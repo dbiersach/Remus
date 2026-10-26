@@ -164,9 +164,10 @@ def expectimax_choice(
     is not. The NSLS-II agent uses a statistical model (a Gaussian process) that
     knows how uncertain each prediction is.
     """
-    best_square = None
+    candidates = candidate_squares(readings)
+    best_square = candidates[0]
     best_value = -math.inf
-    for square in candidate_squares(readings):
+    for square in candidates:
         guess = predicted_value(square, readings)
         outcomes = []
         for reading in (min(PEAK, guess + 20), max(0, guess - 20)):

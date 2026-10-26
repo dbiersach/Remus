@@ -428,6 +428,11 @@ the course repositories: ruff's default rules plus `I` (import order), `C4`
 (type-checking imports), with the default line length of 88. `uv run ruff format .`
 formats the code.
 
+The code must also show no type errors in VS Code's Pylance. Check a Day folder with
+`uvx pyright "instructor/Day 03 - Generate piece moves"`. When a function can return
+`None`, such as `color_of()` or `game_result()`, test for `None` before using the
+result.
+
 ## American spelling
 
 Every word in this repository uses American spelling: prose, docstrings, comments,

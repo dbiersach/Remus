@@ -9,7 +9,7 @@ toward row 0 (a row change of -1) and Black pawns move toward row 7 (+1).
 """
 
 from board import EMPTY, piece_at
-from game_state import WHITE, color_of, new_game
+from game_state import BLACK, WHITE, color_of, new_game
 from moves import Move
 
 KNIGHT_JUMPS = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]
@@ -195,7 +195,7 @@ def pawn_captures(
 def piece_moves(board: list[list[str]], square: tuple[int, int]) -> list[Move]:
     """Return the pseudo-legal moves of whatever piece stands on the square."""
     piece = piece_at(board, square)
-    color = color_of(piece)
+    color = WHITE if piece.isupper() else BLACK  # The square holds a piece, never EMPTY
     kind = piece.upper()
     if kind == "N":
         return knight_moves(board, square, color)

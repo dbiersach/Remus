@@ -91,11 +91,12 @@ def play_game(
                 reason = reason or f"illegal move {move}"
             elif clocks[side] < 0:
                 reason = "lost on time"
-            if reason:
-                result = "0-1" if side == 0 else "1-0"
-                break
-            board.push(move)
-            clocks[side] += increment
+            else:
+                board.push(move)
+                clocks[side] += increment
+                continue
+            result = "0-1" if side == 0 else "1-0"  # The side to move loses
+            break
     finally:
         for engine in engines:
             engine.quit()

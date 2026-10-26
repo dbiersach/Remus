@@ -76,9 +76,9 @@ def main():
         f"First moves in the book: {' '.join(first_moves)}  (expected c2c4 d2d4 e2e4 g1f3)"
     )
     make_move(state, parse_san(state, "e4"))
-    print(
-        f"A book reply to 1. e4: {move_to_uci(book_move(book, state))}  (e7e5, c7c5, e7e6, or c7c6)"
-    )
+    reply = book_move(book, state)
+    reply_text = move_to_uci(reply) if reply is not None else "none"
+    print(f"A book reply to 1. e4: {reply_text}  (e7e5, c7c5, e7e6, or c7c6)")
     missing = load_book(Path(__file__).parent / "no_such_book.txt")
     print(f"Missing book file gives {len(missing)} positions  (expected 0)")
 

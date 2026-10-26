@@ -20,8 +20,11 @@ def main():
     remus_plays_black = len(sys.argv) > 1 and sys.argv[1] == "remus"
     state = state_from_fen(START_FEN)
     book = load_book()
-    while game_result(state) is None:
+    while True:
         print_board(state["board"])
+        outcome = game_result(state)
+        if outcome is not None:
+            break  # The game is over
         if remus_plays_black and state["turn"] == "b":
             move = book_move(book, state) or think_move(state)  # Book first
             print(f"Remus plays {move_to_san(state, move)}")
@@ -36,8 +39,7 @@ def main():
                 print(error)
                 continue
         make_move(state, move)
-    print_board(state["board"])
-    result, reason = game_result(state)
+    result, reason = outcome
     print(f"Game over: {result} by {reason}")
 
 

@@ -88,10 +88,9 @@ def test_threefold_repetition_and_undo() -> None:
 
 
 def test_fifty_move_rule() -> None:
-    assert (
-        game_result(state_from_fen("8/8/4k3/8/8/4R3/8/4K3 w - - 100 80"))[1]
-        == "fifty-move rule"
-    )
+    outcome = game_result(state_from_fen("8/8/4k3/8/8/4R3/8/4K3 w - - 100 80"))
+    assert outcome is not None
+    assert outcome[1] == "fifty-move rule"
 
 
 def test_greedy_takes_the_queen() -> None:

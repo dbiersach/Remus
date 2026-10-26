@@ -118,7 +118,9 @@ def test_opening_book_is_legal_and_answers_e4() -> None:
     state = state_from_fen(START_FEN)
     assert book_move(book, state) is not None
     make_move(state, parse_san(state, "e4"))
-    assert move_to_uci(book_move(book, state)) in ("e7e5", "c7c5", "e7e6", "c7c6")
+    reply = book_move(book, state)
+    assert reply is not None
+    assert move_to_uci(reply) in ("e7e5", "c7c5", "e7e6", "c7c6")
 
 
 def test_missing_book_never_stops_play() -> None:

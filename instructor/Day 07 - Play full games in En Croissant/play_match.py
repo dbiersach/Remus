@@ -32,6 +32,8 @@ def play_game(
     while not board.is_game_over(claim_draw=True):
         engine = white if board.turn == chess.WHITE else black
         result = engine.play(board, chess.engine.Limit(time=1.0))
+        if result.move is None:
+            break  # The engine sent no move, so the game stops unfinished
         board.push(result.move)
     return board.result(claim_draw=True)
 
