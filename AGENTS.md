@@ -9,8 +9,7 @@ explains how the code fits together.
 
 This file holds every project and style rule, so that every AI tool used with this
 repository builds Remus the same way. `CLAUDE.md` imports it and adds only the rules
-that are specific to Claude Code. `.github/copilot-instructions.md` gives GitHub Copilot a
-condensed copy; when a rule here changes, update that file to match. The Python style follows David's course repositories
+that are specific to Claude Code. The Python style follows David's course repositories
 (qis101, scicomp101, cse101), adapted for a chess engine and a younger audience.
 
 # Part 1: The project
