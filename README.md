@@ -8,7 +8,8 @@ could learn from it.
 
 The code grows one day at a time: each `instructor/Day NN - ...` folder is a complete,
 runnable copy of Remus at the end of that workshop day. The `instructor/` folder holds
-only finished, working reference code, kept apart from the code students write. Start with
+only finished, working reference code. `student/` mirrors it, with the functions
+students write left as stubs for them to fill in. Start with
 [`docs/remus_program_overview.md`](docs/remus_program_overview.md); the course plan is
 in [`docs/remus_course_plan.md`](docs/remus_course_plan.md).
 

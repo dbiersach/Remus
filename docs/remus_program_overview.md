@@ -25,7 +25,12 @@ Each day of the workshop has its own folder inside `instructor/`:
 The Day folders live inside the root `instructor/` folder. `instructor/` holds only
 finished reference code that runs as it is, with no blanks to fill in, so the solution
 code stays apart from the code students write and change. Every Day folder is a
-complete, runnable copy of Remus as it stands at the end of that day. A student who opens `Day 06` finds every file from Days 1 to 5, some of them
+complete, runnable copy of Remus as it stands at the end of that day.
+
+`student/` mirrors `instructor/`. In each student Day folder, the functions the class
+writes that day are stubs that raise `NotImplementedError`, and the tests fail until a
+pair writes them. `make_student_folders.py` builds `student/` and lists every student
+function; `student/README.md` shows the same list. A student who opens `Day 06` finds every file from Days 1 to 5, some of them
 grown, plus `perft.py`. Nothing in a Day folder imports from another Day folder.
 
 ### The naming rule for newer versions

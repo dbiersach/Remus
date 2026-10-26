@@ -91,9 +91,11 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
    class repository. `CONTRIBUTORS.md` records which pair wrote which function, by a
    team name the pair chooses rather than full names, since the code goes home with
    every student.
-4. **Everyone moves on together.** The class repository gains one student Day folder
-   per day at its root, beside `instructor/`. The first start tag of each day holds the
-   new folder: the previous day's finished code plus that day's scaffolds. Pairs work
+4. **Everyone moves on together.** `student/` mirrors `instructor/` day by day. Each
+   student Day folder holds the previous days' finished code plus that day's
+   scaffolds, which `make_student_folders.py` builds from the instructor code. Each
+   period opens with its slides; then pairs open that period's files in the student
+   Day folder and write or fix the stubbed functions. Pairs work
    only inside the newest Day folder, so earlier days stay as a record of how Remus
    grew. `instructor/` holds the matching finished code, which runs as it is. At the start of the next period each pair fetches
    from the teacher and starts a new branch from that period's start tag, so the whole
@@ -475,7 +477,8 @@ Outside the Day folders:
 | --- | --- |
 | `tests/mate_puzzles.epd` | The ten GameWorks mate puzzles as FEN |
 | `tests/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
-| `run_all_tests.py` | Runs pytest on each Day folder in turn |
+| `run_all_tests.py` | Runs pytest on each instructor Day folder in turn |
+| `student/`, `make_student_folders.py` | The student copy of every Day folder, with that day's student functions as stubs, and the script that builds it |
 | `docs/` | This plan, the roadmap, the program overview, the script pages, the slide plan, and the two briefing PDFs |
 | `labs/dayNN/<skill>.py`, `labs/dayNN/instructor/<skill>_instructor.py` | Python skills labs: student file with blanks, instructor file with answers (to be written) |
 | `CONTRIBUTORS.md` | Which pair wrote which function (starts on Day 1) |

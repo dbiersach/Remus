@@ -182,6 +182,12 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   from another Day folder. Modules import each other by name
   (`from board import new_board`), so any module runs from inside its folder with
   `uv run perft.py`.
+- `student/` mirrors `instructor/` day by day. In each student Day folder, the
+  functions the students write that day are stubs: the signature and docstring stay
+  and the body raises `NotImplementedError`, so the tests fail until a pair writes
+  the function. `make_student_folders.py` builds `student/` from `instructor/` and
+  lists every student function by day and period; run it again after any change to
+  the instructor code, and never edit a student stub by hand.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson
   makes a file smarter, the new code goes into the same file under a new function
   name next to the function it improves (`negamax`, then `alpha_beta`, then

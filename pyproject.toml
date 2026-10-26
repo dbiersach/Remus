@@ -27,6 +27,9 @@ lint.extend-select = ["I", "C4", "ISC", "SIM", "TCH"]
 # "if TYPE_CHECKING:" block. Remus imports them plainly, so students read one
 # import style everywhere.
 lint.ignore = ["TC002", "TC003"]
+# A student stub keeps the imports its finished version needs, as hints, so
+# unused imports are allowed in student/.
+lint.per-file-ignores = { "student/**" = ["F401"] }
 show-fixes = true
 target-version = "py314"
 
