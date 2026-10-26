@@ -1,64 +1,127 @@
-# move_generation.py
+# move_generation.py: Every move the pieces can make
 
-Lists every move the pieces can make by their movement rules.
+*First appears in `instructor/Day 03 - Generate piece moves`.*
 
-First appears in `instructor/Day 03 - Generate piece moves`. Grows on Day 5.
+## The big picture
 
-## What it does
+Each piece moves in its own way. This file lists every move each piece could make.
 
-A rook on d4 of an empty board has 14 moves; a knight on a1 has 2. This module finds
-them by walking direction tables, before any check for the king's safety. Such moves
-are called pseudo-legal: they follow how the pieces move, but some may leave the king
-in check.
+It does not check whether the king is safe yet. Those moves are called pseudo-legal.
+The next file, legal_moves.py, throws out the unsafe ones.
 
-## Data structures
+## Where this piece fits
 
-Directions are `(row change, col change)` pairs. `ROOK_DIRECTIONS` holds four,
-`BISHOP_DIRECTIONS` four, and `QUEEN_DIRECTIONS` all eight. `KNIGHT_JUMPS` and
-`KING_STEPS` hold fixed offsets. Row 0 is rank 8, so a White pawn moves with a row
-change of -1 and a Black pawn with +1.
+move_generation.py uses board.py, game_state.py, and moves.py. attacks.py and legal_moves.py use it.
 
-## Program flow
+- **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`moves.py`](moves.md)
+- **Used by:** [`attacks.py`](attacks.md), [`legal_moves.py`](legal_moves.md)
 
-`pseudo_legal_moves(state)` visits all 64 squares. For each piece of the side to move,
-`piece_moves` picks a helper by the piece letter:
+## Words to know
 
-- knights and kings use `jump_moves`;
-- rooks, bishops, and queens use `slider_moves`, which calls `slide` once per
-  direction until it meets the edge or a piece;
-- pawns use `pawn_pushes` and `pawn_captures`, and `pawn_moves_to` turns a move to
-  the last rank into four promotion moves.
+- **pseudo-legal:** follows how the pieces move, but might leave your own king in check.
+- **direction:** a step written as (row change, column change). Up the board is (-1, 0).
+- **slider:** a rook, bishop, or queen. It slides until something blocks it.
+- **jumper:** a knight or a king. It moves by fixed steps.
 
-Day 5 adds `en_passant_captures(state)`, which needs the state's en passant square,
-not just the board.
+## What it stores
 
-## Functions
+Directions are pairs of numbers:
 
-| Function | Day | What it does |
+```text
+(-1,-1)  (-1, 0)  (-1, 1)        up-left    up     up-right
+( 0,-1)    piece  ( 0, 1)        left      piece   right
+( 1,-1)  ( 1, 0)  ( 1, 1)        down-left  down   down-right
+```
+
+Rooks use the four straight directions. Bishops use the four diagonals. The queen
+uses all eight. A knight on a1 has only two jumps that stay on the board.
+
+## How it works
+
+1. `pseudo_legal_moves()` visits all 64 squares.
+2. For each piece of the side to move, `piece_moves()` picks a helper by its letter.
+3. Knights and kings use `jump_moves()`.
+4. Rooks, bishops, and queens use `slider_moves()`, which calls `slide()` for each direction.
+5. Pawns use `pawn_pushes()` and `pawn_captures()`. On the last rank, one pawn move becomes four promotion moves.
+6. `en_passant_captures()` adds the special pawn capture.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+pseudo_legal_moves()
+    en_passant_captures()
+        on_board()
+        piece_at()  [board.py]
+    color_of()  [game_state.py]
+    piece_moves()
+        piece_at()  [board.py]
+        color_of()  [game_state.py]
+        knight_moves()
+            jump_moves()
+                on_board()
+                color_of()  [game_state.py]
+                piece_at()  [board.py]
+        king_moves()
+            jump_moves()
+                on_board()
+                color_of()  [game_state.py]
+                piece_at()  [board.py]
+        slider_moves()
+            slide()
+                on_board()
+                piece_at()  [board.py]
+                color_of()  [game_state.py]
+        pawn_pushes()
+            on_board()
+            pawn_moves_to()
+            piece_at()  [board.py]
+        pawn_captures()
+            on_board()
+            color_of()  [game_state.py]
+            piece_at()  [board.py]
+            pawn_moves_to()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `on_board` | 3 | Return True if (row, col) is one of the 64 squares. |
-| `jump_moves` | 3 | Return the moves of a piece that jumps by fixed offsets (a knight or a king). |
-| `knight_moves` | 3 | Return the moves of a knight on the square. |
-| `king_moves` | 3 | Return the one-step moves of a king on the square (castling comes later). |
-| `slide` | 3 | Walk from a square in one direction and return the moves along the way. |
-| `slider_moves` | 3 | Return the moves of a rook, bishop, or queen, one direction at a time. |
-| `pawn_moves_to` | 3 | Return a pawn move, or the four promotion moves if it reaches the last rank. |
-| `pawn_pushes` | 3 | Return a pawn's forward moves: one step, or two steps from its starting rank. |
-| `pawn_captures` | 3 | Return a pawn's diagonal captures of enemy pieces. |
-| `piece_moves` | 3 | Return the pseudo-legal moves of whatever piece stands on the square. |
-| `en_passant_captures` | 5 | Return the en passant captures for the side to move. |
-| `pseudo_legal_moves` | 3 | Return every pseudo-legal move for the side to move. |
+| `on_board` | Says True if (row, col) is one of the 64 squares. | 3 |
+| `jump_moves` | Lists the moves of a piece that jumps by fixed steps. | 3 |
+| `knight_moves` | Lists a knight's moves. | 3 |
+| `king_moves` | Lists a king's one-step moves. | 3 |
+| `slide` | Walks one way until it hits the edge or a piece. | 3 |
+| `slider_moves` | Lists a rook's, bishop's, or queen's moves. | 3 |
+| `pawn_moves_to` | Makes one pawn move, or four if the pawn promotes. | 3 |
+| `pawn_pushes` | Lists a pawn's forward moves: one step, or two from the start. | 3 |
+| `pawn_captures` | Lists a pawn's diagonal captures. | 3 |
+| `piece_moves` | Picks the right helper for the piece on a square. | 3 |
+| `en_passant_captures` | Lists en passant captures, if any. | 5 |
+| `pseudo_legal_moves` | Lists every move for the side to move, before the king-safety check. | 3 |
+
+## How the file grows
+
+- **Day 3:** `on_board`, `jump_moves`, `knight_moves`, `king_moves`, `slide`, `slider_moves`, `pawn_moves_to`, `pawn_pushes`, `pawn_captures`, `piece_moves`, `pseudo_legal_moves`
+- **Day 5:** `en_passant_captures`
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run move_generation.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: `Pseudo-legal moves from the start: 20`, a knight on a1 with 2 moves, and a rook on d4 with 14.
+
+## Puzzle questions
+
+1. A rook on d4 of an empty board has 14 moves. Can you list them?
+2. Why does a White pawn move with a row change of -1?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 3.1, 3.2, 3.3, 3.4, 3.5.
+Slides 3.1, 3.2, 3.3, 3.4, 3.5 in the [slide plan](../slide_plan.md).

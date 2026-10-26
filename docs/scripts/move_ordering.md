@@ -1,39 +1,76 @@
-# move_ordering.py
+# move_ordering.py: Try the best moves first
 
-Puts the moves most likely to be best first.
+*First appears in `instructor/Day 09 - Search faster with alpha-beta`.*
 
-First appears in `instructor/Day 09 - Search faster with alpha-beta`. Grows on Day 10.
+## The big picture
 
-## What it does
+Alpha-beta saves the most work when it tries a strong move first. This file sorts
+the moves so the likely best ones come first.
 
-Alpha-beta cuts off more of the tree when a strong move comes early. With a pawn able
-to take a queen and a queen able to take a pawn, the pawn capture goes first.
+Big captures by small pieces go first. Pawn takes queen comes before queen takes pawn.
 
-## Program flow
+## Where this piece fits
 
-`mvv_lva_score` scores a capture by Most Valuable Victim, Least Valuable Attacker:
-ten times the victim's value minus the attacker's value. `order_moves` sorts by that
-score, puts a `first` move (the previous depth's best, or the transposition table's
-move) ahead of everything, and on Day 10 places up to two killer moves right after
-the captures with `KILLER_SCORE`.
+move_ordering.py uses board.py and evaluation.py. search.py calls it at every position.
 
-## Functions
+- **Uses:** [`board.py`](board.md), [`evaluation.py`](evaluation.md), [`moves.py`](moves.md)
+- **Uses only in its self-check:** [`fen.py`](fen.md), [`legal_moves.py`](legal_moves.md)
+- **Used by:** [`search.py`](search.md)
 
-| Function | Day | What it does |
+## Words to know
+
+- **MVV-LVA:** Most Valuable Victim, Least Valuable Attacker. A rule for sorting captures.
+- **killer move:** a quiet move that worked well in a nearby position. It is tried early (Day 10).
+- **quiet move:** a move that does not capture or promote.
+
+## What it stores
+
+How moves are ranked, best first:
+
+1. The `first` move: the best move from the last search.
+2. Captures, by MVV-LVA score.
+3. Killer moves (Day 10).
+4. All other quiet moves.
+
+## How it works
+
+1. `mvv_lva_score()` gives each capture a number: ten times the victim's value, minus the attacker's value.
+2. `order_moves()` sorts the moves by that number, biggest first.
+3. The `first` move and killer moves get extra points to move them up.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+order_moves()
+    mvv_lva_score()
+        piece_at()  [board.py]
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `mvv_lva_score` | 9 | Score a move for ordering: high for a big capture by a small piece. |
-| `order_moves` | 9 | Return the moves sorted best first. |
+| `mvv_lva_score` | Scores a capture: big victim and small attacker score high. | 9 |
+| `order_moves` | Sorts the moves so the likely best ones come first. | 9 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run move_ordering.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: The first two moves of a test position: pawn takes queen, then queen takes rook.
+
+## Puzzle questions
+
+1. Which comes first: knight takes rook, or rook takes knight? Why?
+2. Why does sorting not change the score that alpha-beta finds?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 9.4, 10.4.
+Slides 9.4, 10.4 in the [slide plan](../slide_plan.md).

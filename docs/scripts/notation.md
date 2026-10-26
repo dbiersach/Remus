@@ -1,40 +1,94 @@
-# notation.py
+# notation.py: Moves the way people write them
 
-Writes and reads moves in SAN, the notation people use.
+*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
 
-First appears in `instructor/Day 07 - Play full games in En Croissant`.
+## The big picture
 
-## What it does
+People write moves like `Nf3`, `exd5`, and `O-O`. This is called SAN.
 
-People write `Nf3`, `exd5`, `O-O`, and `e8=Q+`. `move_to_san` writes a legal move
-that way, adding `+` for check and `#` for mate. When two knights can reach d2,
-`disambiguation` adds the file, rank, or square that tells them apart, as in `Nbd2`.
+This file writes Remus's moves in SAN, and reads SAN that you type. To read SAN, it
+uses a simple trick. It writes every legal move in SAN, then picks the one that
+matches what you typed.
 
-## Program flow
+## Where this piece fits
 
-`parse_san(state, text)` uses one simple idea: write the SAN of every legal move and
-return the one that matches what the player typed. It ignores a trailing `+`, `#`,
-`!`, or `?` and accepts `0-0` for `O-O`. A text that matches no legal move raises
-`ValueError`, so an illegal move can never enter the game through SAN.
+notation.py uses board.py, attacks.py, legal_moves.py, and make_move.py. console_game.py, opening_book.py, and mate_solver.py use it.
 
-## Functions
+- **Uses:** [`attacks.py`](attacks.md), [`board.py`](board.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md)
+- **Uses only in its self-check:** [`fen.py`](fen.md)
+- **Used by:** [`console_game.py`](console_game.md), [`opening_book.py`](opening_book.md)
 
-| Function | Day | What it does |
+## Words to know
+
+- **SAN:** Standard Algebraic Notation, the way chess books write moves.
+- **disambiguation:** an extra letter or number when two pieces could make the same move, as in `Nbd2`.
+- **check sign:** `+` means check. `#` means checkmate.
+
+## What it stores
+
+Parts of a SAN move:
+
+```text
+N  b  x  d2  +
+|  |  |  |   gives check
+|  |  |  square it lands on
+|  |  captures
+|  which knight (the one on the b-file)
+piece letter (no letter for a pawn)
+```
+
+## How it works
+
+1. `move_to_san()` starts with the piece letter, or nothing for a pawn.
+2. `disambiguation()` adds a file, rank, or square if two pieces could reach the same square.
+3. It adds `x` for a capture, the target square, and `=Q` for a promotion.
+4. It makes the move to test for `+` or `#`, then undoes it.
+5. `parse_san()` matches typed text against the SAN of every legal move.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+parse_san()
+    legal_moves()  [legal_moves.py]
+    move_to_san()
+        piece_at()  [board.py]
+        square_name()  [board.py]
+        make_move()  [make_move.py]
+        in_check()  [attacks.py]
+        undo_move()  [make_move.py]
+        legal_moves()  [legal_moves.py]
+        disambiguation()
+            square_name()  [board.py]
+            legal_moves()  [legal_moves.py]
+            piece_at()  [board.py]
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `move_to_san` | 7 | Return the SAN text of a legal move in the current position. |
-| `disambiguation` | 7 | Return the file, rank, or square that tells this move apart from another legal move by the same kind of piece to the same square, such as "b" in "Nbd2". |
-| `parse_san` | 7 | Find the legal move that a SAN text describes. |
+| `move_to_san` | Writes a legal move in SAN, like Nf3 or exd5. | 7 |
+| `disambiguation` | Adds the letter or number that tells two pieces apart. | 7 |
+| `parse_san` | Finds the legal move that matches the SAN you typed. | 7 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run notation.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: Every legal move of a test position in SAN, and `O-O-O` read back as a Move.
+
+## Puzzle questions
+
+1. Two rooks on a1 and h1 can both move to d1. What are their SAN moves?
+2. Why can `parse_san()` never accept an illegal move?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 7.2, 7.3.
+Slides 7.2, 7.3 in the [slide plan](../slide_plan.md).

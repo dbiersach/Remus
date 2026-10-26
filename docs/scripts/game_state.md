@@ -1,53 +1,94 @@
-# game_state.py
+# game_state.py: Everything the board does not show
 
-Holds everything about a game that the board alone does not show.
+*First appears in `instructor/Day 02 - Make and undo moves`.*
 
-First appears in `instructor/Day 02 - Make and undo moves`. Grows on Day 7.
+## The big picture
 
-## What it does
+A picture of the board does not tell the whole story. Whose turn is it? Can White
+still castle? This file keeps those facts next to the board.
 
-Two positions can show the same pieces and still differ: in one, White may castle; in
-the other, the king has already moved. The game state records those facts beside the
-board.
+All the facts live together in one Python dict called the state.
 
-## Data structure
+## Where this piece fits
+
+game_state.py sits right on top of board.py. Every file that makes moves or reads the turn uses it.
+
+- **Uses:** [`board.py`](board.md)
+- **Used by:** [`attacks.py`](attacks.md), [`fen.py`](fen.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`opening_book.py`](opening_book.md)
+
+## Words to know
+
+- **dict:** a Python dictionary. It stores values under names, like `state["turn"]`.
+- **castling rights:** which castling moves are still allowed, written as letters like `KQkq`.
+- **en passant:** a special pawn capture, allowed only right after a pawn moves two squares.
+- **position key:** a short piece of text that describes a position, used to spot repeats.
+
+## What it stores
 
 ```python
-{"board": board, "turn": "w", "castling": "KQkq", "en_passant": None,
- "halfmove_clock": 0, "fullmove_number": 1, "history": [key]}
+state = {
+    "board": board,          # The 8x8 grid
+    "turn": "w",             # Whose move: "w" or "b"
+    "castling": "KQkq",      # Castling moves still allowed
+    "en_passant": None,      # Square a pawn just skipped, or None
+    "halfmove_clock": 0,     # Moves since the last capture or pawn move
+    "fullmove_number": 1,    # Goes up by one after Black moves
+    "history": [key],        # Every position so far (added on Day 7)
+}
 ```
 
-`history` arrives on Day 7. It lists the `position_key` of every position so far, so
-`game_end.py` can count repetitions.
+## How it works
 
-## Program flow
+1. `new_game()` builds the state for the start of a game.
+2. `color_of()`, `is_white()`, and `opponent()` answer small questions about colors.
+3. `position_key()` writes the position as one line of text. Two equal keys mean the same position.
 
-`new_game()` builds the start state. `color_of`, `is_white`, and `opponent` answer the
-small questions every other module asks. `position_key(state)` writes the pieces, side
-to move, castling rights, and en passant square as one string. It includes the en
-passant square only when a capture there is possible, because the repetition rule
-treats two positions as the same unless a player could make a different move.
+## Call tree
 
-## Functions
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
 
-| Function | Day | What it does |
+```text
+new_game()
+    new_board()  [board.py]
+    position_key()
+
+color_of()
+    is_white()
+
+opponent()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `new_game` | 2 | Return the state of a new game. |
-| `is_white` | 2 | Return True if the piece is White (an uppercase letter). |
-| `color_of` | 2 | Return "w" or "b" for a piece, or None for an empty square. |
-| `opponent` | 2 | Return the other side's color. |
-| `position_key` | 7 | Return text that is the same for two positions exactly when the repetition rule treats them as the same position. |
+| `new_game` | Makes the state for a brand new game. | 2 |
+| `is_white` | Says True if a piece letter is uppercase (White). | 2 |
+| `color_of` | Says "w", "b", or None for an empty square. | 2 |
+| `opponent` | Gives the other side's color. | 2 |
+| `position_key` | Writes the position as text, so Remus can tell when a position repeats. | 7 |
+
+## How the file grows
+
+- **Day 2:** `new_game`, `is_white`, `color_of`, `opponent`
+- **Day 7:** `position_key`
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run game_state.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: The start board, `Side to move: w`, and the colors of a few pieces.
+
+## Puzzle questions
+
+1. After 1. e4, what are `turn` and `en_passant`?
+2. Why does the position key leave out the move clocks?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 2.1, 7.4.
+Slides 2.1, 7.4 in the [slide plan](../slide_plan.md).

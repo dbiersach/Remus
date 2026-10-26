@@ -1,57 +1,99 @@
-# evaluation.py
+# evaluation.py: How good is this position?
 
-Scores a position in centipawns without looking ahead.
+*First appears in `instructor/Day 08 - Evaluate and search ahead`.*
 
-First appears in `instructor/Day 08 - Evaluate and search ahead`. Grows on Day 10.
+## The big picture
 
-## What it does
+To pick a good move, Remus needs to judge a position. This file gives each position
+a score.
 
-A centipawn is a hundredth of a pawn. With a White knight on e5 and a Black knight on
-a8, material is level but White's knight attacks eight squares and Black's two, so
-`placement` gives White +70.
+A positive score is good for White. The unit is the centipawn, one hundredth of a
+pawn. So +100 means White is about one pawn ahead.
 
-## Data structures
+## Where this piece fits
 
-`PIECE_VALUES` holds 100, 300, 300, 500, and 900 for pawn, knight, bishop, rook, and
-queen. Each piece-square table is an 8x8 list of bonuses written from White's side,
-row 0 (rank 8) first. A Black piece reads its table upside down: row 7 uses row 0.
+evaluation.py uses board.py. search.py and move_ordering.py use its scores and piece values.
 
-## Program flow
+- **Uses:** [`board.py`](board.md)
+- **Uses only in its self-check:** [`fen.py`](fen.md)
+- **Used by:** [`move_ordering.py`](move_ordering.md), [`search.py`](search.md)
 
-`evaluate(state)` adds the terms with White's side positive, then flips the sign when
-Black is to move, because negamax scores every position for the side to move.
+## Words to know
 
-| Term | Day | Idea |
+- **centipawn:** one hundredth of a pawn. A pawn is worth 100.
+- **material:** the value of all the pieces each side has.
+- **piece-square table:** an 8x8 grid of bonus points for standing on each square.
+- **passed pawn:** a pawn with no enemy pawn ahead of it, on its own file or a file next to it.
+
+## What it stores
+
+Piece values:
+
+| Piece | Pawn | Knight | Bishop | Rook | Queen |
+| --- | --- | --- | --- | --- | --- |
+| Centipawns | 100 | 300 | 300 | 500 | 900 |
+
+The knight table gives +20 for the center and -50 for a corner. A knight in the
+center reaches 8 squares. A knight in a corner reaches 2. Black reads each table
+upside down.
+
+## How it works
+
+1. `material()` adds up White's pieces and subtracts Black's.
+2. `placement()` adds the table bonus for each piece's square.
+3. `pawn_structure()` subtracts points for weak pawns and adds points for passed pawns (Day 10).
+4. `mating_bonus()` helps finish a won endgame by pushing the losing king to the edge (Day 10).
+5. `evaluate()` adds the parts, then flips the sign if Black is to move.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+explain_evaluation()
+    material()
+    placement()
+    pawn_structure()
+    mating_bonus()
+    evaluate()
+        mating_bonus()
+        pawn_structure()
+        material()
+        placement()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `material` | 8 | Sum of piece values |
-| `placement` | 8 | Piece-square tables |
-| `pawn_structure` | 10 | Doubled -8, isolated -20, passed pawns up to +70 by rank |
-| `mating_bonus` | 10 | With a big lead against little material, push the losing king to the edge and bring the winning king close |
+| `material` | Counts the value of the pieces. Positive means White is ahead. | 8 |
+| `placement` | Adds bonus points for pieces on good squares. | 8 |
+| `pawn_structure` | Scores doubled, isolated, and passed pawns. | 10 |
+| `mating_bonus` | Rewards driving the losing king to the edge when far ahead. | 10 |
+| `evaluate` | Gives the score from the point of view of the side to move. | 8 |
+| `explain_evaluation` | Prints each part of the score, so you can see why. | 8 |
 
-`explain_evaluation(state)` prints each term, so a student can say why Remus likes a
-position.
+## How the file grows
 
-## Functions
-
-| Function | Day | What it does |
-| --- | --- | --- |
-| `material` | 8 | Return the material balance in centipawns, positive when White is ahead. |
-| `placement` | 8 | Return the piece-square bonus in centipawns, positive when it favors White. |
-| `pawn_structure` | 10 | Score the pawn structure in centipawns, positive when it favors White. |
-| `mating_bonus` | 10 | Return a bonus for cornering the losing king, positive when it favors White. |
-| `evaluate` | 8 | Score the position for the side to move. |
-| `explain_evaluation` | 8 | Print each term of the evaluation, so Remus can say why it likes a position. |
+- **Day 8:** `material`, `placement`, `evaluate`, `explain_evaluation`
+- **Day 10:** `pawn_structure`, `mating_bonus`
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run evaluation.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: Every part of the score for the start (all 0), then a centered knight worth +70.
+
+## Puzzle questions
+
+1. White has a queen and Black has a rook. What is the material score?
+2. Why does `evaluate()` flip the sign when Black is to move?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 8.1, 8.2, 10.6, 10.7.
+Slides 8.1, 8.2, 10.6, 10.7 in the [slide plan](../slide_plan.md).

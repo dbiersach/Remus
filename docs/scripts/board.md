@@ -1,53 +1,108 @@
-# board.py
+# board.py: The chessboard
 
-Holds the chessboard and converts square names such as e2 to (row, col) tuples.
+*First appears in `instructor/Day 01 - Draw the board`.*
 
-First appears in `instructor/Day 01 - Draw the board`. Grows on Day 2.
+## The big picture
 
-## What it does
+This file holds the chessboard. Every other file stands on it.
 
-At the start of a game, the White pawn on e2 sits at `board[6][4]`. Row 6 is rank 2,
-because row 0 is rank 8, and column 4 is file e, because column 0 is file a. The board
-prints rank 8 at the top, the way a player sees it from White's side.
+The board is a grid of 8 rows and 8 columns. Each square holds one letter. `P` is a
+White pawn, `p` is a Black pawn, and `.` is an empty square.
 
-## Data structure
+People name squares like `e2`. Python finds them by number, like `board[6][4]`.
+This file turns one into the other.
 
-The board is a list of 8 rows; each row is a list of 8 one-character strings.
-Uppercase letters are White pieces, lowercase letters are Black pieces, and `EMPTY`
-(`"."`) is an empty square. `BOARD_FILES` (`"abcdefgh"`) gives the file letter of each
-column, and `BOARD_RANKS` (`"87654321"`) gives the rank digit of each row, so
-`BOARD_FILES[4] + BOARD_RANKS[6]` is `"e2"`. `START_ROWS` spells out the start position one row at a
-time, so students can read it like a picture.
+## Where this piece fits
 
-## Program flow
+board.py is the bottom piece of the puzzle. It uses no other Remus file, and almost every other file uses it.
 
-`square_name(row, col)` and `parse_square(name)` are mirror images: `"e2"` becomes
-`(6, 4)`, and `(6, 4)` becomes `"e2"`. `parse_square` raises `ValueError` for text
-such as `"z9"`, so a typing mistake stops at the boundary instead of reaching the
-engine. Every later module reads and writes squares through `piece_at` and
-`set_piece`.
+- **Uses:** no other Remus file
+- **Used by:** [`attacks.py`](attacks.md), [`console_game.py`](console_game.md), [`evaluation.py`](evaluation.md), [`fen.py`](fen.md), [`game_end.py`](game_end.md), [`game_state.py`](game_state.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`moves.py`](moves.md), [`notation.py`](notation.md), [`search.py`](search.md)
 
-## Functions
+## Words to know
 
-| Function | Day | What it does |
+- **row:** a line of squares going across. Row 0 is rank 8, at the top.
+- **column:** a line of squares going up and down. Column 0 is file a, on the left.
+- **file:** a column of the chessboard, named by a letter from a to h.
+- **rank:** a row of the chessboard, named by a number from 1 to 8.
+- **list of lists:** a Python list where each item is another list. Here, 8 rows of 8 squares.
+
+## What it stores
+
+```text
+         col 0   col 1  ...  col 7
+row 0      r       n    ...    r      <- rank 8 (Black's back row)
+row 1      p       p    ...    p      <- rank 7
+  ...
+row 6      P       P    ...    P      <- rank 2
+row 7      R       N    ...    R      <- rank 1 (White's back row)
+```
+
+Uppercase letters are White. Lowercase letters are Black. The letters are K king,
+Q queen, R rook, B bishop, N knight, and P pawn.
+
+Two strings help with names. `BOARD_FILES` is `"abcdefgh"`, one letter per column.
+`BOARD_RANKS` is `"87654321"`, one digit per row. So square `(6, 4)` is
+`BOARD_FILES[4] + BOARD_RANKS[6]`, which is `"e2"`.
+
+## How it works
+
+1. `new_board()` copies the starting rows into a fresh grid.
+2. `print_board()` prints each row with its rank number, top to bottom.
+3. `square_name()` turns `(6, 4)` into `"e2"`.
+4. `parse_square()` turns `"e2"` back into `(6, 4)`. It rejects names like `"z9"`.
+5. `piece_at()` and `set_piece()` read and write one square.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+new_board()
+
+print_board()
+
+square_name()
+
+parse_square()
+
+piece_at()
+
+set_piece()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `new_board` | 1 | Return a fresh board set up in the starting position. |
-| `print_board` | 1 | Print the board with rank numbers on the left and file letters below. |
-| `square_name` | 1 | Convert board coordinates to an algebraic square name. |
-| `parse_square` | 1 | Convert an algebraic square name to (row, col) coordinates. |
-| `piece_at` | 1 | Return the piece on a (row, col) square, or EMPTY. |
-| `set_piece` | 2 | Put a piece (or EMPTY) on a (row, col) square. |
+| `new_board` | Makes a new board with every piece on its starting square. | 1 |
+| `print_board` | Shows the board on the screen, rank 8 at the top. | 1 |
+| `square_name` | Turns a (row, col) pair into a name like e2. | 1 |
+| `parse_square` | Turns a name like e2 into a (row, col) pair. | 1 |
+| `piece_at` | Tells you which letter sits on a square. | 1 |
+| `set_piece` | Puts a letter (or an empty square) on a square. | 2 |
+
+## How the file grows
+
+- **Day 1:** `new_board`, `print_board`, `square_name`, `parse_square`, `piece_at`
+- **Day 2:** `set_piece`
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run board.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: The starting board, then three checks such as `e2 is (6, 4), expected (6, 4)`.
+
+## Puzzle questions
+
+1. Which (row, col) pair is square a8? Which is h1?
+2. Why does row 0 hold rank 8 instead of rank 1?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 1.3, 1.4, 1.5.
+Slides 1.3, 1.4, 1.5 in the [slide plan](../slide_plan.md).

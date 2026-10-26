@@ -1,47 +1,79 @@
-# mate_solver.py
+# mate_solver.py: Solve mate-in-two puzzles
 
-Solves the ten GameWorks mate puzzles with a yes-or-no search.
+*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.*
 
-First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.
+## The big picture
 
-## What it does
+Turbo GameWorks Chess came with ten puzzles: White to play and mate in 2 or 3 moves.
+This file solves all ten.
 
-MATE.001 asks for White to mate in 2; the answer is Be4. A mate solver does not
-compute scores. It asks whether the attacker has a move such that every defender
-reply still allows mate in one move fewer.
+It asks a yes-or-no question instead of giving scores. Is there a White move where
+every Black reply still loses to mate?
 
-## Program flow
+## Where this piece fits
 
-`mating_move(state, moves_left)` tries each attacker move:
+mate_solver.py uses legal_moves.py, make_move.py, attacks.py, and notation.py. It reads the puzzles from tests/mate_puzzles.epd.
 
-1. On the last allowed move, skip any move that does not give check: only a check can
-   be mate.
-2. If the defender has no replies, it is mate when in check and stalemate otherwise.
-3. Otherwise, `defense_fails` must be true for every reply: after that reply,
-   `mating_move(state, moves_left - 1)` still finds a mate.
+- **Uses:** [`attacks.py`](attacks.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md)
+- **Uses only in its self-check:** [`fen.py`](fen.md), [`notation.py`](notation.md)
+- **Used by:** no other Remus file
 
-Skipping quiet last moves makes the solver fast: all nine mates in 2 take well under
-a second each, and MATE.008, a mate in 3 that takes the general search about two
-minutes, falls in about 6 seconds. `read_puzzles` reads `tests/mate_puzzles.epd`.
+## Words to know
 
-## Functions
+- **mate in 2:** White moves, Black replies, and White's second move is checkmate.
+- **forced:** it works no matter what the other side does.
+- **EPD:** a file format like FEN, with extra fields such as the best move.
 
-| Function | Day | What it does |
+## What it stores
+
+The search is a tree of "some" and "every":
+
+```text
+White: is there SOME move...
+   Black: ...where EVERY reply...
+      White: ...still has SOME mating move?
+```
+
+## How it works
+
+1. `mating_move()` tries each White move.
+2. On White's last allowed move, it skips moves that do not give check. Only a check can be mate.
+3. If Black has no legal reply and is in check, that is mate.
+4. Otherwise `defense_fails()` must be True for every Black reply.
+5. `defense_fails()` makes the reply and asks `mating_move()` again, one move shorter.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+read_puzzles()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `mating_move` | 10 | Find a move that forces checkmate within moves_left of the attacker's moves. |
-| `defense_fails` | 10 | Return True if the attacker still mates in moves_left after this reply. |
-| `read_puzzles` | 10 | Read mate puzzles from an EPD file. |
+| `mating_move` | Finds a move that forces mate in the given number of moves, or None. | 10 |
+| `defense_fails` | Says True if White still mates after this Black reply. | 10 |
+| `read_puzzles` | Reads the puzzles and their answers from the EPD file. | 10 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run mate_solver.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: Each puzzle, the move found, the expected move, and the time. MATE.008, a mate in 3, takes about 6 seconds.
+
+## Puzzle questions
+
+1. Why does skipping non-checking moves on the last move never miss a mate?
+2. What would happen if the solver forgot that stalemate is not a win?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 10.9.
+Slides 10.9 in the [slide plan](../slide_plan.md).

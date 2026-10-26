@@ -67,6 +67,58 @@ uv run run_all_tests.py
 `run_all_tests.py` runs every Day folder in `instructor/` in turn, then the reference-tool tests in
 `tests/`.
 
+## The puzzle box and its pieces
+
+Think of this page as the picture on a jigsaw puzzle box. Each `.py` file is one
+piece. Each piece has its own page in [`scripts/`](scripts/). A page starts with the
+big picture, then shows where the piece fits, its call tree, and what each function
+does.
+
+The pieces stack up. Each file uses the ones above it in this map:
+
+```text
+board.py                     the grid of squares
+game_state.py, moves.py      whose turn it is, what a move looks like
+make_move.py                 play a move and take it back
+move_generation.py           every move the pieces can make
+attacks.py, legal_moves.py   keep only the legal moves
+fen.py, notation.py          read and write positions and moves
+game_end.py                  is the game over?
+evaluation.py                how good is a position?
+move_ordering.py, transposition_table.py, opening_book.py
+search.py                    choose a move
+uci_engine.py                talk to En Croissant
+```
+
+The pages, in the order the class builds them:
+
+| Page | What the file does |
+| --- | --- |
+| [`board.py`](scripts/board.md) | The chessboard |
+| [`game_state.py`](scripts/game_state.md) | Everything the board does not show |
+| [`moves.py`](scripts/moves.md) | What a move looks like |
+| [`make_move.py`](scripts/make_move.md) | Make a move, then take it back |
+| [`move_generation.py`](scripts/move_generation.md) | Every move the pieces can make |
+| [`attacks.py`](scripts/attacks.md) | Is this square under attack? |
+| [`legal_moves.py`](scripts/legal_moves.md) | Keep only the legal moves |
+| [`perft.py`](scripts/perft.md) | Count positions to prove the rules |
+| [`fen.py`](scripts/fen.md) | A whole position in one line |
+| [`notation.py`](scripts/notation.md) | Moves the way people write them |
+| [`game_end.py`](scripts/game_end.md) | Is the game over? |
+| [`console_game.py`](scripts/console_game.md) | Play chess in the terminal |
+| [`uci_engine.py`](scripts/uci_engine.md) | Talk to En Croissant |
+| [`play_match.py`](scripts/play_match.md) | Two Remus brains play each other |
+| [`evaluation.py`](scripts/evaluation.md) | How good is this position? |
+| [`search.py`](scripts/search.md) | Choosing a move |
+| [`compare_search.py`](scripts/compare_search.md) | Prove that alpha-beta saves work |
+| [`move_ordering.py`](scripts/move_ordering.md) | Try the best moves first |
+| [`transposition_table.py`](scripts/transposition_table.md) | Remember positions already searched |
+| [`opening_book.py`](scripts/opening_book.md) | Play known openings without thinking |
+| [`mate_solver.py`](scripts/mate_solver.md) | Solve mate-in-two puzzles |
+| [`tournament.py`](scripts/tournament.md) | The class round robin |
+| [`hidden_peak.py`](scripts/hidden_peak.md) | Science AI: find the hidden peak |
+| [The test files](scripts/tests.md) | Checking that Remus works |
+
 ## The four boundaries
 
 | Part | Files | Responsibility |

@@ -1,45 +1,80 @@
-# moves.py
+# moves.py: What a move looks like
 
-Describes a move as a small record and converts it to and from UCI text.
+*First appears in `instructor/Day 02 - Make and undo moves`.*
 
-First appears in `instructor/Day 02 - Make and undo moves`.
+## The big picture
 
-## What it does
+A move needs three facts: where the piece starts, where it lands, and what a pawn
+turns into if it reaches the last rank.
 
-The move e2-e4 is `Move((6, 4), (4, 4))` inside Remus and `"e2e4"` on the wire to
-En Croissant. A pawn promoting on e8 is `Move((1, 4), (0, 4), "Q")`, written
-`"e7e8q"`.
+This file stores those facts in a small record called `Move`. It also writes moves
+as text like `e2e4`, which En Croissant understands.
 
-## Data structure
+## Where this piece fits
 
-`Move` is a frozen dataclass with three fields: `from_square`, `to_square`, and
-`promotion` (`None` for most moves). Frozen means a move cannot change after it is
-made, so two equal moves compare equal with `==` and can sit in a set or dict.
+moves.py uses board.py for square names. Every file that makes or lists moves uses it.
 
-## Program flow
+- **Uses:** [`board.py`](board.md)
+- **Used by:** [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`mate_solver.py`](mate_solver.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`perft.py`](perft.md), [`search.py`](search.md), [`transposition_table.py`](transposition_table.md), [`uci_engine.py`](uci_engine.md)
 
-`move_to_uci` writes the two square names and a lowercase promotion letter.
-`move_from_uci` reads them back and makes the promotion letter uppercase for White and
-lowercase for Black, matching the board's piece letters.
+## Words to know
 
-## Functions
+- **record:** a small bundle of named values. A `Move` has three.
+- **dataclass:** a Python way to make a record with very little code.
+- **UCI:** the language chess programs use to talk. A move looks like `e2e4`.
+- **promotion:** a pawn on the last rank turns into a queen, rook, bishop, or knight.
 
-| Function | Day | What it does |
+## What it stores
+
+```python
+Move(from_square=(6, 4), to_square=(4, 4), promotion=None)   # e2 to e4
+Move(from_square=(1, 4), to_square=(0, 4), promotion="Q")    # e7 to e8, becomes a queen
+```
+
+A `Move` is frozen. Once made, it cannot change. Two moves with the same three facts
+are equal.
+
+## How it works
+
+1. `move_to_uci()` writes a move as text, such as `e2e4` or `e7e8q`.
+2. `move_from_uci()` reads that text back into a `Move`.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+move_to_uci()
+    square_name()  [board.py]
+
+move_from_uci()
+    parse_square()  [board.py]
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `Move` | 2 | One move: where the piece starts, where it lands, and any promotion. |
-| `move_to_uci` | 2 | Convert a move to UCI text. |
-| `move_from_uci` | 2 | Convert UCI text to a move. |
+| `Move` | The record for one move: start square, end square, and promotion. | 2 |
+| `move_to_uci` | Writes a move as UCI text, like e2e4. | 2 |
+| `move_from_uci` | Reads UCI text like e2e4 and makes a Move. | 2 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run moves.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: `g1f3` turned into a `Move` and back into `g1f3`.
+
+## Puzzle questions
+
+1. What is the UCI text for a Black pawn on b2 promoting to a knight on b1?
+2. Why does a `Move` not store which piece is moving?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 2.2.
+Slides 2.2 in the [slide plan](../slide_plan.md).

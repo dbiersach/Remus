@@ -1,45 +1,79 @@
-# game_end.py
+# game_end.py: Is the game over?
 
-Decides whether the game is over, and why.
+*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
 
-First appears in `instructor/Day 07 - Play full games in En Croissant`.
+## The big picture
 
-## What it does
+A game can end in checkmate. It can also end in a draw, for five different reasons.
 
-After 1. f3 e5 2. g4 Qh4, White has no legal moves and is in check: checkmate,
-`("0-1", "checkmate")`. With no legal moves and no check, the game is stalemate.
+This file checks each reason in turn. It says who won and why, or None if the game
+goes on.
 
-## Program flow
+## Where this piece fits
 
-`game_result(state)` checks, in order:
+game_end.py uses attacks.py and legal_moves.py. console_game.py uses it to stop the game.
 
-1. No legal moves: checkmate if the side to move is in check, otherwise stalemate.
-2. `insufficient_material`: king against king, or king and one minor piece, or
-   bishops all on one color of square.
-3. `repetition_count(state)` of 3 or more: draw by repetition.
-4. `halfmove_clock` of 100 or more: the fifty-move rule.
+- **Uses:** [`attacks.py`](attacks.md), [`board.py`](board.md), [`legal_moves.py`](legal_moves.md)
+- **Uses only in its self-check:** [`fen.py`](fen.md)
+- **Used by:** [`console_game.py`](console_game.md)
 
-It returns `None` while the game goes on. Remus treats repetition and the fifty-move
-rule as the end of the game, the way chess GUIs and engine tournaments do.
+## Words to know
 
-## Functions
+- **checkmate:** the king is in check and has no legal move. The other side wins.
+- **stalemate:** no legal move, but not in check. The game is a draw.
+- **insufficient material:** neither side has enough pieces left to checkmate.
+- **threefold repetition:** the same position appears three times. The game is a draw.
+- **fifty-move rule:** fifty moves each with no capture and no pawn move. The game is a draw.
 
-| Function | Day | What it does |
+## What it stores
+
+`game_result()` returns a pair, such as `("0-1", "checkmate")` or
+`("1/2-1/2", "stalemate")`. It returns `None` while the game goes on.
+
+## How it works
+
+1. No legal moves? If in check, checkmate. If not, stalemate.
+2. Too few pieces to mate? Draw by insufficient material.
+3. Position seen three times? Draw by repetition.
+4. Halfmove clock at 100? Draw by the fifty-move rule.
+5. Otherwise the game goes on.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+game_result()
+    insufficient_material()
+    legal_moves()  [legal_moves.py]
+    in_check()  [attacks.py]
+    repetition_count()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `insufficient_material` | 7 | Return True if neither side can ever checkmate. |
-| `repetition_count` | 7 | Return how many times the current position has appeared in the game. |
-| `game_result` | 7 | Return the result and the reason if the game is over, or None if it goes on. |
+| `insufficient_material` | Says True if neither side can ever checkmate. | 7 |
+| `repetition_count` | Counts how many times this position has appeared. | 7 |
+| `game_result` | Says who won and why, or None if the game goes on. | 7 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run game_end.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: Fool's mate as `('0-1', 'checkmate')`, a stalemate, a draw with king and knight, and `None` for the start.
+
+## Puzzle questions
+
+1. Why is king and knight against king a draw?
+2. Why does the fifty-move rule check for 100 and not 50?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 7.4, 7.5.
+Slides 7.4, 7.5 in the [slide plan](../slide_plan.md).

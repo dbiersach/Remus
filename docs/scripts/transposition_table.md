@@ -1,51 +1,86 @@
-# transposition_table.py
+# transposition_table.py: Remember positions already searched
 
-Remembers positions the search has already scored.
+*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.*
 
-First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.
+## The big picture
 
-## What it does
+You can reach the same position by different move orders. Searching it twice wastes
+time.
 
-1. Nf3 Nf6 2. Nc3 and 1. Nc3 Nf6 2. Nf3 reach the same position. A plain dict keyed by
-`position_key` lets the search score that position once.
+This file is Remus's memory. It is a plain Python dict. The key is the position. The
+value is what the search learned about it.
 
-## Data structure
+## Where this piece fits
 
-Each entry is a dict: `depth`, `score`, `bound`, and `best` move. An alpha-beta score
-is not always exact, so `bound` says what the score proves:
+transposition_table.py uses game_state.py and moves.py. Only `upgraded_search()` in search.py uses it (Day 10).
 
-| Bound | Meaning |
+- **Uses:** [`moves.py`](moves.md)
+- **Uses only in its self-check:** [`fen.py`](fen.md), [`game_state.py`](game_state.md)
+- **Used by:** [`search.py`](search.md)
+
+## Words to know
+
+- **transposition:** the same position reached by a different order of moves.
+- **bound:** a score that may be exact, or only a lower or upper limit.
+- **probe:** look up a position in the table.
+
+## What it stores
+
+One table entry:
+
+```python
+table[key] = {"depth": 3, "score": 25, "bound": "exact", "best": Move(...)}
+```
+
+| Bound | What the score means |
 | --- | --- |
-| `EXACT` | The true score at that depth |
-| `LOWER` | A cutoff happened: the true score is at least this much |
-| `UPPER` | No move beat alpha: the true score is at most this much |
+| `exact` | The true score at that depth |
+| `lower` | The true score is at least this much |
+| `upper` | The true score is at most this much |
 
-## Program flow
+## How it works
 
-`store` keeps the deeper of two results. `probe` returns a stored score only when it
-was searched deep enough and its bound settles the current window. Even when `probe`
-returns `None`, `best_stored_move` gives the search a strong move to try first.
-`upgraded_search` does not store mate scores, because they depend on the distance
-from the root.
+1. After searching a position, `store()` saves the depth, score, bound, and best move.
+2. Before searching, `probe()` looks the position up.
+3. If the stored search was deep enough, the search can reuse the score.
+4. Even if not, `best_stored_move()` gives a strong move to try first.
 
-## Functions
+## Call tree
 
-| Function | Day | What it does |
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+store()
+
+probe()
+
+best_stored_move()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `store` | 10 | Save a search result for a position, keeping the deeper of two results. |
-| `probe` | 10 | Return a stored score that answers this search, or None. |
-| `best_stored_move` | 10 | Return the best move stored for a position, to try first. |
+| `store` | Saves what the search learned about a position. | 10 |
+| `probe` | Returns a saved score, if it can answer this search. | 10 |
+| `best_stored_move` | Returns the best move saved for a position. | 10 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run transposition_table.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: A saved score found at depth 3, and `None` when the search asks for depth 4.
+
+## Puzzle questions
+
+1. Name two move orders that reach the same position.
+2. Why can a depth 2 result not answer a depth 4 search?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 10.2, 10.3.
+Slides 10.2, 10.3 in the [slide plan](../slide_plan.md).

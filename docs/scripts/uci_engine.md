@@ -1,52 +1,101 @@
-# uci_engine.py
+# uci_engine.py: Talk to En Croissant
 
-Connects Remus to En Croissant through UCI.
+*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
 
-First appears in `instructor/Day 07 - Play full games in En Croissant`. Grows on Day 8, Day 9, Day 10.
+## The big picture
 
-## What it does
+En Croissant draws the board and runs the clocks. Remus does the thinking. The two
+programs talk by sending lines of text, in a language called UCI.
 
-En Croissant sends one command per line, and Remus answers on standard output:
+This file reads En Croissant's commands and sends back Remus's answers.
+
+## Where this piece fits
+
+uci_engine.py sits at the top of the puzzle. It uses fen.py, make_move.py, legal_moves.py, search.py, and opening_book.py. remus.bat starts it.
+
+- **Uses:** [`fen.py`](fen.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md), [`opening_book.py`](opening_book.md), [`search.py`](search.md)
+- **Used by:** no other Remus file
+
+## Words to know
+
+- **UCI:** Universal Chess Interface, the text language between chess GUIs and engines.
+- **GUI:** graphical user interface: the window with the board you click on.
+- **standard input and output:** the lines a program reads in and prints out.
+- **thread:** a second line of work that runs at the same time as the first.
+
+## What it stores
+
+A short conversation:
 
 ```text
-GUI:   uci                         Remus: id name Remus ... uciok
-GUI:   isready                     Remus: readyok
-GUI:   position startpos moves e2e4
-GUI:   go wtime 60000 btime 60000  Remus: info depth 3 ... then bestmove e7e5
+En Croissant -> uci                          Remus -> id name Remus ... uciok
+En Croissant -> isready                      Remus -> readyok
+En Croissant -> position startpos moves e2e4
+En Croissant -> go wtime 60000 btime 60000   Remus -> info depth 3 ... bestmove e7e5
 ```
 
-Debug text goes to standard error, which the GUI ignores. `remus.bat` starts the
-engine on Windows so En Croissant can launch it.
+## How it works
 
-## Program flow
+1. `main()` reads one line at a time.
+2. `position` builds the game with `set_position()`.
+3. `go` picks the brain. On Day 10, a book move comes first if there is one.
+4. `thinking_time()` turns the clock into seconds to think.
+5. `search_and_send()` runs `think()` in a thread, so Remus can still answer `isready` and `stop`.
+6. `send()` prints each answer and flushes it right away.
 
-1. `set_position` builds the state from `startpos` or a FEN, then plays the listed
-   moves.
-2. On `go`, a brain named on the command line (`random`, `greedy`, `negamax`) answers
-   at once. The default `think` brain plays a book move (Day 10) if there is one.
-3. Otherwise `thinking_time` turns the clocks into seconds, and `search_and_send`
-   runs `think` in a thread, so Remus can still answer `isready` and obey `stop`.
-4. `bestmove 0000` goes out only when there is no legal move.
+## Call tree
 
-## Functions
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
 
-| Function | Day | What it does |
+```text
+main()
+    state_from_fen()  [fen.py]
+    load_book()  [opening_book.py]
+    send()
+    set_position()
+        state_from_fen()  [fen.py]
+        make_move()  [make_move.py]
+        move_from_uci()  [moves.py]
+    book_move()  [opening_book.py]
+    legal_moves()  [legal_moves.py]
+    thinking_time()
+    move_to_uci()  [moves.py]
+    search_and_send()
+        think()  [search.py]
+        send()
+        move_to_uci()  [moves.py]
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `send` | 7 | Send one line to the GUI. flush=True makes it leave at once. |
-| `set_position` | 7 | Build the state that a "position" command describes. |
-| `thinking_time` | 9 | Decide how many seconds to think from a "go" command. |
-| `search_and_send` | 9 | Think in the background, then send the best move to the GUI. |
+| `send` | Sends one line to En Croissant right away. | 7 |
+| `set_position` | Builds the game state from a position command. | 7 |
+| `thinking_time` | Decides how many seconds to think from the clock. | 9 |
+| `search_and_send` | Thinks in the background, then sends the best move. | 9 |
+
+## How the file grows
+
+- **Day 7:** `send`, `set_position`
+- **Day 9:** `thinking_time`, `search_and_send`
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run uci_engine.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: Nothing at first. Type `uci`, then `isready`, then `go`. Type `quit` to stop.
+
+## Puzzle questions
+
+1. Why must debug messages go to standard error and not standard output?
+2. What should Remus send when it has no legal move?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 1.1, 7.6, 9.7.
+Slides 1.1, 7.6, 9.7 in the [slide plan](../slide_plan.md).

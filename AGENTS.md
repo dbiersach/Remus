@@ -196,6 +196,11 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   them all. `tests/` holds the reference-tool tests and `mate_puzzles.epd`. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
+- Every `.py` file a student modifies or reads has a page in `docs/scripts/`, the
+  "puzzle box top" for that file: the big picture first, then where it fits (uses and
+  used by), words to know, a call tree, a plain-language line for each function, and
+  questions. Write the pages for middle school readers, in short sentences, and do not
+  repeat the code's comments line by line. When a file changes, update its page.
 - `docs/` holds the program overview, one page per major script in `docs/scripts/`,
   the slide plan, the course plan, the roadmap, and the two briefing PDFs.
 

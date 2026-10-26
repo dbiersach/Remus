@@ -1,59 +1,104 @@
-# make_move.py
+# make_move.py: Make a move, then take it back
 
-Makes a move on the game state and undoes it exactly.
+*First appears in `instructor/Day 02 - Make and undo moves`.*
 
-First appears in `instructor/Day 02 - Make and undo moves`. Grows on Day 5, Day 7.
+## The big picture
 
-## What it does
+Search tries thousands of moves to see what happens. After each try, it must put
+the board back exactly as it was.
 
-`make_move(state, move)` changes the state in place and returns an undo record.
-`undo_move(state, undo)` uses that record to put back every square, right, and clock.
-Search depends on this pair: it makes thousands of moves on one live state and must
-leave that state exactly as it found it.
+This file does both jobs. `make_move()` plays a move and hands back an undo record.
+`undo_move()` uses that record to rewind the game.
 
-## Data structure: the undo record
+## Where this piece fits
+
+make_move.py uses board.py, game_state.py, and moves.py. Legal moves, perft, search, and the UCI engine all depend on it.
+
+- **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`moves.py`](moves.md)
+- **Used by:** [`console_game.py`](console_game.md), [`legal_moves.py`](legal_moves.md), [`mate_solver.py`](mate_solver.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`perft.py`](perft.md), [`search.py`](search.md), [`uci_engine.py`](uci_engine.md)
+
+## Words to know
+
+- **undo record:** a dict that remembers everything a move changed.
+- **captured piece:** the enemy piece removed by a move, or `.` if none.
+- **snapshot:** the whole state written as text, so two states are easy to compare.
+- **halfmove clock:** counts moves since the last capture or pawn move. It is for the fifty-move rule.
+
+## What it stores
+
+The undo record for 1. e4 looks like this:
 
 ```python
-{"move": move, "piece": "P", "captured": ".",
+{"move": Move((6, 4), (4, 4)), "piece": "P", "captured": ".",
  "castling": "KQkq", "en_passant": None,
  "halfmove_clock": 0, "fullmove_number": 1,
- "rook_move": None,           # (from, to) of the rook when castling (Day 5)
- "en_passant_victim": None}   # Square of the pawn removed en passant (Day 5)
+ "rook_move": None, "en_passant_victim": None}
 ```
 
-## Program flow
+It holds the old values, from before the move.
 
-1. Save everything the move can change in the undo record.
-2. Move the piece; on Day 5, also move the castling rook, remove the en passant
-   victim, or swap in the promotion piece.
-3. Update the clocks, the en passant target, the castling rights
-   (`update_castling_rights`), and the side to move.
-4. From Day 7, append the new `position_key` to `history`.
+## How it works
 
-`undo_move` runs the same steps backward. `state_snapshot(state)` writes the whole
-state as text, so a test can check `before == after` in one comparison.
+1. Save the old values in the undo record.
+2. Move the piece. Castling also moves the rook. En passant also removes a pawn. Promotion swaps the pawn for a new piece.
+3. Update the clocks, castling rights, en passant square, and turn.
+4. Add the new position key to the history.
+5. Later, `undo_move()` does all of this backward.
 
-## Functions
+## Call tree
 
-| Function | Day | What it does |
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+make_move()
+    piece_at()  [board.py]
+    set_piece()  [board.py]
+    update_castling_rights()
+    opponent()  [game_state.py]
+    en_passant_victim_square()
+    castling_rook_move()
+    position_key()  [game_state.py]
+
+undo_move()
+    set_piece()  [board.py]
+    opponent()  [game_state.py]
+    piece_at()  [board.py]
+
+state_snapshot()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `update_castling_rights` | 5 | Return the castling rights left after a move. |
-| `en_passant_victim_square` | 5 | Return the square of the pawn an en passant capture removes. |
-| `castling_rook_move` | 5 | Return the (from, to) squares of the rook in a castling move. |
-| `make_move` | 2 | Make any move, including castling, en passant, and promotion, and return the record needed to undo it. |
-| `undo_move` | 2 | Take back the move described by an undo record. |
-| `state_snapshot` | 2 | Return the whole state as text, so two states can be compared with ==. |
+| `update_castling_rights` | Removes castling letters when a king or rook moves or is captured. | 5 |
+| `en_passant_victim_square` | Finds the pawn that an en passant capture removes. | 5 |
+| `castling_rook_move` | Finds where the rook goes when the king castles. | 5 |
+| `make_move` | Plays a move on the state and returns the undo record. | 2 |
+| `undo_move` | Takes back a move using its undo record. | 2 |
+| `state_snapshot` | Writes the whole state as text, to check that undo worked. | 2 |
+
+## How the file grows
+
+- **Day 2:** `make_move`, `undo_move`, `state_snapshot`
+- **Day 5:** `update_castling_rights`, `en_passant_victim_square`, `castling_rook_move`
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run make_move.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: A board after 15 moves made and undone, then `back at the start: True`.
+
+## Puzzle questions
+
+1. Why must the undo record keep the old castling rights?
+2. What would go wrong in search if `undo_move()` forgot the en passant square?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 2.3, 2.4, 2.5, 5.2, 5.3, 5.4.
+Slides 2.3, 2.4, 2.5, 5.2, 5.3, 5.4 in the [slide plan](../slide_plan.md).

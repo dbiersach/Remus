@@ -1,42 +1,88 @@
-# fen.py
+# fen.py: A whole position in one line
 
-Reads and writes FEN, the one-line description of a position.
+*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
 
-First appears in `instructor/Day 07 - Play full games in En Croissant`.
+## The big picture
 
-## What it does
+FEN is a way to write a whole chess position on one line. Every chess program can
+read it, so Remus can load any position you find online.
 
-`rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1` is the start position.
-The six fields are the pieces (rank 8 first, digits for runs of empty squares), the
-side to move, the castling rights, the en passant square, the halfmove clock, and the
-fullmove number.
+This file reads FEN into a game state and writes a game state back out as FEN.
 
-## Program flow
+## Where this piece fits
 
-`state_from_fen` splits the text on spaces and fills the state dict field by field;
-`board_from_placement` expands each digit into that many `"."` squares.
-`state_to_fen` runs the other way through `fen_placement`. Tests, puzzles, and the UCI
-adapter all set up positions through `state_from_fen`.
+fen.py uses board.py and game_state.py. Tests, puzzles, the UCI engine, and many self-checks use it to set up positions.
 
-## Functions
+- **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md)
+- **Used by:** [`compare_search.py`](compare_search.md), [`console_game.py`](console_game.md), [`opening_book.py`](opening_book.md), [`uci_engine.py`](uci_engine.md)
 
-| Function | Day | What it does |
+## Words to know
+
+- **FEN:** Forsyth-Edwards Notation, a one-line text for a chess position.
+- **field:** one part of the FEN line. The parts are split by spaces.
+- **placement:** the first field: where every piece stands.
+
+## What it stores
+
+The starting position in FEN:
+
+```text
+rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+|                                         | |  |   | | |
+pieces, rank 8 first, / between ranks     | |  |   | | move number
+                                 side to move  |   | halfmove clock
+                                   castling rights  en passant square
+```
+
+A digit means that many empty squares. `8` is a whole empty rank.
+
+## How it works
+
+1. `state_from_fen()` splits the line into its six fields.
+2. `board_from_placement()` turns the first field into the 8x8 board.
+3. The other fields fill in the turn, castling, en passant square, and clocks.
+4. `state_to_fen()` runs the other way, using `fen_placement()`.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+state_from_fen()
+    board_from_placement()
+    position_key()  [game_state.py]
+    parse_square()  [board.py]
+
+state_to_fen()
+    square_name()  [board.py]
+    fen_placement()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `fen_placement` | 7 | Return the piece-placement field of FEN for a board. |
-| `board_from_placement` | 7 | Build a board from the piece-placement field of FEN. |
-| `state_from_fen` | 7 | Build a game state from a full FEN string. |
-| `state_to_fen` | 7 | Write a game state as a full FEN string. |
+| `fen_placement` | Writes the board as the first FEN field. | 7 |
+| `board_from_placement` | Reads the first FEN field into a board. | 7 |
+| `state_from_fen` | Reads a full FEN line into a game state. | 7 |
+| `state_to_fen` | Writes a game state as a full FEN line. | 7 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run fen.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: The starting board, then `Start FEN read and written back unchanged: True`.
+
+## Puzzle questions
+
+1. What does `4P3` mean in a FEN rank?
+2. After 1. e4, which FEN field changes from `-` to `e3`?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 7.1.
+Slides 7.1 in the [slide plan](../slide_plan.md).

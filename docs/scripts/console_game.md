@@ -1,36 +1,71 @@
-# console_game.py
+# console_game.py: Play chess in the terminal
 
-Plays chess in the terminal with moves typed in SAN.
+*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
 
-First appears in `instructor/Day 07 - Play full games in En Croissant`. Grows on Day 8, Day 9, Day 10.
+## The big picture
 
-## What it does
+Before En Croissant, you can play right in the terminal. Type moves like `e4` and
+`Nf3`.
 
-Two people take turns typing moves such as `e4` and `Nf3`; with `remus` as the
-argument, Remus plays Black. Typing `quit` stops the game. The board prints after
-every move.
+With `remus` after the command, Remus plays Black.
 
-## Program flow
+## Where this piece fits
 
-The loop prints the board, reads a move with `parse_san` (an illegal move prints the
-error and asks again), makes it, and repeats until `game_result` reports the end. On
-Day 10, Remus plays from the opening book first, then thinks.
+console_game.py uses board.py, fen.py, notation.py, make_move.py, game_end.py, and search.py.
 
-## Functions
+- **Uses:** [`board.py`](board.md), [`fen.py`](fen.md), [`game_end.py`](game_end.md), [`make_move.py`](make_move.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`search.py`](search.md)
+- **Used by:** no other Remus file
 
-| Function | Day | What it does |
-| --- | --- | --- |
+## Words to know
+
+- **terminal:** the text window where you type commands.
+- **loop:** code that repeats until something stops it.
+
+## What it stores
+
+The loop keeps going until `game_result()` says the game is over.
+
+## How it works
+
+1. Print the board.
+2. If it is Remus's turn, Remus picks a move. Otherwise, read your move with `parse_san()`.
+3. A bad move prints an error and asks again. Typing `quit` stops the game.
+4. Make the move and repeat.
+5. At the end, print the result and the reason.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+main()
+    state_from_fen()  [fen.py]
+    load_book()  [opening_book.py]
+    print_board()  [board.py]
+    game_result()  [game_end.py]
+    make_move()  [make_move.py]
+    book_move()  [opening_book.py]
+    think_move()  [search.py]
+    parse_san()  [notation.py]
+    move_to_san()  [notation.py]
+```
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
-uv run console_game.py remus
+uv run console_game.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: The board and a prompt like `White to move:`.
+
+## Puzzle questions
+
+1. What happens if you type `Ke2` at the start?
+2. Which file decides when the loop stops?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 1.1.
+Slides 1.1 in the [slide plan](../slide_plan.md).

@@ -1,68 +1,110 @@
-# hidden_peak.py
+# hidden_peak.py: Science AI: find the hidden peak
 
-Science AI: chooses where to measure next to find a hidden hot spot.
+*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.*
 
-First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.
+## The big picture
 
-## What it does
+A science sample hides a hot spot. Each measurement takes time, so we want to find
+the hot spot in as few measurements as we can.
 
-A 10x10 sample hides a hot spot that reads 100, fading to 0 with distance. Every
-measurement costs time, so the goal is to find the peak in as few measurements as
-possible: the same choice an autonomous agent makes at a beamline at Brookhaven's
-NSLS-II.
+This file uses the same idea as the chess engine. List the choices. Score each one.
+Pick the best. Here the choices are squares to measure, not moves.
 
-## The map from chess
+## Where this piece fits
+
+hidden_peak.py stands alone. It imports nothing from Remus. It borrows the engine's ideas, not its code.
+
+- **Uses:** no other Remus file
+- **Used by:** no other Remus file
+
+## Words to know
+
+- **measurement:** reading the value at one square of the sample.
+- **exploit:** measure where it already looks hot.
+- **explore:** measure somewhere new, far from earlier readings.
+- **benchmark:** a fair test: run each method on the same 100 samples and compare averages.
+- **expectimax:** like minimax, but it averages the outcomes, because nature is not an opponent.
+
+## What it stores
 
 | Chess engine | Hidden peak |
 | --- | --- |
-| Legal moves | `candidate_squares`: squares not yet measured |
-| `make_move`, `undo_move` | Add a pretend reading, then delete it |
-| Evaluation | `score_candidate`: predicted value (exploit) plus `EXPLORE_WEIGHT` times the distance to the nearest reading (explore) |
-| `greedy_move` | `choose_next_measurement` |
-| Minimax | `expectimax_choice`: average a high and a low reading, because nature is not an opponent |
-| A match | `benchmark`: average measurements over 100 hidden samples |
+| Legal moves | Squares not measured yet |
+| Evaluation | Predicted value plus a bonus for exploring |
+| `greedy_move()` | Measure the best-scoring square |
+| Minimax | Expectimax: average a high and a low reading |
+| A match | A benchmark over 100 samples |
 
-## Results
-
-| Strategy | Average measurements |
+| Method | Average measurements |
 | --- | --- |
 | Random guessing | about 54 |
-| Greedy, explore weight 0 | about 18 |
-| Greedy, explore weight 8 | about 9 |
-| Greedy, explore weight 40 | about 19 |
-| Expectimax, depth 2 | about 23 to 32 |
+| Greedy AI, explore weight 8 | about 9 |
 
-The greedy AI with a moderate exploration term wins. Expectimax does worse because its
-"plus or minus 20" guess is a crude model of uncertainty; the NSLS-II agent uses a
-Gaussian process, which knows how uncertain each prediction is. The file uses only the
-standard library and reuses the engine's ideas, not its code. `main()` takes about a
-minute.
+## How it works
 
-## Functions
+1. `make_grid()` hides a hot spot on a 10x10 grid.
+2. Every method starts by measuring the center.
+3. `candidate_squares()` lists the squares not measured yet.
+4. `score_candidate()` adds the predicted value and an explore bonus.
+5. `choose_next_measurement()` picks the highest score.
+6. `benchmark()` repeats this on 100 samples and averages the count.
 
-| Function | Day | What it does |
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+choose_next_measurement()
+    candidate_squares()
+    score_candidate()
+        predicted_value()
+
+random_strategy()
+    candidate_squares()
+
+expectimax_choice()
+    candidate_squares()
+    predicted_value()
+    score_candidate()
+        predicted_value()
+
+benchmark()
+    measurements_to_find_peak()
+        measure()
+    make_grid()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `make_grid` | 10 | Make a hidden sample: a hot spot at a random square, fading with distance. |
-| `measure` | 10 | Return the reading at one square of the hidden sample. |
-| `predicted_value` | 10 | Predict the reading at a square from the readings so far. |
-| `candidate_squares` | 10 | Return every square not yet measured, the "legal moves" of this problem. |
-| `score_candidate` | 10 | Score a square as the next measurement, the "evaluation" of this problem. |
-| `choose_next_measurement` | 10 | Return the unmeasured square with the highest score, like greedy_move(). |
-| `random_strategy` | 10 | Measure a random unmeasured square, the baseline every AI must beat. |
-| `expectimax_choice` | 10 | Look two measurements ahead (teacher demo). |
-| `measurements_to_find_peak` | 10 | Run one strategy on one sample and count measurements until it reads PEAK. |
-| `benchmark` | 10 | Return the average number of measurements a strategy needs over many samples. |
+| `make_grid` | Hides a hot spot on a 10x10 grid. | 10 |
+| `measure` | Reads the value at one square. | 10 |
+| `predicted_value` | Guesses a square's value from the readings so far. | 10 |
+| `candidate_squares` | Lists the squares not measured yet. | 10 |
+| `score_candidate` | Scores a square: predicted value plus an explore bonus. | 10 |
+| `choose_next_measurement` | Picks the square with the best score. | 10 |
+| `random_strategy` | Picks a random square. Every AI must beat it. | 10 |
+| `expectimax_choice` | Looks two measurements ahead and averages the outcomes. | 10 |
+| `measurements_to_find_peak` | Counts measurements until one method finds the peak. | 10 |
+| `benchmark` | Averages that count over many hidden samples. | 10 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run hidden_peak.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: The average for random guessing, three greedy AIs, and the expectimax AI. It takes about a minute.
+
+## Puzzle questions
+
+1. What happens with explore weight 0? With 40? Why?
+2. How is `candidate_squares()` like `legal_moves()`?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 10.11, 10.12, 10.13, 10.14, 10.15.
+Slides 10.11, 10.12, 10.13, 10.14, 10.15 in the [slide plan](../slide_plan.md).

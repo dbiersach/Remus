@@ -1,55 +1,105 @@
-# attacks.py
+# attacks.py: Is this square under attack?
 
-Decides whether a square is attacked and whether a king is in check.
+*First appears in `instructor/Day 04 - Keep only legal moves`.*
 
-First appears in `instructor/Day 04 - Keep only legal moves`.
+## The big picture
 
-## What it does
+A king may not stay in check. To know that, Remus must answer one question: is
+this square attacked?
 
-In the start position, White's knight on g1 and pawns on e2 and g2 attack f3, and no
-Black piece does. `is_square_attacked(board, (5, 5), "w")` returns `True`.
+This file answers it two ways. Version 1 asks every enemy piece. Version 2 stands on
+the square and looks outward. Remus uses version 2 because it checks fewer squares.
 
-## Two versions in one file
+## Where this piece fits
 
-Version 1, `is_attacked_by_scanning`, asks every enemy piece "do you attack this
-square?" by generating its moves. Turbo GameWorks Chess works this way, and the idea
-is easy to trust.
+attacks.py uses board.py, game_state.py, and move_generation.py. legal_moves.py, game_end.py, notation.py, search.py, and mate_solver.py use it.
 
-Version 2, `is_square_attacked`, stands on the square and looks outward like a "super
-piece": along rook lines and bishop lines with `first_piece`, and at the nearby
-knight, pawn, and king squares. Version 2 looks at a few dozen squares instead of
-generating every enemy move, so Remus uses it. `main()` compares both versions on
-every square of a test position.
+- **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`move_generation.py`](move_generation.md)
+- **Used by:** [`game_end.py`](game_end.md), [`legal_moves.py`](legal_moves.md), [`mate_solver.py`](mate_solver.md), [`notation.py`](notation.md), [`search.py`](search.md)
 
-## Program flow
+## Words to know
 
-`in_check(state, color)` finds the king with `find_king` and asks whether the opponent
-attacks its square. `legal_moves.py` calls `in_check` after every trial move.
+- **attacked:** an enemy piece could capture on that square.
+- **check:** the king's square is attacked.
+- **super piece:** pretend a piece on the square can move every way. Whatever it could capture is an attacker.
+- **ray:** a straight line of squares from one square to the edge.
 
-## Functions
+## What it stores
 
-| Function | Day | What it does |
+Version 2 looks outward from the square like this:
+
+```text
+   along rook lines      -> finds an enemy rook or queen
+   along bishop lines    -> finds an enemy bishop or queen
+   at knight jumps       -> finds an enemy knight
+   at pawn squares       -> finds an enemy pawn
+   at the 8 next squares -> finds the enemy king
+```
+
+## How it works
+
+1. `in_check()` finds the king with `find_king()`.
+2. It asks `is_square_attacked()` about the king's square.
+3. `is_square_attacked()` checks knights, the king, pawns, and the lines in turn.
+4. `first_piece()` walks along a line and stops at the first piece it meets.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+is_attacked_by_scanning()
+    color_of()  [game_state.py]
+    piece_moves()  [move_generation.py]
+
+in_check()
+    is_square_attacked()
+        attacked_by_knight()
+            on_board()  [move_generation.py]
+            piece_at()  [board.py]
+        attacked_by_pawn()
+            on_board()  [move_generation.py]
+            piece_at()  [board.py]
+        attacked_by_king()
+            on_board()  [move_generation.py]
+            piece_at()  [board.py]
+        attacked_along_lines()
+            first_piece()
+                on_board()  [move_generation.py]
+            color_of()  [game_state.py]
+    find_king()
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `is_attacked_by_scanning` | 4 | Version 1: ask every enemy piece whether it attacks the square. |
-| `attacked_by_knight` | 4 | Return True if a knight of by_color is one knight jump away. |
-| `attacked_by_king` | 4 | Return True if the king of by_color is one step away. |
-| `attacked_by_pawn` | 4 | Return True if a pawn of by_color attacks the square. |
-| `first_piece` | 4 | Return the first piece met walking from the square in a direction, or EMPTY. |
-| `attacked_along_lines` | 4 | Return True if a rook, bishop, or queen of by_color attacks along a line. |
-| `is_square_attacked` | 4 | Version 2: look outward from the square for any attacker of by_color. |
-| `find_king` | 4 | Return the (row, col) of the king of the given color. |
-| `in_check` | 4 | Return True if the king of the given color is attacked. |
+| `is_attacked_by_scanning` | Version 1: asks every enemy piece if it can reach the square. | 4 |
+| `attacked_by_knight` | Looks for an enemy knight one jump away. | 4 |
+| `attacked_by_king` | Looks for the enemy king one step away. | 4 |
+| `attacked_by_pawn` | Looks for an enemy pawn that captures onto the square. | 4 |
+| `first_piece` | Walks in one direction and returns the first piece it meets. | 4 |
+| `attacked_along_lines` | Looks along straight and diagonal lines for a rook, bishop, or queen. | 4 |
+| `is_square_attacked` | Version 2: looks outward from the square for any attacker. | 4 |
+| `find_king` | Finds the square of a king. | 4 |
+| `in_check` | Says True if that side's king is attacked. | 4 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run attacks.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: Which side attacks f3 at the start, and `Versions 1 and 2 agree on 96 of 96 squares`.
+
+## Puzzle questions
+
+1. At the start, which White pieces attack f3?
+2. Why can a pawn attack a square it cannot move to?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 4.1, 4.2.
+Slides 4.1, 4.2 in the [slide plan](../slide_plan.md).

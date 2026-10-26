@@ -1,46 +1,86 @@
-# perft.py
+# perft.py: Count positions to prove the rules
 
-Counts positions in the move tree to prove the rules are right.
+*First appears in `instructor/Day 06 - Count positions with perft`.*
 
-First appears in `instructor/Day 06 - Count positions with perft`.
+## The big picture
 
-## What it does
+How do we know the rules are right? We count.
 
-From the start position, White has 20 moves, the two sides together reach 400
-positions after two moves, 8,902 after three, and 197,281 after four. Chess
-programmers have published these counts for many positions. When Remus's count
-matches, every rule it exercised is right; when it differs, a rule is wrong.
+From the start, White has 20 moves. After Black replies, there are 400 positions.
+Experts have published these counts. If Remus gets the same numbers, its rules work.
 
-## Program flow
+## Where this piece fits
 
-`perft(state, depth)` returns 1 at depth 0. Otherwise it loops over `legal_moves`,
-makes each move, adds `perft(state, depth - 1)`, and undoes the move.
+perft.py uses legal_moves.py and make_move.py. Nothing else in the engine depends on it. It is a test tool.
 
-`divide(state, depth)` returns the count under each root move separately, as a dict
-from UCI text to count. Comparing that dict with a reference program points to the one
-root move whose count is wrong; repeat `divide` one move deeper until the bug shows.
+- **Uses:** [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md)
+- **Uses only in its self-check:** [`game_state.py`](game_state.md)
+- **Used by:** no other Remus file
 
-The tests check the start position and four well-known test positions (including
-"Kiwipete", 97,862 at depth 3) against counts written down before the run, then
-against `python-chess`.
+## Words to know
 
-## Functions
+- **perft:** short for performance test. It counts the positions a fixed number of moves ahead.
+- **depth:** how many moves ahead to look. One move by one side is one ply.
+- **divide:** split the count by first move, to find which move hides a bug.
+- **recursion:** a function that calls itself on a smaller problem.
 
-| Function | Day | What it does |
+## What it stores
+
+Counts from the starting position:
+
+| Depth | Positions |
+| --- | --- |
+| 1 | 20 |
+| 2 | 400 |
+| 3 | 8,902 |
+| 4 | 197,281 |
+
+## How it works
+
+1. At depth 0, count 1: this position.
+2. Otherwise, for every legal move: make it, count one level deeper, then undo it.
+3. Add up the counts.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+divide()
+    legal_moves()  [legal_moves.py]
+    make_move()  [make_move.py]
+    perft()
+        legal_moves()  [legal_moves.py]
+        make_move()  [make_move.py]
+        perft()  (calls itself again, one move deeper)
+        undo_move()  [make_move.py]
+    undo_move()  [make_move.py]
+    move_to_uci()  [moves.py]
+```
+
+## The functions
+
+| Function | What it does | Day |
 | --- | --- | --- |
-| `perft` | 6 | Count the positions reached after exactly `depth` moves. |
-| `divide` | 6 | Split a perft count by root move, to find which move a bug hides under. |
+| `perft` | Counts the positions reached after a fixed number of moves. | 6 |
+| `divide` | Gives the count under each first move separately. | 6 |
 
 ## Try it
 
-From inside a Day folder in `instructor/` that has the file:
+From inside a Day folder that has the file, run:
 
 ```bash
 uv run perft.py
 ```
 
-The script prints each result next to the expected answer.
+You should see: `perft(1) = 20`, `perft(2) = 400`, `perft(3) = 8,902`, and how long each took.
+
+## Puzzle questions
+
+1. If perft(2) came out as 401, what kind of bug could that be?
+2. Why does perft also test `undo_move()`?
 
 ## Slides
 
-See [`slide_plan.md`](../slide_plan.md): slides 6.1, 6.2, 6.3.
+Slides 6.1, 6.2, 6.3 in the [slide plan](../slide_plan.md).
