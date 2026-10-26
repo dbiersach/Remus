@@ -1,0 +1,93 @@
+{
+    "folders": [{ "path": "." }],
+    "settings": {
+        "chat.editor.fontSize": 16,
+        "chat.fontSize": 16,
+        "editor.fontSize": 18,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports.ruff": "explicit"
+        },
+        "editor.unusualLineTerminators": "prompt",
+        "files.autoSave": "afterDelay",
+        "files.exclude": { "**/__pycache__": true },
+        "search.exclude": { "Turbo Pascal Toolbox 4.0 - GameWorks/**": true },
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.completeFunctionParens": true,
+        "python.terminal.activateEnvironment": true,
+        "python.terminal.executeInFileDir": false,
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestArgs": ["tests"],
+        "python.terminal.activateEnvInCurrentTerminal": true,
+        "python.terminal.shellIntegration.enabled": false,
+        "python.experiments.optOutFrom": ["pythonTerminalEnvVarActivation"],
+        "debug.terminal.clearBeforeReusing": false,
+        "output.smartScroll.enabled": false,
+        "terminal.integrated.fontSize": 18,
+        "terminal.integrated.enablePersistentSessions": false,
+        "terminal.integrated.persistentSessionReviveProcess": "never",
+        "terminal.integrated.shellIntegration.enabled": false,
+        "workbench.colorCustomizations": {
+            "tab.activeBorder": "#3cff00",
+            "tab.unfocusedActiveBorder": "#000000"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "ms-python.debugpy",
+            "charliermarsh.ruff",
+            "streetsidesoftware.code-spell-checker"
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Python: Current File",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${file}",
+                "cwd": "${workspaceFolder}",
+                "console": "integratedTerminal",
+                "justMyCode": true
+            }
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "uv sync",
+                "type": "process",
+                "command": "uv",
+                "args": ["sync"],
+                "options": { "cwd": "${workspaceFolder}" },
+                "problemMatcher": []
+            },
+            {
+                "label": "Remus: Test",
+                "type": "process",
+                "command": "uv",
+                "args": ["run", "pytest"],
+                "options": { "cwd": "${workspaceFolder}" },
+                "group": "test",
+                "problemMatcher": []
+            },
+            {
+                "label": "Remus: Lint",
+                "type": "process",
+                "command": "uv",
+                "args": ["run", "ruff", "check", "."],
+                "options": { "cwd": "${workspaceFolder}" },
+                "problemMatcher": []
+            }
+        ]
+    }
+}

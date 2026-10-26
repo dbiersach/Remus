@@ -1,0 +1,72 @@
+// cSpell Settings
+{
+    // Version of the setting file.  Always 0.2
+    "version": "0.2",
+    // language - current active spelling language
+    "language": "en",
+    // files and folders the spell checker skips
+    "ignorePaths": [".venv/**", "uv.lock", "Turbo Pascal Toolbox 4.0 - GameWorks/**"],
+    // words - list of words to be always considered correct
+    "words": [
+        "addopts",
+        "Akkad",
+        "Akkadian",
+        "bestmove",
+        "Biersach",
+        "bitboards",
+        "Borland",
+        "charliermarsh",
+        "cschlosser",
+        "dataclass",
+        "dataclasses",
+        "datawrangler",
+        "davidanson",
+        "debugpy",
+        "docstrings",
+        "Docstrings",
+        "dosbox",
+        "doxdocgen",
+        "emmanuelbeziat",
+        "errorlens",
+        "esbenp",
+        "extensionpack",
+        "GameWorks",
+        "isort",
+        "isready",
+        "keymap",
+        "lldb",
+        "Manishtushu",
+        "masm",
+        "mechatroner",
+        "Naram",
+        "negamax",
+        "oderwat",
+        "perft",
+        "pycache",
+        "PyChess",
+        "pyproject",
+        "pytest",
+        "quiescence",
+        "Rimush",
+        "Sargon",
+        "Spracklen",
+        "tablebase",
+        "tablebases",
+        "tasm",
+        "testpaths",
+        "tomoki",
+        "toolsai",
+        "twxs",
+        "ucinewgame",
+        "underpromotion",
+        "usernamehw",
+        "vadimcn",
+        "venv",
+        "Wavemate",
+        "xsro"
+    ],
+    // flagWords - list of words to be always considered incorrect
+    // This is useful for offensive words and common spelling errors.
+    // For example "hte" should be "the"
+    "flagWords": []
+}
