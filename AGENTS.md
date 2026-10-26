@@ -1,8 +1,8 @@
 # Remus Project Rules and Python Style Guide
 
 Remus is a chess engine written in pure, native Python as a teaching project for the
-**Turbo GameWorks Chess Workshop**. The full lesson plan lives in
-[`turbo_gameworks_chess_workshop.md`](turbo_gameworks_chess_workshop.md) and the
+**"From Chess Engines to Science AI"** workshop. The full lesson plan lives in
+[`workshop_roadmap.md`](workshop_roadmap.md) and the
 day-by-day course in [`remus_course_plan.md`](remus_course_plan.md); read both before
 starting any lesson.
 

@@ -1,11 +1,11 @@
 # Remus
 
 Remus is a chess engine written in plain Python, built one lesson at a time for
-the Turbo GameWorks Chess Workshop. The name echoes Rimush, the son and heir of
+the "From Chess Engines to Science AI" workshop. The name echoes Rimush, the son and heir of
 Sargon of Akkad, in tribute to Sargon (1978), the microcomputer chess program
 whose complete source was published so that people could learn from it.
 
-The lesson plan is in [`turbo_gameworks_chess_workshop.md`](turbo_gameworks_chess_workshop.md).
+The lesson plan is in [`workshop_roadmap.md`](workshop_roadmap.md).
 
 ## Setup
 

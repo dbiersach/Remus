@@ -1,7 +1,7 @@
 [project]
 name = "remus"
 version = "0.1.0"
-description = "Remus - a pure Python teaching chess engine for the Turbo GameWorks Chess Workshop"
+description = "Remus - a pure Python teaching chess engine for the "From Chess Engines to Science AI" workshop"
 readme = "README.md"
 requires-python = ">=3.14,<3.15"
 # The engine uses the standard library only, so it has no runtime dependencies.

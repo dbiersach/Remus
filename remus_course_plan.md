@@ -1,6 +1,6 @@
-# Remus Course Plan: Build a Chess Engine in Two Weeks
+# From Chess Engines to Science AI: Remus Course Plan
 
-This plan turns the [workshop roadmap](turbo_gameworks_chess_workshop.md) into a
+This plan turns the [workshop roadmap](workshop_roadmap.md) into a
 two-week course for students about 13 years old: 10 days, four 90-minute periods a day,
 60 class hours in all. Students work in pairs. They learn the Python they need in short
 labs, and then they write real sections of Remus: small functions that go into the

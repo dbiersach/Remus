@@ -1,4 +1,4 @@
-# Turbo GameWorks Chess Workshop
+# From Chess Engines to Science AI: Workshop Roadmap
 
 ## Purpose
 
