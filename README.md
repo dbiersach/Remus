@@ -1,9 +1,10 @@
 # Remus
 
 Remus is a chess engine written in plain Python, built one lesson at a time for
-the "From Chess Engines to Science AI" workshop. The name echoes Rimush, the son and heir of
-Sargon of Akkad, in tribute to Sargon (1978), the microcomputer chess program
-whose complete source was published so that people could learn from it.
+the "Turning a Chess Engine into Science AI" workshop. The name echoes Rimush,
+the son and heir of Sargon of Akkad, in tribute to Sargon (1978), the
+microcomputer chess program whose complete source was published so that people
+could learn from it.
 
 The lesson plan is in [`workshop_roadmap.md`](workshop_roadmap.md).
 

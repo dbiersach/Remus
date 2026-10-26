@@ -1,4 +1,4 @@
-# From Chess Engines to Science AI: Remus Course Plan
+# Turning a Chess Engine into Science AI: Remus Course Plan
 
 This plan turns the [workshop roadmap](workshop_roadmap.md) into a
 two-week course for students about 13 years old: 10 days, four 90-minute periods a day,

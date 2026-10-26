@@ -1,4 +1,4 @@
-# From Chess Engines to Science AI: Workshop Roadmap
+# Turning a Chess Engine into Science AI: Workshop Roadmap
 
 ## Purpose
 

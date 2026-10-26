@@ -1,7 +1,7 @@
 # Remus Project Rules and Python Style Guide
 
 Remus is a chess engine written in pure, native Python as a teaching project for the
-**"From Chess Engines to Science AI"** workshop. The full lesson plan lives in
+**"Turning a Chess Engine into Science AI"** workshop. The full lesson plan lives in
 [`workshop_roadmap.md`](workshop_roadmap.md) and the
 day-by-day course in [`remus_course_plan.md`](remus_course_plan.md); read both before
 starting any lesson.
