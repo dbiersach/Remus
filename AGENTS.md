@@ -141,10 +141,12 @@ The engine must run without En Croissant or `python-chess` installed.
 10. Improve search: iterative deepening, ordering, quiescence, time limits, PV, null-window, PVS
 11. Transposition table (plain dict), opening list, tablebase probing at the boundary
 12. UCI loop and play in En Croissant
+13. Science AI: aim the same generate, score, and choose loop at a hidden-peak
+    measurement problem (`science/hidden_peak.py`)
 
 Each lesson has a "Ready to move on when" gate in the workshop file. Don't skip a gate.
 
-The course plan maps these 12 lessons onto the ten days and moves the first UCI and
+The course plan maps these 13 lessons onto the ten days and moves the first UCI and
 GUI work to Day 7, after perft has verified the rules.
 
 ## Verification
@@ -175,6 +177,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Engine modules live in one flat `remus/` folder and import each other by name
   (`from board import new_board`), so any module runs directly with
   `uv run remus/perft.py`. pytest finds them through `pythonpath = ["remus"]`.
+- The Science AI lesson lives in a separate `science/` folder. `hidden_peak.py` uses the
+  standard library only and does not import the engine: it reuses the engine's ideas,
+  not its code. Add `"science"` to `pythonpath` when the folder is created.
 - Tests live in `tests/`. A test that uses `python-chess` as a reference states the
   expected count in its docstring or assertion before comparing against Remus.
 

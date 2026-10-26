@@ -9,7 +9,7 @@ class engine and stay there.
 The plan also maps the ideas in Borland's Turbo GameWorks Chess 4.0 (Kaare Danielsen,
 1985 to 1987) onto the modules Remus grows, and shows where Remus connects to
 `python-chess` and a desktop GUI so the class never has to build one. The standing rules
-in [`CLAUDE.md`](CLAUDE.md) apply to everything below.
+in [`AGENTS.md`](AGENTS.md) apply to everything below.
 
 ## Decisions this plan is built on
 
@@ -48,7 +48,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 7 | Notation and a whole game | `split`, `join`, exceptions, `random`, `max` with `key=`, stdin and stdout | FEN and SAN; end the game; play random and greedy moves in a GUI |
 | 8 | Judging a position | Recursion review, constants | Evaluate a position; search with minimax and negamax |
 | 9 | Searching smarter | `sorted` with `key=`, `time` | Alpha-beta, quiescence, move ordering, iterative deepening |
-| 10 | Upgrades and tournament | Dicts as caches | One upgrade per pair; class tournament |
+| 10 | Upgrades, Science AI, and tournament | Dicts as caches, `math.dist`, `random.seed` | One upgrade per pair; a measurement AI that finds a hidden peak; class tournament |
 
 Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special move
 in place, and Week 2 opens with recursion and perft. Perft on Monday gives every pair a
@@ -71,6 +71,7 @@ of Day 7), then it plays **good** moves (Days 8 to 10).
 | Notation | UCI text (D2) | FEN (D7) | SAN out (D7) | SAN in, by matching legal moves (D7) |
 | Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering, iterative deepening (D9), PVS and a transposition table (D10) |
 | Evaluation | Material count (D8) | Piece-square tables (D8) | Mate scores that prefer the faster mate (D8) | Pawn structure, mating evaluation, castling bonus (D10) |
+| Science AI | Paper hidden-peak game (D10 P2 warm-up) | Greedy measurement choice (D10 P2) | Explore and exploit weight tuned on a benchmark (D10 P2) | Depth-2 expectimax, a teacher demo (D10 P2) |
 | Interface | Console printout (D1) | Console game in SAN (D7) | UCI in a GUI (D7) | `info` lines, time control, `stop` (D9) |
 
 ## How students write real Remus code
@@ -137,7 +138,7 @@ every drill uses chess data so the skill is fresh when the engine needs it.
 | 9 | D7 P1 | `split`, `join`, `int()`, exceptions with `try` and `ValueError` | Read a FEN string and print its six fields |
 | 10 | D7 P3 | `random.choice`, `max` with `key=`, `sys.stdin`, `print(..., flush=True)`, `sys.stderr` | A tiny program that echoes lines, then answers `isready` with `readyok` |
 | 11 | D9 P1 | `sorted` with `key=`, `time.perf_counter()`, `float("inf")` | Sort captures by victim value; time a perft run |
-| 12 | D10 P1 | Dicts as caches, tuples as keys, `threading.Event` (teacher demo) | Remember perft counts already computed |
+| 12 | D10 P1 | Dicts as caches, tuples as keys, `math.dist`, `random.seed`, `threading.Event` (teacher demo) | Remember perft counts already computed; measure the distance from `d4` to `g7` |
 
 ## Unplugged warm-ups
 
@@ -159,7 +160,7 @@ replaces: students learn the idea by doing it instead of by listening to it. The
 | D6 P2 | **Count by hand.** A king and pawn against a king; list every move two plies deep on index cards and count the leaves before running `perft` on the same position | Perft and recursion | Index cards, worksheet |
 | D8 P3 | **Paper minimax.** A printed two-ply tree with scores on the bottom row. Pairs back up max and min level by level and circle the best move; the class compares answers before `minimax()` runs on the same tree | Minimax | Tree worksheet |
 | D9 P1 | **Fewest flips.** The same tree as a row of face-down index cards. Pairs turn a card only when the answer could still change; the pair with the fewest flips and the right move wins | Alpha-beta pruning | Deck of score cards |
-| D10 P4 | **Find the hidden peak.** A 10x10 grid hides a hot spot. With five "measurements" (the teacher reads the value at a square), each pair chooses where to measure next and marks its guess | How the NSLS-II AI agent chooses the next measurement, the Science AI link | Grid worksheet |
+| D10 P2 | **Find the hidden peak.** A 10x10 grid hides a hot spot. With five "measurements" (the teacher reads the value at a square), each pair chooses where to measure next and marks its guess | How the NSLS-II AI agent chooses the next measurement, the Science AI link | Grid worksheet |
 
 For the minimax warm-up, the teacher can also run a seven-student "human tree" at the
 front of the room: one root, two "min" players, and four leaves holding score cards,
@@ -222,7 +223,7 @@ refresher with a demonstration board comes right before the code that needs each
 ### Day 1: Setup and the board
 
 - **P1. Welcome and setup.** Watch the finished reference Remus play in the GUI. Tell
-  the Sargon and Rimush story from `CLAUDE.md`. Form pairs, check every laptop runs
+  the Sargon and Rimush story from `AGENTS.md`. Form pairs, check every laptop runs
   `uv run pytest`, and review SAN and UCI notation on the demonstration board.
 - **P2. Python lab 1:** scripts, strings, `ord` and `chr`, f-strings.
 - **P3. Python lab 2:** lists and nested lists. Unplugged warm-up: "Call the square"
@@ -317,7 +318,7 @@ undoes exactly.
   that are ahead time perft at depth 4 (197,281) and look for the slowest function.
 
 **Checkpoint `d6-p4-end`:** perft matches the reference at depth 3 for the start and
-the standard positions. Rule 6 of `CLAUDE.md` is now met.
+the standard positions. Rule 6 of `AGENTS.md` is now met.
 
 ### Day 7: Notation and a whole game
 
@@ -384,12 +385,13 @@ reason. This is the "legal moves" milestone.
 **Checkpoint `d9-p4-end`:** Remus at depth 3 or more beats greedy Remus in a 10-game
 match and never loses on time.
 
-### Day 10: Upgrades and tournament
+### Day 10: Upgrades, Science AI, and tournament
 
-- **P1 and P2. Upgrade stations.** Python lab 12 opens P1. Each pair picks one station,
+- **P1. Upgrade stations.** Python lab 12 opens P1. Each pair picks one station,
   builds it, and shows a measured gain: fewer nodes, deeper search in the same time, or
   more match points. With 10 pairs and eight stations, two stations get a second pair,
-  and those pairs compare their measurements at the end of P2.
+  and those pairs compare their measurements at the end of the period. Each pair hands
+  in its engine as a git bundle on the class USB stick before lunch.
 
 | Station | What the pair builds | GameWorks idea it echoes |
 | --- | --- | --- |
@@ -402,28 +404,49 @@ match and never loses on time.
 | Draw sense | Score a repeated position as 0 inside the search | `DrawGame` |
 | Mate solver | Solve the ten GameWorks puzzles with a mate-only search | `MateSearch` and `MATE.00x` |
 
+- **P2. Science AI: `science/hidden_peak.py`.** Unplugged warm-up: "Find the hidden
+  peak." Then the teacher shows the map from chess to science on the board:
+
+  | Chess engine | Hidden-peak search |
+  | --- | --- |
+  | Legal moves | Squares not yet measured |
+  | `make_move` and `undo_move` | Add a pretend reading, then take it back |
+  | Evaluation: material plus mobility | Score: predicted value (exploit) plus distance to the nearest reading (explore) |
+  | `greedy_move()` | Measure the best-scoring square now |
+  | Minimax: the opponent picks the minimum | Expectimax: average over a high or low reading, because nature is not an opponent |
+  | Match against greedy Remus | Benchmark: average measurements to find the peak over 100 hidden grids |
+
+  The teacher writes `make_grid(seed)` (a random hot spot with values that fall off
+  with distance), `measure(grid, square)`, `predicted_value(square, readings)`
+  (the inverse-distance average of the readings so far), and `benchmark(strategy)`.
+  **Students write:** `candidate_squares(readings)`, `score_candidate(square,
+  readings, explore_weight)`, and `choose_next_measurement(readings, explore_weight)`.
+  Pairs tune `explore_weight` and post their benchmark average on the board, next to
+  random guessing. The teacher closes with a depth-2 expectimax demo, explains why
+  alpha-beta's cutoffs do not carry over to an average, and shows that the NSLS-II
+  agent runs the same loop with a statistical model (a Gaussian process) in place of
+  the hand-built score.
 - **P3. Tournament.** `tools/tournament.py` (python-chess) runs a full round robin: each
   of the 10 engines plays every other engine once, 45 games in all, with colors
   balanced. At 2 minutes plus 1 second a move per side, a game lasts at most about 6
   minutes. Four games at once on the teacher's laptop (eight engine processes, so a
   laptop with at least 8 cores) finish the 45 games in about 70 minutes. The
   script saves every game as PGN and prints the standings after each round on the
-  projector. Each pair hands in its engine as a git bundle on the class USB stick
-  during P2. Pairs replay their wins and losses in En Croissant.
-- **P4. Presentations, take-home, and wrap-up.** Unplugged warm-up: "Find the hidden
-  peak" connects choosing a move to choosing an experiment. Each student copies the pair's repository
+  projector. Pairs replay their wins and losses in En Croissant.
+- **P4. Presentations, take-home, and wrap-up.** Each student copies the pair's repository
   to their own USB drive with `git clone --no-hardlinks`, then checks that the copy opens.
 - **Presentations.** Each pair explains one move its engine chose, with
   the score and principal variation. Close with what comes next: bitboards, Zobrist
   hashing, null-move pruning, endgame tablebases, and a stronger "Manishtushu" engine.
 
-**Checkpoint `d10-p4-end`:** the tournament finishes with no illegal moves, crashes, or
-lost synchronization.
+**Checkpoint `d10-p4-end`:** every pair's `choose_next_measurement()` beats random
+guessing on the 100-grid benchmark, and the tournament finishes with no illegal moves,
+crashes, or lost synchronization.
 
 ## Code breakdown by day
 
 The engine lives in one flat folder of plain modules. Each module ends with a visible
-self-check, as `CLAUDE.md` requires, so a pair can run any file with
+self-check, as `AGENTS.md` requires, so a pair can run any file with
 `uv run remus/perft.py`.
 
 | File | Created | Grows on | Holds |
@@ -447,6 +470,8 @@ self-check, as `CLAUDE.md` requires, so a pair can run any file with
 | `remus/opening_book.py`, `remus/opening_book.txt` | D10 | | Station |
 | `remus.bat` | D7 | | En Croissant launcher on the class laptops |
 | `remus.sh` | D10 | | Take-home launcher for students with a Mac or Linux computer at home |
+| `science/hidden_peak.py` | D10 | | Science AI: hidden grid, readings, scoring, measurement choice, benchmark. Standard library only; reuses the engine's ideas, not its code |
+| `tests/test_hidden_peak.py` | D10 | | Candidate squares, scoring, and "greedy beats random" on a fixed seed |
 | `tools/play_match.py`, `tools/tournament.py` | D7, D10 | | python-chess match runners (dev only) |
 | `tests/test_<topic>.py` | every period | | Expected results written first |
 | `labs/dayNN/<skill>.py`, `labs/dayNN/instructor/<skill>_instructor.py` | each lab | | Python skills labs: student file with blanks, instructor file with answers |
