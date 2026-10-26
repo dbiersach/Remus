@@ -23,7 +23,7 @@ in [`AGENTS.md`](AGENTS.md) apply to everything below.
 | GUI | En Croissant on every laptop |
 | Repositories | The teacher's laptop holds the main class repository. Each pair has its own local repository and pulls from the teacher over the classroom network. No GitHub accounts: the students are minors |
 | Take-home | On the last day each pair copies its repository, with its full history, onto a USB drive |
-| Folder layout | One folder per day, such as `Day 04 - Keep only legal moves`. Each holds a complete, runnable copy of Remus at the end of that day, with its tests beside the modules. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
+| Folder layout | The finished reference code lives in `instructor/`, one folder per day, such as `instructor/Day 04 - Keep only legal moves`. Each holds a complete, runnable copy of Remus at the end of that day, with its tests beside the modules. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
 | Squares | `(row, col)` tuples inside the engine, row 0 is rank 8 and column 0 is file a |
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
 | GUI move text | UCI (`e2e4`, `e7e8q`), because that is what the GUI protocol uses |
@@ -83,7 +83,7 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
 1. **The scaffold.** Before the period, the teacher's checkpoint holds the function's
    signature, its NumPy docstring, and tests that fail. The body says `raise
    NotImplementedError`.
-2. **The pair writes the body** until `uv run pytest "Day NN - .../test_<topic>.py"` passes and
+2. **The pair writes the body** until `uv run pytest test_<topic>.py` passes inside the day's folder and
    the module's own self-check prints the expected answer.
 3. **Show and choose.** Two or three pairs show their version on the projector. With 10
    pairs and about 40 functions, the teacher rotates who presents so every pair ships
@@ -91,10 +91,11 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
    class repository. `CONTRIBUTORS.md` records which pair wrote which function, by a
    team name the pair chooses rather than full names, since the code goes home with
    every student.
-4. **Everyone moves on together.** The class repository gains one Day folder per day.
-   The first start tag of each day holds the new folder: a copy of the previous day's
-   finished code plus that day's scaffolds. Pairs work only inside the newest Day
-   folder, so earlier days stay as a record of how Remus grew. At the start of the next period each pair fetches
+4. **Everyone moves on together.** The class repository gains one student Day folder
+   per day at its root, beside `instructor/`. The first start tag of each day holds the
+   new folder: the previous day's finished code plus that day's scaffolds. Pairs work
+   only inside the newest Day folder, so earlier days stay as a record of how Remus
+   grew. `instructor/` holds the matching finished code, which runs as it is. At the start of the next period each pair fetches
    from the teacher and starts a new branch from that period's start tag, so the whole
    room builds the same engine. The pair's own branches stay in its repository, so a
    pair whose version was not picked keeps its own code too.
@@ -449,8 +450,9 @@ crashes, or lost synchronization.
 
 ## Code breakdown by day
 
-Each day's code lives in its own folder, and each folder is a complete copy of Remus at
-the end of that day. Every module ends with a visible self-check, as `AGENTS.md`
+The finished reference code lives in `instructor/`, one folder per day, and each folder
+is a complete copy of Remus at the end of that day. The table names the folders without
+the `instructor/` prefix. Every module ends with a visible self-check, as `AGENTS.md`
 requires, so a pair can run any file from inside the folder with `uv run perft.py`.
 The full description of each script is in `docs/scripts/`.
 

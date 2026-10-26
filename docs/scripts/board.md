@@ -2,7 +2,7 @@
 
 Holds the chessboard and converts square names such as e2 to (row, col) tuples.
 
-First appears in `Day 01 - Draw the board`. Grows on Day 2.
+First appears in `instructor/Day 01 - Draw the board`. Grows on Day 2.
 
 ## What it does
 
@@ -14,7 +14,9 @@ prints rank 8 at the top, the way a player sees it from White's side.
 
 The board is a list of 8 rows; each row is a list of 8 one-character strings.
 Uppercase letters are White pieces, lowercase letters are Black pieces, and `EMPTY`
-(`"."`) is an empty square. `START_ROWS` spells out the start position one row at a
+(`"."`) is an empty square. `BOARD_FILES` (`"abcdefgh"`) gives the file letter of each
+column, and `BOARD_RANKS` (`"87654321"`) gives the rank digit of each row, so
+`BOARD_FILES[4] + BOARD_RANKS[6]` is `"e2"`. `START_ROWS` spells out the start position one row at a
 time, so students can read it like a picture.
 
 ## Program flow
@@ -38,7 +40,7 @@ engine. Every later module reads and writes squares through `piece_at` and
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run board.py

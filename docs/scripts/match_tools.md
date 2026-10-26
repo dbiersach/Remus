@@ -27,7 +27,7 @@ With no arguments, the four brains of the Day 10 folder play a short demo.
 
 ## Try it
 
-From inside `Day 10 - Upgrade Remus and add Science AI`:
+From inside `instructor/Day 10 - Upgrade Remus and add Science AI`:
 
 ```bash
 uv run tournament.py

@@ -2,7 +2,7 @@
 
 Decides whether the game is over, and why.
 
-First appears in `Day 07 - Play full games in En Croissant`.
+First appears in `instructor/Day 07 - Play full games in En Croissant`.
 
 ## What it does
 
@@ -32,7 +32,7 @@ rule as the end of the game, the way chess GUIs and engine tournaments do.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run game_end.py

@@ -2,7 +2,7 @@
 
 Writes and reads moves in SAN, the notation people use.
 
-First appears in `Day 07 - Play full games in En Croissant`.
+First appears in `instructor/Day 07 - Play full games in En Croissant`.
 
 ## What it does
 
@@ -27,7 +27,7 @@ return the one that matches what the player typed. It ignores a trailing `+`, `#
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run notation.py

@@ -6,8 +6,9 @@ the son and heir of Sargon of Akkad, in tribute to Sargon (1978), the
 microcomputer chess program whose complete source was published so that people
 could learn from it.
 
-The code grows one day at a time: each `Day NN - ...` folder is a complete, runnable
-copy of Remus at the end of that workshop day. Start with
+The code grows one day at a time: each `instructor/Day NN - ...` folder is a complete,
+runnable copy of Remus at the end of that workshop day. The `instructor/` folder holds
+only finished, working reference code, kept apart from the code students write. Start with
 [`docs/remus_program_overview.md`](docs/remus_program_overview.md); the course plan is
 in [`docs/remus_course_plan.md`](docs/remus_course_plan.md).
 
@@ -18,7 +19,7 @@ Remus uses [uv](https://docs.astral.sh/uv/) and Python 3.14.
 ```bash
 uv sync
 uv run run_all_tests.py
-uv run "Day 06 - Count positions with perft/perft.py"
+uv run "instructor/Day 06 - Count positions with perft/perft.py"
 ```
 
 The engine uses only the Python standard library. The development group adds

@@ -2,7 +2,7 @@
 
 Decides whether a square is attacked and whether a king is in check.
 
-First appears in `Day 04 - Keep only legal moves`.
+First appears in `instructor/Day 04 - Keep only legal moves`.
 
 ## What it does
 
@@ -42,7 +42,7 @@ attacks its square. `legal_moves.py` calls `in_check` after every trial move.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run attacks.py

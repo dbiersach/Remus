@@ -174,8 +174,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   import `chess`; only tests and optional display code may.
 - En Croissant is a desktop application, not a Python dependency. It hosts Remus as an
   external UCI engine and comes preinstalled on the class laptops.
-- The code lives in one folder per workshop day, named `Day NN - <what the new code
-  does>`, such as `Day 04 - Keep only legal moves`. Each Day folder is a complete,
+- Finished, ready-to-run reference code lives in the root `instructor/` folder, which
+  keeps the solution code apart from the code students write and change. Inside it the
+  code lives in one folder per workshop day, named `Day NN - <what the new code
+  does>`, such as `instructor/Day 04 - Keep only legal moves`. Each Day folder is a complete,
   runnable copy of Remus as it stands at the end of that day, and nothing in it imports
   from another Day folder. Modules import each other by name
   (`from board import new_board`), so any module runs from inside its folder with
@@ -190,7 +192,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   code.
 - Tests sit next to the modules in each Day folder. The module names repeat from
   folder to folder, so pytest runs one folder at a time
-  (`uv run pytest "Day 04 - Keep only legal moves"`); `uv run run_all_tests.py` runs
+  (`uv run pytest "instructor/Day 04 - Keep only legal moves"`); `uv run run_all_tests.py` runs
   them all. `tests/` holds the reference-tool tests and `mate_puzzles.epd`. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.

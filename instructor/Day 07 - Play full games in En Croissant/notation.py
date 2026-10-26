@@ -9,7 +9,7 @@ that matches what the player typed.
 """
 
 from attacks import in_check
-from board import EMPTY, FILES, piece_at, square_name
+from board import BOARD_FILES, BOARD_RANKS, EMPTY, piece_at, square_name
 from fen import state_from_fen
 from legal_moves import legal_moves
 from make_move import make_move, undo_move
@@ -43,7 +43,7 @@ def move_to_san(state: dict, move: Move) -> str:
     if kind == "K" and abs(move.to_square[1] - move.from_square[1]) == 2:
         text = "O-O" if move.to_square[1] == 6 else "O-O-O"
     elif kind == "P":
-        text = FILES[move.from_square[1]] + "x" + target if is_capture else target
+        text = BOARD_FILES[move.from_square[1]] + "x" + target if is_capture else target
         if move.promotion is not None:
             text += "=" + move.promotion.upper()
     else:
@@ -77,9 +77,9 @@ def disambiguation(state: dict, move: Move, piece: str) -> str:
         return ""
     row, col = move.from_square
     if all(rival[1] != col for rival in rivals):
-        return FILES[col]
+        return BOARD_FILES[col]
     if all(rival[0] != row for rival in rivals):
-        return str(8 - row)
+        return BOARD_RANKS[row]
     return square_name(row, col)
 
 

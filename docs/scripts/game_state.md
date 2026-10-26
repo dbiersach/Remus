@@ -2,7 +2,7 @@
 
 Holds everything about a game that the board alone does not show.
 
-First appears in `Day 02 - Make and undo moves`. Grows on Day 7.
+First appears in `instructor/Day 02 - Make and undo moves`. Grows on Day 7.
 
 ## What it does
 
@@ -40,7 +40,7 @@ treats two positions as the same unless a player could make a different move.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run game_state.py

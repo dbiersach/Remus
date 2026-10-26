@@ -2,7 +2,7 @@
 
 Describes a move as a small record and converts it to and from UCI text.
 
-First appears in `Day 02 - Make and undo moves`.
+First appears in `instructor/Day 02 - Make and undo moves`.
 
 ## What it does
 
@@ -32,7 +32,7 @@ lowercase for Black, matching the board's piece letters.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run moves.py

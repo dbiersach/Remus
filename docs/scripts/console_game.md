@@ -2,7 +2,7 @@
 
 Plays chess in the terminal with moves typed in SAN.
 
-First appears in `Day 07 - Play full games in En Croissant`. Grows on Day 8, Day 9, Day 10.
+First appears in `instructor/Day 07 - Play full games in En Croissant`. Grows on Day 8, Day 9, Day 10.
 
 ## What it does
 
@@ -23,7 +23,7 @@ Day 10, Remus plays from the opening book first, then thinks.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run console_game.py remus

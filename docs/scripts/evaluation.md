@@ -2,7 +2,7 @@
 
 Scores a position in centipawns without looking ahead.
 
-First appears in `Day 08 - Evaluate and search ahead`. Grows on Day 10.
+First appears in `instructor/Day 08 - Evaluate and search ahead`. Grows on Day 10.
 
 ## What it does
 
@@ -44,7 +44,7 @@ position.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run evaluation.py

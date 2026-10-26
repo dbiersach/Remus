@@ -9,7 +9,8 @@ player sees it from White's side: rank 8 at the top, rank 1 at the bottom.
 """
 
 EMPTY = "."  # An empty square
-FILES = "abcdefgh"  # File letters, indexed by column number
+BOARD_FILES = "abcdefgh"  # File letters, indexed by column: column 0 is file a
+BOARD_RANKS = "87654321"  # Rank digits, indexed by row: row 0 is rank 8
 START_ROWS = [  # The starting position, row 0 (rank 8) first
     "rnbqkbnr",
     "pppppppp",
@@ -37,9 +38,8 @@ def print_board(board: list[list[str]]) -> None:
         The board, row 0 first (rank 8).
     """
     for row in range(8):
-        rank = 8 - row
-        print(rank, " ".join(board[row]))
-    print(" ", " ".join(FILES))
+        print(BOARD_RANKS[row], " ".join(board[row]))
+    print(" ", " ".join(BOARD_FILES))
 
 
 def square_name(row: int, col: int) -> str:
@@ -58,7 +58,7 @@ def square_name(row: int, col: int) -> str:
     str
         The square name, such as "e2" for (6, 4).
     """
-    return FILES[col] + str(8 - row)
+    return BOARD_FILES[col] + BOARD_RANKS[row]
 
 
 def parse_square(name: str) -> tuple[int, int]:
@@ -80,10 +80,10 @@ def parse_square(name: str) -> tuple[int, int]:
     ValueError
         If the name is not a square on the board, such as "i9".
     """
-    if len(name) != 2 or name[0] not in FILES or name[1] not in "12345678":
+    if len(name) != 2 or name[0] not in BOARD_FILES or name[1] not in BOARD_RANKS:
         raise ValueError(f"Not a square: {name!r}")
-    col = FILES.index(name[0])
-    row = 8 - int(name[1])
+    col = BOARD_FILES.index(name[0])
+    row = BOARD_RANKS.index(name[1])
     return row, col
 
 
@@ -91,12 +91,6 @@ def piece_at(board: list[list[str]], square: tuple[int, int]) -> str:
     """Return the piece on a (row, col) square, or EMPTY."""
     row, col = square
     return board[row][col]
-
-
-def set_piece(board: list[list[str]], square: tuple[int, int], piece: str) -> None:
-    """Put a piece (or EMPTY) on a (row, col) square."""
-    row, col = square
-    board[row][col] = piece
 
 
 def main():

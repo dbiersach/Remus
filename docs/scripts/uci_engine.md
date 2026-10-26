@@ -2,7 +2,7 @@
 
 Connects Remus to En Croissant through UCI.
 
-First appears in `Day 07 - Play full games in En Croissant`. Grows on Day 8, Day 9, Day 10.
+First appears in `instructor/Day 07 - Play full games in En Croissant`. Grows on Day 8, Day 9, Day 10.
 
 ## What it does
 
@@ -39,7 +39,7 @@ engine on Windows so En Croissant can launch it.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run uci_engine.py

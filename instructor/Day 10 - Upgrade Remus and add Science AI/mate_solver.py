@@ -23,7 +23,7 @@ from make_move import make_move, state_snapshot, undo_move
 from moves import Move
 from notation import move_to_san
 
-PUZZLE_PATH = Path(__file__).parent.parent / "tests" / "mate_puzzles.epd"
+PUZZLE_PATH = Path(__file__).parent.parent.parent / "tests" / "mate_puzzles.epd"
 
 
 def mating_move(state: dict, moves_left: int) -> Move | None:

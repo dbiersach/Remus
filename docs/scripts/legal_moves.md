@@ -2,7 +2,7 @@
 
 Keeps only the legal moves, and adds castling.
 
-First appears in `Day 04 - Keep only legal moves`. Grows on Day 5.
+First appears in `instructor/Day 04 - Keep only legal moves`. Grows on Day 5.
 
 ## What it does
 
@@ -37,7 +37,7 @@ king is not in check, and that neither the passing nor the landing square is att
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run legal_moves.py

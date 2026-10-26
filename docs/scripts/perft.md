@@ -2,7 +2,7 @@
 
 Counts positions in the move tree to prove the rules are right.
 
-First appears in `Day 06 - Count positions with perft`.
+First appears in `instructor/Day 06 - Count positions with perft`.
 
 ## What it does
 
@@ -33,7 +33,7 @@ against `python-chess`.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run perft.py

@@ -2,7 +2,7 @@
 
 Chooses a move, from a random brain up to the final Day 10 search.
 
-First appears in `Day 07 - Play full games in En Croissant`. Grows on Day 8, Day 9, Day 10.
+First appears in `instructor/Day 07 - Play full games in En Croissant`. Grows on Day 8, Day 9, Day 10.
 
 ## What it does
 
@@ -63,7 +63,7 @@ GUI's `stop` event, and on Day 10 the transposition `table` and the `killers`.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run search.py

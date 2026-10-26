@@ -2,7 +2,7 @@
 
 Puts the moves most likely to be best first.
 
-First appears in `Day 09 - Search faster with alpha-beta`. Grows on Day 10.
+First appears in `instructor/Day 09 - Search faster with alpha-beta`. Grows on Day 10.
 
 ## What it does
 
@@ -26,7 +26,7 @@ the captures with `KILLER_SCORE`.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run move_ordering.py

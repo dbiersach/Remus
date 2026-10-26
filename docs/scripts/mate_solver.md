@@ -2,7 +2,7 @@
 
 Solves the ten GameWorks mate puzzles with a yes-or-no search.
 
-First appears in `Day 10 - Upgrade Remus and add Science AI`.
+First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.
 
 ## What it does
 
@@ -34,7 +34,7 @@ minutes, falls in about 6 seconds. `read_puzzles` reads `tests/mate_puzzles.epd`
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run mate_solver.py

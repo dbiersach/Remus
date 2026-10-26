@@ -28,7 +28,7 @@ from search import (
 )
 
 MATE_PUZZLES = (
-    Path(__file__).parent.parent / "tests" / "mate_puzzles.epd"
+    Path(__file__).parent.parent.parent / "tests" / "mate_puzzles.epd"
 )  # GameWorks MATE.00x
 
 MATES_IN_ONE = [  # (FEN, the mating move)

@@ -7,7 +7,7 @@ picture the data structures and the program flow.
 
 ## How the code is organized
 
-Each day of the workshop has its own folder at the top of the repository:
+Each day of the workshop has its own folder inside `instructor/`:
 
 | Folder | What the new code does compared to the day before |
 | --- | --- |
@@ -22,8 +22,10 @@ Each day of the workshop has its own folder at the top of the repository:
 | `Day 09 - Search faster with alpha-beta` | Prunes the tree, searches captures to quiet positions, and thinks on a clock |
 | `Day 10 - Upgrade Remus and add Science AI` | Adds the upgrade stations, a mate solver, the tournament, and the hidden-peak Science AI |
 
-Every Day folder is a complete, runnable copy of Remus as it stands at the end of that
-day. A student who opens `Day 06` finds every file from Days 1 to 5, some of them
+The Day folders live inside the root `instructor/` folder. `instructor/` holds only
+finished reference code that runs as it is, with no blanks to fill in, so the solution
+code stays apart from the code students write and change. Every Day folder is a
+complete, runnable copy of Remus as it stands at the end of that day. A student who opens `Day 06` finds every file from Days 1 to 5, some of them
 grown, plus `perft.py`. Nothing in a Day folder imports from another Day folder.
 
 ### The naming rule for newer versions
@@ -50,7 +52,7 @@ Day 8 still finds `negamax` on Day 10.
 Run a script from inside its Day folder, or give its path:
 
 ```bash
-uv run "Day 06 - Count positions with perft/perft.py"
+uv run "instructor/Day 06 - Count positions with perft/perft.py"
 ```
 
 Every script prints its own check, with the expected answer beside it. Tests sit next
@@ -58,11 +60,11 @@ to the modules. Because each Day folder repeats the same module names, pytest ru
 folder at a time:
 
 ```bash
-uv run pytest "Day 04 - Keep only legal moves"
+uv run pytest "instructor/Day 04 - Keep only legal moves"
 uv run run_all_tests.py
 ```
 
-`run_all_tests.py` runs every Day folder in turn, then the reference-tool tests in
+`run_all_tests.py` runs every Day folder in `instructor/` in turn, then the reference-tool tests in
 `tests/`.
 
 ## The four boundaries

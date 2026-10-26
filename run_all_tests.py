@@ -1,8 +1,8 @@
 #!/usr/bin/env -S uv run
 """run_all_tests.py
 
-Run the tests of every Day folder, one folder at a time, and the reference-tool
-tests in tests/. Each Day folder is a complete copy of Remus with the same module
+Run the tests of every Day folder in instructor/, one folder at a time, and the
+reference-tool tests in tests/. Each Day folder is a complete copy of Remus with the same module
 names (board.py, search.py, ...), so each folder gets its own pytest run.
 """
 
@@ -14,7 +14,7 @@ ROOT = Path(__file__).parent
 
 
 def main():
-    folders = sorted(ROOT.glob("Day *")) + [ROOT / "tests"]
+    folders = sorted((ROOT / "instructor").glob("Day *")) + [ROOT / "tests"]
     failed = []
     for folder in folders:
         print(f"Testing {folder}", flush=True)

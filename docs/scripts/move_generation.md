@@ -2,7 +2,7 @@
 
 Lists every move the pieces can make by their movement rules.
 
-First appears in `Day 03 - Generate piece moves`. Grows on Day 5.
+First appears in `instructor/Day 03 - Generate piece moves`. Grows on Day 5.
 
 ## What it does
 
@@ -51,7 +51,7 @@ not just the board.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run move_generation.py

@@ -2,7 +2,7 @@
 
 Makes a move on the game state and undoes it exactly.
 
-First appears in `Day 02 - Make and undo moves`. Grows on Day 5, Day 7.
+First appears in `instructor/Day 02 - Make and undo moves`. Grows on Day 5, Day 7.
 
 ## What it does
 
@@ -46,7 +46,7 @@ state as text, so a test can check `before == after` in one comparison.
 
 ## Try it
 
-From inside a Day folder that has the file:
+From inside a Day folder in `instructor/` that has the file:
 
 ```bash
 uv run make_move.py
