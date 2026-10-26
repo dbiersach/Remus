@@ -9,11 +9,14 @@ moves the book suggests there. The book is a dict:
     position_key -> list of book moves
 
 Every book move is read with parse_san, which accepts only legal moves, so a typo
-in the file is reported and skipped. A missing file gives an empty book, and an
-empty book never stops play: Remus simply searches instead.
+in the file is reported and skipped. A missing file is reported and gives an empty
+book, and an empty book never stops play: Remus simply searches instead. Reports go
+to standard error, because standard output carries the UCI conversation with the
+GUI.
 """
 
 import random
+import sys
 from pathlib import Path
 
 from fen import START_FEN, state_from_fen
@@ -42,6 +45,10 @@ def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
     """
     book = {}
     if not file_path.exists():
+        print(
+            f"No opening book at {file_path}; Remus searches every move",
+            file=sys.stderr,
+        )
         return book
     for line in file_path.read_text().splitlines():
         if not line.strip() or line.startswith("#"):
@@ -51,7 +58,7 @@ def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
             try:
                 move = parse_san(state, text)
             except ValueError:
-                print(f"Book line skipped at {text!r}: {line}")
+                print(f"Book line skipped at {text!r}: {line}", file=sys.stderr)
                 break
             moves_here = book.setdefault(position_key(state), [])
             if move not in moves_here:
