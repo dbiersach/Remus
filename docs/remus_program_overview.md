@@ -33,6 +33,9 @@ pair writes them. `make_student_folders.py` builds `student/` and lists every st
 function; `student/README.md` shows the same list. A student who opens `Day 06` finds every file from Days 1 to 5, some of them
 grown, plus `perft.py`. Nothing in a Day folder imports from another Day folder.
 
+[`file_versions.md`](file_versions.md) lists when each file first appears and what
+each later day changes in it, by file and by day.
+
 ### The naming rule for newer versions
 
 A module keeps one file name from the day it appears to Day 10. When a later lesson
