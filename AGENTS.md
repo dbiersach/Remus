@@ -48,7 +48,7 @@ condensed copy; when a rule here changes, update that file to match. The Python 
   10:30 to 12:00, 1:00 to 2:30, 3:00 to 4:30). The day-by-day plan lives in
   [`remus_course_plan.md`](remus_course_plan.md), and the code is split into modules
   and checkpoints that follow that plan period by period.
-- 30 students work in **15 pairs** (driver and navigator, swapping every period). Each
+- 20 students work in **10 pairs** (driver and navigator, swapping every period). Each
   pair gets an identical, preconfigured **Windows 11** class laptop with git, `uv`,
   VS Code, and En Croissant. Classroom instructions target Windows; `remus.sh` exists
   only for students who take Remus home to a Mac or Linux computer.
@@ -57,6 +57,9 @@ condensed copy; when a rule here changes, update that file to match. The Python 
   docstring, and failing tests. The class picks one pair's version to merge, and
   `CONTRIBUTORS.md` records who wrote it. Keep student functions short enough for a pair
   to finish in 20 to 40 minutes.
+- Short unplugged warm-ups (paper, cards, and a printed board at the desk) come before
+  the hardest ideas. They replace part of the teacher's explanation, never the time a
+  pair spends typing code.
 - Students know how the pieces move. Lessons remind them of the rarer rules right before
   the code that needs each one: castling conditions, en passant, promotion and
   underpromotion, stalemate, threefold and fivefold repetition, the fifty and 75-move

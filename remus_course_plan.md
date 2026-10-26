@@ -17,9 +17,9 @@ in [`CLAUDE.md`](CLAUDE.md) apply to everything below.
 | --- | --- |
 | Length | Two weeks, 10 days, 4 periods of 90 minutes a day (6 class hours) |
 | Daily schedule | 8:30 to 10:00 Period 1; 10:00 to 10:30 break; 10:30 to 12:00 Period 2; 12:00 to 1:00 lunch; 1:00 to 2:30 Period 3; 2:30 to 3:00 break; 3:00 to 4:30 Period 4 |
-| Students | 30 students in 15 pairs: a driver types, a navigator reads and checks; they swap every period |
+| Students | 20 students in 10 pairs: a driver types, a navigator reads and checks; they swap every period. Ten pairs keep each adult to about five pairs during labs |
 | Staff | The teacher plus at least one assistant |
-| Laptops | 15 identical Windows 11 laptops, one per pair, preconfigured with git, `uv`, VS Code, and En Croissant |
+| Laptops | 10 identical Windows 11 laptops, one per pair, preconfigured with git, `uv`, VS Code, and En Croissant |
 | GUI | En Croissant on every laptop |
 | Repositories | The teacher's laptop holds the main class repository. Each pair has its own local repository and pulls from the teacher over the classroom network. No GitHub accounts: the students are minors |
 | Take-home | On the last day each pair copies its repository, with its full history, onto a USB drive |
@@ -28,6 +28,8 @@ in [`CLAUDE.md`](CLAUDE.md) apply to everything below.
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
 | GUI move text | UCI (`e2e4`, `e7e8q`), because that is what the GUI protocol uses |
 | First GUI game | Day 7, as soon as the rules pass perft and the game can end correctly |
+| Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
+| Tournament | A full round robin of the 10 pair engines on Day 10 |
 | Mate puzzles | The ten GameWorks `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 
 ## The shape of the two weeks
@@ -81,9 +83,9 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
    NotImplementedError`.
 2. **The pair writes the body** until `uv run pytest tests/test_<topic>.py` passes and
    the module's own self-check prints the expected answer.
-3. **Show and choose.** Two or three pairs show their version on the projector. With 15
-   pairs and about 40 functions, the teacher rotates who presents so every pair ships two
-   or three functions over the course. The class picks one for clarity, not cleverness, and the teacher commits it to the main
+3. **Show and choose.** Two or three pairs show their version on the projector. With 10
+   pairs and about 40 functions, the teacher rotates who presents so every pair ships
+   three or four functions over the course. The class picks one for clarity, not cleverness, and the teacher commits it to the main
    class repository. `CONTRIBUTORS.md` records which pair wrote which function, by a
    team name the pair chooses rather than full names, since the code goes home with
    every student.
@@ -137,6 +139,32 @@ every drill uses chess data so the skill is fresh when the engine needs it.
 | 11 | D9 P1 | `sorted` with `key=`, `time.perf_counter()`, `float("inf")` | Sort captures by victim value; time a perft run |
 | 12 | D10 P1 | Dicts as caches, tuples as keys, `threading.Event` (teacher demo) | Remember perft counts already computed |
 
+## Unplugged warm-ups
+
+Each hard idea gets a short warm-up away from the screen first. Pairs close the laptop,
+slide it aside, and work on the desk with a printed board, sticky notes, index cards, and
+a one-page worksheet. Every warm-up fits on one desk, so the room never has to be
+rearranged.
+
+The time comes out of the teacher's explanation at the board, which the warm-up
+replaces: students learn the idea by doing it instead of by listening to it. The
+"Students write" block of each period keeps its full time.
+
+| When | Warm-up (10 to 15 minutes) | Idea it prepares | Materials per pair |
+| --- | --- | --- | --- |
+| D1 P3 | **Call the square.** The teacher calls `(6, 4)`; the navigator puts a token on the printed board and the driver names the square (`e2`). Then they swap and go the other way | Row 0 is rank 8 | Printed board labeled both ways, one token |
+| D2 P4 | **Undo from the card.** One partner makes three moves with sticky-note pieces and writes an undo card for each. The other partner restores the start position from the cards alone | Undo records and exact undo | Printed board, sticky notes, three index cards |
+| D3 P2 | **Shade the reach.** Shade every square a knight on `d4`, a knight on `a1`, and a bishop on `c1` can reach; compare counts with the next pair (8, 2, 7) | Offset lists and sliding | Grid worksheet |
+| D4 P3 | **Pin hunt.** Four printed positions; cross out every move that leaves the mover's king attacked | The legal-move filter | Worksheet |
+| D6 P2 | **Count by hand.** A king and pawn against a king; list every move two plies deep on index cards and count the leaves before running `perft` on the same position | Perft and recursion | Index cards, worksheet |
+| D8 P3 | **Paper minimax.** A printed two-ply tree with scores on the bottom row. Pairs back up max and min level by level and circle the best move; the class compares answers before `minimax()` runs on the same tree | Minimax | Tree worksheet |
+| D9 P1 | **Fewest flips.** The same tree as a row of face-down index cards. Pairs turn a card only when the answer could still change; the pair with the fewest flips and the right move wins | Alpha-beta pruning | Deck of score cards |
+| D10 P4 | **Find the hidden peak.** A 10x10 grid hides a hot spot. With five "measurements" (the teacher reads the value at a square), each pair chooses where to measure next and marks its guess | How the NSLS-II AI agent chooses the next measurement, the Science AI link | Grid worksheet |
+
+For the minimax warm-up, the teacher can also run a seven-student "human tree" at the
+front of the room: one root, two "min" players, and four leaves holding score cards,
+while the other pairs predict the answer on paper.
+
 ## Chess rules to refresh
 
 Students know how the pieces move. These rules trip up nearly everyone, so a short
@@ -161,14 +189,14 @@ refresher with a demonstration board comes right before the code that needs each
    course, with a scaffold tag and a solution tag for every period (`d3-p2-start`,
    `d3-p2-end`). The start tag holds the stubs and failing tests; the end tag holds
    the teacher's answer, which a pair can check out if it falls behind.
-2. **Finish the laptop image.** The 15 Windows 11 laptops arrive with git, `uv`, VS Code,
+2. **Finish the laptop image.** The 10 Windows 11 laptops arrive with git, `uv`, VS Code,
    and En Croissant. Check that the image also has Python 3.14 cached by `uv` and the
    VS Code extensions from `install_vscode_extensions.ps1`. Clone the class repository as
    described in "Sharing code without GitHub", then run `uv sync` and `uv run pytest`
    on every laptop before Day 1, so no laptop needs the internet on Day 1.
 3. **Register Remus in En Croissant.** Add the reference Remus as a local engine through
    `remus.bat` and play one full game on one laptop. If the image is identical, the same
-   engine path works on all 15; check that the repository sits at the same folder on
+   engine path works on all 10; check that the repository sits at the same folder on
    every laptop.
 4. **Print handouts:** a board diagram labeled with both `e2` and `(6, 4)`, the rules
    refresher table, a SAN and UCI cheat sheet, a perft reference table, and a blank game
@@ -176,12 +204,14 @@ refresher with a demonstration board comes right before the code that needs each
 5. **Collect test positions as FEN:** the ten verification exercises in the workshop
    file, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
    GameWorks mate puzzles, and a horizon-effect position.
-6. **Plan for 30 students.** Print 30 copies of each handout. Buy 30 USB drives, so
+6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
    both partners take the code home, plus one class stick for bundles. Give the assistant
    the Day 1 checklist. With preconfigured laptops, Day 1 Period 1 needs only a quick
    check that every laptop runs `uv run pytest` and opens En Croissant.
-7. **Prepare unplugged materials:** index cards for a human minimax tree, a taped 8x8
-   floor grid, and a large demonstration board.
+7. **Prepare unplugged materials:** for each pair, a printed board, sticky-note
+   pieces, a deck of index cards, and the warm-up worksheets listed under "Unplugged
+   warm-ups"; for the room, a large demonstration board and score cards for the human
+   minimax tree.
 8. **Set speed expectations.** Plain Python searches thousands to tens of thousands of
    positions per second. Depth 3 to 4 with alpha-beta and quiescence in a few seconds
    is a realistic target, so students compare Remus with other Python engines, not
@@ -195,9 +225,8 @@ refresher with a demonstration board comes right before the code that needs each
   the Sargon and Rimush story from `CLAUDE.md`. Form pairs, check every laptop runs
   `uv run pytest`, and review SAN and UCI notation on the demonstration board.
 - **P2. Python lab 1:** scripts, strings, `ord` and `chr`, f-strings.
-- **P3. Python lab 2:** lists and nested lists. Unplugged: students stand on the floor
-  grid; the teacher calls `(6, 4)` and the student on `e2` steps forward, drilling "row
-  0 is rank 8" before anyone types it.
+- **P3. Python lab 2:** lists and nested lists. Unplugged warm-up: "Call the square"
+  drills "row 0 is rank 8" on the printed board before anyone types it.
 - **P4. `board.py`.** The teacher writes `new_board()`.
   **Students write:** `print_board()`, `square_name(row, col)`,
   `parse_square(name)` (which rejects `"i9"`), `piece_at(board, square)`.
@@ -213,7 +242,7 @@ refresher with a demonstration board comes right before the code that needs each
   `new_game()` and the `Move` dataclass (`from_square`, `to_square`, `promotion`).
   **Students write:** `is_white(piece)`, `color_of(piece)`, `move_to_uci(move)`,
   `move_from_uci(text)`.
-- **P4. `make_move.py`, ordinary moves.** Draw the state before and after `e2e4`.
+- **P4. `make_move.py`, ordinary moves.** Unplugged warm-up: "Undo from the card."
   The teacher writes `make_move()` returning an undo record.
   **Students write:** `undo_move()` for quiet moves and captures, and
   `state_snapshot(state)` for the "make ten moves, undo ten moves, compare" test.
@@ -223,7 +252,8 @@ refresher with a demonstration board comes right before the code that needs each
 ### Day 3: Loops that walk the board
 
 - **P1. Python lab 5:** `while`, `break`, direction tuples.
-- **P2. Jumping pieces.** The teacher writes `knight_moves()` from an offset list.
+- **P2. Jumping pieces.** Unplugged warm-up: "Shade the reach." The teacher writes
+  `knight_moves()` from an offset list.
   **Students write:** `king_moves()` the same way. Exercise: a knight on `a1` has two
   moves, to `b3` and `c2`.
 - **P3. Sliding pieces.** **Students write:** `slide(board, square, direction)`, the
@@ -244,7 +274,7 @@ refresher with a demonstration board comes right before the code that needs each
   on the square and looks outward like a "super piece."
   **Students write:** `attacked_by_knight()`, `attacked_by_pawn()`, `attacked_by_king()`.
   The teacher writes the sliding-line part, which reuses `slide()`.
-- **P3. Check and the legal filter.** **Students write:** `in_check(state, color)` and
+- **P3. Check and the legal filter.** Unplugged warm-up: "Pin hunt." **Students write:** `in_check(state, color)` and
   `legal_moves(state)`: make each pseudo-legal move, reject it if the mover's king is
   attacked, undo it.
 - **P4. Practice positions.** Pairs build tests for the workshop's first three
@@ -275,7 +305,8 @@ undoes exactly.
 ### Day 6: Counting the tree
 
 - **P1. Python lab 8:** recursion.
-- **P2. Perft.** **Students write:** `perft(state, depth)`, the recursive count of leaf
+- **P2. Perft.** Unplugged warm-up: "Count by hand." **Students write:**
+  `perft(state, depth)`, the recursive count of leaf
   positions. The teacher writes `divide()`, which prints the count under each root move.
   Expected: 20, 400, 8,902 from the start.
 - **P3. Perft against python-chess, and bug hunt.** `tests/test_perft.py` compares Remus
@@ -321,9 +352,9 @@ reason. This is the "legal moves" milestone.
   the class votes on each table that goes into Remus. The teacher writes
   `explain_evaluation()`, which prints every term so Remus can say why it prefers a
   position.
-- **P3. Minimax.** Unplugged: a two-ply tree of index cards on the floor, half the class
-  playing "max" and half "min." The teacher writes `minimax()` to depth 2 with a node
-  counter, and pairs compare its answer with the cards.
+- **P3. Minimax.** Unplugged warm-up: "Paper minimax," with the optional human tree at
+  the front of the room. The teacher writes `minimax()` to depth 2 with a node
+  counter, and pairs compare its answer with their worksheets.
 - **P4. Negamax and mates.** The teacher rewrites the search as `negamax()` with
   `try/finally` around each make and undo. **Students write:** the leaf scoring when
   there are no legal moves (checkmate scores `-(MATE_SCORE - ply)` so Remus prefers the
@@ -334,7 +365,7 @@ reason. This is the "legal moves" milestone.
 
 ### Day 9: Searching smarter
 
-- **P1. Python lab 11** and alpha-beta. Unplugged: replay the card tree and find the
+- **P1. Python lab 11** and alpha-beta. Unplugged warm-up: "Fewest flips" finds the
   cards nobody needs to turn over. The teacher writes `alpha_beta()` beside `negamax()`.
   **Students write:** the comparison script: for ten positions, both must pick the same
   move and score, and alpha-beta must count fewer nodes.
@@ -357,8 +388,8 @@ match and never loses on time.
 
 - **P1 and P2. Upgrade stations.** Python lab 12 opens P1. Each pair picks one station,
   builds it, and shows a measured gain: fewer nodes, deeper search in the same time, or
-  more match points. With 15 pairs and eight stations, about two pairs share a station
-  and compare their measurements at the end of P2.
+  more match points. With 10 pairs and eight stations, two stations get a second pair,
+  and those pairs compare their measurements at the end of P2.
 
 | Station | What the pair builds | GameWorks idea it echoes |
 | --- | --- | --- |
@@ -371,15 +402,16 @@ match and never loses on time.
 | Draw sense | Score a repeated position as 0 inside the search | `DrawGame` |
 | Mate solver | Solve the ten GameWorks puzzles with a mate-only search | `MateSearch` and `MATE.00x` |
 
-- **P3. Tournament.** A full round robin of 15 engines is 105 games, too many for one
-  period. `tools/tournament.py` (python-chess) runs a five-round Swiss instead: 7 games
-  a round and one bye, 35 games in all. At 2 minutes plus 1 second a move per side, and
-  four games at once on the teacher's laptop (eight engine processes, so a laptop with
-  at least 8 cores), each round takes 10 to 12 minutes. The
+- **P3. Tournament.** `tools/tournament.py` (python-chess) runs a full round robin: each
+  of the 10 engines plays every other engine once, 45 games in all, with colors
+  balanced. At 2 minutes plus 1 second a move per side, a game lasts at most about 6
+  minutes. Four games at once on the teacher's laptop (eight engine processes, so a
+  laptop with at least 8 cores) finish the 45 games in about 70 minutes. The
   script saves every game as PGN and prints the standings after each round on the
   projector. Each pair hands in its engine as a git bundle on the class USB stick
   during P2. Pairs replay their wins and losses in En Croissant.
-- **P4. Presentations, take-home, and wrap-up.** Each student copies the pair's repository
+- **P4. Presentations, take-home, and wrap-up.** Unplugged warm-up: "Find the hidden
+  peak" connects choosing a move to choosing an experiment. Each student copies the pair's repository
   to their own USB drive with `git clone --no-hardlinks`, then checks that the copy opens.
 - **Presentations.** Each pair explains one move its engine chose, with
   the score and principal variation. Close with what comes next: bitboards, Zobrist
