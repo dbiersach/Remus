@@ -2,9 +2,10 @@
 
 Remus is a chess engine written in pure, native Python as a teaching project for the
 **"Turning a Chess Engine into Science AI"** workshop. The full lesson plan lives in
-[`workshop_roadmap.md`](workshop_roadmap.md) and the
-day-by-day course in [`remus_course_plan.md`](remus_course_plan.md); read both before
-starting any lesson.
+[`docs/workshop_roadmap.md`](docs/workshop_roadmap.md) and the
+day-by-day course in [`docs/remus_course_plan.md`](docs/remus_course_plan.md); read both
+before starting any lesson. [`docs/remus_program_overview.md`](docs/remus_program_overview.md)
+explains how the code fits together.
 
 This file holds every project and style rule, so that every AI tool used with this
 repository builds Remus the same way. `CLAUDE.md` imports it and adds only the rules
@@ -46,7 +47,7 @@ condensed copy; when a rule here changes, update that file to match. The Python 
 - Remus is an instructional engine for a **two-week, 60-hour course** taught to
   students about **13 years old**: 10 days, four 90-minute periods a day (8:30 to 10:00,
   10:30 to 12:00, 1:00 to 2:30, 3:00 to 4:30). The day-by-day plan lives in
-  [`remus_course_plan.md`](remus_course_plan.md), and the code is split into modules
+  [`docs/remus_course_plan.md`](docs/remus_course_plan.md), and the code is split into modules
   and checkpoints that follow that plan period by period.
 - 20 students work in **10 pairs** (driver and navigator, swapping every period). Each
   pair gets an identical, preconfigured **Windows 11** class laptop with git, `uv`,
@@ -174,14 +175,28 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   import `chess`; only tests and optional display code may.
 - En Croissant is a desktop application, not a Python dependency. It hosts Remus as an
   external UCI engine and comes preinstalled on the class laptops.
-- Engine modules live in one flat `remus/` folder and import each other by name
-  (`from board import new_board`), so any module runs directly with
-  `uv run remus/perft.py`. pytest finds them through `pythonpath = ["remus"]`.
-- The Science AI lesson lives in a separate `science/` folder. `hidden_peak.py` uses the
-  standard library only and does not import the engine: it reuses the engine's ideas,
-  not its code. Add `"science"` to `pythonpath` when the folder is created.
-- Tests live in `tests/`. A test that uses `python-chess` as a reference states the
-  expected count in its docstring or assertion before comparing against Remus.
+- The code lives in one folder per workshop day, named `Day NN - <what the new code
+  does>`, such as `Day 04 - Keep only legal moves`. Each Day folder is a complete,
+  runnable copy of Remus as it stands at the end of that day, and nothing in it imports
+  from another Day folder. Modules import each other by name
+  (`from board import new_board`), so any module runs from inside its folder with
+  `uv run perft.py`.
+- A module keeps one file name from the day it appears to Day 10. When a later lesson
+  makes a file smarter, the new code goes into the same file under a new function
+  name next to the function it improves (`negamax`, then `alpha_beta`, then
+  `upgraded_search`), and the older function stays. Never add version numbers to file
+  names.
+- The Science AI lesson is `hidden_peak.py` in the Day 10 folder. It uses the standard
+  library only and does not import the engine: it reuses the engine's ideas, not its
+  code.
+- Tests sit next to the modules in each Day folder. The module names repeat from
+  folder to folder, so pytest runs one folder at a time
+  (`uv run pytest "Day 04 - Keep only legal moves"`); `uv run run_all_tests.py` runs
+  them all. `tests/` holds the reference-tool tests and `mate_puzzles.epd`. A test
+  that uses `python-chess` as a reference states the expected count in its docstring
+  or assertion before comparing against Remus.
+- `docs/` holds the program overview, one page per major script in `docs/scripts/`,
+  the slide plan, the course plan, the roadmap, and the two briefing PDFs.
 
 ## Licensed local files
 
@@ -218,7 +233,7 @@ Count the leaf positions of the legal move tree to a fixed depth.
 
 On Linux and macOS a script marked executable runs with the project's environment and no
 manual activation. Windows ignores the shebang; there a script runs with
-`uv run remus/perft.py`.
+`uv run perft.py` from inside the Day folder.
 
 The parts of a file come in this order:
 

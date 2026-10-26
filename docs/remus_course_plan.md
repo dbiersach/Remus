@@ -23,7 +23,7 @@ in [`AGENTS.md`](AGENTS.md) apply to everything below.
 | GUI | En Croissant on every laptop |
 | Repositories | The teacher's laptop holds the main class repository. Each pair has its own local repository and pulls from the teacher over the classroom network. No GitHub accounts: the students are minors |
 | Take-home | On the last day each pair copies its repository, with its full history, onto a USB drive |
-| Folder layout | A flat `remus/` folder of modules that import each other by name; pytest finds them through `pythonpath = ["remus"]` |
+| Folder layout | One folder per day, such as `Day 04 - Keep only legal moves`. Each holds a complete, runnable copy of Remus at the end of that day, with its tests beside the modules. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
 | Squares | `(row, col)` tuples inside the engine, row 0 is rank 8 and column 0 is file a |
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
 | GUI move text | UCI (`e2e4`, `e7e8q`), because that is what the GUI protocol uses |
@@ -31,6 +31,7 @@ in [`AGENTS.md`](AGENTS.md) apply to everything below.
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Tournament | A full round robin of the 10 pair engines on Day 10 |
 | Mate puzzles | The ten GameWorks `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
+| Documentation | `docs/remus_program_overview.md` for the whole program, one page per major script in `docs/scripts/`, and `docs/slide_plan.md` for the PowerPoint slides |
 
 ## The shape of the two weeks
 
@@ -63,14 +64,14 @@ of Day 7), then it plays **good** moves (Days 8 to 10).
 
 | Area | Version 1 | Version 2 | Version 3 | Version 4 and later |
 | --- | --- | --- | --- | --- |
-| Board | 8x8 list of lists, printed (D1) | Square names (D1) | FEN in and out (D7) | Piece lists, 0x88 as a "how 1987 did it" sidebar (D10 optional) |
+| Board | 8x8 list of lists, printed (D1) | Square names (D1) | FEN in and out (D7) | GameWorks's 0x88 board as a "how 1987 did it" sidebar talk (D10 optional, no code) |
 | Make and undo | Quiet moves and captures (D2) | Castling, en passant, promotion (D5) | Clocks, history, repetition keys (D7) | Undo inside search with `try/finally` (D8) |
 | Move generation | King and knight jumps (D3) | Sliders and pawns (D3) | Legal filter: make, test the king, undo (D4) | Captures first, MVV-LVA, killers (D9, D10) |
-| Attacks | Loop over enemy pieces (D4) | Look outward from the square (D4) | Castling and legality use it (D5) | King safety in evaluation (D10 station) |
-| Game end | Checkmate and stalemate (D7) | Fifty-move rule (D7) | Threefold repetition (D7) | Insufficient material, fivefold, 75-move (D7) |
+| Attacks | Loop over enemy pieces (D4) | Look outward from the square (D4) | Castling and legality use it (D5) | Check extension in the search (D9) |
+| Game end | Checkmate and stalemate (D7) | Fifty-move rule (D7) | Threefold repetition (D7) | Insufficient material (D7) |
 | Notation | UCI text (D2) | FEN (D7) | SAN out (D7) | SAN in, by matching legal moves (D7) |
 | Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering, iterative deepening (D9), PVS and a transposition table (D10) |
-| Evaluation | Material count (D8) | Piece-square tables (D8) | Mate scores that prefer the faster mate (D8) | Pawn structure, mating evaluation, castling bonus (D10) |
+| Evaluation | Material count (D8) | Piece-square tables (D8) | Mate scores that prefer the faster mate (D8) | Pawn structure and mating evaluation (D10) |
 | Science AI | Paper hidden-peak game (D10 P2 warm-up) | Greedy measurement choice (D10 P2) | Explore and exploit weight tuned on a benchmark (D10 P2) | Depth-2 expectimax, a teacher demo (D10 P2) |
 | Interface | Console printout (D1) | Console game in SAN (D7) | UCI in a GUI (D7) | `info` lines, time control, `stop` (D9) |
 
@@ -82,7 +83,7 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
 1. **The scaffold.** Before the period, the teacher's checkpoint holds the function's
    signature, its NumPy docstring, and tests that fail. The body says `raise
    NotImplementedError`.
-2. **The pair writes the body** until `uv run pytest tests/test_<topic>.py` passes and
+2. **The pair writes the body** until `uv run pytest "Day NN - .../test_<topic>.py"` passes and
    the module's own self-check prints the expected answer.
 3. **Show and choose.** Two or three pairs show their version on the projector. With 10
    pairs and about 40 functions, the teacher rotates who presents so every pair ships
@@ -90,7 +91,10 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
    class repository. `CONTRIBUTORS.md` records which pair wrote which function, by a
    team name the pair chooses rather than full names, since the code goes home with
    every student.
-4. **Everyone moves on together.** At the start of the next period each pair fetches
+4. **Everyone moves on together.** The class repository gains one Day folder per day.
+   The first start tag of each day holds the new folder: a copy of the previous day's
+   finished code plus that day's scaffolds. Pairs work only inside the newest Day
+   folder, so earlier days stay as a record of how Remus grew. At the start of the next period each pair fetches
    from the teacher and starts a new branch from that period's start tag, so the whole
    room builds the same engine. The pair's own branches stay in its repository, so a
    pair whose version was not picked keeps its own code too.
@@ -232,7 +236,7 @@ refresher with a demonstration board comes right before the code that needs each
   **Students write:** `print_board()`, `square_name(row, col)`,
   `parse_square(name)` (which rejects `"i9"`), `piece_at(board, square)`.
 
-**Checkpoint `d1-p4-end`:** `uv run remus/board.py` prints the start board and
+**Checkpoint `d1-p4-end`:** `uv run board.py` prints the start board and
 "b1 holds N, expected N".
 
 ### Day 2: Functions and records
@@ -310,7 +314,7 @@ undoes exactly.
   `perft(state, depth)`, the recursive count of leaf
   positions. The teacher writes `divide()`, which prints the count under each root move.
   Expected: 20, 400, 8,902 from the start.
-- **P3. Perft against python-chess, and bug hunt.** `tests/test_perft.py` compares Remus
+- **P3. Perft against python-chess, and bug hunt.** `test_perft.py` compares Remus
   with `python-chess` on the standard positions. The teacher plants three bugs in a copy
   (en passant pawn left on the board, castling through check, a missing promotion
   piece); pairs race to find them with `divide`.
@@ -337,7 +341,7 @@ the standard positions. Rule 6 of `AGENTS.md` is now met.
 - **P4. First brains and the GUI.** **Students write:** `random_move()` and
   `greedy_move()` (take the most valuable capture, else a random move). The teacher
   writes `uci_engine.py` and the launchers. Every pair registers Remus in the GUI and
-  plays greedy Remus. `tools/play_match.py` plays random Remus against greedy Remus for
+  plays greedy Remus. `play_match.py` plays random Remus against greedy Remus for
   20 games and prints the score.
 
 **Checkpoint `d7-p4-end`:** a full game in the GUI ends with the correct result and
@@ -404,7 +408,7 @@ match and never loses on time.
 | Draw sense | Score a repeated position as 0 inside the search | `DrawGame` |
 | Mate solver | Solve the ten GameWorks puzzles with a mate-only search | `MateSearch` and `MATE.00x` |
 
-- **P2. Science AI: `science/hidden_peak.py`.** Unplugged warm-up: "Find the hidden
+- **P2. Science AI: `hidden_peak.py`.** Unplugged warm-up: "Find the hidden
   peak." Then the teacher shows the map from chess to science on the board:
 
   | Chess engine | Hidden-peak search |
@@ -426,7 +430,7 @@ match and never loses on time.
   alpha-beta's cutoffs do not carry over to an average, and shows that the NSLS-II
   agent runs the same loop with a statistical model (a Gaussian process) in place of
   the hand-built score.
-- **P3. Tournament.** `tools/tournament.py` (python-chess) runs a full round robin: each
+- **P3. Tournament.** `tournament.py` (python-chess) runs a full round robin: each
   of the 10 engines plays every other engine once, 45 games in all, with colors
   balanced. At 2 minutes plus 1 second a move per side, a game lasts at most about 6
   minutes. Four games at once on the teacher's laptop (eight engine processes, so a
@@ -445,43 +449,40 @@ crashes, or lost synchronization.
 
 ## Code breakdown by day
 
-The engine lives in one flat folder of plain modules. Each module ends with a visible
-self-check, as `AGENTS.md` requires, so a pair can run any file with
-`uv run remus/perft.py`.
+Each day's code lives in its own folder, and each folder is a complete copy of Remus at
+the end of that day. Every module ends with a visible self-check, as `AGENTS.md`
+requires, so a pair can run any file from inside the folder with `uv run perft.py`.
+The full description of each script is in `docs/scripts/`.
 
-| File | Created | Grows on | Holds |
-| --- | --- | --- | --- |
-| `remus/board.py` | D1 | D10 (optional piece list) | Board, coordinates, printing |
-| `remus/game_state.py` | D2 | D5, D7 | State dict, `new_game()` |
-| `remus/moves.py` | D2 | D3 (promotion) | `Move` record, UCI text |
-| `remus/make_move.py` | D2 | D5, D7 | `make_move()`, `undo_move()`, undo record |
-| `remus/move_generation.py` | D3 | D4, D5 | Pseudo-legal and legal moves |
-| `remus/attacks.py` | D4 | D10 (king safety) | `is_square_attacked()`, `in_check()` |
-| `remus/perft.py` | D6 | | `perft()`, `divide()` |
-| `remus/fen.py` | D7 | | FEN in and out |
-| `remus/notation.py` | D7 | | SAN in and out |
-| `remus/game_end.py` | D7 | | `game_result()` and reason |
-| `remus/console_game.py` | D7 | | Two people play in SAN; later, a person against Remus |
-| `remus/search.py` | D7 | D8, D9, D10 | Random, greedy, minimax, negamax, alpha-beta, quiescence, iterative deepening |
-| `remus/uci_engine.py` | D7 | D9 | UCI loop |
-| `remus/evaluation.py` | D8 | D10 | Material, tables, explanation |
-| `remus/move_ordering.py` | D9 | D10 | MVV-LVA, killers |
-| `remus/transposition_table.py` | D10 | | Station |
-| `remus/opening_book.py`, `remus/opening_book.txt` | D10 | | Station |
-| `remus.bat` | D7 | | En Croissant launcher on the class laptops |
-| `remus.sh` | D10 | | Take-home launcher for students with a Mac or Linux computer at home |
-| `science/hidden_peak.py` | D10 | | Science AI: hidden grid, readings, scoring, measurement choice, benchmark. Standard library only; reuses the engine's ideas, not its code |
-| `tests/test_hidden_peak.py` | D10 | | Candidate squares, scoring, and "greedy beats random" on a fixed seed |
-| `tools/play_match.py`, `tools/tournament.py` | D7, D10 | | python-chess match runners (dev only) |
-| `tests/test_<topic>.py` | every period | | Expected results written first |
-| `labs/dayNN/<skill>.py`, `labs/dayNN/instructor/<skill>_instructor.py` | each lab | | Python skills labs: student file with blanks, instructor file with answers |
-| `tests/mate_puzzles.epd` | before D1 | | The ten GameWorks mate puzzles as FEN |
-| `CONTRIBUTORS.md` | D1 | every period | Which pair wrote which function |
+| Folder | New files | Files that grow |
+| --- | --- | --- |
+| `Day 01 - Draw the board` | `board.py`, `test_board.py` | |
+| `Day 02 - Make and undo moves` | `game_state.py`, `moves.py`, `make_move.py`, `test_make_move.py` | `board.py` (`set_piece`) |
+| `Day 03 - Generate piece moves` | `move_generation.py`, `test_move_generation.py` | |
+| `Day 04 - Keep only legal moves` | `attacks.py`, `legal_moves.py`, `test_legal_moves.py` | |
+| `Day 05 - Add castling, en passant, and promotion` | `test_special_moves.py` | `make_move.py`, `move_generation.py`, `legal_moves.py` |
+| `Day 06 - Count positions with perft` | `perft.py`, `test_perft.py` | |
+| `Day 07 - Play full games in En Croissant` | `fen.py`, `notation.py`, `game_end.py`, `search.py`, `uci_engine.py`, `console_game.py`, `play_match.py`, `remus.bat`, `test_game.py` | `game_state.py` (`position_key`), `make_move.py` (history) |
+| `Day 08 - Evaluate and search ahead` | `evaluation.py`, `test_search.py` | `search.py` (minimax, negamax) |
+| `Day 09 - Search faster with alpha-beta` | `move_ordering.py`, `compare_search.py` | `search.py` (alpha-beta, quiescence, `think`), `uci_engine.py` (clock, thread, `stop`) |
+| `Day 10 - Upgrade Remus and add Science AI` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `mate_solver.py`, `hidden_peak.py`, `tournament.py`, `remus.sh`, `test_upgrades.py` | `evaluation.py` (pawns, mating), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
 
-When a newer version teaches by comparison, the older function stays beside it:
-`minimax` and `alpha_beta` both remain in `search.py` so pairs can print node counts
-side by side. When a newer version only replaces the older one, as in the attack test,
-the older code survives in the checkpoint tag.
+Outside the Day folders:
+
+| Path | Holds |
+| --- | --- |
+| `tests/mate_puzzles.epd` | The ten GameWorks mate puzzles as FEN |
+| `tests/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
+| `run_all_tests.py` | Runs pytest on each Day folder in turn |
+| `docs/` | This plan, the roadmap, the program overview, the script pages, the slide plan, and the two briefing PDFs |
+| `labs/dayNN/<skill>.py`, `labs/dayNN/instructor/<skill>_instructor.py` | Python skills labs: student file with blanks, instructor file with answers (to be written) |
+| `CONTRIBUTORS.md` | Which pair wrote which function (starts on Day 1) |
+
+A module keeps one file name all course. When a newer version teaches by comparison,
+the older function stays beside it in the same file: `is_attacked_by_scanning` next to
+`is_square_attacked`, `minimax` and `negamax` next to `alpha_beta`, and
+`alpha_beta_with_quiescence` next to `upgraded_search`, so pairs can print node counts
+side by side and every import keeps working.
 
 ## GameWorks to Remus map
 
@@ -507,15 +508,15 @@ engine, and the engine never imports it.
 
 1. **GUI play through UCI.** En Croissant starts a launcher and talks to Remus over stdin and
    stdout. `remus.bat` changes to its own folder and runs `uv run python
-   remus/uci_engine.py`. For students who take Remus home to a Mac or Linux computer,
+   uci_engine.py`. For students who take Remus home to a Mac or Linux computer,
    `remus.sh` does the same; it must be marked executable with `chmod +x remus.sh`, and
    it calls `uv` by its full path (usually `~/.local/bin/uv`) because a desktop app
    does not read the shell's `PATH`.
-2. **Matches and the tournament.** `tools/play_match.py` uses
+2. **Matches and the tournament.** `play_match.py` and `tournament.py` use
    `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes, plays them on a
-   `chess.Board`, and saves PGN with `chess.pgn`. python-chess rejects any illegal move
+   `chess.Board`, and `tournament.py` saves every game as PGN with `chess.pgn`. python-chess rejects any illegal move
    an engine sends, so match play doubles as a rules test.
-3. **Reference checks in tests.** `tests/` compares Remus perft counts, legal move lists,
+3. **Reference checks in tests.** The tests in each Day folder compare Remus perft counts, legal move lists,
    FEN round trips, SAN text, and game results with `chess.Board` on the same position.
    Each test writes the expected value before the comparison.
 

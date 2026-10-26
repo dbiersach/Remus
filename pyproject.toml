@@ -23,11 +23,16 @@ required-environments = [
 
 [tool.ruff]
 lint.extend-select = ["I", "C4", "ISC", "SIM", "TCH"]
-lint.ignore = []
+# TC002 and TC003 ask for imports used only in type hints to move into an
+# "if TYPE_CHECKING:" block. Remus imports them plainly, so students read one
+# import style everywhere.
+lint.ignore = ["TC002", "TC003"]
 show-fixes = true
 target-version = "py314"
 
+# Each Day folder is a complete copy of Remus, so module names repeat from folder
+# to folder. Run one folder at a time, such as
+# uv run pytest "Day 06 - Count positions with perft", or run_all_tests.py for all.
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["remus"]
 addopts = "-q"

@@ -6,7 +6,10 @@ the son and heir of Sargon of Akkad, in tribute to Sargon (1978), the
 microcomputer chess program whose complete source was published so that people
 could learn from it.
 
-The lesson plan is in [`workshop_roadmap.md`](workshop_roadmap.md).
+The code grows one day at a time: each `Day NN - ...` folder is a complete, runnable
+copy of Remus at the end of that workshop day. Start with
+[`docs/remus_program_overview.md`](docs/remus_program_overview.md); the course plan is
+in [`docs/remus_course_plan.md`](docs/remus_course_plan.md).
 
 ## Setup
 
@@ -14,12 +17,13 @@ Remus uses [uv](https://docs.astral.sh/uv/) and Python 3.14.
 
 ```bash
 uv sync
-uv run pytest
+uv run run_all_tests.py
+uv run "Day 06 - Count positions with perft/perft.py"
 ```
 
 The engine uses only the Python standard library. The development group adds
 `python-chess`, which the tests use as an outside reference for move counts,
-along with `pytest` and `ruff`. PyChess, the optional desktop GUI, is installed
+along with `pytest` and `ruff`. En Croissant, the desktop chess GUI, is installed
 separately and talks to Remus over UCI.
 
 ## License
