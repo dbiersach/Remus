@@ -215,7 +215,11 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Python skills labs live in `labs/dayNN/` (student file with `#` blanks) and
   `labs/dayNN/instructor/` (`<name>_instructor.py`); `period_guides.LABS` names the
   period of each, and the builders copy the answer file into the instructor period
-  folder and the blank file into the student one.
+  folder and the blank file into the student one. Every period that has no Remus
+  function for the pairs holds a lab or a short demo (`demo_*.py`) with blanks.
+  Demos that use the engine run only inside their period folder. Day 6, period 3
+  also gets `bug_hunt/`, which `make_period_folders.py` builds by planting the three
+  bugs of `PLANTED_BUGS` in a copy of the period's code.
   Nothing in a period folder imports from another folder. Modules import each other
   by name (`from board import new_board`), so any module runs from inside its folder
   with `uv run perft.py`.

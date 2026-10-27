@@ -8,6 +8,18 @@ By the end of this period, each pair can:
 
 ## The files
 
+The lab is `python_sets.py` in `student/`, with the answers in `python_sets_instructor.py` in `instructor/`. Both come from `labs/day05/`. Run it with `uv run python_sets.py`.
+
 The Remus code here is the same as at the end of the period before.
+
+## The changes and why
+
+The pairs fill in the blanks of `python_sets.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_sets_instructor.py`.
+
+Part #1 adds squares to a set. A set holds each item once, so adding h1 a second time changes nothing.
+
+Parts #2 and #3 ask questions with `in`, of a set and of a dict. The dict `rights_lost` names the castling rights each home square guards: a piece leaving e1 removes K and Q, and a piece leaving h1 removes K.
+
+Part #4 removes rights with `replace()`, one letter at a time, starting from `"KQkq"`. `update_castling_rights()` in `make_move.py` does exactly this in period 2.
 
 Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.

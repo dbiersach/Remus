@@ -118,28 +118,42 @@ The pages, in the order the class builds them:
 | [`python_lists.py`](scripts/python_lists.md) | Day 1 lab: a board is a list of rows |
 | [`board.py`](scripts/board.md) | The chessboard |
 | [`show_board.py`](scripts/show_board.md) | Draw the board and its moves as a picture |
+| [`python_functions.py`](scripts/python_functions.md) | Day 2 lab: small functions and their tests |
+| [`python_dicts.py`](scripts/python_dicts.md) | Day 2 lab: a dict, a copy, and a dataclass |
 | [`game_state.py`](scripts/game_state.md) | Everything the board does not show |
 | [`moves.py`](scripts/moves.md) | What a move looks like |
 | [`make_move.py`](scripts/make_move.md) | Make a move, then take it back |
+| [`python_loops.py`](scripts/python_loops.md) | Day 3 lab: walk until something stops you |
 | [`move_generation.py`](scripts/move_generation.md) | Every move the pieces can make |
+| [`python_modules.py`](scripts/python_modules.md) | Day 4 lab: one file uses another |
 | [`attacks.py`](scripts/attacks.md) | Is this square under attack? |
 | [`legal_moves.py`](scripts/legal_moves.md) | Keep only the legal moves |
+| [`demo_practice_positions.py`](scripts/demo_practice_positions.md) | Day 4 demo: predict, then count the legal moves |
+| [`python_sets.py`](scripts/python_sets.md) | Day 5 lab: castling rights as letters |
+| [`demo_promotion.py`](scripts/demo_promotion.md) | Day 5 demo: why a pawn becomes a knight |
+| [`python_recursion.py`](scripts/python_recursion.md) | Day 6 lab: a function that calls itself |
 | [`perft.py`](scripts/perft.md) | Count positions to prove the rules |
+| [`hunt.py`](scripts/hunt.md) | Day 6 demo: find three planted bugs |
+| [`python_fen_fields.py`](scripts/python_fen_fields.md) | Day 6 lab: the six fields of FEN |
 | [`fen.py`](scripts/fen.md) | A whole position in one line |
 | [`notation.py`](scripts/notation.md) | Moves the way people write them |
 | [`game_end.py`](scripts/game_end.md) | Is the game over? |
 | [`console_game.py`](scripts/console_game.md) | Play chess in the terminal |
+| [`python_input_output.py`](scripts/python_input_output.md) | Day 7 lab: read commands, answer at once |
 | [`uci_engine.py`](scripts/uci_engine.md) | Talk to Lucas Chess |
 | [`play_match.py`](scripts/play_match.md) | Two Remus brains play each other |
 | [`evaluation.py`](scripts/evaluation.md) | How good is this position? |
 | [`search.py`](scripts/search.md) | Choosing a move |
+| [`python_sorting.py`](scripts/python_sorting.md) | Day 8 lab: sort, start at minus infinity, time it |
 | [`compare_search.py`](scripts/compare_search.md) | Prove that alpha-beta saves work |
 | [`move_ordering.py`](scripts/move_ordering.md) | Try the best moves first |
+| [`python_caches.py`](scripts/python_caches.md) | Day 9 lab: remember answers in a dict |
 | [`transposition_table.py`](scripts/transposition_table.md) | Remember positions already searched |
 | [`opening_book.py`](scripts/opening_book.md) | Play known openings without thinking |
 | [`mate_solver.py`](scripts/mate_solver.md) | Solve mate-in-two puzzles |
 | [`tournament.py`](scripts/tournament.md) | The class round robin |
 | [`estimate_elo.py`](scripts/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
+| [`demo_results.py`](scripts/demo_results.md) | Day 10 demo: read a match result and explain a move |
 | [`station_match.py`](stations.md) | Measures one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements |
 | [`station_league.py`](stations.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](scripts/hidden_peak.md) | Science AI: find the hidden peak |

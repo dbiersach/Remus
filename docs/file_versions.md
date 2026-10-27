@@ -48,43 +48,47 @@ Day 5, Period 2.
 ## Table 2: By period
 
 Lab periods and review periods change no Remus code. Their folders are copies of the
-period before, so a pair can always open the newest folder.
+period before, so a pair can always open the newest folder. Each Python lab
+(`python_*.py`) and each demo (`demo_*.py`) comes from `labs/dayNN/` and lives only in
+its own period folder; the student folder holds the file with blanks, and the
+instructor folder holds the answer file `<name>_instructor.py`.
 
 | Period | New files | Changed files |
 | --- | --- | --- |
 | D1 P1 to P3 | No Remus code yet. Each folder holds its Python lab from `labs/day01/`: `python_setup.py` (P1), `python_strings.py` (P2), and `python_lists.py` (P3), with the answer file `<name>_instructor.py` in `instructor/` | None |
 | D1 P4 | `board.py`, `show_board.py`, `test_board.py` | None |
-| D2 P1, P2 | None: Python labs | None |
+| D2 P1 | Lab 3: `python_functions.py` | None |
+| D2 P2 | Lab 4: `python_dicts.py` | None |
 | D2 P3 | `game_state.py`, `moves.py`, `test_make_move.py` | `board.py`: adds `set_piece()` |
 | D2 P4 | `make_move.py` | `test_make_move.py`: make and undo tests |
-| D3 P1 | None: Python lab | None |
+| D3 P1 | Lab 5: `python_loops.py` | None |
 | D3 P2 | `move_generation.py`, `test_move_generation.py` | `show_board.py`: move arrows |
 | D3 P3 | None | `move_generation.py`: `slide()` and `slider_moves()`. `test_move_generation.py` |
 | D3 P4 | None | `move_generation.py`: pawns and `pseudo_legal_moves()`. `test_move_generation.py` |
-| D4 P1 | None: Python lab | None |
+| D4 P1 | Lab 6: `python_modules.py`, which imports `board.py` and `move_generation.py` | None |
 | D4 P2 | `attacks.py`, `test_legal_moves.py` | None |
 | D4 P3 | `legal_moves.py` | `attacks.py`: `find_king()` and `in_check()`. `test_legal_moves.py` |
-| D4 P4 | None | `test_legal_moves.py`: the practice positions |
-| D5 P1 | None: Python lab | None |
+| D4 P4 | Demo: `demo_practice_positions.py` | `test_legal_moves.py`: the practice positions |
+| D5 P1 | Lab 7: `python_sets.py` | None |
 | D5 P2 | `test_special_moves.py` | `make_move.py`: castling and rights. `legal_moves.py`: castling moves |
 | D5 P3 | None | `make_move.py`: en passant. `move_generation.py`: en passant captures. `test_special_moves.py` |
-| D5 P4 | `uci_engine.py`, `remus.bat` | `make_move.py`: promotion. `test_special_moves.py` |
-| D6 P1 | None: Python lab | None |
+| D5 P4 | `uci_engine.py`, `remus.bat`. Demo: `demo_promotion.py` | `make_move.py`: promotion. `test_special_moves.py` |
+| D6 P1 | Lab 8: `python_recursion.py` | None |
 | D6 P2 | `perft.py` | None |
-| D6 P3 | `test_perft.py` | None |
-| D6 P4 | `fen.py`, `test_game.py` | `test_perft.py`: sets up positions with `fen.py` |
+| D6 P3 | `test_perft.py`. Demo: the `bug_hunt/` folder, a copy of the period's Remus with three planted bugs, and `hunt.py`, which finds them with `divide()` | None |
+| D6 P4 | `fen.py`, `test_game.py`. Lab 9: `python_fen_fields.py` | `test_perft.py`: sets up positions with `fen.py` |
 | D7 P1 | `game_end.py` | `game_state.py`: `position_key()`. `make_move.py` and `fen.py`: position history. `test_game.py` |
-| D7 P2 | `notation.py`, `console_game.py` | `test_game.py` |
+| D7 P2 | `notation.py`, `console_game.py`. Lab 10: `python_input_output.py` | `test_game.py` |
 | D7 P3 | `search.py`, `play_match.py` | `uci_engine.py`: the full engine. `console_game.py`: Remus plays. `test_game.py` |
 | D7 P4 | `evaluation.py`, `test_search.py` | None |
 | D8 P1 | None | `search.py`: minimax and negamax. `uci_engine.py` and `console_game.py`: the negamax brain. `test_search.py` |
-| D8 P2 | `compare_search.py` | `search.py`: alpha-beta. `test_search.py` |
+| D8 P2 | `compare_search.py`. Lab 11: `python_sorting.py` | `search.py`: alpha-beta. `test_search.py` |
 | D8 P3 | None | `search.py`: quiescence. `test_search.py` |
 | D8 P4 | `move_ordering.py` | `search.py`: ordering, check extension, clock. `test_search.py` |
 | D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock, thread, `stop`. `console_game.py`: uses `think()`. `test_search.py` |
-| D9 P2, P3 | Ten station folders in `Stations/` (see [stations.md](stations.md)) | None in the Day folder, which holds Remus-WHITE |
+| D9 P2, P3 | Ten station folders in `Stations/` (see [stations.md](stations.md)). Lab 12 in P2: `python_caches.py` | None in the Day folder, which holds Remus-WHITE |
 | D9 P4 | `mate_solver.py` | `test_search.py`: mate-solver tests |
 | D10 P1 | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `test_upgrades.py` | `search.py`: `upgraded_search()`. `evaluation.py`: pawns, mating, king safety. `move_ordering.py`: killers. `uci_engine.py` and `console_game.py`: book moves first |
 | D10 P2 | `beam_time.py`, `test_beam_time.py` | None |
 | D10 P3 | None | `beam_time.py`: the look-ahead. `test_beam_time.py` |
-| D10 P4 | `tournament.py`, `remus.sh`, `estimate_elo.py` | None |
+| D10 P4 | `tournament.py`, `remus.sh`, `estimate_elo.py`. Demo: `demo_results.py` | None |

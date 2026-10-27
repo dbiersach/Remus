@@ -5,9 +5,11 @@
 By the end of this period, each pair can:
 
 - Read and write the piece placement of FEN. **Measured by:** `test_game.py` FEN tests pass: the start FEN goes in and comes back out the same.
-- Name the six fields of a FEN string. **Measured by:** The pair labels the six fields of the start FEN on the worksheet.
+- Name the six fields of a FEN string. **Measured by:** `python_fen_fields.py` prints the six fields of the start FEN with their names, and the pair labels them on the worksheet.
 
 ## The files
+
+The lab is `python_fen_fields.py` in `student/`, with the answers in `python_fen_fields_instructor.py` in `instructor/`. Both come from `labs/day06/`. Run it with `uv run python_fen_fields.py`.
 
 New files this period:
 
@@ -26,6 +28,10 @@ Functions the pairs write this period:
 In `student/` these functions raise `NotImplementedError` until a pair writes them. In `instructor/` they are finished.
 
 ## The changes and why
+
+The pairs fill in the blanks of `python_fen_fields.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_fen_fields_instructor.py`.
+
+The lab cuts the start FEN into its six fields with `split()` and prints each with its name, the map the pair needs before writing `fen.py`. Then `try` and `except ValueError` catch the error that `int()` raises on text that is not a number, which is how a FEN reader can reject a broken string instead of crashing.
 
 ### `fen_placement()` in `fen.py`
 
@@ -47,3 +53,9 @@ Every other function in this folder is finished. Change only these, and only bel
 | `fen.py` | `board_from_placement()` | 40 | 14 | `uv run pytest` |
 
 Lines to type in all: 30. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## What you edit in the lab
+
+Open `python_fen_fields.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
+
+Lines to type in all: 8. Check the work with `uv run python_fen_fields.py` and compare each printed result with the expected value beside it.

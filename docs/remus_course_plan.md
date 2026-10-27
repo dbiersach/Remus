@@ -46,7 +46,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 3 | Loops that walk the board | `while`, `break`, direction tuples, building lists | Generate king, knight, slider, and pawn moves |
 | 4 | Legal moves | Modules, imports, `__main__`, git | Detect attacks and check; keep only legal moves |
 | 5 | Special moves | Sets and dict lookups | Castling, en passant, promotion and underpromotion, with exact undo; play random Remus in Lucas Chess |
-| 6 | Counting the tree, and FEN | Recursion; `split`, `join`, exceptions | Perft matches the reference counts; FEN in and out |
+| 6 | Counting the tree, and FEN | Recursion; `split`, exceptions | Perft matches the reference counts; FEN in and out |
 | 7 | A whole game, and judging a position | `random`, `max` with `key=`, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
 | 8 | Searching ahead, then smarter | Recursion review, `sorted` with `key=` | Minimax, negamax, alpha-beta, quiescence, move ordering |
 | 9 | The clock and the stations | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhancement station per pair; station matches; a mate solver |
@@ -141,10 +141,10 @@ every drill uses chess data so the skill is fresh when the engine needs it.
 | 3 | D2 P1 | Functions, parameters, `return`, type hints, docstrings, tuples and unpacking, `assert`, pytest | `is_white("N")`, `on_board(row, col)` with tests |
 | 4 | D2 P2 | Dicts, `dataclass`, `None`, mutation, aliasing, `copy` and `deepcopy`, `==` on lists | Show `b2 = board` changing both boards; fix it with a copy |
 | 5 | D3 P1 | `while`, `break`, `continue`, lists of direction tuples, `append`, list comprehensions (lightly) | Walk from `d4` toward the edge in one direction, stopping at a piece |
-| 6 | D4 P1 | Modules, `import`, `if __name__ == "__main__"`, git `fetch`, `switch -c`, `commit`, `log` | Split yesterday's code into two files and import one from the other |
+| 6 | D4 P1 | Modules, `import`, `if __name__ == "__main__"`, git `fetch`, `switch -c`, `commit`, `log` | Import yesterday's `board.py` and `move_generation.py` and list the knight moves from `g1` |
 | 7 | D5 P1 | Sets, membership with `in`, dict lookups, string replacement | Castling rights as the string `"KQkq"`: remove `"K"` when the h1 rook moves |
 | 8 | D6 P1 | Recursion: base case, recursive case, call stack | Count down; count the leaves of a small tree; count paths of a knight |
-| 9 | D6 P4 | `split`, `join`, `int()`, exceptions with `try` and `ValueError` | Read a FEN string and print its six fields |
+| 9 | D6 P4 | `split`, `int()`, exceptions with `try` and `ValueError` | Read a FEN string and print its six fields |
 | 10 | D7 P2 | `random.choice`, `max` with `key=`, `sys.stdin`, `print(..., flush=True)`, `sys.stderr` | A tiny program that echoes lines, then answers `isready` with `readyok` |
 | 11 | D8 P2 | `sorted` with `key=`, `time.perf_counter()`, `float("inf")` | Sort captures by victim value; time a perft run |
 | 12 | D9 P2 | Dicts as caches, tuples as keys, `math.dist`, `random.seed`, `threading.Event` (teacher demo) | Remember perft counts already computed; measure the distance from `d4` to `g7` |
@@ -255,8 +255,8 @@ refresher with a demonstration board comes right before the code that needs each
 
 ### Day 2: Functions and records
 
-- **P1. Python lab 3:** functions, type hints, tuples, `assert`, pytest.
-- **P2. Python lab 4:** dicts, dataclasses, aliasing, copying.
+- **P1. Python lab 3, `python_functions.py`:** functions, type hints, tuples, `assert`, pytest.
+- **P2. Python lab 4, `python_dicts.py`:** dicts, dataclasses, aliasing, copying.
 - **P3. `game_state.py` and `moves.py`.** The teacher writes the state dict in
   `new_game()` and the `Move` dataclass (`from_square`, `to_square`, `promotion`).
   **Students write:** `is_white(piece)`, `color_of(piece)`, `move_to_uci(move)`,
@@ -271,7 +271,7 @@ refresher with a demonstration board comes right before the code that needs each
 
 ### Day 3: Loops that walk the board
 
-- **P1. Python lab 5:** `while`, `break`, direction tuples.
+- **P1. Python lab 5, `python_loops.py`:** `while`, `break`, direction tuples.
 - **P2. Jumping pieces.** Unplugged warm-up: "Shade the reach." The teacher writes
   `knight_moves()` from an offset list.
   **Students write:** `king_moves()` the same way. Exercise: a knight on `a1` has two
@@ -289,7 +289,7 @@ refresher with a demonstration board comes right before the code that needs each
 
 ### Day 4: Legal moves
 
-- **P1. Python lab 6:** modules, imports, `__main__`, git.
+- **P1. Python lab 6, `python_modules.py`:** modules, imports, `__main__`, git.
 - **P2. Attacks.** Refresher on check, pins, and discovered check. `attacks.py`
   version 1 loops over the enemy pieces, as GameWorks `Attacks` does. Version 2 stands
   on the square and looks outward like a "super piece."
@@ -300,13 +300,15 @@ refresher with a demonstration board comes right before the code that needs each
   attacked, undo it.
 - **P4. Practice positions.** Pairs build tests for the workshop's first three
   verification exercises: 20 moves from the start, a king in check, and a pinned piece.
+  In `demo_practice_positions.py` each pair types the three positions and a
+  prediction for each, then lets Remus count the legal moves.
 
 **Checkpoint `d4-p4-end`:** a pinned knight has zero legal moves; a king in check has
 only escapes.
 
 ### Day 5: Special moves
 
-- **P1. Python lab 7:** sets, `in`, string replacement for castling rights.
+- **P1. Python lab 7, `python_sets.py`:** sets, `in`, string replacement for castling rights.
 - **P2. Castling.** Refresher with the five conditions on the board. The teacher writes
   castling generation and the attacked-square checks.
   **Students write:** `update_castling_rights(rights, move, captured)`, the table of
@@ -317,7 +319,10 @@ only escapes.
   passant make and undo, including the line that sets the target after a double step.
 - **P4. Promotion and underpromotion.** Puzzle: promoting to a knight wins, promoting to
   a queen stalemates. The teacher writes promotion in `make_move` and `undo_move`,
-  and pairs write tests from the workshop's special-move checklist. To close the week,
+  and pairs write tests from the workshop's special-move checklist. In
+  `demo_promotion.py` pairs write the loop that tries all four promotions on the
+  puzzle and prints stalemate for the queen, rook, and bishop and checkmate for the
+  knight. To close the week,
   the teacher hands out `uci_engine.py` and `remus.bat` as a ready-made plug: pairs
   register `remus.bat` in Lucas Chess and play their own Remus, which answers with a
   random legal move; [`lucas_chess_guide.md`](lucas_chess_guide.md) shows each click.
@@ -334,7 +339,7 @@ catch-up period: a pair that falls behind checks out the period's end tag and re
 
 ### Day 6: Counting the tree, and FEN
 
-- **P1. Python lab 8:** recursion.
+- **P1. Python lab 8, `python_recursion.py`:** recursion.
 - **P2. Perft.** Unplugged warm-up: "Count by hand." **Students write:**
   `perft(state, depth)`, the recursive count of leaf
   positions. The teacher writes `divide()`, which prints the count under each root move.
@@ -342,8 +347,11 @@ catch-up period: a pair that falls behind checks out the period's end tag and re
 - **P3. Perft against python-chess, and bug hunt.** `test_perft.py` compares Remus
   with `python-chess` on the standard positions. The teacher plants three bugs in a copy
   (en passant pawn left on the board, castling through check, a missing promotion
-  piece); pairs race to find them with `divide`.
-- **P4. Python lab 9 and FEN.** The lab covers `split`, `join`, and exceptions. Then
+  piece); pairs race to find them with `divide`. The copy is the `bug_hunt` folder
+  inside the period folder, and `uv run hunt.py` there prints every root move whose
+  count disagrees with `python-chess`.
+- **P4. Python lab 9 and FEN.** The lab, `python_fen_fields.py`, covers `split` and
+  exceptions. Then
   `fen.py`. **Students write:** `fen_placement(board)` (the part of FEN before the
   first space) and `board_from_placement(text)`. The teacher writes the other five FEN
   fields, and `test_perft.py` switches to Remus's own FEN reader.
@@ -362,7 +370,8 @@ is now met.
   disambiguation (`Nbd2`) and the `+` and `#` suffixes. **Students write:**
   `parse_san(state, text)`, which builds the SAN of every legal move and returns the one
   that matches what the player typed. Then `console_game.py` lets two people play in SAN.
-  Python lab 10 (stdin, stdout, `random`, `max` with `key=`) closes the period.
+  Python lab 10, `python_input_output.py` (stdin, stdout, `random`, `max` with `key=`),
+  closes the period.
 - **P3. First brains and the GUI.** **Students write:** `random_move()` and
   `greedy_move()` (take the most valuable capture, else a random move). The class
   reads the Day 5 `uci_engine.py` line by line, and the teacher extends it with FEN
@@ -393,7 +402,8 @@ moves" milestone.
 - **P2. Python lab 11 and alpha-beta.** Unplugged warm-up: "Fewest flips" finds the
   cards nobody needs to turn over. **Students write:** `alpha_beta()` beside
   `negamax()`, then run `compare_search.py`: both pick the same score, and alpha-beta
-  counts fewer nodes.
+  counts fewer nodes. The lab, `python_sorting.py`, covers `sorted()` with `key=`,
+  `float("inf")`, and timing a perft run.
 - **P3. The horizon effect and quiescence.** Puzzle: at depth 2 Remus takes a defended
   pawn with its queen. The teacher writes `capture_moves(state)`, the filter of
   captures and promotions. **Students write:** `quiescence()`, which may "stand pat"
@@ -417,8 +427,9 @@ and alpha-beta returns the same score as negamax with fewer nodes.
   none of the enhancements. The period ends with the class watching Remus-WHITE play
   a full 5-minute game against Stockfish at 1500 Elo in Lucas Chess, set up as in
   [`lucas_chess_guide.md`](lucas_chess_guide.md), Part 3.
-- **P2. Python lab 12 and the enhancement stations.** The lab covers dicts as caches
-  and tuples as keys. Then each of the 10 pairs takes one color station from
+- **P2. Python lab 12 and the enhancement stations.** The lab, `python_caches.py`,
+  covers dicts as caches and tuples as keys (7 typed lines, so a station of 30 lines
+  stays within the limit). Then each of the 10 pairs takes one color station from
   `Stations/`: Remus-WHITE plus one enhancement, with the pair's function stubbed (at
   most 30 typed lines). Colors replace numbers so no station sounds better than
   another. The stations are described in [stations.md](stations.md).
@@ -537,7 +548,9 @@ against Stockfish with `estimate_elo.py`.
   projector: each color's Elo gap against Remus-WHITE, the showcase results, and
   Remus-GOLD's Stockfish rating (about 1520). `tournament.py` runs the round robin of the
   pairs' engines on the teacher's laptop (about 70 minutes) while each student copies the pair's repository to their own
-  USB drive with `git clone --no-hardlinks` and checks that the copy opens. Each pair
+  USB drive with `git clone --no-hardlinks` and checks that the copy opens. In
+  `demo_results.py` each pair turns its color's match result into an Elo gap with a
+  margin of error and lets Remus explain one move. Each pair then
   explains one move its engine chose, with the score and principal variation, and one
   choice its beam time agent made. Close with what comes next: bitboards, Zobrist
   hashing, endgame tablebases, and a stronger "Manishtushu" engine.

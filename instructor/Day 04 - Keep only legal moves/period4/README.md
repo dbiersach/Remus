@@ -5,12 +5,22 @@
 By the end of this period, each pair can:
 
 - Check the move generator on practice positions. **Measured by:** Every practice-position test in `test_legal_moves.py` passes.
-- Predict a legal-move count before running the code. **Measured by:** Each pair writes its count for two positions first, then compares.
+- Predict a legal-move count before running the code. **Measured by:** In `demo_practice_positions.py` the pair types its prediction for each position first, then runs the file and compares.
 
 ## The files
+
+The demo is `demo_practice_positions.py` in `student/`, with the answers in `demo_practice_positions_instructor.py` in `instructor/`. Both come from `labs/day04/`. Run it with `uv run demo_practice_positions.py`.
 
 Files that grow this period:
 
 - `test_legal_moves.py`
+
+## The changes and why
+
+The pairs fill in the blanks of `demo_practice_positions.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `demo_practice_positions_instructor.py`.
+
+`demo_practice_positions.py` builds three positions from a dict of {square: piece} and prints each board with Remus's legal-move count. The pair types each position and its prediction before running the file, so every count is a test of the pair's own reasoning as well as of the code.
+
+Part #2 puts a rook check on the White king, and Part #3 adds a knight on e2 that blocks the check but cannot move: it is pinned. The loop at the end counts only the moves that start on e2, the same check as `test_pinned_knight_has_no_moves()`.
 
 Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.

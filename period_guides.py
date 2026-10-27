@@ -15,6 +15,19 @@ LABS = {
     (1, 1): "python_setup",
     (1, 2): "python_strings",
     (1, 3): "python_lists",
+    (2, 1): "python_functions",
+    (2, 2): "python_dicts",
+    (3, 1): "python_loops",
+    (4, 1): "python_modules",
+    (4, 4): "demo_practice_positions",
+    (5, 1): "python_sets",
+    (5, 4): "demo_promotion",
+    (6, 1): "python_recursion",
+    (6, 4): "python_fen_fields",
+    (7, 2): "python_input_output",
+    (8, 2): "python_sorting",
+    (9, 2): "python_caches",
+    (10, 4): "demo_results",
 }
 
 # (day, period) -> [(objective, how the teacher measures it)]
@@ -284,7 +297,10 @@ OBJECTIVES = {
         ),
         (
             "Predict a legal-move count before running the code.",
-            "Each pair writes its count for two positions first, then compares.",
+            (
+                "In `demo_practice_positions.py` the pair types its prediction for "
+                "each position first, then runs the file and compares."
+            ),
         ),
     ],
     (5, 1): [
@@ -328,6 +344,13 @@ OBJECTIVES = {
             "The promotion tests pass for queen, rook, bishop, and knight.",
         ),
         (
+            "Explain why a player sometimes promotes to a knight.",
+            (
+                "`uv run demo_promotion.py` prints stalemate for b8=Q, b8=R, and b8=B "
+                "and checkmate for b8=N, and the pair says why the queen only draws."
+            ),
+        ),
+        (
             "Play Remus in Lucas Chess.",
             (
                 "The pair registers `remus.bat`, plays one game, and sees a random legal "
@@ -363,8 +386,8 @@ OBJECTIVES = {
         (
             "Find a planted bug with `divide()`.",
             (
-                "The pair finds at least two of the three planted bugs and names the "
-                "root move that shows each one."
+                "`uv run hunt.py` in `bug_hunt/` points at three bugs; the pair fixes at "
+                "least two of them and names the root move that showed each one."
             ),
         ),
     ],
@@ -378,7 +401,10 @@ OBJECTIVES = {
         ),
         (
             "Name the six fields of a FEN string.",
-            "The pair labels the six fields of the start FEN on the worksheet.",
+            (
+                "`python_fen_fields.py` prints the six fields of the start FEN with "
+                "their names, and the pair labels them on the worksheet."
+            ),
         ),
     ],
     (7, 1): [
@@ -404,6 +430,13 @@ OBJECTIVES = {
             (
                 "Two students play `console_game.py` to a finish and the program prints "
                 "the right result."
+            ),
+        ),
+        (
+            "Read commands from `sys.stdin` and answer on stdout.",
+            (
+                "`python_input_output.py` answers `isready` with `readyok` and stops "
+                "at `quit`."
             ),
         ),
     ],
@@ -466,6 +499,13 @@ OBJECTIVES = {
             (
                 "The `alpha_beta` tests pass, and `uv run compare_search.py` prints the "
                 "same scores as negamax with fewer nodes."
+            ),
+        ),
+        (
+            "Sort with `key=`, start a best value at minus infinity, and time code.",
+            (
+                "`python_sorting.py` puts the queen first, finds the best victim, and "
+                "prints the run time of `perft(3)`."
             ),
         ),
     ],
@@ -598,13 +638,17 @@ OBJECTIVES = {
     (10, 4): [
         (
             "Read an experiment's results and their error margins.",
-            "Each pair says whether its color's Elo gap is larger than its margin.",
+            (
+                "`demo_results.py` turns the pair's own match result into an Elo gap "
+                "and margin, and the pair says whether the gap is larger than the margin."
+            ),
         ),
         (
             "Explain one decision your engine made.",
             (
-                "Each pair presents one move with its score and principal variation, and "
-                "one choice its beam time agent made."
+                "Each pair presents one move with its score and principal variation, "
+                "from Part #3 of `demo_results.py` or its own position, and one choice "
+                "its beam time agent made."
             ),
         ),
         (
@@ -957,13 +1001,222 @@ LAB_NOTES = {
             "changes the board."
         ),
     ],
+    (2, 1): [
+        (
+            "Part #1 calls the finished `is_white()` and `on_board()`. You type the one "
+            "line under each docstring: `is_white()` asks `isupper()`, and `on_board()` "
+            "checks that the row and the column both lie between 0 and 7. Remus asks "
+            "these two questions in nearly every function from Day 2 on."
+        ),
+        (
+            "Part #2: you write `is_black()` from nothing: the `def` line with its type "
+            "hints, the docstring, and the `return`. The type hints say what goes in "
+            "and what comes out, so a reader knows how to call the function without "
+            "reading its body."
+        ),
+        (
+            "Part #3 packs e4 into the tuple `(4, 4)` and unpacks it with "
+            "`row, col = square`. Every Remus square is a tuple like this one."
+        ),
+        (
+            "Part #4 runs the two test functions, whose `assert` lines stop the program "
+            "when a check fails. `uv run pytest python_functions.py` runs the same tests "
+            "and prints a report, and breaking one test on purpose shows what a failure "
+            "looks like before a real one happens."
+        ),
+    ],
+    (2, 2): [
+        (
+            "Part #1 keeps the facts of a game in a dict and reads them by key, the way "
+            "`new_game()` in `game_state.py` holds the board, the side to move, and the "
+            "castling rights."
+        ),
+        (
+            "Part #2 shows aliasing: `b2 = board` makes a second name for the same "
+            "board, so a pawn put on e4 through `b2` shows up in `board` too. This is "
+            "the most common surprise in a chess program that changes its board in place."
+        ),
+        (
+            "Part #3 makes a real copy with `deepcopy()`, which copies every row. The "
+            "copy changes alone, and `==` compares the two boards square by square."
+        ),
+        (
+            "Part #4: you write a `dataclass` with two fields and print one of them. "
+            "Remus's `Move` in `moves.py` is the same record with a third field for the "
+            "promotion piece."
+        ),
+    ],
+    (3, 1): [
+        (
+            "Part #1 counts to 3 with `while`, the loop that repeats as long as its test "
+            "is true."
+        ),
+        (
+            "Part #2 writes the direction up and to the right as the tuple `(-1, 1)`. "
+            "The row step is -1 because row 0 is rank 8: moving toward Black's side "
+            "makes the row smaller."
+        ),
+        (
+            "Part #3 walks from d4 one square at a time with `while True` and leaves the "
+            "loop with `break` at the edge of the board or at the first piece. The walk "
+            "reaches e5, f6, and g7, where a Black pawn stops it. `slide()` on Day 3, "
+            "period 3 is this same loop, and it returns moves instead of square names."
+        ),
+    ],
+    (4, 1): [
+        (
+            "The lab imports `board.py`, `game_state.py`, `move_generation.py`, and "
+            "`moves.py` from the same folder. An import runs the other file once and "
+            "hands over its functions, so no code is copied."
+        ),
+        (
+            "Part #1 prints `__name__`: the file that `uv run` starts is `__main__`, and "
+            "an imported file keeps its own name. That is why `board.py` prints its "
+            "board under `uv run board.py` and stays silent when the lab imports it, and "
+            "why every Remus print sits inside `main()`."
+        ),
+        (
+            "Part #2 calls `new_board()` and `knight_moves()` from the imported files "
+            "and lists the two knight moves from g1. Parts #3 and #4 run in the "
+            "terminal: `uv run board.py` on its own, then a git branch, a commit, and "
+            "the log."
+        ),
+    ],
+    (4, 4): [
+        (
+            "`demo_practice_positions.py` builds three positions from a dict of "
+            "{square: piece} and prints each board with Remus's legal-move count. The "
+            "pair types each position and its prediction before running the file, so "
+            "every count is a test of the pair's own reasoning as well as of the code."
+        ),
+        (
+            "Part #2 puts a rook check on the White king, and Part #3 adds a knight "
+            "on e2 that blocks the check but cannot move: it is pinned. The loop at the "
+            "end counts only the moves that start on e2, the same check as "
+            "`test_pinned_knight_has_no_moves()`."
+        ),
+    ],
+    (5, 1): [
+        (
+            "Part #1 adds squares to a set. A set holds each item once, so adding h1 a "
+            "second time changes nothing."
+        ),
+        (
+            "Parts #2 and #3 ask questions with `in`, of a set and of a dict. The dict "
+            "`rights_lost` names the castling rights each home square guards: a piece "
+            "leaving e1 removes K and Q, and a piece leaving h1 removes K."
+        ),
+        (
+            "Part #4 removes rights with `replace()`, one letter at a time, starting from "
+            '`"KQkq"`. `update_castling_rights()` in `make_move.py` does exactly this in '
+            "period 2."
+        ),
+    ],
+    (5, 4): [
+        (
+            "`demo_promotion.py` sets up a puzzle: White's pawn on b7 promotes on b8 next "
+            "to the Black king on a6. The pair writes the loop that tries all four "
+            "promotion pieces, counts Black's legal replies, and names the result."
+        ),
+        (
+            "With no legal reply, `in_check()` decides between checkmate and stalemate. "
+            "A queen, a rook, or a bishop takes away every square without giving check, "
+            "so the game is a draw; only the knight on b8 gives check, and the king "
+            "has nowhere to go. Every promotion is undone, and the snapshot at the end "
+            "proves that the puzzle position comes back exactly."
+        ),
+    ],
+    (6, 1): [
+        (
+            "Part #1: `countdown()` calls itself with a smaller number until it reaches "
+            "the base case, 0. Without the base case the calls would never stop."
+        ),
+        (
+            "Part #2: `count_leaves()` counts the moves at the bottom of a small tree "
+            "made of lists. A move name is a leaf and counts 1, and a list adds up the "
+            "counts of its branches."
+        ),
+        (
+            "Part #3 is finished code to read and trace: `knight_paths()` counts the "
+            "ways a knight can jump from a1. It has the same shape as `perft()` in "
+            "period 2: at depth 0 return 1, otherwise add up the count under every move."
+        ),
+    ],
+    (6, 4): [
+        (
+            "The lab cuts the start FEN into its six fields with `split()` and prints "
+            "each with its name, the map the pair needs before writing `fen.py`. Then "
+            "`try` and `except ValueError` catch the error that `int()` raises on text "
+            "that is not a number, which is how a FEN reader can reject a broken "
+            "string instead of crashing."
+        ),
+    ],
+    (7, 2): [
+        (
+            "Parts #1 and #2 pick moves the way the first brains in period 3 do: "
+            "`random.choice()` takes any item, and `max(..., key=victim_value)` takes "
+            "the item with the largest value."
+        ),
+        (
+            "Parts #3 and #4 talk the way a UCI engine does. The program reads one "
+            "command per line from `sys.stdin`, answers `isready` with `readyok`, and "
+            "sends each answer at once with `flush=True`. Notes for people go to "
+            "`sys.stderr`, where the GUI does not read them."
+        ),
+    ],
+    (8, 2): [
+        (
+            "Part #1 sorts captures by the value of the piece they take, the idea "
+            "behind move ordering in period 4."
+        ),
+        (
+            "Part #2 starts the best value at minus infinity, so the first real value "
+            "always replaces it. `alpha_beta()` starts its alpha the same way, below "
+            "any score a move can get."
+        ),
+        (
+            "Part #3 times `perft(3)` with `time.perf_counter()`, the clock that "
+            "`compare_search.py` uses to show how much time alpha-beta saves."
+        ),
+    ],
+    (9, 2): [
+        (
+            "Part #1: `remembered_perft()` stores each answer in a dict under the tuple "
+            "key `(name, depth)`. The second call finds the answer and returns at once. "
+            "The RED station's transposition table remembers search results the same way."
+        ),
+        (
+            "Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 "
+            "to g7, which the CYAN station needs, and `random.seed()`, which makes a "
+            "random choice repeat on every run."
+        ),
+        (
+            "Part #4 is a teacher demo with no blanks: one thread counts until another "
+            "sets a `threading.Event`. `think()` stops the same way when the GUI sends "
+            "`stop`."
+        ),
+    ],
+    (10, 4): [
+        (
+            "Parts #1 and #2 of `demo_results.py` turn a match result into a score and "
+            "an Elo gap, then into a range that holds the true gap 95 times out of "
+            "100. When the range includes 0, the match has not shown that the "
+            "enhancement helped, and more games are needed. Each pair puts in its own "
+            "color's result."
+        ),
+        (
+            "Part #3 asks `think()` about a back-rank mate and prints each depth's "
+            "score and principal variation, the line of moves Remus expects. That line "
+            "is how a pair explains why Remus chose its move."
+        ),
+    ],
 }
 
 
 def main():
     print(f"Periods with objectives: {len(OBJECTIVES)}  (expected 40)")
     print(f"Functions with a change note: {len(CHANGE_NOTES)}  (expected 67)")
-    print(f"Lab periods: {len(LABS)}  (expected 3)")
+    print(f"Lab and demo periods: {len(LABS)}  (expected 16)")
 
 
 if __name__ == "__main__":

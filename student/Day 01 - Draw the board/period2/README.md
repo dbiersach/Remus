@@ -25,7 +25,7 @@ Part #3: `chr()` goes the other way, so file number 6 becomes "g". Joining it wi
 
 Part #4: `upper()` turns Black's pieces into White's, and `isupper()` tells the colors apart. Remus's `is_white()` on Day 2 is this one call.
 
-## What you edit this period
+## What you edit in the lab
 
 Open `python_strings.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 

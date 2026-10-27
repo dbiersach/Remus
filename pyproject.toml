@@ -30,9 +30,16 @@ lint.ignore = ["TC002", "TC003"]
 # A student stub keeps the imports its finished version needs, as hints, so
 # unused imports are allowed in student/. A student lab file (python_*.py) holds a
 # lone # on each line the pair types, so its blanks and the variables they would
-# use stay as they are, and the formatter leaves the file alone.
-lint.per-file-ignores = { "student/**" = ["F401"], "**/python_*.py" = ["F841", "PLR2044"] }
-format.exclude = ["labs/day*/python_*.py", "student/**/python_*.py"]
+# use stay as they are, and the formatter leaves the file alone. A demo file
+# (demo_*.py) follows the same pattern. The imports a lab needs stay in the student
+# file, so the pair's blanks can use them.
+lint.per-file-ignores = { "student/**" = ["F401"], "**/python_*.py" = ["F401", "F841", "PLR2044"], "**/demo_*.py" = ["F401", "F841", "PLR2044"] }
+format.exclude = [
+    "labs/day*/python_*.py",
+    "labs/day*/demo_*.py",
+    "student/**/python_*.py",
+    "student/**/demo_*.py",
+]
 show-fixes = true
 target-version = "py314"
 

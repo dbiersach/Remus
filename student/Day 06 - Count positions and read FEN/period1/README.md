@@ -9,6 +9,24 @@ By the end of this period, each pair can:
 
 ## The files
 
+The lab is `python_recursion.py` in `student/`, with the answers in `python_recursion_instructor.py` in `instructor/`. Both come from `labs/day06/`. Run it with `uv run python_recursion.py`.
+
 The Remus code here is the same as at the end of the period before.
 
+## The changes and why
+
+The pairs fill in the blanks of `python_recursion.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_recursion_instructor.py`.
+
+Part #1: `countdown()` calls itself with a smaller number until it reaches the base case, 0. Without the base case the calls would never stop.
+
+Part #2: `count_leaves()` counts the moves at the bottom of a small tree made of lists. A move name is a leaf and counts 1, and a list adds up the counts of its branches.
+
+Part #3 is finished code to read and trace: `knight_paths()` counts the ways a knight can jump from a1. It has the same shape as `perft()` in period 2: at depth 0 return 1, otherwise add up the count under every move.
+
 Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+
+## What you edit in the lab
+
+Open `python_recursion.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
+
+Lines to type in all: 11. Check the work with `uv run python_recursion.py` and compare each printed result with the expected value beside it.

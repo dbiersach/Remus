@@ -7,9 +7,12 @@ Register `remus.bat` from this folder as an engine in Lucas Chess and play your 
 By the end of this period, each pair can:
 
 - Promote a pawn to any of four pieces. **Measured by:** The promotion tests pass for queen, rook, bishop, and knight.
+- Explain why a player sometimes promotes to a knight. **Measured by:** `uv run demo_promotion.py` prints stalemate for b8=Q, b8=R, and b8=B and checkmate for b8=N, and the pair says why the queen only draws.
 - Play Remus in Lucas Chess. **Measured by:** The pair registers `remus.bat`, plays one game, and sees a random legal reply to every move, special moves included.
 
 ## The files
+
+The demo is `demo_promotion.py` in `student/`, with the answers in `demo_promotion_instructor.py` in `instructor/`. Both come from `labs/day05/`. Run it with `uv run demo_promotion.py`.
 
 New files this period:
 
@@ -21,4 +24,18 @@ Files that grow this period:
 - `make_move.py`
 - `test_special_moves.py`
 
+## The changes and why
+
+The pairs fill in the blanks of `demo_promotion.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `demo_promotion_instructor.py`.
+
+`demo_promotion.py` sets up a puzzle: White's pawn on b7 promotes on b8 next to the Black king on a6. The pair writes the loop that tries all four promotion pieces, counts Black's legal replies, and names the result.
+
+With no legal reply, `in_check()` decides between checkmate and stalemate. A queen, a rook, or a bishop takes away every square without giving check, so the game is a draw; only the knight on b8 gives check, and the king has nowhere to go. Every promotion is undone, and the snapshot at the end proves that the puzzle position comes back exactly.
+
 Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+
+## What you edit in the demo
+
+Open `demo_promotion.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
+
+Lines to type in all: 12. Check the work with `uv run demo_promotion.py` and compare each printed result with the expected value beside it.
