@@ -102,11 +102,16 @@ takes White once. The games file stores the opening in a `StartMoves` header.
 (Remus-WHITE, the ten stations, and Remus-GOLD) plays each other version 6 times,
 396 games in all. Then it fits one Elo rating to every version from every station
 game in the games file, the games of `station_match.py` included, with Remus-WHITE
-pinned at 0. Each rating is that version's gain over Remus-WHITE.
+pinned at 0. Each rating is that version's gain over Remus-WHITE. The league plays
+at 1 minute plus 0.6 seconds a move unless `--minutes` and `--increment` name another
+clock, and it rates the games of each clock apart from the others, since a version
+that searches deeper can gain more with more time to think.
 
 ```bash
 uv run station_league.py                # the round robin, then the ratings
 uv run station_league.py --rate-only    # only the ratings, from the saved games
+uv run station_league.py --minutes 10 --increment 0 --at-once 16
+                                        # 10-minute games, 16 at a time
 ```
 
 The fit works like `estimate_elo.py`: it moves each rating until the points the Elo

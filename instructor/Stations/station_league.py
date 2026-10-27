@@ -13,6 +13,11 @@ Usage:
     uv run station_league.py                 the round robin, then the ratings
     uv run station_league.py --games 4       4 games for each pair of players
     uv run station_league.py --rate-only     only the ratings, from the saved games
+    uv run station_league.py --minutes 10 --increment 0 --at-once 16
+                                             10-minute games, 16 at a time
+
+Games at one clock are rated apart from games at another clock, because a deeper
+search can matter more with more time to think.
 
 This is a teacher tool, like station_match.py: the engine never imports python-chess.
 """
@@ -34,6 +39,7 @@ from station_match import (
     YARDSTICK,
     find_player,
     play_game,
+    time_control,
 )
 
 ANCHOR = f"Remus-{YARDSTICK}"  # Remus-WHITE is rated 0
@@ -56,13 +62,23 @@ def all_colors() -> list[str]:
     return colors
 
 
-def read_results() -> list[Result]:
+def read_results(clock: str) -> list[Result]:
     """
-    Return (White, Black, White's points) for every station game in the games file.
+    Return (White, Black, White's points) for every station game at one clock.
 
     Only games that start from one of the OPENINGS count. Remus plays the same
     move in the same position, so games from the starting position replay one
     game again and again, and counting them would count one game many times.
+
+    Parameters
+    ----------
+    clock : str
+        The TimeControl of the games to count, such as "600+0" from time_control().
+
+    Returns
+    -------
+    list[Result]
+        One (White, Black, White's points) for each game.
     """
     results = []
     if not GAMES_PATH.exists():
@@ -74,6 +90,8 @@ def read_results() -> list[Result]:
             if not headers.get("Event", "").startswith(EVENT_PREFIX):
                 continue
             if headers.get("Result") not in points or "StartMoves" not in headers:
+                continue
+            if headers.get("TimeControl") != clock:
                 continue
             results.append(
                 (headers["White"], headers["Black"], points[headers["Result"]])
@@ -130,21 +148,26 @@ def fit_ratings(results: list[Result]) -> dict[str, tuple[float, float]]:
     return fitted
 
 
-def played_league_games() -> list[tuple[str, str, str]]:
-    """Return (White, Black, StartMoves) for every league game in the games file."""
+def played_league_games(clock: str) -> list[tuple[str, str, str]]:
+    """Return (White, Black, StartMoves) for every league game at one clock."""
     played = []
     if not GAMES_PATH.exists():
         return played
     with GAMES_PATH.open() as file:
         while (headers := chess.pgn.read_headers(file)) is not None:
-            if headers.get("Event") == LEAGUE_EVENT:
+            if (
+                headers.get("Event") == LEAGUE_EVENT
+                and headers.get("TimeControl") == clock
+            ):
                 played.append(
                     (headers["White"], headers["Black"], headers.get("StartMoves", ""))
                 )
     return played
 
 
-def play_league(games_per_pair: int) -> None:
+def play_league(
+    games_per_pair: int, minutes: float, increment: float, games_at_once: int
+) -> None:
     """
     Play every pair of players games_per_pair times, adding each game to the file.
 
@@ -162,7 +185,7 @@ def play_league(games_per_pair: int) -> None:
                 opening_number += 1
             white, black = (first, second) if number % 2 == 0 else (second, first)
             jobs.append((white, black, opening))
-    played = played_league_games()
+    played = played_league_games(time_control(minutes, increment))
     waiting = []
     for white, black, opening in jobs:
         if (white[0], black[0], opening) in played:
@@ -170,14 +193,17 @@ def play_league(games_per_pair: int) -> None:
         else:
             waiting.append((white, black, opening))
     print(
-        f"League: {len(players)} players, {len(jobs)} games at {MINUTES:g} min + "
-        f"{INCREMENT} s, {len(jobs) - len(waiting)} already played"
+        f"League: {len(players)} players, {len(jobs)} games at {minutes:g} min + "
+        f"{increment:g} s, {len(jobs) - len(waiting)} already played, "
+        f"{games_at_once} at a time"
     )
     print(f"Adding every game to {GAMES_PATH}")
     GAMES_PATH.parent.mkdir(exist_ok=True)
-    with ThreadPoolExecutor(GAMES_AT_ONCE) as pool:
+    with ThreadPoolExecutor(games_at_once) as pool:
         futures = [
-            pool.submit(play_game, white, black, LEAGUE_EVENT, opening)
+            pool.submit(
+                play_game, white, black, LEAGUE_EVENT, opening, minutes, increment
+            )
             for white, black, opening in waiting
         ]
         for number, future in enumerate(futures, start=len(jobs) - len(waiting) + 1):
@@ -191,7 +217,7 @@ def play_league(games_per_pair: int) -> None:
             )
 
 
-def print_ratings(results: list[Result]) -> None:
+def print_ratings(results: list[Result], clock: str) -> None:
     """Print every player's games, score, and rating, strongest first."""
     fitted = fit_ratings(results)
     played = dict.fromkeys(fitted, 0)
@@ -201,7 +227,9 @@ def print_ratings(results: list[Result]) -> None:
         played[black] += 1
         scored[white] += points
         scored[black] += 1 - points
-    print(f"Ratings from {len(results)} station games, {ANCHOR} pinned at 0:")
+    print(
+        f"Ratings from {len(results)} station games at {clock}, {ANCHOR} pinned at 0:"
+    )
     print(f"  {'Rank':>4}  {'Player':13} {'Games':>5}  {'Score':>6}  Elo vs WHITE")
     ranked = sorted(fitted, key=lambda name: fitted[name][0], reverse=True)
     for rank, name in enumerate(ranked, start=1):
@@ -217,11 +245,19 @@ def main():
     parser = argparse.ArgumentParser(description="Rank every Remus version.")
     parser.add_argument("--games", type=int, default=6, help="games for each pair")
     parser.add_argument("--rate-only", action="store_true", help="skip the games")
+    parser.add_argument("--minutes", type=float, default=MINUTES, help="each clock")
+    parser.add_argument(
+        "--increment", type=float, default=INCREMENT, help="seconds added per move"
+    )
+    parser.add_argument(
+        "--at-once", type=int, default=GAMES_AT_ONCE, help="games played at once"
+    )
     options = parser.parse_args()
+    clock = time_control(options.minutes, options.increment)
     start = time.perf_counter()
     if not options.rate_only:
-        play_league(options.games)
-    print_ratings(read_results())
+        play_league(options.games, options.minutes, options.increment, options.at_once)
+    print_ratings(read_results(clock), clock)
     print(f"Total run time (sec): {time.perf_counter() - start:.3f}")
 
 

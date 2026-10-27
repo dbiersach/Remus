@@ -115,8 +115,18 @@ def elo_gap(points: float, games: int) -> float:
     return -400 * math.log10(1 / share - 1)
 
 
+def time_control(minutes: float, increment: float) -> str:
+    """Return the PGN TimeControl text, such as "600+0" for 10 minutes a side."""
+    return f"{minutes * 60:.0f}+{increment:g}"
+
+
 def play_game(
-    white: tuple[str, Path], black: tuple[str, Path], event: str, opening: str = ""
+    white: tuple[str, Path],
+    black: tuple[str, Path],
+    event: str,
+    opening: str = "",
+    minutes: float = MINUTES,
+    increment: float = INCREMENT,
 ) -> chess.pgn.Game:
     """
     Play one game on a chess clock and return it as PGN, with the result set.
@@ -130,6 +140,10 @@ def play_game(
     opening : str
         Moves in UCI notation, such as "e2e4 e7e5", played before the engines
         start thinking.
+    minutes : float
+        Each side's clock at the start of the game.
+    increment : float
+        Seconds added to a side's clock after each of its moves.
     """
     engines = [
         chess.engine.SimpleEngine.popen_uci(
@@ -140,7 +154,7 @@ def play_game(
     board = chess.Board()
     for text in opening.split():
         board.push_uci(text)
-    clocks = [MINUTES * 60, MINUTES * 60]  # Seconds left for White, then Black
+    clocks = [minutes * 60, minutes * 60]  # Seconds left for White, then Black
     result, reason = None, ""
     try:
         while not board.is_game_over(claim_draw=True):
@@ -148,8 +162,8 @@ def play_game(
             limit = chess.engine.Limit(
                 white_clock=clocks[0],
                 black_clock=clocks[1],
-                white_inc=INCREMENT,
-                black_inc=INCREMENT,
+                white_inc=increment,
+                black_inc=increment,
             )
             start = time.perf_counter()
             try:
@@ -163,7 +177,7 @@ def play_game(
                 reason = "lost on time"
             else:
                 board.push(move)
-                clocks[side] += INCREMENT
+                clocks[side] += increment
                 continue
             result = "0-1" if side == 0 else "1-0"  # The side to move loses
             break
@@ -174,7 +188,7 @@ def play_game(
     game.headers["Event"] = event
     game.headers["Date"] = date.today().strftime("%Y.%m.%d")
     game.headers["White"], game.headers["Black"] = white[0], black[0]
-    game.headers["TimeControl"] = f"{MINUTES * 60:.0f}+{INCREMENT}"
+    game.headers["TimeControl"] = time_control(minutes, increment)
     game.headers["Result"] = result or board.result(claim_draw=True)
     if reason:
         game.headers["Termination"] = reason
