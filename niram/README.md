@@ -74,13 +74,32 @@ The first run took place in a cloud Linux container (Python 3.14.6, Rust 1.97.0)
 | 3 | 22,001 | 5.67 s | 0.11 s | 3,879 | 196,270 | 51x |
 | 4 | 84,812 | 19.74 s | 0.36 s | 4,296 | 236,019 | 55x |
 | 5 | 228,133 | 51.00 s | 1.14 s | 4,473 | 200,699 | 45x |
+| 6 | 673,713 | 158.89 s | 2.67 s | 4,240 | 252,045 | 59x |
 
 At every depth the two engines visit the same number of positions and pick the same
 best move with the same score in all ten positions, so the speedup is the language
-alone: 45 to 55 times faster.
+alone: 45 to 59 times faster, far past the factor of 10 that would make a Rust
+version worth considering.
 
 Niram-GOLD stays a direct copy, so it keeps Remus's slow parts: a board of characters,
 a new list of moves at every node, a position key built as text after every move, and
 a repetition test that reads the whole game history. A Rust engine written for speed
 (bitboards, a numeric hash key, moves without heap memory) runs many times faster again,
 but it would no longer search the same tree as Remus.
+
+## Should the students learn Rust?
+
+Rust would be much harder for 13-year-olds than Python. The chess ideas are no harder
+in Rust; the language is. A pair meets the borrow checker (`&mut State` against
+`&State`), `Option` and `Result` in place of `None` and exceptions, `as usize` casts
+on every board index, and long compiler errors before the first move ever plays.
+Those costs land on the class time a pair spends on make/undo, negamax, and
+alpha-beta.
+
+The speed also buys less than it seems. Alpha-beta with good move ordering needs
+roughly 5 to 10 times more positions for each extra ply, so 50 times the speed lets
+the same search look about 2 plies deeper in the same time.
+
+The course stays in Python. Niram-GOLD serves as a short teacher demo that answers
+the question "why do real engines use compiled languages?" with a measurement: the
+same engine, the same tree, the same moves, and 50 times the speed.
