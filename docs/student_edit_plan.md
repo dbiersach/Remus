@@ -9,7 +9,7 @@
 | P1 | Welcome and setup | `python_setup_instructor.py` | None | the lab `python_setup.py` (6 lines) |
 | P2 | Python lab 1: scripts, strings, ord and chr, f-strings | `python_strings_instructor.py` | None | the lab `python_strings.py` (13 lines) |
 | P3 | Python lab 2: lists and nested lists | `python_lists_instructor.py` | None | the lab `python_lists.py` (25 lines) |
-| P4 | board.py: the board and its square names | `board.py`, `show_board.py`, `test_board.py` | None | `print_board()` in `board.py` (3 lines); `square_name()` in `board.py` (1 line); `parse_square()` in `board.py` (5 lines); `piece_at()` in `board.py` (2 lines) |
+| P4 | board.py: the board and its square names | `board.py`, `show_board.py`, `test_board.py` | None | `print_board()` in `board.py` (6 lines); `square_name()` in `board.py` (1 line); `parse_square()` in `board.py` (5 lines); `piece_at()` in `board.py` (2 lines) |
 
 ## Day 02 - Make and undo moves
 
