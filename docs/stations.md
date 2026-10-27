@@ -149,6 +149,36 @@ just: +99 plus or minus 87 runs from +12 to +186. Every single station's range
 includes 0, so one enhancement alone changes Remus by less than 66 games can measure
 at 1 minute a game.
 
+## How big is each version?
+
+The table counts the lines of Python code in each version. A line counts only when
+it holds code: comment lines, docstrings, and blank lines do not count. The count
+covers only the engine's own `.py` files, the ones `uci_engine.py` loads directly or
+through another module when Lucas Chess runs that version. Test files and tools such
+as `perft.py`, `play_match.py`, and `show_board.py` do not count, and neither do the
+Day 10 science files in the GOLD folder.
+
+| Version | Enhancement | Engine files | Code lines | Lines over WHITE |
+| --- | --- | --- | --- | --- |
+| Remus-WHITE | No enhancements | 12 | 1,107 | 0 |
+| Remus-RED | Transposition table | 13 | 1,192 | +85 |
+| Remus-GREEN | Opening book | 14 | 1,226 | +119 |
+| Remus-BLUE | Killer moves | 12 | 1,164 | +57 |
+| Remus-PINK | Principal variation search | 12 | 1,157 | +50 |
+| Remus-YELLOW | Draw sense | 12 | 1,149 | +42 |
+| Remus-PURPLE | Pawn structure | 12 | 1,145 | +38 |
+| Remus-CYAN | Mating bonus | 12 | 1,137 | +30 |
+| Remus-ORANGE | Null-move pruning | 12 | 1,182 | +75 |
+| Remus-BROWN | Late move reductions | 12 | 1,159 | +52 |
+| Remus-GRAY | King safety | 12 | 1,133 | +26 |
+| Remus-GOLD | All enhancements | 15 | 1,509 | +402 |
+
+Remus-GOLD holds 402 more code lines than Remus-WHITE. The ten stations add 574
+lines when each one is counted on its own, so GOLD needs 172 fewer. Most stations
+change the same search loop in `search.py`, and GOLD holds one copy of that loop
+with all ten ideas inside it. GREEN adds the most lines of any single station, 119,
+because its book reads moves in SAN and so loads `notation.py` as well.
+
 ## Puzzle questions
 
 1. Why does every station play the same opponent instead of each other?
