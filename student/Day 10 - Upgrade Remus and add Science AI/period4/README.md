@@ -1,6 +1,6 @@
 # Day 10, Period 4: Presentations, take-home, and wrap-up
 
-`uv run estimate_elo.py` measures the Elo rating of Remus against Stockfish set to fixed ratings, and adds every game to remus_vs_stockfish.pgn.
+`uv run estimate_elo.py` measures the Elo rating of Remus against Stockfish set to fixed ratings, and adds every game to games/remus_games.pgn.
 
 New files this period:
 

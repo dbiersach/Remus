@@ -29,9 +29,9 @@ Day 5, Period 2.
 | `game_end.py` | D7 P2: mate, stalemate, draws | No changes |
 | `notation.py` | D7 P3: SAN in and out | No changes |
 | `console_game.py` | D7 P3: two people play in SAN | D7 P4: Remus plays greedy moves. D8 P4: Remus plays with negamax. D9 P4: Remus thinks on a clock. D10 P1: Remus plays book moves first |
-| `search.py` | D7 P4: random and greedy brains | D8 P3: minimax. D8 P4: negamax and mate scores. D9 P1: alpha-beta. D9 P2: quiescence. D9 P3: move ordering, check extension, the clock. D9 P4: iterative deepening and `info` lines. D10 P1: `upgraded_search()` with memory, killers, PVS, draw sense |
+| `search.py` | D7 P4: random and greedy brains | D8 P3: minimax. D8 P4: negamax and mate scores. D9 P1: alpha-beta. D9 P2: quiescence. D9 P3: move ordering, check extension, the clock. D9 P4: iterative deepening and `info` lines. D10 P1: `upgraded_search()` with memory, killers, PVS, draw sense, null moves, late move reductions |
 | `play_match.py` | D7 P4: two brains play a match | No changes |
-| `evaluation.py` | D8 P1: material | D8 P2: piece-square tables. D10 P1: pawn structure and the mating bonus |
+| `evaluation.py` | D8 P1: material | D8 P2: piece-square tables. D10 P1: pawn structure, the mating bonus, king safety |
 | `compare_search.py` | D9 P1: negamax against alpha-beta | No changes |
 | `move_ordering.py` | D9 P3: captures first by MVV-LVA | D10 P1: killer moves |
 | `transposition_table.py` | D10 P1: remembers searched positions | Last day |
@@ -41,6 +41,7 @@ Day 5, Period 2.
 | `tournament.py` | D10 P3: the class round robin | Last day |
 | `remus.sh` | D10 P4: starts Remus on a Mac or Linux computer at home | Last day |
 | `estimate_elo.py` | D10 P4: measures the Elo rating of Remus against Stockfish | Last day |
+| `Stations/station_match.py` | D10 P1: plays one enhancement station against the plain Day 9 Remus | Last day |
 
 ## Table 2: By period
 
@@ -82,7 +83,7 @@ period before, so a pair can always open the newest folder.
 | D9 P2 | None | `search.py`: quiescence. `test_search.py` |
 | D9 P3 | `move_ordering.py` | `search.py`: ordering, check extension, clock. `test_search.py` |
 | D9 P4 | None | `search.py`: `think()`. `uci_engine.py`: clock, thread, `stop`. `console_game.py`: uses `think()`. `test_search.py` |
-| D10 P1 | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `mate_solver.py`, `test_upgrades.py` | `search.py`: `upgraded_search()`. `evaluation.py`: pawns and mating. `move_ordering.py`: killers. `uci_engine.py` and `console_game.py`: book moves first |
+| D10 P1 | Ten station folders in `Stations/` (see [stations.md](stations.md)), `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `mate_solver.py`, `test_upgrades.py` | `search.py`: `upgraded_search()`. `evaluation.py`: pawns, mating, king safety. `move_ordering.py`: killers. `uci_engine.py` and `console_game.py`: book moves first |
 | D10 P2 | `hidden_peak.py` | `test_upgrades.py`: hidden-peak tests |
 | D10 P3 | `tournament.py` | None |
 | D10 P4 | `remus.sh`, `estimate_elo.py` | None |

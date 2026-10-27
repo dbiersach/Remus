@@ -14,7 +14,7 @@ All the facts live together in one Python dict called the state.
 game_state.py sits right on top of board.py. Every file that makes moves or reads the turn uses it.
 
 - **Uses:** [`board.py`](board.md)
-- **Used by:** [`attacks.py`](attacks.md), [`fen.py`](fen.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`opening_book.py`](opening_book.md)
+- **Used by:** [`attacks.py`](attacks.md), [`fen.py`](fen.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`opening_book.py`](opening_book.md), [`search.py`](search.md)
 
 ## Words to know
 

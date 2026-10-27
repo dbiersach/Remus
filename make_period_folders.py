@@ -576,10 +576,10 @@ PERIOD_NOTES = {
     "play your own Remus. It plays random legal moves, and every special move works.",
     (7, 4): "Register `remus.bat` from this folder in En Croissant again: Remus now "
     "plays greedy moves. `uv run play_match.py` plays random Remus against greedy Remus.",
-    (10, 3): "`uv run tournament.py` plays the class round robin and saves every game "
-    "as PGN beside the script.",
+    (10, 3): "`uv run tournament.py` plays the class round robin and adds every game "
+    "to games/remus_games.pgn at the top of the Remus folder.",
     (10, 4): "`uv run estimate_elo.py` measures the Elo rating of Remus against "
-    "Stockfish set to fixed ratings, and adds every game to remus_vs_stockfish.pgn.",
+    "Stockfish set to fixed ratings, and adds every game to games/remus_games.pgn.",
 }
 
 # Every Python module name that appears in any Day folder

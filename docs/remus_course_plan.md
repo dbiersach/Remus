@@ -402,22 +402,28 @@ match and never loses on time.
 
 ### Day 10: Upgrades, Science AI, and tournament
 
-- **P1. Upgrade stations.** Python lab 12 opens P1. Each pair picks one station,
-  builds it, and shows a measured gain: fewer nodes, deeper search in the same time, or
-  more match points. With 10 pairs and eight stations, two stations get a second pair,
-  and those pairs compare their measurements at the end of the period. Each pair hands
-  in its engine as a git bundle on the class USB stick before lunch.
+- **P1. Enhancement stations.** Python lab 12 opens P1. Each of the 10 pairs takes
+  one color station from `Stations/`: the plain Day 9 Remus plus one enhancement, with
+  the pair's function stubbed (at most 30 typed lines). Colors replace numbers so no
+  station sounds better than another. Each pair then starts
+  `uv run station_match.py <COLOR>`, which plays its Remus against the plain Day 9
+  Remus with nobody watching and adds every game to `games/remus_games.pgn`. The
+  stations are described in [stations.md](stations.md).
 
-| Station | What the pair builds | GameWorks idea it echoes |
+| Color | Station | GameWorks idea it echoes |
 | --- | --- | --- |
-| Transposition table | A dict from `position_key` to depth, score, bound (`exact`, `lower`, `upper`), and best move | (not in GameWorks) |
-| Opening book | `opening_book.txt` of SAN move lines from openings the students like; every move is checked with `legal_moves()` | `OPENING.LIB` |
-| Killer moves | Two quiet moves per ply that caused a cutoff, tried right after captures | `KillingMove` |
-| Pawn structure | Penalties for doubled and isolated pawns, a bonus for passed pawns | `PawnStrVal`, `PassPawnRank` |
-| Mating evaluation | With a big material lead, push the losing king to the edge and bring the winning king close | `Mating` mode in `CalcPVTable` |
-| Principal variation search | Full window on the first move, null window on the rest, re-search on a surprise | `ZeroWindow` in `SEARCH.CH` |
-| Draw sense | Score a repeated position as 0 inside the search | `DrawGame` |
-| Mate solver | Solve the ten GameWorks puzzles with a mate-only search | `MateSearch` and `MATE.00x` |
+| RED | Transposition table: a dict from `position_key` to depth, score, bound, and best move | (not in GameWorks) |
+| GREEN | Opening book: SAN lines checked with `legal_moves()` | `OPENING.LIB` |
+| BLUE | Killer moves: two quiet moves per ply that caused a cutoff | `KillingMove` |
+| PINK | Principal variation search: null window on every move after the first | `ZeroWindow` in `SEARCH.CH` |
+| YELLOW | Draw sense: a repeated position scores 0 inside the search | `DrawGame` |
+| PURPLE | Pawn structure: doubled, isolated, and passed pawns | `PawnStrVal`, `PassPawnRank` |
+| CYAN | Mating bonus: push the losing king to the edge | `Mating` mode in `CalcPVTable` |
+| ORANGE | Null-move pruning: pass the turn in a shallow search | (not in GameWorks) |
+| BROWN | Late move reductions: search late, quiet moves one ply shallower | (not in GameWorks) |
+| GRAY | King safety: reward the pawn shield while queens are on | (not in GameWorks) |
+
+  The mate solver (`mate_solver.py`) stays in the Day 10 folder as a teacher demo.
 
 - **P2. Science AI: `hidden_peak.py`.** Unplugged warm-up: "Find the hidden
   peak." Then the teacher shows the map from chess to science on the board:

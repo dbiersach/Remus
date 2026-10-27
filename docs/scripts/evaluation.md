@@ -43,7 +43,8 @@ upside down.
 2. `placement()` adds the table bonus for each piece's square.
 3. `pawn_structure()` subtracts points for weak pawns and adds points for passed pawns (Day 10).
 4. `mating_bonus()` helps finish a won endgame by pushing the losing king to the edge (Day 10).
-5. `evaluate()` adds the parts, then flips the sign if Black is to move.
+5. `king_safety()` rewards pawns that shelter the king while the enemy queen is on the board (Day 10).
+6. `evaluate()` adds the parts, then flips the sign if Black is to move.
 
 ## Call tree
 
@@ -56,7 +57,9 @@ explain_evaluation()
     placement()
     pawn_structure()
     mating_bonus()
+    king_safety()
     evaluate()
+        king_safety()
         mating_bonus()
         pawn_structure()
         material()
@@ -71,6 +74,7 @@ explain_evaluation()
 | `placement` | Adds bonus points for pieces on good squares. | Day 8, period 2 |
 | `pawn_structure` | Scores doubled, isolated, and passed pawns. | Day 10, period 1 |
 | `mating_bonus` | Rewards driving the losing king to the edge when far ahead. | Day 10, period 1 |
+| `king_safety` | Rewards pawns that shelter the king while the enemy queen is on the board. | Day 10, period 1 |
 | `evaluate` | Gives the score from the point of view of the side to move. | Day 8, period 1 |
 | `explain_evaluation` | Prints each part of the score, so you can see why. | Day 8, period 1 |
 
@@ -78,7 +82,7 @@ explain_evaluation()
 
 - **Day 8, period 1:** `material`, `evaluate`, `explain_evaluation`
 - **Day 8, period 2:** `placement`
-- **Day 10, period 1:** `pawn_structure`, `mating_bonus`
+- **Day 10, period 1:** `pawn_structure`, `mating_bonus`, `king_safety`
 
 ## Try it
 

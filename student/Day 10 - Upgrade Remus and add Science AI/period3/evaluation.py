@@ -16,6 +16,8 @@ Day 10 adds two upgrade-station terms, both ideas from Turbo GameWorks Chess:
 3. Pawn structure: penalties for doubled and isolated pawns, a bonus for passed pawns.
 4. Mating: with a big material lead, drive the losing king to the edge and bring
    the winning king close, so Remus can finish off a won endgame.
+5. King safety: while the enemy queen is on the board, a bonus for each pawn that
+   shelters the king from in front.
 """
 
 from board import EMPTY
@@ -89,6 +91,9 @@ PASSED_PAWN = [0, 10, 20, 40, 60, 70]  # Bonus for a passed pawn, by squares adv
 CENTER_DISTANCE = [3, 2, 1, 0, 0, 1, 2, 3]  # How far a row or column is from the center
 MATING_MARGIN = 200  # A lead of at least a rook for a bishop starts the mating term
 WEAK_SIDE_LIMIT = 600  # ... when the losing side has at most two bishops' worth left
+SHIELD_PAWN = (
+    15  # Bonus for each pawn on the king's file or a neighbor, 1 or 2 rows ahead
+)
 PLACEMENT_TABLES = {
     "P": PAWN_TABLE,
     "N": KNIGHT_TABLE,
@@ -232,6 +237,46 @@ def mating_bonus(board: list[list[str]]) -> int:
     return bonus if lead > 0 else -bonus
 
 
+def king_safety(board: list[list[str]]) -> int:
+    """
+    Score the pawn shields in front of both kings, positive when it favors White.
+
+    Parameters
+    ----------
+    board : list[list[str]]
+        The board.
+
+    Returns
+    -------
+    int
+        For each king facing an enemy queen: SHIELD_PAWN for every file (the king's
+        own and its two neighbors) with a friendly pawn one or two rows in front of
+        the king. A White king on g1 behind pawns on f2, g2, and h2 earns 45. Once the
+        queens are gone the king is safe enough to walk forward, so the term is 0.
+    """
+    score = 0
+    # White's pawns stand in front of its king at smaller rows, since row 0 is rank 8
+    for king, pawn, enemy_queen, forward, sign in (
+        ("K", "P", "q", -1, 1),
+        ("k", "p", "Q", 1, -1),
+    ):
+        if not any(enemy_queen in row for row in board):
+            continue
+        for row in range(8):
+            for col in range(8):
+                if board[row][col] != king:
+                    continue
+                for file in (col - 1, col, col + 1):
+                    if not 0 <= file < 8:
+                        continue
+                    for step in (1, 2):
+                        ahead = row + forward * step
+                        if 0 <= ahead < 8 and board[ahead][file] == pawn:
+                            score += sign * SHIELD_PAWN
+                            break
+    return score
+
+
 def evaluate(state: dict) -> int:
     """
     Score the position for the side to move.
@@ -244,13 +289,17 @@ def evaluate(state: dict) -> int:
     Returns
     -------
     int
-        Material, placement, pawn structure, and the mating bonus in centipawns,
-        positive when the side to move stands better. Negamax search needs the
+        Material, placement, pawn structure, the mating bonus, and king safety in
+        centipawns, positive when the side to move stands better. Negamax search needs the
         score from the mover's side.
     """
     board = state["board"]
     white_score = (
-        material(board) + placement(board) + pawn_structure(board) + mating_bonus(board)
+        material(board)
+        + placement(board)
+        + pawn_structure(board)
+        + mating_bonus(board)
+        + king_safety(board)
     )
     return white_score if state["turn"] == "w" else -white_score
 
@@ -262,6 +311,7 @@ def explain_evaluation(state: dict) -> None:
     print(f"  Placement: {placement(board):+} centipawns for White")
     print(f"  Pawns:     {pawn_structure(board):+} centipawns for White")
     print(f"  Mating:    {mating_bonus(board):+} centipawns for White")
+    print(f"  King:      {king_safety(board):+} centipawns for White")
     print(f"  Score for the side to move ({state['turn']}): {evaluate(state):+}")
 
 
@@ -275,6 +325,9 @@ def main():
     print("Rook endgame, Black king in the corner:")
     explain_evaluation(state_from_fen("k7/8/2K5/8/8/8/8/7R w - - 0 1"))
     print("  (expected a mating bonus for White)")
+    print("White castled behind three pawns, Black king in the open:")
+    explain_evaluation(state_from_fen("q3k3/8/8/8/8/8/5PPP/6K1 w - - 0 1"))
+    print("  (expected king safety +45 for White)")
 
 
 if __name__ == "__main__":

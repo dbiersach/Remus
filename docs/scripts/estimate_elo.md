@@ -29,8 +29,8 @@ estimate_elo.py starts uci_engine.py and Stockfish. It uses python-chess as the 
 
 Each level plays 10 games by default, with Remus taking White and Black in turn.
 The clock gives 1 minute plus 0.6 seconds a move, the clock Stockfish uses to set
-UCI_Elo. Every game is added to remus_vs_stockfish.pgn the moment it ends, and the
-file is never erased.
+UCI_Elo. Every game is added to games/remus_games.pgn, at the top of the Remus
+folder, the moment it ends, and the file is never erased.
 
 ## How it works
 

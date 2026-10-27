@@ -1,6 +1,6 @@
 # Day 10, Period 3: Tournament
 
-`uv run tournament.py` plays the class round robin and saves every game as PGN beside the script.
+`uv run tournament.py` plays the class round robin and adds every game to games/remus_games.pgn at the top of the Remus folder.
 
 New files this period:
 

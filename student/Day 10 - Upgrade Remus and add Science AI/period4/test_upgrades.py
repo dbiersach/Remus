@@ -1,11 +1,12 @@
 """test_upgrades.py
 
-Tests for the Day 10 upgrade stations: pawn structure, the mating bonus, the
-transposition table, killer moves, upgraded_search, the opening book, the mate
-solver, and the hidden-peak Science AI.
+Tests for the Day 10 upgrade stations: pawn structure, the mating bonus, king
+safety, the transposition table, killer moves, null moves, late move reductions,
+upgraded_search, the opening book, the mate solver, and the hidden-peak Science AI.
 """
 
-from evaluation import mating_bonus, pawn_structure
+from board import EMPTY
+from evaluation import king_safety, mating_bonus, pawn_structure
 from fen import START_FEN, state_from_fen
 from game_state import position_key
 from hidden_peak import (
@@ -25,7 +26,10 @@ from search import (
     MATE_SCORE,
     SearchInfo,
     alpha_beta_with_quiescence,
+    make_null_move,
+    reduction,
     remember_killer,
+    undo_null_move,
     upgraded_search,
 )
 from transposition_table import EXACT, LOWER, UPPER, best_stored_move, probe, store
@@ -91,23 +95,52 @@ def test_killers_keep_two_quiet_moves() -> None:
     assert [move_to_uci(move) for move in info.killers[2]] == ["g1f3", "d2d4"]
 
 
-def test_upgraded_search_agrees_with_alpha_beta() -> None:
-    """The upgrades save work but find the same score at the same depth."""
+def test_king_safety_rewards_the_pawn_shield() -> None:
+    """Three pawns in front of the castled White king earn 3 * 15 = 45."""
+    sheltered = state_from_fen("q3k3/8/8/8/8/8/5PPP/6K1 w - - 0 1")["board"]
+    no_queen = state_from_fen("4k3/8/8/8/8/8/5PPP/6K1 w - - 0 1")["board"]
+    assert king_safety(sheltered) == 45
+    assert king_safety(no_queen) == 0  # Without the enemy queen the term is off
+    assert king_safety(state_from_fen(START_FEN)["board"]) == 0
+
+
+def test_null_move_and_undo_restore_the_state() -> None:
+    state = state_from_fen(ITALIAN)
+    before = state_snapshot(state)
+    en_passant = make_null_move(state)
+    assert state["turn"] == "b"
+    undo_null_move(state, en_passant)
+    assert state_snapshot(state) == before
+
+
+def test_only_late_quiet_moves_are_reduced() -> None:
+    quiet = Move((6, 0), (5, 0))
+    assert reduction(4, 5, quiet, EMPTY, False) == 1
+    assert reduction(4, 1, quiet, EMPTY, False) == 0  # Early in the list
+    assert reduction(2, 5, quiet, EMPTY, False) == 0  # Too close to the leaves
+    assert reduction(4, 5, quiet, "p", False) == 0  # A capture
+    assert reduction(4, 5, quiet, EMPTY, True) == 0  # A check
+
+
+def test_upgraded_search_saves_work_and_keeps_the_state() -> None:
+    """The upgrades search fewer positions than plain alpha-beta at the same depth."""
     state = state_from_fen(ITALIAN)
     before = state_snapshot(state)
     plain = SearchInfo()
     upgraded = SearchInfo()
-    plain_score, _ = alpha_beta_with_quiescence(state, 3, 0, *WIDE, plain)
-    upgraded_score, pv = upgraded_search(state, 3, 0, *WIDE, upgraded)
-    assert upgraded_score == plain_score
+    alpha_beta_with_quiescence(state, 4, 0, *WIDE, plain)
+    _, pv = upgraded_search(state, 4, 0, *WIDE, upgraded)
+    assert upgraded.nodes < plain.nodes
     assert pv
     assert state_snapshot(state) == before
 
 
 def test_upgraded_search_finds_a_mate_in_two() -> None:
+    """Be4 is a quiet move late in the list, so late move reductions first search it
+    two plies shallower; depth 5 leaves room to prove the mate in 3 plies."""
     fen, best, _, _ = read_puzzles()[0]  # MATE.001: Be4
     state = state_from_fen(fen)
-    score, pv = upgraded_search(state, 3, 0, *WIDE, SearchInfo())
+    score, pv = upgraded_search(state, 5, 0, *WIDE, SearchInfo())
     assert score == MATE_SCORE - 3
     assert move_to_san(state, pv[0]) == best
 

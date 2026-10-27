@@ -57,6 +57,12 @@ that are specific to Claude Code. The Python style follows David's course reposi
   docstring, and failing tests. The class picks one pair's version to merge, and
   `CONTRIBUTORS.md` records who wrote it. Keep student functions short enough for a pair
   to finish in 20 to 40 minutes.
+- **No hands-on lab asks a pair to type more than about 30 to 40 lines of code** in
+  one period, counted across every function and lab blank of that period (David,
+  2026-10-27). Many 13-year-olds cannot touch-type, so a longer lab spends class time
+  on typing instead of thinking. When an idea needs more code, the teacher writes the
+  rest beforehand and the pair writes the core. `make_student_folders.py` prints the
+  largest count per period and flags any period above `MAX_TYPED_LINES = 40`.
 - Short unplugged warm-ups (paper, cards, and a printed board at the desk) come before
   the hardest ideas. They replace part of the teacher's explanation, never the time a
   pair spends typing code.
@@ -200,6 +206,16 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   tests fail until a pair writes the function. `make_student_folders.py` builds
   `student/` from `instructor/` and lists every student function by day and period;
   run it after `make_period_folders.py`, and never edit a student stub by hand.
+- `instructor/Stations` holds the ten enhancement stations, one folder per color
+  (`RED - Transposition table`, ...). Each is the finished Day 9 Remus plus one
+  enhancement; the finished Day 10 Remus holds all ten. `make_station_folders.py`
+  builds them from the Day 9 and Day 10 `period4` code, and `make_student_folders.py`
+  stubs each station's functions in `student/Stations`. Colors name the stations so
+  that no station sounds better than another. `station_match.py` plays a station
+  against the plain Day 9 Remus.
+- Every game any script plays (`play_match.py`, `tournament.py`, `estimate_elo.py`,
+  `station_match.py`) is added to `games/remus_games.pgn` at the top of the
+  repository, which git ignores so each computer keeps its own games.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson
   makes a file smarter, the new code goes into the same file under a new function
   name next to the function it improves (`negamax`, then `alpha_beta`, then

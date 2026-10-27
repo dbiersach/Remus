@@ -1,10 +1,10 @@
 #!/usr/bin/env -S uv run
 """run_all_tests.py
 
-Run the tests of every period folder in instructor/, one folder at a time, and the
-reference-tool tests in tests/. Each period folder is a complete copy of Remus with
-the same module names (board.py, search.py, ...), so each folder gets its own pytest
-run.
+Run the tests of every period folder and every station folder in instructor/, one
+folder at a time, and the reference-tool tests in tests/. Each folder is a complete
+copy of Remus with the same module names (board.py, search.py, ...), so each folder
+gets its own pytest run.
 """
 
 import subprocess
@@ -19,6 +19,7 @@ def main():
     for folder in sorted((ROOT / "instructor").glob("Day */period*")):
         if list(folder.glob("test_*.py")):
             folders.append(folder)  # Periods before any Remus code have no tests
+    folders += sorted((ROOT / "instructor" / "Stations").glob("* - *"))
     folders.append(ROOT / "tests")
     failed = []
     for folder in folders:

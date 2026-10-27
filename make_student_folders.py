@@ -18,9 +18,12 @@ import ast
 import shutil
 from pathlib import Path
 
+from make_station_folders import STATIONS_TABLE
+
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
 STUDENT = ROOT / "student"
+MAX_TYPED_LINES = 40  # Most lines of code a pair types in one period
 
 # (day, period, file, function) for every function the students write
 STUDENT_FUNCTIONS = [
@@ -63,6 +66,16 @@ STUDENT_FUNCTIONS = [
 ]
 
 
+def typed_lines(source: str, name: str) -> int:
+    """Return how many lines of code (not blank, not comments) a function's body has."""
+    tree = ast.parse(source)
+    node = next(
+        n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == name
+    )
+    lines = source.splitlines()[node.body[0].end_lineno : node.end_lineno]
+    return sum(1 for line in lines if line.strip() and not line.strip().startswith("#"))
+
+
 def stub_function(source: str, name: str, day: int, period: int) -> str:
     """
     Replace the body of one function with a NotImplementedError stub.
@@ -100,6 +113,7 @@ def stub_function(source: str, name: str, day: int, period: int) -> str:
 
 def main():
     stubbed = 0
+    typed: dict[tuple[int, int], int] = {}  # (day, period) -> lines the pairs type
     for folder in sorted(INSTRUCTOR.glob("Day */period*")):
         day = int(folder.parent.name[4:6])
         period = int(folder.name.removeprefix("period"))
@@ -116,12 +130,51 @@ def main():
                 continue
             file_path = target / file_name
             text = file_path.read_text()
+            typed[(day, period)] = typed.get((day, period), 0) + typed_lines(
+                text, function
+            )
             file_path.write_text(stub_function(text, function, stub_day, stub_period))
             stubbed += 1
+    # Each station folder stubs the functions its pair writes during the station
+    (STUDENT / "Stations").mkdir(exist_ok=True)
+    shutil.copy2(
+        INSTRUCTOR / "Stations" / "station_match.py",
+        STUDENT / "Stations" / "station_match.py",
+    )
+    for station in STATIONS_TABLE:
+        folder = INSTRUCTOR / "Stations" / station["folder"]
+        target = STUDENT / "Stations" / station["folder"]
+        if target.exists():
+            shutil.rmtree(target)
+        shutil.copytree(
+            folder,
+            target,
+            ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg"),
+        )
+        color = station["folder"].split(" - ")[0]
+        count = 0
+        for file_name, function in station["students"]:
+            file_path = target / file_name
+            text = file_path.read_text()
+            count += typed_lines(text, function)
+            file_path.write_text(stub_function(text, function, 10, 1))
+            stubbed += 1
+        print(f"{color} station: {count} lines to type")
+        if count > MAX_TYPED_LINES:
+            print(f"  Too long: the {color} station asks for {count} lines")
     print(f"Wrote {STUDENT}")
     print(
-        f"Functions turned into stubs: {stubbed}  (expected {len(STUDENT_FUNCTIONS)})"
+        f"Functions turned into stubs: {stubbed}  (expected "
+        f"{len(STUDENT_FUNCTIONS) + sum(len(st['students']) for st in STATIONS_TABLE)})"
     )
+    longest = max(typed, key=lambda day_period: typed[day_period])
+    print(
+        f"Most lines typed in one period: {typed[longest]} on Day {longest[0]}, "
+        f"period {longest[1]}  (expected at most {MAX_TYPED_LINES})"
+    )
+    for (day, period), count in sorted(typed.items()):
+        if count > MAX_TYPED_LINES:
+            print(f"  Too long: Day {day}, period {period} asks for {count} lines")
 
 
 if __name__ == "__main__":

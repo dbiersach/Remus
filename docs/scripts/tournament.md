@@ -33,7 +33,7 @@ The clock gives 2 minutes plus 1 second per move.
 1. `round_robin()` makes the pairings for every round.
 2. Four games run at the same time.
 3. `play_game()` runs the clocks. An illegal move, a crash, or running out of time loses.
-4. After each round, print the standings and add the games to tournament.pgn.
+4. After each round, print the standings and add the games to games/remus_games.pgn.
 
 ## Call tree
 

@@ -7,7 +7,8 @@
 Which brain is stronger? Let them play.
 
 This file starts two copies of Remus and lets them play a match. python-chess acts as
-the referee, so an illegal move is caught.
+the referee, so an illegal move is caught. Every game goes into the class games file,
+games/remus_games.pgn, so no game is lost.
 
 ## Where this piece fits
 
@@ -20,6 +21,7 @@ play_match.py starts uci_engine.py twice. It uses python-chess, which only teach
 
 - **referee:** a program that checks every move is legal.
 - **match:** several games between the same two players, swapping colors.
+- **PGN:** a text file format for saving chess games.
 
 ## What it stores
 
@@ -29,7 +31,8 @@ On Day 10, `think` beat `greedy` 4 to 0.
 
 1. `start_engine()` starts one copy of Remus with a chosen brain.
 2. `play_game()` asks each side for a move until the game ends.
-3. `main()` swaps colors each game and keeps the score.
+3. `save_game()` adds the game to games/remus_games.pgn.
+4. `main()` swaps colors each game and keeps the score.
 
 ## Call tree
 
@@ -40,6 +43,7 @@ A name in [brackets] lives in another file.
 main()
     start_engine()
     play_game()
+    save_game()
 ```
 
 ## The functions
@@ -47,7 +51,8 @@ main()
 | Function | What it does | Arrives |
 | --- | --- | --- |
 | `start_engine` | Starts one copy of Remus with a chosen brain. | Day 7, period 4 |
-| `play_game` | Plays one game and returns the result. | Day 7, period 4 |
+| `play_game` | Plays one game and returns the board with every move on it. | Day 7, period 4 |
+| `save_game` | Adds one game to the class games file and returns its result. | Day 7, period 4 |
 
 ## Try it
 
@@ -62,6 +67,7 @@ You should see: Each game's result, then the final score.
 ## Puzzle questions
 
 1. Why swap colors every game?
+2. Run `uv run play_match.py think think 4`. Why can Remus win against itself?
 
 ## Slides
 

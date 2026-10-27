@@ -4,7 +4,8 @@
 Measure the playing strength of Remus. Remus plays Stockfish set to a fixed
 strength (UCI_Elo), level after level, and the script turns the results into an
 estimated Elo rating. python-chess is the referee, as in tournament.py, and every
-finished game is added at once to remus_vs_stockfish.pgn, so no game is ever lost.
+finished game is added at once to the class games file, games/remus_games.pgn at
+the top of the Remus folder, so no game is ever lost.
 This is a teacher tool: the engine itself never imports python-chess.
 
 Usage: uv run estimate_elo.py [--games 10] [--levels 1320 1500 1700] [--stockfish PATH]
@@ -29,7 +30,16 @@ import chess.engine
 import chess.pgn
 
 ENGINE_FILE = Path(__file__).parent / "uci_engine.py"
-PGN_PATH = Path(__file__).parent / "remus_vs_stockfish.pgn"
+# The top Remus folder is the one that holds pyproject.toml
+REPOSITORY = next(
+    (
+        folder
+        for folder in Path(__file__).parents
+        if (folder / "pyproject.toml").exists()
+    ),
+    Path(__file__).parent,
+)
+GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
 EN_CROISSANT_ENGINES = (
     Path.home() / "AppData" / "Roaming" / "org.encroissant.app" / "engines"
 )  # Where En Croissant keeps the Stockfish it downloads on Windows
@@ -165,7 +175,8 @@ def main():
     games_at_once = max(1, (os.cpu_count() or 2) // 2)  # Each game runs two engines
 
     print(f"Stockfish: {stockfish_path}")
-    print(f"Adding every game to {PGN_PATH}")
+    print(f"Adding every game to {GAMES_PATH}")
+    GAMES_PATH.parent.mkdir(exist_ok=True)
     print(f"Clock: {MINUTES:g} minute(s) + {INCREMENT} seconds a move per side")
     results = []
     start = time.perf_counter()
@@ -178,7 +189,7 @@ def main():
             level_points = 0.0
             for job in jobs:
                 game = job.result()
-                with PGN_PATH.open("a") as file:
+                with GAMES_PATH.open("a") as file:
                     print(game, end="\n\n", file=file)
                 points = remus_points(game)
                 level_points += points

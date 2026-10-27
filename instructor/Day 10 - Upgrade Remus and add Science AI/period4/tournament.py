@@ -3,8 +3,9 @@
 
 Run a round robin: every engine plays every other engine once, with colors
 balanced, at 2 minutes plus 1 second a move per side. python-chess is the referee,
-so an illegal move, a crash, or a lost connection loses the game. This is a
-teacher tool: the engine itself never imports python-chess.
+so an illegal move, a crash, or a lost connection loses the game. Every game is
+added to the class games file, games/remus_games.pgn at the top of the Remus folder.
+This is a teacher tool: the engine itself never imports python-chess.
 
 Usage: uv run tournament.py "C:/Tournament/Knights" "C:/Tournament/Rooks" ...
 
@@ -16,6 +17,7 @@ arguments, the four brains of this folder's Remus play each other as a demo, at
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
+from datetime import date
 from pathlib import Path
 
 import chess
@@ -23,7 +25,16 @@ import chess.engine
 import chess.pgn
 
 ENGINE_FILE = Path(__file__).parent / "uci_engine.py"
-PGN_PATH = Path(__file__).parent / "tournament.pgn"
+# The top Remus folder is the one that holds pyproject.toml
+REPOSITORY = next(
+    (
+        folder
+        for folder in Path(__file__).parents
+        if (folder / "pyproject.toml").exists()
+    ),
+    Path(__file__).parent,
+)
+GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
 GAMES_AT_ONCE = 4  # Each game runs two engine processes
 
 
@@ -101,6 +112,8 @@ def play_game(
         for engine in engines:
             engine.quit()
     game = chess.pgn.Game.from_board(board)
+    game.headers["Event"] = "Remus round robin"
+    game.headers["Date"] = date.today().strftime("%Y.%m.%d")
     game.headers["White"], game.headers["Black"] = white[0], black[0]
     game.headers["Result"] = result or board.result(claim_draw=True)
     if reason:
@@ -123,8 +136,8 @@ def main():
         ]
         minutes, increment = 10 / 60, 0.1
     points = {name: 0.0 for name, _ in entrants}
-    print(f"Saving games to {PGN_PATH}")
-    PGN_PATH.write_text("")
+    print(f"Adding every game to {GAMES_PATH}")
+    GAMES_PATH.parent.mkdir(exist_ok=True)
     for number, games in enumerate(round_robin(len(entrants)), start=1):
         with ThreadPoolExecutor(GAMES_AT_ONCE) as pool:
             finished = list(
@@ -142,7 +155,7 @@ def main():
             points[white] += {"1-0": 1, "0-1": 0}.get(result, 0.5)
             points[black] += {"1-0": 0, "0-1": 1}.get(result, 0.5)
             print(f"Round {number}: {white} vs {black}: {result}")
-            with PGN_PATH.open("a") as file:
+            with GAMES_PATH.open("a") as file:
                 print(game, end="\n\n", file=file)
         print(f"Standings after round {number}:")
         for name, score in sorted(points.items(), key=lambda item: -item[1]):

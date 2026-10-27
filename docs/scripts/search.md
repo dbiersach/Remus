@@ -13,7 +13,7 @@ the older one. That way you can run both and compare.
 
 search.py uses almost every engine file: legal_moves.py, make_move.py, evaluation.py, move_ordering.py, and transposition_table.py. uci_engine.py and console_game.py call it.
 
-- **Uses:** [`attacks.py`](attacks.md), [`board.py`](board.md), [`evaluation.py`](evaluation.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_ordering.py`](move_ordering.md), [`moves.py`](moves.md), [`transposition_table.py`](transposition_table.md)
+- **Uses:** [`attacks.py`](attacks.md), [`board.py`](board.md), [`evaluation.py`](evaluation.md), [`game_state.py`](game_state.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_ordering.py`](move_ordering.md), [`moves.py`](moves.md), [`transposition_table.py`](transposition_table.md)
 - **Uses only in its self-check:** [`fen.py`](fen.md)
 - **Used by:** [`compare_search.py`](compare_search.md), [`console_game.py`](console_game.md), [`uci_engine.py`](uci_engine.md)
 
@@ -38,7 +38,7 @@ The brains, from simplest to smartest:
 | 9 | `alpha_beta` | Look ahead, but skip useless branches |
 | 9 | `alpha_beta_with_quiescence` | Also finish all the captures, and try good moves first |
 | 9 | `think` | Go deeper and deeper until the clock runs out |
-| 10 | `upgraded_search` | Adds memory, killer moves, and draw sense |
+| 10 | `upgraded_search` | Adds memory, killer moves, draw sense, null moves, and late move reductions |
 
 A checkmate scores `MATE_SCORE`, which is 100,000. A faster mate scores a little
 more than a slower one.
@@ -126,6 +126,10 @@ think_move()
             probe()  [transposition_table.py]
             legal_moves()  [legal_moves.py]
             order_moves()  [move_ordering.py]
+            has_pieces()
+            make_null_move()
+                opponent()  [game_state.py]
+                position_key()  [game_state.py]
             best_stored_move()  [transposition_table.py]
             make_move()  [make_move.py]
             store()  [transposition_table.py]
@@ -137,10 +141,13 @@ think_move()
                 make_move()  [make_move.py]
                 undo_move()  [make_move.py]
                 quiescence()  (calls itself again, one move deeper)
+            upgraded_search()  (calls itself again, one move deeper)
+            undo_null_move()
+                opponent()  [game_state.py]
             undo_move()  [make_move.py]
             remember_killer()
                 piece_at()  [board.py]
-            upgraded_search()  (calls itself again, one move deeper)
+            reduction()
         format_info()
             move_to_uci()  [moves.py]
 ```
@@ -165,7 +172,11 @@ think_move()
 | `quiescence` | Keeps searching captures until the position is quiet. | Day 9, period 2 |
 | `alpha_beta_with_quiescence` | The full Day 9 search: alpha-beta, quiescence, and good move order. | Day 9, period 3 |
 | `remember_killer` | Remembers a quiet move that caused a cutoff, to try it early next time. | Day 10, period 1 |
-| `upgraded_search` | The Day 10 search, with memory, killer moves, and draw sense. | Day 10, period 1 |
+| `make_null_move` | Passes the turn without moving, so the search can test a pass. | Day 10, period 1 |
+| `undo_null_move` | Takes back a null move. | Day 10, period 1 |
+| `has_pieces` | Checks that a side has a piece besides pawns and the king. | Day 10, period 1 |
+| `reduction` | Says how many plies to cut from a late, quiet move. | Day 10, period 1 |
+| `upgraded_search` | The Day 10 search, with memory, killer moves, draw sense, null moves, and late move reductions. | Day 10, period 1 |
 | `format_info` | Writes a line telling the GUI the depth, score, and best line. | Day 9, period 4 |
 | `think` | Searches deeper and deeper until time runs out, then returns the best move. | Day 9, period 4 |
 | `think_move` | The thinking brain, with two seconds per move. | Day 9, period 4 |
@@ -179,7 +190,7 @@ think_move()
 - **Day 9, period 2:** `capture_moves`, `quiescence`
 - **Day 9, period 3:** `SearchTimeout`, `check_time`, `alpha_beta_with_quiescence`
 - **Day 9, period 4:** `format_info`, `think`, `think_move`
-- **Day 10, period 1:** `remember_killer`, `upgraded_search`
+- **Day 10, period 1:** `remember_killer`, `make_null_move`, `undo_null_move`, `has_pieces`, `reduction`, `upgraded_search`
 
 ## Try it
 
