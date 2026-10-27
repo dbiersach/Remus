@@ -8,6 +8,9 @@
     "ignorePaths": [".venv/**", "uv.lock", "Turbo Pascal Toolbox 4.0 - GameWorks/**"],
     // words - list of words to be always considered correct
     "words": [
+        "Naram",
+        "Niram",
+        "rustup",
         "addopts",
         "Akkad",
         "Akkadian",

@@ -231,6 +231,13 @@ The search makes and undoes moves on the one live state. A `try/finally` around 
 3. The engine imports only the Python standard library.
 4. Every script prints a result next to the expected answer.
 
+## Niram-GOLD, the Rust copy
+
+`niram/` holds Niram-GOLD, Remus-GOLD rewritten in Rust with the same rules,
+evaluation, and search. On the same positions and depth it visits exactly as many
+positions as Remus-GOLD and picks the same moves, about 50 times faster: some 200,000
+positions a second against about 4,000. See [`niram/README.md`](../niram/README.md).
+
 ## Where the ideas come from
 
 Remus borrows its approach from Turbo GameWorks Chess 4.0 (Borland, 1987) without

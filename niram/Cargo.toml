@@ -1,0 +1,12 @@
+[package]
+name = "niram"
+version = "0.1.0"
+edition = "2024"
+description = "Niram-GOLD: Remus-GOLD rewritten in Rust, with the same search and evaluation"
+license = "MIT"
+
+# Niram uses the Rust standard library only, the way Remus uses Python's.
+[dependencies]
+
+[profile.release]
+debug = false
