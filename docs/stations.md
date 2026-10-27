@@ -120,6 +120,11 @@ against Remus-WHITE keeps a perfect score from giving an endless rating. A ratin
 of +60 plus or minus 80 means the true gain most likely lies between -20 and +140,
 so two versions whose ranges overlap have not been told apart yet.
 
+An engine that sends no move within its clock plus 10 seconds loses the game, with
+the Termination "engine sent no move", so one silent engine cannot hold up the rest
+of the league. Anything an engine prints to stderr, such as the traceback of a
+crash, is saved with the game's names and opening in `games/engine_errors.log`.
+
 The league can stop partway, such as when a laptop restarts. Run it again and it
 plays only the games that are not in the games file yet. With one game per processor
 core, a 4-core computer plays about 2 games a minute, so the whole league takes
