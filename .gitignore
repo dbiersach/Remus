@@ -28,3 +28,7 @@ board.svg
 # The class games file: every game that play_match.py, tournament.py, and
 # estimate_elo.py play stays on the computer that played it
 /games/
+
+# The games played in En Croissant, which saves them in Remus.pgn at the top of
+# the Remus folder
+/Remus.pgn
