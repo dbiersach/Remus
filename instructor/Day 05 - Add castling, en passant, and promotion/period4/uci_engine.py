@@ -45,7 +45,10 @@ def set_position(words: list[str]) -> dict:
     """
     state = new_game()
     # Some GUIs send the start position as FEN text, so both forms mean the start
-    starts_at_start = words[1] == "startpos" or " ".join(words[2:8]) == START_FEN
+    fen = ""
+    for word in words[2:8]:
+        fen += word + " "
+    starts_at_start = words[1] == "startpos" or fen.strip() == START_FEN
     if not starts_at_start:
         print("Remus reads only the starting position until Day 7", file=sys.stderr)
     if "moves" in words:

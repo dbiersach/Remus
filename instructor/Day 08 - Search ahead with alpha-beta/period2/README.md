@@ -6,7 +6,7 @@ By the end of this period, each pair can:
 
 - Explain an alpha-beta cutoff. **Measured by:** "Fewest flips": the pair reaches the right move while turning fewer cards than the whole tree.
 - Show that alpha-beta keeps the answer and saves work. **Measured by:** The `alpha_beta` tests pass, and `uv run compare_search.py` prints the same scores as negamax with fewer nodes.
-- Sort with `key=`, start a best value at minus infinity, and time code. **Measured by:** `python_sorting.py` puts the queen first, finds the best victim, and prints the run time of `perft(3)`.
+- Keep a list in order with `insert()`, start a best value at minus infinity, and time code. **Measured by:** `python_sorting.py` puts the queen first, finds the best victim, and prints the run time of `perft(3)`.
 
 ## The files
 
@@ -31,7 +31,7 @@ In `student/` these functions raise `NotImplementedError` until a pair writes th
 
 The pairs fill in the blanks of `python_sorting.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_sorting_instructor.py`.
 
-Part #1 sorts captures by the value of the piece they take, the idea behind move ordering in period 4.
+Part #1 sorts captures by the value of the piece they take: each new piece steps past every piece worth at least as much and is inserted there. `order_moves()` in period 4 sorts moves the same way.
 
 Part #2 starts the best value at minus infinity, so the first real value always replaces it. `alpha_beta()` starts its alpha the same way, below any score a move can get.
 

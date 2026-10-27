@@ -66,19 +66,27 @@ def disambiguation(state: dict, move: Move, piece: str) -> str:
     Return the file, rank, or square that tells this move apart from another
     legal move by the same kind of piece to the same square, such as "b" in "Nbd2".
     """
-    rivals = [
-        other.from_square
-        for other in legal_moves(state)
-        if other.to_square == move.to_square
-        and other.from_square != move.from_square
-        and piece_at(state["board"], other.from_square) == piece
-    ]
+    # A rival is another piece of the same kind that can reach the same square
+    rivals = []
+    for other in legal_moves(state):
+        same_target = other.to_square == move.to_square
+        same_start = other.from_square == move.from_square
+        same_piece = piece_at(state["board"], other.from_square) == piece
+        if same_target and same_piece and not same_start:
+            rivals.append(other.from_square)
     if not rivals:
         return ""
     row, col = move.from_square
-    if all(rival[1] != col for rival in rivals):
+    file_is_unique = True
+    rank_is_unique = True
+    for rival_row, rival_col in rivals:
+        if rival_col == col:
+            file_is_unique = False
+        if rival_row == row:
+            rank_is_unique = False
+    if file_is_unique:
         return BOARD_FILES[col]
-    if all(rival[0] != row for rival in rivals):
+    if rank_is_unique:
         return BOARD_RANKS[row]
     return square_name(row, col)
 
@@ -112,8 +120,14 @@ def parse_san(state: dict, text: str) -> Move:
 
 def main():
     state = state_from_fen("r3k2r/8/8/8/8/8/8/R3K1NR w KQkq - 0 1")
-    sans = sorted(move_to_san(state, move) for move in legal_moves(state))
-    print(" ".join(sans))
+    sans = []
+    for move in legal_moves(state):
+        sans.append(move_to_san(state, move))
+    sans.sort()
+    text = ""
+    for san in sans:
+        text += san + " "
+    print(text)
     print(f"parse_san('O-O-O') gives {parse_san(state, 'O-O-O')}")
     print("  (expected Move(from_square=(7, 4), to_square=(7, 2), promotion=None))")
 

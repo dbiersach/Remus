@@ -60,7 +60,14 @@ def greedy_move(state: dict) -> Move:
     """
     moves = legal_moves(state)
     random.shuffle(moves)  # Break ties between equal captures at random
-    return max(moves, key=lambda move: capture_value(state, move))
+    best_move = moves[0]
+    best_value = capture_value(state, best_move)
+    for move in moves:
+        value = capture_value(state, move)
+        if value > best_value:
+            best_move = move
+            best_value = value
+    return best_move
 
 
 def white_score(state: dict) -> int:

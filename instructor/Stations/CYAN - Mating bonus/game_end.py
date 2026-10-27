@@ -43,7 +43,10 @@ def insufficient_material(board: list[list[str]]) -> bool:
         return True
     if len(pieces) == 1 and pieces[0] in "BN":
         return True
-    return all(piece == "B" for piece in pieces) and len(bishop_square_colors) == 1
+    for piece in pieces:
+        if piece != "B":
+            return False  # A knight beside other pieces, or any pawn, rook, or queen
+    return len(bishop_square_colors) == 1
 
 
 def repetition_count(state: dict) -> int:

@@ -40,8 +40,8 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `make_null_move()` | 395 | 5 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
-| `search.py` | `undo_null_move()` | 415 | 3 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
+| `search.py` | `make_null_move()` | 402 | 5 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
+| `search.py` | `undo_null_move()` | 422 | 3 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
 | `test_upgrades.py` | `test_null_move_and_undo_restore_the_state()` | 21 | 6 | `uv run pytest` |
 | `test_upgrades.py` | `test_null_move_search_saves_work_and_keeps_the_state()` | 30 | 9 | `uv run pytest` |
 

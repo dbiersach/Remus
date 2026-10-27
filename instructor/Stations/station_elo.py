@@ -44,15 +44,12 @@ import chess.engine
 import chess.pgn
 
 STATIONS = Path(__file__).parent
-# The top Remus folder is the one that holds pyproject.toml
-REPOSITORY = next(
-    (
-        folder
-        for folder in Path(__file__).parents
-        if (folder / "pyproject.toml").exists()
-    ),
-    Path(__file__).parent,
-)
+# The top Remus folder is the nearest folder above this one with pyproject.toml
+REPOSITORY = Path(__file__).parent
+for folder in Path(__file__).parents:
+    if (folder / "pyproject.toml").exists():
+        REPOSITORY = folder
+        break
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
 REPORT_PATH = REPOSITORY / "docs" / "station_elo.md"  # The table of ratings
 LUCAS_CHESS_ENGINES = (
@@ -78,8 +75,11 @@ def all_players() -> list[Player]:
     players = []
     for folder in sorted(STATIONS.iterdir()):
         if folder.is_dir() and " - " in folder.name:
-            players.append((f"Remus-{folder.name.split(' - ')[0]}", folder))
-    players.sort(key=lambda player: player[0] != "Remus-WHITE")
+            name = f"Remus-{folder.name.split(' - ')[0]}"
+            if name == "Remus-WHITE":
+                players.insert(0, (name, folder))
+            else:
+                players.append((name, folder))
     return players
 
 
@@ -129,23 +129,27 @@ def estimate_rating(results: list[tuple[int, float]]) -> tuple[float, float]:
         the half-width of its 95 percent confidence interval. A perfect score
         counts as half a point short of perfect, so the rating stays a bound.
     """
-    points = sum(score for _, score in results)
+    points = 0.0
+    for _, score in results:
+        points += score
     points = min(max(points, 0.5), len(results) - 0.5)
     # The expected total grows with the rating, so halving the range finds the match
     low, high = 0.0, 3500.0
     for _ in range(60):
         middle = (low + high) / 2
-        expected = sum(expected_score(middle, elo) for elo, _ in results)
+        expected = 0.0
+        for elo, _ in results:
+            expected += expected_score(middle, elo)
         if expected < points:
             low = middle
         else:
             high = middle
     rating = (low + high) / 2
     # A game tells us the most when its result was hard to predict (p near 0.5)
-    information = sum(
-        expected_score(rating, elo) * (1 - expected_score(rating, elo))
-        for elo, _ in results
-    )
+    information = 0.0
+    for elo, _ in results:
+        chance = expected_score(rating, elo)
+        information += chance * (1 - chance)
     margin = 1.96 * ELO_SCALE / math.sqrt(information) if information > 0 else 0.0
     return rating, margin
 
@@ -291,10 +295,11 @@ def play_all(players: list[Player], stockfish_path: str, workers: int) -> None:
     frozen = dict(zip(players, freeze(players), strict=True))
     start = time.perf_counter()
     with ThreadPoolExecutor(workers) as pool:
-        futures = [
-            pool.submit(play_game, frozen[player], stockfish_path, elo, number)
-            for player, elo, number in jobs
-        ]
+        futures = []
+        for player, elo, number in jobs:
+            futures.append(
+                pool.submit(play_game, frozen[player], stockfish_path, elo, number)
+            )
         for done, future in enumerate(futures, start=1):
             game = future.result()
             with GAMES_PATH.open("a") as file:
@@ -312,34 +317,41 @@ def write_report(results: dict[str, dict[int, list[float]]]) -> str:
     """Return the Markdown table of every version's rating and score at each level."""
     rated = []
     for name, by_level in results.items():
-        games = [(elo, points) for elo in by_level for points in by_level[elo]]
+        games = []
+        for elo in by_level:
+            for points in by_level[elo]:
+                games.append((elo, points))
         rating, margin = estimate_rating(games)
         rated.append((rating, margin, name, by_level, games))
     rated.sort(reverse=True)
-    level_heads = " | ".join(f"SF {elo}" for elo in LEVELS)
-    lines = [
-        f"| Rank | Version | Elo | 95% margin | Score | {level_heads} |",
-        "| ---: | --- | ---: | ---: | ---: | "
-        + " | ".join(":---:" for _ in LEVELS)
-        + " |",
-    ]
+    head = "| Rank | Version | Elo | 95% margin | Score |"
+    rule = "| ---: | --- | ---: | ---: | ---: |"
+    for elo in LEVELS:
+        head += f" SF {elo} |"
+        rule += " :---: |"
+    report = head + "\n" + rule + "\n"
     for rank, (rating, margin, name, by_level, games) in enumerate(rated, start=1):
-        points = sum(score for _, score in games)
-        cells = []
+        points = 0.0
+        for _, score in games:
+            points += score
+        cells = ""
         for elo in LEVELS:
             scores = by_level.get(elo, [])
-            cells.append(f"{sum(scores):g}/{len(scores)}" if scores else "-")
+            if scores:
+                cells += f" {sum(scores):g}/{len(scores)} |"
+            else:
+                cells += " - |"
         if points == 0:
             elo_text = f"below {rating:.0f}"
         elif points == len(games):
             elo_text = f"above {rating:.0f}"
         else:
             elo_text = f"{rating:.0f}"
-        lines.append(
+        report += (
             f"| {rank} | {name} | {elo_text} | +/- {margin:.0f} | "
-            f"{points:g}/{len(games)} | " + " | ".join(cells) + " |"
+            f"{points:g}/{len(games)} |" + cells + "\n"
         )
-    return "\n".join(lines)
+    return report.rstrip("\n")
 
 
 def main():
@@ -354,8 +366,14 @@ def main():
     start = time.perf_counter()
     players = all_players()
     if options.colors:
-        wanted = {f"Remus-{color.upper()}" for color in options.colors}
-        players = [player for player in players if player[0] in wanted]
+        wanted = []
+        for color in options.colors:
+            wanted.append(f"Remus-{color.upper()}")
+        chosen = []
+        for player in players:
+            if player[0] in wanted:
+                chosen.append(player)
+        players = chosen
     if not options.report_only:
         stockfish_path = options.stockfish or find_stockfish()
         print(f"Stockfish: {stockfish_path}")

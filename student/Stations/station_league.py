@@ -122,7 +122,12 @@ def fit_ratings(results: list[Result]) -> dict[str, tuple[float, float]]:
     points equal its real points, the way estimate_elo.py finds a rating
     against Stockfish. The anchor stays at 0, so the ratings are gains over it.
     """
-    players = sorted({name for white, black, _ in results for name in (white, black)})
+    players = []
+    for white, black, _ in results:
+        for name in (white, black):
+            if name not in players:
+                players.append(name)
+    players.sort()
     games = list(results)
     for name in players:
         if name != ANCHOR:
@@ -174,7 +179,9 @@ def play_league(
     A league game already in the file is not played twice, so a league that
     stops partway, such as when the computer restarts, picks up where it stopped.
     """
-    players = [find_player(color) for color in all_colors()]
+    players = []
+    for color in all_colors():
+        players.append(find_player(color))
     jobs = []
     opening_number = 0
     opening = OPENINGS[0]
@@ -200,12 +207,13 @@ def play_league(
     print(f"Adding every game to {GAMES_PATH}")
     GAMES_PATH.parent.mkdir(exist_ok=True)
     with ThreadPoolExecutor(games_at_once) as pool:
-        futures = [
-            pool.submit(
-                play_game, white, black, LEAGUE_EVENT, opening, minutes, increment
+        futures = []
+        for white, black, opening in waiting:
+            futures.append(
+                pool.submit(
+                    play_game, white, black, LEAGUE_EVENT, opening, minutes, increment
+                )
             )
-            for white, black, opening in waiting
-        ]
         for number, future in enumerate(futures, start=len(jobs) - len(waiting) + 1):
             game = future.result()
             with GAMES_PATH.open("a") as file:
@@ -231,8 +239,11 @@ def print_ratings(results: list[Result], clock: str) -> None:
         f"Ratings from {len(results)} station games at {clock}, {ANCHOR} pinned at 0:"
     )
     print(f"  {'Rank':>4}  {'Player':13} {'Games':>5}  {'Score':>6}  Elo vs WHITE")
-    ranked = sorted(fitted, key=lambda name: fitted[name][0], reverse=True)
-    for rank, name in enumerate(ranked, start=1):
+    standings = []
+    for name in fitted:
+        standings.append((-fitted[name][0], name))  # A minus sign puts the top first
+    standings.sort()
+    for rank, (_, name) in enumerate(standings, start=1):
         rating, margin = fitted[name]
         share = 100 * scored[name] / played[name]
         print(

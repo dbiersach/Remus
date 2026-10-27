@@ -79,13 +79,13 @@ def position_key(state: dict) -> str:
         square does not matter). The clocks are left out.
     """
     board = state["board"]
-    key = (
-        "/".join("".join(row) for row in board)
-        + " "
-        + state["turn"]
-        + " "
-        + state["castling"]
-    )
+    key = ""
+    for row in range(8):
+        if row > 0:
+            key += "/"  # A slash separates one rank from the next
+        for piece in board[row]:
+            key += piece
+    key += " " + state["turn"] + " " + state["castling"]
     target = state["en_passant"]
     if target is not None:
         pawn = "P" if state["turn"] == WHITE else "p"

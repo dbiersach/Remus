@@ -83,7 +83,14 @@ def greedy_move(state: dict) -> Move:
     """
     moves = legal_moves(state)
     random.shuffle(moves)  # Break ties between equal captures at random
-    return max(moves, key=lambda move: capture_value(state, move))
+    best_move = moves[0]
+    best_value = capture_value(state, best_move)
+    for move in moves:
+        value = capture_value(state, move)
+        if value > best_value:
+            best_move = move
+            best_value = value
+    return best_move
 
 
 def white_score(state: dict) -> int:
@@ -523,8 +530,10 @@ def format_info(depth: int, score: int, nodes: int, pv: list[Move]) -> str:
         score_text = f"mate {moves_to_mate if score > 0 else -moves_to_mate}"
     else:
         score_text = f"cp {score}"
-    line = " ".join(move_to_uci(move) for move in pv)
-    return f"info depth {depth} score {score_text} nodes {nodes} pv {line}"
+    line = ""
+    for move in pv:
+        line += " " + move_to_uci(move)
+    return f"info depth {depth} score {score_text} nodes {nodes} pv{line}"
 
 
 def think(

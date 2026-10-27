@@ -127,7 +127,9 @@ def score_candidate(
         The predicted value (exploit) plus explore_weight times the distance to the
         nearest reading (explore).
     """
-    nearest = min(math.dist(square, measured) for measured in readings)
+    nearest = math.inf  # Farther than any real square
+    for measured in readings:
+        nearest = min(nearest, math.dist(square, measured))
     return predicted_value(square, readings) + explore_weight * nearest
 
 
@@ -135,10 +137,15 @@ def choose_next_measurement(
     readings: dict[tuple[int, int], int], explore_weight: float = EXPLORE_WEIGHT
 ) -> tuple[int, int]:
     """Return the unmeasured square with the highest score, like greedy_move()."""
-    return max(
-        candidate_squares(readings),
-        key=lambda square: score_candidate(square, readings, explore_weight),
-    )
+    candidates = candidate_squares(readings)
+    best_square = candidates[0]
+    best_score = score_candidate(best_square, readings, explore_weight)
+    for square in candidates:
+        score = score_candidate(square, readings, explore_weight)
+        if score > best_score:
+            best_square = square
+            best_score = score
+    return best_square
 
 
 def random_strategy(readings: dict[tuple[int, int], int]) -> tuple[int, int]:
@@ -172,13 +179,14 @@ def expectimax_choice(
         outcomes = []
         for reading in (min(PEAK, guess + 20), max(0, guess - 20)):
             readings[square] = round(reading)  # Pretend to measure, like make_move
-            next_best = max(
-                (
-                    score_candidate(other, readings, explore_weight)
-                    for other in candidate_squares(readings)
-                ),
-                default=0,
-            )
+            next_best = 0  # The score when no square is left to measure
+            others = candidate_squares(readings)
+            if others:
+                next_best = score_candidate(others[0], readings, explore_weight)
+            for other in others:
+                next_best = max(
+                    next_best, score_candidate(other, readings, explore_weight)
+                )
             del readings[square]  # Take the pretend reading back, like undo_move
             outcomes.append(reading + next_best)
         value = sum(outcomes) / len(outcomes)
@@ -187,17 +195,29 @@ def expectimax_choice(
     return best_square
 
 
-def measurements_to_find_peak(grid: list[list[int]], strategy) -> int:
-    """Run one strategy on one sample and count measurements until it reads PEAK."""
+def measurements_to_find_peak(
+    grid: list[list[int]], strategy, explore_weight: float | None = None
+) -> int:
+    """
+    Run one strategy on one sample and count measurements until it reads PEAK.
+
+    A strategy that takes an explore weight gets explore_weight; when it is None,
+    the strategy gets only the readings.
+    """
     center = (SIZE // 2, SIZE // 2)
     readings = {center: measure(grid, center)}  # Every strategy starts in the middle
     while PEAK not in readings.values():
-        square = strategy(readings)
+        if explore_weight is None:
+            square = strategy(readings)
+        else:
+            square = strategy(readings, explore_weight)
         readings[square] = measure(grid, square)
     return len(readings)
 
 
-def benchmark(strategy, trials: int = 100) -> float:
+def benchmark(
+    strategy, trials: int = 100, explore_weight: float | None = None
+) -> float:
     """
     Return the average number of measurements a strategy needs over many samples.
 
@@ -208,6 +228,9 @@ def benchmark(strategy, trials: int = 100) -> float:
     trials : int
         How many hidden samples to try. Sample n always uses seed n, so every
         strategy faces the same samples.
+    explore_weight : float | None
+        The explore weight to hand the strategy, or None for a strategy that
+        takes only the readings.
 
     Returns
     -------
@@ -217,16 +240,14 @@ def benchmark(strategy, trials: int = 100) -> float:
     random.seed(0)  # The random strategy makes the same choices every run
     total = 0
     for seed in range(trials):
-        total += measurements_to_find_peak(make_grid(seed), strategy)
+        total += measurements_to_find_peak(make_grid(seed), strategy, explore_weight)
     return total / trials
 
 
 def main():
     print(f"Random guessing: {benchmark(random_strategy):5.1f} measurements on average")
     for weight in (0, EXPLORE_WEIGHT, 40):
-        average = benchmark(
-            lambda readings, w=weight: choose_next_measurement(readings, w)
-        )
+        average = benchmark(choose_next_measurement, explore_weight=weight)
         print(
             f"Greedy AI, explore weight {weight:2}: {average:5.1f} measurements on average"
         )

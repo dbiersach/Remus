@@ -25,7 +25,10 @@ START_ROWS = [  # The starting position, row 0 (rank 8) first
 
 def new_board() -> list[list[str]]:
     """Return a fresh board set up in the starting position."""
-    return [list(row) for row in START_ROWS]
+    board = []
+    for row in START_ROWS:
+        board.append(list(row))  # list("rnbqkbnr") gives one letter per square
+    return board
 
 
 def print_board(board: list[list[str]]) -> None:

@@ -402,8 +402,18 @@ Short helper functions may use a one-line docstring:
 - `time.perf_counter()` for timing, reported as `f"Total run time (sec): {elapsed:.3f}"`.
 - Seed the random generator (`random.seed(2016)`) wherever a lab or test must give the
   same result on every run.
-- Plain loops over clever one-liners. A list comprehension is fine when it fits on one
-  line and reads as a sentence; otherwise write the loop.
+- Plain loops over clever one-liners, everywhere in the repository (David,
+  2026-10-27). Simple code for middle school readers matters more than the most
+  Pythonic or the fastest form, and every file follows the same rule:
+  - Build text with `+` or `+=` in a loop, never with `str.join()`.
+  - Find the best item with a loop that remembers the best so far, never with
+    `max(..., key=lambda ...)` or `sorted(..., key=...)`. Do not use `lambda` at all.
+  - Fill a list with a loop and `append`, never with a list, set, or dict
+    comprehension. Check every item with a loop and a yes-or-no variable, never
+    with `any()` or `all()` over a generator expression.
+  - `min()` and `max()` of two numbers, and `sum()` of a list, are fine.
+  - The build scripts (`make_*.py`, `period_guides.py`, `run_all_tests.py`) are
+    teacher tools that no student reads, so they may keep the compact forms.
 
 ## Comments
 

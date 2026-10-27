@@ -165,7 +165,11 @@ def gain(sample_readings: list[float], noise: float) -> float:
 
 def choose_next_sample(readings: Readings, noises: list[float]) -> int:
     """Return the number of the sample whose next shot has the largest gain."""
-    return max(range(SAMPLES), key=lambda i: gain(readings[i], noises[i]))
+    best = 0
+    for sample in range(SAMPLES):
+        if gain(readings[sample], noises[sample]) > gain(readings[best], noises[best]):
+            best = sample
+    return best
 
 
 def random_sample(readings: Readings, noises: list[float]) -> int:
@@ -175,7 +179,11 @@ def random_sample(readings: Readings, noises: list[float]) -> int:
 
 def equal_time(readings: Readings, noises: list[float]) -> int:
     """Return the sample with the fewest readings, so every sample gets 5 shots."""
-    return min(range(SAMPLES), key=lambda i: len(readings[i]))
+    fewest = 0
+    for sample in range(SAMPLES):
+        if len(readings[sample]) < len(readings[fewest]):
+            fewest = sample
+    return fewest
 
 
 def run_experiment(samples: list[dict[str, float]], strategy, seed: int) -> Readings:
@@ -193,8 +201,11 @@ def run_experiment(samples: list[dict[str, float]], strategy, seed: int) -> Read
         The random seed for the noise in the readings.
     """
     rng = random.Random(seed)
-    noises = [sample["noise"] for sample in samples]
-    readings = [[] for _ in range(SAMPLES)]
+    noises = []
+    readings = []
+    for sample in samples:
+        noises.append(sample["noise"])
+        readings.append([])  # No shots on this sample yet
     for _ in range(SHOTS):
         choice = strategy(readings, noises)
         readings[choice].append(take_reading(samples[choice], rng))
@@ -229,7 +240,9 @@ def benchmark(strategy, trials: int = TRIALS) -> tuple[float, float]:
     for trial in range(trials):
         samples = make_samples(trial)
         readings = run_experiment(samples, strategy, seed=trial + 10_000)
-        noises = [sample["noise"] for sample in samples]
+        noises = []
+        for sample in samples:
+            noises.append(sample["noise"])
         expected += expected_wrong_calls(readings, noises)
         real += wrong_calls(samples, readings)
     return expected / trials, real / trials

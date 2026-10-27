@@ -54,9 +54,13 @@ def mating_move(state: dict, moves_left: int) -> Move | None:
                 if gives_check:
                     return move  # Checkmate
                 continue  # Stalemate is not a win
-            if moves_left > 1 and all(
-                defense_fails(state, reply, moves_left - 1) for reply in replies
-            ):
+            if moves_left == 1:
+                continue  # A check that is not mate fails in a mate in one
+            every_reply_fails = True
+            for reply in replies:
+                if not defense_fails(state, reply, moves_left - 1):
+                    every_reply_fails = False
+            if every_reply_fails:
                 return move
         finally:
             undo_move(state, undo)
@@ -93,12 +97,17 @@ def read_puzzles(file_path: Path = PUZZLE_PATH) -> list[tuple[str, str, int, str
         if not line.strip():
             continue
         fields = line.split()
-        fen = " ".join(fields[:4]) + " 0 1"
-        operations = dict(
-            part.strip().split(" ", 1)
-            for part in " ".join(fields[4:]).split(";")
-            if part.strip()
-        )
+        # EPD gives four FEN fields, then operations such as bm Qg6; dm 2;
+        fen = fields[0] + " " + fields[1] + " " + fields[2] + " " + fields[3] + " 0 1"
+        rest = ""
+        for word in fields[4:]:
+            rest += word + " "
+        operations = {}
+        for part in rest.split(";"):
+            part = part.strip()
+            if part != "":
+                name, value = part.split(" ", 1)
+                operations[name] = value
         puzzles.append(
             (fen, operations["bm"], int(operations["dm"]), operations["id"].strip('"'))
         )

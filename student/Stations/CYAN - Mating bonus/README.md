@@ -28,6 +28,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `evaluation.py` | `mating_bonus()` | 135 | 24 | `test_upgrades.py::test_mating_bonus_prefers_the_losing_king_in_the_corner` |
+| `evaluation.py` | `mating_bonus()` | 144 | 24 | `test_upgrades.py::test_mating_bonus_prefers_the_losing_king_in_the_corner` |
 
 Lines to type in all: 24. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

@@ -85,7 +85,7 @@ def order_moves(
 def main():
     state = state_from_fen("4k3/8/2q5/1P1r4/8/8/8/3QK3 w - - 0 1")
     ordered = order_moves(legal_moves(state), state["board"])
-    print("First two moves:", [move_to_uci(move) for move in ordered[:2]])
+    print(f"First two moves: {move_to_uci(ordered[0])} {move_to_uci(ordered[1])}")
     print("  (expected b5c6, pawn takes queen, then d1d5, queen takes rook)")
 
 
