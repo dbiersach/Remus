@@ -25,6 +25,8 @@ BRAINS = {
     "negamax": negamax_move,
 }  # By name
 DEFAULT_SECONDS = 2.0  # Thinking time when the GUI gives no clock
+RESERVE_SECONDS = 3.0  # Clock time Remus never plans to spend, to pay for sending moves
+MIN_SECONDS = 0.01  # The shortest think, for when the clock is nearly empty
 
 
 def send(text: str) -> None:
@@ -76,7 +78,10 @@ def thinking_time(words: list[str], white_to_move: bool) -> float:
     -------
     float
         "movetime" if the GUI gives one; otherwise a thirtieth of the remaining
-        time plus half the increment; otherwise DEFAULT_SECONDS.
+        time plus half the increment; otherwise DEFAULT_SECONDS. The remaining
+        time leaves out RESERVE_SECONDS, because every move also costs time that
+        the search does not see: starting the search, sending the move, and the
+        GUI reading it. One move never takes more than half of the spare time.
     """
     values = {}
     for index in range(1, len(words) - 1):
@@ -88,7 +93,9 @@ def thinking_time(words: list[str], white_to_move: bool) -> float:
         return values["movetime"]
     clock, increment = ("wtime", "winc") if white_to_move else ("btime", "binc")
     if clock in values:
-        return max(0.05, values[clock] / 30 + values.get(increment, 0) / 2)
+        spare = values[clock] - RESERVE_SECONDS
+        seconds = spare / 30 + values.get(increment, 0) / 2
+        return max(MIN_SECONDS, min(seconds, spare / 2))
     return DEFAULT_SECONDS
 
 

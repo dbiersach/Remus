@@ -17,6 +17,7 @@ from make_move import make_move, state_snapshot, undo_move
 from moves import move_from_uci, move_to_uci
 from notation import move_to_san, parse_san
 from search import greedy_move
+from uci_engine import MIN_SECONDS, RESERVE_SECONDS, thinking_time
 
 FENS = [  # Positions with every kind of move: castling, en passant, promotion, checks
     START_FEN,
@@ -116,3 +117,12 @@ def test_uci_engine_answers_the_gui() -> None:
     board.push_uci("e2e4")
     board.push_uci("e7e5")
     assert chess.Move.from_uci(best) in board.legal_moves
+
+
+def test_thinking_time_keeps_a_reserve() -> None:
+    """33 seconds left: (33 - 3) / 30 = 1 second. 2 seconds left: the shortest think."""
+    assert thinking_time(["go", "wtime", "33000", "btime", "1000"], True) == 1.0
+    assert thinking_time(["go", "wtime", "1000", "btime", "2000"], False) == MIN_SECONDS
+    # A big increment never spends more than half of the spare time
+    seconds = thinking_time(["go", "wtime", "5000", "winc", "10000"], True)
+    assert seconds == (5 - RESERVE_SECONDS) / 2
