@@ -5,19 +5,27 @@ workshop, the same as `instructor/`, and each Day folder has four period folders
 `period1` to `period4`.
 
 Each period folder starts with working code from the periods before. Its
-`README.md` names the files that are new or growing, and the functions left for
-you to write. Each of those functions keeps its name, its docstring, and its
-type hints. Its body is one line:
+`README.md` lists what you will learn and how you will show it, the files that are
+new or growing, a paragraph on every change you make and why, and a table of the
+functions left for you to write, with the line where each one starts. Each of those
+functions keeps its name, its docstring, and its type hints. Its body is a stub:
 
 ```python
-raise NotImplementedError("Day 1 P4: write square_name()")
+    # Day 1, period 4: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 1 P4: write square_name()")
 ```
+
+The first three periods of Day 1 hold Python labs instead: `python_setup.py`,
+`python_strings.py`, and `python_lists.py`. In a lab file, each line that holds only
+a `#` is one line for you to type.
 
 ## How to work on a function
 
-1. Open the page for the file in `docs/scripts/`, such as `docs/scripts/board.md`.
+1. Read the period's `README.md`, then the page for the file in `docs/scripts/`,
+   such as `docs/scripts/board.md`.
 2. Read the function's docstring. It says what the function must do.
-3. Delete the `raise` line and write the body.
+3. Delete the two stub comments and the `raise` line, and write the body.
 4. Run the tests from inside the period folder: `uv run pytest`.
 5. Run the file itself, such as `uv run board.py`, and compare with the expected answers.
 
@@ -36,8 +44,8 @@ written yet.
 | 2 | 3 | `game_state.py` | `color_of` |
 | 2 | 3 | `moves.py` | `move_to_uci` |
 | 2 | 3 | `moves.py` | `move_from_uci` |
+| 2 | 4 | `make_move.py` | `make_move` |
 | 2 | 4 | `make_move.py` | `undo_move` |
-| 2 | 4 | `make_move.py` | `state_snapshot` |
 | 3 | 2 | `move_generation.py` | `king_moves` |
 | 3 | 3 | `move_generation.py` | `slide` |
 | 3 | 4 | `move_generation.py` | `pawn_pushes` |
@@ -57,9 +65,11 @@ written yet.
 | 7 | 3 | `search.py` | `random_move` |
 | 7 | 3 | `search.py` | `greedy_move` |
 | 7 | 4 | `evaluation.py` | `material` |
-| 8 | 3 | `search.py` | `capture_moves` |
+| 8 | 1 | `search.py` | `negamax` |
+| 8 | 2 | `search.py` | `alpha_beta` |
+| 8 | 3 | `search.py` | `quiescence` |
 | 8 | 4 | `move_ordering.py` | `mvv_lva_score` |
-| 9 | 1 | `search.py` | `format_info` |
+| 9 | 1 | `search.py` | `think` |
 | 9 | 4 | `mate_solver.py` | `mating_move` |
 | 10 | 1 | `hidden_peak.py` | `candidate_squares` |
 | 10 | 1 | `hidden_peak.py` | `score_candidate` |

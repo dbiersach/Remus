@@ -114,6 +114,9 @@ against Remus-WHITE keeps a perfect score from giving an endless rating. A ratin
 of +60 plus or minus 80 means the true gain most likely lies between -20 and +140,
 so two versions whose ranges overlap have not been told apart yet.
 
+The league can stop partway, such as when a laptop restarts. Run it again and it
+plays only the games that are not in the games file yet.
+
 ## Puzzle questions
 
 1. Why does every station play the same opponent instead of each other?

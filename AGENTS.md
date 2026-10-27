@@ -57,6 +57,12 @@ that are specific to Claude Code. The Python style follows David's course reposi
   docstring, and failing tests. The class picks one pair's version to merge, and
   `CONTRIBUTORS.md` records who wrote it. Keep student functions short enough for a pair
   to finish in 20 to 40 minutes.
+- **Pairs write the most important and most enlightening code, never plumbing**
+  (David, 2026-10-27). Each student function holds a central idea of the lesson, such
+  as making a move and recording its undo, negamax's sign flip, an alpha-beta cutoff,
+  or quiescence standing pat, in code simple enough that a pair can explain every line
+  it types. Text formatting, protocol strings, and helpers that only move data around
+  stay teacher code. A lab must never become a typing exercise.
 - **No hands-on lab asks a pair to type more than about 30 to 40 lines of code** in
   one period, counted across every function and lab blank of that period (David,
   2026-10-27). Many 13-year-olds cannot touch-type, so a longer lab spends class time
@@ -192,6 +198,22 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   four period folders, `period1` to `period4`. Each period folder is a complete,
   runnable copy of Remus as it stands at the end of that period, with a `README.md`
   that names the period, its new and growing files, and the functions pairs write.
+  Every period README and station README also holds (David, 2026-10-27):
+  - **Learning objectives** as a bulleted list, each with a **Measured by** line that
+    says how the teacher sees a pair has learned it: a named test that passes, a
+    printed result, or something the pair explains without running code.
+  - **The changes and why**: one paragraph for every function or lab part the pair
+    writes, saying what the code does, why it is written that way, and how it fits
+    the whole engine.
+  The text lives in `period_guides.py` (`OBJECTIVES`, `CHANGE_NOTES`, `LAB_NOTES`,
+  `STATION_OBJECTIVES`); the builders write it into the READMEs, so edit it there.
+  Each student README adds a "What you edit this period" table with the line where
+  each stub starts, the lines to type, and the tests that check it, and
+  `docs/student_edit_plan.md` lists the same plan for the whole course.
+- Python skills labs live in `labs/dayNN/` (student file with `#` blanks) and
+  `labs/dayNN/instructor/` (`<name>_instructor.py`); `period_guides.LABS` names the
+  period of each, and the builders copy the answer file into the instructor period
+  folder and the blank file into the student one.
   Nothing in a period folder imports from another folder. Modules import each other
   by name (`from board import new_board`), so any module runs from inside its folder
   with `uv run perft.py`.

@@ -150,7 +150,10 @@ Map each engine idea onto the new problem before writing code. Legal moves becom
 
 Benchmark the strategies the way the engine was benchmarked against itself: run 100 hidden grids with a fixed random seed and report the average number of measurements needed to find the peak for random guessing, the greedy strategy, and depth 2. Close by naming what the real NSLS-II agent adds: a statistical model of the sample (a Gaussian process) in place of a hand-built score.
 
-**Ready to move on when:** the greedy strategy needs fewer measurements than random guessing on the 100-grid benchmark, and the learner can say which engine idea each function reuses and which one (the opponent's minimum) does not apply.
+
+A second problem, `beam_time.py`, brings the loop closer to a real beamline. Eight samples on a holder each need one yes-or-no answer (is the signal above 50?), every one-minute shot is noisy, and there are only 40 shots for all eight. The evaluation is the number of wrong calls the agent expects to make, built from each sample's average and its error, the noise divided by the square root of the number of readings. The look-ahead tries three pretend next readings, one noise step low, on the average, and one step high, with chances 1/4, 1/2, and 1/4, and spends the next shot where the expected wrong calls drop the most. Verify the agent the way perft verified the rules: the wrong calls it expects should land close to the wrong calls it really makes over 200 holders.
+
+**Ready to move on when:** the greedy strategy needs fewer measurements than random guessing on the 100-grid benchmark, the largest-gain beam time agent makes fewer wrong calls than equal time, and the learner can say which engine idea each function reuses and which one (the opponent's minimum) does not apply.
 
 ## Special-move checklist
 

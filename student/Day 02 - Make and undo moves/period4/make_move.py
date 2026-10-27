@@ -27,32 +27,9 @@ def make_move(state: dict, move: Move) -> dict:
         The undo record: the move, the piece that moved, the piece it captured,
         and the old values of every state field the move changes.
     """
-    board = state["board"]
-    piece = piece_at(board, move.from_square)
-    captured = piece_at(board, move.to_square)
-    undo = {
-        "move": move,
-        "piece": piece,
-        "captured": captured,
-        "castling": state["castling"],
-        "en_passant": state["en_passant"],
-        "halfmove_clock": state["halfmove_clock"],
-        "fullmove_number": state["fullmove_number"],
-    }
-
-    set_piece(board, move.to_square, piece)
-    set_piece(board, move.from_square, EMPTY)
-
-    # The fifty-move clock restarts after a capture or a pawn move
-    if captured != EMPTY or piece.upper() == "P":
-        state["halfmove_clock"] = 0
-    else:
-        state["halfmove_clock"] += 1
-    if state["turn"] == BLACK:
-        state["fullmove_number"] += 1
-    state["en_passant"] = None
-    state["turn"] = opponent(state["turn"])
-    return undo
+    # Day 2, period 4: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 2 P4: write make_move()")
 
 
 def undo_move(state: dict, undo: dict) -> None:
@@ -73,9 +50,15 @@ def undo_move(state: dict, undo: dict) -> None:
 
 def state_snapshot(state: dict) -> str:
     """Return the whole state as text, so two states can be compared with ==."""
-    # Day 2, period 4: write this function.
-    # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 2 P4: write state_snapshot()")
+    rows = ["".join(row) for row in state["board"]]
+    fields = [
+        state["turn"],
+        state["castling"],
+        str(state["en_passant"]),
+        str(state["halfmove_clock"]),
+        str(state["fullmove_number"]),
+    ]
+    return "/".join(rows) + " " + " ".join(fields)
 
 
 def main():

@@ -23,6 +23,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from period_guides import CHANGE_NOTES, STATION_OBJECTIVES
+
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
 STATIONS = INSTRUCTOR / "Stations"
@@ -872,11 +874,23 @@ def readme_text(station: dict) -> str:
     written = ", ".join(
         f"`{function}()` in `{file}`" for file, function in station["students"]
     )
+    objectives = "\n".join(
+        f"- {objective} **Measured by:** {measure}"
+        for objective, measure in STATION_OBJECTIVES
+    )
+    changes = "\n\n".join(
+        f"### `{function}()` in `{file}`\n\n{CHANGE_NOTES[(file, function)]}"
+        for file, function in station["students"]
+    )
     return (
         f"# Remus-{color}: {name}\n\n"
         f"{station['idea']}\n\n"
+        "## Learning objectives\n\n"
+        f"By the end of the station, each pair can:\n\n{objectives}\n\n"
+        "## The files\n\n"
         "This folder is Remus-WHITE, the finished Day 9 Remus, plus this one "
         f"enhancement. The pair writes {written}.\n\n"
+        f"## The changes and why\n\n{changes}\n\n"
         "Check the work from inside this folder with `uv run pytest`. Then measure "
         "the gain from the Stations folder with "
         f"`uv run station_match.py {color}`, which plays Remus-{color} against "

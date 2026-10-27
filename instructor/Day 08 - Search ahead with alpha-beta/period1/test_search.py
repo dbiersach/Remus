@@ -43,6 +43,7 @@ def test_negamax_finds_mate_in_one() -> None:
         move, score, _ = best_move(state_from_fen(fen), 2)
         assert move_to_uci(move) == expected
         assert score == MATE_SCORE - 1
+        assert negamax(state_from_fen(fen), 2, 0, SearchInfo()) == MATE_SCORE - 1
 
 
 def test_minimax_and_negamax_agree() -> None:

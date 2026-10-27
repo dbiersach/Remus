@@ -409,9 +409,14 @@ def format_info(depth: int, score: int, nodes: int, pv: list[Move]) -> str:
         Text such as "info depth 3 score cp 35 nodes 4120 pv e2e4 e7e5 g1f3". A
         mate score is written as "score mate 2", counted in moves, not plies.
     """
-    # Day 9, period 1: write this function.
-    # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 9 P1: write format_info()")
+    if abs(score) > MATE_SCORE - 1000:
+        plies = MATE_SCORE - abs(score)
+        moves_to_mate = (plies + 1) // 2
+        score_text = f"mate {moves_to_mate if score > 0 else -moves_to_mate}"
+    else:
+        score_text = f"cp {score}"
+    line = " ".join(move_to_uci(move) for move in pv)
+    return f"info depth {depth} score {score_text} nodes {nodes} pv {line}"
 
 
 def think(
@@ -442,23 +447,9 @@ def think(
     Move
         The best move of the deepest search that finished.
     """
-    info = SearchInfo(deadline=time.perf_counter() + seconds, stop=stop)
-    moves = legal_moves(state)
-    best = order_moves(moves, state["board"])[0]
-    for depth in range(1, max_depth + 1):
-        try:
-            score, pv = alpha_beta_with_quiescence(
-                state, depth, 0, -MATE_SCORE - 1, MATE_SCORE + 1, info, best
-            )
-        except SearchTimeout:
-            break  # Keep the best move of the last depth that finished
-        if pv:
-            best = pv[0]
-        if report is not None:
-            report(format_info(depth, score, info.nodes, pv))
-        if abs(score) > MATE_SCORE - 1000 or len(moves) == 1:
-            break  # A forced mate or a single legal move needs no deeper search
-    return best
+    # Day 9, period 1: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P1: write think()")
 
 
 def think_move(state: dict) -> Move:

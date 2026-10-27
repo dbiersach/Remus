@@ -25,6 +25,7 @@ from search import (
     format_info,
     minimax,
     negamax,
+    quiescence,
     think,
 )
 
@@ -66,6 +67,7 @@ def test_negamax_finds_mate_in_one() -> None:
         move, score, _ = best_move(state_from_fen(fen), 2)
         assert move_to_uci(move) == expected
         assert score == MATE_SCORE - 1
+        assert negamax(state_from_fen(fen), 2, 0, SearchInfo()) == MATE_SCORE - 1
 
 
 def test_minimax_and_negamax_agree() -> None:
@@ -124,6 +126,18 @@ def test_capture_moves_and_mvv_lva() -> None:
     )
     ordered = order_moves(capture_moves(state), board)
     assert move_to_uci(ordered[0]) == "b5c6"
+
+
+def test_quiescence_stands_pat_or_takes_a_free_pawn() -> None:
+    """Expected: a defended pawn is left alone, a free pawn is taken."""
+    defended = state_from_fen("4k3/8/4p3/3p4/8/8/3Q4/4K3 w - - 0 1")
+    before = state_snapshot(defended)
+    score = quiescence(defended, -MATE_SCORE - 1, MATE_SCORE + 1, SearchInfo())
+    assert score == evaluate(defended)  # Qxd5 exd5 loses the queen, so stand pat
+    assert state_snapshot(defended) == before
+    free = state_from_fen("4k3/8/8/3p4/8/8/3Q4/4K3 w - - 0 1")
+    score = quiescence(free, -MATE_SCORE - 1, MATE_SCORE + 1, SearchInfo())
+    assert score > evaluate(free)  # Qxd5 wins a pawn that nothing defends
 
 
 def test_quiescence_sees_the_recapture() -> None:

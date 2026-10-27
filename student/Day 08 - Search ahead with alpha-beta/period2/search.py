@@ -217,22 +217,9 @@ def alpha_beta(
     int
         The same score negamax returns at this depth.
     """
-    info.nodes += 1
-    if depth == 0:
-        return evaluate(state)
-    moves = legal_moves(state)
-    if not moves:
-        return -(MATE_SCORE - ply) if in_check(state, state["turn"]) else 0
-    for move in moves:
-        undo = make_move(state, move)
-        try:
-            score = -alpha_beta(state, depth - 1, ply + 1, -beta, -alpha, info)
-        finally:
-            undo_move(state, undo)
-        if score >= beta:
-            return score  # Cutoff: the opponent will not allow this
-        alpha = max(alpha, score)
-    return alpha
+    # Day 8, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 8 P2: write alpha_beta()")
 
 
 def main():

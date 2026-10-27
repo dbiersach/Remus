@@ -15,8 +15,10 @@ rebuilds the three earlier periods from it:
 3. When a function is left out, every import of it is removed, and every function
    or test that uses it is left out too, until each file uses only what exists.
 
-Each period folder also gets a README.md that says what the period is about,
-which files changed, and which functions the students write.
+Each period folder also gets a README.md that says what the period is about, its
+learning objectives and how each one is measured, which files changed, and one
+paragraph on every change the students make, all from period_guides.py. A Python
+lab period gets its answer file from labs/dayNN/instructor/.
 
 Run make_student_folders.py after this script.
 """
@@ -28,9 +30,11 @@ import sys
 from pathlib import Path
 
 from make_student_folders import STUDENT_FUNCTIONS
+from period_guides import CHANGE_NOTES, LAB_NOTES, LABS, OBJECTIVES
 
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
+LABS_FOLDER = ROOT / "labs"  # The Python skills labs, one folder per day
 SAVED_OUTPUT_SUFFIXES = {".pgn", ".svg"}  # Games and board pictures that scripts save
 
 # For each day, the period in which a file takes its period4 form. Before that
@@ -775,12 +779,54 @@ def build_period(day: int, period: int, day_end: dict, day_before: dict) -> dict
     return settle(files, label)
 
 
+def objectives_section(day: int, period: int) -> str:
+    """Return the learning objectives of a period, each with how it is measured."""
+    lines = [
+        "## Learning objectives",
+        "",
+        "By the end of this period, each pair can:",
+        "",
+    ]
+    for objective, measure in OBJECTIVES[(day, period)]:
+        lines.append(f"- {objective} **Measured by:** {measure}")
+    return "\n".join(lines)
+
+
+def changes_section(day: int, period: int) -> str:
+    """Return one paragraph for every change the pairs make this period."""
+    lines = ["## The changes and why"]
+    if (day, period) in LABS:
+        name = LABS[(day, period)]
+        lines += [
+            "",
+            (
+                f"The pairs fill in the blanks of `{name}.py`. Each `#` line in the "
+                "student file stands for one line to type, and the answer sits on the "
+                f"same line of `{name}_instructor.py`."
+            ),
+        ]
+        for paragraph in LAB_NOTES[(day, period)]:
+            lines += ["", paragraph]
+    for row_day, row_period, file_name, function in STUDENT_FUNCTIONS:
+        if (row_day, row_period) == (day, period):
+            lines += [
+                "",
+                f"### `{function}()` in `{file_name}`",
+                "",
+                CHANGE_NOTES[(file_name, function)],
+            ]
+    if len(lines) == 1:
+        return ""
+    return "\n".join(lines)
+
+
 def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     """Return the README.md that explains one period folder."""
     title = PERIOD_TITLES[(day, period)]
     sections = [f"# Day {day}, Period {period}: {title}"]
     if (day, period) in PERIOD_NOTES:
         sections.append(PERIOD_NOTES[(day, period)])
+    sections.append(objectives_section(day, period))
     new_files = [name for name in files if name not in files_before]
     grown_files = [
         name
@@ -792,9 +838,16 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         for (row_day, row_period, file_name, function) in STUDENT_FUNCTIONS
         if (row_day, row_period) == (day, period)
     ]
-    if title.startswith("Python lab"):
-        sections.append(f"The lab files for this period live in `labs/day{day:02}/`.")
-    if not files:
+    sections.append("## The files")
+    if (day, period) in LABS:
+        name = LABS[(day, period)]
+        sections.append(
+            f"This period comes before any Remus code. The lab is `{name}.py` in "
+            f"`student/`, with the answers in `{name}_instructor.py` in "
+            f"`instructor/`. Both come from `labs/day{day:02}/`. Run it with "
+            f"`uv run {name}.py`."
+        )
+    elif not files:
         sections.append(
             "This period comes before any Remus code, so the folder is empty."
         )
@@ -820,12 +873,24 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
             "In `student/` these functions raise `NotImplementedError` until a pair "
             "writes them. In `instructor/` they are finished."
         )
+    changes = changes_section(day, period)
+    if changes:
+        sections.append(changes)
     if any(name.startswith("test_") for name in files):
         sections.append(
             "Check the work from inside this folder with `uv run pytest`, and run any "
             "file on its own, such as `uv run board.py`."
         )
     return "\n\n".join(sections) + "\n"
+
+
+def copy_lab(day: int, period: int, folder: Path) -> None:
+    """Copy a lab period's answer file into its instructor period folder."""
+    if (day, period) not in LABS:
+        return
+    name = f"{LABS[(day, period)]}_instructor.py"
+    source = LABS_FOLDER / f"day{day:02}" / "instructor" / name
+    shutil.copy2(source, folder / name)
 
 
 def write_folder(folder: Path, files: dict[str, str], day_end_folder: Path) -> None:
@@ -867,6 +932,7 @@ def main():
                 files = build_period(day, period, day_end, day_before)
                 folder = day_folder(day) / f"period{period}"
                 write_folder(folder, files, end_folder)
+                copy_lab(day, period, folder)
                 built.append(folder)
             readme = readme_text(day, period, files, files_before)
             (day_folder(day) / f"period{period}" / "README.md").write_text(readme)

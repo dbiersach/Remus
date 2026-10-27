@@ -251,9 +251,15 @@ def capture_moves(state: dict) -> list[Move]:
         The captures (including en passant) and promotions, the moves quiescence
         search keeps playing until the position is quiet.
     """
-    # Day 8, period 3: write this function.
-    # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 8 P3: write capture_moves()")
+    board = state["board"]
+    captures = []
+    for move in legal_moves(state):
+        is_en_passant = move.to_square == state["en_passant"] and (
+            piece_at(board, move.from_square).upper() == "P"
+        )
+        if piece_at(board, move.to_square) != EMPTY or is_en_passant or move.promotion:
+            captures.append(move)
+    return captures
 
 
 def quiescence(state: dict, alpha: int, beta: int, info: SearchInfo) -> int:
@@ -281,21 +287,9 @@ def quiescence(state: dict, alpha: int, beta: int, info: SearchInfo) -> int:
     int
         The score for the side to move.
     """
-    info.nodes += 1
-    stand_pat = evaluate(state)
-    if stand_pat >= beta:
-        return stand_pat
-    alpha = max(alpha, stand_pat)
-    for move in capture_moves(state):
-        undo = make_move(state, move)
-        try:
-            score = -quiescence(state, -beta, -alpha, info)
-        finally:
-            undo_move(state, undo)
-        if score >= beta:
-            return score
-        alpha = max(alpha, score)
-    return alpha
+    # Day 8, period 3: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 8 P3: write quiescence()")
 
 
 def main():

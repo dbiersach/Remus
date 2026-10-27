@@ -27,8 +27,9 @@ The Day folders live inside the root `instructor/` folder. `instructor/` holds o
 finished reference code that runs as it is, with no blanks to fill in, so the solution
 code stays apart from the code students write and change. Every period folder is a
 complete, runnable copy of Remus as it stands at the end of that period, and its
-`README.md` names the period, the files that are new or growing, and the functions the
-pairs write. `period4` holds the finished code of the day. `make_period_folders.py`
+`README.md` names the period, its learning objectives with how each is measured, the
+files that are new or growing, the functions the pairs write, and a paragraph on each
+change and why (the text comes from `period_guides.py`). `period4` holds the finished code of the day. `make_period_folders.py`
 builds `period1` to `period3` from it, so a file that grows during the day, such as
 `make_move.py` on Day 5, gains castling in `period2`, en passant in `period3`, and
 promotion in `period4`.
@@ -110,7 +111,11 @@ The pages, in the order the class builds them:
 
 | Page | What the file does |
 | --- | --- |
+| [`python_setup.py`](scripts/python_setup.md) | Day 1 lab: is the laptop ready? |
+| [`python_strings.py`](scripts/python_strings.md) | Day 1 lab: square names are text |
+| [`python_lists.py`](scripts/python_lists.md) | Day 1 lab: a board is a list of rows |
 | [`board.py`](scripts/board.md) | The chessboard |
+| [`show_board.py`](scripts/show_board.md) | Draw the board and its moves as a picture |
 | [`game_state.py`](scripts/game_state.md) | Everything the board does not show |
 | [`moves.py`](scripts/moves.md) | What a move looks like |
 | [`make_move.py`](scripts/make_move.md) | Make a move, then take it back |

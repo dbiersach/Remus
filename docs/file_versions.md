@@ -52,7 +52,7 @@ period before, so a pair can always open the newest folder.
 
 | Period | New files | Changed files |
 | --- | --- | --- |
-| D1 P1 to P3 | None: setup and Python labs, before any Remus code | None |
+| D1 P1 to P3 | No Remus code yet. Each folder holds its Python lab from `labs/day01/`: `python_setup.py` (P1), `python_strings.py` (P2), and `python_lists.py` (P3), with the answer file `<name>_instructor.py` in `instructor/` | None |
 | D1 P4 | `board.py`, `show_board.py`, `test_board.py` | None |
 | D2 P1, P2 | None: Python labs | None |
 | D2 P3 | `game_state.py`, `moves.py`, `test_make_move.py` | `board.py`: adds `set_piece()` |

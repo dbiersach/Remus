@@ -9,7 +9,7 @@ class engine and stay there.
 The plan also maps the ideas in Borland's Turbo GameWorks Chess 4.0 (Kaare Danielsen,
 1985 to 1987) onto the modules Remus grows, and shows where Remus connects to
 `python-chess` and a desktop GUI so the class never has to build one. The standing rules
-in [`AGENTS.md`](AGENTS.md) apply to everything below.
+in [`AGENTS.md`](../AGENTS.md) apply to everything below.
 
 ## Decisions this plan is built on
 
@@ -234,10 +234,14 @@ refresher with a demonstration board comes right before the code that needs each
 
 - **P1. Welcome and setup.** Watch the finished reference Remus play in the GUI. Tell
   the Sargon and Rimush story from `AGENTS.md`. Form pairs, check every laptop runs
-  `uv run pytest`, and review SAN and UCI notation on the demonstration board.
-- **P2. Python lab 1:** scripts, strings, `ord` and `chr`, f-strings.
-- **P3. Python lab 2:** lists and nested lists. Unplugged warm-up: "Call the square"
-  drills "row 0 is rank 8" on the printed board before anyone types it.
+  `uv run pytest`, and review SAN and UCI notation on the demonstration board. Each
+  pair runs `python_setup.py`, which checks the laptop and prints the team's first
+  greeting (6 typed lines).
+- **P2. Python lab 1, `python_strings.py`:** scripts, strings, `ord` and `chr`,
+  f-strings (13 typed lines).
+- **P3. Python lab 2, `python_lists.py`:** lists and nested lists (25 typed lines).
+  Unplugged warm-up: "Call the square" drills "row 0 is rank 8" on the printed board
+  before anyone types it.
 - **P4. `board.py`.** The teacher writes `new_board()` and hands out `show_board.py`,
   which draws the board as a picture in the web browser (python-chess draws it; the
   engine never imports python-chess).
@@ -256,9 +260,10 @@ refresher with a demonstration board comes right before the code that needs each
   **Students write:** `is_white(piece)`, `color_of(piece)`, `move_to_uci(move)`,
   `move_from_uci(text)`.
 - **P4. `make_move.py`, ordinary moves.** Unplugged warm-up: "Undo from the card."
-  The teacher writes `make_move()` returning an undo record.
-  **Students write:** `undo_move()` for quiet moves and captures, and
-  `state_snapshot(state)` for the "make ten moves, undo ten moves, compare" test.
+  The teacher writes `state_snapshot(state)` for the "make ten moves, undo ten moves,
+  compare" test. **Students write:** `make_move()`, which moves the piece and returns
+  an undo record of everything the move destroys, and `undo_move()`, which uses that
+  record to take back quiet moves and captures.
 
 **Checkpoint `d2-p4-end`:** ten moves made and undone return the exact start state.
 
@@ -304,12 +309,13 @@ only escapes.
   castling generation and the attacked-square checks.
   **Students write:** `update_castling_rights(rights, move, captured)`, the table of
   which moves remove `K`, `Q`, `k`, or `q`, including a rook captured on its home square.
-- **P3. En passant and the double step.** **Students write:** the line in `make_move`
-  that sets the en passant target after a double step, and `en_passant_victim_square()`.
-  The teacher writes the en passant make and undo.
+- **P3. En passant and the double step.** **Students write:**
+  `en_passant_victim_square()`, the square of the pawn an en passant capture removes,
+  which is not the square the capturing pawn lands on. The teacher writes the en
+  passant make and undo, including the line that sets the target after a double step.
 - **P4. Promotion and underpromotion.** Puzzle: promoting to a knight wins, promoting to
-  a queen stalemates. **Students write:** promotion in `make_move` and `undo_move`.
-  Pairs write tests from the workshop's special-move checklist. To close the week,
+  a queen stalemates. The teacher writes promotion in `make_move` and `undo_move`,
+  and pairs write tests from the workshop's special-move checklist. To close the week,
   the teacher hands out `uci_engine.py` and `remus.bat` as a ready-made plug: pairs
   register `remus.bat` in En Croissant and play their own Remus, which answers with a
   random legal move. Nobody reads the UCI code yet; Day 7 explains it.
@@ -376,17 +382,19 @@ moves" milestone.
 
 - **P1. Minimax, negamax, and mates.** Unplugged warm-up: "Paper minimax," with the
   optional human tree at the front of the room. The teacher writes `minimax()` to
-  depth 2 with a node counter, and pairs compare its answer with their worksheets. The
-  teacher then rewrites the search as `negamax()` with `try/finally` around each make
-  and undo, and scores checkmate as `-(MATE_SCORE - ply)` so Remus prefers the faster
-  mate. Pairs run the tests that the root state is unchanged after every search.
+  depth 2 with a node counter, and pairs compare its answer with their worksheets.
+  **Students write:** `negamax()`, the same search in one function: each reply's score
+  with its sign flipped, `try/finally` around each make and undo, and checkmate scored
+  as `-(MATE_SCORE - ply)` so Remus prefers the faster mate. The tests check that it
+  agrees with minimax and leaves the root state unchanged.
 - **P2. Python lab 11 and alpha-beta.** Unplugged warm-up: "Fewest flips" finds the
-  cards nobody needs to turn over. The teacher writes `alpha_beta()` beside `negamax()`,
-  and pairs run `compare_search.py`: both pick the same score, and alpha-beta counts
-  fewer nodes.
+  cards nobody needs to turn over. **Students write:** `alpha_beta()` beside
+  `negamax()`, then run `compare_search.py`: both pick the same score, and alpha-beta
+  counts fewer nodes.
 - **P3. The horizon effect and quiescence.** Puzzle: at depth 2 Remus takes a defended
-  pawn with its queen. The teacher writes `quiescence()`. **Students write:**
-  `capture_moves(state)`, the filter quiescence searches.
+  pawn with its queen. The teacher writes `capture_moves(state)`, the filter of
+  captures and promotions. **Students write:** `quiescence()`, which may "stand pat"
+  with the evaluation or try a capture that does better.
 - **P4. Move ordering.** **Students write:** `mvv_lva_score(move, board)` (most valuable
   victim, least valuable attacker). The teacher writes `order_moves()`, the
   `sorted(..., key=...)` call that uses it, and the check extension. Pairs measure node
@@ -397,11 +405,12 @@ and alpha-beta returns the same score as negamax with fewer nodes.
 
 ### Day 9: The clock, and the enhancement stations
 
-- **P1. Iterative deepening, the clock, and UCI info.** The teacher writes the deepening
-  loop, reads `go movetime`, `wtime`, `btime`, `winc`, and `binc`, and moves the search
-  into a thread with a stop flag. **Students write:** `format_info(depth, score, nodes,
-  pv)`, which prints `info depth 3 score cp 35 nodes 4120 pv e2e4 e7e5 g1f3` so the GUI
-  shows Remus thinking. The Remus at the end of this period is **Remus-WHITE**, with
+- **P1. Iterative deepening, the clock, and UCI info.** The teacher reads `go
+  movetime`, `wtime`, `btime`, `winc`, and `binc`, moves the search into a thread with
+  a stop flag, and writes `format_info()`, which prints `info depth 3 score cp 35 nodes
+  4120 pv e2e4 e7e5 g1f3` so the GUI shows Remus thinking. **Students write:**
+  `think()`, the deepening loop: depth 1, then 2, then 3, keeping the best move of the
+  deepest search that finished before the clock ran out. The Remus at the end of this period is **Remus-WHITE**, with
   none of the enhancements.
 - **P2. Python lab 12 and the enhancement stations.** The lab covers dicts as caches
   and tuples as keys. Then each of the 10 pairs takes one color station from
@@ -524,7 +533,7 @@ The full description of each script is in `docs/scripts/`.
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thread, `stop`); the station folders live in `Stations/` |
+| `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thread, `stop`), `console_game.py` (uses `think`); the station folders live in `Stations/` |
 | `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `beam_time.py`, `tournament.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_beam_time.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
 
 Outside the Day folders:
@@ -537,7 +546,9 @@ Outside the Day folders:
 | `make_period_folders.py` | Builds `period1` to `period3` of each instructor Day folder from `period4` |
 | `student/`, `make_student_folders.py` | The student copy of every period folder, with that period's student functions as stubs, and the script that builds it |
 | `docs/` | This plan, the roadmap, the program overview, the script pages, the slide plan, and the two briefing PDFs |
-| `labs/dayNN/<skill>.py`, `labs/dayNN/instructor/<skill>_instructor.py` | Python skills labs: student file with blanks, instructor file with answers (to be written) |
+| `labs/dayNN/<skill>.py`, `labs/dayNN/instructor/<skill>_instructor.py` | Python skills labs: student file with blanks, instructor file with answers. Day 1 holds `python_setup`, `python_strings`, and `python_lists`; the labs of Days 2 to 9 are still to be written |
+| `period_guides.py` | The learning objectives, how each is measured, and the paragraph on every change, which the builders write into every period README |
+| `docs/student_edit_plan.md` | Generated by `make_student_folders.py`: what the pairs write in every period, with line counts |
 | `CONTRIBUTORS.md` | Which pair wrote which function (starts on Day 1) |
 
 A module keeps one file name all course. When a newer version teaches by comparison,

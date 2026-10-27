@@ -130,23 +130,9 @@ def negamax(state: dict, depth: int, ply: int, info: SearchInfo) -> int:
     int
         The score for the side to move.
     """
-    info.nodes += 1
-    if depth == 0:
-        return evaluate(state)
-    moves = legal_moves(state)
-    if not moves:
-        if in_check(state, state["turn"]):
-            return -(MATE_SCORE - ply)  # Checkmated: worse the sooner it happens
-        return 0  # Stalemate
-    best = -MATE_SCORE - 1
-    for move in moves:
-        undo = make_move(state, move)
-        try:
-            score = -negamax(state, depth - 1, ply + 1, info)
-        finally:
-            undo_move(state, undo)
-        best = max(best, score)
-    return best
+    # Day 8, period 1: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 8 P1: write negamax()")
 
 
 def best_move(state: dict, depth: int) -> tuple[Move, int, SearchInfo]:

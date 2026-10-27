@@ -2,7 +2,14 @@
 
 Each pair builds one color station in the `Stations` folder, such as `RED - Transposition table`. The code in this Day folder is Remus-WHITE, the starting point of every station.
 
-The lab files for this period live in `labs/day09/`.
+## Learning objectives
+
+By the end of this period, each pair can:
+
+- Use a dict as a cache with tuples as keys. **Measured by:** The lab remembers perft counts already computed and prints the time saved.
+- Add one enhancement to Remus-WHITE. **Measured by:** The station's own tests pass in its folder.
+
+## The files
 
 The Remus code here is the same as at the end of the period before.
 

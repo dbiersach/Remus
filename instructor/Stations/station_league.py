@@ -38,6 +38,7 @@ from station_match import (
 
 ANCHOR = f"Remus-{YARDSTICK}"  # Remus-WHITE is rated 0
 EVENT_PREFIX = "Station"  # Events of station_match.py and of this league
+LEAGUE_EVENT = "Station league"  # The Event header of every league game
 PRIOR_DRAWS = 1  # Pretend draws against Remus-WHITE, so a perfect score stays finite
 SCALE = 400 / math.log(10)  # Elo points per unit of the natural logarithm
 # Only one engine of a game thinks at a time, so each game needs one processor core
@@ -129,8 +130,27 @@ def fit_ratings(results: list[Result]) -> dict[str, tuple[float, float]]:
     return fitted
 
 
+def played_league_games() -> list[tuple[str, str, str]]:
+    """Return (White, Black, StartMoves) for every league game in the games file."""
+    played = []
+    if not GAMES_PATH.exists():
+        return played
+    with GAMES_PATH.open() as file:
+        while (headers := chess.pgn.read_headers(file)) is not None:
+            if headers.get("Event") == LEAGUE_EVENT:
+                played.append(
+                    (headers["White"], headers["Black"], headers.get("StartMoves", ""))
+                )
+    return played
+
+
 def play_league(games_per_pair: int) -> None:
-    """Play every pair of players games_per_pair times, adding each game to the file."""
+    """
+    Play every pair of players games_per_pair times, adding each game to the file.
+
+    A league game already in the file is not played twice, so a league that
+    stops partway, such as when the computer restarts, picks up where it stopped.
+    """
     players = [find_player(color) for color in all_colors()]
     jobs = []
     opening_number = 0
@@ -142,18 +162,25 @@ def play_league(games_per_pair: int) -> None:
                 opening_number += 1
             white, black = (first, second) if number % 2 == 0 else (second, first)
             jobs.append((white, black, opening))
+    played = played_league_games()
+    waiting = []
+    for white, black, opening in jobs:
+        if (white[0], black[0], opening) in played:
+            played.remove((white[0], black[0], opening))
+        else:
+            waiting.append((white, black, opening))
     print(
         f"League: {len(players)} players, {len(jobs)} games at {MINUTES:g} min + "
-        f"{INCREMENT} s"
+        f"{INCREMENT} s, {len(jobs) - len(waiting)} already played"
     )
     print(f"Adding every game to {GAMES_PATH}")
     GAMES_PATH.parent.mkdir(exist_ok=True)
     with ThreadPoolExecutor(GAMES_AT_ONCE) as pool:
         futures = [
-            pool.submit(play_game, white, black, "Station league", opening)
-            for white, black, opening in jobs
+            pool.submit(play_game, white, black, LEAGUE_EVENT, opening)
+            for white, black, opening in waiting
         ]
-        for number, future in enumerate(futures, start=1):
+        for number, future in enumerate(futures, start=len(jobs) - len(waiting) + 1):
             game = future.result()
             with GAMES_PATH.open("a") as file:
                 print(game, end="\n\n", file=file)

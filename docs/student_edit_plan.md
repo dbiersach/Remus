@@ -1,0 +1,112 @@
+# Student Edit Plan: Who Writes What, Period by Period
+
+`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which the teacher writes, and the functions the pairs write, which are stubs in `student/` and finished in `instructor/`. Each student period folder's `README.md` has the same list with line numbers and the tests that check each function.
+
+## Day 01 - Draw the board
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Welcome and setup | `python_setup_instructor.py` | None | the lab `python_setup.py` (6 lines) |
+| P2 | Python lab 1: scripts, strings, ord and chr, f-strings | `python_strings_instructor.py` | None | the lab `python_strings.py` (13 lines) |
+| P3 | Python lab 2: lists and nested lists | `python_lists_instructor.py` | None | the lab `python_lists.py` (25 lines) |
+| P4 | board.py: the board and its square names | `board.py`, `show_board.py`, `test_board.py` | None | `print_board()` in `board.py` (3 lines); `square_name()` in `board.py` (1 line); `parse_square()` in `board.py` (5 lines); `piece_at()` in `board.py` (2 lines) |
+
+## Day 02 - Make and undo moves
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Python lab 3: functions, type hints, tuples, assert, pytest | None | None | Nothing: a demo or teacher code |
+| P2 | Python lab 4: dicts, dataclasses, aliasing, copying | None | None | Nothing: a demo or teacher code |
+| P3 | game_state.py and moves.py: a game state and a move record | `game_state.py`, `moves.py`, `test_make_move.py` | `board.py` | `is_white()` in `game_state.py` (1 line); `color_of()` in `game_state.py` (5 lines); `move_to_uci()` in `moves.py` (4 lines); `move_from_uci()` in `moves.py` (6 lines) |
+| P4 | make_move.py: make and undo ordinary moves | `make_move.py` | `test_make_move.py` | `make_move()` in `make_move.py` (23 lines); `undo_move()` in `make_move.py` (9 lines) |
+
+## Day 03 - Generate piece moves
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Python lab 5: while, break, direction tuples | None | None | Nothing: a demo or teacher code |
+| P2 | Jumping pieces: knights and kings | `move_generation.py`, `test_move_generation.py` | `show_board.py` | `king_moves()` in `move_generation.py` (1 line) |
+| P3 | Sliding pieces: rooks, bishops, and queens | None | `move_generation.py`, `test_move_generation.py` | `slide()` in `move_generation.py` (14 lines) |
+| P4 | Pawns | None | `move_generation.py`, `test_move_generation.py` | `pawn_pushes()` in `move_generation.py` (11 lines) |
+
+## Day 04 - Keep only legal moves
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Python lab 6: modules, imports, __main__, git | None | None | Nothing: a demo or teacher code |
+| P2 | Attacks | `attacks.py`, `test_legal_moves.py` | None | `attacked_by_knight()` in `attacks.py` (7 lines); `attacked_by_pawn()` in `attacks.py` (8 lines); `attacked_by_king()` in `attacks.py` (7 lines) |
+| P3 | Check and the legal filter | `legal_moves.py` | `attacks.py`, `test_legal_moves.py` | `in_check()` in `attacks.py` (3 lines); `legal_moves()` in `legal_moves.py` (8 lines) |
+| P4 | Practice positions | None | `test_legal_moves.py` | Nothing: a demo or teacher code |
+
+## Day 05 - Add castling, en passant, and promotion
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Python lab 7: sets, in, string replacement | None | None | Nothing: a demo or teacher code |
+| P2 | Castling | `test_special_moves.py` | `legal_moves.py`, `make_move.py` | `update_castling_rights()` in `make_move.py` (4 lines) |
+| P3 | En passant and the double step | None | `make_move.py`, `move_generation.py`, `test_special_moves.py` | `en_passant_victim_square()` in `make_move.py` (1 line) |
+| P4 | Promotion, and Remus plays in En Croissant | `remus.bat`, `uci_engine.py` | `make_move.py`, `test_special_moves.py` | Nothing: a demo or teacher code |
+
+## Day 06 - Count positions and read FEN
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Python lab 8: recursion | None | None | Nothing: a demo or teacher code |
+| P2 | Perft | `perft.py` | None | `perft()` in `perft.py` (8 lines) |
+| P3 | Perft against python-chess, and bug hunt | `test_perft.py` | None | Nothing: a demo or teacher code |
+| P4 | Python lab 9 and FEN | `fen.py`, `test_game.py` | `test_perft.py` | `fen_placement()` in `fen.py` (16 lines); `board_from_placement()` in `fen.py` (14 lines) |
+
+## Day 07 - Play full games and score positions
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Ending the game | `game_end.py` | `fen.py`, `game_state.py`, `make_move.py`, `test_game.py` | `insufficient_material()` in `game_end.py` (15 lines); `game_result()` in `game_end.py` (12 lines) |
+| P2 | SAN and the console game | `console_game.py`, `notation.py` | `test_game.py` | `parse_san()` in `notation.py` (5 lines) |
+| P3 | First brains and the GUI | `play_match.py`, `search.py` | `console_game.py`, `test_game.py`, `uci_engine.py` | `random_move()` in `search.py` (1 line); `greedy_move()` in `search.py` (3 lines) |
+| P4 | What makes a position good? Material and piece-square tables | `evaluation.py`, `test_search.py` | None | `material()` in `evaluation.py` (10 lines) |
+
+## Day 08 - Search ahead with alpha-beta
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Minimax, negamax, and mates | None | `console_game.py`, `search.py`, `test_search.py`, `uci_engine.py` | `negamax()` in `search.py` (17 lines) |
+| P2 | Python lab 11 and alpha-beta | `compare_search.py` | `search.py`, `test_search.py` | `alpha_beta()` in `search.py` (16 lines) |
+| P3 | The horizon effect and quiescence | None | `search.py`, `test_search.py` | `quiescence()` in `search.py` (15 lines) |
+| P4 | Move ordering | `move_ordering.py` | `search.py`, `test_search.py` | `mvv_lva_score()` in `move_ordering.py` (8 lines) |
+
+## Day 09 - Add the clock and build the stations
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Iterative deepening, the clock, and UCI info | None | `console_game.py`, `search.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
+| P2 | Python lab 12 and the enhancement stations | None | None | Their color station's functions, in the table below |
+| P3 | Enhancement stations: test and measure | None | None | Their color station's functions, in the table below |
+| P4 | Launch the station matches, and the mate solver | `mate_solver.py` | `test_search.py` | `mating_move()` in `mate_solver.py` (18 lines) |
+
+## Day 10 - Aim Remus at a science problem
+
+| Period | Title | New files | Files that grow | Pairs write |
+| --- | --- | --- | --- | --- |
+| P1 | Science AI: hidden_peak.py | `hidden_peak.py`, `opening_book.py`, `opening_book.txt`, `test_upgrades.py`, `transposition_table.py` | `console_game.py`, `evaluation.py`, `move_ordering.py`, `search.py`, `uci_engine.py` | `candidate_squares()` in `hidden_peak.py` (6 lines); `score_candidate()` in `hidden_peak.py` (2 lines); `choose_next_measurement()` in `hidden_peak.py` (4 lines) |
+| P2 | The beamline problem: represent and evaluate | `beam_time.py`, `test_beam_time.py` | None | `estimate()` in `beam_time.py` (3 lines); `expected_wrong_calls()` in `beam_time.py` (7 lines) |
+| P3 | The beamline problem: look ahead and verify | None | `beam_time.py`, `test_beam_time.py` | `gain()` in `beam_time.py` (8 lines); `choose_next_sample()` in `beam_time.py` (1 line) |
+| P4 | Results, tournament, take-home, and wrap-up | `estimate_elo.py`, `remus.sh`, `tournament.py` | None | Nothing: a demo or teacher code |
+
+## Enhancement stations (Day 9, periods 2 and 3)
+
+Each pair writes the functions of one color station in `student/Stations`.
+
+| Station | Pairs write |
+| --- | --- |
+| GOLD - All enhancements | Nothing: a finished engine |
+| WHITE - No enhancements | Nothing: a finished engine |
+| RED - Transposition table | `probe()` in `transposition_table.py` (11 lines) |
+| GREEN - Opening book | `load_book()` in `opening_book.py` (22 lines) |
+| BLUE - Killer moves | `remember_killer()` in `search.py` (6 lines) |
+| PINK - Principal variation search | `search_later_move()` in `search.py` (6 lines) |
+| YELLOW - Draw sense | `is_draw_in_search()` in `search.py` (2 lines) |
+| PURPLE - Pawn structure | `pawn_structure()` in `evaluation.py` (30 lines) |
+| CYAN - Mating bonus | `mating_bonus()` in `evaluation.py` (24 lines) |
+| ORANGE - Null-move pruning | `make_null_move()` in `search.py` (5 lines); `undo_null_move()` in `search.py` (3 lines) |
+| BROWN - Late move reductions | `reduction()` in `search.py` (3 lines) |
+| GRAY - King safety | `king_safety()` in `evaluation.py` (20 lines) |

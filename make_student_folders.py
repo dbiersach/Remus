@@ -17,13 +17,17 @@ make_period_folders.py.
 import ast
 import shutil
 from pathlib import Path
+from typing import Any
 
 from make_station_folders import STATIONS_TABLE
+from period_guides import LABS
 
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
 STUDENT = ROOT / "student"
+LABS_FOLDER = ROOT / "labs"  # The Python skills labs, one folder per day
 MAX_TYPED_LINES = 40  # Most lines of code a pair types in one period
+EditRow = dict[str, Any]  # One function a pair writes: file, name, line, tests
 
 # (day, period, file, function) for every function the students write
 STUDENT_FUNCTIONS = [
@@ -35,8 +39,8 @@ STUDENT_FUNCTIONS = [
     (2, 3, "game_state.py", "color_of"),
     (2, 3, "moves.py", "move_to_uci"),
     (2, 3, "moves.py", "move_from_uci"),
+    (2, 4, "make_move.py", "make_move"),
     (2, 4, "make_move.py", "undo_move"),
-    (2, 4, "make_move.py", "state_snapshot"),
     (3, 2, "move_generation.py", "king_moves"),
     (3, 3, "move_generation.py", "slide"),
     (3, 4, "move_generation.py", "pawn_pushes"),
@@ -56,9 +60,11 @@ STUDENT_FUNCTIONS = [
     (7, 3, "search.py", "random_move"),
     (7, 3, "search.py", "greedy_move"),
     (7, 4, "evaluation.py", "material"),
-    (8, 3, "search.py", "capture_moves"),
+    (8, 1, "search.py", "negamax"),
+    (8, 2, "search.py", "alpha_beta"),
+    (8, 3, "search.py", "quiescence"),
     (8, 4, "move_ordering.py", "mvv_lva_score"),
-    (9, 1, "search.py", "format_info"),
+    (9, 1, "search.py", "think"),
     (9, 4, "mate_solver.py", "mating_move"),
     (10, 1, "hidden_peak.py", "candidate_squares"),
     (10, 1, "hidden_peak.py", "score_candidate"),
@@ -115,9 +121,185 @@ def stub_function(source: str, name: str, day: int, period: int) -> str:
     return "".join(lines[:body_start] + stub + lines[body_end:])
 
 
+def lines_text(count: int) -> str:
+    """Return "1 line" or "5 lines"."""
+    return f"{count} line" if count == 1 else f"{count} lines"
+
+
+def lab_blanks(source: str) -> int:
+    """Return how many lines of a student lab file are a lone # for a line to type."""
+    return sum(1 for line in source.splitlines() if line.strip() == "#")
+
+
+def def_line(source: str, name: str) -> int:
+    """Return the line number, counting from 1, where a top-level function starts."""
+    for node in ast.parse(source).body:
+        if isinstance(node, ast.FunctionDef) and node.name == name:
+            return node.lineno
+    raise ValueError(f"No function named {name}")
+
+
+def checking_tests(folder: Path, name: str) -> list[str]:
+    """Return "file::test" for every test in a folder that calls a function by name."""
+    tests = []
+    for test_path in sorted(folder.glob("test_*.py")):
+        for node in ast.parse(test_path.read_text()).body:
+            if not isinstance(node, ast.FunctionDef):
+                continue
+            names = {item.id for item in ast.walk(node) if isinstance(item, ast.Name)}
+            if node.name.startswith("test_") and name in names:
+                tests.append(f"{test_path.name}::{node.name}")
+    return tests
+
+
+def edit_section(rows: list[EditRow]) -> str:
+    """
+    Return the "What you edit" section of a student README.
+
+    Parameters
+    ----------
+    rows : list[EditRow]
+        One row per function the pair writes in the period.
+
+    Returns
+    -------
+    str
+        Markdown with one table row per function: where its stub starts, how
+        many lines to type, and which tests check it.
+    """
+    total = sum(row["typed"] for row in rows)
+    lines = [
+        "## What you edit this period",
+        "",
+        (
+            "Every other function in this folder is finished. Change only these, and "
+            "only below each docstring:"
+        ),
+        "",
+        "| File | Function | Starts at line | Lines to type | Tests that check it |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for row in rows:
+        tests = ", ".join(f"`{test}`" for test in row["tests"]) or "`uv run pytest`"
+        lines.append(
+            f"| `{row['file']}` | `{row['function']}()` | {row['line']} | "
+            f"{row['typed']} | {tests} |"
+        )
+    lines += [
+        "",
+        (
+            f"Lines to type in all: {total}. Each stub is two comment lines that start "
+            "with `# Day ...` and a `raise NotImplementedError` line. Delete those "
+            "three lines and write the body in their place."
+        ),
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def lab_section(name: str, count: int) -> str:
+    """Return the "What you edit" section of a lab period's student README."""
+    lines = [
+        "## What you edit this period",
+        "",
+        (
+            f"Open `{name}.py`. Under each `Part` heading, every line that holds only a "
+            "`#` is one line of code to type. Replace the `#` with the code, keeping "
+            "its indent. The printed text next to each step says what the line must "
+            "produce."
+        ),
+        "",
+        (
+            f"Lines to type in all: {count}. Check the work with `uv run {name}.py` "
+            "and compare each printed result with the expected value beside it."
+        ),
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def changed_files(folder: Path, before: Path | None) -> tuple[list[str], list[str]]:
+    """Return the (new, changed) code files of a period folder, against the one before."""
+    new, changed = [], []
+    for path in sorted(folder.iterdir()):
+        if not path.is_file() or path.name == "README.md" or path.suffix == ".pyc":
+            continue
+        old = before / path.name if before is not None else None
+        if old is None or not old.exists():
+            new.append(path.name)
+        elif old.read_bytes() != path.read_bytes():
+            changed.append(path.name)
+    return new, changed
+
+
+def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
+    """Write docs/student_edit_plan.md: what changes and what pairs write, by period."""
+    from make_period_folders import PERIOD_TITLES  # Imported here: it imports this file
+
+    out = [
+        "# Student Edit Plan: Who Writes What, Period by Period",
+        "",
+        (
+            "`make_student_folders.py` writes this page from the code, so it always matches "
+            "the folders. For every period it names the files that arrive or grow, which "
+            "the teacher writes, and the functions the pairs write, which are stubs in "
+            "`student/` and finished in `instructor/`. Each student period folder's "
+            "`README.md` has the same list with line numbers and the tests that check "
+            "each function."
+        ),
+        "",
+    ]
+    before = None
+    for folder in sorted(INSTRUCTOR.glob("Day */period*")):
+        day = int(folder.parent.name[4:6])
+        period = int(folder.name.removeprefix("period"))
+        if period == 1:
+            out += [f"## {folder.parent.name}", ""]
+            out += ["| Period | Title | New files | Files that grow | Pairs write |"]
+            out += ["| --- | --- | --- | --- | --- |"]
+        new, changed = changed_files(folder, before)
+        written = rows.get((day, period), [])
+        writes = "; ".join(
+            f"`{row['function']}()` in `{row['file']}` ({lines_text(row['typed'])})"
+            if row["function"]
+            else f"the lab `{row['file']}` ({lines_text(row['typed'])})"
+            for row in written
+        )
+        if (day, period) in [(9, 2), (9, 3)]:
+            writes = "Their color station's functions, in the table below"
+        out.append(
+            f"| P{period} | {PERIOD_TITLES[(day, period)]} | "
+            f"{', '.join(f'`{name}`' for name in new) or 'None'} | "
+            f"{', '.join(f'`{name}`' for name in changed) or 'None'} | "
+            f"{writes or 'Nothing: a demo or teacher code'} |"
+        )
+        if period == 4:
+            out.append("")
+        before = folder
+    out += [
+        "## Enhancement stations (Day 9, periods 2 and 3)",
+        "",
+        "Each pair writes the functions of one color station in `student/Stations`.",
+        "",
+        "| Station | Pairs write |",
+        "| --- | --- |",
+    ]
+    for station in STATIONS_TABLE:
+        written = rows.get(("station", station["folder"]), [])  # type: ignore[arg-type]
+        writes = "; ".join(
+            f"`{row['function']}()` in `{row['file']}` ({lines_text(row['typed'])})"
+            for row in written
+        )
+        out.append(
+            f"| {station['folder']} | {writes or 'Nothing: a finished engine'} |"
+        )
+    file_path = ROOT / "docs" / "student_edit_plan.md"
+    file_path.write_text("\n".join(out) + "\n")
+    print(f"Wrote {file_path}")
+
+
 def main():
     stubbed = 0
     typed: dict[tuple[int, int], int] = {}  # (day, period) -> lines the pairs type
+    rows: dict = {}  # (day, period), or ("station", folder), -> list[EditRow]
     for folder in sorted(INSTRUCTOR.glob("Day */period*")):
         day = int(folder.parent.name[4:6])
         period = int(folder.name.removeprefix("period"))
@@ -134,11 +316,29 @@ def main():
                 continue
             file_path = target / file_name
             text = file_path.read_text()
-            typed[(day, period)] = typed.get((day, period), 0) + typed_lines(
-                text, function
-            )
+            count = typed_lines(text, function)
+            typed[(day, period)] = typed.get((day, period), 0) + count
+            row = {"file": file_name, "function": function, "typed": count}
+            row["line"] = def_line(text, function)
+            row["tests"] = checking_tests(folder, function)
+            rows.setdefault((day, period), []).append(row)
             file_path.write_text(stub_function(text, function, stub_day, stub_period))
             stubbed += 1
+        if (day, period) in LABS:
+            # A student folder holds the lab with blanks, never the answer file
+            name = LABS[(day, period)]
+            (target / f"{name}_instructor.py").unlink()
+            lab_path = target / f"{name}.py"
+            shutil.copy2(LABS_FOLDER / f"day{day:02}" / f"{name}.py", lab_path)
+            count = lab_blanks(lab_path.read_text())
+            typed[(day, period)] = typed.get((day, period), 0) + count
+            row = {"file": f"{name}.py", "function": "", "typed": count}
+            rows.setdefault((day, period), []).append(row)
+            with (target / "README.md").open("a") as file:
+                file.write("\n" + lab_section(name, count))
+        elif (day, period) in rows:
+            with (target / "README.md").open("a") as file:
+                file.write("\n" + edit_section(rows[(day, period)]))
     # Each station folder stubs the functions its pair writes during the station
     (STUDENT / "Stations").mkdir(exist_ok=True)
     for name in ["station_match.py", "station_league.py"]:
@@ -158,13 +358,22 @@ def main():
         for file_name, function in station["students"]:
             file_path = target / file_name
             text = file_path.read_text()
-            count += typed_lines(text, function)
+            row = {"file": file_name, "function": function}
+            row["typed"] = typed_lines(text, function)
+            row["line"] = def_line(text, function)
+            row["tests"] = checking_tests(folder, function)
+            rows.setdefault(("station", station["folder"]), []).append(row)
+            count += row["typed"]
             file_path.write_text(stub_function(text, function, 9, 2))
             stubbed += 1
+        if station["students"]:
+            with (target / "README.md").open("a") as file:
+                file.write("\n" + edit_section(rows[("station", station["folder"])]))
         print(f"{color} station: {count} lines to type")
         if count > MAX_TYPED_LINES:
             print(f"  Too long: the {color} station asks for {count} lines")
     print(f"Wrote {STUDENT}")
+    write_edit_plan(rows)
     print(
         f"Functions turned into stubs: {stubbed}  (expected "
         f"{len(STUDENT_FUNCTIONS) + sum(len(st['students']) for st in STATIONS_TABLE)})"
