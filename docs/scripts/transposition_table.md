@@ -1,6 +1,6 @@
 # transposition_table.py: Remember positions already searched
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.*
+*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period1`.*
 
 ## The big picture
 
@@ -60,15 +60,15 @@ best_stored_move()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `store` | Saves what the search learned about a position. | 10 |
-| `probe` | Returns a saved score, if it can answer this search. | 10 |
-| `best_stored_move` | Returns the best move saved for a position. | 10 |
+| `store` | Saves what the search learned about a position. | Day 10, period 1 |
+| `probe` | Returns a saved score, if it can answer this search. | Day 10, period 1 |
+| `best_stored_move` | Returns the best move saved for a position. | Day 10, period 1 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run transposition_table.py

@@ -1,6 +1,6 @@
 # compare_search.py: Prove that alpha-beta saves work
 
-*First appears in `instructor/Day 09 - Search faster with alpha-beta`.*
+*First appears in `instructor/Day 09 - Search faster with alpha-beta/period1`.*
 
 ## The big picture
 
@@ -43,7 +43,7 @@ main()
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run compare_search.py

@@ -1,6 +1,6 @@
 # attacks.py: Is this square under attack?
 
-*First appears in `instructor/Day 04 - Keep only legal moves`.*
+*First appears in `instructor/Day 04 - Keep only legal moves/period2`.*
 
 ## The big picture
 
@@ -73,21 +73,26 @@ in_check()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `is_attacked_by_scanning` | Version 1: asks every enemy piece if it can reach the square. | 4 |
-| `attacked_by_knight` | Looks for an enemy knight one jump away. | 4 |
-| `attacked_by_king` | Looks for the enemy king one step away. | 4 |
-| `attacked_by_pawn` | Looks for an enemy pawn that captures onto the square. | 4 |
-| `first_piece` | Walks in one direction and returns the first piece it meets. | 4 |
-| `attacked_along_lines` | Looks along straight and diagonal lines for a rook, bishop, or queen. | 4 |
-| `is_square_attacked` | Version 2: looks outward from the square for any attacker. | 4 |
-| `find_king` | Finds the square of a king. | 4 |
-| `in_check` | Says True if that side's king is attacked. | 4 |
+| `is_attacked_by_scanning` | Version 1: asks every enemy piece if it can reach the square. | Day 4, period 2 |
+| `attacked_by_knight` | Looks for an enemy knight one jump away. | Day 4, period 2 |
+| `attacked_by_king` | Looks for the enemy king one step away. | Day 4, period 2 |
+| `attacked_by_pawn` | Looks for an enemy pawn that captures onto the square. | Day 4, period 2 |
+| `first_piece` | Walks in one direction and returns the first piece it meets. | Day 4, period 2 |
+| `attacked_along_lines` | Looks along straight and diagonal lines for a rook, bishop, or queen. | Day 4, period 2 |
+| `is_square_attacked` | Version 2: looks outward from the square for any attacker. | Day 4, period 2 |
+| `find_king` | Finds the square of a king. | Day 4, period 3 |
+| `in_check` | Says True if that side's king is attacked. | Day 4, period 3 |
+
+## How the file grows
+
+- **Day 4, period 2:** `is_attacked_by_scanning`, `attacked_by_knight`, `attacked_by_king`, `attacked_by_pawn`, `first_piece`, `attacked_along_lines`, `is_square_attacked`
+- **Day 4, period 3:** `find_king`, `in_check`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run attacks.py

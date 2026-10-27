@@ -1,6 +1,6 @@
 # game_state.py: Everything the board does not show
 
-*First appears in `instructor/Day 02 - Make and undo moves`.*
+*First appears in `instructor/Day 02 - Make and undo moves/period3`.*
 
 ## The big picture
 
@@ -61,22 +61,22 @@ opponent()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `new_game` | Makes the state for a brand new game. | 2 |
-| `is_white` | Says True if a piece letter is uppercase (White). | 2 |
-| `color_of` | Says "w", "b", or None for an empty square. | 2 |
-| `opponent` | Gives the other side's color. | 2 |
-| `position_key` | Writes the position as text, so Remus can tell when a position repeats. | 7 |
+| `new_game` | Makes the state for a brand new game. | Day 2, period 3 |
+| `is_white` | Says True if a piece letter is uppercase (White). | Day 2, period 3 |
+| `color_of` | Says "w", "b", or None for an empty square. | Day 2, period 3 |
+| `opponent` | Gives the other side's color. | Day 2, period 3 |
+| `position_key` | Writes the position as text, so Remus can tell when a position repeats. | Day 7, period 2 |
 
 ## How the file grows
 
-- **Day 2:** `new_game`, `is_white`, `color_of`, `opponent`
-- **Day 7:** `position_key`
+- **Day 2, period 3:** `new_game`, `is_white`, `color_of`, `opponent`
+- **Day 7, period 2:** `position_key`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run game_state.py

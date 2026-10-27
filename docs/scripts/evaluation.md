@@ -1,6 +1,6 @@
 # evaluation.py: How good is this position?
 
-*First appears in `instructor/Day 08 - Evaluate and search ahead`.*
+*First appears in `instructor/Day 08 - Evaluate and search ahead/period1`.*
 
 ## The big picture
 
@@ -65,23 +65,24 @@ explain_evaluation()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `material` | Counts the value of the pieces. Positive means White is ahead. | 8 |
-| `placement` | Adds bonus points for pieces on good squares. | 8 |
-| `pawn_structure` | Scores doubled, isolated, and passed pawns. | 10 |
-| `mating_bonus` | Rewards driving the losing king to the edge when far ahead. | 10 |
-| `evaluate` | Gives the score from the point of view of the side to move. | 8 |
-| `explain_evaluation` | Prints each part of the score, so you can see why. | 8 |
+| `material` | Counts the value of the pieces. Positive means White is ahead. | Day 8, period 1 |
+| `placement` | Adds bonus points for pieces on good squares. | Day 8, period 2 |
+| `pawn_structure` | Scores doubled, isolated, and passed pawns. | Day 10, period 1 |
+| `mating_bonus` | Rewards driving the losing king to the edge when far ahead. | Day 10, period 1 |
+| `evaluate` | Gives the score from the point of view of the side to move. | Day 8, period 1 |
+| `explain_evaluation` | Prints each part of the score, so you can see why. | Day 8, period 1 |
 
 ## How the file grows
 
-- **Day 8:** `material`, `placement`, `evaluate`, `explain_evaluation`
-- **Day 10:** `pawn_structure`, `mating_bonus`
+- **Day 8, period 1:** `material`, `evaluate`, `explain_evaluation`
+- **Day 8, period 2:** `placement`
+- **Day 10, period 1:** `pawn_structure`, `mating_bonus`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run evaluation.py

@@ -1,6 +1,6 @@
 # move_generation.py: Every move the pieces can make
 
-*First appears in `instructor/Day 03 - Generate piece moves`.*
+*First appears in `instructor/Day 03 - Generate piece moves/period2`.*
 
 ## The big picture
 
@@ -58,7 +58,6 @@ pseudo_legal_moves()
     color_of()  [game_state.py]
     piece_moves()
         piece_at()  [board.py]
-        color_of()  [game_state.py]
         knight_moves()
             jump_moves()
                 on_board()
@@ -87,29 +86,31 @@ pseudo_legal_moves()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `on_board` | Says True if (row, col) is one of the 64 squares. | 3 |
-| `jump_moves` | Lists the moves of a piece that jumps by fixed steps. | 3 |
-| `knight_moves` | Lists a knight's moves. | 3 |
-| `king_moves` | Lists a king's one-step moves. | 3 |
-| `slide` | Walks one way until it hits the edge or a piece. | 3 |
-| `slider_moves` | Lists a rook's, bishop's, or queen's moves. | 3 |
-| `pawn_moves_to` | Makes one pawn move, or four if the pawn promotes. | 3 |
-| `pawn_pushes` | Lists a pawn's forward moves: one step, or two from the start. | 3 |
-| `pawn_captures` | Lists a pawn's diagonal captures. | 3 |
-| `piece_moves` | Picks the right helper for the piece on a square. | 3 |
-| `en_passant_captures` | Lists en passant captures, if any. | 5 |
-| `pseudo_legal_moves` | Lists every move for the side to move, before the king-safety check. | 3 |
+| `on_board` | Says True if (row, col) is one of the 64 squares. | Day 3, period 2 |
+| `jump_moves` | Lists the moves of a piece that jumps by fixed steps. | Day 3, period 2 |
+| `knight_moves` | Lists a knight's moves. | Day 3, period 2 |
+| `king_moves` | Lists a king's one-step moves. | Day 3, period 2 |
+| `slide` | Walks one way until it hits the edge or a piece. | Day 3, period 3 |
+| `slider_moves` | Lists a rook's, bishop's, or queen's moves. | Day 3, period 3 |
+| `pawn_moves_to` | Makes one pawn move, or four if the pawn promotes. | Day 3, period 4 |
+| `pawn_pushes` | Lists a pawn's forward moves: one step, or two from the start. | Day 3, period 4 |
+| `pawn_captures` | Lists a pawn's diagonal captures. | Day 3, period 4 |
+| `piece_moves` | Picks the right helper for the piece on a square. | Day 3, period 4 |
+| `en_passant_captures` | Lists en passant captures, if any. | Day 5, period 3 |
+| `pseudo_legal_moves` | Lists every move for the side to move, before the king-safety check. | Day 3, period 4 |
 
 ## How the file grows
 
-- **Day 3:** `on_board`, `jump_moves`, `knight_moves`, `king_moves`, `slide`, `slider_moves`, `pawn_moves_to`, `pawn_pushes`, `pawn_captures`, `piece_moves`, `pseudo_legal_moves`
-- **Day 5:** `en_passant_captures`
+- **Day 3, period 2:** `on_board`, `jump_moves`, `knight_moves`, `king_moves`
+- **Day 3, period 3:** `slide`, `slider_moves`
+- **Day 3, period 4:** `pawn_moves_to`, `pawn_pushes`, `pawn_captures`, `piece_moves`, `pseudo_legal_moves`
+- **Day 5, period 3:** `en_passant_captures`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run move_generation.py

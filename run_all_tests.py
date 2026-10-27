@@ -1,9 +1,10 @@
 #!/usr/bin/env -S uv run
 """run_all_tests.py
 
-Run the tests of every Day folder in instructor/, one folder at a time, and the
-reference-tool tests in tests/. Each Day folder is a complete copy of Remus with the same module
-names (board.py, search.py, ...), so each folder gets its own pytest run.
+Run the tests of every period folder in instructor/, one folder at a time, and the
+reference-tool tests in tests/. Each period folder is a complete copy of Remus with
+the same module names (board.py, search.py, ...), so each folder gets its own pytest
+run.
 """
 
 import subprocess
@@ -14,7 +15,11 @@ ROOT = Path(__file__).parent
 
 
 def main():
-    folders = sorted((ROOT / "instructor").glob("Day *")) + [ROOT / "tests"]
+    folders = []
+    for folder in sorted((ROOT / "instructor").glob("Day */period*")):
+        if list(folder.glob("test_*.py")):
+            folders.append(folder)  # Periods before any Remus code have no tests
+    folders.append(ROOT / "tests")
     failed = []
     for folder in folders:
         print(f"Testing {folder}", flush=True)
@@ -22,7 +27,7 @@ def main():
             [sys.executable, "-m", "pytest", str(folder)], check=False
         )
         if result.returncode != 0:
-            failed.append(folder.name)
+            failed.append(str(folder.relative_to(ROOT)))
     print(
         f"Folders tested: {len(folders)}; failed: {', '.join(failed) or 'none'}"
         "  (expected none)"

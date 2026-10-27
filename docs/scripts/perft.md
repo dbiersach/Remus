@@ -1,6 +1,6 @@
 # perft.py: Count positions to prove the rules
 
-*First appears in `instructor/Day 06 - Count positions with perft`.*
+*First appears in `instructor/Day 06 - Count positions with perft/period2`.*
 
 ## The big picture
 
@@ -61,14 +61,14 @@ divide()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `perft` | Counts the positions reached after a fixed number of moves. | 6 |
-| `divide` | Gives the count under each first move separately. | 6 |
+| `perft` | Counts the positions reached after a fixed number of moves. | Day 6, period 2 |
+| `divide` | Gives the count under each first move separately. | Day 6, period 2 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run perft.py

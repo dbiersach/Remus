@@ -1,6 +1,6 @@
 # uci_engine.py: Talk to En Croissant
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
+*First appears in `instructor/Day 05 - Add castling, en passant, and promotion/period4`.*
 
 ## The big picture
 
@@ -12,6 +12,8 @@ This file reads En Croissant's commands and sends back Remus's answers.
 ## Where this piece fits
 
 uci_engine.py sits at the top of the puzzle. It uses fen.py, make_move.py, legal_moves.py, search.py, and opening_book.py. remus.bat starts it.
+
+A first, small version arrives on Day 5, period 4. It follows games from the starting position and plays a random legal move, so pairs can play their own Remus in En Croissant before the week ends. The teacher hands it out ready to run. On Day 7 the class reads every command, and the full version reads FEN and calls the brains in search.py.
 
 - **Uses:** [`fen.py`](fen.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md), [`opening_book.py`](opening_book.md), [`search.py`](search.md)
 - **Used by:** no other Remus file
@@ -69,21 +71,21 @@ main()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `send` | Sends one line to En Croissant right away. | 7 |
-| `set_position` | Builds the game state from a position command. | 7 |
-| `thinking_time` | Decides how many seconds to think from the clock. | 9 |
-| `search_and_send` | Thinks in the background, then sends the best move. | 9 |
+| `send` | Sends one line to En Croissant right away. | Day 5, period 4 |
+| `set_position` | Builds the game state from a position command. | Day 5, period 4 |
+| `thinking_time` | Decides how many seconds to think from the clock. | Day 9, period 4 |
+| `search_and_send` | Thinks in the background, then sends the best move. | Day 9, period 4 |
 
 ## How the file grows
 
-- **Day 7:** `send`, `set_position`
-- **Day 9:** `thinking_time`, `search_and_send`
+- **Day 5, period 4:** `send`, `set_position`
+- **Day 9, period 4:** `thinking_time`, `search_and_send`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run uci_engine.py
@@ -98,4 +100,4 @@ You should see: Nothing at first. Type `uci`, then `isready`, then `go`. Type `q
 
 ## Slides
 
-Slides 1.1, 7.6, 9.7 in the [slide plan](../slide_plan.md).
+Slides 1.1, 5.6, 7.6, 9.7 in the [slide plan](../slide_plan.md).

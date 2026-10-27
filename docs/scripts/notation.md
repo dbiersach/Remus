@@ -1,6 +1,6 @@
 # notation.py: Moves the way people write them
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
+*First appears in `instructor/Day 07 - Play full games in En Croissant/period3`.*
 
 ## The big picture
 
@@ -68,15 +68,15 @@ parse_san()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `move_to_san` | Writes a legal move in SAN, like Nf3 or exd5. | 7 |
-| `disambiguation` | Adds the letter or number that tells two pieces apart. | 7 |
-| `parse_san` | Finds the legal move that matches the SAN you typed. | 7 |
+| `move_to_san` | Writes a legal move in SAN, like Nf3 or exd5. | Day 7, period 3 |
+| `disambiguation` | Adds the letter or number that tells two pieces apart. | Day 7, period 3 |
+| `parse_san` | Finds the legal move that matches the SAN you typed. | Day 7, period 3 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run notation.py

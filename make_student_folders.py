@@ -3,13 +3,15 @@
 
 Build the student/ folder from the finished code in instructor/.
 
-student/ mirrors instructor/ day by day. Each student Day folder holds the same
-files, except that the functions the students write that day are stubs: the
-signature and docstring stay, and the body raises NotImplementedError. The tests
-stay complete, so they fail until the pair writes each function. Functions from
-earlier days are complete, so every Day folder starts from working code.
+student/ mirrors instructor/ day by day and period by period. Each student period
+folder holds the same files as the instructor period folder, except that the
+functions the students write in that period are stubs: the signature and docstring
+stay, and the body raises NotImplementedError. The tests stay complete, so they
+fail until the pair writes each function. Functions from earlier periods are
+complete, so every period folder starts from working code.
 
-Run this script again whenever the instructor code changes.
+Run this script again whenever the instructor code changes, after
+make_period_folders.py.
 """
 
 import ast
@@ -98,18 +100,19 @@ def stub_function(source: str, name: str, day: int, period: int) -> str:
 
 def main():
     stubbed = 0
-    for folder in sorted(INSTRUCTOR.glob("Day *")):
-        day = int(folder.name[4:6])
-        target = STUDENT / folder.name
+    for folder in sorted(INSTRUCTOR.glob("Day */period*")):
+        day = int(folder.parent.name[4:6])
+        period = int(folder.name.removeprefix("period"))
+        target = STUDENT / folder.parent.name / folder.name
         if target.exists():
-            shutil.rmtree(target)  # Rebuild each student Day folder from scratch
+            shutil.rmtree(target)  # Rebuild each student period folder from scratch
         shutil.copytree(folder, target, ignore=shutil.ignore_patterns("__pycache__"))
-        for stub_day, period, file_name, function in STUDENT_FUNCTIONS:
-            if stub_day != day:
+        for stub_day, stub_period, file_name, function in STUDENT_FUNCTIONS:
+            if (stub_day, stub_period) != (day, period):
                 continue
             file_path = target / file_name
             text = file_path.read_text()
-            file_path.write_text(stub_function(text, function, stub_day, period))
+            file_path.write_text(stub_function(text, function, stub_day, stub_period))
             stubbed += 1
     print(f"Wrote {STUDENT}")
     print(

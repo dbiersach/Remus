@@ -1,6 +1,6 @@
 # console_game.py: Play chess in the terminal
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
+*First appears in `instructor/Day 07 - Play full games in En Croissant/period3`.*
 
 ## The big picture
 
@@ -53,7 +53,7 @@ main()
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run console_game.py

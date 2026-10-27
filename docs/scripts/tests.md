@@ -5,7 +5,7 @@
 A test is a small program that checks one fact about Remus. For example: "from the
 start, there are 20 legal moves." If the fact is wrong, the test fails and says where.
 
-Every Day folder has its own tests, next to the code they check. When you finish a
+Every period folder has its own tests, next to the code they check. A test can only check code that exists, so `period2` of a day has fewer tests than `period4`. When you finish a
 function, you run the tests to see whether it works.
 
 ## Where this piece fits

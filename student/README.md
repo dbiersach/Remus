@@ -1,10 +1,12 @@
 # Student code
 
 This folder is where you write Remus. It has one folder for each day of the
-workshop, the same as `instructor/`.
+workshop, the same as `instructor/`, and each Day folder has four period folders,
+`period1` to `period4`.
 
-Each Day folder starts with working code from the days before. A few functions are
-left for you to write. Each of those functions keeps its name, its docstring, and its
+Each period folder starts with working code from the periods before. Its
+`README.md` names the files that are new or growing, and the functions left for
+you to write. Each of those functions keeps its name, its docstring, and its
 type hints. Its body is one line:
 
 ```python
@@ -16,7 +18,7 @@ raise NotImplementedError("Day 1 P4: write square_name()")
 1. Open the page for the file in `docs/scripts/`, such as `docs/scripts/board.md`.
 2. Read the function's docstring. It says what the function must do.
 3. Delete the `raise` line and write the body.
-4. Run the tests from inside the Day folder: `uv run pytest`.
+4. Run the tests from inside the period folder: `uv run pytest`.
 5. Run the file itself, such as `uv run board.py`, and compare with the expected answers.
 
 A test that fails with `NotImplementedError` points to a function you have not

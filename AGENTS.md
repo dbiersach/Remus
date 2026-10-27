@@ -97,7 +97,10 @@ that are specific to Claude Code. The Python style follows David's course reposi
    including clocks, rights, en passant target, side to move, and history. Search must
    leave the live position unchanged even if it stops early (use `try/finally`).
 6. **Separate rules from search.** Legal move generation must be correct (perft-verified)
-   before minimax, alpha-beta, books, tables, or GUI work.
+   before minimax, alpha-beta, books, tables, or GUI work. The one early exception is
+   the teacher-written UCI plug at the end of Day 5, which plays random legal moves so
+   students see their rules on a real board; the UCI lesson itself waits for Day 7,
+   after perft.
 7. **One idea at a time.** Simple correct version first; an advanced version only with an
    explanation of why it is needed.
 8. Opening books and endgame tables are optional boundary features. Validate every book
@@ -146,8 +149,10 @@ The engine must run without En Croissant or `python-chess` installed.
 
 Each lesson has a "Ready to move on when" gate in the workshop file. Don't skip a gate.
 
-The course plan maps these 13 lessons onto the ten days and moves the first UCI and
-GUI work to Day 7, after perft has verified the rules.
+The course plan maps these 13 lessons onto the ten days. Students see their board as a
+picture on Day 1 and their moves as arrows on Day 3, and play a random-move Remus in
+En Croissant at the end of Day 5. The UCI lesson and the first real brains come on
+Day 7, after perft has verified the rules.
 
 ## Verification
 
@@ -171,35 +176,42 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Run `uv sync` once, then `uv run pytest` and `uv run ruff check .`.
 - The project has no runtime dependencies. The `dev` dependency group holds
   `python-chess` (imported as `chess`), `pytest`, and `ruff`. Engine modules never
-  import `chess`; only tests and optional display code may.
+  import `chess`; only tests and optional display code (`show_board.py`) may.
 - En Croissant is a desktop application, not a Python dependency. It hosts Remus as an
   external UCI engine and comes preinstalled on the class laptops.
 - Finished, ready-to-run reference code lives in the root `instructor/` folder, which
   keeps the solution code apart from the code students write and change. Inside it the
   code lives in one folder per workshop day, named `Day NN - <what the new code
-  does>`, such as `instructor/Day 04 - Keep only legal moves`. Each Day folder is a complete,
-  runnable copy of Remus as it stands at the end of that day, and nothing in it imports
-  from another Day folder. Modules import each other by name
-  (`from board import new_board`), so any module runs from inside its folder with
-  `uv run perft.py`.
-- `student/` mirrors `instructor/` day by day. In each student Day folder, the
-  functions the students write that day are stubs: the signature and docstring stay
-  and the body raises `NotImplementedError`, so the tests fail until a pair writes
-  the function. `make_student_folders.py` builds `student/` from `instructor/` and
-  lists every student function by day and period; run it again after any change to
-  the instructor code, and never edit a student stub by hand.
+  does>`, such as `instructor/Day 04 - Keep only legal moves`. Each Day folder holds
+  four period folders, `period1` to `period4`. Each period folder is a complete,
+  runnable copy of Remus as it stands at the end of that period, with a `README.md`
+  that names the period, its new and growing files, and the functions pairs write.
+  Nothing in a period folder imports from another folder. Modules import each other
+  by name (`from board import new_board`), so any module runs from inside its folder
+  with `uv run perft.py`.
+- `period4` holds the finished code of the day, and it is the only period folder to
+  edit by hand. `make_period_folders.py` builds `period1` to `period3` from it: its
+  `ARRIVALS` table says in which period each file takes its finished form, and its
+  `CHANGES` table says what the earlier periods leave out of a file that grows during
+  the day. Run it after any change to the instructor code.
+- `student/` mirrors `instructor/` day by day and period by period. In each student
+  period folder, the functions the students write in that period are stubs: the
+  signature and docstring stay and the body raises `NotImplementedError`, so the
+  tests fail until a pair writes the function. `make_student_folders.py` builds
+  `student/` from `instructor/` and lists every student function by day and period;
+  run it after `make_period_folders.py`, and never edit a student stub by hand.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson
   makes a file smarter, the new code goes into the same file under a new function
   name next to the function it improves (`negamax`, then `alpha_beta`, then
   `upgraded_search`), and the older function stays. Never add version numbers to file
   names.
-- The Science AI lesson is `hidden_peak.py` in the Day 10 folder. It uses the standard
+- The Science AI lesson is `hidden_peak.py` in the Day 10 folder, from `period2` on. It uses the standard
   library only and does not import the engine: it reuses the engine's ideas, not its
   code.
-- Tests sit next to the modules in each Day folder. The module names repeat from
+- Tests sit next to the modules in each period folder. The module names repeat from
   folder to folder, so pytest runs one folder at a time
-  (`uv run pytest "instructor/Day 04 - Keep only legal moves"`); `uv run run_all_tests.py` runs
-  them all. `tests/` holds the reference-tool tests and `mate_puzzles.epd`. A test
+  (`uv run pytest "instructor/Day 04 - Keep only legal moves/period3"`);
+  `uv run run_all_tests.py` runs them all. `tests/` holds the reference-tool tests and `mate_puzzles.epd`. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
 - Every `.py` file a student modifies or reads has a page in `docs/scripts/`, the
@@ -429,7 +441,7 @@ the course repositories: ruff's default rules plus `I` (import order), `C4`
 formats the code.
 
 The code must also show no type errors in VS Code's Pylance. Check a Day folder with
-`uvx pyright "instructor/Day 03 - Generate piece moves"`. When a function can return
+`uvx pyright "instructor/Day 03 - Generate piece moves/period4"`. When a function can return
 `None`, such as `color_of()` or `game_result()`, test for `None` before using the
 result.
 

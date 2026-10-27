@@ -1,6 +1,6 @@
 # opening_book.py: Play known openings without thinking
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.*
+*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period1`.*
 
 ## The big picture
 
@@ -60,14 +60,14 @@ book_move()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `load_book` | Reads the opening file into a dict of positions and moves. | 10 |
-| `book_move` | Picks a book move for this position, or None. | 10 |
+| `load_book` | Reads the opening file into a dict of positions and moves. | Day 10, period 1 |
+| `book_move` | Picks a book move for this position, or None. | Day 10, period 1 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run opening_book.py

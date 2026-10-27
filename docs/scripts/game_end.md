@@ -1,6 +1,6 @@
 # game_end.py: Is the game over?
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
+*First appears in `instructor/Day 07 - Play full games in En Croissant/period2`.*
 
 ## The big picture
 
@@ -53,15 +53,15 @@ game_result()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `insufficient_material` | Says True if neither side can ever checkmate. | 7 |
-| `repetition_count` | Counts how many times this position has appeared. | 7 |
-| `game_result` | Says who won and why, or None if the game goes on. | 7 |
+| `insufficient_material` | Says True if neither side can ever checkmate. | Day 7, period 2 |
+| `repetition_count` | Counts how many times this position has appeared. | Day 7, period 2 |
+| `game_result` | Says who won and why, or None if the game goes on. | Day 7, period 2 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run game_end.py

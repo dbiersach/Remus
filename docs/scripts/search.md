@@ -1,6 +1,6 @@
 # search.py: Choosing a move
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
+*First appears in `instructor/Day 07 - Play full games in En Croissant/period4`.*
 
 ## The big picture
 
@@ -147,39 +147,43 @@ think_move()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `SearchInfo` | Holds what one search counts and needs: positions visited, the clock, and memory. | 8 |
-| `SearchTimeout` | A signal that stops the search when time is up. | 9 |
-| `check_time` | Raises SearchTimeout if time is up or the GUI said stop. | 9 |
-| `random_move` | Picks any legal move at random. | 7 |
-| `capture_value` | Says how much the captured piece is worth. | 7 |
-| `greedy_move` | Picks the move that captures the most valuable piece. | 7 |
-| `white_score` | Scores a position from White's side, for minimax. | 8 |
-| `minimax` | Looks ahead. White picks the highest score, Black the lowest. | 8 |
-| `negamax` | Does the same as minimax with one function and a minus sign. | 8 |
-| `best_move` | Tries every first move with negamax and keeps the best. | 8 |
-| `negamax_move` | The negamax brain: looks two moves ahead. | 8 |
-| `alpha_beta` | Negamax that skips moves which cannot change the answer. | 9 |
-| `capture_moves` | Lists only the captures and promotions. | 9 |
-| `quiescence` | Keeps searching captures until the position is quiet. | 9 |
-| `alpha_beta_with_quiescence` | The full Day 9 search: alpha-beta, quiescence, and good move order. | 9 |
-| `remember_killer` | Remembers a quiet move that caused a cutoff, to try it early next time. | 10 |
-| `upgraded_search` | The Day 10 search, with memory, killer moves, and draw sense. | 10 |
-| `format_info` | Writes a line telling the GUI the depth, score, and best line. | 9 |
-| `think` | Searches deeper and deeper until time runs out, then returns the best move. | 9 |
-| `think_move` | The thinking brain, with two seconds per move. | 9 |
+| `SearchInfo` | Holds what one search counts and needs: positions visited, the clock, and memory. | Day 8, period 3 |
+| `SearchTimeout` | A signal that stops the search when time is up. | Day 9, period 3 |
+| `check_time` | Raises SearchTimeout if time is up or the GUI said stop. | Day 9, period 3 |
+| `random_move` | Picks any legal move at random. | Day 7, period 4 |
+| `capture_value` | Says how much the captured piece is worth. | Day 7, period 4 |
+| `greedy_move` | Picks the move that captures the most valuable piece. | Day 7, period 4 |
+| `white_score` | Scores a position from White's side, for minimax. | Day 8, period 3 |
+| `minimax` | Looks ahead. White picks the highest score, Black the lowest. | Day 8, period 3 |
+| `negamax` | Does the same as minimax with one function and a minus sign. | Day 8, period 4 |
+| `best_move` | Tries every first move with negamax and keeps the best. | Day 8, period 4 |
+| `negamax_move` | The negamax brain: looks two moves ahead. | Day 8, period 4 |
+| `alpha_beta` | Negamax that skips moves which cannot change the answer. | Day 9, period 1 |
+| `capture_moves` | Lists only the captures and promotions. | Day 9, period 2 |
+| `quiescence` | Keeps searching captures until the position is quiet. | Day 9, period 2 |
+| `alpha_beta_with_quiescence` | The full Day 9 search: alpha-beta, quiescence, and good move order. | Day 9, period 3 |
+| `remember_killer` | Remembers a quiet move that caused a cutoff, to try it early next time. | Day 10, period 1 |
+| `upgraded_search` | The Day 10 search, with memory, killer moves, and draw sense. | Day 10, period 1 |
+| `format_info` | Writes a line telling the GUI the depth, score, and best line. | Day 9, period 4 |
+| `think` | Searches deeper and deeper until time runs out, then returns the best move. | Day 9, period 4 |
+| `think_move` | The thinking brain, with two seconds per move. | Day 9, period 4 |
 
 ## How the file grows
 
-- **Day 7:** `random_move`, `capture_value`, `greedy_move`
-- **Day 8:** `SearchInfo`, `white_score`, `minimax`, `negamax`, `best_move`, `negamax_move`
-- **Day 9:** `SearchTimeout`, `check_time`, `alpha_beta`, `capture_moves`, `quiescence`, `alpha_beta_with_quiescence`, `format_info`, `think`, `think_move`
-- **Day 10:** `remember_killer`, `upgraded_search`
+- **Day 7, period 4:** `random_move`, `capture_value`, `greedy_move`
+- **Day 8, period 3:** `SearchInfo`, `white_score`, `minimax`
+- **Day 8, period 4:** `negamax`, `best_move`, `negamax_move`
+- **Day 9, period 1:** `alpha_beta`
+- **Day 9, period 2:** `capture_moves`, `quiescence`
+- **Day 9, period 3:** `SearchTimeout`, `check_time`, `alpha_beta_with_quiescence`
+- **Day 9, period 4:** `format_info`, `think`, `think_move`
+- **Day 10, period 1:** `remember_killer`, `upgraded_search`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run search.py

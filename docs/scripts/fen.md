@@ -1,6 +1,6 @@
 # fen.py: A whole position in one line
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
+*First appears in `instructor/Day 07 - Play full games in En Croissant/period1`.*
 
 ## The big picture
 
@@ -61,16 +61,16 @@ state_to_fen()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `fen_placement` | Writes the board as the first FEN field. | 7 |
-| `board_from_placement` | Reads the first FEN field into a board. | 7 |
-| `state_from_fen` | Reads a full FEN line into a game state. | 7 |
-| `state_to_fen` | Writes a game state as a full FEN line. | 7 |
+| `fen_placement` | Writes the board as the first FEN field. | Day 7, period 1 |
+| `board_from_placement` | Reads the first FEN field into a board. | Day 7, period 1 |
+| `state_from_fen` | Reads a full FEN line into a game state. | Day 7, period 1 |
+| `state_to_fen` | Writes a game state as a full FEN line. | Day 7, period 1 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run fen.py

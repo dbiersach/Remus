@@ -1,6 +1,6 @@
 # legal_moves.py: Keep only the legal moves
 
-*First appears in `instructor/Day 04 - Keep only legal moves`.*
+*First appears in `instructor/Day 04 - Keep only legal moves/period3`.*
 
 ## The big picture
 
@@ -62,19 +62,19 @@ legal_moves()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `castling_moves` | Lists the castling moves the side to move may make right now. | 5 |
-| `legal_moves` | Lists every legal move for the side to move. | 4 |
+| `castling_moves` | Lists the castling moves the side to move may make right now. | Day 5, period 2 |
+| `legal_moves` | Lists every legal move for the side to move. | Day 4, period 3 |
 
 ## How the file grows
 
-- **Day 4:** `legal_moves`
-- **Day 5:** `castling_moves`
+- **Day 4, period 3:** `legal_moves`
+- **Day 5, period 2:** `castling_moves`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run legal_moves.py

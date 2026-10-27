@@ -23,11 +23,12 @@ in [`AGENTS.md`](AGENTS.md) apply to everything below.
 | GUI | En Croissant on every laptop |
 | Repositories | The teacher's laptop holds the main class repository. Each pair has its own local repository and pulls from the teacher over the classroom network. No GitHub accounts: the students are minors |
 | Take-home | On the last day each pair copies its repository, with its full history, onto a USB drive |
-| Folder layout | The finished reference code lives in `instructor/`, one folder per day, such as `instructor/Day 04 - Keep only legal moves`. Each holds a complete, runnable copy of Remus at the end of that day, with its tests beside the modules. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
+| Folder layout | The finished reference code lives in `instructor/`, one folder per day, such as `instructor/Day 04 - Keep only legal moves`, with four period folders inside, `period1` to `period4`. Each period folder holds a complete, runnable copy of Remus at the end of that period, with its tests beside the modules and a `README.md` for the period. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
 | Squares | `(row, col)` tuples inside the engine, row 0 is rank 8 and column 0 is file a |
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
 | GUI move text | UCI (`e2e4`, `e7e8q`), because that is what the GUI protocol uses |
-| First GUI game | Day 7, as soon as the rules pass perft and the game can end correctly |
+| First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
+| First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in En Croissant once every special move works. Day 7 explains UCI and adds FEN and the brains, after the rules pass perft |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Tournament | A full round robin of the 10 pair engines on Day 10 |
 | Mate puzzles | The ten GameWorks `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
@@ -44,7 +45,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 2 | Functions and records | Functions, type hints, tuples, `assert`, pytest, dicts, dataclasses, copying | Hold a game state; make and undo a quiet move or capture |
 | 3 | Loops that walk the board | `while`, `break`, direction tuples, building lists | Generate king, knight, slider, and pawn moves |
 | 4 | Legal moves | Modules, imports, `__main__`, git | Detect attacks and check; keep only legal moves |
-| 5 | Special moves | Sets and dict lookups | Castling, en passant, promotion and underpromotion, with exact undo |
+| 5 | Special moves | Sets and dict lookups | Castling, en passant, promotion and underpromotion, with exact undo; play random Remus in En Croissant |
 | 6 | Counting the tree | Recursion | Perft matches the reference counts; Week 1 review |
 | 7 | Notation and a whole game | `split`, `join`, exceptions, `random`, `max` with `key=`, stdin and stdout | FEN and SAN; end the game; play random and greedy moves in a GUI |
 | 8 | Judging a position | Recursion review, constants | Evaluate a position; search with minimax and negamax |
@@ -73,7 +74,7 @@ of Day 7), then it plays **good** moves (Days 8 to 10).
 | Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering, iterative deepening (D9), PVS and a transposition table (D10) |
 | Evaluation | Material count (D8) | Piece-square tables (D8) | Mate scores that prefer the faster mate (D8) | Pawn structure and mating evaluation (D10) |
 | Science AI | Paper hidden-peak game (D10 P2 warm-up) | Greedy measurement choice (D10 P2) | Explore and exploit weight tuned on a benchmark (D10 P2) | Depth-2 expectimax, a teacher demo (D10 P2) |
-| Interface | Console printout (D1) | Console game in SAN (D7) | UCI in a GUI (D7) | `info` lines, time control, `stop` (D9) |
+| Interface | Console printout and a board picture (D1) | Move arrows (D3) and random Remus in En Croissant (D5) | Console game in SAN and full UCI (D7) | `info` lines, time control, `stop` (D9) |
 
 ## How students write real Remus code
 
@@ -91,13 +92,13 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
    class repository. `CONTRIBUTORS.md` records which pair wrote which function, by a
    team name the pair chooses rather than full names, since the code goes home with
    every student.
-4. **Everyone moves on together.** `student/` mirrors `instructor/` day by day. Each
-   student Day folder holds the previous days' finished code plus that day's
-   scaffolds, which `make_student_folders.py` builds from the instructor code. Each
-   period opens with its slides; then pairs open that period's files in the student
-   Day folder and write or fix the stubbed functions. Pairs work
-   only inside the newest Day folder, so earlier days stay as a record of how Remus
-   grew. `instructor/` holds the matching finished code, which runs as it is. At the start of the next period each pair fetches
+4. **Everyone moves on together.** `student/` mirrors `instructor/` day by day and
+   period by period. Each student period folder holds the finished code of the
+   periods before plus that period's scaffolds, which `make_student_folders.py`
+   builds from the instructor code. Each period opens with its slides; then pairs
+   open the period folder, read its `README.md`, and write or fix the stubbed
+   functions in the files it names. Pairs work only inside the current period
+   folder, so earlier periods stay as a record of how Remus grew. `instructor/` holds the matching finished code, which runs as it is. At the start of the next period each pair fetches
    from the teacher and starts a new branch from that period's start tag, so the whole
    room builds the same engine. The pair's own branches stay in its repository, so a
    pair whose version was not picked keeps its own code too.
@@ -235,7 +236,9 @@ refresher with a demonstration board comes right before the code that needs each
 - **P2. Python lab 1:** scripts, strings, `ord` and `chr`, f-strings.
 - **P3. Python lab 2:** lists and nested lists. Unplugged warm-up: "Call the square"
   drills "row 0 is rank 8" on the printed board before anyone types it.
-- **P4. `board.py`.** The teacher writes `new_board()`.
+- **P4. `board.py`.** The teacher writes `new_board()` and hands out `show_board.py`,
+  which draws the board as a picture in the web browser (python-chess draws it; the
+  engine never imports python-chess).
   **Students write:** `print_board()`, `square_name(row, col)`,
   `parse_square(name)` (which rejects `"i9"`), `piece_at(board, square)`.
 
@@ -263,7 +266,8 @@ refresher with a demonstration board comes right before the code that needs each
 - **P2. Jumping pieces.** Unplugged warm-up: "Shade the reach." The teacher writes
   `knight_moves()` from an offset list.
   **Students write:** `king_moves()` the same way. Exercise: a knight on `a1` has two
-  moves, to `b3` and `c2`.
+  moves, to `b3` and `c2`. `uv run show_board.py` draws an arrow for every move the
+  generator returns, so pairs see their own moves on a real board.
 - **P3. Sliding pieces.** **Students write:** `slide(board, square, direction)`, the
   loop that walks one direction and stops at the first piece, capturing it if it is
   an enemy. The teacher writes `slider_moves()` that calls it with rook, bishop, and
@@ -303,10 +307,13 @@ only escapes.
   The teacher writes the en passant make and undo.
 - **P4. Promotion and underpromotion.** Puzzle: promoting to a knight wins, promoting to
   a queen stalemates. **Students write:** promotion in `make_move` and `undo_move`.
-  Pairs write tests from the workshop's special-move checklist.
+  Pairs write tests from the workshop's special-move checklist. To close the week,
+  the teacher hands out `uci_engine.py` and `remus.bat` as a ready-made plug: pairs
+  register `remus.bat` in En Croissant and play their own Remus, which answers with a
+  random legal move. Nobody reads the UCI code yet; Day 7 explains it.
 
-**Checkpoint `d5-p4-end`:** every special-move test passes, and every special move
-undoes exactly.
+**Checkpoint `d5-p4-end`:** every special-move test passes, every special move
+undoes exactly, and Remus plays random legal moves in En Croissant.
 
 ## Week 2: A game, a GUI, and a thinking engine
 
@@ -342,8 +349,9 @@ the standard positions. Rule 6 of `AGENTS.md` is now met.
   that matches what the player typed. Then `console_game.py` lets two people play in SAN.
   Python lab 10 (stdin, stdout, `random`, `max` with `key=`) closes the period.
 - **P4. First brains and the GUI.** **Students write:** `random_move()` and
-  `greedy_move()` (take the most valuable capture, else a random move). The teacher
-  writes `uci_engine.py` and the launchers. Every pair registers Remus in the GUI and
+  `greedy_move()` (take the most valuable capture, else a random move). The class
+  reads the Day 5 `uci_engine.py` line by line, and the teacher extends it with FEN
+  positions and a choice of brains. Every pair registers Remus in the GUI again and
   plays greedy Remus. `play_match.py` plays random Remus against greedy Remus for
   20 games and prints the score.
 
@@ -452,21 +460,24 @@ crashes, or lost synchronization.
 
 ## Code breakdown by day
 
-The finished reference code lives in `instructor/`, one folder per day, and each folder
-is a complete copy of Remus at the end of that day. The table names the folders without
-the `instructor/` prefix. Every module ends with a visible self-check, as `AGENTS.md`
+The finished reference code lives in `instructor/`, one folder per day. Each Day folder
+holds `period1` to `period4`, and each period folder is a complete copy of Remus at
+the end of that period. `period4` is the finished code of the day, and
+`make_period_folders.py` builds the three earlier periods from it.
+[`file_versions.md`](file_versions.md) lists which period adds or grows each file. The
+table names the folders without the `instructor/` prefix. Every module ends with a visible self-check, as `AGENTS.md`
 requires, so a pair can run any file from inside the folder with `uv run perft.py`.
 The full description of each script is in `docs/scripts/`.
 
 | Folder | New files | Files that grow |
 | --- | --- | --- |
-| `Day 01 - Draw the board` | `board.py`, `test_board.py` | |
+| `Day 01 - Draw the board` | `board.py`, `show_board.py`, `test_board.py` | |
 | `Day 02 - Make and undo moves` | `game_state.py`, `moves.py`, `make_move.py`, `test_make_move.py` | `board.py` (`set_piece`) |
-| `Day 03 - Generate piece moves` | `move_generation.py`, `test_move_generation.py` | |
+| `Day 03 - Generate piece moves` | `move_generation.py`, `test_move_generation.py` | `show_board.py` (`show_moves`) |
 | `Day 04 - Keep only legal moves` | `attacks.py`, `legal_moves.py`, `test_legal_moves.py` | |
-| `Day 05 - Add castling, en passant, and promotion` | `test_special_moves.py` | `make_move.py`, `move_generation.py`, `legal_moves.py` |
+| `Day 05 - Add castling, en passant, and promotion` | `uci_engine.py`, `remus.bat`, `test_special_moves.py` | `make_move.py`, `move_generation.py`, `legal_moves.py` |
 | `Day 06 - Count positions with perft` | `perft.py`, `test_perft.py` | |
-| `Day 07 - Play full games in En Croissant` | `fen.py`, `notation.py`, `game_end.py`, `search.py`, `uci_engine.py`, `console_game.py`, `play_match.py`, `remus.bat`, `test_game.py` | `game_state.py` (`position_key`), `make_move.py` (history) |
+| `Day 07 - Play full games in En Croissant` | `fen.py`, `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `test_game.py` | `game_state.py` (`position_key`), `make_move.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Evaluate and search ahead` | `evaluation.py`, `test_search.py` | `search.py` (minimax, negamax) |
 | `Day 09 - Search faster with alpha-beta` | `move_ordering.py`, `compare_search.py` | `search.py` (alpha-beta, quiescence, `think`), `uci_engine.py` (clock, thread, `stop`) |
 | `Day 10 - Upgrade Remus and add Science AI` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `mate_solver.py`, `hidden_peak.py`, `tournament.py`, `remus.sh`, `test_upgrades.py` | `evaluation.py` (pawns, mating), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
@@ -477,8 +488,9 @@ Outside the Day folders:
 | --- | --- |
 | `tests/mate_puzzles.epd` | The ten GameWorks mate puzzles as FEN |
 | `tests/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
-| `run_all_tests.py` | Runs pytest on each instructor Day folder in turn |
-| `student/`, `make_student_folders.py` | The student copy of every Day folder, with that day's student functions as stubs, and the script that builds it |
+| `run_all_tests.py` | Runs pytest on each instructor period folder in turn |
+| `make_period_folders.py` | Builds `period1` to `period3` of each instructor Day folder from `period4` |
+| `student/`, `make_student_folders.py` | The student copy of every period folder, with that period's student functions as stubs, and the script that builds it |
 | `docs/` | This plan, the roadmap, the program overview, the script pages, the slide plan, and the two briefing PDFs |
 | `labs/dayNN/<skill>.py`, `labs/dayNN/instructor/<skill>_instructor.py` | Python skills labs: student file with blanks, instructor file with answers (to be written) |
 | `CONTRIBUTORS.md` | Which pair wrote which function (starts on Day 1) |
@@ -508,7 +520,7 @@ course; a fast pair can try it after Day 10.
 
 ## Connecting Remus to python-chess and a GUI
 
-`python-chess` is a library, not a GUI. Remus uses it in three places, all outside the
+`python-chess` is a library, not a GUI. Remus uses it in four places, all outside the
 engine, and the engine never imports it.
 
 1. **GUI play through UCI.** En Croissant starts a launcher and talks to Remus over stdin and
@@ -521,9 +533,12 @@ engine, and the engine never imports it.
    `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes, plays them on a
    `chess.Board`, and `tournament.py` saves every game as PGN with `chess.pgn`. python-chess rejects any illegal move
    an engine sends, so match play doubles as a rules test.
-3. **Reference checks in tests.** The tests in each Day folder compare Remus perft counts, legal move lists,
+3. **Reference checks in tests.** The tests in each period folder compare Remus perft counts, legal move lists,
    FEN round trips, SAN text, and game results with `chess.Board` on the same position.
    Each test writes the expected value before the comparison.
+4. **Pictures.** `show_board.py` copies a Remus board into a `chess.Board` and saves
+   `chess.svg.board()` as `board.svg` beside the script, with arrows for moves from
+   Day 3 on. It only draws; the rules stay in Remus.
 
 Three habits keep the UCI link from breaking: print protocol lines with `flush=True`;
 send all debug text to `sys.stderr`; and never print anything when a module is imported.

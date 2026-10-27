@@ -1,6 +1,6 @@
 # move_ordering.py: Try the best moves first
 
-*First appears in `instructor/Day 09 - Search faster with alpha-beta`.*
+*First appears in `instructor/Day 09 - Search faster with alpha-beta/period3`.*
 
 ## The big picture
 
@@ -51,14 +51,14 @@ order_moves()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `mvv_lva_score` | Scores a capture: big victim and small attacker score high. | 9 |
-| `order_moves` | Sorts the moves so the likely best ones come first. | 9 |
+| `mvv_lva_score` | Scores a capture: big victim and small attacker score high. | Day 9, period 3 |
+| `order_moves` | Sorts the moves so the likely best ones come first. | Day 9, period 3 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run move_ordering.py

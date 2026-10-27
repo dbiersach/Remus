@@ -7,7 +7,8 @@ picture the data structures and the program flow.
 
 ## How the code is organized
 
-Each day of the workshop has its own folder inside `instructor/`:
+Each day of the workshop has its own folder inside `instructor/`, and each Day folder
+holds four period folders, `period1` to `period4`, one for each class period:
 
 | Folder | What the new code does compared to the day before |
 | --- | --- |
@@ -24,14 +25,21 @@ Each day of the workshop has its own folder inside `instructor/`:
 
 The Day folders live inside the root `instructor/` folder. `instructor/` holds only
 finished reference code that runs as it is, with no blanks to fill in, so the solution
-code stays apart from the code students write and change. Every Day folder is a
-complete, runnable copy of Remus as it stands at the end of that day.
+code stays apart from the code students write and change. Every period folder is a
+complete, runnable copy of Remus as it stands at the end of that period, and its
+`README.md` names the period, the files that are new or growing, and the functions the
+pairs write. `period4` holds the finished code of the day. `make_period_folders.py`
+builds `period1` to `period3` from it, so a file that grows during the day, such as
+`make_move.py` on Day 5, gains castling in `period2`, en passant in `period3`, and
+promotion in `period4`.
 
-`student/` mirrors `instructor/`. In each student Day folder, the functions the class
-writes that day are stubs that raise `NotImplementedError`, and the tests fail until a
-pair writes them. `make_student_folders.py` builds `student/` and lists every student
-function; `student/README.md` shows the same list. A student who opens `Day 06` finds every file from Days 1 to 5, some of them
-grown, plus `perft.py`. Nothing in a Day folder imports from another Day folder.
+`student/` mirrors `instructor/`. In each student period folder, the functions the class
+writes in that period are stubs that raise `NotImplementedError`, and the tests fail
+until a pair writes them. `make_student_folders.py` builds `student/` and lists every
+student function; `student/README.md` shows the same list. A student who opens
+`Day 06 - Count positions with perft/period2` finds every file from Days 1 to 5, some of
+them grown, plus `perft.py` with `perft()` left to write. Nothing in a period folder
+imports from another folder.
 
 [`file_versions.md`](file_versions.md) lists when each file first appears and what
 each later day changes in it, by file and by day.
@@ -57,22 +65,22 @@ Day 8 still finds `negamax` on Day 10.
 
 ### Running the code
 
-Run a script from inside its Day folder, or give its path:
+Run a script from inside its period folder, or give its path:
 
 ```bash
-uv run "instructor/Day 06 - Count positions with perft/perft.py"
+uv run "instructor/Day 06 - Count positions with perft/period4/perft.py"
 ```
 
 Every script prints its own check, with the expected answer beside it. Tests sit next
-to the modules. Because each Day folder repeats the same module names, pytest runs one
-folder at a time:
+to the modules. Because each period folder repeats the same module names, pytest runs
+one folder at a time:
 
 ```bash
-uv run pytest "instructor/Day 04 - Keep only legal moves"
+uv run pytest "instructor/Day 04 - Keep only legal moves/period3"
 uv run run_all_tests.py
 ```
 
-`run_all_tests.py` runs every Day folder in `instructor/` in turn, then the reference-tool tests in
+`run_all_tests.py` runs every period folder in `instructor/` in turn, then the reference-tool tests in
 `tests/`.
 
 ## The puzzle box and its pieces

@@ -1,6 +1,6 @@
 # tournament.py: The class round robin
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.*
+*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period3`.*
 
 ## The big picture
 
@@ -48,14 +48,14 @@ main()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `round_robin` | Makes the pairings for every round. | 10 |
-| `play_game` | Plays one game on a clock and returns it as PGN. | 10 |
+| `round_robin` | Makes the pairings for every round. | Day 10, period 3 |
+| `play_game` | Plays one game on a clock and returns it as PGN. | Day 10, period 3 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run tournament.py

@@ -21,3 +21,6 @@ tasks/
 # Borland's copyrighted software, kept locally as a historical reference for
 # the workshop. They must never be committed or pushed.
 /Turbo Pascal Toolbox 4.0 - GameWorks/
+
+# Pictures that show_board.py saves beside itself
+board.svg

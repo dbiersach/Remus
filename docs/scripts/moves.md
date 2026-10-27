@@ -1,6 +1,6 @@
 # moves.py: What a move looks like
 
-*First appears in `instructor/Day 02 - Make and undo moves`.*
+*First appears in `instructor/Day 02 - Make and undo moves/period3`.*
 
 ## The big picture
 
@@ -15,7 +15,7 @@ as text like `e2e4`, which En Croissant understands.
 moves.py uses board.py for square names. Every file that makes or lists moves uses it.
 
 - **Uses:** [`board.py`](board.md)
-- **Used by:** [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`mate_solver.py`](mate_solver.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`perft.py`](perft.md), [`search.py`](search.md), [`transposition_table.py`](transposition_table.md), [`uci_engine.py`](uci_engine.md)
+- **Used by:** [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`mate_solver.py`](mate_solver.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`perft.py`](perft.md), [`search.py`](search.md), [`show_board.py`](show_board.md), [`transposition_table.py`](transposition_table.md), [`uci_engine.py`](uci_engine.md)
 
 ## Words to know
 
@@ -54,15 +54,15 @@ move_from_uci()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `Move` | The record for one move: start square, end square, and promotion. | 2 |
-| `move_to_uci` | Writes a move as UCI text, like e2e4. | 2 |
-| `move_from_uci` | Reads UCI text like e2e4 and makes a Move. | 2 |
+| `Move` | The record for one move: start square, end square, and promotion. | Day 2, period 3 |
+| `move_to_uci` | Writes a move as UCI text, like e2e4. | Day 2, period 3 |
+| `move_from_uci` | Reads UCI text like e2e4 and makes a Move. | Day 2, period 3 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run moves.py

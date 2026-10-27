@@ -1,6 +1,6 @@
 # mate_solver.py: Solve mate-in-two puzzles
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.*
+*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period1`.*
 
 ## The big picture
 
@@ -53,15 +53,15 @@ read_puzzles()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `mating_move` | Finds a move that forces mate in the given number of moves, or None. | 10 |
-| `defense_fails` | Says True if White still mates after this Black reply. | 10 |
-| `read_puzzles` | Reads the puzzles and their answers from the EPD file. | 10 |
+| `mating_move` | Finds a move that forces mate in the given number of moves, or None. | Day 10, period 1 |
+| `defense_fails` | Says True if White still mates after this Black reply. | Day 10, period 1 |
+| `read_puzzles` | Reads the puzzles and their answers from the EPD file. | Day 10, period 1 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run mate_solver.py

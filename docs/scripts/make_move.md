@@ -1,6 +1,6 @@
 # make_move.py: Make a move, then take it back
 
-*First appears in `instructor/Day 02 - Make and undo moves`.*
+*First appears in `instructor/Day 02 - Make and undo moves/period4`.*
 
 ## The big picture
 
@@ -70,23 +70,24 @@ state_snapshot()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `update_castling_rights` | Removes castling letters when a king or rook moves or is captured. | 5 |
-| `en_passant_victim_square` | Finds the pawn that an en passant capture removes. | 5 |
-| `castling_rook_move` | Finds where the rook goes when the king castles. | 5 |
-| `make_move` | Plays a move on the state and returns the undo record. | 2 |
-| `undo_move` | Takes back a move using its undo record. | 2 |
-| `state_snapshot` | Writes the whole state as text, to check that undo worked. | 2 |
+| `update_castling_rights` | Removes castling letters when a king or rook moves or is captured. | Day 5, period 2 |
+| `en_passant_victim_square` | Finds the pawn that an en passant capture removes. | Day 5, period 3 |
+| `castling_rook_move` | Finds where the rook goes when the king castles. | Day 5, period 2 |
+| `make_move` | Plays a move on the state and returns the undo record. | Day 2, period 4 |
+| `undo_move` | Takes back a move using its undo record. | Day 2, period 4 |
+| `state_snapshot` | Writes the whole state as text, to check that undo worked. | Day 2, period 4 |
 
 ## How the file grows
 
-- **Day 2:** `make_move`, `undo_move`, `state_snapshot`
-- **Day 5:** `update_castling_rights`, `en_passant_victim_square`, `castling_rook_move`
+- **Day 2, period 4:** `make_move`, `undo_move`, `state_snapshot`
+- **Day 5, period 2:** `update_castling_rights`, `castling_rook_move`
+- **Day 5, period 3:** `en_passant_victim_square`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run make_move.py

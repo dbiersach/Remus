@@ -1,6 +1,6 @@
 # board.py: The chessboard
 
-*First appears in `instructor/Day 01 - Draw the board`.*
+*First appears in `instructor/Day 01 - Draw the board/period4`.*
 
 ## The big picture
 
@@ -17,7 +17,7 @@ This file turns one into the other.
 board.py is the bottom piece of the puzzle. It uses no other Remus file, and almost every other file uses it.
 
 - **Uses:** no other Remus file
-- **Used by:** [`attacks.py`](attacks.md), [`console_game.py`](console_game.md), [`evaluation.py`](evaluation.md), [`fen.py`](fen.md), [`game_end.py`](game_end.md), [`game_state.py`](game_state.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`moves.py`](moves.md), [`notation.py`](notation.md), [`search.py`](search.md)
+- **Used by:** [`attacks.py`](attacks.md), [`console_game.py`](console_game.md), [`evaluation.py`](evaluation.md), [`fen.py`](fen.md), [`game_end.py`](game_end.md), [`game_state.py`](game_state.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`moves.py`](moves.md), [`notation.py`](notation.md), [`search.py`](search.md), [`show_board.py`](show_board.md)
 
 ## Words to know
 
@@ -74,23 +74,23 @@ set_piece()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `new_board` | Makes a new board with every piece on its starting square. | 1 |
-| `print_board` | Shows the board on the screen, rank 8 at the top. | 1 |
-| `square_name` | Turns a (row, col) pair into a name like e2. | 1 |
-| `parse_square` | Turns a name like e2 into a (row, col) pair. | 1 |
-| `piece_at` | Tells you which letter sits on a square. | 1 |
-| `set_piece` | Puts a letter (or an empty square) on a square. | 2 |
+| `new_board` | Makes a new board with every piece on its starting square. | Day 1, period 4 |
+| `print_board` | Shows the board on the screen, rank 8 at the top. | Day 1, period 4 |
+| `square_name` | Turns a (row, col) pair into a name like e2. | Day 1, period 4 |
+| `parse_square` | Turns a name like e2 into a (row, col) pair. | Day 1, period 4 |
+| `piece_at` | Tells you which letter sits on a square. | Day 1, period 4 |
+| `set_piece` | Puts a letter (or an empty square) on a square. | Day 2, period 3 |
 
 ## How the file grows
 
-- **Day 1:** `new_board`, `print_board`, `square_name`, `parse_square`, `piece_at`
-- **Day 2:** `set_piece`
+- **Day 1, period 4:** `new_board`, `print_board`, `square_name`, `parse_square`, `piece_at`
+- **Day 2, period 3:** `set_piece`
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run board.py

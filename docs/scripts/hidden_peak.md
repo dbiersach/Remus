@@ -1,6 +1,6 @@
 # hidden_peak.py: Science AI: find the hidden peak
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI`.*
+*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period2`.*
 
 ## The big picture
 
@@ -77,22 +77,22 @@ benchmark()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `make_grid` | Hides a hot spot on a 10x10 grid. | 10 |
-| `measure` | Reads the value at one square. | 10 |
-| `predicted_value` | Guesses a square's value from the readings so far. | 10 |
-| `candidate_squares` | Lists the squares not measured yet. | 10 |
-| `score_candidate` | Scores a square: predicted value plus an explore bonus. | 10 |
-| `choose_next_measurement` | Picks the square with the best score. | 10 |
-| `random_strategy` | Picks a random square. Every AI must beat it. | 10 |
-| `expectimax_choice` | Looks two measurements ahead and averages the outcomes. | 10 |
-| `measurements_to_find_peak` | Counts measurements until one method finds the peak. | 10 |
-| `benchmark` | Averages that count over many hidden samples. | 10 |
+| `make_grid` | Hides a hot spot on a 10x10 grid. | Day 10, period 2 |
+| `measure` | Reads the value at one square. | Day 10, period 2 |
+| `predicted_value` | Guesses a square's value from the readings so far. | Day 10, period 2 |
+| `candidate_squares` | Lists the squares not measured yet. | Day 10, period 2 |
+| `score_candidate` | Scores a square: predicted value plus an explore bonus. | Day 10, period 2 |
+| `choose_next_measurement` | Picks the square with the best score. | Day 10, period 2 |
+| `random_strategy` | Picks a random square. Every AI must beat it. | Day 10, period 2 |
+| `expectimax_choice` | Looks two measurements ahead and averages the outcomes. | Day 10, period 2 |
+| `measurements_to_find_peak` | Counts measurements until one method finds the peak. | Day 10, period 2 |
+| `benchmark` | Averages that count over many hidden samples. | Day 10, period 2 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run hidden_peak.py

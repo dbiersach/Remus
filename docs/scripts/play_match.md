@@ -1,6 +1,6 @@
 # play_match.py: Two Remus brains play each other
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant`.*
+*First appears in `instructor/Day 07 - Play full games in En Croissant/period4`.*
 
 ## The big picture
 
@@ -44,14 +44,14 @@ main()
 
 ## The functions
 
-| Function | What it does | Day |
+| Function | What it does | Arrives |
 | --- | --- | --- |
-| `start_engine` | Starts one copy of Remus with a chosen brain. | 7 |
-| `play_game` | Plays one game and returns the result. | 7 |
+| `start_engine` | Starts one copy of Remus with a chosen brain. | Day 7, period 4 |
+| `play_game` | Plays one game and returns the result. | Day 7, period 4 |
 
 ## Try it
 
-From inside a Day folder that has the file, run:
+From inside a period folder that has the file, run:
 
 ```bash
 uv run play_match.py

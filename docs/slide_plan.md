@@ -17,6 +17,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 1.3 | The board is a list of lists | An 8x8 grid with `board[row][col]` indexes on one side and rank and file labels on the other. Highlight `board[6][4]` = e2 = `"P"` |
 | 1.4 | Square names and coordinates | `"e2"` to `(6, 4)` and back: `col = "abcdefgh".index("e")`, `row = 8 - 2`. Three worked examples: a8, e2, h1 |
 | 1.5 | Piece letters | The 12 letters plus `"."`: uppercase White, lowercase Black, with piece icons |
+| 1.6 | Your board as a picture | `show_board.py` side by side: the printed letters on the left, the browser picture on the right. python-chess only draws; Remus keeps the board |
 
 ## Day 2: Make and undo moves
 
@@ -37,6 +38,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 3.3 | Sliding along a ray | A rook on d4: `slide` walks each direction, stops before its own piece, stops on an enemy piece and includes the capture. 14 moves on an empty board |
 | 3.4 | Pawns are different | White moves toward row 0, Black toward row 7; one step, two from the start row, diagonal captures, and one move becoming four at promotion |
 | 3.5 | `pseudo_legal_moves` flow | Loop over 64 squares, `piece_moves` dispatches by letter to `knight_moves`, `king_moves`, `slider_moves`, `pawn_pushes`, `pawn_captures` |
+| 3.6 | See your moves | The start position with one arrow per move from `show_moves()`: four knight arrows, then all 20 pseudo-legal moves |
 
 ## Day 4: Keep only legal moves
 
@@ -56,6 +58,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 5.3 | En passant | The double step sets the target square; the capture lands on the target but removes the pawn beside it (`en_passant_victim_square`) |
 | 5.4 | The full undo record | The undo dict with `rook_move` and `en_passant_victim` filled in for a castle and an en passant capture |
 | 5.5 | Promotion and underpromotion | One pawn move becomes four: `e7e8q`, `e7e8r`, `e7e8b`, `e7e8n` |
+| 5.6 | Remus plays in En Croissant | Register `remus.bat` from `Day 05 .../period4`. The GUI sends `position startpos moves e2e4 ...` and `go`; Remus answers `bestmove` with a random legal move. Day 7 explains every line |
 
 ## Day 6: Count positions with perft
 
