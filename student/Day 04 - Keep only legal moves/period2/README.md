@@ -48,4 +48,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `attacks.py` | `attacked_by_pawn()` | 85 | 8 | `uv run pytest` |
 | `attacks.py` | `attacked_by_king()` | 72 | 7 | `uv run pytest` |
 
-Lines to type in all: 22. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 22. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

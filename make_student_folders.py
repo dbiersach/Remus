@@ -113,10 +113,20 @@ def stub_function(source: str, name: str, day: int, period: int) -> str:
     body_start = docstring.end_lineno  # Line numbers count from 1
     body_end = node.end_lineno
     indent = " " * (node.col_offset + 4)
+    if name.startswith("test_"):
+        hint = "The docstring above says what this test must check."
+    else:
+        hint = "The docstring above says what it must do; the tests check it."
+    message = f'"Day {day} P{period}: write {name}()"'
+    raise_line = f"{indent}raise NotImplementedError({message})\n"
+    if len(raise_line) > 89:  # Wrap the way ruff format would, within 88 columns
+        raise_line = (
+            f"{indent}raise NotImplementedError(\n{indent}    {message}\n{indent})\n"
+        )
     stub = [
         f"{indent}# Day {day}, period {period}: write this function.\n",
-        f"{indent}# The docstring above says what it must do; the tests check it.\n",
-        f'{indent}raise NotImplementedError("Day {day} P{period}: write {name}()")\n',
+        f"{indent}# {hint}\n",
+        raise_line,
     ]
     return "".join(lines[:body_start] + stub + lines[body_end:])
 
@@ -189,8 +199,8 @@ def edit_section(rows: list[EditRow]) -> str:
         "",
         (
             f"Lines to type in all: {total}. Each stub is two comment lines that start "
-            "with `# Day ...` and a `raise NotImplementedError` line. Delete those "
-            "three lines and write the body in their place."
+            "with `# Day ...` and a `raise NotImplementedError` statement. Delete them "
+            "and write the body in their place."
         ),
     ]
     return "\n".join(lines) + "\n"

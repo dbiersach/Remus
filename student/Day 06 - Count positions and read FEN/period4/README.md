@@ -46,4 +46,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `fen.py` | `fen_placement()` | 20 | 16 | `uv run pytest` |
 | `fen.py` | `board_from_placement()` | 40 | 14 | `uv run pytest` |
 
-Lines to type in all: 30. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 30. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

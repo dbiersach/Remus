@@ -21,12 +21,16 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 def test_null_move_and_undo_restore_the_state() -> None:
     """Expected: a pass gives Black the turn, and its undo restores the exact state."""
     # Day 9, period 2: write this function.
-    # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 9 P2: write test_null_move_and_undo_restore_the_state()")
+    # The docstring above says what this test must check.
+    raise NotImplementedError(
+        "Day 9 P2: write test_null_move_and_undo_restore_the_state()"
+    )
 
 
 def test_null_move_search_saves_work_and_keeps_the_state() -> None:
     """The station searches fewer positions than plain alpha-beta at depth 4."""
     # Day 9, period 2: write this function.
-    # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 9 P2: write test_null_move_search_saves_work_and_keeps_the_state()")
+    # The docstring above says what this test must check.
+    raise NotImplementedError(
+        "Day 9 P2: write test_null_move_search_saves_work_and_keeps_the_state()"
+    )

@@ -40,4 +40,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `move_ordering.py` | `mvv_lva_score()` | 18 | 8 | `test_search.py::test_capture_moves_and_mvv_lva` |
 
-Lines to type in all: 8. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 8. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

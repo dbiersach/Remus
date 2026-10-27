@@ -36,4 +36,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `move_generation.py` | `pawn_pushes()` | 146 | 11 | `test_move_generation.py::test_pawn_pushes_from_the_start_rank`, `test_move_generation.py::test_blocked_pawn_has_no_pushes`, `test_move_generation.py::test_pawn_promotes_to_four_pieces` |
 
-Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

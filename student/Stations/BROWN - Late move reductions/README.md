@@ -38,6 +38,6 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `search.py` | `reduction()` | 394 | 3 | `test_upgrades.py::test_only_late_quiet_moves_are_reduced` |
 | `test_upgrades.py` | `test_only_late_quiet_moves_are_reduced()` | 22 | 6 | `uv run pytest` |
-| `test_upgrades.py` | `test_reduced_search_saves_work_and_keeps_the_state()` | 29 | 9 | `uv run pytest` |
+| `test_upgrades.py` | `test_reduced_search_saves_work_and_keeps_the_state()` | 31 | 9 | `uv run pytest` |
 
-Lines to type in all: 18. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 18. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

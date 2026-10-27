@@ -60,4 +60,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `moves.py` | `move_to_uci()` | 28 | 4 | `test_make_move.py::test_uci_round_trip` |
 | `moves.py` | `move_from_uci()` | 47 | 6 | `test_make_move.py::test_uci_round_trip`, `test_make_move.py::test_move_record_holds_squares` |
 
-Lines to type in all: 16. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 16. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

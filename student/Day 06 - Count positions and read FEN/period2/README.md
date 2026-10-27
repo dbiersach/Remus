@@ -35,4 +35,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `perft.py` | `perft()` | 25 | 8 | `uv run pytest` |
 
-Lines to type in all: 8. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 8. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

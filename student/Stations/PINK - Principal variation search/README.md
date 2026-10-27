@@ -38,6 +38,6 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `search.py` | `search_later_move()` | 393 | 6 | `uv run pytest` |
 | `test_upgrades.py` | `test_pvs_search_agrees_with_alpha_beta()` | 14 | 7 | `uv run pytest` |
-| `test_upgrades.py` | `test_a_null_window_answers_only_better_or_not()` | 21 | 5 | `uv run pytest` |
+| `test_upgrades.py` | `test_a_null_window_answers_only_better_or_not()` | 23 | 5 | `uv run pytest` |
 
-Lines to type in all: 18. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 18. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

@@ -18,7 +18,7 @@ def test_transposition_table_bounds() -> None:
     """Expected: an exact entry answers at its depth; a bound answers only when it
     settles the window."""
     # Day 9, period 2: write this function.
-    # The docstring above says what it must do; the tests check it.
+    # The docstring above says what this test must check.
     raise NotImplementedError("Day 9 P2: write test_transposition_table_bounds()")
 
 

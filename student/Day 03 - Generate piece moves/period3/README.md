@@ -36,4 +36,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `move_generation.py` | `slide()` | 76 | 14 | `test_move_generation.py::test_slide_stops_at_a_friend_and_captures_an_enemy` |
 
-Lines to type in all: 14. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 14. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

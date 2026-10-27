@@ -46,4 +46,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `attacks.py` | `in_check()` | 175 | 3 | `test_legal_moves.py::test_rook_check` |
 | `legal_moves.py` | `legal_moves()` | 16 | 8 | `test_legal_moves.py::test_king_cannot_step_next_to_the_other_king`, `test_legal_moves.py::test_legal_moves_leave_the_state_unchanged` |
 
-Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

@@ -59,4 +59,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `hidden_peak.py` | `score_candidate()` | 104 | 2 | `uv run pytest` |
 | `hidden_peak.py` | `choose_next_measurement()` | 132 | 4 | `test_upgrades.py::test_greedy_ai_measures_where_it_looks_hot`, `test_upgrades.py::test_greedy_ai_beats_random_guessing` |
 
-Lines to type in all: 12. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 12. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

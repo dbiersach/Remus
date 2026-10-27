@@ -44,4 +44,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `beam_time.py` | `estimate()` | 70 | 3 | `test_beam_time.py::test_four_readings_halve_the_error` |
 | `beam_time.py` | `expected_wrong_calls()` | 104 | 7 | `test_beam_time.py::test_unmeasured_samples_count_as_coin_flips` |
 
-Lines to type in all: 10. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 10. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

@@ -30,4 +30,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `evaluation.py` | `king_safety()` | 135 | 20 | `test_upgrades.py::test_king_safety_rewards_the_pawn_shield` |
 
-Lines to type in all: 20. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 20. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

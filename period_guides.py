@@ -838,7 +838,7 @@ CHANGE_NOTES = {
     ),
     ("test_upgrades.py", "test_transposition_table_bounds"): (
         "Proves the rules of `probe()` with three made-up entries before any real "
-        "search uses them. A bound is the tricky part: \"at least 80\" settles a "
+        'search uses them. A bound is the tricky part: "at least 80" settles a '
         "window whose beta is 70, but says nothing useful when beta is 100."
     ),
     ("opening_book.py", "book_move"): (

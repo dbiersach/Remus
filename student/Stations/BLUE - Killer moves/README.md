@@ -40,4 +40,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `move_ordering.py` | `order_moves()` | 53 | 11 | `test_search.py::test_capture_moves_and_mvv_lva` |
 | `test_upgrades.py` | `test_killers_keep_two_quiet_moves()` | 21 | 5 | `uv run pytest` |
 
-Lines to type in all: 22. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 22. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

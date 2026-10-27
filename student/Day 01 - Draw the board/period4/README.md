@@ -58,4 +58,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `board.py` | `parse_square()` | 66 | 5 | `test_board.py::test_e2_is_row_6_col_4`, `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips`, `test_board.py::test_bad_square_names_are_rejected`, `test_board.py::test_start_position_pieces` |
 | `board.py` | `piece_at()` | 90 | 2 | `test_board.py::test_start_position_pieces` |
 
-Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

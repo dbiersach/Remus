@@ -42,4 +42,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `beam_time.py` | `gain()` | 133 | 8 | `test_beam_time.py::test_gain_favors_a_close_call_over_a_safe_one` |
 | `beam_time.py` | `choose_next_sample()` | 161 | 1 | `test_beam_time.py::test_the_agent_measures_every_sample_once_first`, `test_beam_time.py::test_largest_gain_beats_equal_time` |
 
-Lines to type in all: 9. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 9. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

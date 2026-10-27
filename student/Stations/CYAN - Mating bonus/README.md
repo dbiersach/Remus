@@ -30,4 +30,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `evaluation.py` | `mating_bonus()` | 135 | 24 | `test_upgrades.py::test_mating_bonus_prefers_the_losing_king_in_the_corner` |
 
-Lines to type in all: 24. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 24. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

@@ -21,7 +21,7 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 def test_killers_keep_two_quiet_moves() -> None:
     """Expected: after three cutoffs at ply 2, the two newest moves stay, newest first."""
     # Day 9, period 2: write this function.
-    # The docstring above says what it must do; the tests check it.
+    # The docstring above says what this test must check.
     raise NotImplementedError("Day 9 P2: write test_killers_keep_two_quiet_moves()")
 
 

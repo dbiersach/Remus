@@ -51,4 +51,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `search.py` | `random_move()` | 25 | 1 | `uv run pytest` |
 | `search.py` | `greedy_move()` | 40 | 3 | `test_game.py::test_greedy_takes_the_queen` |
 
-Lines to type in all: 4. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 4. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

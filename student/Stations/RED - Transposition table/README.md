@@ -40,4 +40,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `transposition_table.py` | `probe()` | 34 | 11 | `test_upgrades.py::test_transposition_table_bounds` |
 | `test_upgrades.py` | `test_transposition_table_bounds()` | 17 | 13 | `uv run pytest` |
 
-Lines to type in all: 27. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 27. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

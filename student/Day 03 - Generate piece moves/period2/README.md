@@ -42,4 +42,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `move_generation.py` | `king_moves()` | 66 | 1 | `test_move_generation.py::test_king_in_the_corner_has_three_moves` |
 
-Lines to type in all: 1. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 1. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

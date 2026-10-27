@@ -48,4 +48,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | `game_end.py` | `insufficient_material()` | 17 | 15 | `test_game.py::test_insufficient_material` |
 | `game_end.py` | `game_result()` | 42 | 12 | `test_game.py::test_checkmate_and_stalemate`, `test_game.py::test_threefold_repetition_and_undo`, `test_game.py::test_fifty_move_rule` |
 
-Lines to type in all: 27. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 27. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

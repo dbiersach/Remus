@@ -22,12 +22,16 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 def test_only_late_quiet_moves_are_reduced() -> None:
     """Expected: only a late, quiet move with no check and 3 plies to go loses 1 ply."""
     # Day 9, period 2: write this function.
-    # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 9 P2: write test_only_late_quiet_moves_are_reduced()")
+    # The docstring above says what this test must check.
+    raise NotImplementedError(
+        "Day 9 P2: write test_only_late_quiet_moves_are_reduced()"
+    )
 
 
 def test_reduced_search_saves_work_and_keeps_the_state() -> None:
     """The station searches fewer positions than plain alpha-beta at depth 4."""
     # Day 9, period 2: write this function.
-    # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 9 P2: write test_reduced_search_saves_work_and_keeps_the_state()")
+    # The docstring above says what this test must check.
+    raise NotImplementedError(
+        "Day 9 P2: write test_reduced_search_saves_work_and_keeps_the_state()"
+    )

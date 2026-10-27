@@ -40,4 +40,4 @@ Every other function in this folder is finished. Change only these, and only bel
 | --- | --- | --- | --- | --- |
 | `notation.py` | `parse_san()` | 86 | 5 | `test_game.py::test_parse_san_finds_each_move` |
 
-Lines to type in all: 5. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` line. Delete those three lines and write the body in their place.
+Lines to type in all: 5. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
