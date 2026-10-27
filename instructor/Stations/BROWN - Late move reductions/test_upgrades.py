@@ -20,6 +20,7 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_only_late_quiet_moves_are_reduced() -> None:
+    """Expected: only a late, quiet move with no check and 3 plies to go loses 1 ply."""
     quiet = Move((6, 0), (5, 0))
     assert reduction(4, 5, quiet, EMPTY, False) == 1
     assert reduction(4, 1, quiet, EMPTY, False) == 0  # Early in the list

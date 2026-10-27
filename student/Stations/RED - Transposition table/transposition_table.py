@@ -26,9 +26,9 @@ def store(
     table: dict, key: str, depth: int, score: int, bound: str, best: Move | None
 ) -> None:
     """Save a search result for a position, keeping the deeper of two results."""
-    old = table.get(key)
-    if old is None or depth >= old["depth"]:
-        table[key] = {"depth": depth, "score": score, "bound": bound, "best": best}
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write store()")
 
 
 def probe(table: dict, key: str, depth: int, alpha: int, beta: int) -> int | None:

@@ -77,19 +77,9 @@ def order_moves(
         The moves, highest MVV-LVA score first, killers after the captures, with
         `first` at the front.
     """
-    killers = killers or []
-
-    def order_score(move: Move) -> int:
-        score = mvv_lva_score(move, board)
-        if score == 0 and move in killers:
-            return KILLER_SCORE
-        return score
-
-    ordered = sorted(moves, key=order_score, reverse=True)
-    if first in ordered:
-        ordered.remove(first)
-        ordered.insert(0, first)
-    return ordered
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write order_moves()")
 
 
 def main():

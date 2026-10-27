@@ -20,3 +20,12 @@ def test_pvs_search_agrees_with_alpha_beta() -> None:
     assert score == plain_score
     assert pv
     assert state_snapshot(state) == before
+
+
+def test_a_null_window_answers_only_better_or_not() -> None:
+    """A null window (alpha, alpha + 1) says only whether the exact score beats alpha."""
+    state = state_from_fen(ITALIAN)
+    exact, _ = pvs_search(state, 3, 0, *WIDE, SearchInfo())
+    for alpha in (exact - 50, exact + 50):
+        score, _ = pvs_search(state, 3, 0, alpha, alpha + 1, SearchInfo())
+        assert (score > alpha) == (exact > alpha)

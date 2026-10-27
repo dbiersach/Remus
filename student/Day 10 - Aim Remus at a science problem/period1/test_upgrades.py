@@ -62,6 +62,8 @@ def test_mating_bonus_prefers_the_losing_king_in_the_corner() -> None:
 
 
 def test_transposition_table_bounds() -> None:
+    """Expected: an exact entry answers at its depth; a bound answers only when it
+    settles the window."""
     table = {}
     best = Move((6, 4), (4, 4))
     store(table, "a", 3, 50, EXACT, best)
@@ -88,6 +90,7 @@ def test_two_move_orders_reach_one_position_key() -> None:
 
 
 def test_killers_keep_two_quiet_moves() -> None:
+    """Expected: after three cutoffs at ply 2, the two newest moves stay, newest first."""
     info = SearchInfo()
     board = state_from_fen(START_FEN)["board"]
     for text in ("e2e4", "d2d4", "g1f3"):
@@ -105,6 +108,7 @@ def test_king_safety_rewards_the_pawn_shield() -> None:
 
 
 def test_null_move_and_undo_restore_the_state() -> None:
+    """Expected: a pass gives Black the turn, and its undo restores the exact state."""
     state = state_from_fen(ITALIAN)
     before = state_snapshot(state)
     en_passant = make_null_move(state)
@@ -114,6 +118,7 @@ def test_null_move_and_undo_restore_the_state() -> None:
 
 
 def test_only_late_quiet_moves_are_reduced() -> None:
+    """Expected: only a late, quiet move with no check and 3 plies to go loses 1 ply."""
     quiet = Move((6, 0), (5, 0))
     assert reduction(4, 5, quiet, EMPTY, False) == 1
     assert reduction(4, 1, quiet, EMPTY, False) == 0  # Early in the list

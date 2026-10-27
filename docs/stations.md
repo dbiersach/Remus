@@ -29,18 +29,18 @@ all ten enhancements at once. Remus-GOLD stays out of the color matches;
 
 | Color | Enhancement | The idea in one line | The pair writes | Lines to type |
 | --- | --- | --- | --- | --- |
-| RED | Transposition table | Remember positions already searched, so one position reached in two move orders is scored once | `probe()` in `transposition_table.py` | 11 |
-| GREEN | Opening book | Play the first moves of well-known openings from a book | `load_book()` in `opening_book.py` | 22 |
-| BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` | 6 |
-| PINK | Principal variation search | Search the first move with the full window and the rest with a cheap null window | `search_later_move()` in `search.py` | 6 |
-| YELLOW | Draw sense | Score a repeated position, or one at the fifty-move limit, as 0 inside the search | `is_draw_in_search()` in `search.py` | 2 |
+| RED | Transposition table | Remember positions already searched, so one position reached in two move orders is scored once | `store()` in `transposition_table.py` and `probe()` in `transposition_table.py`, plus 1 test in `test_upgrades.py` | 27 |
+| GREEN | Opening book | Play the first moves of well-known openings from a book | `load_book()` in `opening_book.py` and `book_move()` in `opening_book.py` | 24 |
+| BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` and `order_moves()` in `move_ordering.py`, plus 1 test in `test_upgrades.py` | 22 |
+| PINK | Principal variation search | Search the first move with the full window and the rest with a cheap null window | `search_later_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
+| YELLOW | Draw sense | Score a repeated position, or one at the fifty-move limit, as 0 inside the search | `is_draw_in_search()` in `search.py`, plus 3 tests in `test_upgrades.py` | 16 |
 | PURPLE | Pawn structure | Penalize doubled and isolated pawns, reward passed pawns | `pawn_structure()` in `evaluation.py` | 30 |
 | CYAN | Mating bonus | With a big lead, drive the losing king to the edge | `mating_bonus()` in `evaluation.py` | 24 |
-| ORANGE | Null-move pruning | If passing the turn still wins in a shallow search, a real move will too | `make_null_move()` and `undo_null_move()` in `search.py` | 8 |
-| BROWN | Late move reductions | Search late, quiet moves one ply shallower, and in full only if they surprise | `reduction()` in `search.py` | 3 |
+| ORANGE | Null-move pruning | If passing the turn still wins in a shallow search, a real move will too | `make_null_move()` in `search.py` and `undo_null_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 23 |
+| BROWN | Late move reductions | Search late, quiet moves one ply shallower, and in full only if they surprise | `reduction()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
 | GRAY | King safety | Reward pawns that shelter the king while the enemy queen is on the board | `king_safety()` in `evaluation.py` | 20 |
 
-Every station stays under the 40-line limit for one period.
+Every station asks for 16 to 30 typed lines, under the 40-line limit for one period. Where the enhancement itself is short, the pair also writes the tests that prove it works, such as the test that a null window answers only "better or not?", so every pair spends the station thinking about its idea rather than waiting.
 
 ## Words to know
 
@@ -120,7 +120,7 @@ plays only the games that are not in the games file yet.
 ## Puzzle questions
 
 1. Why does every station play the same opponent instead of each other?
-2. The YELLOW station types only 2 lines. Why can such a small change still win games?
+2. The YELLOW station's whole enhancement is a 2-line function. Why can such a small change still win games?
 3. Which stations change the score Remus finds at a fixed depth, and which only find
    the same score faster?
 4. Remus-GOLD has every enhancement. Why might it gain less than the ten gains added up?

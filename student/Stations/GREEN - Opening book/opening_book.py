@@ -50,8 +50,9 @@ def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
 
 def book_move(book: dict[str, list[Move]], state: dict) -> Move | None:
     """Return a random book move for this position, or None when out of book."""
-    choices = book.get(position_key(state))
-    return random.choice(choices) if choices else None
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write book_move()")
 
 
 def main():

@@ -19,6 +19,7 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_killers_keep_two_quiet_moves() -> None:
+    """Expected: after three cutoffs at ply 2, the two newest moves stay, newest first."""
     info = SearchInfo()
     board = state_from_fen(START_FEN)["board"]
     for text in ("e2e4", "d2d4", "g1f3"):

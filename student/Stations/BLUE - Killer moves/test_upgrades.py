@@ -19,11 +19,10 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_killers_keep_two_quiet_moves() -> None:
-    info = SearchInfo()
-    board = state_from_fen(START_FEN)["board"]
-    for text in ("e2e4", "d2d4", "g1f3"):
-        remember_killer(info, 2, move_from_uci(text), board)
-    assert [move_to_uci(move) for move in info.killers[2]] == ["g1f3", "d2d4"]
+    """Expected: after three cutoffs at ply 2, the two newest moves stay, newest first."""
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write test_killers_keep_two_quiet_moves()")
 
 
 def test_killer_search_agrees_with_alpha_beta() -> None:

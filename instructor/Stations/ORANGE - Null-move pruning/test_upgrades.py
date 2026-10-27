@@ -19,6 +19,7 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_null_move_and_undo_restore_the_state() -> None:
+    """Expected: a pass gives Black the turn, and its undo restores the exact state."""
     state = state_from_fen(ITALIAN)
     before = state_snapshot(state)
     en_passant = make_null_move(state)

@@ -20,22 +20,14 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_only_late_quiet_moves_are_reduced() -> None:
-    quiet = Move((6, 0), (5, 0))
-    assert reduction(4, 5, quiet, EMPTY, False) == 1
-    assert reduction(4, 1, quiet, EMPTY, False) == 0  # Early in the list
-    assert reduction(2, 5, quiet, EMPTY, False) == 0  # Too close to the leaves
-    assert reduction(4, 5, quiet, "p", False) == 0  # A capture
-    assert reduction(4, 5, quiet, EMPTY, True) == 0  # A check
+    """Expected: only a late, quiet move with no check and 3 plies to go loses 1 ply."""
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write test_only_late_quiet_moves_are_reduced()")
 
 
 def test_reduced_search_saves_work_and_keeps_the_state() -> None:
     """The station searches fewer positions than plain alpha-beta at depth 4."""
-    state = state_from_fen(ITALIAN)
-    before = state_snapshot(state)
-    plain = SearchInfo()
-    station = SearchInfo()
-    alpha_beta_with_quiescence(state, 4, 0, *WIDE, plain)
-    _, pv = reduced_search(state, 4, 0, *WIDE, station)
-    assert station.nodes < plain.nodes
-    assert pv
-    assert state_snapshot(state) == before
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write test_reduced_search_saves_work_and_keeps_the_state()")

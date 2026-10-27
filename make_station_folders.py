@@ -470,6 +470,18 @@ def agreement_test(function: str) -> str:
 '''
 
 
+PINK_NULL_WINDOW_TEST = '''def test_a_null_window_answers_only_better_or_not() -> None:
+    """A null window (alpha, alpha + 1) says only whether the exact score beats alpha."""
+    state = state_from_fen(ITALIAN)
+    exact, _ = pvs_search(state, 3, 0, *WIDE, SearchInfo())
+    for alpha in (exact - 50, exact + 50):
+        score, _ = pvs_search(state, 3, 0, alpha, alpha + 1, SearchInfo())
+        assert (score > alpha) == (exact > alpha)
+
+
+'''
+
+
 def saving_test(function: str) -> str:
     """Return a test that a pruning station search visits fewer positions."""
     return f'''def test_{function}_saves_work_and_keeps_the_state() -> None:
@@ -562,7 +574,11 @@ STATIONS_TABLE = [
             ],
             agreement_test("table_search"),
         ),
-        "students": [("transposition_table.py", "probe")],
+        "students": [
+            ("transposition_table.py", "store"),
+            ("transposition_table.py", "probe"),
+            ("test_upgrades.py", "test_transposition_table_bounds"),
+        ],
     },
     {
         "folder": "GREEN - Opening book",
@@ -642,7 +658,10 @@ STATIONS_TABLE = [
                 "test_missing_book_never_stops_play",
             ],
         ),
-        "students": [("opening_book.py", "load_book")],
+        "students": [
+            ("opening_book.py", "load_book"),
+            ("opening_book.py", "book_move"),
+        ],
     },
     {
         "folder": "BLUE - Killer moves",
@@ -676,7 +695,11 @@ STATIONS_TABLE = [
             ["test_killers_keep_two_quiet_moves"],
             agreement_test("killer_search"),
         ),
-        "students": [("search.py", "remember_killer")],
+        "students": [
+            ("search.py", "remember_killer"),
+            ("move_ordering.py", "order_moves"),
+            ("test_upgrades.py", "test_killers_keep_two_quiet_moves"),
+        ],
     },
     {
         "folder": "PINK - Principal variation search",
@@ -690,9 +713,13 @@ STATIONS_TABLE = [
             "Tests for the PINK station: principal variation search.",
             SEARCH_TEST_IMPORTS.format(names="pvs_search"),
             [],
-            agreement_test("pvs_search"),
+            agreement_test("pvs_search") + PINK_NULL_WINDOW_TEST,
         ),
-        "students": [("search.py", "search_later_move")],
+        "students": [
+            ("search.py", "search_later_move"),
+            ("test_upgrades.py", "test_pvs_search_agrees_with_alpha_beta"),
+            ("test_upgrades.py", "test_a_null_window_answers_only_better_or_not"),
+        ],
     },
     {
         "folder": "YELLOW - Draw sense",
@@ -719,13 +746,19 @@ STATIONS_TABLE = [
 
 
 def test_the_fifty_move_limit_is_a_draw() -> None:
+    """A halfmove clock of 100 is 50 moves by each side with no capture or pawn move."""
     state = state_from_fen("4k3/8/8/8/8/8/8/R3K3 w - - 100 80")
     assert is_draw_in_search(state)
 
 
 ''',
         ),
-        "students": [("search.py", "is_draw_in_search")],
+        "students": [
+            ("search.py", "is_draw_in_search"),
+            ("test_upgrades.py", "test_draw_sense_search_agrees_with_alpha_beta"),
+            ("test_upgrades.py", "test_a_repeated_position_is_a_draw"),
+            ("test_upgrades.py", "test_the_fifty_move_limit_is_a_draw"),
+        ],
     },
     {
         "folder": "PURPLE - Pawn structure",
@@ -807,6 +840,11 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         "students": [
             ("search.py", "make_null_move"),
             ("search.py", "undo_null_move"),
+            ("test_upgrades.py", "test_null_move_and_undo_restore_the_state"),
+            (
+                "test_upgrades.py",
+                "test_null_move_search_saves_work_and_keeps_the_state",
+            ),
         ],
     },
     {
@@ -837,7 +875,11 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
             ["test_only_late_quiet_moves_are_reduced"],
             saving_test("reduced_search"),
         ),
-        "students": [("search.py", "reduction")],
+        "students": [
+            ("search.py", "reduction"),
+            ("test_upgrades.py", "test_only_late_quiet_moves_are_reduced"),
+            ("test_upgrades.py", "test_reduced_search_saves_work_and_keeps_the_state"),
+        ],
     },
     {
         "folder": "GRAY - King safety",

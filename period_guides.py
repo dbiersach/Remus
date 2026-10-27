@@ -831,6 +831,72 @@ CHANGE_NOTES = {
     ("evaluation.py", "king_safety"): "Rewards each pawn that shelters the king on "
     "its own file or a neighbor, one or two squares ahead, while the enemy queen is "
     "on the board. A king without pawn cover is easy to attack.",
+    ("transposition_table.py", "store"): (
+        "Saves what one search learned about a position under its key: the depth, "
+        "the score, whether that score is exact or only a bound, and the best move. "
+        "A dict holds the table, so looking a position up again costs one step."
+    ),
+    ("test_upgrades.py", "test_transposition_table_bounds"): (
+        "Proves the rules of `probe()` with three made-up entries before any real "
+        "search uses them. A bound is the tricky part: \"at least 80\" settles a "
+        "window whose beta is 70, but says nothing useful when beta is 100."
+    ),
+    ("opening_book.py", "book_move"): (
+        "Looks the position up in the book and picks one of its moves at random, or "
+        "returns None when the game has left the book. The random pick keeps Remus "
+        "from playing the same opening every game."
+    ),
+    ("move_ordering.py", "order_moves"): (
+        "Sorts the moves so captures come first by MVV-LVA, then this ply's killer "
+        "moves, then every other move. The earlier a good move comes, the sooner "
+        "alpha-beta cuts off the rest."
+    ),
+    ("test_upgrades.py", "test_killers_keep_two_quiet_moves"): (
+        "Feeds three cutoff moves to `remember_killer()` and checks that only the "
+        "two newest stay, newest first. Writing the expected list before running the "
+        "test is how a pair shows it understands the two slots."
+    ),
+    ("test_upgrades.py", "test_pvs_search_agrees_with_alpha_beta"): (
+        "PVS must be a faster way to the same answer, never a different answer. The "
+        "test searches one position with the Day 9 search and with PVS and compares "
+        "the scores, and checks that the position is unchanged afterward."
+    ),
+    ("test_upgrades.py", "test_a_null_window_answers_only_better_or_not"): (
+        "Shows what a null window really returns. With a window one point wide, the "
+        "score only says whether the exact score is above alpha or not, so the test "
+        "tries an alpha 50 below the exact score and one 50 above it. That yes-or-no "
+        "answer is why PVS must search again when a move surprises it."
+    ),
+    ("test_upgrades.py", "test_draw_sense_search_agrees_with_alpha_beta"): (
+        "In a position with no repetition, draw sense must change nothing, so the "
+        "station search and the Day 9 search must find the same score."
+    ),
+    ("test_upgrades.py", "test_a_repeated_position_is_a_draw"): (
+        "Plays Nf3 Nf6 Ng1 Ng8, which brings back the starting position, and checks "
+        "that `is_draw_in_search()` says draw only after the knights come home."
+    ),
+    ("test_upgrades.py", "test_the_fifty_move_limit_is_a_draw"): (
+        "Loads a FEN whose halfmove clock is 100 and checks that it counts as a "
+        "draw. The FEN carries the clock, so no game needs to be played."
+    ),
+    ("test_upgrades.py", "test_null_move_and_undo_restore_the_state"): (
+        "Makes a pass and takes it back, then compares the whole state with the "
+        "start. A null move that leaves one thing changed, such as the en passant "
+        "target, would corrupt every search after it."
+    ),
+    ("test_upgrades.py", "test_null_move_search_saves_work_and_keeps_the_state"): (
+        "Counts positions: the null-move search must visit fewer than the Day 9 "
+        "search at the same depth and leave the position unchanged. The count is "
+        "the evidence that the pass saves work."
+    ),
+    ("test_upgrades.py", "test_only_late_quiet_moves_are_reduced"): (
+        "Checks `reduction()` one condition at a time: a late quiet move is cut, "
+        "and an early move, a move near the leaves, a capture, and a check are not."
+    ),
+    ("test_upgrades.py", "test_reduced_search_saves_work_and_keeps_the_state"): (
+        "Counts positions: the reduced search must visit fewer than the Day 9 search "
+        "at the same depth and leave the position unchanged."
+    ),
 }
 
 # (day, period) -> paragraphs about the lab file, one per part the pairs type
@@ -896,7 +962,7 @@ LAB_NOTES = {
 
 def main():
     print(f"Periods with objectives: {len(OBJECTIVES)}  (expected 40)")
-    print(f"Functions with a change note: {len(CHANGE_NOTES)}  (expected 53)")
+    print(f"Functions with a change note: {len(CHANGE_NOTES)}  (expected 67)")
     print(f"Lab periods: {len(LABS)}  (expected 3)")
 
 

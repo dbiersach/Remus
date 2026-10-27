@@ -19,22 +19,14 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_null_move_and_undo_restore_the_state() -> None:
-    state = state_from_fen(ITALIAN)
-    before = state_snapshot(state)
-    en_passant = make_null_move(state)
-    assert state["turn"] == "b"
-    undo_null_move(state, en_passant)
-    assert state_snapshot(state) == before
+    """Expected: a pass gives Black the turn, and its undo restores the exact state."""
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write test_null_move_and_undo_restore_the_state()")
 
 
 def test_null_move_search_saves_work_and_keeps_the_state() -> None:
     """The station searches fewer positions than plain alpha-beta at depth 4."""
-    state = state_from_fen(ITALIAN)
-    before = state_snapshot(state)
-    plain = SearchInfo()
-    station = SearchInfo()
-    alpha_beta_with_quiescence(state, 4, 0, *WIDE, plain)
-    _, pv = null_move_search(state, 4, 0, *WIDE, station)
-    assert station.nodes < plain.nodes
-    assert pv
-    assert state_snapshot(state) == before
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write test_null_move_search_saves_work_and_keeps_the_state()")

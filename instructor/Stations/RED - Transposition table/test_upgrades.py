@@ -15,6 +15,8 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_transposition_table_bounds() -> None:
+    """Expected: an exact entry answers at its depth; a bound answers only when it
+    settles the window."""
     table = {}
     best = Move((6, 4), (4, 4))
     store(table, "a", 3, 50, EXACT, best)

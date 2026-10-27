@@ -15,19 +15,11 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_transposition_table_bounds() -> None:
-    table = {}
-    best = Move((6, 4), (4, 4))
-    store(table, "a", 3, 50, EXACT, best)
-    store(table, "b", 3, 80, LOWER, None)
-    store(table, "c", 3, -20, UPPER, None)
-    assert probe(table, "a", 3, -100, 100) == 50
-    assert probe(table, "a", 4, -100, 100) is None  # Not searched deep enough
-    assert probe(table, "b", 3, -100, 70) == 80  # At least 80 is a cutoff above beta 70
-    assert (
-        probe(table, "b", 3, -100, 100) is None
-    )  # At least 80 does not settle beta 100
-    assert probe(table, "c", 3, 0, 100) == -20  # At most -20 cannot beat alpha 0
-    assert best_stored_move(table, "a") == best
+    """Expected: an exact entry answers at its depth; a bound answers only when it
+    settles the window."""
+    # Day 9, period 2: write this function.
+    # The docstring above says what it must do; the tests check it.
+    raise NotImplementedError("Day 9 P2: write test_transposition_table_bounds()")
 
 
 def test_two_move_orders_reach_one_position_key() -> None:

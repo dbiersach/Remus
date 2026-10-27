@@ -39,5 +39,6 @@ def test_a_repeated_position_is_a_draw() -> None:
 
 
 def test_the_fifty_move_limit_is_a_draw() -> None:
+    """A halfmove clock of 100 is 50 moves by each side with no capture or pawn move."""
     state = state_from_fen("4k3/8/8/8/8/8/8/R3K3 w - - 100 80")
     assert is_draw_in_search(state)
