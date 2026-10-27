@@ -249,6 +249,15 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   and fits one Elo rating per version with Remus-WHITE pinned at 0.
   `station_elo.py` rates all 12 versions against Stockfish at five UCI_Elo levels
   from frozen copies of the stations and writes the table to `docs/station_elo.md`.
+- `niram/` holds Niram-GOLD, Remus-GOLD rewritten in Rust (David, 2026-10-27), named
+  for Naram-Sin, Sargon's grandson. It is a teacher's experiment that measures how much
+  faster the same engine runs in a compiled language; students never edit it. Each
+  `.rs` file matches the Python file of the same name, and Niram must visit exactly
+  the same number of positions as Remus-GOLD at each depth (`cargo test --release`
+  inside `niram/`; `uv run niram/remus_benchmark.py` times Remus-GOLD on the same
+  positions). A change to Remus-GOLD's rules, evaluation, or search needs the same
+  change in Niram. The Python style rules above do not apply to the Rust code, which
+  follows `cargo fmt` and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `tournament.py`, `estimate_elo.py`,
   `station_match.py`, `station_league.py`, `station_elo.py`) is added to `games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.

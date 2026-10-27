@@ -32,3 +32,6 @@ board.svg
 # David's own game file, Remus.pgn at the top of the Remus folder, which holds the
 # games he plays and analyzes in the chess apps
 /Remus.pgn
+
+# Niram-GOLD build output (cargo build writes it inside niram/)
+/niram/target/
