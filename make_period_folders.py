@@ -31,6 +31,7 @@ from make_student_folders import STUDENT_FUNCTIONS
 
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
+SAVED_OUTPUT_SUFFIXES = {".pgn", ".svg"}  # Games and board pictures that scripts save
 
 # For each day, the period in which a file takes its period4 form. Before that
 # period the file keeps its form from the day before, or is absent if it is new.
@@ -96,6 +97,7 @@ ARRIVALS = {
         "hidden_peak.py": 2,
         "tournament.py": 3,
         "remus.sh": 4,
+        "estimate_elo.py": 4,
     },
 }
 
@@ -576,6 +578,8 @@ PERIOD_NOTES = {
     "plays greedy moves. `uv run play_match.py` plays random Remus against greedy Remus.",
     (10, 3): "`uv run tournament.py` plays the class round robin and saves every game "
     "as PGN beside the script.",
+    (10, 4): "`uv run estimate_elo.py` measures the Elo rating of Remus against "
+    "Stockfish set to fixed ratings, and adds every game to remus_vs_stockfish.pgn.",
 }
 
 # Every Python module name that appears in any Day folder
@@ -588,10 +592,11 @@ def day_folder(day: int) -> Path:
 
 
 def read_folder(folder: Path) -> dict[str, str]:
-    """Return {file name: text} for every file in a folder."""
+    """Return {file name: text} for every code and data file in a folder."""
     files = {}
     for path in sorted(folder.iterdir()):
-        if path.is_file():
+        # Games and pictures that scripts save beside themselves are not course code
+        if path.is_file() and path.suffix not in SAVED_OUTPUT_SUFFIXES:
             files[path.name] = path.read_text()
     return files
 

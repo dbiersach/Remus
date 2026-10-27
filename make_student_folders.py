@@ -106,7 +106,11 @@ def main():
         target = STUDENT / folder.parent.name / folder.name
         if target.exists():
             shutil.rmtree(target)  # Rebuild each student period folder from scratch
-        shutil.copytree(folder, target, ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copytree(
+            folder,
+            target,
+            ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg"),
+        )
         for stub_day, stub_period, file_name, function in STUDENT_FUNCTIONS:
             if (stub_day, stub_period) != (day, period):
                 continue

@@ -40,6 +40,7 @@ Day 5, Period 2.
 | `hidden_peak.py` | D10 P2: Science AI | Last day |
 | `tournament.py` | D10 P3: the class round robin | Last day |
 | `remus.sh` | D10 P4: starts Remus on a Mac or Linux computer at home | Last day |
+| `estimate_elo.py` | D10 P4: measures the Elo rating of Remus against Stockfish | Last day |
 
 ## Table 2: By period
 
@@ -84,4 +85,4 @@ period before, so a pair can always open the newest folder.
 | D10 P1 | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `mate_solver.py`, `test_upgrades.py` | `search.py`: `upgraded_search()`. `evaluation.py`: pawns and mating. `move_ordering.py`: killers. `uci_engine.py` and `console_game.py`: book moves first |
 | D10 P2 | `hidden_peak.py` | `test_upgrades.py`: hidden-peak tests |
 | D10 P3 | `tournament.py` | None |
-| D10 P4 | `remus.sh` | None |
+| D10 P4 | `remus.sh`, `estimate_elo.py` | None |

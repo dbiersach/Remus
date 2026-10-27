@@ -480,7 +480,7 @@ The full description of each script is in `docs/scripts/`.
 | `Day 07 - Play full games in En Croissant` | `fen.py`, `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `test_game.py` | `game_state.py` (`position_key`), `make_move.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Evaluate and search ahead` | `evaluation.py`, `test_search.py` | `search.py` (minimax, negamax) |
 | `Day 09 - Search faster with alpha-beta` | `move_ordering.py`, `compare_search.py` | `search.py` (alpha-beta, quiescence, `think`), `uci_engine.py` (clock, thread, `stop`) |
-| `Day 10 - Upgrade Remus and add Science AI` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `mate_solver.py`, `hidden_peak.py`, `tournament.py`, `remus.sh`, `test_upgrades.py` | `evaluation.py` (pawns, mating), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
+| `Day 10 - Upgrade Remus and add Science AI` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `mate_solver.py`, `hidden_peak.py`, `tournament.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py` | `evaluation.py` (pawns, mating), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
 
 Outside the Day folders:
 

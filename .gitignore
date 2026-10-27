@@ -24,3 +24,7 @@ tasks/
 
 # Pictures that show_board.py saves beside itself
 board.svg
+
+# Games that tournament.py and estimate_elo.py save beside themselves
+tournament.pgn
+remus_vs_stockfish.pgn
