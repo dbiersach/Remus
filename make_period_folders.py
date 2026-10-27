@@ -126,6 +126,7 @@ ARRIVALS = {
         "test_search.py": 1,
         "console_game.py": 1,
         "uci_engine.py": 1,
+        "test_game.py": 1,
         "mate_solver.py": 4,
     },
     10: {

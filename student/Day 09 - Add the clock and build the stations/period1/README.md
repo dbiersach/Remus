@@ -13,6 +13,7 @@ Files that grow this period:
 
 - `console_game.py`
 - `search.py`
+- `test_game.py`
 - `test_search.py`
 - `uci_engine.py`
 

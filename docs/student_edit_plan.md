@@ -78,7 +78,7 @@
 
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
-| P1 | Iterative deepening, the clock, and UCI info | None | `console_game.py`, `search.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
+| P1 | Iterative deepening, the clock, and UCI info | None | `console_game.py`, `search.py`, `test_game.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
 | P2 | Python lab 12 and the enhancement stations | `python_caches_instructor.py` | None | The lab `python_caches.py` (7 lines); their color station's functions, in the table below |
 | P3 | Enhancement stations: test and measure | None | None | Their color station's functions, in the table below |
 | P4 | Launch the station matches, and the mate solver | `mate_solver.py` | `test_search.py` | `mating_move()` in `mate_solver.py` (22 lines) |
