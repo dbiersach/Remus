@@ -123,10 +123,15 @@ def test_knight_underpromotion_and_undo() -> None:
 
 
 def test_uci_engine_follows_a_game_with_castling() -> None:
-    """The GUI sends castling as the king's move, e1g1; Remus must answer legally."""
+    """
+    En Croissant sends the start as FEN and castling as the king's move, e1g1.
+    Remus must follow both and answer with a legal move.
+    """
     engine = Path(__file__).parent / "uci_engine.py"
     played = "e2e4 e7e5 g1f3 b8c6 f1c4 g8f6 e1g1"
-    commands = f"uci\nisready\nposition startpos moves {played}\ngo\nquit\n"
+    start = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    position = f"position fen {start} moves {played}"
+    commands = f"uci\nisready\n{position}\ngo\nquit\n"
     output = subprocess.run(
         [sys.executable, str(engine)],
         input=commands,
