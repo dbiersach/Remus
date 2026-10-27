@@ -243,8 +243,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   against Remus-WHITE, and Remus-WHITE takes part in the color matches too.
   `station_league.py` plays a round robin of all 12 versions, Remus-GOLD included,
   and fits one Elo rating per version with Remus-WHITE pinned at 0.
+  `station_elo.py` rates all 12 versions against Stockfish at five UCI_Elo levels
+  from frozen copies of the stations and writes the table to `docs/station_elo.md`.
 - Every game any script plays (`play_match.py`, `tournament.py`, `estimate_elo.py`,
-  `station_match.py`, `station_league.py`) is added to `games/remus_games.pgn` at the top of the
+  `station_match.py`, `station_league.py`, `station_elo.py`) is added to `games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson
   makes a file smarter, the new code goes into the same file under a new function
