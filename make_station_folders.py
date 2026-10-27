@@ -54,7 +54,7 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
 
 
 BASE_SEARCH = function_text(BASE / "search.py", "alpha_beta_with_quiescence")
-BASE_SUMMARY = """    The full Day 9 search: alpha-beta with quiescence at the leaves, ordered
+BASE_SUMMARY = """    The full Day 8 search: alpha-beta with quiescence at the leaves, ordered
     moves, a check extension, a clock, and the line of best play."""
 THINK_CALL = """            score, pv = alpha_beta_with_quiescence(
                 state, depth, 0, -MATE_SCORE - 1, MATE_SCORE + 1, info, best

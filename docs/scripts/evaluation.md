@@ -1,6 +1,6 @@
 # evaluation.py: How good is this position?
 
-*First appears in `instructor/Day 08 - Evaluate and search ahead/period1`.*
+*First appears in `instructor/Day 07 - Play full games and score positions/period4`.*
 
 ## The big picture
 
@@ -70,18 +70,17 @@ explain_evaluation()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `material` | Counts the value of the pieces. Positive means White is ahead. | Day 8, period 1 |
-| `placement` | Adds bonus points for pieces on good squares. | Day 8, period 2 |
+| `material` | Counts the value of the pieces. Positive means White is ahead. | Day 7, period 4 |
+| `placement` | Adds bonus points for pieces on good squares. | Day 7, period 4 |
 | `pawn_structure` | Scores doubled, isolated, and passed pawns. | Day 10, period 1 |
 | `mating_bonus` | Rewards driving the losing king to the edge when far ahead. | Day 10, period 1 |
 | `king_safety` | Rewards pawns that shelter the king while the enemy queen is on the board. | Day 10, period 1 |
-| `evaluate` | Gives the score from the point of view of the side to move. | Day 8, period 1 |
-| `explain_evaluation` | Prints each part of the score, so you can see why. | Day 8, period 1 |
+| `evaluate` | Gives the score from the point of view of the side to move. | Day 7, period 4 |
+| `explain_evaluation` | Prints each part of the score, so you can see why. | Day 7, period 4 |
 
 ## How the file grows
 
-- **Day 8, period 1:** `material`, `evaluate`, `explain_evaluation`
-- **Day 8, period 2:** `placement`
+- **Day 7, period 4:** `material`, `placement`, `evaluate`, `explain_evaluation`
 - **Day 10, period 1:** `pawn_structure`, `mating_bonus`, `king_safety`
 
 ## Try it
@@ -101,4 +100,4 @@ You should see: Every part of the score for the start (all 0), then a centered k
 
 ## Slides
 
-Slides 8.1, 8.2, 10.6, 10.7 in the [slide plan](../slide_plan.md).
+Slides 7.7, 7.8, 9.12, 9.13, 9.14 in the [slide plan](../slide_plan.md).

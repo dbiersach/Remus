@@ -149,9 +149,9 @@ def mating_bonus(board: list[list[str]]) -> int:
         losing king stands from the center, and 4 points for each step the
         winning king has closed toward it.
     """
-    # Day 10, period 1: write this function.
+    # Day 9, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 10 P1: write mating_bonus()")
+    raise NotImplementedError("Day 9 P2: write mating_bonus()")
 
 
 def evaluate(state: dict) -> int:

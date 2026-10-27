@@ -1,6 +1,6 @@
 # console_game.py: Play chess in the terminal
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant/period3`.*
+*First appears in `instructor/Day 07 - Play full games and score positions/period2`.*
 
 ## The big picture
 

@@ -48,21 +48,25 @@ STUDENT_FUNCTIONS = [
     (5, 2, "make_move.py", "update_castling_rights"),
     (5, 3, "make_move.py", "en_passant_victim_square"),
     (6, 2, "perft.py", "perft"),
-    (7, 1, "fen.py", "fen_placement"),
-    (7, 1, "fen.py", "board_from_placement"),
-    (7, 2, "game_end.py", "insufficient_material"),
-    (7, 2, "game_end.py", "game_result"),
-    (7, 3, "notation.py", "parse_san"),
-    (7, 4, "search.py", "random_move"),
-    (7, 4, "search.py", "greedy_move"),
-    (8, 1, "evaluation.py", "material"),
-    (9, 2, "search.py", "capture_moves"),
-    (9, 3, "move_ordering.py", "mvv_lva_score"),
-    (9, 4, "search.py", "format_info"),
-    (10, 1, "mate_solver.py", "mating_move"),
-    (10, 2, "hidden_peak.py", "candidate_squares"),
-    (10, 2, "hidden_peak.py", "score_candidate"),
-    (10, 2, "hidden_peak.py", "choose_next_measurement"),
+    (6, 4, "fen.py", "fen_placement"),
+    (6, 4, "fen.py", "board_from_placement"),
+    (7, 1, "game_end.py", "insufficient_material"),
+    (7, 1, "game_end.py", "game_result"),
+    (7, 2, "notation.py", "parse_san"),
+    (7, 3, "search.py", "random_move"),
+    (7, 3, "search.py", "greedy_move"),
+    (7, 4, "evaluation.py", "material"),
+    (8, 3, "search.py", "capture_moves"),
+    (8, 4, "move_ordering.py", "mvv_lva_score"),
+    (9, 1, "search.py", "format_info"),
+    (9, 4, "mate_solver.py", "mating_move"),
+    (10, 1, "hidden_peak.py", "candidate_squares"),
+    (10, 1, "hidden_peak.py", "score_candidate"),
+    (10, 1, "hidden_peak.py", "choose_next_measurement"),
+    (10, 2, "beam_time.py", "estimate"),
+    (10, 2, "beam_time.py", "expected_wrong_calls"),
+    (10, 3, "beam_time.py", "gain"),
+    (10, 3, "beam_time.py", "choose_next_sample"),
 ]
 
 
@@ -157,7 +161,7 @@ def main():
             file_path = target / file_name
             text = file_path.read_text()
             count += typed_lines(text, function)
-            file_path.write_text(stub_function(text, function, 10, 1))
+            file_path.write_text(stub_function(text, function, 9, 2))
             stubbed += 1
         print(f"{color} station: {count} lines to type")
         if count > MAX_TYPED_LINES:

@@ -1,6 +1,6 @@
 # estimate_elo.py: How strong is Remus?
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period4`.*
+*First appears in `instructor/Day 10 - Aim Remus at a science problem/period4`.*
 
 ## The big picture
 

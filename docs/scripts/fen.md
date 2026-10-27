@@ -1,6 +1,6 @@
 # fen.py: A whole position in one line
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant/period1`.*
+*First appears in `instructor/Day 06 - Count positions and read FEN/period4`.*
 
 ## The big picture
 
@@ -63,10 +63,10 @@ state_to_fen()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `fen_placement` | Writes the board as the first FEN field. | Day 7, period 1 |
-| `board_from_placement` | Reads the first FEN field into a board. | Day 7, period 1 |
-| `state_from_fen` | Reads a full FEN line into a game state. | Day 7, period 1 |
-| `state_to_fen` | Writes a game state as a full FEN line. | Day 7, period 1 |
+| `fen_placement` | Writes the board as the first FEN field. | Day 6, period 4 |
+| `board_from_placement` | Reads the first FEN field into a board. | Day 6, period 4 |
+| `state_from_fen` | Reads a full FEN line into a game state. | Day 6, period 4 |
+| `state_to_fen` | Writes a game state as a full FEN line. | Day 6, period 4 |
 
 ## Try it
 
@@ -85,4 +85,4 @@ You should see: The starting board, then `Start FEN read and written back unchan
 
 ## Slides
 
-Slides 7.1 in the [slide plan](../slide_plan.md).
+Slides 6.4 in the [slide plan](../slide_plan.md).

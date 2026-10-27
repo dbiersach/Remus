@@ -1,7 +1,7 @@
 """test_perft.py
 
 Compare Remus's perft counts with python-chess, an independent move generator, on
-the standard test positions. From Day 7 on, Remus reads each FEN itself.
+the standard test positions. From Day 6, period 4 on, Remus reads each FEN itself.
 """
 
 import chess

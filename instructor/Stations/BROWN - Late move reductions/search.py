@@ -6,10 +6,10 @@ greedy move that grabs the most valuable piece it can capture. Then Remus looks
 ahead: minimax tries every move and every reply, and negamax does the same work
 with one function instead of two mirror-image halves.
 
-Day 9 makes the search smarter without changing its answer: alpha-beta skips
+Day 8 makes the search smarter without changing its answer: alpha-beta skips
 moves that cannot change the result, quiescence keeps looking until the captures
-stop, move ordering tries strong moves first, and iterative deepening searches
-one move deeper at a time until the clock runs out.
+stop, and move ordering tries strong moves first. Day 9 adds iterative
+deepening, which searches one move deeper at a time until the clock runs out.
 
 The BROWN station adds reduced_search, and think uses it.
 """
@@ -335,7 +335,7 @@ def alpha_beta_with_quiescence(
     first: Move | None = None,
 ) -> tuple[int, list[Move]]:
     """
-    The full Day 9 search: alpha-beta with quiescence at the leaves, ordered
+    The full Day 8 search: alpha-beta with quiescence at the leaves, ordered
     moves, a check extension, a clock, and the line of best play.
 
     Parameters

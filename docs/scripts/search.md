@@ -1,6 +1,6 @@
 # search.py: Choosing a move
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant/period4`.*
+*First appears in `instructor/Day 07 - Play full games and score positions/period3`.*
 
 ## The big picture
 
@@ -156,40 +156,39 @@ think_move()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `SearchInfo` | Holds what one search counts and needs: positions visited, the clock, and memory. | Day 8, period 3 |
-| `SearchTimeout` | A signal that stops the search when time is up. | Day 9, period 3 |
-| `check_time` | Raises SearchTimeout if time is up or the GUI said stop. | Day 9, period 3 |
-| `random_move` | Picks any legal move at random. | Day 7, period 4 |
-| `capture_value` | Says how much the captured piece is worth. | Day 7, period 4 |
-| `greedy_move` | Picks the move that captures the most valuable piece. | Day 7, period 4 |
-| `white_score` | Scores a position from White's side, for minimax. | Day 8, period 3 |
-| `minimax` | Looks ahead. White picks the highest score, Black the lowest. | Day 8, period 3 |
-| `negamax` | Does the same as minimax with one function and a minus sign. | Day 8, period 4 |
-| `best_move` | Tries every first move with negamax and keeps the best. | Day 8, period 4 |
-| `negamax_move` | The negamax brain: looks two moves ahead. | Day 8, period 4 |
-| `alpha_beta` | Negamax that skips moves which cannot change the answer. | Day 9, period 1 |
-| `capture_moves` | Lists only the captures and promotions. | Day 9, period 2 |
-| `quiescence` | Keeps searching captures until the position is quiet. | Day 9, period 2 |
-| `alpha_beta_with_quiescence` | The full Day 9 search: alpha-beta, quiescence, and good move order. | Day 9, period 3 |
+| `SearchInfo` | Holds what one search counts and needs: positions visited, the clock, and memory. | Day 8, period 1 |
+| `SearchTimeout` | A signal that stops the search when time is up. | Day 8, period 4 |
+| `check_time` | Raises SearchTimeout if time is up or the GUI said stop. | Day 8, period 4 |
+| `random_move` | Picks any legal move at random. | Day 7, period 3 |
+| `capture_value` | Says how much the captured piece is worth. | Day 7, period 3 |
+| `greedy_move` | Picks the move that captures the most valuable piece. | Day 7, period 3 |
+| `white_score` | Scores a position from White's side, for minimax. | Day 8, period 1 |
+| `minimax` | Looks ahead. White picks the highest score, Black the lowest. | Day 8, period 1 |
+| `negamax` | Does the same as minimax with one function and a minus sign. | Day 8, period 1 |
+| `best_move` | Tries every first move with negamax and keeps the best. | Day 8, period 1 |
+| `negamax_move` | The negamax brain: looks two moves ahead. | Day 8, period 1 |
+| `alpha_beta` | Negamax that skips moves which cannot change the answer. | Day 8, period 2 |
+| `capture_moves` | Lists only the captures and promotions. | Day 8, period 3 |
+| `quiescence` | Keeps searching captures until the position is quiet. | Day 8, period 3 |
+| `alpha_beta_with_quiescence` | The full Day 9 search: alpha-beta, quiescence, and good move order. | Day 8, period 4 |
 | `remember_killer` | Remembers a quiet move that caused a cutoff, to try it early next time. | Day 10, period 1 |
 | `make_null_move` | Passes the turn without moving, so the search can test a pass. | Day 10, period 1 |
 | `undo_null_move` | Takes back a null move. | Day 10, period 1 |
 | `has_pieces` | Checks that a side has a piece besides pawns and the king. | Day 10, period 1 |
 | `reduction` | Says how many plies to cut from a late, quiet move. | Day 10, period 1 |
 | `upgraded_search` | The Day 10 search, with memory, killer moves, draw sense, null moves, and late move reductions. | Day 10, period 1 |
-| `format_info` | Writes a line telling the GUI the depth, score, and best line. | Day 9, period 4 |
-| `think` | Searches deeper and deeper until time runs out, then returns the best move. | Day 9, period 4 |
-| `think_move` | The thinking brain, with two seconds per move. | Day 9, period 4 |
+| `format_info` | Writes a line telling the GUI the depth, score, and best line. | Day 9, period 1 |
+| `think` | Searches deeper and deeper until time runs out, then returns the best move. | Day 9, period 1 |
+| `think_move` | The thinking brain, with two seconds per move. | Day 9, period 1 |
 
 ## How the file grows
 
-- **Day 7, period 4:** `random_move`, `capture_value`, `greedy_move`
-- **Day 8, period 3:** `SearchInfo`, `white_score`, `minimax`
-- **Day 8, period 4:** `negamax`, `best_move`, `negamax_move`
-- **Day 9, period 1:** `alpha_beta`
-- **Day 9, period 2:** `capture_moves`, `quiescence`
-- **Day 9, period 3:** `SearchTimeout`, `check_time`, `alpha_beta_with_quiescence`
-- **Day 9, period 4:** `format_info`, `think`, `think_move`
+- **Day 7, period 3:** `random_move`, `capture_value`, `greedy_move`
+- **Day 8, period 1:** `SearchInfo`, `white_score`, `minimax`, `negamax`, `best_move`, `negamax_move`
+- **Day 8, period 2:** `alpha_beta`
+- **Day 8, period 3:** `capture_moves`, `quiescence`
+- **Day 8, period 4:** `SearchTimeout`, `check_time`, `alpha_beta_with_quiescence`
+- **Day 9, period 1:** `format_info`, `think`, `think_move`
 - **Day 10, period 1:** `remember_killer`, `make_null_move`, `undo_null_move`, `has_pieces`, `reduction`, `upgraded_search`
 
 ## Try it
@@ -209,4 +208,4 @@ You should see: A greedy capture, a back-rank mate found, negamax against alpha-
 
 ## Slides
 
-Slides 7.7, 8.3, 8.4, 8.5, 9.1, 9.3, 9.5, 9.6, 9.8, 10.4, 10.5 in the [slide plan](../slide_plan.md).
+Slides 7.6, 8.1, 8.2, 8.3, 8.4, 8.6, 9.1, 9.2, 9.4, 9.8, 9.9, 9.10, 9.11 in the [slide plan](../slide_plan.md).

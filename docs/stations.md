@@ -4,8 +4,10 @@
 
 Remus-WHITE is the finished Day 9 Remus with none of the enhancements. It already
 searches with alpha-beta, quiescence, move ordering, iterative deepening, and a
-clock. Ten ideas can make it stronger. Each pair builds
-one of them, so the class can measure which idea adds the most strength.
+clock. Ten ideas can make it stronger. On Day 9, in periods 2 and 3, each pair builds
+one of them, so the class can measure which idea adds the most strength. In period 4
+every pair starts its matches, which run with nobody watching while the pairs write
+the mate solver.
 
 Each station has a color instead of a number or a letter, so no station sounds
 better than another before the games are played.

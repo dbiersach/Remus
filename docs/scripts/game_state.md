@@ -67,12 +67,12 @@ opponent()
 | `is_white` | Says True if a piece letter is uppercase (White). | Day 2, period 3 |
 | `color_of` | Says "w", "b", or None for an empty square. | Day 2, period 3 |
 | `opponent` | Gives the other side's color. | Day 2, period 3 |
-| `position_key` | Writes the position as text, so Remus can tell when a position repeats. | Day 7, period 2 |
+| `position_key` | Writes the position as text, so Remus can tell when a position repeats. | Day 7, period 1 |
 
 ## How the file grows
 
 - **Day 2, period 3:** `new_game`, `is_white`, `color_of`, `opponent`
-- **Day 7, period 2:** `position_key`
+- **Day 7, period 1:** `position_key`
 
 ## Try it
 
@@ -91,4 +91,4 @@ You should see: The start board, `Side to move: w`, and the colors of a few piec
 
 ## Slides
 
-Slides 2.1, 7.4 in the [slide plan](../slide_plan.md).
+Slides 2.1, 7.1 in the [slide plan](../slide_plan.md).

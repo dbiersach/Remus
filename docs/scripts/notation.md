@@ -1,6 +1,6 @@
 # notation.py: Moves the way people write them
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant/period3`.*
+*First appears in `instructor/Day 07 - Play full games and score positions/period2`.*
 
 ## The big picture
 
@@ -70,9 +70,9 @@ parse_san()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `move_to_san` | Writes a legal move in SAN, like Nf3 or exd5. | Day 7, period 3 |
-| `disambiguation` | Adds the letter or number that tells two pieces apart. | Day 7, period 3 |
-| `parse_san` | Finds the legal move that matches the SAN you typed. | Day 7, period 3 |
+| `move_to_san` | Writes a legal move in SAN, like Nf3 or exd5. | Day 7, period 2 |
+| `disambiguation` | Adds the letter or number that tells two pieces apart. | Day 7, period 2 |
+| `parse_san` | Finds the legal move that matches the SAN you typed. | Day 7, period 2 |
 
 ## Try it
 
@@ -91,4 +91,4 @@ You should see: Every legal move of a test position in SAN, and `O-O-O` read bac
 
 ## Slides
 
-Slides 7.2, 7.3 in the [slide plan](../slide_plan.md).
+Slides 7.3, 7.4 in the [slide plan](../slide_plan.md).

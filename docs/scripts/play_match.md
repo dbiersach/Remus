@@ -1,6 +1,6 @@
 # play_match.py: Two Remus brains play each other
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant/period4`.*
+*First appears in `instructor/Day 07 - Play full games and score positions/period3`.*
 
 ## The big picture
 
@@ -50,9 +50,9 @@ main()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `start_engine` | Starts one copy of Remus with a chosen brain. | Day 7, period 4 |
-| `play_game` | Plays one game and returns the board with every move on it. | Day 7, period 4 |
-| `save_game` | Adds one game to the class games file and returns its result. | Day 7, period 4 |
+| `start_engine` | Starts one copy of Remus with a chosen brain. | Day 7, period 3 |
+| `play_game` | Plays one game and returns the board with every move on it. | Day 7, period 3 |
+| `save_game` | Adds one game to the class games file and returns its result. | Day 7, period 3 |
 
 ## Try it
 
@@ -71,4 +71,4 @@ You should see: Each game's result, then the final score.
 
 ## Slides
 
-Slides 7.7 in the [slide plan](../slide_plan.md).
+Slides 7.6 in the [slide plan](../slide_plan.md).

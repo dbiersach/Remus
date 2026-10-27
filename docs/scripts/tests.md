@@ -30,9 +30,10 @@ python-chess as an outside judge, to compare its answers with Remus's.
 | `test_legal_moves.py` | 4 | Check, pins, and the legal-move filter |
 | `test_special_moves.py` | 5 | Castling, en passant, and promotion |
 | `test_perft.py` | 6 | Position counts match the published numbers |
-| `test_game.py` | 7 | FEN, SAN, game endings, and the UCI engine |
-| `test_search.py` | 8 | Evaluation, minimax, negamax, and later alpha-beta and mates |
-| `test_upgrades.py` | 10 | The Day 10 upgrades, the mate solver, and the Science AI |
+| `test_game.py` | 6 | FEN, and from Day 7 SAN, game endings, and the UCI engine |
+| `test_search.py` | 7 | Evaluation and the first brains, then minimax, negamax, alpha-beta, mates, and the mate solver |
+| `test_upgrades.py` | 10 | The Day 10 upgrades and the hidden-peak Science AI |
+| `test_beam_time.py` | 10 | The beam time agent: estimates, wrong-call chances, the look-ahead, and the benchmark |
 
 ## How a test works
 

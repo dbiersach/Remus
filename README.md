@@ -21,7 +21,7 @@ Remus uses [uv](https://docs.astral.sh/uv/) and Python 3.14.
 ```bash
 uv sync
 uv run run_all_tests.py
-uv run "instructor/Day 06 - Count positions with perft/period4/perft.py"
+uv run "instructor/Day 06 - Count positions and read FEN/period4/perft.py"
 ```
 
 The engine uses only the Python standard library. The development group adds

@@ -6,10 +6,10 @@ greedy move that grabs the most valuable piece it can capture. Then Remus looks
 ahead: minimax tries every move and every reply, and negamax does the same work
 with one function instead of two mirror-image halves.
 
-Day 9 makes the search smarter without changing its answer: alpha-beta skips
+Day 8 makes the search smarter without changing its answer: alpha-beta skips
 moves that cannot change the result, quiescence keeps looking until the captures
-stop, move ordering tries strong moves first, and iterative deepening searches
-one move deeper at a time until the clock runs out.
+stop, and move ordering tries strong moves first. Day 9 adds iterative
+deepening, which searches one move deeper at a time until the clock runs out.
 
 The ORANGE station adds null_move_search, and think uses it.
 """
@@ -336,7 +336,7 @@ def alpha_beta_with_quiescence(
     first: Move | None = None,
 ) -> tuple[int, list[Move]]:
     """
-    The full Day 9 search: alpha-beta with quiescence at the leaves, ordered
+    The full Day 8 search: alpha-beta with quiescence at the leaves, ordered
     moves, a check extension, a clock, and the line of best play.
 
     Parameters
@@ -407,16 +407,16 @@ def make_null_move(state: dict) -> tuple[int, int] | None:
     tuple[int, int] | None
         The en passant target before the null move, which undo_null_move restores.
     """
-    # Day 10, period 1: write this function.
+    # Day 9, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 10 P1: write make_null_move()")
+    raise NotImplementedError("Day 9 P2: write make_null_move()")
 
 
 def undo_null_move(state: dict, en_passant: tuple[int, int] | None) -> None:
     """Take back a null move, restoring the side to move and the en passant target."""
-    # Day 10, period 1: write this function.
+    # Day 9, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 10 P1: write undo_null_move()")
+    raise NotImplementedError("Day 9 P2: write undo_null_move()")
 
 
 def has_pieces(board: list[list[str]], color: str) -> bool:

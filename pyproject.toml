@@ -35,7 +35,7 @@ target-version = "py314"
 
 # Each period folder is a complete copy of Remus, so module names repeat from folder
 # to folder. Run one folder at a time, such as
-# uv run pytest "instructor/Day 06 - Count positions with perft/period2", or
+# uv run pytest "instructor/Day 06 - Count positions and read FEN/period2", or
 # run_all_tests.py for all.
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,6 +1,6 @@
 # tournament.py: The class round robin
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period3`.*
+*First appears in `instructor/Day 10 - Aim Remus at a science problem/period4`.*
 
 ## The big picture
 
@@ -50,8 +50,8 @@ main()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `round_robin` | Makes the pairings for every round. | Day 10, period 3 |
-| `play_game` | Plays one game on a clock and returns it as PGN. | Day 10, period 3 |
+| `round_robin` | Makes the pairings for every round. | Day 10, period 4 |
+| `play_game` | Plays one game on a clock and returns it as PGN. | Day 10, period 4 |
 
 ## Try it
 

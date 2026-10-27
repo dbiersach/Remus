@@ -225,8 +225,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   name next to the function it improves (`negamax`, then `alpha_beta`, then
   `upgraded_search`), and the older function stays. Never add version numbers to file
   names.
-- The Science AI lesson is `hidden_peak.py` in the Day 10 folder, from `period2` on. It uses the standard
-  library only and does not import the engine: it reuses the engine's ideas, not its
+- The Science AI lessons are `hidden_peak.py` (Day 10, `period1` on) and
+  `beam_time.py`, the beamline problem (Day 10, `period2` on). Both use the standard
+  library only and do not import the engine: they reuse the engine's ideas, not its
   code.
 - Tests sit next to the modules in each period folder. The module names repeat from
   folder to folder, so pytest runs one folder at a time

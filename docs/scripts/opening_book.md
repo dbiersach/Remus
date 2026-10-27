@@ -1,6 +1,6 @@
 # opening_book.py: Play known openings without thinking
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period1`.*
+*First appears in `instructor/Day 10 - Aim Remus at a science problem/period1`.*
 
 ## The big picture
 
@@ -82,4 +82,4 @@ You should see: `Book positions: 97`, the first moves in the book, and a reply t
 
 ## Slides
 
-Slides 10.8 in the [slide plan](../slide_plan.md).
+Slides 9.15 in the [slide plan](../slide_plan.md).

@@ -1,6 +1,6 @@
 # game_end.py: Is the game over?
 
-*First appears in `instructor/Day 07 - Play full games in En Croissant/period2`.*
+*First appears in `instructor/Day 07 - Play full games and score positions/period1`.*
 
 ## The big picture
 
@@ -55,9 +55,9 @@ game_result()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `insufficient_material` | Says True if neither side can ever checkmate. | Day 7, period 2 |
-| `repetition_count` | Counts how many times this position has appeared. | Day 7, period 2 |
-| `game_result` | Says who won and why, or None if the game goes on. | Day 7, period 2 |
+| `insufficient_material` | Says True if neither side can ever checkmate. | Day 7, period 1 |
+| `repetition_count` | Counts how many times this position has appeared. | Day 7, period 1 |
+| `game_result` | Says who won and why, or None if the game goes on. | Day 7, period 1 |
 
 ## Try it
 
@@ -76,4 +76,4 @@ You should see: Fool's mate as `('0-1', 'checkmate')`, a stalemate, a draw with 
 
 ## Slides
 
-Slides 7.4, 7.5 in the [slide plan](../slide_plan.md).
+Slides 7.1, 7.2 in the [slide plan](../slide_plan.md).

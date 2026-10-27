@@ -2,7 +2,7 @@
 
 Tests for the Day 10 upgrade stations: pawn structure, the mating bonus, king
 safety, the transposition table, killer moves, null moves, late move reductions,
-upgraded_search, the opening book, the mate solver, and the hidden-peak Science AI.
+upgraded_search, the opening book, and the hidden-peak Science AI.
 """
 
 from board import EMPTY
@@ -18,7 +18,7 @@ from hidden_peak import (
     random_strategy,
 )
 from make_move import make_move, state_snapshot
-from mate_solver import mating_move, read_puzzles
+from mate_solver import read_puzzles
 from moves import Move, move_from_uci, move_to_uci
 from notation import move_to_san, parse_san
 from opening_book import BOOK_PATH, book_move, load_book
@@ -171,21 +171,6 @@ def test_missing_book_never_stops_play() -> None:
     book = load_book(BOOK_PATH.with_name("no_such_book.txt"))
     assert book == {}
     assert book_move(book, state_from_fen(START_FEN)) is None
-
-
-def test_mate_solver_solves_all_gameworks_puzzles() -> None:
-    """Ten puzzles: nine mates in 2 and MATE.008, a mate in 3."""
-    puzzles = read_puzzles()
-    assert len(puzzles) == 10
-    for fen, best, length, name in puzzles:
-        state = state_from_fen(fen)
-        move = mating_move(state, length)
-        assert move is not None, name
-        assert move_to_san(state, move).rstrip("+#") == best, name
-
-
-def test_mate_solver_finds_no_mate_when_there_is_none() -> None:
-    assert mating_move(state_from_fen(START_FEN), 1) is None
 
 
 def test_hidden_peak_grid_has_one_peak() -> None:

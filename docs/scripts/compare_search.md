@@ -1,6 +1,6 @@
 # compare_search.py: Prove that alpha-beta saves work
 
-*First appears in `instructor/Day 09 - Search faster with alpha-beta/period1`.*
+*First appears in `instructor/Day 08 - Search ahead with alpha-beta/period2`.*
 
 ## The big picture
 
@@ -9,7 +9,7 @@ checks that on ten positions.
 
 ## Where this piece fits
 
-compare_search.py uses search.py and fen.py. It is a Day 9 experiment.
+compare_search.py uses search.py and fen.py. It is a Day 8 experiment.
 
 - **Uses:** [`fen.py`](fen.md), [`search.py`](search.md)
 - **Used by:** no other Remus file
@@ -57,4 +57,4 @@ You should see: Ten lines like `negamax 24,942 positions, alpha-beta 4,226 posit
 
 ## Slides
 
-Slides 9.2 in the [slide plan](../slide_plan.md).
+Slides 8.5 in the [slide plan](../slide_plan.md).

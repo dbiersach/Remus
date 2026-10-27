@@ -53,9 +53,9 @@ def probe(table: dict, key: str, depth: int, alpha: int, beta: int) -> int | Non
         the question: an exact score, a lower bound at or above beta (a cutoff),
         or an upper bound at or below alpha (no improvement). Otherwise None.
     """
-    # Day 10, period 1: write this function.
+    # Day 9, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 10 P1: write probe()")
+    raise NotImplementedError("Day 9 P2: write probe()")
 
 
 def best_stored_move(table: dict, key: str) -> Move | None:

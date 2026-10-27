@@ -17,11 +17,11 @@ holds four period folders, `period1` to `period4`, one for each class period:
 | `Day 03 - Generate piece moves` | Lists every move each piece can make by its movement rules |
 | `Day 04 - Keep only legal moves` | Finds attacked squares and drops moves that leave the king in check |
 | `Day 05 - Add castling, en passant, and promotion` | Completes the rules of movement |
-| `Day 06 - Count positions with perft` | Proves the rules right by counting positions against published totals |
-| `Day 07 - Play full games in En Croissant` | Adds FEN, SAN, game endings, two simple brains, and the UCI link to the GUI |
-| `Day 08 - Evaluate and search ahead` | Scores positions and looks ahead with minimax and negamax |
-| `Day 09 - Search faster with alpha-beta` | Prunes the tree, searches captures to quiet positions, and thinks on a clock |
-| `Day 10 - Upgrade Remus and add Science AI` | Adds the upgrade stations, a mate solver, the tournament, and the hidden-peak Science AI |
+| `Day 06 - Count positions and read FEN` | Proves the rules right by counting positions against published totals, then reads and writes FEN |
+| `Day 07 - Play full games and score positions` | Adds game endings, SAN, two simple brains, the UCI link to the GUI, and the evaluation |
+| `Day 08 - Search ahead with alpha-beta` | Looks ahead with minimax and negamax, then prunes with alpha-beta, searches captures to quiet positions, and orders moves |
+| `Day 09 - Add the clock and build the stations` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten enhancement stations, and adds a mate solver |
+| `Day 10 - Aim Remus at a science problem` | Holds all ten enhancements, the hidden-peak and beam time Science AI, and the tournament |
 
 The Day folders live inside the root `instructor/` folder. `instructor/` holds only
 finished reference code that runs as it is, with no blanks to fill in, so the solution
@@ -37,7 +37,7 @@ promotion in `period4`.
 writes in that period are stubs that raise `NotImplementedError`, and the tests fail
 until a pair writes them. `make_student_folders.py` builds `student/` and lists every
 student function; `student/README.md` shows the same list. A student who opens
-`Day 06 - Count positions with perft/period2` finds every file from Days 1 to 5, some of
+`Day 06 - Count positions and read FEN/period2` finds every file from Days 1 to 5, some of
 them grown, plus `perft.py` with `perft()` left to write. Nothing in a period folder
 imports from another folder.
 
@@ -55,10 +55,10 @@ compare them.
 | --- | --- | --- | --- |
 | `attacks.py` | `is_attacked_by_scanning` (ask every enemy piece) | `is_square_attacked` (look outward from the square) | 4 |
 | `search.py` | `random_move`, `greedy_move` | `minimax`, then `negamax` | 7, 8 |
-| `search.py` | `negamax` | `alpha_beta`, then `alpha_beta_with_quiescence` | 9 |
+| `search.py` | `negamax` | `alpha_beta`, then `alpha_beta_with_quiescence` | 8 |
 | `search.py` | `alpha_beta_with_quiescence` | `upgraded_search` | 10 |
-| `evaluation.py` | `material`, `placement` | adds `pawn_structure`, `mating_bonus` | 8, 10 |
-| `move_ordering.py` | captures by MVV-LVA | adds killer moves | 9, 10 |
+| `evaluation.py` | `material`, `placement` | adds `pawn_structure`, `mating_bonus`, `king_safety` | 7, 10 |
+| `move_ordering.py` | captures by MVV-LVA | adds killer moves | 8, 10 |
 
 Imports never break, because no file is ever renamed. A script that called `negamax` on
 Day 8 still finds `negamax` on Day 10.
@@ -68,7 +68,7 @@ Day 8 still finds `negamax` on Day 10.
 Run a script from inside its period folder, or give its path:
 
 ```bash
-uv run "instructor/Day 06 - Count positions with perft/period4/perft.py"
+uv run "instructor/Day 06 - Count positions and read FEN/period4/perft.py"
 ```
 
 Every script prints its own check, with the expected answer beside it. Tests sit next
@@ -135,6 +135,7 @@ The pages, in the order the class builds them:
 | [`estimate_elo.py`](scripts/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
 | [`station_match.py`](stations.md) | Measures one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements |
 | [`hidden_peak.py`](scripts/hidden_peak.md) | Science AI: find the hidden peak |
+| [`beam_time.py`](scripts/beam_time.md) | Science AI: plan the beam time |
 | [The test files](scripts/tests.md) | Checking that Remus works |
 
 ## The four boundaries
@@ -188,7 +189,7 @@ order:
 2. On `go wtime 60000 ...`, `thinking_time` turns the clock into seconds to think.
 3. Out of the opening book, `search.think` runs iterative deepening: depth 1, 2, 3,
    and on, until time runs out.
-4. Each depth calls `upgraded_search` (Day 10) or `alpha_beta_with_quiescence` (Day 9).
+4. Each depth calls `upgraded_search` (Day 10) or `alpha_beta_with_quiescence` (Day 8).
    The search calls `legal_moves`, which calls `pseudo_legal_moves`,
    `castling_moves`, `make_move`, `in_check`, and `undo_move` for every candidate.
 5. At depth 0, `quiescence` keeps searching captures until the position is quiet, then
@@ -230,3 +231,10 @@ copying its code:
 choose the best" to choose where to measure next on a 10x10 sample. A greedy AI with an
 exploration term finds the hidden peak in about 9 measurements, against about 54 for
 random guessing. See [`scripts/hidden_peak.md`](scripts/hidden_peak.md).
+
+`beam_time.py` aims the same loop at a beamline problem: 40 one-minute shots of
+X-rays for 8 samples, where each sample needs a yes-or-no call. The agent looks one
+shot ahead with three pretend readings and measures the sample whose next shot lowers
+the chance of a wrong call the most. Over 200 sample holders it makes about 0.65 wrong
+calls per holder, against 0.83 for equal time and 0.94 for random samples. See
+[`scripts/beam_time.md`](scripts/beam_time.md).

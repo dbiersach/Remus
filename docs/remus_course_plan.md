@@ -28,9 +28,9 @@ in [`AGENTS.md`](AGENTS.md) apply to everything below.
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
 | GUI move text | UCI (`e2e4`, `e7e8q`), because that is what the GUI protocol uses |
 | First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
-| First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in En Croissant once every special move works. Day 7 explains UCI and adds FEN and the brains, after the rules pass perft |
+| First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in En Croissant once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
-| Tournament | A full round robin of the 10 pair engines on Day 10 |
+| Matches | Day 9: each color station plays Remus-WHITE, plus 15 planned color-on-color showcase matches, unattended. Day 10: a round robin of the 10 pair engines and the results |
 | Mate puzzles | The ten GameWorks `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 | Documentation | `docs/remus_program_overview.md` for the whole program, one page per major script in `docs/scripts/`, and `docs/slide_plan.md` for the PowerPoint slides |
 
@@ -46,34 +46,35 @@ plugs it into a GUI, and teaches Remus to think.
 | 3 | Loops that walk the board | `while`, `break`, direction tuples, building lists | Generate king, knight, slider, and pawn moves |
 | 4 | Legal moves | Modules, imports, `__main__`, git | Detect attacks and check; keep only legal moves |
 | 5 | Special moves | Sets and dict lookups | Castling, en passant, promotion and underpromotion, with exact undo; play random Remus in En Croissant |
-| 6 | Counting the tree | Recursion | Perft matches the reference counts; Week 1 review |
-| 7 | Notation and a whole game | `split`, `join`, exceptions, `random`, `max` with `key=`, stdin and stdout | FEN and SAN; end the game; play random and greedy moves in a GUI |
-| 8 | Judging a position | Recursion review, constants | Evaluate a position; search with minimax and negamax |
-| 9 | Searching smarter | `sorted` with `key=`, `time` | Alpha-beta, quiescence, move ordering, iterative deepening |
-| 10 | Upgrades, Science AI, and tournament | Dicts as caches, `math.dist`, `random.seed` | One upgrade per pair; a measurement AI that finds a hidden peak; class tournament |
+| 6 | Counting the tree, and FEN | Recursion; `split`, `join`, exceptions | Perft matches the reference counts; FEN in and out |
+| 7 | A whole game, and judging a position | `random`, `max` with `key=`, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
+| 8 | Searching ahead, then smarter | Recursion review, `sorted` with `key=` | Minimax, negamax, alpha-beta, quiescence, move ordering |
+| 9 | The clock and the stations | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhancement station per pair; station matches; a mate solver |
+| 10 | Science AI at the beamline | `math.dist`, `math.sqrt`, `random.seed` | A measurement AI that finds a hidden peak; a beam time agent for a beamline problem; results and tournament |
 
 Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special move
 in place, and Week 2 opens with recursion and perft. Perft on Monday gives every pair a
-verified checkpoint after the weekend, and the Week 1 review in Day 6 Period 4 catches
-anyone who fell behind before the game work starts.
+verified checkpoint after the weekend. Week 2 moves fast so that Day 9 can hold the
+enhancement stations and Day 10 the science problem, so a pair that falls behind
+rejoins from the period's end tag instead of a catch-up period.
 
 ### Progressive elaboration
 
 Every functional area starts with the smallest correct version and grows in later
 periods. The engine as a whole gets two big passes: first it plays **legal** moves (end
-of Day 7), then it plays **good** moves (Days 8 to 10).
+of Day 7), then it plays **good** moves (Days 7 to 10).
 
 | Area | Version 1 | Version 2 | Version 3 | Version 4 and later |
 | --- | --- | --- | --- | --- |
-| Board | 8x8 list of lists, printed (D1) | Square names (D1) | FEN in and out (D7) | GameWorks's 0x88 board as a "how 1987 did it" sidebar talk (D10 optional, no code) |
+| Board | 8x8 list of lists, printed (D1) | Square names (D1) | FEN in and out (D6) | GameWorks's 0x88 board as a "how 1987 did it" sidebar talk (D10 optional, no code) |
 | Make and undo | Quiet moves and captures (D2) | Castling, en passant, promotion (D5) | Clocks, history, repetition keys (D7) | Undo inside search with `try/finally` (D8) |
-| Move generation | King and knight jumps (D3) | Sliders and pawns (D3) | Legal filter: make, test the king, undo (D4) | Captures first, MVV-LVA, killers (D9, D10) |
-| Attacks | Loop over enemy pieces (D4) | Look outward from the square (D4) | Castling and legality use it (D5) | Check extension in the search (D9) |
+| Move generation | King and knight jumps (D3) | Sliders and pawns (D3) | Legal filter: make, test the king, undo (D4) | Captures first, MVV-LVA, killers (D8, D9) |
+| Attacks | Loop over enemy pieces (D4) | Look outward from the square (D4) | Castling and legality use it (D5) | Check extension in the search (D8) |
 | Game end | Checkmate and stalemate (D7) | Fifty-move rule (D7) | Threefold repetition (D7) | Insufficient material (D7) |
-| Notation | UCI text (D2) | FEN (D7) | SAN out (D7) | SAN in, by matching legal moves (D7) |
-| Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering, iterative deepening (D9), PVS and a transposition table (D10) |
-| Evaluation | Material count (D8) | Piece-square tables (D8) | Mate scores that prefer the faster mate (D8) | Pawn structure and mating evaluation (D10) |
-| Science AI | Paper hidden-peak game (D10 P2 warm-up) | Greedy measurement choice (D10 P2) | Explore and exploit weight tuned on a benchmark (D10 P2) | Depth-2 expectimax, a teacher demo (D10 P2) |
+| Notation | UCI text (D2) | FEN (D6) | SAN out (D7) | SAN in, by matching legal moves (D7) |
+| Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering (D8), iterative deepening (D9), the ten enhancement stations (D9) |
+| Evaluation | Material count (D7) | Piece-square tables (D7) | Mate scores that prefer the faster mate (D8) | Pawn structure, mating bonus, and king safety stations (D9) |
+| Science AI | Paper hidden-peak game and greedy measurement choice (D10 P1) | Explore and exploit weight tuned on a benchmark (D10 P1) | Beam time: estimates and the chance of a wrong call (D10 P2) | Look ahead with pretend readings, and verify predictions against results (D10 P3) |
 | Interface | Console printout and a board picture (D1) | Move arrows (D3) and random Remus in En Croissant (D5) | Console game in SAN and full UCI (D7) | `info` lines, time control, `stop` (D9) |
 
 ## How students write real Remus code
@@ -143,10 +144,10 @@ every drill uses chess data so the skill is fresh when the engine needs it.
 | 6 | D4 P1 | Modules, `import`, `if __name__ == "__main__"`, git `fetch`, `switch -c`, `commit`, `log` | Split yesterday's code into two files and import one from the other |
 | 7 | D5 P1 | Sets, membership with `in`, dict lookups, string replacement | Castling rights as the string `"KQkq"`: remove `"K"` when the h1 rook moves |
 | 8 | D6 P1 | Recursion: base case, recursive case, call stack | Count down; count the leaves of a small tree; count paths of a knight |
-| 9 | D7 P1 | `split`, `join`, `int()`, exceptions with `try` and `ValueError` | Read a FEN string and print its six fields |
-| 10 | D7 P3 | `random.choice`, `max` with `key=`, `sys.stdin`, `print(..., flush=True)`, `sys.stderr` | A tiny program that echoes lines, then answers `isready` with `readyok` |
-| 11 | D9 P1 | `sorted` with `key=`, `time.perf_counter()`, `float("inf")` | Sort captures by victim value; time a perft run |
-| 12 | D10 P1 | Dicts as caches, tuples as keys, `math.dist`, `random.seed`, `threading.Event` (teacher demo) | Remember perft counts already computed; measure the distance from `d4` to `g7` |
+| 9 | D6 P4 | `split`, `join`, `int()`, exceptions with `try` and `ValueError` | Read a FEN string and print its six fields |
+| 10 | D7 P2 | `random.choice`, `max` with `key=`, `sys.stdin`, `print(..., flush=True)`, `sys.stderr` | A tiny program that echoes lines, then answers `isready` with `readyok` |
+| 11 | D8 P2 | `sorted` with `key=`, `time.perf_counter()`, `float("inf")` | Sort captures by victim value; time a perft run |
+| 12 | D9 P2 | Dicts as caches, tuples as keys, `math.dist`, `random.seed`, `threading.Event` (teacher demo) | Remember perft counts already computed; measure the distance from `d4` to `g7` |
 
 ## Unplugged warm-ups
 
@@ -166,9 +167,10 @@ replaces: students learn the idea by doing it instead of by listening to it. The
 | D3 P2 | **Shade the reach.** Shade every square a knight on `d4`, a knight on `a1`, and a bishop on `c1` can reach; compare counts with the next pair (8, 2, 7) | Offset lists and sliding | Grid worksheet |
 | D4 P3 | **Pin hunt.** Four printed positions; cross out every move that leaves the mover's king attacked | The legal-move filter | Worksheet |
 | D6 P2 | **Count by hand.** A king and pawn against a king; list every move two plies deep on index cards and count the leaves before running `perft` on the same position | Perft and recursion | Index cards, worksheet |
-| D8 P3 | **Paper minimax.** A printed two-ply tree with scores on the bottom row. Pairs back up max and min level by level and circle the best move; the class compares answers before `minimax()` runs on the same tree | Minimax | Tree worksheet |
-| D9 P1 | **Fewest flips.** The same tree as a row of face-down index cards. Pairs turn a card only when the answer could still change; the pair with the fewest flips and the right move wins | Alpha-beta pruning | Deck of score cards |
-| D10 P2 | **Find the hidden peak.** A 10x10 grid hides a hot spot. With five "measurements" (the teacher reads the value at a square), each pair chooses where to measure next and marks its guess | How the NSLS-II AI agent chooses the next measurement, the Science AI link | Grid worksheet |
+| D8 P1 | **Paper minimax.** A printed two-ply tree with scores on the bottom row. Pairs back up max and min level by level and circle the best move; the class compares answers before `minimax()` runs on the same tree | Minimax | Tree worksheet |
+| D8 P2 | **Fewest flips.** The same tree as a row of face-down index cards. Pairs turn a card only when the answer could still change; the pair with the fewest flips and the right move wins | Alpha-beta pruning | Deck of score cards |
+| D10 P1 | **Find the hidden peak.** A 10x10 grid hides a hot spot. With five "measurements" (the teacher reads the value at a square), each pair chooses where to measure next and marks its guess | How the NSLS-II AI agent chooses the next measurement, the Science AI link | Grid worksheet |
+| D10 P2 | **Spend the beam time.** Eight cards, each with a sample's readings so far and its noise level. Each pair has five more shots and chooses where to spend them; the teacher reveals the true signals | Why a close call needs more shots than a clear one | Sample cards |
 
 For the minimax warm-up, the teacher can also run a seven-student "human tree" at the
 front of the room: one root, two "min" players, and four leaves holding score cards,
@@ -186,11 +188,11 @@ refresher with a demonstration board comes right before the code that needs each
 | Castling | King and that rook never moved; squares between empty; king not in check, not passing through or landing on an attacked square. The rook may cross an attacked square (b1). Capturing a rook on its home square removes that right | D5 P2 |
 | En passant | Only on the very next move after a two-square push. The captured pawn is not on the destination square. Rare trap: the capture can expose your king along the rank | D5 P3 |
 | Promotion and underpromotion | Queen, rook, bishop, or knight. A knight can promote with check and a fork; a queen can stalemate. One side can have two queens | D5 P4 |
-| Stalemate | No legal move and not in check is a draw | D7 P2 |
-| Threefold repetition | Same pieces, same side to move, same castling and en passant rights, three times, not necessarily in a row. Claimable; fivefold ends the game automatically | D7 P2 |
-| Fifty-move rule | 50 moves by each side (100 plies) without a capture or pawn move. Claimable at 50, automatic at 75 | D7 P2 |
-| Insufficient material | K vs K, K+B vs K, K+N vs K, and K+B vs K+B with same-colored bishops are draws | D7 P2 |
-| Piece values and tactics | Pawn 1, knight 3, bishop 3, rook 5, queen 9; fork, pin, skewer | D8 P1 |
+| Stalemate | No legal move and not in check is a draw | D7 P1 |
+| Threefold repetition | Same pieces, same side to move, same castling and en passant rights, three times, not necessarily in a row. Claimable; fivefold ends the game automatically | D7 P1 |
+| Fifty-move rule | 50 moves by each side (100 plies) without a capture or pawn move. Claimable at 50, automatic at 75 | D7 P1 |
+| Insufficient material | K vs K, K+B vs K, K+N vs K, and K+B vs K+B with same-colored bishops are draws | D7 P1 |
+| Piece values and tactics | Pawn 1, knight 3, bishop 3, rook 5, queen 9; fork, pin, skewer | D7 P4 |
 
 ## Teacher preparation
 
@@ -317,7 +319,11 @@ undoes exactly, and Remus plays random legal moves in En Croissant.
 
 ## Week 2: A game, a GUI, and a thinking engine
 
-### Day 6: Counting the tree
+Week 2 is tight by design. Days 6 to 8 move faster than Week 1, so that Day 9 can hold
+the enhancement stations and Day 10 can hold the science problem. There is no spare
+catch-up period: a pair that falls behind checks out the period's end tag and rejoins.
+
+### Day 6: Counting the tree, and FEN
 
 - **P1. Python lab 8:** recursion.
 - **P2. Perft.** Unplugged warm-up: "Count by hand." **Students write:**
@@ -328,87 +334,80 @@ undoes exactly, and Remus plays random legal moves in En Croissant.
   with `python-chess` on the standard positions. The teacher plants three bugs in a copy
   (en passant pawn left on the board, castling through check, a missing promotion
   piece); pairs race to find them with `divide`.
-- **P4. Week 1 review and catch-up.** Pairs that are behind check out `d6-p3-end`; pairs
-  that are ahead time perft at depth 4 (197,281) and look for the slowest function.
+- **P4. Python lab 9 and FEN.** The lab covers `split`, `join`, and exceptions. Then
+  `fen.py`. **Students write:** `fen_placement(board)` (the part of FEN before the
+  first space) and `board_from_placement(text)`. The teacher writes the other five FEN
+  fields, and `test_perft.py` switches to Remus's own FEN reader.
 
 **Checkpoint `d6-p4-end`:** perft matches the reference at depth 3 for the start and
-the standard positions. Rule 6 of `AGENTS.md` is now met.
+the standard positions, and every test position loads from FEN. Rule 6 of `AGENTS.md`
+is now met.
 
-### Day 7: Notation and a whole game
+### Day 7: A whole game, and judging a position
 
-- **P1. Python lab 9:** `split`, `join`, exceptions. Then `fen.py`.
-  **Students write:** `fen_placement(board)` (the part of FEN before the first space)
-  and `board_from_placement(text)`. The teacher writes the other five FEN fields.
-- **P2. Ending the game.** Refresher on stalemate, repetition, the fifty and 75-move
+- **P1. Ending the game.** Refresher on stalemate, repetition, the fifty and 75-move
   rules, and insufficient material, with a six-position quiz. The teacher writes the
   halfmove clock and `position_key()`. **Students write:** `insufficient_material(board)`
   and the result-and-reason checks in `game_result(state)`.
-- **P3. SAN and the console game.** The teacher writes `move_to_san()`, including
+- **P2. SAN and the console game.** The teacher writes `move_to_san()`, including
   disambiguation (`Nbd2`) and the `+` and `#` suffixes. **Students write:**
   `parse_san(state, text)`, which builds the SAN of every legal move and returns the one
   that matches what the player typed. Then `console_game.py` lets two people play in SAN.
   Python lab 10 (stdin, stdout, `random`, `max` with `key=`) closes the period.
-- **P4. First brains and the GUI.** **Students write:** `random_move()` and
+- **P3. First brains and the GUI.** **Students write:** `random_move()` and
   `greedy_move()` (take the most valuable capture, else a random move). The class
   reads the Day 5 `uci_engine.py` line by line, and the teacher extends it with FEN
   positions and a choice of brains. Every pair registers Remus in the GUI again and
   plays greedy Remus. `play_match.py` plays random Remus against greedy Remus for
   20 games and prints the score.
-
-**Checkpoint `d7-p4-end`:** a full game in the GUI ends with the correct result and
-reason. This is the "legal moves" milestone.
-
-### Day 8: Judging a position
-
-- **P1. What makes a position good?** Pairs rank three positions and write one reason
+- **P4. What makes a position good?** Pairs rank three positions and write one reason
   each; those reasons become evaluation terms. **Students write:** `material(board)` in
   centipawns (pawn 100, knight 300, bishop 300, rook 500, queen 900), scored for White.
-- **P2. Piece-square tables.** A knight on `d4` attacks eight squares; on `a1` it
-  attacks two. **Students write:** one table each (knight, bishop, rook, pawn, king);
-  the class votes on each table that goes into Remus. The teacher writes
-  `explain_evaluation()`, which prints every term so Remus can say why it prefers a
-  position.
-- **P3. Minimax.** Unplugged warm-up: "Paper minimax," with the optional human tree at
-  the front of the room. The teacher writes `minimax()` to depth 2 with a node
-  counter, and pairs compare its answer with their worksheets.
-- **P4. Negamax and mates.** The teacher rewrites the search as `negamax()` with
-  `try/finally` around each make and undo. **Students write:** the leaf scoring when
-  there are no legal moves (checkmate scores `-(MATE_SCORE - ply)` so Remus prefers the
-  faster mate; stalemate scores 0), and the test that the root state is unchanged after
-  every search.
+  The teacher shows the piece-square tables (a knight on `d4` attacks eight squares; on
+  `a1` it attacks two) and `explain_evaluation()`, which prints every term so Remus can
+  say why it prefers a position. Each pair proposes one change to one table, and the
+  class votes.
 
-**Checkpoint `d8-p4-end`:** Remus finds every mate in 1 and mate in 2 in the test set.
+**Checkpoint `d7-p4-end`:** a full game in the GUI ends with the correct result and
+reason, and `explain_evaluation()` gives 0 for the start position. This is the "legal
+moves" milestone.
 
-### Day 9: Searching smarter
+### Day 8: Searching ahead, then searching smarter
 
-- **P1. Python lab 11** and alpha-beta. Unplugged warm-up: "Fewest flips" finds the
-  cards nobody needs to turn over. The teacher writes `alpha_beta()` beside `negamax()`.
-  **Students write:** the comparison script: for ten positions, both must pick the same
-  move and score, and alpha-beta must count fewer nodes.
-- **P2. The horizon effect and quiescence.** Puzzle: at depth 2 Remus takes a defended
+- **P1. Minimax, negamax, and mates.** Unplugged warm-up: "Paper minimax," with the
+  optional human tree at the front of the room. The teacher writes `minimax()` to
+  depth 2 with a node counter, and pairs compare its answer with their worksheets. The
+  teacher then rewrites the search as `negamax()` with `try/finally` around each make
+  and undo, and scores checkmate as `-(MATE_SCORE - ply)` so Remus prefers the faster
+  mate. Pairs run the tests that the root state is unchanged after every search.
+- **P2. Python lab 11 and alpha-beta.** Unplugged warm-up: "Fewest flips" finds the
+  cards nobody needs to turn over. The teacher writes `alpha_beta()` beside `negamax()`,
+  and pairs run `compare_search.py`: both pick the same score, and alpha-beta counts
+  fewer nodes.
+- **P3. The horizon effect and quiescence.** Puzzle: at depth 2 Remus takes a defended
   pawn with its queen. The teacher writes `quiescence()`. **Students write:**
   `capture_moves(state)`, the filter quiescence searches.
-- **P3. Move ordering.** **Students write:** `mvv_lva_score(move, board)` (most valuable
-  victim, least valuable attacker) and the `sorted(..., key=...)` call that uses it.
-  Pairs measure node counts before and after. The teacher adds the check extension.
-- **P4. Iterative deepening, the clock, and UCI info.** The teacher writes the deepening
+- **P4. Move ordering.** **Students write:** `mvv_lva_score(move, board)` (most valuable
+  victim, least valuable attacker). The teacher writes `order_moves()`, the
+  `sorted(..., key=...)` call that uses it, and the check extension. Pairs measure node
+  counts before and after.
+
+**Checkpoint `d8-p4-end`:** Remus finds every mate in 1 and every GameWorks mate in 2,
+and alpha-beta returns the same score as negamax with fewer nodes.
+
+### Day 9: The clock, and the enhancement stations
+
+- **P1. Iterative deepening, the clock, and UCI info.** The teacher writes the deepening
   loop, reads `go movetime`, `wtime`, `btime`, `winc`, and `binc`, and moves the search
   into a thread with a stop flag. **Students write:** `format_info(depth, score, nodes,
   pv)`, which prints `info depth 3 score cp 35 nodes 4120 pv e2e4 e7e5 g1f3` so the GUI
-  shows Remus thinking.
-
-**Checkpoint `d9-p4-end`:** Remus at depth 3 or more beats greedy Remus in a 10-game
-match and never loses on time.
-
-### Day 10: Upgrades, Science AI, and tournament
-
-- **P1. Enhancement stations.** Python lab 12 opens P1. Each of the 10 pairs takes
-  one color station from `Stations/`: Remus-WHITE (the finished Day 9 Remus, with no
-  enhancements) plus one enhancement, with
-  the pair's function stubbed (at most 30 typed lines). Colors replace numbers so no
-  station sounds better than another. Each pair then starts
-  `uv run station_match.py <COLOR>`, which plays its Remus against Remus-WHITE with nobody watching and adds every game to `games/remus_games.pgn`. The
-  stations are described in [stations.md](stations.md).
+  shows Remus thinking. The Remus at the end of this period is **Remus-WHITE**, with
+  none of the enhancements.
+- **P2. Python lab 12 and the enhancement stations.** The lab covers dicts as caches
+  and tuples as keys. Then each of the 10 pairs takes one color station from
+  `Stations/`: Remus-WHITE plus one enhancement, with the pair's function stubbed (at
+  most 30 typed lines). Colors replace numbers so no station sounds better than
+  another. The stations are described in [stations.md](stations.md).
 
 | Color | Station | GameWorks idea it echoes |
 | --- | --- | --- |
@@ -423,9 +422,33 @@ match and never loses on time.
 | BROWN | Late move reductions: search late, quiet moves one ply shallower | (not in GameWorks) |
 | GRAY | King safety: reward the pawn shield while queens are on | (not in GameWorks) |
 
-  The mate solver (`mate_solver.py`) stays in the Day 10 folder as a teacher demo.
+- **P3. Enhancement stations: test and measure.** Each pair finishes its station,
+  passes its tests, and plays a two-game smoke test against Remus-WHITE with
+  `uv run station_match.py <COLOR> --games 2`. Each pair writes one sentence on the
+  board: what its enhancement should change, and how the class will see it.
+- **P4. Launch the station matches, and the mate solver.** Each laptop starts
+  `uv run station_match.py <COLOR>`, 20 games against Remus-WHITE, and then its share
+  of the 15 planned color-on-color showcase matches (see "The match plan" below). The
+  matches run with nobody watching, through the evening if needed, and add every game
+  to `games/remus_games.pgn`. While they run, the class meets the ten GameWorks mate
+  puzzles. **Students write:** `mating_move(state, moves_left)` in `mate_solver.py`,
+  the yes-or-no search that solves all ten, including the mate in 3 (`MATE.008`).
 
-- **P2. Science AI: `hidden_peak.py`.** Unplugged warm-up: "Find the hidden
+**Checkpoint `d9-p4-end`:** every station passes its tests, and every laptop is
+playing its matches with no illegal moves or losses on time.
+
+#### The match plan
+
+Every color plays Remus-WHITE, the yardstick, so the ten Elo gaps compare fairly.
+On top of those ten matches, each color plays three planned showcase matches, 15 in
+all, chosen so that each one answers a question the class can predict before the
+games start (the table is filled in from the container runs; see the note under it).
+Remus-GOLD, with all ten enhancements, stays out of the matches; the teacher rates it
+against Stockfish with `estimate_elo.py`.
+
+### Day 10: Science AI at the beamline
+
+- **P1. Science AI: `hidden_peak.py`.** Unplugged warm-up: "Find the hidden
   peak." Then the teacher shows the map from chess to science on the board:
 
   | Chess engine | Hidden-peak search |
@@ -437,32 +460,48 @@ match and never loses on time.
   | Minimax: the opponent picks the minimum | Expectimax: average over a high or low reading, because nature is not an opponent |
   | Match against greedy Remus | Benchmark: average measurements to find the peak over 100 hidden grids |
 
-  The teacher writes `make_grid(seed)` (a random hot spot with values that fall off
-  with distance), `measure(grid, square)`, `predicted_value(square, readings)`
-  (the inverse-distance average of the readings so far), and `benchmark(strategy)`.
-  **Students write:** `candidate_squares(readings)`, `score_candidate(square,
-  readings, explore_weight)`, and `choose_next_measurement(readings, explore_weight)`.
-  Pairs tune `explore_weight` and post their benchmark average on the board, next to
-  random guessing. The teacher closes with a depth-2 expectimax demo, explains why
-  alpha-beta's cutoffs do not carry over to an average, and shows that the NSLS-II
-  agent runs the same loop with a statistical model (a Gaussian process) in place of
-  the hand-built score.
-- **P3. Tournament.** `tournament.py` (python-chess) runs a full round robin: each
-  of the 10 engines plays every other engine once, 45 games in all, with colors
-  balanced. At 2 minutes plus 1 second a move per side, a game lasts at most about 6
-  minutes. Four games at once on the teacher's laptop (eight engine processes, so a
-  laptop with at least 8 cores) finish the 45 games in about 70 minutes. The
-  script saves every game as PGN and prints the standings after each round on the
-  projector. Pairs replay their wins and losses in En Croissant.
-- **P4. Presentations, take-home, and wrap-up.** Each student copies the pair's repository
-  to their own USB drive with `git clone --no-hardlinks`, then checks that the copy opens.
-- **Presentations.** Each pair explains one move its engine chose, with
-  the score and principal variation. Close with what comes next: bitboards, Zobrist
-  hashing, null-move pruning, endgame tablebases, and a stronger "Manishtushu" engine.
+  The teacher writes `make_grid(seed)`, `measure(grid, square)`,
+  `predicted_value(square, readings)`, and `benchmark(strategy)`. **Students write:**
+  `candidate_squares(readings)`, `score_candidate(square, readings, explore_weight)`,
+  and `choose_next_measurement(readings, explore_weight)`. Pairs tune
+  `explore_weight` and post their benchmark average on the board, next to random
+  guessing.
+- **P2. The beamline problem: represent and evaluate.** A scientist visit (or the
+  teacher) shows an NSLS-II beamline and the question it answers. `beam_time.py` is
+  the problem on paper: eight samples on a holder, one yes-or-no question for each
+  (is its signal above 50, which means a new crystal phase is there?), noisy one-minute
+  shots, and only 40 shots for all eight. Unplugged warm-up: pairs get eight cards with
+  noisy readings and choose where to spend five more shots. The teacher writes
+  `make_samples()`, `take_reading()`, `chance_wrong()`, and the random and
+  equal-time agents. **Students write:** `estimate(readings, noise)` (the average and
+  its error, noise divided by the square root of the number of readings) and
+  `expected_wrong_calls(readings, noises)`, the evaluation. Random sample makes about
+  0.94 wrong calls per holder, equal time about 0.83.
+- **P3. The beamline problem: look ahead and verify.** The teacher draws the
+  look-ahead next to Remus's make and undo: the next reading may land one noise step
+  low, on the average, or one step high, with chances 1/4, 1/2, and 1/4. **Students
+  write:** `gain(sample_readings, noise)`, which tries the three pretend readings and
+  returns how much the chance of a wrong call drops, and
+  `choose_next_sample(readings, noises)`. The largest-gain agent makes about 0.65 wrong
+  calls per holder. Then the class verifies: the number of wrong calls each agent
+  expects lands close to the number it really makes, the science version of perft
+  against python-chess. The teacher closes with the real NSLS-II agent, which runs the
+  same loop with a statistical model (a Gaussian process) in place of the hand-built
+  one. When Brookhaven shares a real beamline problem for the course, it replaces the
+  sample holder in this period, and the agent's loop stays the same.
+- **P4. Results, tournament, take-home, and wrap-up.** The station results go on the
+  projector: each color's Elo gap against Remus-WHITE, the showcase results, and
+  Remus-GOLD's Stockfish rating (about 1520). `tournament.py` runs the round robin of the
+  pairs' engines on the teacher's laptop (about 70 minutes) while each student copies the pair's repository to their own
+  USB drive with `git clone --no-hardlinks` and checks that the copy opens. Each pair
+  explains one move its engine chose, with the score and principal variation, and one
+  choice its beam time agent made. Close with what comes next: bitboards, Zobrist
+  hashing, endgame tablebases, and a stronger "Manishtushu" engine.
 
 **Checkpoint `d10-p4-end`:** every pair's `choose_next_measurement()` beats random
-guessing on the 100-grid benchmark, and the tournament finishes with no illegal moves,
-crashes, or lost synchronization.
+guessing on the 100-grid benchmark, every pair's `choose_next_sample()` beats equal
+time on the 200-holder benchmark, and the station matches finished with no illegal
+moves, crashes, or lost synchronization.
 
 ## Code breakdown by day
 
@@ -482,11 +521,11 @@ The full description of each script is in `docs/scripts/`.
 | `Day 03 - Generate piece moves` | `move_generation.py`, `test_move_generation.py` | `show_board.py` (`show_moves`) |
 | `Day 04 - Keep only legal moves` | `attacks.py`, `legal_moves.py`, `test_legal_moves.py` | |
 | `Day 05 - Add castling, en passant, and promotion` | `uci_engine.py`, `remus.bat`, `test_special_moves.py` | `make_move.py`, `move_generation.py`, `legal_moves.py` |
-| `Day 06 - Count positions with perft` | `perft.py`, `test_perft.py` | |
-| `Day 07 - Play full games in En Croissant` | `fen.py`, `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `test_game.py` | `game_state.py` (`position_key`), `make_move.py` (history), `uci_engine.py` (FEN, brains) |
-| `Day 08 - Evaluate and search ahead` | `evaluation.py`, `test_search.py` | `search.py` (minimax, negamax) |
-| `Day 09 - Search faster with alpha-beta` | `move_ordering.py`, `compare_search.py` | `search.py` (alpha-beta, quiescence, `think`), `uci_engine.py` (clock, thread, `stop`) |
-| `Day 10 - Upgrade Remus and add Science AI` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `mate_solver.py`, `hidden_peak.py`, `tournament.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py` | `evaluation.py` (pawns, mating), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
+| `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
+| `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
+| `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
+| `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thread, `stop`); the station folders live in `Stations/` |
+| `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `beam_time.py`, `tournament.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_beam_time.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
 
 Outside the Day folders:
 

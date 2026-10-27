@@ -1,6 +1,6 @@
 # move_ordering.py: Try the best moves first
 
-*First appears in `instructor/Day 09 - Search faster with alpha-beta/period3`.*
+*First appears in `instructor/Day 08 - Search ahead with alpha-beta/period4`.*
 
 ## The big picture
 
@@ -53,8 +53,8 @@ order_moves()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `mvv_lva_score` | Scores a capture: big victim and small attacker score high. | Day 9, period 3 |
-| `order_moves` | Sorts the moves so the likely best ones come first. | Day 9, period 3 |
+| `mvv_lva_score` | Scores a capture: big victim and small attacker score high. | Day 8, period 4 |
+| `order_moves` | Sorts the moves so the likely best ones come first. | Day 8, period 4 |
 
 ## Try it
 
@@ -73,4 +73,4 @@ You should see: The first two moves of a test position: pawn takes queen, then q
 
 ## Slides
 
-Slides 9.4, 10.4 in the [slide plan](../slide_plan.md).
+Slides 8.7, 9.8 in the [slide plan](../slide_plan.md).

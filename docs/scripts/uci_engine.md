@@ -75,13 +75,13 @@ main()
 | --- | --- | --- |
 | `send` | Sends one line to En Croissant right away. | Day 5, period 4 |
 | `set_position` | Builds the game state from a position command. | Day 5, period 4 |
-| `thinking_time` | Decides how many seconds to think from the clock. | Day 9, period 4 |
-| `search_and_send` | Thinks in the background, then sends the best move. | Day 9, period 4 |
+| `thinking_time` | Decides how many seconds to think from the clock. | Day 9, period 1 |
+| `search_and_send` | Thinks in the background, then sends the best move. | Day 9, period 1 |
 
 ## How the file grows
 
 - **Day 5, period 4:** `send`, `set_position`
-- **Day 9, period 4:** `thinking_time`, `search_and_send`
+- **Day 9, period 1:** `thinking_time`, `search_and_send`
 
 ## Try it
 
@@ -100,4 +100,4 @@ You should see: Nothing at first. Type `uci`, then `isready`, then `go`. Type `q
 
 ## Slides
 
-Slides 1.1, 5.6, 7.6, 9.7 in the [slide plan](../slide_plan.md).
+Slides 1.1, 5.6, 7.5, 9.3 in the [slide plan](../slide_plan.md).

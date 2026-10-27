@@ -150,9 +150,9 @@ def pawn_structure(board: list[list[str]]) -> int:
         and a bonus for every passed pawn (no enemy pawn ahead of it on its own
         file or a neighboring file), bigger the further it has advanced.
     """
-    # Day 10, period 1: write this function.
+    # Day 9, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 10 P1: write pawn_structure()")
+    raise NotImplementedError("Day 9 P2: write pawn_structure()")
 
 
 def evaluate(state: dict) -> int:

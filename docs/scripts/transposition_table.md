@@ -1,6 +1,6 @@
 # transposition_table.py: Remember positions already searched
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period1`.*
+*First appears in `instructor/Day 10 - Aim Remus at a science problem/period1`.*
 
 ## The big picture
 
@@ -83,4 +83,4 @@ You should see: A saved score found at depth 3, and `None` when the search asks 
 
 ## Slides
 
-Slides 10.2, 10.3 in the [slide plan](../slide_plan.md).
+Slides 9.6, 9.7 in the [slide plan](../slide_plan.md).

@@ -60,65 +60,73 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 5.5 | Promotion and underpromotion | One pawn move becomes four: `e7e8q`, `e7e8r`, `e7e8b`, `e7e8n` |
 | 5.6 | Remus plays in En Croissant | Register `remus.bat` from `Day 05 .../period4`. The GUI sends `position startpos moves e2e4 ...` and `go`; Remus answers `bestmove` with a random legal move. Day 7 explains every line |
 
-## Day 6: Count positions with perft
+## Day 6: Count positions and read FEN
 
 | Slide | Title | What it shows |
 | --- | --- | --- |
 | 6.1 | The move tree | Start position: 20 moves, 400 positions, 8,902, 197,281. A tree whose branch count explodes |
 | 6.2 | `perft` in eight lines | The recursive count with make, recurse, undo |
 | 6.3 | `divide` finds the bug | A table of root moves with Remus's count against the reference count; the one row that differs points to the bug |
+| 6.4 | Anatomy of FEN | The start FEN split into its six fields, each labeled |
 
-## Day 7: Play full games in En Croissant
-
-| Slide | Title | What it shows |
-| --- | --- | --- |
-| 7.1 | Anatomy of FEN | The start FEN split into its six fields, each labeled |
-| 7.2 | Anatomy of SAN | `Nbd2`, `exd5`, `O-O`, `e8=Q+`, with each part labeled |
-| 7.3 | Reading SAN the simple way | Write the SAN of every legal move, then pick the one that matches what the player typed |
-| 7.4 | Positions remember the past | `position_key` text and the `history` list; the same key three times means a repetition draw |
-| 7.5 | Is the game over? | The decision flow of `game_result`: no legal moves (mate or stalemate), insufficient material, repetition, fifty-move rule |
-| 7.6 | The UCI conversation | A sequence diagram: En Croissant sends `uci`, `isready`, `position`, `go`; Remus answers `uciok`, `readyok`, `bestmove` |
-| 7.7 | Two first brains | `random_move` and `greedy_move` on the same position; the greedy brain takes the queen |
-
-## Day 8: Evaluate and search ahead
+## Day 7: Play full games and score positions
 
 | Slide | Title | What it shows |
 | --- | --- | --- |
-| 8.1 | Centipawns | Piece values 100, 300, 300, 500, 900, and a material count for a sample position |
-| 8.2 | Piece-square tables | The knight table as a heat map: +20 in the center, -50 in the corners. Black reads the table upside down |
-| 8.3 | Minimax by hand | A depth-2 tree with leaf scores; White takes the maximum, Black the minimum, and the numbers move up the tree |
-| 8.4 | Negamax: one function | The same tree with one rule, "my score is the negative of my opponent's best" |
-| 8.5 | Scoring checkmate | `MATE_SCORE - ply`: a mate in 1 beats a mate in 3, and both beat any material count |
+| 7.1 | Positions remember the past | `position_key` text and the `history` list; the same key three times means a repetition draw |
+| 7.2 | Is the game over? | The decision flow of `game_result`: no legal moves (mate or stalemate), insufficient material, repetition, fifty-move rule |
+| 7.3 | Anatomy of SAN | `Nbd2`, `exd5`, `O-O`, `e8=Q+`, with each part labeled |
+| 7.4 | Reading SAN the simple way | Write the SAN of every legal move, then pick the one that matches what the player typed |
+| 7.5 | The UCI conversation | A sequence diagram: En Croissant sends `uci`, `isready`, `position`, `go`; Remus answers `uciok`, `readyok`, `bestmove` |
+| 7.6 | Two first brains | `random_move` and `greedy_move` on the same position; the greedy brain takes the queen |
+| 7.7 | Centipawns | Piece values 100, 300, 300, 500, 900, and a material count for a sample position |
+| 7.8 | Piece-square tables | The knight table as a heat map: +20 in the center, -50 in the corners. Black reads the table upside down |
 
-## Day 9: Search faster with alpha-beta
-
-| Slide | Title | What it shows |
-| --- | --- | --- |
-| 9.1 | Alpha-beta cutoffs | The Day 8 tree with branches crossed out once a refutation is found; the window `(alpha, beta)` written beside each node |
-| 9.2 | Same answer, less work | A bar chart from `compare_search.py`: alpha-beta visits less than a fifth of the positions negamax visits, with equal scores |
-| 9.3 | The horizon effect | A queen captures a pawn at depth 0 and is lost one move later. Quiescence keeps searching captures until the position is quiet |
-| 9.4 | Move ordering | An MVV-LVA grid: victim across, attacker down. Pawn takes queen first, queen takes pawn last |
-| 9.5 | Iterative deepening | A timeline of depth 1, 2, 3, 4 with the clock running out during depth 5; the best move from depth 4 is played |
-| 9.6 | Stopping safely | `SearchTimeout` unwinding the recursion; each `finally` undoes its move, so the root position is intact |
-| 9.7 | Thinking in a thread | The UCI loop and the search thread side by side, with the stop event between them |
-| 9.8 | The principal variation | An `info depth 4 score cp 35 pv ...` line drawn as moves on the board |
-
-## Day 10: Upgrade Remus and add Science AI
+## Day 8: Search ahead with alpha-beta
 
 | Slide | Title | What it shows |
 | --- | --- | --- |
-| 10.1 | The enhancement stations | The ten color stations with the idea each one adds, and Remus-WHITE, the Day 9 Remus with no enhancements, which they all play |
-| 10.2 | Transpositions | 1. Nf3 Nf6 2. Nc3 and 1. Nc3 Nf6 2. Nf3 reach one position. A table entry: depth, score, bound, best move |
-| 10.3 | Exact, lower, upper | Three number lines showing what a stored bound proves for a new `(alpha, beta)` window |
-| 10.4 | Killer moves | Two slots per ply; a quiet move that caused a cutoff jumps the queue in sibling positions |
-| 10.5 | Principal variation search | The first move gets the full window; the rest get a null window `(alpha, alpha + 1)` and a re-search only on a surprise |
-| 10.6 | Pawn structure | Doubled, isolated, and passed pawns on one diagram with their points |
-| 10.7 | Finishing a won endgame | The `mating_bonus` heat map: the losing king pushed to the edge, the winning king closing in |
-| 10.8 | The opening book | Book lines in SAN turned into a dict from `position_key` to moves, drawn as a small tree |
-| 10.9 | The mate solver | An AND/OR tree: the attacker needs one move that works, the defender's every reply must fail. MATE.008 solved in about 6 seconds |
+| 8.1 | Minimax by hand | A depth-2 tree with leaf scores; White takes the maximum, Black the minimum, and the numbers move up the tree |
+| 8.2 | Negamax: one function | The same tree with one rule, "my score is the negative of my opponent's best" |
+| 8.3 | Scoring checkmate | `MATE_SCORE - ply`: a mate in 1 beats a mate in 3, and both beat any material count |
+| 8.4 | Alpha-beta cutoffs | The minimax tree of slide 8.1 with branches crossed out once a refutation is found; the window `(alpha, beta)` written beside each node |
+| 8.5 | Same answer, less work | A bar chart from `compare_search.py`: alpha-beta visits less than a fifth of the positions negamax visits, with equal scores |
+| 8.6 | The horizon effect | A queen captures a pawn at depth 0 and is lost one move later. Quiescence keeps searching captures until the position is quiet |
+| 8.7 | Move ordering | An MVV-LVA grid: victim across, attacker down. Pawn takes queen first, queen takes pawn last |
+
+## Day 9: Add the clock and build the stations
+
+| Slide | Title | What it shows |
+| --- | --- | --- |
+| 9.1 | Iterative deepening | A timeline of depth 1, 2, 3, 4 with the clock running out during depth 5; the best move from depth 4 is played |
+| 9.2 | Stopping safely | `SearchTimeout` unwinding the recursion; each `finally` undoes its move, so the root position is intact |
+| 9.3 | Thinking in a thread | The UCI loop and the search thread side by side, with the stop event between them |
+| 9.4 | The principal variation | An `info depth 4 score cp 35 pv ...` line drawn as moves on the board |
+| 9.5 | The enhancement stations | The ten color stations with the idea each one adds, and Remus-WHITE, the Day 9 Remus with no enhancements, which they all play |
+| 9.6 | Transpositions | 1. Nf3 Nf6 2. Nc3 and 1. Nc3 Nf6 2. Nf3 reach one position. A table entry: depth, score, bound, best move |
+| 9.7 | Exact, lower, upper | Three number lines showing what a stored bound proves for a new `(alpha, beta)` window |
+| 9.8 | Killer moves | Two slots per ply; a quiet move that caused a cutoff jumps the queue in sibling positions |
+| 9.9 | Principal variation search | The first move gets the full window; the rest get a null window `(alpha, alpha + 1)` and a re-search only on a surprise |
+| 9.10 | Null-move pruning | Remus passes the turn and searches 2 plies shallower; if the score still beats beta, the real moves are skipped |
+| 9.11 | Late move reductions | A move list with the first three moves at full depth and the late, quiet moves one ply shallower, with a re-search on a surprise |
+| 9.12 | Pawn structure | Doubled, isolated, and passed pawns on one diagram with their points |
+| 9.13 | King safety | A castled king with its three shield pawns, 15 points each while the enemy queen is on the board |
+| 9.14 | Finishing a won endgame | The `mating_bonus` heat map: the losing king pushed to the edge, the winning king closing in |
+| 9.15 | The opening book | Book lines in SAN turned into a dict from `position_key` to moves, drawn as a small tree |
+| 9.16 | The match plan | Each color against Remus-WHITE, plus the planned color-on-color showcase matches, all running with nobody watching |
+| 9.17 | The mate solver | An AND/OR tree: the attacker needs one move that works, the defender's every reply must fail. MATE.008 solved in about 6 seconds |
+
+## Day 10: Aim Remus at a science problem
+
+| Slide | Title | What it shows |
+| --- | --- | --- |
+| 10.1 | From chess to science | The map table: legal moves to unmeasured squares, evaluation to predicted value plus exploration, minimax to expectimax |
+| 10.2 | The hidden peak | A 10x10 grid with readings so far, the predicted values, and the square the AI chooses next |
+| 10.3 | Explore against exploit | Three runs with explore weight 0, 8, and 40 and their average measurements |
+| 10.4 | The benchmark | A bar chart: random guessing about 54 measurements, greedy AI about 9 |
+| 10.5 | Beam time | A sample holder with eight samples, each with its readings and error bar against the line at 50; 40 shots to share |
+| 10.6 | The chance of a wrong call | A bell curve around a sample's average; the tail on the far side of the line at 50 is the chance the call is wrong |
+| 10.7 | Look ahead with pretend readings | Three pretend readings (one noise step low, on the average, one step high) with chances 1/4, 1/2, 1/4, beside Remus making and undoing a move |
+| 10.8 | Verify | A bar chart of wrong calls per holder (random 0.94, equal time 0.83, largest gain 0.65), each beside the count the agent expected |
+| 10.9 | The real thing | The NSLS-II autonomous agent runs the same loop with a Gaussian process instead of the hand-built model |
 | 10.10 | The round robin | The circle method for 10 entrants: one fixed, the rest rotate; 9 rounds, 45 games |
-| 10.11 | From chess to science | The map table: legal moves to unmeasured squares, evaluation to predicted value plus exploration, minimax to expectimax |
-| 10.12 | The hidden peak | A 10x10 grid with readings so far, the predicted values, and the square the AI chooses next |
-| 10.13 | Explore against exploit | Three runs with explore weight 0, 8, and 40 and their average measurements |
-| 10.14 | The benchmark | A bar chart: random guessing about 54 measurements, greedy AI about 9 |
-| 10.15 | The real thing | The NSLS-II autonomous agent runs the same loop with a Gaussian process instead of the hand-built score |

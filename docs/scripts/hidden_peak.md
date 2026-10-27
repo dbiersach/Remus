@@ -1,6 +1,6 @@
 # hidden_peak.py: Science AI: find the hidden peak
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period2`.*
+*First appears in `instructor/Day 10 - Aim Remus at a science problem/period1`.*
 
 ## The big picture
 
@@ -79,16 +79,16 @@ benchmark()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `make_grid` | Hides a hot spot on a 10x10 grid. | Day 10, period 2 |
-| `measure` | Reads the value at one square. | Day 10, period 2 |
-| `predicted_value` | Guesses a square's value from the readings so far. | Day 10, period 2 |
-| `candidate_squares` | Lists the squares not measured yet. | Day 10, period 2 |
-| `score_candidate` | Scores a square: predicted value plus an explore bonus. | Day 10, period 2 |
-| `choose_next_measurement` | Picks the square with the best score. | Day 10, period 2 |
-| `random_strategy` | Picks a random square. Every AI must beat it. | Day 10, period 2 |
-| `expectimax_choice` | Looks two measurements ahead and averages the outcomes. | Day 10, period 2 |
-| `measurements_to_find_peak` | Counts measurements until one method finds the peak. | Day 10, period 2 |
-| `benchmark` | Averages that count over many hidden samples. | Day 10, period 2 |
+| `make_grid` | Hides a hot spot on a 10x10 grid. | Day 10, period 1 |
+| `measure` | Reads the value at one square. | Day 10, period 1 |
+| `predicted_value` | Guesses a square's value from the readings so far. | Day 10, period 1 |
+| `candidate_squares` | Lists the squares not measured yet. | Day 10, period 1 |
+| `score_candidate` | Scores a square: predicted value plus an explore bonus. | Day 10, period 1 |
+| `choose_next_measurement` | Picks the square with the best score. | Day 10, period 1 |
+| `random_strategy` | Picks a random square. Every AI must beat it. | Day 10, period 1 |
+| `expectimax_choice` | Looks two measurements ahead and averages the outcomes. | Day 10, period 1 |
+| `measurements_to_find_peak` | Counts measurements until one method finds the peak. | Day 10, period 1 |
+| `benchmark` | Averages that count over many hidden samples. | Day 10, period 1 |
 
 ## Try it
 
@@ -107,4 +107,4 @@ You should see: The average for random guessing, three greedy AIs, and the expec
 
 ## Slides
 
-Slides 10.11, 10.12, 10.13, 10.14, 10.15 in the [slide plan](../slide_plan.md).
+Slides 10.1, 10.2, 10.3, 10.4, 10.9 in the [slide plan](../slide_plan.md).

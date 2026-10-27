@@ -1,6 +1,6 @@
 # perft.py: Count positions to prove the rules
 
-*First appears in `instructor/Day 06 - Count positions with perft/period2`.*
+*First appears in `instructor/Day 06 - Count positions and read FEN/period2`.*
 
 ## The big picture
 

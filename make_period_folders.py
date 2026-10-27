@@ -54,34 +54,35 @@ ARRIVALS = {
         "uci_engine.py": 4,
         "remus.bat": 4,
     },
-    6: {"perft.py": 2, "test_perft.py": 3},
+    6: {"perft.py": 2, "test_perft.py": 3, "fen.py": 4, "test_game.py": 4},
     7: {
         "fen.py": 1,
         "test_game.py": 1,
-        "test_perft.py": 1,
-        "game_state.py": 2,
-        "make_move.py": 2,
-        "game_end.py": 2,
-        "notation.py": 3,
-        "console_game.py": 3,
-        "search.py": 4,
-        "uci_engine.py": 4,
-        "play_match.py": 4,
+        "game_state.py": 1,
+        "make_move.py": 1,
+        "game_end.py": 1,
+        "notation.py": 2,
+        "console_game.py": 2,
+        "search.py": 3,
+        "uci_engine.py": 3,
+        "play_match.py": 3,
+        "evaluation.py": 4,
+        "test_search.py": 4,
     },
     8: {
-        "evaluation.py": 1,
+        "search.py": 1,
         "test_search.py": 1,
-        "search.py": 3,
-        "console_game.py": 4,
-        "uci_engine.py": 4,
+        "console_game.py": 1,
+        "uci_engine.py": 1,
+        "compare_search.py": 2,
+        "move_ordering.py": 4,
     },
     9: {
         "search.py": 1,
-        "compare_search.py": 1,
         "test_search.py": 1,
-        "move_ordering.py": 3,
-        "console_game.py": 4,
-        "uci_engine.py": 4,
+        "console_game.py": 1,
+        "uci_engine.py": 1,
+        "mate_solver.py": 4,
     },
     10: {
         "evaluation.py": 1,
@@ -92,10 +93,11 @@ ARRIVALS = {
         "transposition_table.py": 1,
         "opening_book.py": 1,
         "opening_book.txt": 1,
-        "mate_solver.py": 1,
         "test_upgrades.py": 1,
-        "hidden_peak.py": 2,
-        "tournament.py": 3,
+        "hidden_peak.py": 1,
+        "beam_time.py": 2,
+        "test_beam_time.py": 2,
+        "tournament.py": 4,
         "remus.sh": 4,
         "estimate_elo.py": 4,
     },
@@ -150,17 +152,65 @@ MAKE_MOVE_REPORT = (
     "Fifteen moves (en passant, both castlings, a knight promotion) made and undone"
 )
 
-SEARCH_DAY_9_ABOUT = """Day 9 makes the search smarter without changing its answer: alpha-beta skips
+SEARCH_DAY_8_ABOUT = """Day 8 makes the search smarter without changing its answer: alpha-beta skips
 moves that cannot change the result, quiescence keeps looking until the captures
-stop, move ordering tries strong moves first, and iterative deepening searches
-one move deeper at a time until the clock runs out."""
+stop, and move ordering tries strong moves first."""
 SEARCH_INFO_CLOCK = """    deadline: float | None = None  # time.perf_counter() value when the search must stop
     stop: threading.Event | None = None  # Set by the GUI's "stop" command
 """
-SEARCH_THINK_DEMO = """    print("Thinking for 2 seconds from that position:")
-    think(state, 2.0, report=print)
+SEARCH_ALPHA_BETA_DEMO = """
+    state = state_from_fen(
+        "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+    )
+    plain = SearchInfo()
+    plain_score = negamax(state, 3, 0, plain)
+    pruned = SearchInfo()
+    pruned_score = alpha_beta(state, 3, 0, -MATE_SCORE - 1, MATE_SCORE + 1, pruned)
+    print(f"Negamax depth 3: score {plain_score}, {plain.nodes:,} positions")
+    print(
+        f"Alpha-beta depth 3: score {pruned_score}, {pruned.nodes:,} positions"
+        "  (expected the same score, fewer positions)"
+    )
 """
-SEARCH_DAY_9_LATER = ["format_info", "think", "think_move"]
+
+# Text that test_perft.py swaps on Day 6, before Remus reads FEN in period 4
+TEST_PERFT_FEN_ABOUT = (
+    "the standard test positions. From Day 6, period 4 on, Remus reads each FEN itself."
+)
+TEST_PERFT_HELPER = '''def state_from_python_chess(board: chess.Board) -> dict:
+    """Build a Remus state from a python-chess board (test helper only)."""
+    state = new_game()
+    state["board"] = [[EMPTY] * 8 for _ in range(8)]
+    for square, piece in board.piece_map().items():
+        row = 7 - chess.square_rank(square)
+        col = chess.square_file(square)
+        state["board"][row][col] = piece.symbol()
+    state["turn"] = WHITE if board.turn == chess.WHITE else BLACK
+    state["castling"] = board.castling_xfen().replace("-", "")
+    state["en_passant"] = None
+    if board.ep_square is not None:
+        state["en_passant"] = (
+            7 - chess.square_rank(board.ep_square),
+            chess.square_file(board.ep_square),
+        )
+    state["halfmove_clock"] = board.halfmove_clock
+    state["fullmove_number"] = board.fullmove_number
+    return state
+
+
+def python_chess_perft('''
+
+# The main() of beam_time.py before the pairs write the look-ahead in period 3
+BEAM_TIME_MAIN = """def main():
+    print(f"Beam time: {SHOTS} shots for {SAMPLES} samples, on {TRIALS} holders")
+    for name, strategy in [("Random sample", random_sample), ("Equal time", equal_time)]:
+        expected, real = benchmark(strategy)
+        print(
+            f"  {name:13}: {real:.2f} wrong calls per holder "
+            f"(the agent expected {expected:.2f})"
+        )
+    print("  (expected: equal time makes fewer wrong calls than random samples)")
+"""
 
 # What the earlier periods leave out of a file that grows during the day:
 # ("drop", [names]) drops top-level functions, classes, and constants;
@@ -327,10 +377,31 @@ passant removes a pawn that is not on the landing square.""",
             ],
         ),
     ],
-    (7, 1, "fen.py"): [
-        ("replace", '    state["history"] = [position_key(state)]\n', ""),
+    (6, 3, "test_perft.py"): [
+        (
+            "replace",
+            TEST_PERFT_FEN_ABOUT,
+            """the standard test positions. python-chess also converts each FEN into a Remus state,
+because Remus learns to read FEN in period 4.""",
+        ),
+        (
+            "replace",
+            "from fen import state_from_fen\nfrom game_state import new_game\n",
+            "from board import EMPTY\nfrom game_state import BLACK, WHITE, new_game\n",
+        ),
+        ("replace", "def python_chess_perft(", TEST_PERFT_HELPER),
+        (
+            "replace",
+            "perft(state_from_fen(fen), depth)",
+            "perft(state_from_python_chess(board), depth)",
+        ),
+        (
+            "replace",
+            "divide(state_from_fen(POSITIONS[1][1]), 2)",
+            "divide(state_from_python_chess(board), 2)",
+        ),
     ],
-    (7, 3, "console_game.py"): [
+    (7, 2, "console_game.py"): [
         (
             "replace",
             """Play chess in the terminal by typing moves in SAN, such as e4, Nf3, or O-O.
@@ -362,91 +433,28 @@ Type "quit" to stop.""",
 """,
         ),
     ],
-    (8, 1, "evaluation.py"): [
-        (
-            "replace",
-            """A positive score is good for White. Two terms make up the score:
-
-1. Material: the value of every piece on the board.
-2. Placement: a bonus or penalty from a piece-square table, such as a knight
-   in the center (it attacks eight squares) against a knight in the corner (two).
-
-Each table is written from White's side, row 0 (rank 8) first. A Black piece reads
-the table upside down, so its row 7 uses the table's row 0.""",
-            """A positive score is good for White. The score is the material: the value of
-every piece on the board.""",
-        ),
+    (8, 1, "search.py"): [
+        ("replace", "\n\n" + SEARCH_DAY_8_ABOUT, ""),
+        ("replace", SEARCH_INFO_CLOCK, ""),
         (
             "drop",
             [
-                "PAWN_TABLE",
-                "KNIGHT_TABLE",
-                "BISHOP_TABLE",
-                "ROOK_TABLE",
-                "KING_TABLE",
-                "QUEEN_TABLE",
-                "PLACEMENT_TABLES",
-                "placement",
+                "SearchTimeout",
+                "check_time",
+                "alpha_beta",
+                "capture_moves",
+                "quiescence",
+                "alpha_beta_with_quiescence",
             ],
         ),
-        ("replace", "Material plus placement in centipawns", "Material in centipawns"),
-        (
-            "replace",
-            'white_score = material(state["board"]) + placement(state["board"])',
-            'white_score = material(state["board"])',
-        ),
-        (
-            "replace",
-            """    print(f"  Placement: {placement(board):+} centipawns for White")
-""",
-            "",
-        ),
-        (
-            "main",
-            """def main():
-    print("Start position:")
-    explain_evaluation(state_from_fen(START_FEN))
-    print("  (expected 0 for every term: the position is symmetric)")
-    print("White knight against a Black rook:")
-    explain_evaluation(state_from_fen("r3k3/8/8/4N3/8/8/8/4K3 w - - 0 1"))
-    print("  (expected material -200: the rook is worth 200 more than the knight)")
-""",
-        ),
+        ("replace", SEARCH_ALPHA_BETA_DEMO, ""),
     ],
-    (8, 3, "search.py"): [
+    (8, 1, "test_search.py"): [("drop", ["MATE_PUZZLES"])],
+    (8, 2, "search.py"): [
         (
             "replace",
-            """Then Remus looks
-ahead: minimax tries every move and every reply, and negamax does the same work
-with one function instead of two mirror-image halves.""",
-            """Then Remus looks
-ahead: minimax tries every move and every reply.""",
-        ),
-        ("drop", ["negamax", "best_move", "negamax_move"]),
-        (
-            "main",
-            """def main():
-    state = state_from_fen("4k3/8/8/3q4/8/2N1p3/8/4K3 w - - 0 1")
-    print(
-        f"Greedy move: {move_to_uci(greedy_move(state))}  (expected c3d5, taking the queen)"
-    )
-    print(f"Random move: {move_to_uci(random_move(state))}  (any legal move)")
-    state = state_from_fen("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1")
-    before = state_snapshot(state)
-    info = SearchInfo()
-    score = minimax(state, 2, info)
-    print(f"Back-rank mate: minimax scores {score}  (expected {MATE_SCORE}, White mates)")
-    print(
-        f"Positions visited: {info.nodes:,}; root unchanged: {state_snapshot(state) == before}"
-    )
-""",
-        ),
-    ],
-    (9, 1, "search.py"): [
-        (
-            "replace",
-            SEARCH_DAY_9_ABOUT,
-            """Day 9 makes the search smarter without changing its answer: alpha-beta skips
+            SEARCH_DAY_8_ABOUT,
+            """Day 8 makes the search smarter without changing its answer: alpha-beta skips
 moves that cannot change the result.""",
         ),
         ("replace", SEARCH_INFO_CLOCK, ""),
@@ -458,25 +466,19 @@ moves that cannot change the result.""",
                 "capture_moves",
                 "quiescence",
                 "alpha_beta_with_quiescence",
-            ]
-            + SEARCH_DAY_9_LATER,
+            ],
         ),
-        ("replace", SEARCH_THINK_DEMO, ""),
     ],
-    (9, 2, "search.py"): [
+    (8, 3, "search.py"): [
         (
             "replace",
-            SEARCH_DAY_9_ABOUT,
-            """Day 9 makes the search smarter without changing its answer: alpha-beta skips
+            SEARCH_DAY_8_ABOUT,
+            """Day 8 makes the search smarter without changing its answer: alpha-beta skips
 moves that cannot change the result, and quiescence keeps looking until the
 captures stop.""",
         ),
         ("replace", SEARCH_INFO_CLOCK, ""),
-        (
-            "drop",
-            ["SearchTimeout", "check_time", "alpha_beta_with_quiescence"]
-            + SEARCH_DAY_9_LATER,
-        ),
+        ("drop", ["SearchTimeout", "check_time", "alpha_beta_with_quiescence"]),
         (
             "replace",
             "    check_time(info)\n    stand_pat = evaluate(state)\n",
@@ -504,22 +506,21 @@ captures stop.""",
     int
         The score for the side to move.""",
         ),
-        ("replace", SEARCH_THINK_DEMO, ""),
     ],
-    (9, 3, "search.py"): [
+    (10, 2, "beam_time.py"): [
+        ("drop", ["NEXT_READINGS", "gain", "choose_next_sample"]),
+        ("main", BEAM_TIME_MAIN),
+    ],
+    (10, 2, "test_beam_time.py"): [
         (
             "replace",
-            SEARCH_DAY_9_ABOUT,
-            """Day 9 makes the search smarter without changing its answer: alpha-beta skips
-moves that cannot change the result, quiescence keeps looking until the captures
-stop, and move ordering tries strong moves first.""",
+            (
+                "the estimate, the evaluation, the look-ahead, and\nthe benchmark "
+                "against random and equal-time agents."
+            ),
+            "the estimate, the evaluation, and the random and\nequal-time agents.",
         ),
-        ("drop", SEARCH_DAY_9_LATER),
-        ("replace", SEARCH_THINK_DEMO, ""),
     ],
-    (9, 1, "test_search.py"): [("drop", ["test_uci_engine_answers_while_thinking"])],
-    (9, 2, "test_search.py"): [("drop", ["test_uci_engine_answers_while_thinking"])],
-    (9, 3, "test_search.py"): [("drop", ["test_uci_engine_answers_while_thinking"])],
 }
 
 # The title of every period, from docs/remus_course_plan.md
@@ -547,23 +548,23 @@ PERIOD_TITLES = {
     (6, 1): "Python lab 8: recursion",
     (6, 2): "Perft",
     (6, 3): "Perft against python-chess, and bug hunt",
-    (6, 4): "Week 1 review and catch-up",
-    (7, 1): "Python lab 9 and FEN",
-    (7, 2): "Ending the game",
-    (7, 3): "SAN and the console game",
-    (7, 4): "First brains and the GUI",
-    (8, 1): "What makes a position good? Material",
-    (8, 2): "Piece-square tables",
-    (8, 3): "Minimax",
-    (8, 4): "Negamax and mates",
-    (9, 1): "Python lab 11 and alpha-beta",
-    (9, 2): "The horizon effect and quiescence",
-    (9, 3): "Move ordering",
-    (9, 4): "Iterative deepening, the clock, and UCI info",
-    (10, 1): "Upgrade stations",
-    (10, 2): "Science AI: hidden_peak.py",
-    (10, 3): "Tournament",
-    (10, 4): "Presentations, take-home, and wrap-up",
+    (6, 4): "Python lab 9 and FEN",
+    (7, 1): "Ending the game",
+    (7, 2): "SAN and the console game",
+    (7, 3): "First brains and the GUI",
+    (7, 4): "What makes a position good? Material and piece-square tables",
+    (8, 1): "Minimax, negamax, and mates",
+    (8, 2): "Python lab 11 and alpha-beta",
+    (8, 3): "The horizon effect and quiescence",
+    (8, 4): "Move ordering",
+    (9, 1): "Iterative deepening, the clock, and UCI info",
+    (9, 2): "Python lab 12 and the enhancement stations",
+    (9, 3): "Enhancement stations: test and measure",
+    (9, 4): "Launch the station matches, and the mate solver",
+    (10, 1): "Science AI: hidden_peak.py",
+    (10, 2): "The beamline problem: represent and evaluate",
+    (10, 3): "The beamline problem: look ahead and verify",
+    (10, 4): "Results, tournament, take-home, and wrap-up",
 }
 
 # A few periods need a sentence more than the title and the file list give
@@ -574,12 +575,19 @@ PERIOD_NOTES = {
     (3, 2): "`uv run show_board.py` draws an arrow for every move a generator returns.",
     (5, 4): "Register `remus.bat` from this folder as an engine in En Croissant and "
     "play your own Remus. It plays random legal moves, and every special move works.",
-    (7, 4): "Register `remus.bat` from this folder in En Croissant again: Remus now "
+    (7, 3): "Register `remus.bat` from this folder in En Croissant again: Remus now "
     "plays greedy moves. `uv run play_match.py` plays random Remus against greedy Remus.",
-    (10, 3): "`uv run tournament.py` plays the class round robin and adds every game "
-    "to games/remus_games.pgn at the top of the Remus folder.",
-    (10, 4): "`uv run estimate_elo.py` measures the Elo rating of Remus against "
-    "Stockfish set to fixed ratings, and adds every game to games/remus_games.pgn.",
+    (9, 2): "Each pair builds one color station in the `Stations` folder, such as "
+    "`RED - Transposition table`. The code in this Day folder is Remus-WHITE, the "
+    "starting point of every station.",
+    (9, 4): "Each pair starts `uv run station_match.py <COLOR>` in the `Stations` "
+    "folder, which plays its station against Remus-WHITE with nobody watching. "
+    "Meanwhile the pairs write the mate solver.",
+    (10, 2): "`uv run beam_time.py` spends 40 shots of beam time on 8 samples and "
+    "counts the wrong calls over 200 sample holders.",
+    (10, 4): "`uv run tournament.py` plays the class round robin, and "
+    "`uv run estimate_elo.py` measures the Elo rating of Remus against Stockfish. "
+    "Both add every game to games/remus_games.pgn at the top of the Remus folder.",
 }
 
 # Every Python module name that appears in any Day folder
@@ -597,7 +605,8 @@ def read_folder(folder: Path) -> dict[str, str]:
     for path in sorted(folder.iterdir()):
         # Games and pictures that scripts save beside themselves are not course code
         if path.is_file() and path.suffix not in SAVED_OUTPUT_SUFFIXES:
-            files[path.name] = path.read_text()
+            # newline="" keeps the CRLF line endings that remus.bat has on Windows
+            files[path.name] = path.read_text(newline="")
     return files
 
 
@@ -826,7 +835,7 @@ def write_folder(folder: Path, files: dict[str, str], day_end_folder: Path) -> N
     folder.mkdir()
     for name, text in files.items():
         file_path = folder / name
-        file_path.write_text(text)
+        file_path.write_text(text, newline="")
         source = day_end_folder / name
         if source.exists():
             shutil.copymode(source, file_path)

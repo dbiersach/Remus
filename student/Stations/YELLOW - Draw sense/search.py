@@ -6,10 +6,10 @@ greedy move that grabs the most valuable piece it can capture. Then Remus looks
 ahead: minimax tries every move and every reply, and negamax does the same work
 with one function instead of two mirror-image halves.
 
-Day 9 makes the search smarter without changing its answer: alpha-beta skips
+Day 8 makes the search smarter without changing its answer: alpha-beta skips
 moves that cannot change the result, quiescence keeps looking until the captures
-stop, move ordering tries strong moves first, and iterative deepening searches
-one move deeper at a time until the clock runs out.
+stop, and move ordering tries strong moves first. Day 9 adds iterative
+deepening, which searches one move deeper at a time until the clock runs out.
 
 The YELLOW station adds draw_sense_search, and think uses it.
 """
@@ -334,7 +334,7 @@ def alpha_beta_with_quiescence(
     first: Move | None = None,
 ) -> tuple[int, list[Move]]:
     """
-    The full Day 9 search: alpha-beta with quiescence at the leaves, ordered
+    The full Day 8 search: alpha-beta with quiescence at the leaves, ordered
     moves, a check extension, a clock, and the line of best play.
 
     Parameters
@@ -407,9 +407,9 @@ def is_draw_in_search(state: dict) -> bool:
         reached 100, the fifty-move limit. Repeating a position gains nothing, so
         the search scores it 0 instead of chasing a win that cannot happen.
     """
-    # Day 10, period 1: write this function.
+    # Day 9, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 10 P1: write is_draw_in_search()")
+    raise NotImplementedError("Day 9 P2: write is_draw_in_search()")
 
 
 def draw_sense_search(

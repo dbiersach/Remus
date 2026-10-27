@@ -149,9 +149,9 @@ def king_safety(board: list[list[str]]) -> int:
         the king. A White king on g1 behind pawns on f2, g2, and h2 earns 45. Once the
         queens are gone the king is safe enough to walk forward, so the term is 0.
     """
-    # Day 10, period 1: write this function.
+    # Day 9, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 10 P1: write king_safety()")
+    raise NotImplementedError("Day 9 P2: write king_safety()")
 
 
 def evaluate(state: dict) -> int:

@@ -43,9 +43,9 @@ def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
         For each position reached in the book, the moves the book plays there.
         The dict is empty if the file does not exist.
     """
-    # Day 10, period 1: write this function.
+    # Day 9, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 10 P1: write load_book()")
+    raise NotImplementedError("Day 9 P2: write load_book()")
 
 
 def book_move(book: dict[str, list[Move]], state: dict) -> Move | None:

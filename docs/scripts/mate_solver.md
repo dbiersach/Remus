@@ -1,6 +1,6 @@
 # mate_solver.py: Solve mate-in-two puzzles
 
-*First appears in `instructor/Day 10 - Upgrade Remus and add Science AI/period1`.*
+*First appears in `instructor/Day 09 - Add the clock and build the stations/period4`.*
 
 ## The big picture
 
@@ -55,9 +55,9 @@ read_puzzles()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `mating_move` | Finds a move that forces mate in the given number of moves, or None. | Day 10, period 1 |
-| `defense_fails` | Says True if White still mates after this Black reply. | Day 10, period 1 |
-| `read_puzzles` | Reads the puzzles and their answers from the EPD file. | Day 10, period 1 |
+| `mating_move` | Finds a move that forces mate in the given number of moves, or None. | Day 9, period 4 |
+| `defense_fails` | Says True if White still mates after this Black reply. | Day 9, period 4 |
+| `read_puzzles` | Reads the puzzles and their answers from the EPD file. | Day 9, period 4 |
 
 ## Try it
 
@@ -76,4 +76,4 @@ You should see: Each puzzle, the move found, the expected move, and the time. MA
 
 ## Slides
 
-Slides 10.9 in the [slide plan](../slide_plan.md).
+Slides 9.17 in the [slide plan](../slide_plan.md).
