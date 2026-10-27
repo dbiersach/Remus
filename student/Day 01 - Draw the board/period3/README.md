@@ -25,7 +25,7 @@ Part #3: you build the board as a list of eight rows, each a new list of eight d
 
 Part #4: you play 1. e4 by changing two squares, then count the White pawns left on rank 2. `board[row][col]` is how every rule in Remus reads and changes the board.
 
-## What you edit this period
+## What you edit in the lab
 
 Open `python_lists.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 

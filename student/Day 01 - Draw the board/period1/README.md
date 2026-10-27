@@ -24,7 +24,7 @@ Part #2: you store your team name in a variable and print it inside an f-string.
 
 Part #3: you store White's back rank as one string and print the letter at index 4, the king. Remus writes pieces as letters too, uppercase for White.
 
-## What you edit this period
+## What you edit in the lab
 
 Open `python_setup.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 

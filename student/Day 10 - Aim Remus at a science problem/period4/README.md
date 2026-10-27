@@ -6,11 +6,13 @@
 
 By the end of this period, each pair can:
 
-- Read an experiment's results and their error margins. **Measured by:** Each pair says whether its color's Elo gap is larger than its margin.
-- Explain one decision your engine made. **Measured by:** Each pair presents one move with its score and principal variation, and one choice its beam time agent made.
+- Read an experiment's results and their error margins. **Measured by:** `demo_results.py` turns the pair's own match result into an Elo gap and margin, and the pair says whether the gap is larger than the margin.
+- Explain one decision your engine made. **Measured by:** Each pair presents one move with its score and principal variation, from Part #3 of `demo_results.py` or its own position, and one choice its beam time agent made.
 - Take the code home. **Measured by:** Each student's USB copy opens and runs `uv run pytest`.
 
 ## The files
+
+The demo is `demo_results.py` in `student/`, with the answers in `demo_results_instructor.py` in `instructor/`. Both come from `labs/day10/`. Run it with `uv run demo_results.py`.
 
 New files this period:
 
@@ -18,4 +20,18 @@ New files this period:
 - `remus.sh`
 - `tournament.py`
 
+## The changes and why
+
+The pairs fill in the blanks of `demo_results.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `demo_results_instructor.py`.
+
+Parts #1 and #2 of `demo_results.py` turn a match result into a score and an Elo gap, then into a range that holds the true gap 95 times out of 100. When the range includes 0, the match has not shown that the enhancement helped, and more games are needed. Each pair puts in its own color's result.
+
+Part #3 asks `think()` about a back-rank mate and prints each depth's score and principal variation, the line of moves Remus expects. That line is how a pair explains why Remus chose its move.
+
 Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+
+## What you edit in the demo
+
+Open `demo_results.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
+
+Lines to type in all: 15. Check the work with `uv run demo_results.py` and compare each printed result with the expected value beside it.

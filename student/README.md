@@ -16,9 +16,11 @@ functions keeps its name, its docstring, and its type hints. Its body is a stub:
     raise NotImplementedError("Day 1 P4: write square_name()")
 ```
 
-The first three periods of Day 1 hold Python labs instead: `python_setup.py`,
-`python_strings.py`, and `python_lists.py`. In a lab file, each line that holds only
-a `#` is one line for you to type.
+Thirteen periods hold a Python lab (`python_*.py`), such as `python_lists.py` on Day 1
+or `python_recursion.py` on Day 6, and three hold a demo (`demo_*.py`), such as
+`demo_promotion.py` on Day 5. In a lab or demo file, each line that holds only a `#`
+is one line for you to type. On Day 6, period 3 the `bug_hunt` folder holds a copy
+of Remus with three planted bugs for you to find and fix.
 
 ## How to work on a function
 

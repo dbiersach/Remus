@@ -207,9 +207,11 @@ def edit_section(rows: list[EditRow]) -> str:
 
 
 def lab_section(name: str, count: int) -> str:
-    """Return the "What you edit" section of a lab period's student README."""
+    """Return the "What you edit" section of a lab or demo period's student README."""
     lines = [
-        "## What you edit this period",
+        "## What you edit in the lab"
+        if name.startswith("python_")
+        else "## What you edit in the demo",
         "",
         (
             f"Open `{name}.py`. Under each `Part` heading, every line that holds only a "
@@ -224,6 +226,35 @@ def lab_section(name: str, count: int) -> str:
         ),
     ]
     return "\n".join(lines) + "\n"
+
+
+def bug_hunt_section(count: int) -> str:
+    """Return the "What you edit" section for the bug hunt of Day 6, period 3."""
+    lines = [
+        "## What you edit in the bug hunt",
+        "",
+        (
+            "Open the `bug_hunt` folder and run `uv run hunt.py` there. Each root move "
+            "it prints points at a planted bug in one of the Remus files of that "
+            "folder. Fix each bug by changing the line that breaks the rule, and run "
+            "the hunt again until every count agrees. The files outside `bug_hunt` "
+            "are correct, so compare with them only after a guess."
+        ),
+        "",
+        f"Lines to fix in all: {count}. `bug_hunt/README.md` explains the hunt.",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def write_bug_hunt_student(target: Path) -> int:
+    """Remove the answers from a student bug_hunt folder and return the lines to fix."""
+    from make_period_folders import (
+        PLANTED_BUGS,
+        bug_hunt_readme,
+    )  # It imports this file
+
+    (target / "bug_hunt" / "README.md").write_text(bug_hunt_readme(with_answers=False))
+    return len(PLANTED_BUGS)
 
 
 def changed_files(folder: Path, before: Path | None) -> tuple[list[str], list[str]]:
@@ -267,14 +298,21 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
             out += ["| --- | --- | --- | --- | --- |"]
         new, changed = changed_files(folder, before)
         written = rows.get((day, period), [])
-        writes = "; ".join(
-            f"`{row['function']}()` in `{row['file']}` ({lines_text(row['typed'])})"
-            if row["function"]
-            else f"the lab `{row['file']}` ({lines_text(row['typed'])})"
-            for row in written
-        )
+        parts = []
+        for row in written:
+            count = lines_text(row["typed"])
+            if row["function"]:
+                parts.append(f"`{row['function']}()` in `{row['file']}` ({count})")
+            elif row["file"] == "bug_hunt/":
+                parts.append(f"the fixes for the planted bugs in `bug_hunt/` ({count})")
+            elif row["file"].startswith("demo_"):
+                parts.append(f"the demo `{row['file']}` ({count})")
+            else:
+                parts.append(f"the lab `{row['file']}` ({count})")
         if (day, period) in [(9, 2), (9, 3)]:
-            writes = "Their color station's functions, in the table below"
+            parts.append("their color station's functions, in the table below")
+        writes = "; ".join(parts)
+        writes = writes[:1].upper() + writes[1:]
         out.append(
             f"| P{period} | {PERIOD_TITLES[(day, period)]} | "
             f"{', '.join(f'`{name}`' for name in new) or 'None'} | "
@@ -334,6 +372,9 @@ def main():
             rows.setdefault((day, period), []).append(row)
             file_path.write_text(stub_function(text, function, stub_day, stub_period))
             stubbed += 1
+        sections = []
+        if (day, period) in rows:
+            sections.append(edit_section(rows[(day, period)]))
         if (day, period) in LABS:
             # A student folder holds the lab with blanks, never the answer file
             name = LABS[(day, period)]
@@ -344,11 +385,17 @@ def main():
             typed[(day, period)] = typed.get((day, period), 0) + count
             row = {"file": f"{name}.py", "function": "", "typed": count}
             rows.setdefault((day, period), []).append(row)
+            sections.append(lab_section(name, count))
+        if (target / "bug_hunt").exists():
+            count = write_bug_hunt_student(target)
+            typed[(day, period)] = typed.get((day, period), 0) + count
+            row = {"file": "bug_hunt/", "function": "", "typed": count}
+            rows.setdefault((day, period), []).append(row)
+            sections.append(bug_hunt_section(count))
+        if sections:
             with (target / "README.md").open("a") as file:
-                file.write("\n" + lab_section(name, count))
-        elif (day, period) in rows:
-            with (target / "README.md").open("a") as file:
-                file.write("\n" + edit_section(rows[(day, period)]))
+                for section in sections:
+                    file.write("\n" + section)
     # Each station folder stubs the functions its pair writes during the station
     (STUDENT / "Stations").mkdir(exist_ok=True)
     for name in ["station_match.py", "station_league.py"]:

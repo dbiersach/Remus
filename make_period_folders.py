@@ -18,7 +18,9 @@ rebuilds the three earlier periods from it:
 Each period folder also gets a README.md that says what the period is about, its
 learning objectives and how each one is measured, which files changed, and one
 paragraph on every change the students make, all from period_guides.py. A Python
-lab period gets its answer file from labs/dayNN/instructor/.
+lab or demo period gets its answer file from labs/dayNN/instructor/, and Day 6,
+period 3 gets the bug_hunt folder: a copy of the period's code with three planted
+bugs for the pairs to find with divide().
 
 Run make_student_folders.py after this script.
 """
@@ -36,6 +38,44 @@ ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
 LABS_FOLDER = ROOT / "labs"  # The Python skills labs, one folder per day
 SAVED_OUTPUT_SUFFIXES = {".pgn", ".svg"}  # Games and board pictures that scripts save
+BUG_HUNT_PERIOD = (6, 3)  # The period whose folder holds bug_hunt/
+BUG_HUNT_FILES = [  # The Remus files that bug_hunt/ copies, so that perft runs there
+    "attacks.py",
+    "board.py",
+    "game_state.py",
+    "legal_moves.py",
+    "make_move.py",
+    "move_generation.py",
+    "moves.py",
+    "perft.py",
+]
+# (file, correct text, planted text, what goes wrong, root moves that show it)
+PLANTED_BUGS = [
+    (
+        "make_move.py",
+        "        set_piece(board, victim, EMPTY)\n",
+        "",
+        "An en passant capture leaves the captured pawn on the board.",
+        (
+            "g2g4 and e2e4 in position 3: the White pawn left on rank 4 hides the "
+            "Black king on h4 from the rook on b4"
+        ),
+    ),
+    (
+        "legal_moves.py",
+        "if in_check(state, color) or is_square_attacked(board, crossed, enemy):",
+        "if in_check(state, color) or is_square_attacked(board, king_to, enemy):",
+        "Castling checks the landing square instead of the square the king crosses.",
+        "e5f7, e5d7, e5g6, and e5c6 in kiwipete: the knight attacks d8 or f8",
+    ),
+    (
+        "move_generation.py",
+        'PROMOTION_PIECES = "QRBN"',
+        'PROMOTION_PIECES = "QRB"',
+        "A pawn cannot promote to a knight.",
+        "d7c8n in position 5, missing from Remus's list, and six moves in position 4",
+    ),
+]
 
 # For each day, the period in which a file takes its period4 form. Before that
 # period the file keeps its form from the day before, or is absent if it is new.
@@ -579,6 +619,8 @@ PERIOD_NOTES = {
     (3, 2): "`uv run show_board.py` draws an arrow for every move a generator returns.",
     (5, 4): "Register `remus.bat` from this folder as an engine in Lucas Chess and "
     "play your own Remus. It plays random legal moves, and every special move works.",
+    (6, 3): "The `bug_hunt` folder holds a copy of this period's Remus with three "
+    "planted bugs. `uv run hunt.py` inside it shows where the counts go wrong.",
     (7, 3): "Register `remus.bat` from this folder in Lucas Chess again: Remus now "
     "plays greedy moves. `uv run play_match.py` plays random Remus against greedy Remus.",
     (9, 2): "Each pair builds one color station in the `Stations` folder, such as "
@@ -841,16 +883,18 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     sections.append("## The files")
     if (day, period) in LABS:
         name = LABS[(day, period)]
+        kind = "demo" if name.startswith("demo_") else "lab"
+        before = "This period comes before any Remus code. " if not files else ""
         sections.append(
-            f"This period comes before any Remus code. The lab is `{name}.py` in "
-            f"`student/`, with the answers in `{name}_instructor.py` in "
-            f"`instructor/`. Both come from `labs/day{day:02}/`. Run it with "
-            f"`uv run {name}.py`."
+            f"{before}The {kind} is `{name}.py` in `student/`, with the answers in "
+            f"`{name}_instructor.py` in `instructor/`. Both come from "
+            f"`labs/day{day:02}/`. Run it with `uv run {name}.py`."
         )
-    elif not files:
-        sections.append(
-            "This period comes before any Remus code, so the folder is empty."
-        )
+    if not files:
+        if (day, period) not in LABS:
+            sections.append(
+                "This period comes before any Remus code, so the folder is empty."
+            )
     elif not new_files and not grown_files:
         sections.append(
             "The Remus code here is the same as at the end of the period before."
@@ -884,8 +928,63 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     return "\n\n".join(sections) + "\n"
 
 
+def lab_answer_files(day: int) -> list[str]:
+    """Return the names of the lab and demo answer files of one day."""
+    names = []
+    for (lab_day, _), name in LABS.items():
+        if lab_day == day:
+            names.append(f"{name}_instructor.py")
+    return names
+
+
+def bug_hunt_readme(with_answers: bool) -> str:
+    """Return the README.md of the bug_hunt folder, with or without the answers."""
+    lines = [
+        "# Bug hunt",
+        "",
+        (
+            "The Remus files in this folder are a copy of the Day 6, period 3 code, "
+            "with three bugs planted in them. Each bug breaks one chess rule. Run "
+            "`uv run hunt.py` from inside this folder: it uses `divide()` to count "
+            "the positions under every root move of four standard positions, and "
+            "prints each root move where Remus and python-chess disagree."
+        ),
+        "",
+        (
+            "A root move that disagrees points at a rule that its position needs. "
+            "Ask what is special about that move or about the replies to it, find "
+            "the rule in the code, fix the line, and run the hunt again. The hunt "
+            "is over when it prints 0 root moves that disagree."
+        ),
+    ]
+    if with_answers:
+        lines += ["", "## Answers", "", "| File | The bug | Root moves that show it |"]
+        lines += ["| --- | --- | --- |"]
+        for file_name, correct, _, problem, shown_by in PLANTED_BUGS:
+            fix = correct.strip()
+            lines.append(f"| `{file_name}` | {problem} The fix: `{fix}` | {shown_by} |")
+    return "\n".join(lines) + "\n"
+
+
+def write_bug_hunt(folder: Path) -> None:
+    """Write folder/bug_hunt: the period's Remus files with three planted bugs."""
+    hunt = folder / "bug_hunt"
+    hunt.mkdir()
+    for name in BUG_HUNT_FILES:
+        text = (folder / name).read_text()
+        for file_name, correct, planted, _, _ in PLANTED_BUGS:
+            if file_name == name:
+                if text.count(correct) != 1:
+                    raise ValueError(f"bug_hunt/{name}: cannot plant the bug")
+                text = text.replace(correct, planted)
+        (hunt / name).write_text(text)
+        shutil.copymode(folder / name, hunt / name)
+    shutil.copy2(LABS_FOLDER / "day06" / "bug_hunt" / "hunt.py", hunt / "hunt.py")
+    (hunt / "README.md").write_text(bug_hunt_readme(with_answers=True))
+
+
 def copy_lab(day: int, period: int, folder: Path) -> None:
-    """Copy a lab period's answer file into its instructor period folder."""
+    """Copy a lab or demo period's answer file into its instructor period folder."""
     if (day, period) not in LABS:
         return
     name = f"{LABS[(day, period)]}_instructor.py"
@@ -924,6 +1023,8 @@ def main():
         end_folder = day_folder(day) / "period4"
         day_end = read_folder(end_folder)
         day_end.pop("README.md", None)
+        for name in lab_answer_files(day):
+            day_end.pop(name, None)  # copy_lab() writes the answer files of period4
         files_before = day_before
         for period in range(1, 5):
             if period == 4:
@@ -933,7 +1034,11 @@ def main():
                 folder = day_folder(day) / f"period{period}"
                 write_folder(folder, files, end_folder)
                 copy_lab(day, period, folder)
+                if (day, period) == BUG_HUNT_PERIOD:
+                    write_bug_hunt(folder)
                 built.append(folder)
+            if period == 4:
+                copy_lab(day, period, end_folder)
             readme = readme_text(day, period, files, files_before)
             (day_folder(day) / f"period{period}" / "README.md").write_text(readme)
             files_before = files
