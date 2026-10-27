@@ -63,6 +63,10 @@ LEVELS = [1320, 1615, 1910, 2205, 2500]  # Stockfish strengths; 1320 is its weak
 GAMES_PER_LEVEL = 6  # Half with Remus as White, half with Remus as Black
 MINUTES = 10.0  # Each side's clock
 INCREMENT = 0.0  # Seconds added after each move
+# Milliseconds Stockfish keeps in reserve on every move. The referee times each move
+# from outside, and with many games running at once its own bookkeeping adds a few
+# hundred milliseconds that Stockfish cannot see on its clock.
+STOCKFISH_OVERHEAD = 1000
 ELO_SCALE = 400 / math.log(10)  # Turns a rating gap into the logistic curve's units
 
 Player = tuple[str, Path]  # A version's name, such as "Remus-RED", and its folder
@@ -172,7 +176,14 @@ def play_game(player: Player, stockfish_path: str, elo: int, number: int):
         [sys.executable, str(folder / "uci_engine.py")], cwd=folder
     )
     stockfish = chess.engine.SimpleEngine.popen_uci(stockfish_path)
-    stockfish.configure({"Threads": 1, "UCI_LimitStrength": True, "UCI_Elo": elo})
+    stockfish.configure(
+        {
+            "Threads": 1,
+            "Move Overhead": STOCKFISH_OVERHEAD,
+            "UCI_LimitStrength": True,
+            "UCI_Elo": elo,
+        }
+    )
     engines = [remus, stockfish] if remus_white else [stockfish, remus]
     board = chess.Board()
     clocks = [MINUTES * 60, MINUTES * 60]  # Seconds left for White, then Black
