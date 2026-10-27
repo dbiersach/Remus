@@ -328,7 +328,7 @@ OBJECTIVES = {
             "The promotion tests pass for queen, rook, bishop, and knight.",
         ),
         (
-            "Play Remus in En Croissant.",
+            "Play Remus in Lucas Chess.",
             (
                 "The pair registers `remus.bat`, plays one game, and sees a random legal "
                 "reply to every move, special moves included."
@@ -500,13 +500,13 @@ OBJECTIVES = {
             "Search deeper one step at a time until the clock runs out.",
             (
                 "`test_think_respects_its_time` passes, and Remus never loses on time "
-                "in En Croissant."
+                "in Lucas Chess."
             ),
         ),
         (
             "Report the search to the GUI with `info` lines.",
             (
-                "En Croissant shows Remus's depth, score, and best line for each depth "
+                "Lucas Chess shows Remus's depth, score, and best line for each depth "
                 "that `think()` finishes."
             ),
         ),
@@ -659,8 +659,8 @@ CHANGE_NOTES = {
     "friend blocks the move, an enemy can be captured, and None means the square is "
     "free.",
     ("moves.py", "move_to_uci"): "Writes a move as text such as e2e4, adding a "
-    "lowercase piece letter for a promotion (e7e8q). UCI is the language En "
-    "Croissant speaks, so this is how Remus tells the GUI which move it chose.",
+    "lowercase piece letter for a promotion (e7e8q). UCI is the language Lucas "
+    "Chess speaks, so this is how Remus tells the GUI which move it chose.",
     ("moves.py", "move_from_uci"): "Reads text such as e7e8q back into a Move. The "
     "promotion letter becomes uppercase for White and lowercase for Black, so the "
     "new piece gets the right color on the board.",

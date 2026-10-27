@@ -548,7 +548,7 @@ PERIOD_TITLES = {
     (5, 1): "Python lab 7: sets, in, string replacement",
     (5, 2): "Castling",
     (5, 3): "En passant and the double step",
-    (5, 4): "Promotion, and Remus plays in En Croissant",
+    (5, 4): "Promotion, and Remus plays in Lucas Chess",
     (6, 1): "Python lab 8: recursion",
     (6, 2): "Perft",
     (6, 3): "Perft against python-chess, and bug hunt",
@@ -573,13 +573,13 @@ PERIOD_TITLES = {
 
 # A few periods need a sentence more than the title and the file list give
 PERIOD_NOTES = {
-    (1, 1): "Watch the finished Remus play in En Croissant, form pairs, and check that "
+    (1, 1): "Watch the finished Remus play in Lucas Chess, form pairs, and check that "
     "every laptop runs `uv run pytest`.",
     (1, 4): "`uv run show_board.py` draws the board as a picture in the web browser.",
     (3, 2): "`uv run show_board.py` draws an arrow for every move a generator returns.",
-    (5, 4): "Register `remus.bat` from this folder as an engine in En Croissant and "
+    (5, 4): "Register `remus.bat` from this folder as an engine in Lucas Chess and "
     "play your own Remus. It plays random legal moves, and every special move works.",
-    (7, 3): "Register `remus.bat` from this folder in En Croissant again: Remus now "
+    (7, 3): "Register `remus.bat` from this folder in Lucas Chess again: Remus now "
     "plays greedy moves. `uv run play_match.py` plays random Remus against greedy Remus.",
     (9, 2): "Each pair builds one color station in the `Stations` folder, such as "
     "`RED - Transposition table`. The code in this Day folder is Remus-WHITE, the "

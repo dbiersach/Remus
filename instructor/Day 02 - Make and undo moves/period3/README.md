@@ -41,7 +41,7 @@ Returns "w", "b", or None for an empty square. Move generation asks this about e
 
 ### `move_to_uci()` in `moves.py`
 
-Writes a move as text such as e2e4, adding a lowercase piece letter for a promotion (e7e8q). UCI is the language En Croissant speaks, so this is how Remus tells the GUI which move it chose.
+Writes a move as text such as e2e4, adding a lowercase piece letter for a promotion (e7e8q). UCI is the language Lucas Chess speaks, so this is how Remus tells the GUI which move it chose.
 
 ### `move_from_uci()` in `moves.py`
 

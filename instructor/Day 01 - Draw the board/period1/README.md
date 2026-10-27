@@ -1,6 +1,6 @@
 # Day 1, Period 1: Welcome and setup
 
-Watch the finished Remus play in En Croissant, form pairs, and check that every laptop runs `uv run pytest`.
+Watch the finished Remus play in Lucas Chess, form pairs, and check that every laptop runs `uv run pytest`.
 
 ## Learning objectives
 

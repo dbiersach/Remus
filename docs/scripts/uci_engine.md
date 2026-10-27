@@ -1,19 +1,19 @@
-# uci_engine.py: Talk to En Croissant
+# uci_engine.py: Talk to Lucas Chess
 
 *First appears in `instructor/Day 05 - Add castling, en passant, and promotion/period4`.*
 
 ## The big picture
 
-En Croissant draws the board and runs the clocks. Remus does the thinking. The two
+Lucas Chess draws the board and runs the clocks. Remus does the thinking. The two
 programs talk by sending lines of text, in a language called UCI.
 
-This file reads En Croissant's commands and sends back Remus's answers.
+This file reads Lucas Chess's commands and sends back Remus's answers.
 
 ## Where this piece fits
 
 uci_engine.py sits at the top of the puzzle. It uses fen.py, make_move.py, legal_moves.py, search.py, and opening_book.py. remus.bat starts it.
 
-A first, small version arrives on Day 5, period 4. It follows games from the starting position and plays a random legal move, so pairs can play their own Remus in En Croissant before the week ends. The teacher hands it out ready to run. On Day 7 the class reads every command, and the full version reads FEN and calls the brains in search.py.
+A first, small version arrives on Day 5, period 4. It follows games from the starting position and plays a random legal move, so pairs can play their own Remus in Lucas Chess before the week ends. The teacher hands it out ready to run. On Day 7 the class reads every command, and the full version reads FEN and calls the brains in search.py.
 
 - **Uses:** [`fen.py`](fen.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md), [`opening_book.py`](opening_book.md), [`search.py`](search.md)
 - **Used by:** no other Remus file
@@ -30,10 +30,10 @@ A first, small version arrives on Day 5, period 4. It follows games from the sta
 A short conversation:
 
 ```text
-En Croissant -> uci                          Remus -> id name Remus ... uciok
-En Croissant -> isready                      Remus -> readyok
-En Croissant -> position startpos moves e2e4
-En Croissant -> go wtime 60000 btime 60000   Remus -> info depth 3 ... bestmove e7e5
+Lucas Chess -> uci                          Remus -> id name Remus ... uciok
+Lucas Chess -> isready                      Remus -> readyok
+Lucas Chess -> position startpos moves e2e4
+Lucas Chess -> go wtime 60000 btime 60000   Remus -> info depth 3 ... bestmove e7e5
 ```
 
 ## How it works
@@ -73,7 +73,7 @@ main()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `send` | Sends one line to En Croissant right away. | Day 5, period 4 |
+| `send` | Sends one line to Lucas Chess right away. | Day 5, period 4 |
 | `set_position` | Builds the game state from a position command. | Day 5, period 4 |
 | `thinking_time` | Decides how many seconds to think from the clock. | Day 9, period 1 |
 | `search_and_send` | Thinks in the background, then sends the best move. | Day 9, period 1 |

@@ -12,7 +12,7 @@ Usage: uv run estimate_elo.py [--games 10] [--levels 1320 1500 1700] [--stockfis
 
 Stockfish calibrates UCI_Elo at 60 seconds plus 0.6 seconds a move, anchored to the
 CCRL 40/4 rating list, so the games use that clock by default. Without --stockfish,
-the script looks for "stockfish" on the PATH and then in En Croissant's engine folder.
+the script looks for "stockfish" on the PATH and then in Lucas Chess's engine folder.
 """
 
 import argparse
@@ -40,9 +40,9 @@ REPOSITORY = next(
     Path(__file__).parent,
 )
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
-EN_CROISSANT_ENGINES = (
-    Path.home() / "AppData" / "Roaming" / "org.encroissant.app" / "engines"
-)  # Where En Croissant keeps the Stockfish it downloads on Windows
+LUCAS_CHESS_ENGINES = (
+    Path.home() / "AppData" / "Local" / "Programs" / "LucasChessR" / "bin" / "OS"
+)  # Where Lucas Chess keeps the Stockfish it installs on Windows
 LEVELS = [1320, 1500, 1700]  # Stockfish strengths to play; 1320 is its weakest
 MINUTES = 1.0  # Each side's clock, the clock Stockfish calibrates UCI_Elo with
 INCREMENT = 0.6  # Seconds added after each move
@@ -55,8 +55,8 @@ def find_stockfish() -> str:
     on_path = shutil.which("stockfish") or shutil.which("/usr/games/stockfish")
     if on_path:
         return on_path
-    if EN_CROISSANT_ENGINES.exists():
-        for candidate in sorted(EN_CROISSANT_ENGINES.rglob("stockfish*.exe")):
+    if LUCAS_CHESS_ENGINES.exists():
+        for candidate in sorted(LUCAS_CHESS_ENGINES.rglob("stockfish*.exe")):
             return str(candidate)
     sys.exit("No Stockfish found. Give its path with --stockfish PATH.")
 

@@ -45,7 +45,7 @@
 | P1 | Python lab 7: sets, in, string replacement | None | None | Nothing: a demo or teacher code |
 | P2 | Castling | `test_special_moves.py` | `legal_moves.py`, `make_move.py` | `update_castling_rights()` in `make_move.py` (4 lines) |
 | P3 | En passant and the double step | None | `make_move.py`, `move_generation.py`, `test_special_moves.py` | `en_passant_victim_square()` in `make_move.py` (1 line) |
-| P4 | Promotion, and Remus plays in En Croissant | `remus.bat`, `uci_engine.py` | `make_move.py`, `test_special_moves.py` | Nothing: a demo or teacher code |
+| P4 | Promotion, and Remus plays in Lucas Chess | `remus.bat`, `uci_engine.py` | `make_move.py`, `test_special_moves.py` | Nothing: a demo or teacher code |
 
 ## Day 06 - Count positions and read FEN
 

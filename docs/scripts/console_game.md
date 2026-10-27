@@ -4,7 +4,7 @@
 
 ## The big picture
 
-Before En Croissant, you can play right in the terminal. Type moves like `e4` and
+Before Lucas Chess, you can play right in the terminal. Type moves like `e4` and
 `Nf3`.
 
 With `remus` after the command, Remus plays Black.

@@ -39,7 +39,7 @@ holds e5, c5, e6, and c6.
 1. `load_book()` reads opening_book.txt one line at a time.
 2. It plays each line from the start, checking every move with `parse_san()`.
 3. For each position on the way, it records the next move.
-4. A typo stops that one line. A missing file gives an empty book. Remus reports both on standard error, so En Croissant never sees them.
+4. A typo stops that one line. A missing file gives an empty book. Remus reports both on standard error, so Lucas Chess never sees them.
 5. `book_move()` picks one of the recorded moves, or None when out of book.
 
 ## Call tree

@@ -4,8 +4,8 @@
 
 By the end of this period, each pair can:
 
-- Search deeper one step at a time until the clock runs out. **Measured by:** `test_think_respects_its_time` passes, and Remus never loses on time in En Croissant.
-- Report the search to the GUI with `info` lines. **Measured by:** En Croissant shows Remus's depth, score, and best line for each depth that `think()` finishes.
+- Search deeper one step at a time until the clock runs out. **Measured by:** `test_think_respects_its_time` passes, and Remus never loses on time in Lucas Chess.
+- Report the search to the GUI with `info` lines. **Measured by:** Lucas Chess shows Remus's depth, score, and best line for each depth that `think()` finishes.
 
 ## The files
 

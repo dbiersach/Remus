@@ -26,7 +26,7 @@ uv run "instructor/Day 06 - Count positions and read FEN/period4/perft.py"
 
 The engine uses only the Python standard library. The development group adds
 `python-chess`, which the tests use as an outside reference for move counts,
-along with `pytest` and `ruff`. En Croissant, the desktop chess GUI, is installed
+along with `pytest` and `ruff`. Lucas Chess, the desktop chess GUI, is installed
 separately and talks to Remus over UCI.
 
 ## License

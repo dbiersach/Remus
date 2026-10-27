@@ -1,6 +1,6 @@
 # Day 7, Period 3: First brains and the GUI
 
-Register `remus.bat` from this folder in En Croissant again: Remus now plays greedy moves. `uv run play_match.py` plays random Remus against greedy Remus.
+Register `remus.bat` from this folder in Lucas Chess again: Remus now plays greedy moves. `uv run play_match.py` plays random Remus against greedy Remus.
 
 ## Learning objectives
 

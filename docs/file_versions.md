@@ -22,8 +22,8 @@ Day 5, Period 2.
 | `move_generation.py` | D3 P2: knight and king jumps | D3 P3: sliding pieces. D3 P4: pawns, promotion choices, `pseudo_legal_moves()`. D5 P3: en passant captures |
 | `attacks.py` | D4 P2: attacked squares, two versions | D4 P3: `find_king()` and `in_check()` |
 | `legal_moves.py` | D4 P3: the make, test, undo filter | D5 P2: adds castling moves |
-| `uci_engine.py` | D5 P4: a first engine for En Croissant that plays random legal moves | D7 P3: every UCI command, FEN positions, random and greedy brains. D8 P1: negamax brain. D9 P1: clock, thinking thread, `stop`. D10 P1: plays book moves first |
-| `remus.bat` | D5 P4: starts Remus for En Croissant | No changes |
+| `uci_engine.py` | D5 P4: a first engine for Lucas Chess that plays random legal moves | D7 P3: every UCI command, FEN positions, random and greedy brains. D8 P1: negamax brain. D9 P1: clock, thinking thread, `stop`. D10 P1: plays book moves first |
+| `remus.bat` | D5 P4: starts Remus for Lucas Chess | No changes |
 | `perft.py` | D6 P2: counts positions, `divide()` | No changes |
 | `fen.py` | D6 P4: FEN in and out | D7 P1: starts the position history |
 | `game_end.py` | D7 P1: mate, stalemate, draws | No changes |

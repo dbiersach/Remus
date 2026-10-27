@@ -29,6 +29,6 @@ board.svg
 # estimate_elo.py play stays on the computer that played it
 /games/
 
-# The games played in En Croissant, which saves them in Remus.pgn at the top of
-# the Remus folder
+# David's own game file, Remus.pgn at the top of the Remus folder, which holds the
+# games he plays and analyzes in the chess apps
 /Remus.pgn

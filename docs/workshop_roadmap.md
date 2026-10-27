@@ -4,7 +4,7 @@
 
 Build a chess engine in native Python, one understandable step at a time. The workshop is a teaching project: every lesson should explain the chess idea, show the corresponding code, let the learner inspect a small example, and end with a concrete exercise. A working game comes first; stronger play comes later.
 
-The engine should eventually play through a graphical chess interface. En Croissant is a desktop chess application that can host an external engine through the Universal Chess Interface (UCI). `python-chess` is a Python chess library, not a full desktop GUI; it can help an optional interface or serve as an independent reference for testing. Neither should supply the core engine's board representation, move generator, search, or evaluation. Keep that boundary visible in the examples.
+The engine should eventually play through a graphical chess interface. Lucas Chess is a desktop chess application that can host an external engine through the Universal Chess Interface (UCI). `python-chess` is a Python chess library, not a full desktop GUI; it can help an optional interface or serve as an independent reference for testing. Neither should supply the core engine's board representation, move generator, search, or evaluation. Keep that boundary visible in the examples.
 
 ## Teaching principles
 
@@ -27,9 +27,9 @@ The final learning project has four boundaries:
 | Native Python engine | Board, rules, legal moves, game state, search, evaluation, and move choice |
 | Console driver | Human-readable board and commands for early lessons and debugging |
 | UCI adapter | Translate GUI commands into engine calls and return best moves and optional analysis |
-| External interface | En Croissant as the desktop GUI on every class laptop; `python-chess` for match running and reference checks |
+| External interface | Lucas Chess as the desktop GUI on every class laptop; `python-chess` for match running and reference checks |
 
-The engine should run without En Croissant or `python-chess`. The optional interface is an integration exercise after the core engine can complete a legal game.
+The engine should run without Lucas Chess or `python-chess`. The optional interface is an integration exercise after the core engine can complete a legal game.
 
 ## A simple starting representation
 
@@ -138,7 +138,7 @@ Opening libraries and endgame tables are optional boundary features. First show 
 
 Create a small UCI command loop around the engine. Implement the subset needed to launch and play: `uci`, `isready`, `ucinewgame`, `position startpos ...`, `position fen ...`, `go`, `stop` as time control is added, and `quit`. Return moves in UCI notation, such as `e2e4` or `e7e8q`; use `bestmove 0000` only when there is no legal move. Keep protocol text on standard output and debugging information on standard error so the GUI can parse responses.
 
-Register the launcher (`remus.bat`) as an external UCI engine in En Croissant and play short games. Alternatively, build a small display layer using `python-chess` components while the workshop engine still decides legality and moves. When testing, `python-chess` can independently check positions and moves; do not make it the engine's hidden implementation.
+Register the launcher (`remus.bat`) as an external UCI engine in Lucas Chess and play short games. Alternatively, build a small display layer using `python-chess` components while the workshop engine still decides legality and moves. When testing, `python-chess` can independently check positions and moves; do not make it the engine's hidden implementation.
 
 **Completion test:** the GUI can start a game, send moves, receive legal engine replies, display promotions correctly, and end a game without losing synchronization.
 
@@ -214,7 +214,7 @@ Avoid dropping in a complete optimized engine. The workshop succeeds when a lear
 
 ## Reference links for the optional interface
 
-- [En Croissant chess application](https://encroissant.org)
+- [Lucas Chess](https://lucaschess.pythonanywhere.com)
 - [python-chess documentation for UCI/XBoard communication](https://python-chess.readthedocs.io/en/latest/engine.html)
 - [python-chess project and supported library features](https://github.com/niklasf/python-chess)
 

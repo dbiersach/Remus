@@ -12,7 +12,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 
 | Slide | Title | What it shows |
 | --- | --- | --- |
-| 1.1 | Remus at a glance | The four boundaries as boxes: engine, console, UCI adapter, En Croissant. Arrows show that only moves and text cross a boundary |
+| 1.1 | Remus at a glance | The four boundaries as boxes: engine, console, UCI adapter, Lucas Chess. Arrows show that only moves and text cross a boundary |
 | 1.2 | The module map | Every module of Day 10 as a box, arranged bottom to top in the order it is built (board, game_state, moves, make_move, move_generation, attacks, legal_moves, ...), with import arrows |
 | 1.3 | The board is a list of lists | An 8x8 grid with `board[row][col]` indexes on one side and rank and file labels on the other. Highlight `board[6][4]` = e2 = `"P"` |
 | 1.4 | Square names and coordinates | `"e2"` to `(6, 4)` and back: `col = "abcdefgh".index("e")`, `row = 8 - 2`. Three worked examples: a8, e2, h1 |
@@ -58,7 +58,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 5.3 | En passant | The double step sets the target square; the capture lands on the target but removes the pawn beside it (`en_passant_victim_square`) |
 | 5.4 | The full undo record | The undo dict with `rook_move` and `en_passant_victim` filled in for a castle and an en passant capture |
 | 5.5 | Promotion and underpromotion | One pawn move becomes four: `e7e8q`, `e7e8r`, `e7e8b`, `e7e8n` |
-| 5.6 | Remus plays in En Croissant | Register `remus.bat` from `Day 05 .../period4`. The GUI sends `position startpos moves e2e4 ...` and `go`; Remus answers `bestmove` with a random legal move. Day 7 explains every line |
+| 5.6 | Remus plays in Lucas Chess | Register `remus.bat` from `Day 05 .../period4`. The GUI sends `position startpos moves e2e4 ...` and `go`; Remus answers `bestmove` with a random legal move. Day 7 explains every line |
 
 ## Day 6: Count positions and read FEN
 
@@ -77,7 +77,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 7.2 | Is the game over? | The decision flow of `game_result`: no legal moves (mate or stalemate), insufficient material, repetition, fifty-move rule |
 | 7.3 | Anatomy of SAN | `Nbd2`, `exd5`, `O-O`, `e8=Q+`, with each part labeled |
 | 7.4 | Reading SAN the simple way | Write the SAN of every legal move, then pick the one that matches what the player typed |
-| 7.5 | The UCI conversation | A sequence diagram: En Croissant sends `uci`, `isready`, `position`, `go`; Remus answers `uciok`, `readyok`, `bestmove` |
+| 7.5 | The UCI conversation | A sequence diagram: Lucas Chess sends `uci`, `isready`, `position`, `go`; Remus answers `uciok`, `readyok`, `bestmove` |
 | 7.6 | Two first brains | `random_move` and `greedy_move` on the same position; the greedy brain takes the queen |
 | 7.7 | Centipawns | Piece values 100, 300, 300, 500, 900, and a material count for a sample position |
 | 7.8 | Piece-square tables | The knight table as a heat map: +20 in the center, -50 in the corners. Black reads the table upside down |

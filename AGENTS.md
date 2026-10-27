@@ -50,7 +50,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
   and checkpoints that follow that plan period by period.
 - 20 students work in **10 pairs** (driver and navigator, swapping every period). Each
   pair gets an identical, preconfigured **Windows 11** class laptop with git, `uv`,
-  VS Code, and En Croissant. Classroom instructions target Windows; `remus.sh` exists
+  VS Code, and Lucas Chess. Classroom instructions target Windows; `remus.sh` exists
   only for students who take Remus home to a Mac or Linux computer.
 - Python skills labs come before the engine code that needs each skill. Students
   **write real Remus code**: small functions with a teacher-written signature,
@@ -84,9 +84,11 @@ that are specific to Claude Code. The Python style follows David's course reposi
   (`d3-p2-start`, `d3-p2-end`) so a pair that falls behind can rejoin.
 - Write code, comments, and lesson text for a 13-year-old reading the idea for the first
   time: short functions, concrete names, and one small example position per idea.
-- The class never builds a GUI. Every laptop uses **En Croissant**, which runs Remus as
-  a UCI engine through `remus.bat`. `python-chess` runs
-  matches and checks results from outside the engine.
+- The class never builds a GUI. Every laptop uses **Lucas Chess** (David,
+  2026-10-27), which runs Remus as a UCI engine through `remus.bat`.
+  [`docs/lucas_chess_guide.md`](docs/lucas_chess_guide.md) shows students, step by step
+  with screenshots, how to add Remus and watch it play Stockfish at 1500 Elo.
+  `python-chess` runs matches and checks results from outside the engine.
 - **No GitHub for students.** They are minors, so they create no online accounts. The
   teacher's laptop holds the main class repository; each pair has its own local
   repository and fetches from the teacher over the classroom network (or a git bundle
@@ -102,7 +104,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
    magic numbers, compiled extensions, clever caches, or framework machinery.
 3. **Engine is the single source of truth** for board, rules, legal moves, game state,
    search, evaluation, and move choice. A GUI only sends moves and displays results.
-4. **`python-chess` and En Croissant are boundary tools only.** En Croissant is the
+4. **`python-chess` and Lucas Chess are boundary tools only.** Lucas Chess is the
    desktop GUI, which runs Remus over UCI. `python-chess` runs matches and serves as an
    external cross-check in tests, never as the engine's hidden implementation.
 5. **Exact make/undo.** `undo_move(make_move(state, move))` must restore the full state,
@@ -138,9 +140,9 @@ that are specific to Claude Code. The Python style follows David's course reposi
 | Native Python engine | Board, rules, legal moves, state, search, evaluation, move choice |
 | Console driver | Human-readable board and commands for lessons and debugging |
 | UCI adapter | `uci`, `isready`, `ucinewgame`, `position startpos/fen ...`, `go`, `stop`, `quit`; protocol on stdout, debug on stderr; `bestmove 0000` only with no legal move |
-| GUI | En Croissant, which starts `remus.bat` and hosts Remus as an external UCI engine |
+| GUI | Lucas Chess, which starts `remus.bat` and hosts Remus as an external UCI engine |
 
-The engine must run without En Croissant or `python-chess` installed.
+The engine must run without Lucas Chess or `python-chess` installed.
 
 ## Lesson roadmap (summary)
 
@@ -155,7 +157,7 @@ The engine must run without En Croissant or `python-chess` installed.
 9. Search: minimax/negamax, then alpha-beta
 10. Improve search: iterative deepening, ordering, quiescence, time limits, PV, null-window, PVS
 11. Transposition table (plain dict), opening list, tablebase probing at the boundary
-12. UCI loop and play in En Croissant
+12. UCI loop and play in Lucas Chess
 13. Science AI: aim the same generate, score, and choose loop at a hidden-peak
     measurement problem (`science/hidden_peak.py`)
 
@@ -163,7 +165,7 @@ Each lesson has a "Ready to move on when" gate in the workshop file. Don't skip 
 
 The course plan maps these 13 lessons onto the ten days. Students see their board as a
 picture on Day 1 and their moves as arrows on Day 3, and play a random-move Remus in
-En Croissant at the end of Day 5. The UCI lesson and the first real brains come on
+Lucas Chess at the end of Day 5. The UCI lesson and the first real brains come on
 Day 7, after perft has verified the rules.
 
 ## Verification
@@ -189,7 +191,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - The project has no runtime dependencies. The `dev` dependency group holds
   `python-chess` (imported as `chess`), `pytest`, and `ruff`. Engine modules never
   import `chess`; only tests and optional display code (`show_board.py`) may.
-- En Croissant is a desktop application, not a Python dependency. It hosts Remus as an
+- Lucas Chess is a desktop application, not a Python dependency. It hosts Remus as an
   external UCI engine and comes preinstalled on the class laptops.
 - Finished, ready-to-run reference code lives in the root `instructor/` folder, which
   keeps the solution code apart from the code students write and change. Inside it the
@@ -265,7 +267,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   questions. Write the pages for middle school readers, in short sentences, and do not
   repeat the code's comments line by line. When a file changes, update its page.
 - `docs/` holds the program overview, one page per major script in `docs/scripts/`,
-  the slide plan, the course plan, the roadmap, and the two briefing PDFs.
+  the slide plan, the course plan, the roadmap, the Lucas Chess guide (with its
+  screenshots in `docs/images/lucas_chess/`), and the two briefing PDFs.
 
 ## Licensed local files
 
@@ -328,7 +331,7 @@ if __name__ == "__main__":
 
 The guard matters more in Remus than in a stand-alone lab script. Engine modules import
 each other, and the UCI engine imports nearly all of them; a module that printed at
-import time would send stray text to En Croissant and break the protocol. Every print
+import time would send stray text to Lucas Chess and break the protocol. Every print
 in an engine module therefore lives inside `main()` or a function `main()` calls.
 
 ### Every script produces visible output

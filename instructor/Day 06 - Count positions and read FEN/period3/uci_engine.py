@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """uci_engine.py
 
-Let a chess GUI such as En Croissant play against Remus. The GUI and Remus talk in
+Let a chess GUI such as Lucas Chess play against Remus. The GUI and Remus talk in
 the Universal Chess Interface (UCI): the GUI sends one command per line, such as
 "position startpos moves e2e4" or "go", and Remus answers "bestmove e7e5".
 
@@ -18,7 +18,7 @@ from legal_moves import legal_moves
 from make_move import make_move
 from moves import move_from_uci, move_to_uci
 
-# The starting position as FEN text, the way En Croissant sends it
+# The starting position as FEN text, the way some chess GUIs send it
 START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 
@@ -44,7 +44,7 @@ def set_position(words: list[str]) -> dict:
         The game state after the listed moves.
     """
     state = new_game()
-    # En Croissant sends the start position as FEN text, so both forms mean the start
+    # Some GUIs send the start position as FEN text, so both forms mean the start
     starts_at_start = words[1] == "startpos" or " ".join(words[2:8]) == START_FEN
     if not starts_at_start:
         print("Remus reads only the starting position until Day 7", file=sys.stderr)

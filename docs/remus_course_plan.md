@@ -19,8 +19,8 @@ in [`AGENTS.md`](../AGENTS.md) apply to everything below.
 | Daily schedule | 8:30 to 10:00 Period 1; 10:00 to 10:30 break; 10:30 to 12:00 Period 2; 12:00 to 1:00 lunch; 1:00 to 2:30 Period 3; 2:30 to 3:00 break; 3:00 to 4:30 Period 4 |
 | Students | 20 students in 10 pairs: a driver types, a navigator reads and checks; they swap every period. Ten pairs keep each adult to about five pairs during labs |
 | Staff | The teacher plus at least one assistant |
-| Laptops | 10 identical Windows 11 laptops, one per pair, preconfigured with git, `uv`, VS Code, and En Croissant |
-| GUI | En Croissant on every laptop |
+| Laptops | 10 identical Windows 11 laptops, one per pair, preconfigured with git, `uv`, VS Code, and Lucas Chess |
+| GUI | Lucas Chess on every laptop |
 | Repositories | The teacher's laptop holds the main class repository. Each pair has its own local repository and pulls from the teacher over the classroom network. No GitHub accounts: the students are minors |
 | Take-home | On the last day each pair copies its repository, with its full history, onto a USB drive |
 | Folder layout | The finished reference code lives in `instructor/`, one folder per day, such as `instructor/Day 04 - Keep only legal moves`, with four period folders inside, `period1` to `period4`. Each period folder holds a complete, runnable copy of Remus at the end of that period, with its tests beside the modules and a `README.md` for the period. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
@@ -28,7 +28,7 @@ in [`AGENTS.md`](../AGENTS.md) apply to everything below.
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
 | GUI move text | UCI (`e2e4`, `e7e8q`), because that is what the GUI protocol uses |
 | First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
-| First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in En Croissant once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
+| First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Matches | Day 9: each color station plays Remus-WHITE, plus 15 planned color-on-color showcase matches, unattended. Day 10: a round robin of the 10 pair engines and the results |
 | Mate puzzles | The ten GameWorks `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
@@ -45,7 +45,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 2 | Functions and records | Functions, type hints, tuples, `assert`, pytest, dicts, dataclasses, copying | Hold a game state; make and undo a quiet move or capture |
 | 3 | Loops that walk the board | `while`, `break`, direction tuples, building lists | Generate king, knight, slider, and pawn moves |
 | 4 | Legal moves | Modules, imports, `__main__`, git | Detect attacks and check; keep only legal moves |
-| 5 | Special moves | Sets and dict lookups | Castling, en passant, promotion and underpromotion, with exact undo; play random Remus in En Croissant |
+| 5 | Special moves | Sets and dict lookups | Castling, en passant, promotion and underpromotion, with exact undo; play random Remus in Lucas Chess |
 | 6 | Counting the tree, and FEN | Recursion; `split`, `join`, exceptions | Perft matches the reference counts; FEN in and out |
 | 7 | A whole game, and judging a position | `random`, `max` with `key=`, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
 | 8 | Searching ahead, then smarter | Recursion review, `sorted` with `key=` | Minimax, negamax, alpha-beta, quiescence, move ordering |
@@ -75,7 +75,7 @@ of Day 7), then it plays **good** moves (Days 7 to 10).
 | Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering (D8), iterative deepening (D9), the ten enhancement stations (D9) |
 | Evaluation | Material count (D7) | Piece-square tables (D7) | Mate scores that prefer the faster mate (D8) | Pawn structure, mating bonus, and king safety stations (D9) |
 | Science AI | Paper hidden-peak game and greedy measurement choice (D10 P1) | Explore and exploit weight tuned on a benchmark (D10 P1) | Beam time: estimates and the chance of a wrong call (D10 P2) | Look ahead with pretend readings, and verify predictions against results (D10 P3) |
-| Interface | Console printout and a board picture (D1) | Move arrows (D3) and random Remus in En Croissant (D5) | Console game in SAN and full UCI (D7) | `info` lines, time control, `stop` (D9) |
+| Interface | Console printout and a board picture (D1) | Move arrows (D3) and random Remus in Lucas Chess (D5) | Console game in SAN and full UCI (D7) | `info` lines, time control, `stop` (D9) |
 
 ## How students write real Remus code
 
@@ -117,7 +117,7 @@ and nothing leaves the classroom except on the USB drives at the end.
 | Catch up after falling behind | Pair | `git switch -c d3-p3-catchup d3-p3-end` |
 | Hand in a picked function | Pair and teacher | The teacher copies the function from the pair's screen or from a file the pair saves to the class USB stick, then commits it with a `CONTRIBUTORS.md` line |
 | Hand in an engine for the tournament | Pair | `git bundle create <team>.bundle --all` onto the class USB stick; the teacher fetches each bundle into a branch on the tournament laptop |
-| Take it home | Pair | `git clone --no-hardlinks . <usb>/remus` copies the source and full history but not the `.venv` folder, which only works on the laptop that built it. At home: install `uv`, run `uv sync`, register `remus.bat` in En Croissant. A student with a Mac or Linux computer at home uses `remus.sh` instead |
+| Take it home | Pair | `git clone --no-hardlinks . <usb>/remus` copies the source and full history but not the `.venv` folder, which only works on the laptop that built it. At home: install `uv`, run `uv sync`, install the free Lucas Chess (Windows or Linux) from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). A student with a Mac or Linux computer at home uses `remus.sh` instead; Lucas Chess has no Mac version, so a Mac needs another UCI chess app |
 
 School Wi-Fi sometimes blocks laptops from reaching each other. Test `git fetch
 instructor` from one class laptop in the room before Day 1. If the network
@@ -201,12 +201,14 @@ refresher with a demonstration board comes right before the code that needs each
    `d3-p2-end`). The start tag holds the stubs and failing tests; the end tag holds
    the teacher's answer, which a pair can check out if it falls behind.
 2. **Finish the laptop image.** The 10 Windows 11 laptops arrive with git, `uv`, VS Code,
-   and En Croissant. Check that the image also has Python 3.14 cached by `uv` and the
+   and Lucas Chess. Check that the image also has Python 3.14 cached by `uv` and the
    VS Code extensions from `install_vscode_extensions.ps1`. Clone the class repository as
    described in "Sharing code without GitHub", then run `uv sync` and `uv run pytest`
    on every laptop before Day 1, so no laptop needs the internet on Day 1.
-3. **Register Remus in En Croissant.** Add the reference Remus as a local engine through
-   `remus.bat` and play one full game on one laptop. If the image is identical, the same
+3. **Register Remus in Lucas Chess.** Add the reference Remus as an external engine
+   through `remus.bat`, following [`lucas_chess_guide.md`](lucas_chess_guide.md), and play
+   one full game on one laptop. Start Lucas Chess from the Start menu or its desktop
+   icon: it runs engine-against-engine games only when it starts from its own folder. If the image is identical, the same
    engine path works on all 10; check that the repository sits at the same folder on
    every laptop.
 4. **Print handouts:** a board diagram labeled with both `e2` and `(6, 4)`, the rules
@@ -218,7 +220,7 @@ refresher with a demonstration board comes right before the code that needs each
 6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
    both partners take the code home, plus one class stick for bundles. Give the assistant
    the Day 1 checklist. With preconfigured laptops, Day 1 Period 1 needs only a quick
-   check that every laptop runs `uv run pytest` and opens En Croissant.
+   check that every laptop runs `uv run pytest` and opens Lucas Chess.
 7. **Prepare unplugged materials:** for each pair, a printed board, sticky-note
    pieces, a deck of index cards, and the warm-up worksheets listed under "Unplugged
    warm-ups"; for the room, a large demonstration board and score cards for the human
@@ -317,11 +319,12 @@ only escapes.
   a queen stalemates. The teacher writes promotion in `make_move` and `undo_move`,
   and pairs write tests from the workshop's special-move checklist. To close the week,
   the teacher hands out `uci_engine.py` and `remus.bat` as a ready-made plug: pairs
-  register `remus.bat` in En Croissant and play their own Remus, which answers with a
-  random legal move. Nobody reads the UCI code yet; Day 7 explains it.
+  register `remus.bat` in Lucas Chess and play their own Remus, which answers with a
+  random legal move; [`lucas_chess_guide.md`](lucas_chess_guide.md) shows each click.
+  Nobody reads the UCI code yet; Day 7 explains it.
 
 **Checkpoint `d5-p4-end`:** every special-move test passes, every special move
-undoes exactly, and Remus plays random legal moves in En Croissant.
+undoes exactly, and Remus plays random legal moves in Lucas Chess.
 
 ## Week 2: A game, a GUI, and a thinking engine
 
@@ -411,7 +414,9 @@ and alpha-beta returns the same score as negamax with fewer nodes.
   4120 pv e2e4 e7e5 g1f3` so the GUI shows Remus thinking. **Students write:**
   `think()`, the deepening loop: depth 1, then 2, then 3, keeping the best move of the
   deepest search that finished before the clock ran out. The Remus at the end of this period is **Remus-WHITE**, with
-  none of the enhancements.
+  none of the enhancements. The period ends with the class watching Remus-WHITE play
+  a full 5-minute game against Stockfish at 1500 Elo in Lucas Chess, set up as in
+  [`lucas_chess_guide.md`](lucas_chess_guide.md), Part 3.
 - **P2. Python lab 12 and the enhancement stations.** The lab covers dicts as caches
   and tuples as keys. Then each of the 10 pairs takes one color station from
   `Stations/`: Remus-WHITE plus one enhancement, with the pair's function stubbed (at
@@ -579,7 +584,7 @@ course; a fast pair can try it after Day 10.
 `python-chess` is a library, not a GUI. Remus uses it in four places, all outside the
 engine, and the engine never imports it.
 
-1. **GUI play through UCI.** En Croissant starts a launcher and talks to Remus over stdin and
+1. **GUI play through UCI.** Lucas Chess starts a launcher and talks to Remus over stdin and
    stdout. `remus.bat` changes to its own folder and runs `uv run python
    uci_engine.py`. For students who take Remus home to a Mac or Linux computer,
    `remus.sh` does the same; it must be marked executable with `chmod +x remus.sh`, and

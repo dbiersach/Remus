@@ -8,7 +8,7 @@ A move needs three facts: where the piece starts, where it lands, and what a paw
 turns into if it reaches the last rank.
 
 This file stores those facts in a small record called `Move`. It also writes moves
-as text like `e2e4`, which En Croissant understands.
+as text like `e2e4`, which Lucas Chess understands.
 
 ## Where this piece fits
 

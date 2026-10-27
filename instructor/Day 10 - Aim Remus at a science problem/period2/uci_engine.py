@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """uci_engine.py
 
-Talk to a chess GUI such as En Croissant through the Universal Chess Interface (UCI).
+Talk to a chess GUI such as Lucas Chess through the Universal Chess Interface (UCI).
 The GUI sends one command per line on standard input, and Remus answers on standard
 output. Debug text goes to standard error, where the GUI ignores it.
 

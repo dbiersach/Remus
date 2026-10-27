@@ -4,6 +4,8 @@ Remus is a chess engine in plain Python, built over ten workshop days. This page
 how the pieces fit together. Each major script has its own page in
 [`scripts/`](scripts/), and [`slide_plan.md`](slide_plan.md) lists the slides that
 picture the data structures and the program flow.
+[`lucas_chess_guide.md`](lucas_chess_guide.md) shows how to run Remus in Lucas Chess,
+the chess app on every class laptop.
 
 ## How the code is organized
 
@@ -104,7 +106,7 @@ game_end.py                  is the game over?
 evaluation.py                how good is a position?
 move_ordering.py, transposition_table.py, opening_book.py
 search.py                    choose a move
-uci_engine.py                talk to En Croissant
+uci_engine.py                talk to Lucas Chess
 ```
 
 The pages, in the order the class builds them:
@@ -127,7 +129,7 @@ The pages, in the order the class builds them:
 | [`notation.py`](scripts/notation.md) | Moves the way people write them |
 | [`game_end.py`](scripts/game_end.md) | Is the game over? |
 | [`console_game.py`](scripts/console_game.md) | Play chess in the terminal |
-| [`uci_engine.py`](scripts/uci_engine.md) | Talk to En Croissant |
+| [`uci_engine.py`](scripts/uci_engine.md) | Talk to Lucas Chess |
 | [`play_match.py`](scripts/play_match.md) | Two Remus brains play each other |
 | [`evaluation.py`](scripts/evaluation.md) | How good is this position? |
 | [`search.py`](scripts/search.md) | Choosing a move |
@@ -150,7 +152,7 @@ The pages, in the order the class builds them:
 | --- | --- | --- |
 | Native Python engine | `board.py` to `search.py` | Board, rules, legal moves, state, search, evaluation, move choice |
 | Console driver | `console_game.py` | Prints the board and reads SAN moves typed in the terminal |
-| UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with En Croissant on standard input and output |
+| UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with Lucas Chess on standard input and output |
 | Teacher tools | `play_match.py`, `compare_search.py`, `tournament.py`, `estimate_elo.py`, `Stations/station_match.py`, `Stations/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
 
 ## The core data structures
@@ -187,7 +189,7 @@ the rook's squares for castling, and the victim's square for en passant.
 
 ## Program flow: from a GUI command to a move
 
-When En Croissant asks Remus for a move, the work runs through the modules in this
+When Lucas Chess asks Remus for a move, the work runs through the modules in this
 order:
 
 1. `uci_engine.py` reads `position startpos moves e2e4 e7e5` and builds the state with

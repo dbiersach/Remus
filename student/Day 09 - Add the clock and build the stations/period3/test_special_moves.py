@@ -124,7 +124,7 @@ def test_knight_underpromotion_and_undo() -> None:
 
 def test_uci_engine_follows_a_game_with_castling() -> None:
     """
-    En Croissant sends the start as FEN and castling as the king's move, e1g1.
+    A GUI may send the start as FEN, and it sends castling as the king's move, e1g1.
     Remus must follow both and answer with a legal move.
     """
     engine = Path(__file__).parent / "uci_engine.py"

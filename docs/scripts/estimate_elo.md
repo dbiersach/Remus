@@ -57,7 +57,7 @@ main()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `find_stockfish` | Finds Stockfish on the PATH or in En Croissant's engine folder. | Day 10, period 4 |
+| `find_stockfish` | Finds Stockfish on the PATH or in Lucas Chess's engine folder. | Day 10, period 4 |
 | `expected_score` | Gives the points per game the Elo formula expects. | Day 10, period 4 |
 | `estimate_rating` | Finds the rating that best fits all the results, and its error margin. | Day 10, period 4 |
 | `play_game` | Plays Remus against Stockfish at one rating and returns the game as PGN. | Day 10, period 4 |
