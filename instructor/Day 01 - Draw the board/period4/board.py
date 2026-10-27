@@ -38,8 +38,13 @@ def print_board(board: list[list[str]]) -> None:
         The board, row 0 first (rank 8).
     """
     for row in range(8):
-        print(BOARD_RANKS[row], " ".join(board[row]))
-    print(" ", " ".join(BOARD_FILES))
+        # Start the line with the rank number, then add a space and each square
+        line = BOARD_RANKS[row]
+        for col in range(8):
+            line = line + " " + board[row][col]
+        print(line)
+    # Two spaces line up the file letters under the squares
+    print("  a b c d e f g h")
 
 
 def square_name(row: int, col: int) -> str:
