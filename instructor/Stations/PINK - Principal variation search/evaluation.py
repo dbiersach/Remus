@@ -74,7 +74,16 @@ KING_TABLE = [  # The king hides behind its pawns until the endgame
     [20, 20, 0, 0, 0, 0, 20, 20],
     [20, 30, 10, 0, 0, 10, 30, 20],
 ]
-QUEEN_TABLE = [[0] * 8 for _ in range(8)]  # The queen is strong anywhere
+QUEEN_TABLE = [  # The queen is strong anywhere
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+]
 PLACEMENT_TABLES = {
     "P": PAWN_TABLE,
     "N": KNIGHT_TABLE,

@@ -56,7 +56,7 @@ Every other function in this folder is finished. Change only these, and only bel
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `hidden_peak.py` | `candidate_squares()` | 85 | 6 | `test_upgrades.py::test_greedy_ai_measures_where_it_looks_hot` |
-| `hidden_peak.py` | `score_candidate()` | 104 | 2 | `uv run pytest` |
-| `hidden_peak.py` | `choose_next_measurement()` | 132 | 4 | `test_upgrades.py::test_greedy_ai_measures_where_it_looks_hot`, `test_upgrades.py::test_greedy_ai_beats_random_guessing` |
+| `hidden_peak.py` | `score_candidate()` | 104 | 4 | `uv run pytest` |
+| `hidden_peak.py` | `choose_next_measurement()` | 132 | 9 | `test_upgrades.py::test_greedy_ai_measures_where_it_looks_hot`, `test_upgrades.py::test_greedy_ai_beats_random_guessing` |
 
-Lines to type in all: 12. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+Lines to type in all: 19. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

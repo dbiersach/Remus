@@ -59,7 +59,16 @@ def order_moves(
     list[Move]
         The moves, highest MVV-LVA score first, with `first` at the front.
     """
-    ordered = sorted(moves, key=lambda move: mvv_lva_score(move, board), reverse=True)
+    ordered = []
+    scores = []
+    for move in moves:
+        score = mvv_lva_score(move, board)
+        # Step past every move that scores at least as high, so ties keep their order
+        place = 0
+        while place < len(scores) and scores[place] >= score:
+            place += 1
+        ordered.insert(place, move)
+        scores.insert(place, score)
     if first in ordered:
         ordered.remove(first)
         ordered.insert(0, first)
@@ -69,7 +78,7 @@ def order_moves(
 def main():
     state = state_from_fen("4k3/8/2q5/1P1r4/8/8/8/3QK3 w - - 0 1")
     ordered = order_moves(legal_moves(state), state["board"])
-    print("First two moves:", [move_to_uci(move) for move in ordered[:2]])
+    print(f"First two moves: {move_to_uci(ordered[0])} {move_to_uci(ordered[1])}")
     print("  (expected b5c6, pawn takes queen, then d1d5, queen takes rook)")
 
 

@@ -45,7 +45,11 @@ def castling_moves(state: dict) -> list[Move]:
     for right, king_from, king_to, must_be_empty, crossed in CASTLES:
         if right not in state["castling"] or right.isupper() != (color == WHITE):
             continue
-        if any(piece_at(board, square) != EMPTY for square in must_be_empty):
+        path_is_empty = True
+        for square in must_be_empty:
+            if piece_at(board, square) != EMPTY:
+                path_is_empty = False
+        if not path_is_empty:
             continue
         if in_check(state, color) or is_square_attacked(board, king_to, enemy):
             continue

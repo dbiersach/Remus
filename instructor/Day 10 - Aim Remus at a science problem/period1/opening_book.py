@@ -78,10 +78,14 @@ def main():
     book = load_book()
     print(f"Book positions: {len(book)}")
     state = state_from_fen(START_FEN)
-    first_moves = sorted(move_to_uci(move) for move in book[position_key(state)])
-    print(
-        f"First moves in the book: {' '.join(first_moves)}  (expected c2c4 d2d4 e2e4 g1f3)"
-    )
+    first_moves = []
+    for move in book[position_key(state)]:
+        first_moves.append(move_to_uci(move))
+    first_moves.sort()
+    text = ""
+    for uci in first_moves:
+        text += uci + " "
+    print(f"First moves in the book: {text} (expected c2c4 d2d4 e2e4 g1f3)")
     make_move(state, parse_san(state, "e4"))
     reply = book_move(book, state)
     reply_text = move_to_uci(reply) if reply is not None else "none"

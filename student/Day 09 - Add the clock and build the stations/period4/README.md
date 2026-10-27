@@ -39,6 +39,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `mate_solver.py` | `mating_move()` | 29 | 18 | `test_search.py::test_mate_solver_solves_all_gameworks_puzzles`, `test_search.py::test_mate_solver_finds_no_mate_when_there_is_none` |
+| `mate_solver.py` | `mating_move()` | 29 | 22 | `test_search.py::test_mate_solver_solves_all_gameworks_puzzles`, `test_search.py::test_mate_solver_finds_no_mate_when_there_is_none` |
 
-Lines to type in all: 18. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+Lines to type in all: 22. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

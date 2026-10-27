@@ -33,7 +33,7 @@ def fen_placement(board: list[list[str]]) -> str:
         One group per rank, rank 8 first, separated by "/". A digit counts the
         empty squares in a row, so an empty rank is "8".
     """
-    ranks = []
+    placement = ""
     for row in board:
         text = ""
         empty_count = 0
@@ -47,8 +47,10 @@ def fen_placement(board: list[list[str]]) -> str:
                 text += piece
         if empty_count > 0:
             text += str(empty_count)
-        ranks.append(text)
-    return "/".join(ranks)
+        if placement != "":
+            placement += "/"  # A slash separates one rank from the next
+        placement += text
+    return placement
 
 
 def board_from_placement(text: str) -> list[list[str]]:
@@ -101,15 +103,14 @@ def state_to_fen(state: dict) -> str:
     en_passant = (
         "-" if state["en_passant"] is None else square_name(*state["en_passant"])
     )
-    fields = [
-        fen_placement(state["board"]),
-        state["turn"],
-        state["castling"] or "-",
-        en_passant,
-        str(state["halfmove_clock"]),
-        str(state["fullmove_number"]),
-    ]
-    return " ".join(fields)
+    castling = state["castling"] or "-"  # FEN writes "-" when no one can castle
+    fen = fen_placement(state["board"])
+    fen += " " + state["turn"]
+    fen += " " + castling
+    fen += " " + en_passant
+    fen += " " + str(state["halfmove_clock"])
+    fen += " " + str(state["fullmove_number"])
+    return fen
 
 
 def main():

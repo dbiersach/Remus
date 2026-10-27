@@ -21,7 +21,7 @@ reads `sys.stdin` and answers with `flush=True` as Part #4 does.
 ## Words to know
 
 - **random.choice():** picks one item of a list at random.
-- **max() with key=:** picks the item whose key value is largest, here the most valuable victim.
+- **best so far:** a variable that holds the best item seen yet. A loop swaps in any item that beats it.
 - **stdin and stdout:** the text a program reads and the text it prints.
 - **stderr:** a second output for notes, which a GUI does not read.
 - **flush=True:** sends the printed line at once, so the GUI is not left waiting.
@@ -29,11 +29,11 @@ reads `sys.stdin` and answers with `flush=True` as Part #4 does.
 ## How it works
 
 1. Part #1: pick a random move.
-2. Part #2: pick the most valuable capture with `max(..., key=victim_value)`.
+2. Part #2: pick the most valuable capture with a loop that keeps the best piece so far.
 3. Part #3: print a note to `sys.stderr`.
 4. Part #4: read lines from `sys.stdin` until `quit`, answering `isready` and echoing the rest.
 
-The pair types 13 lines.
+The pair types 16 lines.
 
 ## Try it
 

@@ -166,7 +166,11 @@ def undo_move(state: dict, undo: dict) -> None:
 
 def state_snapshot(state: dict) -> str:
     """Return the whole state as text, so two states can be compared with ==."""
-    rows = ["".join(row) for row in state["board"]]
+    text = ""
+    for row in state["board"]:
+        for piece in row:
+            text += piece
+        text += "/"
     fields = [
         state["turn"],
         state["castling"],
@@ -174,7 +178,9 @@ def state_snapshot(state: dict) -> str:
         str(state["halfmove_clock"]),
         str(state["fullmove_number"]),
     ]
-    return "/".join(rows) + " " + " ".join(fields)
+    for field in fields:
+        text += " " + field
+    return text
 
 
 def main():

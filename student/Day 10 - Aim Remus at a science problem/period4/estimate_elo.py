@@ -30,15 +30,12 @@ import chess.engine
 import chess.pgn
 
 ENGINE_FILE = Path(__file__).parent / "uci_engine.py"
-# The top Remus folder is the one that holds pyproject.toml
-REPOSITORY = next(
-    (
-        folder
-        for folder in Path(__file__).parents
-        if (folder / "pyproject.toml").exists()
-    ),
-    Path(__file__).parent,
-)
+# The top Remus folder is the nearest folder above this one with pyproject.toml
+REPOSITORY = Path(__file__).parent
+for folder in Path(__file__).parents:
+    if (folder / "pyproject.toml").exists():
+        REPOSITORY = folder
+        break
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
 LUCAS_CHESS_ENGINES = (
     Path.home() / "AppData" / "Local" / "Programs" / "LucasChessR" / "bin" / "OS"
@@ -86,23 +83,27 @@ def estimate_rating(results: list[tuple[int, float]]) -> tuple[float, float]:
     """
     # A perfect score (all losses or all wins) fits any rating far enough away, so
     # count it as half a point off perfect to get a bound instead
-    points = sum(score for _, score in results)
+    points = 0.0
+    for _, score in results:
+        points += score
     points = min(max(points, 0.5), len(results) - 0.5)
     # The expected total grows with the rating, so halving the range finds the match
     low, high = 0.0, 3500.0
     for _ in range(60):
         middle = (low + high) / 2
-        expected = sum(expected_score(middle, elo) for elo, _ in results)
+        expected = 0.0
+        for elo, _ in results:
+            expected += expected_score(middle, elo)
         if expected < points:
             low = middle
         else:
             high = middle
     rating = (low + high) / 2
     # Each game tells us more when its result was hard to predict (p near 0.5)
-    information = sum(
-        expected_score(rating, elo) * (1 - expected_score(rating, elo))
-        for elo, _ in results
-    )
+    information = 0.0
+    for elo, _ in results:
+        chance = expected_score(rating, elo)
+        information += chance * (1 - chance)
     margin = 1.96 * ELO_SCALE / math.sqrt(information) if information > 0 else 0.0
     return rating, margin
 
@@ -182,11 +183,11 @@ def main():
     results = []
     start = time.perf_counter()
     for elo in options.levels:
-        colors = [number % 2 == 0 for number in range(options.games)]  # Take turns
         with ThreadPoolExecutor(games_at_once) as pool:
-            jobs = [
-                pool.submit(play_game, stockfish_path, elo, white) for white in colors
-            ]
+            jobs = []
+            for number in range(options.games):
+                remus_white = number % 2 == 0  # Take turns with White
+                jobs.append(pool.submit(play_game, stockfish_path, elo, remus_white))
             level_points = 0.0
             for job in jobs:
                 game = job.result()
@@ -203,7 +204,9 @@ def main():
         print(f"Against Stockfish {elo}: {level_points:g} / {options.games}")
 
     rating, margin = estimate_rating(results)
-    points = sum(score for _, score in results)
+    points = 0.0
+    for _, score in results:
+        points += score
     print(f"Remus scored {points:g} / {len(results)}")
     if points == 0:
         print(f"Estimated Elo: below {rating:.0f} (Remus lost every game)")

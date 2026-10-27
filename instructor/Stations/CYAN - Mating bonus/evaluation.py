@@ -76,7 +76,16 @@ KING_TABLE = [  # The king hides behind its pawns until the endgame
     [20, 20, 0, 0, 0, 0, 20, 20],
     [20, 30, 10, 0, 0, 10, 30, 20],
 ]
-QUEEN_TABLE = [[0] * 8 for _ in range(8)]  # The queen is strong anywhere
+QUEEN_TABLE = [  # The queen is strong anywhere
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+]
 CENTER_DISTANCE = [3, 2, 1, 0, 0, 1, 2, 3]  # How far a row or column is from the center
 MATING_MARGIN = 200  # A lead of at least a rook for a bishop starts the mating term
 WEAK_SIDE_LIMIT = 600  # ... when the losing side has at most two bishops' worth left

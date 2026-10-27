@@ -47,8 +47,8 @@ plugs it into a GUI, and teaches Remus to think.
 | 4 | Legal moves | Modules, imports, `__main__`, git | Detect attacks and check; keep only legal moves |
 | 5 | Special moves | Sets and dict lookups | Castling, en passant, promotion and underpromotion, with exact undo; play random Remus in Lucas Chess |
 | 6 | Counting the tree, and FEN | Recursion; `split`, exceptions | Perft matches the reference counts; FEN in and out |
-| 7 | A whole game, and judging a position | `random`, `max` with `key=`, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
-| 8 | Searching ahead, then smarter | Recursion review, `sorted` with `key=` | Minimax, negamax, alpha-beta, quiescence, move ordering |
+| 7 | A whole game, and judging a position | `random`, a loop that keeps the best so far, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
+| 8 | Searching ahead, then smarter | Recursion review, keeping a list in order with `insert` | Minimax, negamax, alpha-beta, quiescence, move ordering |
 | 9 | The clock and the stations | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhancement station per pair; station matches; a mate solver |
 | 10 | Science AI at the beamline | `math.dist`, `math.sqrt`, `random.seed` | A measurement AI that finds a hidden peak; a beam time agent for a beamline problem; results and tournament |
 
@@ -140,13 +140,13 @@ every drill uses chess data so the skill is fresh when the engine needs it.
 | 2 | D1 P3 | Lists, `for` and `range`, `len`, nested lists, `board[row][col]` | Print an 8x8 grid of dots, then count the pawns in a row |
 | 3 | D2 P1 | Functions, parameters, `return`, type hints, docstrings, tuples and unpacking, `assert`, pytest | `is_white("N")`, `on_board(row, col)` with tests |
 | 4 | D2 P2 | Dicts, `dataclass`, `None`, mutation, aliasing, `copy` and `deepcopy`, `==` on lists | Show `b2 = board` changing both boards; fix it with a copy |
-| 5 | D3 P1 | `while`, `break`, `continue`, lists of direction tuples, `append`, list comprehensions (lightly) | Walk from `d4` toward the edge in one direction, stopping at a piece |
+| 5 | D3 P1 | `while`, `break`, `continue`, lists of direction tuples, `append` | Walk from `d4` toward the edge in one direction, stopping at a piece |
 | 6 | D4 P1 | Modules, `import`, `if __name__ == "__main__"`, git `fetch`, `switch -c`, `commit`, `log` | Import yesterday's `board.py` and `move_generation.py` and list the knight moves from `g1` |
 | 7 | D5 P1 | Sets, membership with `in`, dict lookups, string replacement | Castling rights as the string `"KQkq"`: remove `"K"` when the h1 rook moves |
 | 8 | D6 P1 | Recursion: base case, recursive case, call stack | Count down; count the leaves of a small tree; count paths of a knight |
 | 9 | D6 P4 | `split`, `int()`, exceptions with `try` and `ValueError` | Read a FEN string and print its six fields |
-| 10 | D7 P2 | `random.choice`, `max` with `key=`, `sys.stdin`, `print(..., flush=True)`, `sys.stderr` | A tiny program that echoes lines, then answers `isready` with `readyok` |
-| 11 | D8 P2 | `sorted` with `key=`, `time.perf_counter()`, `float("inf")` | Sort captures by victim value; time a perft run |
+| 10 | D7 P2 | `random.choice`, a loop that keeps the best so far, `sys.stdin`, `print(..., flush=True)`, `sys.stderr` | A tiny program that echoes lines, then answers `isready` with `readyok` |
+| 11 | D8 P2 | keeping a list in order with `insert`, `time.perf_counter()`, `float("inf")` | Sort captures by victim value; time a perft run |
 | 12 | D9 P2 | Dicts as caches, tuples as keys, `math.dist`, `random.seed`, `threading.Event` (teacher demo) | Remember perft counts already computed; measure the distance from `d4` to `g7` |
 
 ## Unplugged warm-ups
@@ -370,7 +370,7 @@ is now met.
   disambiguation (`Nbd2`) and the `+` and `#` suffixes. **Students write:**
   `parse_san(state, text)`, which builds the SAN of every legal move and returns the one
   that matches what the player typed. Then `console_game.py` lets two people play in SAN.
-  Python lab 10, `python_input_output.py` (stdin, stdout, `random`, `max` with `key=`),
+  Python lab 10, `python_input_output.py` (stdin, stdout, `random`, and a loop that keeps the best so far),
   closes the period.
 - **P3. First brains and the GUI.** **Students write:** `random_move()` and
   `greedy_move()` (take the most valuable capture, else a random move). The class
@@ -402,16 +402,16 @@ moves" milestone.
 - **P2. Python lab 11 and alpha-beta.** Unplugged warm-up: "Fewest flips" finds the
   cards nobody needs to turn over. **Students write:** `alpha_beta()` beside
   `negamax()`, then run `compare_search.py`: both pick the same score, and alpha-beta
-  counts fewer nodes. The lab, `python_sorting.py`, covers `sorted()` with `key=`,
+  counts fewer nodes. The lab, `python_sorting.py`, covers keeping a list in order with `insert()`,
   `float("inf")`, and timing a perft run.
 - **P3. The horizon effect and quiescence.** Puzzle: at depth 2 Remus takes a defended
   pawn with its queen. The teacher writes `capture_moves(state)`, the filter of
   captures and promotions. **Students write:** `quiescence()`, which may "stand pat"
   with the evaluation or try a capture that does better.
 - **P4. Move ordering.** **Students write:** `mvv_lva_score(move, board)` (most valuable
-  victim, least valuable attacker). The teacher writes `order_moves()`, the
-  `sorted(..., key=...)` call that uses it, and the check extension. Pairs measure node
-  counts before and after.
+  victim, least valuable attacker). The teacher writes `order_moves()`, the loop that
+  slides each move into place behind every higher score, and the check extension.
+  Pairs measure node counts before and after.
 
 **Checkpoint `d8-p4-end`:** Remus finds every mate in 1 and every GameWorks mate in 2,
 and alpha-beta returns the same score as negamax with fewer nodes.

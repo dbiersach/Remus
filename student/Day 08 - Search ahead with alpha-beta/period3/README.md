@@ -34,6 +34,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `quiescence()` | 265 | 15 | `test_search.py::test_quiescence_stands_pat_or_takes_a_free_pawn` |
+| `search.py` | `quiescence()` | 272 | 15 | `test_search.py::test_quiescence_stands_pat_or_takes_a_free_pawn` |
 
 Lines to type in all: 15. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

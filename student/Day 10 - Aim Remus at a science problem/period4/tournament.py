@@ -25,15 +25,12 @@ import chess.engine
 import chess.pgn
 
 ENGINE_FILE = Path(__file__).parent / "uci_engine.py"
-# The top Remus folder is the one that holds pyproject.toml
-REPOSITORY = next(
-    (
-        folder
-        for folder in Path(__file__).parents
-        if (folder / "pyproject.toml").exists()
-    ),
-    Path(__file__).parent,
-)
+# The top Remus folder is the nearest folder above this one with pyproject.toml
+REPOSITORY = Path(__file__).parent
+for folder in Path(__file__).parents:
+    if (folder / "pyproject.toml").exists():
+        REPOSITORY = folder
+        break
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
 GAMES_AT_ONCE = 4  # Each game runs two engine processes
 
@@ -78,7 +75,8 @@ def play_game(
 ) -> chess.pgn.Game:
     """Play one game on a chess clock and return it as PGN, with the result set."""
     engines = [
-        chess.engine.SimpleEngine.popen_uci(command) for _, command in (white, black)
+        chess.engine.SimpleEngine.popen_uci(white[1]),
+        chess.engine.SimpleEngine.popen_uci(black[1]),
     ]
     board = chess.Board()
     clocks = [minutes * 60, minutes * 60]  # Seconds left for White, then Black
@@ -123,43 +121,49 @@ def play_game(
 
 def main():
     if len(sys.argv) > 1:
-        folders = [Path(name) for name in sys.argv[1:]]
-        entrants = [
-            (folder.name, [sys.executable, str(folder / "uci_engine.py")])
-            for folder in folders
-        ]
+        entrants = []
+        for name in sys.argv[1:]:
+            folder = Path(name)
+            entrants.append(
+                (folder.name, [sys.executable, str(folder / "uci_engine.py")])
+            )
         minutes, increment = 2.0, 1.0
     else:
-        entrants = [
-            (brain, [sys.executable, str(ENGINE_FILE), brain])
-            for brain in ("random", "greedy", "negamax", "think")
-        ]
+        entrants = []
+        for brain in ("random", "greedy", "negamax", "think"):
+            entrants.append((brain, [sys.executable, str(ENGINE_FILE), brain]))
         minutes, increment = 10 / 60, 0.1
-    points = {name: 0.0 for name, _ in entrants}
+    points = {}
+    for name, _ in entrants:
+        points[name] = 0.0
     print(f"Adding every game to {GAMES_PATH}")
     GAMES_PATH.parent.mkdir(exist_ok=True)
     for number, games in enumerate(round_robin(len(entrants)), start=1):
         with ThreadPoolExecutor(GAMES_AT_ONCE) as pool:
-            finished = list(
-                pool.map(
-                    lambda pair: play_game(
-                        entrants[pair[0]], entrants[pair[1]], minutes, increment
-                    ),
-                    games,
+            jobs = []
+            for first, second in games:
+                jobs.append(
+                    pool.submit(
+                        play_game, entrants[first], entrants[second], minutes, increment
+                    )
                 )
-            )
-        for game in finished:
-            white, black, result = (
-                game.headers[key] for key in ("White", "Black", "Result")
-            )
+        for job in jobs:
+            game = job.result()
+            white = game.headers["White"]
+            black = game.headers["Black"]
+            result = game.headers["Result"]
             points[white] += {"1-0": 1, "0-1": 0}.get(result, 0.5)
             points[black] += {"1-0": 0, "0-1": 1}.get(result, 0.5)
             print(f"Round {number}: {white} vs {black}: {result}")
             with GAMES_PATH.open("a") as file:
                 print(game, end="\n\n", file=file)
         print(f"Standings after round {number}:")
-        for name, score in sorted(points.items(), key=lambda item: -item[1]):
-            print(f"  {score:4.1f}  {name}")
+        standings = []
+        for name, score in points.items():
+            standings.append((-score, name))  # A minus sign puts the top score first
+        standings.sort()
+        for minus_score, name in standings:
+            print(f"  {-minus_score:4.1f}  {name}")
     print(
         f"Games played: {sum(points.values()):.0f}  (expected {len(entrants) * (len(entrants) - 1) // 2})"
     )

@@ -502,7 +502,10 @@ OBJECTIVES = {
             ),
         ),
         (
-            "Sort with `key=`, start a best value at minus infinity, and time code.",
+            (
+                "Keep a list in order with `insert()`, start a best value at minus "
+                "infinity, and time code."
+            ),
             (
                 "`python_sorting.py` puts the queen first, finds the best victim, and "
                 "prints the run time of `perft(3)`."
@@ -1154,8 +1157,8 @@ LAB_NOTES = {
     (7, 2): [
         (
             "Parts #1 and #2 pick moves the way the first brains in period 3 do: "
-            "`random.choice()` takes any item, and `max(..., key=victim_value)` takes "
-            "the item with the largest value."
+            "`random.choice()` takes any item, and a loop that keeps the best piece "
+            "so far takes the item with the largest value."
         ),
         (
             "Parts #3 and #4 talk the way a UCI engine does. The program reads one "
@@ -1166,8 +1169,9 @@ LAB_NOTES = {
     ],
     (8, 2): [
         (
-            "Part #1 sorts captures by the value of the piece they take, the idea "
-            "behind move ordering in period 4."
+            "Part #1 sorts captures by the value of the piece they take: each new "
+            "piece steps past every piece worth at least as much and is inserted "
+            "there. `order_moves()` in period 4 sorts moves the same way."
         ),
         (
             "Part #2 starts the best value at minus infinity, so the first real value "

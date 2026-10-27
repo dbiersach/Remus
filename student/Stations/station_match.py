@@ -22,8 +22,10 @@ Colors match the start of a station folder name, so "RED" finds
 """
 
 import argparse
+import asyncio
 import math
 import sys
+import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
@@ -34,20 +36,19 @@ import chess.engine
 import chess.pgn
 
 STATIONS = Path(__file__).parent
-# The top Remus folder is the one that holds pyproject.toml
-REPOSITORY = next(
-    (
-        folder
-        for folder in Path(__file__).parents
-        if (folder / "pyproject.toml").exists()
-    ),
-    Path(__file__).parent,
-)
+# The top Remus folder is the nearest folder above this one with pyproject.toml
+REPOSITORY = Path(__file__).parent
+for folder in Path(__file__).parents:
+    if (folder / "pyproject.toml").exists():
+        REPOSITORY = folder
+        break
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
 YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every station
 MINUTES = 1.0  # Each side's clock
 INCREMENT = 0.6  # Seconds added after each move
 GAMES_AT_ONCE = 2  # Each game runs two engine processes
+ERRORS_PATH = REPOSITORY / "games" / "engine_errors.log"  # What engines print to stderr
+SILENCE_GRACE = 10.0  # Seconds past its clock an engine may take before it forfeits
 # Well-known openings, three moves for each side, in UCI notation
 OPENINGS = [
     "e2e4 e7e5 g1f3 b8c6 f1b5 a7a6",  # Ruy Lopez
@@ -120,6 +121,134 @@ def time_control(minutes: float, increment: float) -> str:
     return f"{minutes * 60:.0f}+{increment:g}"
 
 
+def ask_for_move(
+    engine: chess.engine.SimpleEngine,
+    board: chess.Board,
+    limit: chess.engine.Limit,
+    seconds: float,
+) -> chess.Move | None:
+    """
+    Ask an engine for its move, and stop waiting after a number of seconds.
+
+    Parameters
+    ----------
+    engine : chess.engine.SimpleEngine
+        The engine to move.
+    board : chess.Board
+        The position.
+    limit : chess.engine.Limit
+        The clocks the engine sees.
+    seconds : float
+        How long to wait for the answer.
+
+    Returns
+    -------
+    chess.Move | None
+        The engine's move, or None if no "bestmove" arrived in time. A clock alone
+        never ends python-chess's wait, so an engine that stops answering would
+        otherwise hold up the whole match.
+    """
+    waiting = asyncio.wait_for(engine.protocol.play(board, limit), seconds)
+    future = asyncio.run_coroutine_threadsafe(waiting, engine.protocol.loop)
+    try:
+        return future.result().move
+    except TimeoutError:
+        return None
+
+
+def save_engine_errors(game: chess.pgn.Game, names: list[str], logs: list) -> None:
+    """Copy anything the two engines printed to stderr into ERRORS_PATH."""
+    for name, log in zip(names, logs, strict=True):
+        log.seek(0)
+        text = log.read().decode(errors="replace").strip()
+        if not text:
+            continue
+        headers = game.headers
+        with ERRORS_PATH.open("a") as file:
+            print(
+                f"{name} in {headers['White']} vs {headers['Black']}, "
+                f"{headers['Event']}, {headers.get('StartMoves', '')}, "
+                f"after {len(game.end().board().move_stack)} plies:\n{text}\n",
+                file=file,
+            )
+        print(f"  {name} wrote to stderr; see {ERRORS_PATH}", flush=True)
+
+
+def referee(
+    white: tuple[str, Path],
+    black: tuple[str, Path],
+    opening: str,
+    minutes: float,
+    increment: float,
+    logs: list,
+) -> tuple[chess.Board, str | None, str]:
+    """
+    Start both engines, play the game on a chess clock, and stop the engines.
+
+    Parameters
+    ----------
+    white, black, opening, minutes, increment
+        The same as for play_game().
+    logs : list
+        Two open files that receive what the White and Black engines print to
+        stderr.
+
+    Returns
+    -------
+    tuple[chess.Board, str | None, str]
+        The final board, the result if a side lost by forfeit (else None), and
+        the reason for the forfeit (else "").
+    """
+    engines = []
+    for side in range(2):  # 0 is White, 1 is Black
+        folder = (white, black)[side][1]
+        command = [sys.executable, str(folder / "uci_engine.py")]
+        engines.append(
+            chess.engine.SimpleEngine.popen_uci(command, cwd=folder, stderr=logs[side])
+        )
+    board = chess.Board()
+    for text in opening.split():
+        board.push_uci(text)
+    clocks = [minutes * 60, minutes * 60]  # Seconds left for White, then Black
+    result, reason = None, ""
+    try:
+        while not board.is_game_over(claim_draw=True):
+            side = 0 if board.turn == chess.WHITE else 1
+            limit = chess.engine.Limit(
+                white_clock=clocks[0],
+                black_clock=clocks[1],
+                white_inc=increment,
+                black_inc=increment,
+            )
+            start = time.perf_counter()
+            try:
+                move = ask_for_move(
+                    engines[side], board, limit, clocks[side] + SILENCE_GRACE
+                )
+                if move is None:
+                    reason = "engine sent no move"
+            except chess.engine.EngineError as error:
+                move, reason = None, f"engine error: {error}"
+            clocks[side] -= time.perf_counter() - start
+            if move is None or move not in board.legal_moves:
+                reason = reason or f"illegal move {move}"
+            elif clocks[side] < 0:
+                reason = "lost on time"
+            else:
+                board.push(move)
+                clocks[side] += increment
+                continue
+            result = "0-1" if side == 0 else "1-0"  # The side to move loses
+            break
+    finally:
+        for engine in engines:
+            try:
+                engine.quit()
+            except TimeoutError:
+                engine.close()  # The engine ignored "quit", so end its process
+    return board, result, reason
+
+
 def play_game(
     white: tuple[str, Path],
     black: tuple[str, Path],
@@ -145,55 +274,21 @@ def play_game(
     increment : float
         Seconds added to a side's clock after each of its moves.
     """
-    engines = [
-        chess.engine.SimpleEngine.popen_uci(
-            [sys.executable, str(folder / "uci_engine.py")], cwd=folder
-        )
-        for _, folder in (white, black)
-    ]
-    board = chess.Board()
-    for text in opening.split():
-        board.push_uci(text)
-    clocks = [minutes * 60, minutes * 60]  # Seconds left for White, then Black
-    result, reason = None, ""
-    try:
-        while not board.is_game_over(claim_draw=True):
-            side = 0 if board.turn == chess.WHITE else 1
-            limit = chess.engine.Limit(
-                white_clock=clocks[0],
-                black_clock=clocks[1],
-                white_inc=increment,
-                black_inc=increment,
-            )
-            start = time.perf_counter()
-            try:
-                move = engines[side].play(board, limit).move
-            except chess.engine.EngineError as error:
-                move, reason = None, f"engine error: {error}"
-            clocks[side] -= time.perf_counter() - start
-            if move is None or move not in board.legal_moves:
-                reason = reason or f"illegal move {move}"
-            elif clocks[side] < 0:
-                reason = "lost on time"
-            else:
-                board.push(move)
-                clocks[side] += increment
-                continue
-            result = "0-1" if side == 0 else "1-0"  # The side to move loses
-            break
-    finally:
-        for engine in engines:
-            engine.quit()
-    game = chess.pgn.Game.from_board(board)
-    game.headers["Event"] = event
-    game.headers["Date"] = date.today().strftime("%Y.%m.%d")
-    game.headers["White"], game.headers["Black"] = white[0], black[0]
-    game.headers["TimeControl"] = time_control(minutes, increment)
-    game.headers["Result"] = result or board.result(claim_draw=True)
-    if reason:
-        game.headers["Termination"] = reason
-    if opening:
-        game.headers["StartMoves"] = opening  # The opening the engines started from
+    # Each engine's stderr goes to a temporary file, kept only if it holds text
+    with tempfile.TemporaryFile() as white_log, tempfile.TemporaryFile() as black_log:
+        logs = [white_log, black_log]
+        board, result, reason = referee(white, black, opening, minutes, increment, logs)
+        game = chess.pgn.Game.from_board(board)
+        game.headers["Event"] = event
+        game.headers["Date"] = date.today().strftime("%Y.%m.%d")
+        game.headers["White"], game.headers["Black"] = white[0], black[0]
+        game.headers["TimeControl"] = time_control(minutes, increment)
+        game.headers["Result"] = result or board.result(claim_draw=True)
+        if reason:
+            game.headers["Termination"] = reason
+        if opening:
+            game.headers["StartMoves"] = opening  # The opening the engines started from
+        save_engine_errors(game, [white[0], black[0]], logs)
     return game
 
 
@@ -211,19 +306,20 @@ def main():
     print(f"Adding every game to {GAMES_PATH}")
     GAMES_PATH.parent.mkdir(exist_ok=True)
     # Games 0 and 1 share an opening, and the first player takes White in game 0
-    pairings = [
-        (first, second) if number % 2 == 0 else (second, first)
-        for number in range(options.games)
-    ]
+    pairings = []
+    for number in range(options.games):
+        if number % 2 == 0:
+            pairings.append((first, second))
+        else:
+            pairings.append((second, first))
     points = 0.0
     start = time.perf_counter()
     with ThreadPoolExecutor(GAMES_AT_ONCE) as pool:
-        jobs = [
-            pool.submit(
-                play_game, white, black, event, OPENINGS[number // 2 % len(OPENINGS)]
-            )
-            for number, (white, black) in enumerate(pairings)
-        ]
+        jobs = []
+        for number in range(len(pairings)):
+            white, black = pairings[number]
+            opening = OPENINGS[number // 2 % len(OPENINGS)]
+            jobs.append(pool.submit(play_game, white, black, event, opening))
         for number, job in enumerate(jobs, start=1):
             game = job.result()
             with GAMES_PATH.open("a") as file:

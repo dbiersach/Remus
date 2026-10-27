@@ -28,7 +28,9 @@ POSITIONS = [  # (name, FEN): standard perft positions from the Chess Programmin
 def state_from_python_chess(board: chess.Board) -> dict:
     """Build a Remus state from a python-chess board, because Remus reads FEN in period 4."""
     state = new_game()
-    state["board"] = [[EMPTY] * 8 for _ in range(8)]
+    state["board"] = []
+    for _ in range(8):
+        state["board"].append([EMPTY] * 8)  # Eight empty rows to fill below
     for square, piece in board.piece_map().items():
         # python-chess counts rank 1 as 0, and Remus puts rank 8 on row 0
         row = 7 - chess.square_rank(square)

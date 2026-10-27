@@ -54,7 +54,10 @@ def set_position(words: list[str]) -> dict:
         state = state_from_fen(START_FEN)
     else:
         fen_end = words.index("moves") if "moves" in words else len(words)
-        state = state_from_fen(" ".join(words[2:fen_end]))
+        fen = ""
+        for word in words[2:fen_end]:
+            fen += word + " "
+        state = state_from_fen(fen)
     if "moves" in words:
         for text in words[words.index("moves") + 1 :]:
             make_move(state, move_from_uci(text, state["turn"] == "w"))

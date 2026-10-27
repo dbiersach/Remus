@@ -4,8 +4,8 @@
 
 ## The big picture
 
-Three small tools make the search faster and easier to measure. `sorted()` with a
-key puts the most promising captures first, a best value that starts at minus
+Three small tools make the search faster and easier to measure. A loop that
+inserts each capture behind every bigger one puts the most promising captures first, a best value that starts at minus
 infinity is beaten by the first real value, and `time.perf_counter()` measures how
 long the work takes.
 
@@ -20,17 +20,17 @@ times negamax against alpha-beta.
 
 ## Words to know
 
-- **sorted() with key=:** sorts by the value a function gives each item, such as the value of a victim.
+- **insert():** puts an item into a list at a chosen place, such as `ordered.insert(0, piece)` for the front.
 - **float("inf"):** infinity: larger than every number, so `-float("inf")` is smaller than every number.
 - **time.perf_counter():** a clock for measuring how long code runs.
 
 ## How it works
 
-1. Part #1: sort the victims, most valuable first.
+1. Part #1: sort the victims, most valuable first: each piece steps past every piece worth at least as much, then goes in.
 2. Part #2: find the best victim with a best value that starts at minus infinity.
 3. Part #3: time `perft(3)` from the start position.
 
-The pair types 13 lines.
+The pair types 19 lines.
 
 ## Try it
 

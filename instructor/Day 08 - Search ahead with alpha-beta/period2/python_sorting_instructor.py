@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """python_sorting_instructor.py
 
-Day 8, period 2, Python lab 11: sorted() with key=, float("inf"), and
+Day 8, period 2, Python lab 11: insert() into a list in order, float("inf"), and
 time.perf_counter(). The chess drill sorts captures by the value of the piece
 they take, starts a search for the best value at minus infinity, and times a
 perft run: three tools that alpha-beta and move ordering use.
@@ -22,10 +22,16 @@ def victim_value(piece: str) -> int:
 
 
 def main():
-    print("Part #1 - sorted() with key= Puts the Biggest Victim First")
+    print("Part #1 - insert() Puts the Biggest Victim First")
     victims = ["p", "r", "q", "n"]
-    # reverse=True puts the largest value first
-    ordered = sorted(victims, key=victim_value, reverse=True)
+    # Step past every piece worth at least as much, then insert the new piece there
+    ordered = []
+    for piece in victims:
+        value = victim_value(piece)
+        place = 0
+        while place < len(ordered) and victim_value(ordered[place]) >= value:
+            place += 1
+        ordered.insert(place, piece)
     print(f"Victims, best first: {ordered}  (expected ['q', 'r', 'n', 'p'])")
 
     print("Part #2 - Start the Best at Minus Infinity")

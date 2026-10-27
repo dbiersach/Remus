@@ -271,7 +271,9 @@ def main():
     print(
         f"Pseudo-legal moves from the start: {len(pseudo_legal_moves(state))}  (expected 20)"
     )
-    empty = [["."] * 8 for _ in range(8)]
+    empty = []
+    for _ in range(8):
+        empty.append(["."] * 8)
     print(
         f"Knight on a1: {len(knight_moves(empty, (7, 0), WHITE))} moves  (expected 2)"
     )

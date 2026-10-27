@@ -76,7 +76,16 @@ KING_TABLE = [  # The king hides behind its pawns until the endgame
     [20, 20, 0, 0, 0, 0, 20, 20],
     [20, 30, 10, 0, 0, 10, 30, 20],
 ]
-QUEEN_TABLE = [[0] * 8 for _ in range(8)]  # The queen is strong anywhere
+QUEEN_TABLE = [  # The queen is strong anywhere
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+]
 DOUBLED_PAWN = 8  # Penalty for each pawn that shares its file with another of its color
 ISOLATED_PAWN = (
     20  # Penalty for a pawn with no friendly pawn on either neighboring file

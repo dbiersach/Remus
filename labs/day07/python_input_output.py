@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """python_input_output.py
 
-Day 7, period 2, Python lab 10: random.choice(), max() with key=, sys.stdin,
+Day 7, period 2, Python lab 10: random.choice(), a best-so-far loop, sys.stdin,
 print(..., flush=True), and sys.stderr. The chess drill picks a random move, picks
 the most valuable capture, and answers "isready" with "readyok", the way the
 first brains and the UCI engine do in period 3.
@@ -26,10 +26,13 @@ def main():
     #
     #
 
-    print("Part #2 - max() with key= Picks the Best Item")
-    # key=victim_value makes max() compare the pieces by their values
+    print("Part #2 - A Loop Keeps the Best Item So Far")
+    # Start with the first piece, then swap in any piece worth more
     victims = ["p", "q", "n"]
     #
+    #
+        #
+            #
     #
 
     print("Part #3 - Notes Go to stderr")

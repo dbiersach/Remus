@@ -54,15 +54,15 @@
 | P1 | Python lab 8: recursion | `python_recursion_instructor.py` | None | The lab `python_recursion.py` (11 lines) |
 | P2 | Perft | `perft.py` | None | `perft()` in `perft.py` (8 lines) |
 | P3 | Perft against python-chess, and bug hunt | `test_perft.py` | None | The fixes for the planted bugs in `bug_hunt/` (3 lines) |
-| P4 | Python lab 9 and FEN | `fen.py`, `python_fen_fields_instructor.py`, `test_game.py` | `test_perft.py` | `fen_placement()` in `fen.py` (16 lines); `board_from_placement()` in `fen.py` (14 lines); the lab `python_fen_fields.py` (8 lines) |
+| P4 | Python lab 9 and FEN | `fen.py`, `python_fen_fields_instructor.py`, `test_game.py` | `test_perft.py` | `fen_placement()` in `fen.py` (18 lines); `board_from_placement()` in `fen.py` (14 lines); the lab `python_fen_fields.py` (8 lines) |
 
 ## Day 07 - Play full games and score positions
 
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
-| P1 | Ending the game | `game_end.py` | `fen.py`, `game_state.py`, `make_move.py`, `test_game.py` | `insufficient_material()` in `game_end.py` (15 lines); `game_result()` in `game_end.py` (12 lines) |
-| P2 | SAN and the console game | `console_game.py`, `notation.py`, `python_input_output_instructor.py` | `test_game.py` | `parse_san()` in `notation.py` (5 lines); the lab `python_input_output.py` (13 lines) |
-| P3 | First brains and the GUI | `play_match.py`, `search.py` | `console_game.py`, `test_game.py`, `uci_engine.py` | `random_move()` in `search.py` (1 line); `greedy_move()` in `search.py` (3 lines) |
+| P1 | Ending the game | `game_end.py` | `fen.py`, `game_state.py`, `make_move.py`, `test_game.py` | `insufficient_material()` in `game_end.py` (18 lines); `game_result()` in `game_end.py` (12 lines) |
+| P2 | SAN and the console game | `console_game.py`, `notation.py`, `python_input_output_instructor.py` | `test_game.py` | `parse_san()` in `notation.py` (5 lines); the lab `python_input_output.py` (16 lines) |
+| P3 | First brains and the GUI | `play_match.py`, `search.py` | `console_game.py`, `test_game.py`, `uci_engine.py` | `random_move()` in `search.py` (1 line); `greedy_move()` in `search.py` (10 lines) |
 | P4 | What makes a position good? Material and piece-square tables | `evaluation.py`, `test_search.py` | None | `material()` in `evaluation.py` (10 lines) |
 
 ## Day 08 - Search ahead with alpha-beta
@@ -70,7 +70,7 @@
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Minimax, negamax, and mates | None | `console_game.py`, `search.py`, `test_search.py`, `uci_engine.py` | `negamax()` in `search.py` (17 lines) |
-| P2 | Python lab 11 and alpha-beta | `compare_search.py`, `python_sorting_instructor.py` | `search.py`, `test_search.py` | `alpha_beta()` in `search.py` (16 lines); the lab `python_sorting.py` (13 lines) |
+| P2 | Python lab 11 and alpha-beta | `compare_search.py`, `python_sorting_instructor.py` | `search.py`, `test_search.py` | `alpha_beta()` in `search.py` (16 lines); the lab `python_sorting.py` (19 lines) |
 | P3 | The horizon effect and quiescence | None | `search.py`, `test_search.py` | `quiescence()` in `search.py` (15 lines) |
 | P4 | Move ordering | `move_ordering.py` | `search.py`, `test_search.py` | `mvv_lva_score()` in `move_ordering.py` (8 lines) |
 
@@ -81,15 +81,15 @@
 | P1 | Iterative deepening, the clock, and UCI info | None | `console_game.py`, `search.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
 | P2 | Python lab 12 and the enhancement stations | `python_caches_instructor.py` | None | The lab `python_caches.py` (7 lines); their color station's functions, in the table below |
 | P3 | Enhancement stations: test and measure | None | None | Their color station's functions, in the table below |
-| P4 | Launch the station matches, and the mate solver | `mate_solver.py` | `test_search.py` | `mating_move()` in `mate_solver.py` (18 lines) |
+| P4 | Launch the station matches, and the mate solver | `mate_solver.py` | `test_search.py` | `mating_move()` in `mate_solver.py` (22 lines) |
 
 ## Day 10 - Aim Remus at a science problem
 
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
-| P1 | Science AI: hidden_peak.py | `hidden_peak.py`, `opening_book.py`, `opening_book.txt`, `test_upgrades.py`, `transposition_table.py` | `console_game.py`, `evaluation.py`, `move_ordering.py`, `search.py`, `uci_engine.py` | `candidate_squares()` in `hidden_peak.py` (6 lines); `score_candidate()` in `hidden_peak.py` (2 lines); `choose_next_measurement()` in `hidden_peak.py` (4 lines) |
+| P1 | Science AI: hidden_peak.py | `hidden_peak.py`, `opening_book.py`, `opening_book.txt`, `test_upgrades.py`, `transposition_table.py` | `console_game.py`, `evaluation.py`, `move_ordering.py`, `search.py`, `uci_engine.py` | `candidate_squares()` in `hidden_peak.py` (6 lines); `score_candidate()` in `hidden_peak.py` (4 lines); `choose_next_measurement()` in `hidden_peak.py` (9 lines) |
 | P2 | The beamline problem: represent and evaluate | `beam_time.py`, `test_beam_time.py` | None | `estimate()` in `beam_time.py` (3 lines); `expected_wrong_calls()` in `beam_time.py` (7 lines) |
-| P3 | The beamline problem: look ahead and verify | None | `beam_time.py`, `test_beam_time.py` | `gain()` in `beam_time.py` (8 lines); `choose_next_sample()` in `beam_time.py` (1 line) |
+| P3 | The beamline problem: look ahead and verify | None | `beam_time.py`, `test_beam_time.py` | `gain()` in `beam_time.py` (8 lines); `choose_next_sample()` in `beam_time.py` (5 lines) |
 | P4 | Results, tournament, take-home, and wrap-up | `demo_results_instructor.py`, `estimate_elo.py`, `remus.sh`, `tournament.py` | None | The demo `demo_results.py` (15 lines) |
 
 ## Enhancement stations (Day 9, periods 2 and 3)
@@ -102,11 +102,11 @@ Each pair writes the functions of one color station in `student/Stations`.
 | WHITE - No enhancements | Nothing: a finished engine |
 | RED - Transposition table | `store()` in `transposition_table.py` (3 lines); `probe()` in `transposition_table.py` (11 lines); `test_transposition_table_bounds()` in `test_upgrades.py` (13 lines) |
 | GREEN - Opening book | `load_book()` in `opening_book.py` (22 lines); `book_move()` in `opening_book.py` (2 lines) |
-| BLUE - Killer moves | `remember_killer()` in `search.py` (6 lines); `order_moves()` in `move_ordering.py` (11 lines); `test_killers_keep_two_quiet_moves()` in `test_upgrades.py` (5 lines) |
+| BLUE - Killer moves | `remember_killer()` in `search.py` (6 lines); `order_moves()` in `move_ordering.py` (16 lines); `test_killers_keep_two_quiet_moves()` in `test_upgrades.py` (5 lines) |
 | PINK - Principal variation search | `search_later_move()` in `search.py` (6 lines); `test_pvs_search_agrees_with_alpha_beta()` in `test_upgrades.py` (7 lines); `test_a_null_window_answers_only_better_or_not()` in `test_upgrades.py` (5 lines) |
 | YELLOW - Draw sense | `is_draw_in_search()` in `search.py` (2 lines); `test_draw_sense_search_agrees_with_alpha_beta()` in `test_upgrades.py` (7 lines); `test_a_repeated_position_is_a_draw()` in `test_upgrades.py` (5 lines); `test_the_fifty_move_limit_is_a_draw()` in `test_upgrades.py` (2 lines) |
-| PURPLE - Pawn structure | `pawn_structure()` in `evaluation.py` (30 lines) |
+| PURPLE - Pawn structure | `pawn_structure()` in `evaluation.py` (29 lines) |
 | CYAN - Mating bonus | `mating_bonus()` in `evaluation.py` (24 lines) |
 | ORANGE - Null-move pruning | `make_null_move()` in `search.py` (5 lines); `undo_null_move()` in `search.py` (3 lines); `test_null_move_and_undo_restore_the_state()` in `test_upgrades.py` (6 lines); `test_null_move_search_saves_work_and_keeps_the_state()` in `test_upgrades.py` (9 lines) |
 | BROWN - Late move reductions | `reduction()` in `search.py` (3 lines); `test_only_late_quiet_moves_are_reduced()` in `test_upgrades.py` (6 lines); `test_reduced_search_saves_work_and_keeps_the_state()` in `test_upgrades.py` (9 lines) |
-| GRAY - King safety | `king_safety()` in `evaluation.py` (20 lines) |
+| GRAY - King safety | `king_safety()` in `evaluation.py` (24 lines) |

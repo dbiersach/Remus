@@ -36,15 +36,12 @@ import chess.engine
 import chess.pgn
 
 STATIONS = Path(__file__).parent
-# The top Remus folder is the one that holds pyproject.toml
-REPOSITORY = next(
-    (
-        folder
-        for folder in Path(__file__).parents
-        if (folder / "pyproject.toml").exists()
-    ),
-    Path(__file__).parent,
-)
+# The top Remus folder is the nearest folder above this one with pyproject.toml
+REPOSITORY = Path(__file__).parent
+for folder in Path(__file__).parents:
+    if (folder / "pyproject.toml").exists():
+        REPOSITORY = folder
+        break
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
 YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every station
 MINUTES = 1.0  # Each side's clock
@@ -202,12 +199,13 @@ def referee(
         The final board, the result if a side lost by forfeit (else None), and
         the reason for the forfeit (else "").
     """
-    engines = [
-        chess.engine.SimpleEngine.popen_uci(
-            [sys.executable, str(folder / "uci_engine.py")], cwd=folder, stderr=log
+    engines = []
+    for side in range(2):  # 0 is White, 1 is Black
+        folder = (white, black)[side][1]
+        command = [sys.executable, str(folder / "uci_engine.py")]
+        engines.append(
+            chess.engine.SimpleEngine.popen_uci(command, cwd=folder, stderr=logs[side])
         )
-        for (_, folder), log in zip((white, black), logs, strict=True)
-    ]
     board = chess.Board()
     for text in opening.split():
         board.push_uci(text)
@@ -308,19 +306,20 @@ def main():
     print(f"Adding every game to {GAMES_PATH}")
     GAMES_PATH.parent.mkdir(exist_ok=True)
     # Games 0 and 1 share an opening, and the first player takes White in game 0
-    pairings = [
-        (first, second) if number % 2 == 0 else (second, first)
-        for number in range(options.games)
-    ]
+    pairings = []
+    for number in range(options.games):
+        if number % 2 == 0:
+            pairings.append((first, second))
+        else:
+            pairings.append((second, first))
     points = 0.0
     start = time.perf_counter()
     with ThreadPoolExecutor(GAMES_AT_ONCE) as pool:
-        jobs = [
-            pool.submit(
-                play_game, white, black, event, OPENINGS[number // 2 % len(OPENINGS)]
-            )
-            for number, (white, black) in enumerate(pairings)
-        ]
+        jobs = []
+        for number in range(len(pairings)):
+            white, black = pairings[number]
+            opening = OPENINGS[number // 2 % len(OPENINGS)]
+            jobs.append(pool.submit(play_game, white, black, event, opening))
         for number, job in enumerate(jobs, start=1):
             game = job.result()
             with GAMES_PATH.open("a") as file:

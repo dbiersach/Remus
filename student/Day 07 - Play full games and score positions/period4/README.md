@@ -34,6 +34,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `evaluation.py` | `material()` | 88 | 10 | `test_search.py::test_start_position_is_level` |
+| `evaluation.py` | `material()` | 97 | 10 | `test_search.py::test_start_position_is_level` |
 
 Lines to type in all: 10. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

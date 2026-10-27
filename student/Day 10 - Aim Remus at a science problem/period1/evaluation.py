@@ -82,7 +82,16 @@ KING_TABLE = [  # The king hides behind its pawns until the endgame
     [20, 20, 0, 0, 0, 0, 20, 20],
     [20, 30, 10, 0, 0, 10, 30, 20],
 ]
-QUEEN_TABLE = [[0] * 8 for _ in range(8)]  # The queen is strong anywhere
+QUEEN_TABLE = [  # The queen is strong anywhere
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+]
 DOUBLED_PAWN = 8  # Penalty for each pawn that shares its file with another of its color
 ISOLATED_PAWN = (
     20  # Penalty for a pawn with no friendly pawn on either neighboring file
@@ -182,12 +191,11 @@ def pawn_structure(board: list[list[str]]) -> int:
                 ahead = (
                     range(row) if pawn == "P" else range(row + 1, 8)
                 )  # White moves to row 0
-                blocked = any(
-                    board[r][c] == enemy
-                    for r in ahead
-                    for c in (col - 1, col, col + 1)
-                    if 0 <= c < 8
-                )
+                blocked = False
+                for ahead_row in ahead:
+                    for ahead_col in (col - 1, col, col + 1):
+                        if 0 <= ahead_col < 8 and board[ahead_row][ahead_col] == enemy:
+                            blocked = True
                 if not blocked:
                     advanced = 6 - row if pawn == "P" else row - 1
                     score += sign * PASSED_PAWN[advanced]
@@ -260,7 +268,11 @@ def king_safety(board: list[list[str]]) -> int:
         ("K", "P", "q", -1, 1),
         ("k", "p", "Q", 1, -1),
     ):
-        if not any(enemy_queen in row for row in board):
+        queen_on_board = False
+        for row in board:
+            if enemy_queen in row:
+                queen_on_board = True
+        if not queen_on_board:
             continue
         for row in range(8):
             for col in range(8):
