@@ -403,11 +403,11 @@ match and never loses on time.
 ### Day 10: Upgrades, Science AI, and tournament
 
 - **P1. Enhancement stations.** Python lab 12 opens P1. Each of the 10 pairs takes
-  one color station from `Stations/`: the plain Day 9 Remus plus one enhancement, with
+  one color station from `Stations/`: Remus-WHITE (the finished Day 9 Remus, with no
+  enhancements) plus one enhancement, with
   the pair's function stubbed (at most 30 typed lines). Colors replace numbers so no
   station sounds better than another. Each pair then starts
-  `uv run station_match.py <COLOR>`, which plays its Remus against the plain Day 9
-  Remus with nobody watching and adds every game to `games/remus_games.pgn`. The
+  `uv run station_match.py <COLOR>`, which plays its Remus against Remus-WHITE with nobody watching and adds every game to `games/remus_games.pgn`. The
   stations are described in [stations.md](stations.md).
 
 | Color | Station | GameWorks idea it echoes |

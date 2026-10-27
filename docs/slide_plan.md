@@ -107,7 +107,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 
 | Slide | Title | What it shows |
 | --- | --- | --- |
-| 10.1 | The enhancement stations | The ten color stations with the idea each one adds, and the plain Day 9 Remus they all play |
+| 10.1 | The enhancement stations | The ten color stations with the idea each one adds, and Remus-WHITE, the Day 9 Remus with no enhancements, which they all play |
 | 10.2 | Transpositions | 1. Nf3 Nf6 2. Nc3 and 1. Nc3 Nf6 2. Nf3 reach one position. A table entry: depth, score, bound, best move |
 | 10.3 | Exact, lower, upper | Three number lines showing what a stored bound proves for a new `(alpha, beta)` window |
 | 10.4 | Killer moves | Two slots per ply; a quiet move that caused a cutoff jumps the queue in sibling positions |

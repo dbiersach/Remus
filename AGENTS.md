@@ -206,13 +206,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   tests fail until a pair writes the function. `make_student_folders.py` builds
   `student/` from `instructor/` and lists every student function by day and period;
   run it after `make_period_folders.py`, and never edit a student stub by hand.
-- `instructor/Stations` holds the ten enhancement stations, one folder per color
-  (`RED - Transposition table`, ...). Each is the finished Day 9 Remus plus one
-  enhancement; the finished Day 10 Remus holds all ten. `make_station_folders.py`
+- `instructor/Stations` holds Remus-WHITE (`WHITE - No enhancements`, the finished
+  Day 9 Remus with none of the ten enhancements, named by David on 2026-10-27) and the
+  ten enhancement stations, one folder per color (`RED - Transposition table`, ...).
+  Each station is Remus-WHITE plus one enhancement; the finished Day 10 Remus holds all ten. `make_station_folders.py`
   builds them from the Day 9 and Day 10 `period4` code, and `make_student_folders.py`
   stubs each station's functions in `student/Stations`. Colors name the stations so
   that no station sounds better than another. `station_match.py` plays a station
-  against the plain Day 9 Remus.
+  against Remus-WHITE, and Remus-WHITE takes part in the color matches too.
 - Every game any script plays (`play_match.py`, `tournament.py`, `estimate_elo.py`,
   `station_match.py`) is added to `games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.

@@ -41,7 +41,7 @@ Day 5, Period 2.
 | `tournament.py` | D10 P3: the class round robin | Last day |
 | `remus.sh` | D10 P4: starts Remus on a Mac or Linux computer at home | Last day |
 | `estimate_elo.py` | D10 P4: measures the Elo rating of Remus against Stockfish | Last day |
-| `Stations/station_match.py` | D10 P1: plays one enhancement station against the plain Day 9 Remus | Last day |
+| `Stations/station_match.py` | D10 P1: plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements | Last day |
 
 ## Table 2: By period
 

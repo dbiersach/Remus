@@ -2,8 +2,9 @@
 
 ## The big picture
 
-The plain Day 9 Remus already searches with alpha-beta, quiescence, move ordering,
-iterative deepening, and a clock. Ten ideas can make it stronger. Each pair builds
+Remus-WHITE is the finished Day 9 Remus with none of the enhancements. It already
+searches with alpha-beta, quiescence, move ordering, iterative deepening, and a
+clock. Ten ideas can make it stronger. Each pair builds
 one of them, so the class can measure which idea adds the most strength.
 
 Each station has a color instead of a number or a letter, so no station sounds
@@ -11,9 +12,10 @@ better than another before the games are played.
 
 ## Where the stations live
 
-`instructor/Stations` holds one folder per station, such as
-`RED - Transposition table`. Each folder is a complete, runnable copy of the plain
-Day 9 Remus (`instructor/Day 09 .../period4`) plus one enhancement. `student/Stations`
+`instructor/Stations` holds `WHITE - No enhancements` and one folder per station,
+such as `RED - Transposition table`. The WHITE folder is a complete, runnable copy of
+the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each station folder is
+that copy plus one enhancement. `student/Stations`
 holds the same folders with the pair's functions stubbed.
 
 `make_station_folders.py` builds the folders from the Day 9 and Day 10 code. The
@@ -40,7 +42,7 @@ Every station stays under the 40-line limit for one period.
 
 - **Elo gap:** the rating difference that a match score suggests. A 75 percent
   score means a gap of about +191.
-- **yardstick:** the plain Day 9 Remus. Every station plays the same opponent, so
+- **yardstick:** Remus-WHITE. Every station plays the same opponent, so
   the gaps compare fairly.
 - **null window:** a search window one point wide, (alpha, alpha + 1). It answers
   only "better or not?", which takes far less work than an exact score.
@@ -66,17 +68,20 @@ both `uci_engine.py` and `console_game.py`.
 
 ## Measure the gain: station_match.py
 
-`instructor/Stations/station_match.py` plays a station's Remus against the plain
-Day 9 Remus, or against another station, at 1 minute plus 0.6 seconds a move. It adds
+`instructor/Stations/station_match.py` plays a station's Remus against Remus-WHITE,
+or against another station, at 1 minute plus 0.6 seconds a move. It adds
 every game to `games/remus_games.pgn` and prints the score and the Elo gap.
 
 ```bash
-uv run station_match.py RED            # RED against the plain Day 9 Remus, 20 games
-uv run station_match.py RED BLUE       # RED against BLUE
+uv run station_match.py RED            # Remus-RED against Remus-WHITE, 20 games
+uv run station_match.py RED BLUE       # Remus-RED against Remus-BLUE
 ```
 
 Twenty games take about an hour with two games at once. Nobody needs to watch, so
-every laptop runs its own color against the plain Remus at the same time.
+every laptop runs its own color against Remus-WHITE at the same time. Remus-WHITE
+also plays in the color-on-color matches, to show how far each station climbs above
+its starting point. In the games file every player is named `Remus-<COLOR>`, such as
+`Remus-WHITE`, so a player name never reads like the side to move.
 
 ## Puzzle questions
 

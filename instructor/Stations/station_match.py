@@ -2,14 +2,14 @@
 """station_match.py
 
 Measure how much one enhancement station adds. A station's Remus plays a match
-against the plain Day 9 Remus, or against another station, with python-chess as
-the referee. Every game is added to the class games file, games/remus_games.pgn
+against Remus-WHITE (the finished Day 9 Remus with no enhancements), or against
+another station, with python-chess as the referee. Every game is added to the class games file, games/remus_games.pgn
 at the top of the Remus folder, and the script turns the score into an Elo gap.
 This is a teacher tool: the engine itself never imports python-chess.
 
 Usage:
-    uv run station_match.py RED            RED against the plain Day 9 Remus
-    uv run station_match.py RED BLUE       RED against BLUE
+    uv run station_match.py RED            Remus-RED against Remus-WHITE
+    uv run station_match.py RED BLUE       Remus-RED against Remus-BLUE
     uv run station_match.py RED --games 20
 
 Colors match the start of a station folder name, so "RED" finds
@@ -39,25 +39,18 @@ REPOSITORY = next(
     Path(__file__).parent,
 )
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
-PLAIN_NAME = "PLAIN"  # The plain Day 9 Remus, the yardstick for every station
+YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every station
 MINUTES = 1.0  # Each side's clock
 INCREMENT = 0.6  # Seconds added after each move
 GAMES_AT_ONCE = 2  # Each game runs two engine processes
 
 
-def plain_folder() -> Path:
-    """Return the finished Day 9 folder, the Remus every station starts from."""
-    return next((REPOSITORY / "instructor").glob("Day 09 - *")) / "period4"
-
-
-def find_player(name: str) -> tuple[str, Path]:
-    """Return a player's name and folder from a color such as "RED", or "PLAIN"."""
-    if name.upper() == PLAIN_NAME:
-        return PLAIN_NAME, plain_folder()
+def find_player(color: str) -> tuple[str, Path]:
+    """Return a player's name, such as "Remus-RED", and its station folder."""
     for folder in sorted(STATIONS.iterdir()):
-        if folder.is_dir() and folder.name.upper().startswith(name.upper() + " "):
-            return folder.name.split(" - ")[0], folder
-    sys.exit(f"No station folder starts with {name!r}")
+        if folder.is_dir() and folder.name.upper().startswith(color.upper() + " "):
+            return f"Remus-{folder.name.split(' - ')[0]}", folder
+    sys.exit(f"No station folder starts with {color!r}")
 
 
 def elo_gap(points: float, games: int) -> float:
@@ -137,7 +130,7 @@ def play_game(
 def main():
     parser = argparse.ArgumentParser(description="Measure an enhancement station.")
     parser.add_argument("first", help='a station color, such as "RED"')
-    parser.add_argument("second", nargs="?", default=PLAIN_NAME)
+    parser.add_argument("second", nargs="?", default=YARDSTICK)
     parser.add_argument("--games", type=int, default=20, help="games in the match")
     options = parser.parse_args()
     first = find_player(options.first)

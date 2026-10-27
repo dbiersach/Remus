@@ -133,7 +133,7 @@ The pages, in the order the class builds them:
 | [`mate_solver.py`](scripts/mate_solver.md) | Solve mate-in-two puzzles |
 | [`tournament.py`](scripts/tournament.md) | The class round robin |
 | [`estimate_elo.py`](scripts/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
-| [`station_match.py`](stations.md) | Measures one enhancement station against the plain Day 9 Remus |
+| [`station_match.py`](stations.md) | Measures one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements |
 | [`hidden_peak.py`](scripts/hidden_peak.md) | Science AI: find the hidden peak |
 | [The test files](scripts/tests.md) | Checking that Remus works |
 

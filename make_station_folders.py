@@ -3,11 +3,11 @@
 
 Build one folder per enhancement station in instructor/Stations.
 
-Each station folder is the plain Day 9 Remus (instructor/Day 09 .../period4) plus
-one enhancement, named by a color so that no station sounds better than another.
-A pair builds its station, then its Remus plays the plain Day 9 Remus to measure
-how much Elo the one enhancement adds. The finished Day 10 Remus holds every
-enhancement at once.
+Remus-WHITE is the finished Day 9 Remus (instructor/Day 09 .../period4) with none of
+the ten enhancements. Each other station folder is Remus-WHITE plus one enhancement,
+named by a color so that no station sounds better than another. A pair builds its
+station, then its Remus plays Remus-WHITE to measure how much Elo the one
+enhancement adds. The finished Day 10 Remus holds every enhancement at once.
 
 The script copies the Day 9 files, adds the station's files from the Day 10 folder,
 and applies the station's edits. Each search station gets a new search function
@@ -25,7 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
 STATIONS = INSTRUCTOR / "Stations"
-BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period4"  # The plain Day 9 Remus
+BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period4"  # Remus-WHITE
 FINAL = next(INSTRUCTOR.glob("Day 10 - *")) / "period4"  # Every enhancement at once
 
 
@@ -495,6 +495,16 @@ from search import MATE_SCORE, SearchInfo, alpha_beta_with_quiescence, {names}
 # and the functions the pair writes
 STATIONS_TABLE = [
     {
+        "folder": "WHITE - No enhancements",
+        "idea": "Remus-WHITE is the finished Day 9 Remus with none of the ten "
+        "enhancements. Every station starts from it, and every station match "
+        "measures against it.",
+        "copies": [],
+        "edits": [],
+        "tests": "",
+        "students": [],
+    },
+    {
         "folder": "RED - Transposition table",
         "idea": "Remember positions already searched, so the same position reached "
         "in two move orders is scored once.",
@@ -835,19 +845,24 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
 def readme_text(station: dict) -> str:
     """Return the README.md that explains one station folder."""
     color, name = station["folder"].split(" - ")
+    if not station["students"]:
+        return (
+            f"# Remus-{color}: {name}\n\n{station['idea']}\n\n"
+            "Check it from inside this folder with `uv run pytest`. From the Stations "
+            f"folder, `uv run station_match.py {color} RED` plays it against a station.\n"
+        )
     written = ", ".join(
         f"`{function}()` in `{file}`" for file, function in station["students"]
     )
     return (
-        f"# {color} station: {name}\n\n"
+        f"# Remus-{color}: {name}\n\n"
         f"{station['idea']}\n\n"
-        "This folder is the plain Day 9 Remus plus this one enhancement. "
-        f"The pair writes {written}.\n\n"
+        "This folder is Remus-WHITE, the finished Day 9 Remus, plus this one "
+        f"enhancement. The pair writes {written}.\n\n"
         "Check the work from inside this folder with `uv run pytest`. Then measure "
         "the gain from the Stations folder with "
-        f'`uv run station_match.py "{station["folder"]}"`, which plays this Remus '
-        "against the plain Day 9 Remus and adds every game to "
-        "games/remus_games.pgn.\n"
+        f"`uv run station_match.py {color}`, which plays Remus-{color} against "
+        "Remus-WHITE and adds every game to games/remus_games.pgn.\n"
     )
 
 
@@ -880,11 +895,12 @@ def main():
             file_path = folder / file_name
             text = replace_once(file_path.read_text(), old, new, station["folder"])
             file_path.write_text(text)
-        (folder / "test_upgrades.py").write_text(station["tests"])
+        if station["tests"]:
+            (folder / "test_upgrades.py").write_text(station["tests"])
         (folder / "README.md").write_text(readme_text(station))
         built.append(folder)
     tidy(built)
-    print(f"Built {len(built)} station folders in {STATIONS}  (expected 10)")
+    print(f"Built {len(built)} station folders in {STATIONS}  (expected 11)")
 
 
 if __name__ == "__main__":
