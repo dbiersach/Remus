@@ -3,9 +3,14 @@
 
 Measure how much one enhancement station adds. A station's Remus plays a match
 against Remus-WHITE (the finished Day 9 Remus with no enhancements), or against
-another station, with python-chess as the referee. Every game is added to the class games file, games/remus_games.pgn
-at the top of the Remus folder, and the script turns the score into an Elo gap.
-This is a teacher tool: the engine itself never imports python-chess.
+another station, with python-chess as the referee. Every game is added to the class
+games file, games/remus_games.pgn at the top of the Remus folder, and the script
+turns the score into an Elo gap. This is a teacher tool: the engine itself never
+imports python-chess.
+
+Remus picks the same move every time it sees the same position, so two games from
+the starting position would be the same game twice. Each pair of games therefore
+starts from one of the OPENINGS, three moves deep, and each player takes White once.
 
 Usage:
     uv run station_match.py RED            Remus-RED against Remus-WHITE
@@ -43,6 +48,41 @@ YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every station
 MINUTES = 1.0  # Each side's clock
 INCREMENT = 0.6  # Seconds added after each move
 GAMES_AT_ONCE = 2  # Each game runs two engine processes
+# Well-known openings, three moves for each side, in UCI notation
+OPENINGS = [
+    "e2e4 e7e5 g1f3 b8c6 f1b5 a7a6",  # Ruy Lopez
+    "d2d4 d7d5 c2c4 e7e6 b1c3 g8f6",  # Queen's Gambit Declined
+    "e2e4 c7c5 g1f3 d7d6 d2d4 c5d4",  # Sicilian
+    "d2d4 g8f6 c2c4 g7g6 b1c3 f8g7",  # King's Indian
+    "e2e4 e7e6 d2d4 d7d5 b1c3 f8b4",  # French
+    "c2c4 e7e5 b1c3 g8f6 g1f3 b8c6",  # English
+    "e2e4 c7c6 d2d4 d7d5 b1c3 d5e4",  # Caro-Kann
+    "d2d4 g8f6 c2c4 e7e6 b1c3 f8b4",  # Nimzo-Indian
+    "e2e4 e7e5 g1f3 b8c6 f1c4 f8c5",  # Italian
+    "g1f3 d7d5 g2g3 g8f6 f1g2 e7e6",  # Reti
+    "e2e4 e7e5 g1f3 b8c6 d2d4 e5d4",  # Scotch
+    "d2d4 d7d5 c2c4 c7c6 g1f3 g8f6",  # Slav
+    "e2e4 c7c5 g1f3 b8c6 d2d4 c5d4",  # Sicilian, with Nc6
+    "d2d4 g8f6 c2c4 g7g6 b1c3 d7d5",  # Grunfeld
+    "e2e4 d7d6 d2d4 g8f6 b1c3 g7g6",  # Pirc
+    "d2d4 d7d5 c2c4 d5c4 g1f3 g8f6",  # Queen's Gambit Accepted
+    "e2e4 e7e5 g1f3 g8f6 f3e5 d7d6",  # Petrov
+    "d2d4 g8f6 c2c4 e7e6 g1f3 b7b6",  # Queen's Indian
+    "e2e4 g8f6 e4e5 f6d5 d2d4 d7d6",  # Alekhine
+    "d2d4 f7f5 g2g3 g8f6 f1g2 g7g6",  # Dutch
+    "e2e4 d7d5 e4d5 d8d5 b1c3 d5a5",  # Scandinavian
+    "d2d4 d7d5 g1f3 g8f6 c1f4 e7e6",  # London
+    "e2e4 c7c5 c2c3 g8f6 e4e5 f6d5",  # Sicilian, Alapin
+    "c2c4 c7c5 g1f3 g8f6 b1c3 b8c6",  # Symmetrical English
+    "e2e4 e7e5 b1c3 g8f6 f2f4 d7d5",  # Vienna
+    "d2d4 g8f6 c2c4 c7c5 d4d5 e7e6",  # Benoni
+    "e2e4 e7e6 d2d4 d7d5 e4e5 c7c5",  # French, advance
+    "e2e4 c7c6 d2d4 d7d5 e4e5 c8f5",  # Caro-Kann, advance
+    "e2e4 e7e5 f2f4 e5f4 g1f3 g7g5",  # King's Gambit
+    "e2e4 c7c5 b1c3 b8c6 g2g3 g7g6",  # Closed Sicilian
+    "g1f3 g8f6 c2c4 g7g6 b2b3 f8g7",  # Reti, double fianchetto
+    "e2e4 e7e5 g1f3 b8c6 b1c3 g8f6",  # Four Knights
+]
 
 
 def find_player(color: str) -> tuple[str, Path]:
@@ -76,9 +116,21 @@ def elo_gap(points: float, games: int) -> float:
 
 
 def play_game(
-    white: tuple[str, Path], black: tuple[str, Path], event: str
+    white: tuple[str, Path], black: tuple[str, Path], event: str, opening: str = ""
 ) -> chess.pgn.Game:
-    """Play one game on a chess clock and return it as PGN, with the result set."""
+    """
+    Play one game on a chess clock and return it as PGN, with the result set.
+
+    Parameters
+    ----------
+    white, black : tuple[str, Path]
+        Each player's name and station folder, from find_player().
+    event : str
+        The Event header of the game.
+    opening : str
+        Moves in UCI notation, such as "e2e4 e7e5", played before the engines
+        start thinking.
+    """
     engines = [
         chess.engine.SimpleEngine.popen_uci(
             [sys.executable, str(folder / "uci_engine.py")], cwd=folder
@@ -86,6 +138,8 @@ def play_game(
         for _, folder in (white, black)
     ]
     board = chess.Board()
+    for text in opening.split():
+        board.push_uci(text)
     clocks = [MINUTES * 60, MINUTES * 60]  # Seconds left for White, then Black
     result, reason = None, ""
     try:
@@ -124,6 +178,8 @@ def play_game(
     game.headers["Result"] = result or board.result(claim_draw=True)
     if reason:
         game.headers["Termination"] = reason
+    if opening:
+        game.headers["StartMoves"] = opening  # The opening the engines started from
     return game
 
 
@@ -140,7 +196,7 @@ def main():
     print(f"{event}: {options.games} games at {MINUTES:g} min + {INCREMENT} s")
     print(f"Adding every game to {GAMES_PATH}")
     GAMES_PATH.parent.mkdir(exist_ok=True)
-    # The first player takes White in the even games and Black in the odd ones
+    # Games 0 and 1 share an opening, and the first player takes White in game 0
     pairings = [
         (first, second) if number % 2 == 0 else (second, first)
         for number in range(options.games)
@@ -149,7 +205,10 @@ def main():
     start = time.perf_counter()
     with ThreadPoolExecutor(GAMES_AT_ONCE) as pool:
         jobs = [
-            pool.submit(play_game, white, black, event) for white, black in pairings
+            pool.submit(
+                play_game, white, black, event, OPENINGS[number // 2 % len(OPENINGS)]
+            )
+            for number, (white, black) in enumerate(pairings)
         ]
         for number, job in enumerate(jobs, start=1):
             game = job.result()

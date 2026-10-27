@@ -87,9 +87,37 @@ also plays in the color-on-color matches, to show how far each station climbs ab
 its starting point. In the games file every player is named `Remus-<COLOR>`, such as
 `Remus-WHITE`, so a player name never reads like the side to move.
 
+### Why the games start from openings
+
+Remus plays the same move every time it sees the same position. Two games between
+the same two versions from the starting position would be one game played twice.
+Each pair of games therefore starts from one of 32 well-known openings, three moves
+deep for each side, such as the Ruy Lopez or the Queen's Gambit, and each version
+takes White once. The games file stores the opening in a `StartMoves` header.
+
+## Rank every version: station_league.py
+
+`instructor/Stations/station_league.py` plays a round robin: each of the 12 versions
+(Remus-WHITE, the ten stations, and Remus-GOLD) plays each other version 6 times,
+396 games in all. Then it fits one Elo rating to every version from every station
+game in the games file, the games of `station_match.py` included, with Remus-WHITE
+pinned at 0. Each rating is that version's gain over Remus-WHITE.
+
+```bash
+uv run station_league.py                # the round robin, then the ratings
+uv run station_league.py --rate-only    # only the ratings, from the saved games
+```
+
+The fit works like `estimate_elo.py`: it moves each rating until the points the Elo
+formula expects for a version equal the points it really scored. One pretend draw
+against Remus-WHITE keeps a perfect score from giving an endless rating. A rating
+of +60 plus or minus 80 means the true gain most likely lies between -20 and +140,
+so two versions whose ranges overlap have not been told apart yet.
+
 ## Puzzle questions
 
 1. Why does every station play the same opponent instead of each other?
 2. The YELLOW station types only 2 lines. Why can such a small change still win games?
 3. Which stations change the score Remus finds at a fixed depth, and which only find
    the same score faster?
+4. Remus-GOLD has every enhancement. Why might it gain less than the ten gains added up?

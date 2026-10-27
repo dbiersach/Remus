@@ -217,8 +217,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   stubs each station's functions in `student/Stations`. Colors name the stations so
   that no station sounds better than another. `station_match.py` plays a station
   against Remus-WHITE, and Remus-WHITE takes part in the color matches too.
+  `station_league.py` plays a round robin of all 12 versions, Remus-GOLD included,
+  and fits one Elo rating per version with Remus-WHITE pinned at 0.
 - Every game any script plays (`play_match.py`, `tournament.py`, `estimate_elo.py`,
-  `station_match.py`) is added to `games/remus_games.pgn` at the top of the
+  `station_match.py`, `station_league.py`) is added to `games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson
   makes a file smarter, the new code goes into the same file under a new function

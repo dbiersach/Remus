@@ -134,6 +134,7 @@ The pages, in the order the class builds them:
 | [`tournament.py`](scripts/tournament.md) | The class round robin |
 | [`estimate_elo.py`](scripts/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
 | [`station_match.py`](stations.md) | Measures one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements |
+| [`station_league.py`](stations.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](scripts/hidden_peak.md) | Science AI: find the hidden peak |
 | [`beam_time.py`](scripts/beam_time.md) | Science AI: plan the beam time |
 | [The test files](scripts/tests.md) | Checking that Remus works |
@@ -145,7 +146,7 @@ The pages, in the order the class builds them:
 | Native Python engine | `board.py` to `search.py` | Board, rules, legal moves, state, search, evaluation, move choice |
 | Console driver | `console_game.py` | Prints the board and reads SAN moves typed in the terminal |
 | UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with En Croissant on standard input and output |
-| Teacher tools | `play_match.py`, `compare_search.py`, `tournament.py`, `estimate_elo.py`, `Stations/station_match.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
+| Teacher tools | `play_match.py`, `compare_search.py`, `tournament.py`, `estimate_elo.py`, `Stations/station_match.py`, `Stations/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
 
 ## The core data structures
 

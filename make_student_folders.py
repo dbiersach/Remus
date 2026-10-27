@@ -141,10 +141,8 @@ def main():
             stubbed += 1
     # Each station folder stubs the functions its pair writes during the station
     (STUDENT / "Stations").mkdir(exist_ok=True)
-    shutil.copy2(
-        INSTRUCTOR / "Stations" / "station_match.py",
-        STUDENT / "Stations" / "station_match.py",
-    )
+    for name in ["station_match.py", "station_league.py"]:
+        shutil.copy2(INSTRUCTOR / "Stations" / name, STUDENT / "Stations" / name)
     for station in STATIONS_TABLE:
         folder = INSTRUCTOR / "Stations" / station["folder"]
         target = STUDENT / "Stations" / station["folder"]
