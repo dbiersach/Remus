@@ -456,7 +456,37 @@ playing its matches with no illegal moves or losses on time.
 Every color plays Remus-WHITE, the yardstick, so the ten Elo gaps compare fairly.
 On top of those ten matches, each color plays three planned showcase matches, 15 in
 all, chosen so that each one answers a question the class can predict before the
-games start (the table is filled in from the container runs; see the note under it).
+games start. The first color named hosts the match on its laptop with
+`uv run station_match.py <COLOR> <COLOR>`, so no laptop hosts more than two. Each
+match is 20 games and takes about 20 to 30 minutes at two games at once.
+
+| # | Match | The question the class predicts | Teacher's league run (6 games) |
+| --- | --- | --- | --- |
+| 1 | RED vs BLUE | Remembering positions or trying the best moves first: which saves more search? | 2.5-3.5 |
+| 2 | PINK vs RED | PVS saves work only when good moves come first. Does it pay off against a table that remembers? | 3-3 |
+| 3 | ORANGE vs BROWN | Skipping a turn or searching late moves less deeply: which shortcut misses less? | 2.5-3.5 |
+| 4 | PURPLE vs GRAY | Healthy pawns or a safe king: which knowledge wins more games? | 3.5-2.5 |
+| 5 | CYAN vs YELLOW | Knowing how to finish a win or knowing when a game is drawn? | 2-4 |
+| 6 | GREEN vs ORANGE | A book of good openings or a deeper search in every position? | 2.5-3.5 |
+| 7 | PURPLE vs RED | Chess knowledge against search speed | 3-3 |
+| 8 | YELLOW vs BLUE | Does a sense for draws matter when the other side searches faster? | 3.5-2.5 |
+| 9 | GRAY vs CYAN | Two ways to think about the king: protect your own or hunt the other one | 2.5-3.5 |
+| 10 | GREEN vs PINK | Does the book's head start last once both sides leave the book? | 3-3 |
+| 11 | BROWN vs PURPLE | Searching more moves or understanding pawns better? | 2.5-3.5 |
+| 12 | BLUE vs GREEN | Good move order in every position or good moves in the opening only? | 3.5-2.5 |
+| 13 | PINK vs BROWN | Both re-search when a move surprises them. Which one gets surprised less? | 1.5-4.5 |
+| 14 | ORANGE vs CYAN | Null-move pruning searches deeper but can be fooled in endgames. Does the mating bonus punish it? | 3.5-2.5 |
+| 15 | YELLOW vs GRAY | Avoiding bad draws or avoiding a weak king? | 3-3 |
+
+Each color plays three matches: RED (1, 2, 7), BLUE (1, 8, 12), PINK (2, 10, 13),
+ORANGE (3, 6, 14), BROWN (3, 11, 13), PURPLE (4, 7, 11), GRAY (4, 9, 15), CYAN (5, 9,
+14), YELLOW (5, 8, 15), and GREEN (6, 10, 12). The last column comes from the
+teacher's `station_league.py` run of 396 games, and 13 of the 15 matches ended 3-3
+or one game apart. Even 66 games per version leave each league rating with an error
+bar of about 84 Elo, so most stations are not yet told apart (see
+[`stations.md`](stations.md)). That is the lesson of the 20-game matches: the class
+predicts, the games decide, and more games narrow the error bar.
+
 Remus-GOLD, with all ten enhancements, stays out of the matches; the teacher rates it
 against Stockfish with `estimate_elo.py`.
 

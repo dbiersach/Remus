@@ -81,7 +81,8 @@ uv run station_match.py RED            # Remus-RED against Remus-WHITE, 20 games
 uv run station_match.py RED BLUE       # Remus-RED against Remus-BLUE
 ```
 
-Twenty games take about an hour with two games at once. Nobody needs to watch, so
+Twenty games take about 20 to 30 minutes with two games at once: each game lasts
+about two minutes, because each side has 1 minute plus 0.6 seconds a move. Nobody needs to watch, so
 every laptop runs its own color against Remus-WHITE at the same time. Remus-WHITE
 also plays in the color-on-color matches, to show how far each station climbs above
 its starting point. In the games file every player is named `Remus-<COLOR>`, such as
@@ -115,7 +116,33 @@ of +60 plus or minus 80 means the true gain most likely lies between -20 and +14
 so two versions whose ranges overlap have not been told apart yet.
 
 The league can stop partway, such as when a laptop restarts. Run it again and it
-plays only the games that are not in the games file yet.
+plays only the games that are not in the games file yet. With one game per processor
+core, a 4-core computer plays about 2 games a minute, so the whole league takes
+about 3 hours and 20 minutes.
+
+### The teacher's league run
+
+The teacher's run of all 396 games (October 2026) gave these ratings:
+
+| Rank | Version | Score | Elo vs WHITE |
+| --- | --- | --- | --- |
+| 1 | Remus-GOLD | 65.2% | +99 +/- 87 |
+| 2 | Remus-PURPLE | 55.3% | +34 +/- 84 |
+| 3 | Remus-YELLOW | 53.8% | +24 +/- 84 |
+| 4 | Remus-ORANGE | 51.5% | +10 +/- 84 |
+| 5 | Remus-RED | 50.0% | +0 +/- 84 |
+| 6 | Remus-WHITE | 50.0% | 0 (pinned) |
+| 7 | Remus-BLUE | 49.2% | -5 +/- 84 |
+| 8 | Remus-BROWN | 47.7% | -14 +/- 84 |
+| 9 | Remus-PINK | 44.7% | -34 +/- 84 |
+| 10 | Remus-GRAY | 44.7% | -34 +/- 84 |
+| 11 | Remus-GREEN | 43.9% | -39 +/- 84 |
+| 12 | Remus-CYAN | 43.9% | -39 +/- 84 |
+
+Only Remus-GOLD, with all ten enhancements, has a range that stays above 0, and only
+just: +99 plus or minus 87 runs from +12 to +186. Every single station's range
+includes 0, so one enhancement alone changes Remus by less than 66 games can measure
+at 1 minute a game.
 
 ## Puzzle questions
 
@@ -123,4 +150,7 @@ plays only the games that are not in the games file yet.
 2. The YELLOW station's whole enhancement is a 2-line function. Why can such a small change still win games?
 3. Which stations change the score Remus finds at a fixed depth, and which only find
    the same score faster?
+4. In the teacher's league, no single station measured clearly stronger than
+   Remus-WHITE, but Remus-GOLD did. How can ten small gains that each hide inside the
+   error bar add up to one gain that shows?
 4. Remus-GOLD has every enhancement. Why might it gain less than the ten gains added up?
