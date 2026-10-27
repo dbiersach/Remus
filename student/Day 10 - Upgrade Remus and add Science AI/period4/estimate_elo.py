@@ -46,6 +46,7 @@ EN_CROISSANT_ENGINES = (
 LEVELS = [1320, 1500, 1700]  # Stockfish strengths to play; 1320 is its weakest
 MINUTES = 1.0  # Each side's clock, the clock Stockfish calibrates UCI_Elo with
 INCREMENT = 0.6  # Seconds added after each move
+PLAYER_NAME = "Remus-GOLD"  # The finished Remus, with all ten enhancements
 ELO_SCALE = 400 / math.log(10)  # Turns a rating gap into the logistic curve's units
 
 
@@ -149,8 +150,8 @@ def play_game(
     stockfish_name = f"Stockfish {stockfish_elo}"
     game.headers["Event"] = "Remus strength test"
     game.headers["Date"] = date.today().strftime("%Y.%m.%d")
-    game.headers["White"] = "Remus" if remus_white else stockfish_name
-    game.headers["Black"] = stockfish_name if remus_white else "Remus"
+    game.headers["White"] = PLAYER_NAME if remus_white else stockfish_name
+    game.headers["Black"] = stockfish_name if remus_white else PLAYER_NAME
     game.headers["WhiteElo" if not remus_white else "BlackElo"] = str(stockfish_elo)
     game.headers["TimeControl"] = f"{MINUTES * 60:.0f}+{INCREMENT}"
     game.headers["Result"] = result or board.result(claim_draw=True)
@@ -162,7 +163,7 @@ def play_game(
 def remus_points(game: chess.pgn.Game) -> float:
     """Return Remus's points from one game: 1, 0.5, or 0."""
     white_points = {"1-0": 1.0, "0-1": 0.0}.get(game.headers["Result"], 0.5)
-    return white_points if game.headers["White"] == "Remus" else 1 - white_points
+    return white_points if game.headers["White"] == PLAYER_NAME else 1 - white_points
 
 
 def main():

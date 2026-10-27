@@ -209,7 +209,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - `instructor/Stations` holds Remus-WHITE (`WHITE - No enhancements`, the finished
   Day 9 Remus with none of the ten enhancements, named by David on 2026-10-27) and the
   ten enhancement stations, one folder per color (`RED - Transposition table`, ...).
-  Each station is Remus-WHITE plus one enhancement; the finished Day 10 Remus holds all ten. `make_station_folders.py`
+  Each station is Remus-WHITE plus one enhancement, and `GOLD - All enhancements`
+  holds Remus-GOLD, a copy of the finished Day 10 Remus with all ten (David,
+  2026-10-27). Remus-GOLD stays out of the color matches; `estimate_elo.py` rates it
+  against Stockfish; the finished Day 10 Remus holds all ten. `make_station_folders.py`
   builds them from the Day 9 and Day 10 `period4` code, and `make_student_folders.py`
   stubs each station's functions in `student/Stations`. Colors name the stations so
   that no station sounds better than another. `station_match.py` plays a station

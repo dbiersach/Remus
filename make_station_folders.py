@@ -7,7 +7,8 @@ Remus-WHITE is the finished Day 9 Remus (instructor/Day 09 .../period4) with non
 the ten enhancements. Each other station folder is Remus-WHITE plus one enhancement,
 named by a color so that no station sounds better than another. A pair builds its
 station, then its Remus plays Remus-WHITE to measure how much Elo the one
-enhancement adds. The finished Day 10 Remus holds every enhancement at once.
+enhancement adds. Remus-GOLD, a copy of the finished Day 10 Remus, holds every
+enhancement at once.
 
 The script copies the Day 9 files, adds the station's files from the Day 10 folder,
 and applies the station's edits. Each search station gets a new search function
@@ -495,6 +496,17 @@ from search import MATE_SCORE, SearchInfo, alpha_beta_with_quiescence, {names}
 # and the functions the pair writes
 STATIONS_TABLE = [
     {
+        "folder": "GOLD - All enhancements",
+        "idea": "Remus-GOLD is the finished Day 10 Remus with all ten enhancements "
+        "at once. It stays out of the color matches; estimate_elo.py measures its "
+        "rating against Stockfish.",
+        "source": FINAL,
+        "copies": [],
+        "edits": [],
+        "tests": "",
+        "students": [],
+    },
+    {
         "folder": "WHITE - No enhancements",
         "idea": "Remus-WHITE is the finished Day 9 Remus with none of the ten "
         "enhancements. Every station starts from it, and every station match "
@@ -845,6 +857,12 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
 def readme_text(station: dict) -> str:
     """Return the README.md that explains one station folder."""
     color, name = station["folder"].split(" - ")
+    if color == "GOLD":
+        return (
+            f"# Remus-{color}: {name}\n\n{station['idea']}\n\n"
+            "Check it from inside this folder with `uv run pytest`, and rate it with "
+            "`uv run estimate_elo.py`.\n"
+        )
     if not station["students"]:
         return (
             f"# Remus-{color}: {name}\n\n{station['idea']}\n\n"
@@ -885,7 +903,7 @@ def main():
         if folder.exists():
             shutil.rmtree(folder)
         shutil.copytree(
-            BASE,
+            station.get("source", BASE),
             folder,
             ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg", "README.md"),
         )
@@ -900,7 +918,7 @@ def main():
         (folder / "README.md").write_text(readme_text(station))
         built.append(folder)
     tidy(built)
-    print(f"Built {len(built)} station folders in {STATIONS}  (expected 11)")
+    print(f"Built {len(built)} station folders in {STATIONS}  (expected 12)")
 
 
 if __name__ == "__main__":

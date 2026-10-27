@@ -18,8 +18,10 @@ the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each station fol
 that copy plus one enhancement. `student/Stations`
 holds the same folders with the pair's functions stubbed.
 
-`make_station_folders.py` builds the folders from the Day 9 and Day 10 code. The
-finished Day 10 Remus holds all ten enhancements at once.
+`make_station_folders.py` builds the folders from the Day 9 and Day 10 code.
+`GOLD - All enhancements` holds Remus-GOLD, a copy of the finished Day 10 Remus with
+all ten enhancements at once. Remus-GOLD stays out of the color matches;
+`uv run estimate_elo.py` inside its folder rates it against Stockfish.
 
 ## The ten stations
 
