@@ -49,7 +49,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `alpha_beta()` | 198 | 16 | `test_search.py::test_alpha_beta_matches_negamax_with_fewer_positions` |
+| `search.py` | `alpha_beta()` | 197 | 16 | `test_search.py::test_alpha_beta_matches_negamax_with_fewer_positions` |
 
 Lines to type in all: 16. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 

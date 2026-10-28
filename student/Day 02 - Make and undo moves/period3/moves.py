@@ -7,7 +7,7 @@ Describe a move as a small record, and convert it to and from UCI text such as
 
 from dataclasses import dataclass
 
-from board import parse_square, square_name
+from board import Square, parse_square, square_name
 
 
 @dataclass(frozen=True)
@@ -20,8 +20,8 @@ class Move:
     or None for every other move.
     """
 
-    from_square: tuple[int, int]
-    to_square: tuple[int, int]
+    from_square: Square
+    to_square: Square
     promotion: str | None = None
 
 

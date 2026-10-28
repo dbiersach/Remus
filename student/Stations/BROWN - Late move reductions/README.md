@@ -36,7 +36,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `reduction()` | 401 | 3 | `test_upgrades.py::test_only_late_quiet_moves_are_reduced` |
+| `search.py` | `reduction()` | 397 | 3 | `test_upgrades.py::test_only_late_quiet_moves_are_reduced` |
 | `test_upgrades.py` | `test_only_late_quiet_moves_are_reduced()` | 22 | 6 | `uv run pytest` |
 | `test_upgrades.py` | `test_reduced_search_saves_work_and_keeps_the_state()` | 31 | 9 | `uv run pytest` |
 

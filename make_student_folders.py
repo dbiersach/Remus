@@ -44,7 +44,7 @@ STUDENT_FUNCTIONS = [
     (3, 2, "move_generation.py", "king_moves"),
     (3, 3, "move_generation.py", "slide"),
     (3, 4, "move_generation.py", "pawn_pushes"),
-    (4, 2, "attacks.py", "attacked_by_knight"),
+    (4, 2, "attacks.py", "piece_at_offsets"),
     (4, 2, "attacks.py", "attacked_by_pawn"),
     (4, 2, "attacks.py", "attacked_by_king"),
     (4, 3, "attacks.py", "in_check"),

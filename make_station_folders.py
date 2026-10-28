@@ -389,7 +389,8 @@ def search_station(
 
 
 TABLE_FIELD = (
-    '    stop: threading.Event | None = None  # Set by the GUI\'s "stop" command\n'
+    "    deadline: float | None = None  # time.perf_counter() value when the search "
+    "must stop\n"
 )
 
 
@@ -676,6 +677,10 @@ STATIONS_TABLE = [
                     "from dataclasses import dataclass, field\n",
                 ),
                 (
+                    "from board import EMPTY, piece_at\n",
+                    "from board import EMPTY, Board, piece_at\n",
+                ),
+                (
                     TABLE_FIELD,
                     TABLE_FIELD
                     + "    killers: dict = field(default_factory=dict)  # Ply -> up "
@@ -810,6 +815,10 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
             ORANGE_SEARCH,
             [
                 (
+                    "from board import EMPTY, piece_at\n",
+                    "from board import EMPTY, Board, Square, piece_at\n",
+                ),
+                (
                     "from fen import state_from_fen\n",
                     (
                         "from fen import state_from_fen\nfrom game_state import "
@@ -817,10 +826,10 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
                     ),
                 ),
                 (
-                    "MATE_SCORE = (\n",
+                    "# Larger than any material count",
                     (
                         "NULL_MOVE_REDUCTION = 2  # How many plies shallower the "
-                        "null-move search looks\nMATE_SCORE = (\n"
+                        "null-move search looks\n# Larger than any material count"
                     ),
                 ),
             ],
@@ -856,10 +865,10 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
             BROWN_SEARCH,
             [
                 (
-                    "MATE_SCORE = (\n",
+                    "# Larger than any material count",
                     (
                         "LATE_MOVE_INDEX = 3  # Moves after the first three in the "
-                        "ordered list count as late\nMATE_SCORE = (\n"
+                        "ordered list count as late\n# Larger than any material count"
                     ),
                 ),
             ],

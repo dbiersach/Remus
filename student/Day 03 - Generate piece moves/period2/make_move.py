@@ -84,33 +84,16 @@ def state_snapshot(state: dict) -> str:
         for piece in row:
             text += piece
         text += "/"
-    fields = [
-        state["turn"],
-        state["castling"],
-        str(state["en_passant"]),
-        str(state["halfmove_clock"]),
-        str(state["fullmove_number"]),
-    ]
-    for field in fields:
-        text += " " + field
+    text += f" {state['turn']} {state['castling']} {state['en_passant']}"
+    text += f" {state['halfmove_clock']} {state['fullmove_number']}"
     return text
 
 
 def main():
     state = new_game()
     start = state_snapshot(state)
-    texts = [
-        "e2e4",
-        "e7e5",
-        "g1f3",
-        "b8c6",
-        "f1b5",
-        "a7a6",
-        "b5c6",
-        "d7c6",
-        "e1f1",
-        "g8f6",
-    ]
+    texts = ["e2e4", "e7e5", "g1f3", "b8c6", "f1b5", "a7a6", "b5c6", "d7c6"]
+    texts += ["e1f1", "g8f6"]
     undo_records = []
     for text in texts:
         undo_records.append(make_move(state, move_from_uci(text)))

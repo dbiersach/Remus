@@ -28,6 +28,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `evaluation.py` | `pawn_structure()` | 146 | 29 | `test_upgrades.py::test_pawn_structure_is_level_at_the_start`, `test_upgrades.py::test_doubled_isolated_pawns_cost_points`, `test_upgrades.py::test_a_passed_pawn_earns_a_bonus` |
+| `evaluation.py` | `pawn_structure()` | 128 | 29 | `test_upgrades.py::test_pawn_structure_is_level_at_the_start`, `test_upgrades.py::test_doubled_isolated_pawns_cost_points`, `test_upgrades.py::test_a_passed_pawn_earns_a_bonus` |
 
 Lines to type in all: 29. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

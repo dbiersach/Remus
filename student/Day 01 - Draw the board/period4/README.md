@@ -53,9 +53,9 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `board.py` | `print_board()` | 34 | 6 | `uv run pytest` |
-| `board.py` | `square_name()` | 48 | 1 | `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips` |
-| `board.py` | `parse_square()` | 69 | 5 | `test_board.py::test_e2_is_row_6_col_4`, `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips`, `test_board.py::test_bad_square_names_are_rejected`, `test_board.py::test_start_position_pieces` |
-| `board.py` | `piece_at()` | 93 | 2 | `test_board.py::test_start_position_pieces` |
+| `board.py` | `print_board()` | 37 | 6 | `uv run pytest` |
+| `board.py` | `square_name()` | 51 | 1 | `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips` |
+| `board.py` | `parse_square()` | 72 | 5 | `test_board.py::test_e2_is_row_6_col_4`, `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips`, `test_board.py::test_bad_square_names_are_rejected`, `test_board.py::test_start_position_pieces` |
+| `board.py` | `piece_at()` | 96 | 2 | `test_board.py::test_start_position_pieces` |
 
 Lines to type in all: 14. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

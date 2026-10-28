@@ -21,11 +21,8 @@ from moves import move_from_uci, move_to_uci
 from opening_book import book_move, load_book
 from search import greedy_move, negamax_move, random_move, think
 
-BRAINS = {
-    "random": random_move,
-    "greedy": greedy_move,
-    "negamax": negamax_move,
-}  # By name
+# Move choosers, by name
+BRAINS = {"random": random_move, "greedy": greedy_move, "negamax": negamax_move}
 DEFAULT_SECONDS = 2.0  # Thinking time when the GUI gives no clock
 RESERVE_SECONDS = 3.0  # Clock time Remus never plans to spend, to pay for sending moves
 MIN_SECONDS = 0.01  # The shortest think, for when the clock is nearly empty
@@ -88,9 +85,8 @@ def thinking_time(words: list[str], white_to_move: bool) -> float:
     values = {}
     for index in range(1, len(words) - 1):
         if words[index + 1].lstrip("-").isdigit():
-            values[words[index]] = (
-                int(words[index + 1]) / 1000
-            )  # Milliseconds to seconds
+            # The GUI counts time in milliseconds, and Remus in seconds
+            values[words[index]] = int(words[index + 1]) / 1000
     if "movetime" in values:
         return values["movetime"]
     clock, increment = ("wtime", "winc") if white_to_move else ("btime", "binc")

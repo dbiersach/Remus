@@ -56,14 +56,13 @@ is_attacked_by_scanning()
 in_check()
     is_square_attacked()
         attacked_by_knight()
-            on_board()  [move_generation.py]
-            piece_at()  [board.py]
+            piece_at_offsets()
+                on_board()  [move_generation.py]
+                piece_at()  [board.py]
         attacked_by_pawn()
-            on_board()  [move_generation.py]
-            piece_at()  [board.py]
+            piece_at_offsets()
         attacked_by_king()
-            on_board()  [move_generation.py]
-            piece_at()  [board.py]
+            piece_at_offsets()
         attacked_along_lines()
             first_piece()
                 on_board()  [move_generation.py]
@@ -76,6 +75,7 @@ in_check()
 | Function | What it does | Arrives |
 | --- | --- | --- |
 | `is_attacked_by_scanning` | Version 1: asks every enemy piece if it can reach the square. | Day 4, period 2 |
+| `piece_at_offsets` | Looks at a list of nearby squares for one piece, such as a Black knight. | Day 4, period 2 |
 | `attacked_by_knight` | Looks for an enemy knight one jump away. | Day 4, period 2 |
 | `attacked_by_king` | Looks for the enemy king one step away. | Day 4, period 2 |
 | `attacked_by_pawn` | Looks for an enemy pawn that captures onto the square. | Day 4, period 2 |
@@ -87,7 +87,7 @@ in_check()
 
 ## How the file grows
 
-- **Day 4, period 2:** `is_attacked_by_scanning`, `attacked_by_knight`, `attacked_by_king`, `attacked_by_pawn`, `first_piece`, `attacked_along_lines`, `is_square_attacked`
+- **Day 4, period 2:** `is_attacked_by_scanning`, `piece_at_offsets`, `attacked_by_knight`, `attacked_by_king`, `attacked_by_pawn`, `first_piece`, `attacked_along_lines`, `is_square_attacked`
 - **Day 4, period 3:** `find_king`, `in_check`
 
 ## Try it

@@ -36,7 +36,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `remember_killer()` | 401 | 6 | `test_upgrades.py::test_killers_keep_two_quiet_moves` |
+| `search.py` | `remember_killer()` | 397 | 6 | `test_upgrades.py::test_killers_keep_two_quiet_moves` |
 | `move_ordering.py` | `order_moves()` | 53 | 16 | `test_search.py::test_capture_moves_and_mvv_lva` |
 | `test_upgrades.py` | `test_killers_keep_two_quiet_moves()` | 21 | 5 | `uv run pytest` |
 

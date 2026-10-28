@@ -15,15 +15,14 @@ from dataclasses import dataclass
 
 from attacks import in_check
 from board import EMPTY, piece_at
-from evaluation import PIECE_VALUES, evaluate, material, placement
+from evaluation import PIECE_VALUES, evaluate
 from fen import state_from_fen
 from legal_moves import legal_moves
 from make_move import make_move, state_snapshot, undo_move
 from moves import Move, move_to_uci
 
-MATE_SCORE = (
-    100_000  # Larger than any material count; a mate n plies away scores MATE_SCORE - n
-)
+# Larger than any material count; a mate n plies away scores MATE_SCORE - n
+MATE_SCORE = 100_000
 
 
 @dataclass
@@ -75,7 +74,7 @@ def greedy_move(state: dict) -> Move:
 
 def white_score(state: dict) -> int:
     """Return the evaluation from White's side, as minimax uses it."""
-    return material(state["board"]) + placement(state["board"])
+    return evaluate(state) if state["turn"] == "w" else -evaluate(state)
 
 
 def minimax(state: dict, depth: int, info: SearchInfo) -> int:

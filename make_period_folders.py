@@ -177,21 +177,8 @@ UNDO_MOVE_EN_PASSANT = """    if undo["en_passant_victim"] is None:
 MAKE_MOVE_ABOUT = """Three moves change more than two squares: castling also moves a rook, en passant
 removes a pawn that is not on the landing square, and promotion swaps the pawn for
 a new piece."""
-MAKE_MOVE_TEXTS = """        "e2e4",
-        "g8f6",
-        "e4e5",
-        "d7d5",
-        "e5d6",
-        "c8g4",
-        "f1e2",
-        "b8c6",
-        "g1f3",
-        "d8d7",
-        "e1g1",
-        "e8c8",
-        "d6c7",
-        "a7a6",
-        "c7d8n",
+MAKE_MOVE_TEXTS = """    texts = ["e2e4", "g8f6", "e4e5", "d7d5", "e5d6", "c8g4", "f1e2", "b8c6"]
+    texts += ["g1f3", "d8d7", "e1g1", "e8c8", "d6c7", "a7a6", "c7d8n"]
 """
 MAKE_MOVE_REPORT = (
     "Fifteen moves (en passant, both castlings, a knight promotion) made and undone"
@@ -201,7 +188,6 @@ SEARCH_DAY_8_ABOUT = """Day 8 makes the search smarter without changing its answ
 moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first."""
 SEARCH_INFO_CLOCK = """    deadline: float | None = None  # time.perf_counter() value when the search must stop
-    stop: threading.Event | None = None  # Set by the GUI's "stop" command
 """
 SEARCH_ALPHA_BETA_DEMO = """
     state = state_from_fen(
@@ -360,15 +346,7 @@ CHANGES = {
         (
             "replace",
             MAKE_MOVE_TEXTS,
-            """        "e2e4",
-        "e7e5",
-        "g1f3",
-        "b8c6",
-        "f1c4",
-        "g8f6",
-        "e1g1",
-        "f8c5",
-        "e8g8",
+            """    texts = ["e2e4", "e7e5", "g1f3", "b8c6", "f1c4", "g8f6", "e1g1", "f8c5", "e8g8"]
 """,
         ),
         ("replace", MAKE_MOVE_REPORT, "Nine moves (both sides castle) made and undone"),
@@ -392,7 +370,7 @@ passant removes a pawn that is not on the landing square.""",
             MAKE_MOVE_PROMOTION,
             "    set_piece(board, move.to_square, piece)\n",
         ),
-        ("replace", '        "d6c7",\n        "a7a6",\n        "c7d8n",\n', ""),
+        ("replace", ', "d6c7", "a7a6", "c7d8n"]', "]"),
         (
             "replace",
             MAKE_MOVE_REPORT,

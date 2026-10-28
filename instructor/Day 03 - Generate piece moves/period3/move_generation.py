@@ -8,10 +8,11 @@ Directions are (row change, col change) pairs. Row 0 is rank 8, so White pawns m
 toward row 0 (a row change of -1) and Black pawns move toward row 7 (+1).
 """
 
-from board import EMPTY, piece_at
+from board import EMPTY, Board, Square, piece_at
 from game_state import WHITE, color_of
 from moves import Move
 
+Direction = tuple[int, int]  # A (row change, col change) step, such as (-1, 0)
 KNIGHT_JUMPS = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]
 KING_STEPS = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 ROOK_DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # Along ranks and files
@@ -25,23 +26,20 @@ def on_board(row: int, col: int) -> bool:
 
 
 def jump_moves(
-    board: list[list[str]],
-    square: tuple[int, int],
-    color: str,
-    offsets: list[tuple[int, int]],
+    board: Board, square: Square, color: str, offsets: list[Direction]
 ) -> list[Move]:
     """
     Return the moves of a piece that jumps by fixed offsets (a knight or a king).
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
-    square : tuple[int, int]
+    square : Square
         The (row, col) of the jumping piece.
     color : str
         The color of the jumping piece, "w" or "b".
-    offsets : list[tuple[int, int]]
+    offsets : list[Direction]
         The jumps the piece can make, such as KNIGHT_JUMPS.
 
     Returns
@@ -59,36 +57,27 @@ def jump_moves(
     return moves
 
 
-def knight_moves(
-    board: list[list[str]], square: tuple[int, int], color: str
-) -> list[Move]:
+def knight_moves(board: Board, square: Square, color: str) -> list[Move]:
     """Return the moves of a knight on the square."""
     return jump_moves(board, square, color, KNIGHT_JUMPS)
 
 
-def king_moves(
-    board: list[list[str]], square: tuple[int, int], color: str
-) -> list[Move]:
+def king_moves(board: Board, square: Square, color: str) -> list[Move]:
     """Return the one-step moves of a king on the square (castling comes later)."""
     return jump_moves(board, square, color, KING_STEPS)
 
 
-def slide(
-    board: list[list[str]],
-    square: tuple[int, int],
-    direction: tuple[int, int],
-    color: str,
-) -> list[Move]:
+def slide(board: Board, square: Square, direction: Direction, color: str) -> list[Move]:
     """
     Walk from a square in one direction and return the moves along the way.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
-    square : tuple[int, int]
+    square : Square
         The (row, col) of the sliding piece.
-    direction : tuple[int, int]
+    direction : Direction
         The (row change, col change) of one step.
     color : str
         The color of the sliding piece.
@@ -116,10 +105,7 @@ def slide(
 
 
 def slider_moves(
-    board: list[list[str]],
-    square: tuple[int, int],
-    color: str,
-    directions: list[tuple[int, int]],
+    board: Board, square: Square, color: str, directions: list[Direction]
 ) -> list[Move]:
     """Return the moves of a rook, bishop, or queen, one direction at a time."""
     moves = []

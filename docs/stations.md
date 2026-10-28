@@ -31,7 +31,7 @@ all ten enhancements at once. Remus-GOLD stays out of the color matches;
 | --- | --- | --- | --- | --- |
 | RED | Transposition table | Remember positions already searched, so one position reached in two move orders is scored once | `store()` in `transposition_table.py` and `probe()` in `transposition_table.py`, plus 1 test in `test_upgrades.py` | 27 |
 | GREEN | Opening book | Play the first moves of well-known openings from a book | `load_book()` in `opening_book.py` and `book_move()` in `opening_book.py` | 24 |
-| BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` and `order_moves()` in `move_ordering.py`, plus 1 test in `test_upgrades.py` | 22 |
+| BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` and `order_moves()` in `move_ordering.py`, plus 1 test in `test_upgrades.py` | 27 |
 | PINK | Principal variation search | Search the first move with the full window and the rest with a cheap null window | `search_later_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
 | YELLOW | Draw sense | Score a repeated position, or one at the fifty-move limit, as 0 inside the search | `is_draw_in_search()` in `search.py`, plus 3 tests in `test_upgrades.py` | 16 |
 | PURPLE | Pawn structure | Penalize doubled and isolated pawns, reward passed pawns | `pawn_structure()` in `evaluation.py` | 30 |
@@ -174,23 +174,23 @@ Day 10 science files in the GOLD folder.
 
 | Version | Enhancement | Engine files | Code lines | Lines over WHITE |
 | --- | --- | --- | --- | --- |
-| Remus-WHITE | No enhancements | 12 | 1,107 | 0 |
-| Remus-RED | Transposition table | 13 | 1,192 | +85 |
-| Remus-GREEN | Opening book | 14 | 1,226 | +119 |
-| Remus-BLUE | Killer moves | 12 | 1,164 | +57 |
-| Remus-PINK | Principal variation search | 12 | 1,157 | +50 |
-| Remus-YELLOW | Draw sense | 12 | 1,149 | +42 |
-| Remus-PURPLE | Pawn structure | 12 | 1,145 | +38 |
-| Remus-CYAN | Mating bonus | 12 | 1,137 | +30 |
-| Remus-ORANGE | Null-move pruning | 12 | 1,182 | +75 |
-| Remus-BROWN | Late move reductions | 12 | 1,159 | +52 |
-| Remus-GRAY | King safety | 12 | 1,133 | +26 |
-| Remus-GOLD | All enhancements | 15 | 1,509 | +402 |
+| Remus-WHITE | No enhancements | 12 | 1,040 | 0 |
+| Remus-RED | Transposition table | 13 | 1,125 | +85 |
+| Remus-GREEN | Opening book | 14 | 1,172 | +132 |
+| Remus-BLUE | Killer moves | 12 | 1,092 | +52 |
+| Remus-PINK | Principal variation search | 12 | 1,090 | +50 |
+| Remus-YELLOW | Draw sense | 12 | 1,082 | +42 |
+| Remus-PURPLE | Pawn structure | 12 | 1,077 | +37 |
+| Remus-CYAN | Mating bonus | 12 | 1,070 | +30 |
+| Remus-ORANGE | Null-move pruning | 12 | 1,119 | +79 |
+| Remus-BROWN | Late move reductions | 12 | 1,092 | +52 |
+| Remus-GRAY | King safety | 12 | 1,070 | +30 |
+| Remus-GOLD | All enhancements | 15 | 1,463 | +423 |
 
-Remus-GOLD holds 402 more code lines than Remus-WHITE. The ten stations add 574
-lines when each one is counted on its own, so GOLD needs 172 fewer. Most stations
+Remus-GOLD holds 423 more code lines than Remus-WHITE. The ten stations add 589
+lines when each one is counted on its own, so GOLD needs 166 fewer. Most stations
 change the same search loop in `search.py`, and GOLD holds one copy of that loop
-with all ten ideas inside it. GREEN adds the most lines of any single station, 119,
+with all ten ideas inside it. GREEN adds the most lines of any single station, 132,
 because its book reads moves in SAN and so loads `notation.py` as well.
 
 ## Puzzle questions

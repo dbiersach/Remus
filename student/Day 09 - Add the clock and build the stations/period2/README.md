@@ -23,8 +23,6 @@ Part #1: `remembered_perft()` stores each answer in a dict under the tuple key `
 
 Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 to g7, which the CYAN station needs, and `random.seed()`, which makes a random choice repeat on every run.
 
-Part #4 is a teacher demo with no blanks: one thread counts until another sets a `threading.Event`. `think()` stops the same way when the GUI sends `stop`.
-
 Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
 
 ## What you edit in the lab

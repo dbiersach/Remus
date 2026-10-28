@@ -40,7 +40,8 @@ upside down.
 ## How it works
 
 1. `material()` adds up White's pieces and subtracts Black's.
-2. `placement()` adds the table bonus for each piece's square.
+2. `placement()` adds the table bonus for each piece's square. The queen has no table:
+   it is strong on any square, so it gets no bonus anywhere.
 3. `pawn_structure()` subtracts points for weak pawns and adds points for passed pawns (Day 10).
 4. `mating_bonus()` helps finish a won endgame by pushing the losing king to the edge (Day 10).
 5. `king_safety()` rewards pawns that shelter the king while the enemy queen is on the board (Day 10).

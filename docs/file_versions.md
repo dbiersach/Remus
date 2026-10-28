@@ -22,7 +22,7 @@ Day 5, Period 2.
 | `move_generation.py` | D3 P2: knight and king jumps | D3 P3: sliding pieces. D3 P4: pawns, promotion choices, `pseudo_legal_moves()`. D5 P3: en passant captures |
 | `attacks.py` | D4 P2: attacked squares, two versions | D4 P3: `find_king()` and `in_check()` |
 | `legal_moves.py` | D4 P3: the make, test, undo filter | D5 P2: adds castling moves |
-| `uci_engine.py` | D5 P4: a first engine for Lucas Chess that plays random legal moves | D7 P3: every UCI command, FEN positions, random and greedy brains. D8 P1: negamax brain. D9 P1: clock, thinking thread, `stop`. D10 P1: plays book moves first |
+| `uci_engine.py` | D5 P4: a first engine for Lucas Chess that plays random legal moves | D7 P3: every UCI command, FEN positions, random and greedy brains. D8 P1: negamax brain. D9 P1: clock and thinking time. D10 P1: plays book moves first |
 | `remus.bat` | D5 P4: starts Remus for Lucas Chess | No changes |
 | `perft.py` | D6 P2: counts positions, `divide()` | No changes |
 | `fen.py` | D6 P4: FEN in and out | D7 P1: starts the position history |
@@ -85,7 +85,7 @@ instructor folder holds the answer file `<name>_instructor.py`.
 | D8 P2 | `compare_search.py`. Lab 11: `python_sorting.py` | `search.py`: alpha-beta. `test_search.py` |
 | D8 P3 | None | `search.py`: quiescence. `test_search.py` |
 | D8 P4 | `move_ordering.py` | `search.py`: ordering, check extension, clock. `test_search.py` |
-| D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock, thread, `stop`. `console_game.py`: uses `think()`. `test_search.py` |
+| D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock and thinking time. `console_game.py`: uses `think()`. `test_search.py` |
 | D9 P2, P3 | Ten station folders in `Stations/` (see [stations.md](stations.md)). Lab 12 in P2: `python_caches.py` | None in the Day folder, which holds Remus-WHITE |
 | D9 P4 | `mate_solver.py` | `test_search.py`: mate-solver tests |
 | D10 P1 | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `test_upgrades.py` | `search.py`: `upgraded_search()`. `evaluation.py`: pawns, mating, king safety. `move_ordering.py`: killers. `uci_engine.py` and `console_game.py`: book moves first |

@@ -40,6 +40,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `move_generation.py` | `king_moves()` | 66 | 1 | `test_move_generation.py::test_king_in_the_corner_has_three_moves` |
+| `move_generation.py` | `king_moves()` | 62 | 1 | `test_move_generation.py::test_king_in_the_corner_has_three_moves` |
 
 Lines to type in all: 1. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

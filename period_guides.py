@@ -734,15 +734,20 @@ CHANGE_NOTES = {
     "empty, and two squares from its starting row if both are empty. White pawns "
     "move toward row 0, because row 0 is rank 8. Pawns are the only pieces that "
     "move one way and capture another, which is why pushes get their own function.",
-    ("attacks.py", "attacked_by_knight"): "Looks one knight jump away from the square "
-    "for an enemy knight. Attacks work backward: instead of asking where every enemy "
-    "piece can go, it stands on the square and looks out.",
+    ("attacks.py", "piece_at_offsets"): "Stands on the square and looks at each "
+    "offset for one piece, such as an enemy knight. Attacks work backward: instead "
+    "of asking where every enemy piece can go, the test looks out from the square. "
+    "A knight attacks e5 from exactly the squares a knight on e5 could jump to, so "
+    "the knight, the king, and the pawn all share this one loop, the way "
+    "`jump_moves()` serves both the knight and the king.",
     ("attacks.py", "attacked_by_pawn"): "Looks diagonally for an enemy pawn on the "
     "row behind the square, from the attacker's point of view. A pawn captures "
-    "diagonally even though it moves straight, so this check differs from the push.",
+    "diagonally even though it moves straight, so its two offsets differ from its "
+    "push, and they depend on its color.",
     ("attacks.py", "attacked_by_king"): "Looks one step away in all eight directions "
-    "for the enemy king. Kings can never stand next to each other, and this check is "
-    "what stops a king from walking up to the other king.",
+    "for the enemy king, with the same `KING_STEPS` the king moves by. Kings can "
+    "never stand next to each other, and this check is what stops a king from "
+    "walking up to the other king.",
     ("attacks.py", "in_check"): "Finds the king of one color and asks whether the "
     "other color attacks its square. Check decides which moves are legal, whether "
     "a game is over, and later how deep the search looks.",
@@ -1193,11 +1198,6 @@ LAB_NOTES = {
             "Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 "
             "to g7, which the CYAN station needs, and `random.seed()`, which makes a "
             "random choice repeat on every run."
-        ),
-        (
-            "Part #4 is a teacher demo with no blanks: one thread counts until another "
-            "sets a `threading.Event`. `think()` stops the same way when the GUI sends "
-            "`stop`."
         ),
     ],
     (10, 4): [
