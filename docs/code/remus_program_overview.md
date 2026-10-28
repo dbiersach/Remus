@@ -22,7 +22,7 @@ holds four period folders, `period1` to `period4`, one for each class period:
 | `Day 06 - Count positions and read FEN` | Proves the rules right by counting positions against published totals, then reads and writes FEN |
 | `Day 07 - Play full games and score positions` | Adds game endings, SAN, two simple brains, the UCI link to the GUI, and the evaluation |
 | `Day 08 - Search ahead with alpha-beta` | Looks ahead with minimax and negamax, then prunes with alpha-beta, searches captures to quiet positions, and orders moves |
-| `Day 09 - Add the clock and build the stations` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten color versions, and adds a mate solver |
+| `Day 09 - Add the clock and build the color versions` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten color versions, and adds a mate solver |
 | `Day 10 - Aim Remus at a science problem` | Holds only the hidden-peak and phase-hunt Science AI; the Day 10 engine is Remus-GOLD in `Remus/11 GOLD - All enhancements`, with all ten enhancements |
 
 The Day folders live inside the root `instructor/` folder. `instructor/` holds only
@@ -93,7 +93,7 @@ every teacher tool that is not part of an engine: the builders that write the pe
 version, and student
 folders, `period_guides.py` with the README text, the test runner, the league and
 Stockfish rating scripts, and the Niram benchmark. Students never open it.
-`station_match.py` stays in the `Remus` folders, because every pair runs it there in
+`version_match.py` stays in the `Remus` folders, because every pair runs it there in
 the Day 10 tournament.
 
 ## The puzzle box and its pieces
@@ -163,8 +163,8 @@ The pages, in the order the class builds them:
 | [`mate_solver.py`](mate_solver.md) | Solve mate-in-two puzzles |
 | [`estimate_elo.py`](estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
 | [`demo_results.py`](demo_results.md) | Day 10 demo: read a match result |
-| [`station_match.py`](../versions/remus_versions.md) | Plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |
-| [`scripts/station_league.py`](../versions/remus_versions.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
+| [`version_match.py`](../versions/remus_versions.md) | Plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |
+| [`scripts/version_league.py`](../versions/remus_versions.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](hidden_peak.md) | Science AI: find the hidden peak |
 | [`phase_hunt.py`](phase_hunt.md) | Science AI: name the crystals in a powder |
 | [The test files](tests.md) | Checking that Remus works |
@@ -176,7 +176,7 @@ The pages, in the order the class builds them:
 | Native Python engine | `board.py` to `search.py` | Board, rules, legal moves, state, search, evaluation, move choice |
 | Console driver | `console_game.py` | Prints the board and reads SAN moves typed in the terminal |
 | UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with Lucas Chess on standard input and output |
-| Teacher tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `Remus/station_match.py`, `scripts/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
+| Teacher tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `Remus/version_match.py`, `scripts/version_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
 
 ## The core data structures
 

@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the CYAN station: the mating bonus.
+Tests for the CYAN color version: the mating bonus.
 """
 
 from evaluation import mating_bonus

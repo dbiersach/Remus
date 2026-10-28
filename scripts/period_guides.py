@@ -7,7 +7,7 @@ also holds the overview of every day, which goes into the README.md at the top o
 each Day folder.
 
 make_period_folders.py writes this text into each instructor period README, and
-make_student_folders.py into each student period README and station README. Keep
+make_student_folders.py into each student period README and version README. Keep
 the language at a middle school reading level: short sentences, one idea each.
 """
 
@@ -564,14 +564,14 @@ OBJECTIVES = {
         ),
         (
             "Add one enhancement to Remus-WHITE.",
-            "The station's own tests pass in its folder.",
+            "The color version's own tests pass in its folder.",
         ),
     ],
     (9, 3): [
         (
             "Test an enhancement before trusting it.",
             (
-                "The station passes `uv run pytest` and a one-game smoke test against "
+                "The color version passes `uv run pytest` and a one-game smoke test against "
                 "Remus-WHITE with no illegal moves."
             ),
         ),
@@ -665,20 +665,20 @@ OBJECTIVES = {
     ],
 }
 
-# Objectives for the station READMEs, the same for every color
-STATION_OBJECTIVES = [
+# Objectives for the version READMEs, the same for every color
+VERSION_OBJECTIVES = [
     (
-        "Explain the idea of the station's enhancement in two sentences.",
+        "Explain the idea of the color version's enhancement in two sentences.",
         "The pair explains the idea to another pair, who can restate it.",
     ),
     (
         "Add the enhancement without breaking the rules.",
-        "`uv run pytest` passes in the station folder.",
+        "`uv run pytest` passes in the version folder.",
     ),
     (
         "Run a fair experiment against Remus-WHITE: same opening, both colors.",
         (
-            "In the Day 10 tournament, `play_tournament.py` in the station folder "
+            "In the Day 10 tournament, `play_tournament.py` in the version folder "
             "plays both 10-minute games with no illegal moves or crashes when the pair "
             "presses Run in VS Code, and the pair says why "
             "two games cannot show whether the enhancement helps."
@@ -686,12 +686,12 @@ STATION_OBJECTIVES = [
     ),
 ]
 
-# The long explanation in each station README, by color. Each section is Markdown:
+# The long explanation in each version README, by color. Each section is Markdown:
 # "example" walks through one concrete case, "why" says how the idea makes Remus
 # stronger, "cost" says what it spends (positions per second, memory, re-searches),
 # "expect" says what the pair should see in the numbers and in games, and "fits"
 # traces where the pair's code is called from.
-STATION_GUIDES = {
+VERSION_GUIDES = {
     "WHITE": {
         "why_title": "Why it matters",
         "example": (
@@ -706,8 +706,8 @@ STATION_GUIDES = {
             "best move of the last depth is tried before everything else."
         ),
         "why": (
-            "Every color station is Remus-WHITE plus exactly one change. Playing each "
-            "station against Remus-WHITE is a fair experiment: same openings, both "
+            "Every color version is Remus-WHITE plus exactly one change. Playing each "
+            "color version against Remus-WHITE is a fair experiment: same openings, both "
             "colors, and only one thing different."
         ),
         "cost": (
@@ -832,7 +832,7 @@ STATION_GUIDES = {
         "expect": (
             "The time saved goes to later moves. Remus thinks about one thirtieth of "
             "its remaining clock per move, so five instant book moves leave roughly "
-            "a minute and a half more for the middlegame. Every station match game "
+            "a minute and a half more for the middlegame. Every version match game "
             "starts from one of 32 openings three moves deep, and 24 of those "
             "positions are in the book, so Remus-GREEN usually gets two more instant "
             "moves before it searches. The book saves the most time in games that "
@@ -1134,7 +1134,7 @@ STATION_GUIDES = {
 # Each version's search on the ten positions of compare_search.py, measured with
 # think() on one computer: positions to finish depth 4, the seconds that took, and
 # the average deepest depth finished in 5 seconds a position
-STATION_MEASURES = {
+VERSION_MEASURES = {
     "WHITE": {"nodes": 431_212, "seconds": 83.2, "depth": 3.1},
     "GOLD": {"nodes": 84_812, "seconds": 18.8, "depth": 4.9},
     "RED": {"nodes": 243_223, "seconds": 48.7, "depth": 3.7},
@@ -1561,7 +1561,7 @@ CHANGE_NOTES = {
     ),
     ("test_upgrades.py", "test_draw_sense_search_agrees_with_alpha_beta"): (
         "In a position with no repetition, draw sense must change nothing, so the "
-        "station search and the Day 9 search must find the same score."
+        "version search and the Day 9 search must find the same score."
     ),
     ("test_upgrades.py", "test_a_repeated_position_is_a_draw"): (
         "Plays Nf3 Nf6 Ng1 Ng8, which brings back the starting position, and checks "
@@ -1832,11 +1832,11 @@ LAB_NOTES = {
         (
             "Part #1: `remembered_perft()` stores each answer in a dict under the tuple "
             "key `(name, depth)`. The second call finds the answer and returns at once. "
-            "The RED station's transposition table remembers search results the same way."
+            "The RED color version's transposition table remembers search results the same way."
         ),
         (
             "Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 "
-            "to g7, which the CYAN station needs, and `random.seed()`, which makes a "
+            "to g7, which the CYAN color version needs, and `random.seed()`, which makes a "
             "random choice repeat on every run."
         ),
     ],
@@ -3175,11 +3175,11 @@ DAY_GUIDES = {
         ),
     },
     9: {
-        "theme": "The clock and the stations",
+        "theme": "The clock and the color versions",
         "summary": (
             "Day 9 gives Remus a clock, then splits the class into ten enhancement "
-            "stations. Each pair adds one idea to the same engine, Remus-WHITE, and "
-            "tests it. By 4:30 every station passes its tests and plays a legal game, "
+            "color versions. Each pair adds one idea to the same engine, Remus-WHITE, and "
+            "tests it. By 4:30 every color version passes its tests and plays a legal game, "
             "and the mate solver solves all ten puzzles."
         ),
         "objectives": [
@@ -3221,7 +3221,7 @@ DAY_GUIDES = {
                     (
                         "Show and choose for `think()`. The chosen code makes "
                         "Remus-WHITE, the Remus with none of the enhancements and the "
-                        "starting point of every station."
+                        "starting point of every color version."
                     ),
                 ),
                 (
@@ -3244,17 +3244,17 @@ DAY_GUIDES = {
                 (
                     20,
                     (
-                        "Slides: the ten color stations. Each is Remus-WHITE plus one "
+                        "Slides: the ten color versions. Each is Remus-WHITE plus one "
                         "enhancement, such as RED (transposition table) or BLUE "
-                        "(killer moves). Colors name the stations so that no station "
+                        "(killer moves). Colors name the color versions so that no color version "
                         "sounds better than another."
                     ),
                 ),
                 (
                     30,
                     (
-                        "Each pair opens its color station in the `Remus` folder "
-                        "next to the Day folders, reads the station README, and writes the station's stubbed "
+                        "Each pair opens its color version in the `Remus` folder "
+                        "next to the Day folders, reads the version README, and writes the color version's stubbed "
                         "code."
                     ),
                 ),
@@ -3262,12 +3262,12 @@ DAY_GUIDES = {
             3: [
                 (
                     0,
-                    "Pairs finish their station code and pass its tests.",
+                    "Pairs finish their color version code and pass its tests.",
                 ),
                 (
                     40,
                     (
-                        "Each pair opens `smoke_test.py` in its station folder and "
+                        "Each pair opens `smoke_test.py` in its version folder and "
                         "presses Run in VS Code: one 2-minute game against "
                         "Remus-WHITE, which checks only that the engine plays legal "
                         "moves to the end."
@@ -3304,14 +3304,14 @@ DAY_GUIDES = {
                 (
                     80,
                     (
-                        "Checkpoint: every station passes its tests, and the mate "
+                        "Checkpoint: every color version passes its tests, and the mate "
                         "solver solves all ten."
                     ),
                 ),
             ],
         },
         "checkpoint": (
-            "Every station passes its tests and its one-game test match, and the mate "
+            "Every color version passes its tests and its one-game test match, and the mate "
             "solver solves all ten puzzles."
         ),
     },
@@ -3452,7 +3452,7 @@ DAY_GUIDES = {
                     0,
                     (
                         "The tournament: every pair opens `play_tournament.py` in "
-                        "its station folder and presses Run in VS Code, all ten "
+                        "its version folder and presses Run in VS Code, all ten "
                         "laptops at once. "
                         "Its color plays two 10-minute games against Remus-WHITE, one "
                         "with each color."

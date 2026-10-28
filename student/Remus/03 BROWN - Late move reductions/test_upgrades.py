@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the BROWN station: late move reductions.
+Tests for the BROWN color version: late move reductions.
 """
 
 from board import EMPTY
@@ -29,7 +29,7 @@ def test_only_late_quiet_moves_are_reduced() -> None:
 
 
 def test_reduced_search_saves_work_and_keeps_the_state() -> None:
-    """The station searches fewer positions than plain alpha-beta at depth 4."""
+    """The upgraded search visits fewer positions than plain alpha-beta at depth 4."""
     # Day 9, period 2: write this function.
     # The docstring above says what this test must check.
     raise NotImplementedError(

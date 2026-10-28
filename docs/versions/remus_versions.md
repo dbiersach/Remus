@@ -22,7 +22,7 @@ the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each version fol
 that copy plus one enhancement. `student/Remus`
 holds the same folders with the pair's functions stubbed.
 
-`make_station_folders.py` builds the folders from the Day 9 code and the GOLD folder.
+`make_version_folders.py` builds the folders from the Day 9 code and the GOLD folder.
 `11 GOLD - All enhancements` holds Remus-GOLD, the finished Remus of Day 10, with
 all ten enhancements at once. Remus-GOLD stays out of the color matches;
 `uv run estimate_elo.py` inside its folder rates it against Stockfish.
@@ -72,21 +72,21 @@ The evaluation color versions (PURPLE, CYAN, GRAY) add one term to `evaluate()` 
 line to `explain_evaluation()`. The GREEN color version asks the book before searching, in
 both `uci_engine.py` and `console_game.py`.
 
-## The Day 10 tournament: station_match.py
+## The Day 10 tournament: version_match.py
 
-`instructor/Remus/station_match.py` plays a color version's Remus against Remus-WHITE,
+`instructor/Remus/version_match.py` plays a color version's Remus against Remus-WHITE,
 or against another color version, at 10 minutes a side. It adds every game to
 `games/remus_games.pgn` and prints the score.
 
 ```bash
-uv run station_match.py RED            # Remus-RED against Remus-WHITE, 2 games
-uv run station_match.py RED BLUE       # Remus-RED against Remus-BLUE
-uv run station_match.py RED --games 1 --minutes 2
+uv run version_match.py RED            # Remus-RED against Remus-WHITE, 2 games
+uv run version_match.py RED BLUE       # Remus-RED against Remus-BLUE
+uv run version_match.py RED --games 1 --minutes 2
                                        # the Day 9 smoke test: one short game
 ```
 
 Pairs never type these commands. Every color folder holds two short scripts that run
-`station_match.py` for its own color, so a pair opens one in VS Code and presses Run:
+`version_match.py` for its own color, so a pair opens one in VS Code and presses Run:
 
 | Script | When | What it plays |
 | --- | --- | --- |
@@ -102,7 +102,7 @@ fewer than 10 games. The teacher then shows Remus-GOLD's score against every col
 and Remus-WHITE from the teacher's league, run from the top Remus folder:
 
 ```bash
-uv run scripts/station_league.py --rate-only --player GOLD
+uv run scripts/version_league.py --rate-only --player GOLD
 ```
 
 The Day 9 smoke test plays one game on a short clock only to prove that the color version's
@@ -119,12 +119,12 @@ Each pair of games therefore starts from one of 32 well-known openings, three mo
 deep for each side, such as the Ruy Lopez or the Queen's Gambit, and each version
 takes White once. The games file stores the opening in a `StartMoves` header.
 
-## Rank every version: station_league.py
+## Rank every version: version_league.py
 
-`scripts/station_league.py`, run from the top Remus folder, plays a round robin: each of the 12 versions
+`scripts/version_league.py`, run from the top Remus folder, plays a round robin: each of the 12 versions
 (Remus-WHITE, the ten color versions, and Remus-GOLD) plays each other version 6 times,
 396 games in all. Then it fits one Elo rating to every version from every color version
-game in the games file, the games of `station_match.py` included, with Remus-WHITE
+game in the games file, the games of `version_match.py` included, with Remus-WHITE
 pinned at 0. Each rating is that version's gain over Remus-WHITE. The league plays
 at 10 minutes a side with no increment, because Remus in Python searches too slowly
 for shorter games to show what an enhancement adds. `--minutes` and `--increment`
@@ -132,9 +132,9 @@ name another clock, and the script rates the games of each clock apart from the
 others, since a version that searches deeper can gain more with more time to think.
 
 ```bash
-uv run scripts/station_league.py --at-once 16   # the round robin, 16 games at a time
-uv run scripts/station_league.py --rate-only    # only the ratings, from the saved games
-uv run scripts/station_league.py --at-once 16 --event "Station league 2"
+uv run scripts/version_league.py --at-once 16   # the round robin, 16 games at a time
+uv run scripts/version_league.py --rate-only    # only the ratings, from the saved games
+uv run scripts/version_league.py --at-once 16 --event "Station league 2"
                                                 # a new league, rated apart from the others
 ```
 
@@ -143,7 +143,7 @@ the `Niram` folder (see [`Niram/README.md`](../../Niram/README.md)). Niram picks
 same moves as Remus about 50 times faster ([`engine_parity.md`](engine_parity.md) shows
 the check), so a 10-minute Niram game searches about
 as many positions as an 8-hour Remus game. Niram games are rated apart from Remus
-games, with Niram-WHITE pinned at 0, and `station_match.py` and `station_elo.py`
+games, with Niram-WHITE pinned at 0, and `version_match.py` and `version_elo.py`
 take `--niram` too.
 
 Without `--at-once`, the league plays one game per processor thread. Give it the

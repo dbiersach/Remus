@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the ORANGE station: null-move pruning.
+Tests for the ORANGE color version: null-move pruning.
 """
 
 from fen import state_from_fen
@@ -29,13 +29,13 @@ def test_null_move_and_undo_restore_the_state() -> None:
 
 
 def test_null_move_search_saves_work_and_keeps_the_state() -> None:
-    """The station searches fewer positions than plain alpha-beta at depth 4."""
+    """The upgraded search visits fewer positions than plain alpha-beta at depth 4."""
     state = state_from_fen(ITALIAN)
     before = state_snapshot(state)
     plain = SearchInfo()
-    station = SearchInfo()
+    upgraded = SearchInfo()
     alpha_beta_with_quiescence(state, 4, 0, *WIDE, plain)
-    _, pv = null_move_search(state, 4, 0, *WIDE, station)
-    assert station.nodes < plain.nodes
+    _, pv = null_move_search(state, 4, 0, *WIDE, upgraded)
+    assert upgraded.nodes < plain.nodes
     assert pv
     assert state_snapshot(state) == before

@@ -40,8 +40,8 @@ Day 5, Period 2.
 | `hidden_peak.py` | D10 P1: Science AI, the hidden peak | Last day |
 | `phase_hunt.py` | D10 P2: the phase hunt: the evaluation `score()` and the greedy agent | D10 P3: the tree search `search()` and the benchmark that compares it with greedy |
 | `estimate_elo.py` | Remus-GOLD: measures the Elo rating of Remus against Stockfish | Last day |
-| `Remus/station_match.py` | D9 P2: plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
-| `scripts/station_league.py` | D10 P4: ranks all 12 Remus versions from every color version game | Last day |
+| `Remus/version_match.py` | D9 P2: plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
+| `scripts/version_league.py` | D10 P4: ranks all 12 Remus versions from every color version game | Last day |
 
 ## Table 2: By period
 

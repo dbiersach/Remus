@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the PINK station: principal variation search.
+Tests for the PINK color version: principal variation search.
 """
 
 from fen import state_from_fen
@@ -12,7 +12,7 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_pvs_search_agrees_with_alpha_beta() -> None:
-    """The station saves work but finds the same score at the same depth."""
+    """The color version saves work but finds the same score at the same depth."""
     state = state_from_fen(ITALIAN)
     before = state_snapshot(state)
     plain_score, _ = alpha_beta_with_quiescence(state, 3, 0, *WIDE, SearchInfo())

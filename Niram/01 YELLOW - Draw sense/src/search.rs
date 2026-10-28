@@ -44,7 +44,7 @@ pub fn quiescence(state: &mut State, mut alpha: i32, beta: i32, info: &mut Searc
     Ok(alpha)
 }
 
-/// The YELLOW station search: the Day 9 search plus draw sense. A position that
+/// The Remus-YELLOW search: the Day 9 search plus draw sense. A position that
 /// repeats, or that reaches the fifty-move limit, scores 0.
 ///
 /// `depth` counts the plies left before quiescence takes over, `ply` how many moves

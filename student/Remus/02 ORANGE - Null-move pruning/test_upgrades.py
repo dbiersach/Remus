@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the ORANGE station: null-move pruning.
+Tests for the ORANGE color version: null-move pruning.
 """
 
 from fen import state_from_fen
@@ -28,7 +28,7 @@ def test_null_move_and_undo_restore_the_state() -> None:
 
 
 def test_null_move_search_saves_work_and_keeps_the_state() -> None:
-    """The station searches fewer positions than plain alpha-beta at depth 4."""
+    """The upgraded search visits fewer positions than plain alpha-beta at depth 4."""
     # Day 9, period 2: write this function.
     # The docstring above says what this test must check.
     raise NotImplementedError(

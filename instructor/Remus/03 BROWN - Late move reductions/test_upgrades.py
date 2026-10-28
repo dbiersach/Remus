@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the BROWN station: late move reductions.
+Tests for the BROWN color version: late move reductions.
 """
 
 from board import EMPTY
@@ -30,13 +30,13 @@ def test_only_late_quiet_moves_are_reduced() -> None:
 
 
 def test_reduced_search_saves_work_and_keeps_the_state() -> None:
-    """The station searches fewer positions than plain alpha-beta at depth 4."""
+    """The upgraded search visits fewer positions than plain alpha-beta at depth 4."""
     state = state_from_fen(ITALIAN)
     before = state_snapshot(state)
     plain = SearchInfo()
-    station = SearchInfo()
+    upgraded = SearchInfo()
     alpha_beta_with_quiescence(state, 4, 0, *WIDE, plain)
-    _, pv = reduced_search(state, 4, 0, *WIDE, station)
-    assert station.nodes < plain.nodes
+    _, pv = reduced_search(state, 4, 0, *WIDE, upgraded)
+    assert upgraded.nodes < plain.nodes
     assert pv
     assert state_snapshot(state) == before

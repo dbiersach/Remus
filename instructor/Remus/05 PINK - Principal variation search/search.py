@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-The PINK station adds pvs_search, and think uses it.
+The PINK color version adds pvs_search, and think uses it.
 """
 
 import random
@@ -438,7 +438,7 @@ def pvs_search(
     first: Move | None = None,
 ) -> tuple[int, list[Move]]:
     """
-    The PINK station search: the Day 9 search plus principal variation search.
+    The Remus-PINK search: the Day 9 search plus principal variation search.
     The first move, the best one by the move ordering, gets the full window, and
     every later move first gets a cheap null window.
 

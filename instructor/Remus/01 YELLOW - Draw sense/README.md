@@ -4,11 +4,11 @@ Score a repeated position, or one at the fifty-move limit, as a draw inside the 
 
 ## Learning objectives
 
-By the end of the station, each pair can:
+By the end of Day 9, each pair can:
 
-- Explain the idea of the station's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
-- Add the enhancement without breaking the rules. **Measured by:** `uv run pytest` passes in the station folder.
-- Run a fair experiment against Remus-WHITE: same opening, both colors. **Measured by:** In the Day 10 tournament, `play_tournament.py` in the station folder plays both 10-minute games with no illegal moves or crashes when the pair presses Run in VS Code, and the pair says why two games cannot show whether the enhancement helps.
+- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
+- Add the enhancement without breaking the rules. **Measured by:** `uv run pytest` passes in the version folder.
+- Run a fair experiment against Remus-WHITE: same opening, both colors. **Measured by:** In the Day 10 tournament, `play_tournament.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the pair presses Run in VS Code, and the pair says why two games cannot show whether the enhancement helps.
 
 ## The idea, with an example
 
@@ -51,7 +51,7 @@ Says a position is a draw when it already appeared earlier in the game or the se
 
 ### `test_draw_sense_search_agrees_with_alpha_beta()` in `test_upgrades.py`
 
-In a position with no repetition, draw sense must change nothing, so the station search and the Day 9 search must find the same score.
+In a position with no repetition, draw sense must change nothing, so the version search and the Day 9 search must find the same score.
 
 ### `test_a_repeated_position_is_a_draw()` in `test_upgrades.py`
 
@@ -63,4 +63,4 @@ Loads a FEN whose halfmove clock is 100 and checks that it counts as a draw. The
 
 ## Check it
 
-Check the work from inside this folder with `uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: Remus-YELLOW plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 10 tournament, open `play_tournament.py` and press Run: Remus-YELLOW plays Remus-WHITE twice, once with each color, at 10 minutes a side, and both games go into games/remus_games.pgn. Each script runs `station_match.py` from the `Remus` folder above this one.
+Check the work from inside this folder with `uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: Remus-YELLOW plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 10 tournament, open `play_tournament.py` and press Run: Remus-YELLOW plays Remus-WHITE twice, once with each color, at 10 minutes a side, and both games go into games/remus_games.pgn. Each script runs `version_match.py` from the `Remus` folder above this one.

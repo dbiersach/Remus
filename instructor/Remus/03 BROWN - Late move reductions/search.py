@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-The BROWN station adds reduced_search, and think uses it.
+The BROWN color version adds reduced_search, and think uses it.
 """
 
 import random
@@ -435,7 +435,7 @@ def reduced_search(
     first: Move | None = None,
 ) -> tuple[int, list[Move]]:
     """
-    The BROWN station search: the Day 9 search plus late move reductions. Late,
+    The Remus-BROWN search: the Day 9 search plus late move reductions. Late,
     quiet moves get a search one ply shallower, and a full-depth search only if
     they turn out better than alpha.
 

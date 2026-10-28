@@ -44,7 +44,7 @@ pub fn quiescence(state: &mut State, mut alpha: i32, beta: i32, info: &mut Searc
     Ok(alpha)
 }
 
-/// The BROWN station search: the Day 9 search plus late move reductions. Late,
+/// The Remus-BROWN search: the Day 9 search plus late move reductions. Late,
 /// quiet moves get a search one ply shallower, and a full-depth search only if they
 /// turn out better than alpha.
 ///

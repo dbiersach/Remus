@@ -157,14 +157,14 @@ batch file.
 ## Leagues and matches with Niram
 
 The three match and rating scripts take `--niram`, which plays the Niram programs in place
-of the Python color versions. Build the programs first. `station_match.py` runs from
+of the Python color versions. Build the programs first. `version_match.py` runs from
 `instructor/Remus`, and the other two run from the top Remus folder.
 
 ```bash
-uv run station_match.py RED --niram                   # Niram-RED against Niram-WHITE
-uv run scripts/station_league.py --niram --at-once 16 # the round robin of all 12
-uv run scripts/station_league.py --niram --rate-only  # only the Niram ratings
-uv run scripts/station_elo.py --niram --workers 16    # all 12 against Stockfish
+uv run version_match.py RED --niram                   # Niram-RED against Niram-WHITE
+uv run scripts/version_league.py --niram --at-once 16 # the round robin of all 12
+uv run scripts/version_league.py --niram --rate-only  # only the Niram ratings
+uv run scripts/version_elo.py --niram --workers 16    # all 12 against Stockfish
 ```
 
 Niram games carry the names Niram-WHITE to Niram-GOLD and are rated apart from the

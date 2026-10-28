@@ -23,7 +23,7 @@ import shutil
 from pathlib import Path
 from typing import Any
 
-from make_station_folders import STATIONS_TABLE
+from make_version_folders import VERSIONS_TABLE
 from period_guides import DAY_GUIDES, LABS
 
 ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
@@ -273,7 +273,7 @@ def changed_files(folder: Path, before: Path | None) -> tuple[list[str], list[st
     return new, changed
 
 
-def pairs_write(day: int, period: int, rows: dict, station_note: str) -> str:
+def pairs_write(day: int, period: int, rows: dict, version_note: str) -> str:
     """Return what the pairs write in one period, with the lines each one takes."""
     parts = []
     for row in rows.get((day, period), []):
@@ -287,7 +287,7 @@ def pairs_write(day: int, period: int, rows: dict, station_note: str) -> str:
         else:
             parts.append(f"the lab `{row['file']}` ({count})")
     if (day, period) in [(9, 2), (9, 3)]:
-        parts.append(f"their color station's functions, {station_note}")
+        parts.append(f"their color version's functions, {version_note}")
     writes = "; ".join(parts)
     return writes[:1].upper() + writes[1:]
 
@@ -322,7 +322,7 @@ def day_readme(day: int, rows: dict) -> str:
     for period in range(1, 5):
         start = PERIOD_STARTS[period]
         end = start + PERIOD_MINUTES
-        writes = pairs_write(day, period, rows, "from the station README")
+        writes = pairs_write(day, period, rows, "from the version README")
         out.append(
             f"| P{period} | {clock(start)} to {clock(end)} | "
             f"{PERIOD_TITLES[(day, period)]} | {writes or 'Nothing: teacher code'} |"
@@ -415,21 +415,21 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
             out.append("")
         before = folder
     out += [
-        "## Enhancement stations (Day 9, periods 2 and 3)",
+        "## Color versions (Day 9, periods 2 and 3)",
         "",
-        "Each pair writes the functions of one color station in `student/Remus`.",
+        "Each pair writes the functions of one color version in `student/Remus`.",
         "",
-        "| Station | Pairs write |",
+        "| Color version | Pairs write |",
         "| --- | --- |",
     ]
-    for station in STATIONS_TABLE:
-        written = rows.get(("station", station["folder"]), [])  # type: ignore[arg-type]
+    for version in VERSIONS_TABLE:
+        written = rows.get(("version", version["folder"]), [])  # type: ignore[arg-type]
         writes = "; ".join(
             f"`{row['function']}()` in `{row['file']}` ({lines_text(row['typed'])})"
             for row in written
         )
         out.append(
-            f"| {station['folder']} | {writes or 'Nothing: a finished engine'} |"
+            f"| {version['folder']} | {writes or 'Nothing: a finished engine'} |"
         )
     file_path = ROOT / "docs" / "course" / "student_edit_plan.md"
     file_path.write_text("\n".join(out) + "\n")
@@ -439,7 +439,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
 def main():
     stubbed = 0
     typed: dict[tuple[int, int], int] = {}  # (day, period) -> lines the pairs type
-    rows: dict = {}  # (day, period), or ("station", folder), -> list[EditRow]
+    rows: dict = {}  # (day, period), or ("version", folder), -> list[EditRow]
     for folder in sorted(INSTRUCTOR.glob("Day */period*")):
         day = int(folder.parent.name[4:6])
         period = int(folder.name.removeprefix("period"))
@@ -496,12 +496,12 @@ def main():
             with (target / "README.md").open("a") as file:
                 for section in sections:
                     file.write("\n" + section)
-    # Each station folder stubs the functions its pair writes during the station
+    # Each version folder stubs the functions its pair writes on Day 9
     (STUDENT / "Remus").mkdir(exist_ok=True)
-    shutil.copy2(INSTRUCTOR / "Remus" / "station_match.py", STUDENT / "Remus")
-    for station in STATIONS_TABLE:
-        folder = INSTRUCTOR / "Remus" / station["folder"]
-        target = STUDENT / "Remus" / station["folder"]
+    shutil.copy2(INSTRUCTOR / "Remus" / "version_match.py", STUDENT / "Remus")
+    for version in VERSIONS_TABLE:
+        folder = INSTRUCTOR / "Remus" / version["folder"]
+        target = STUDENT / "Remus" / version["folder"]
         if target.exists():
             shutil.rmtree(target)
         shutil.copytree(
@@ -509,31 +509,31 @@ def main():
             target,
             ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg"),
         )
-        color = station["folder"].split(" - ")[0].split(" ")[1]
+        color = version["folder"].split(" - ")[0].split(" ")[1]
         count = 0
-        for file_name, function in station["students"]:
+        for file_name, function in version["students"]:
             file_path = target / file_name
             text = file_path.read_text()
             row = {"file": file_name, "function": function}
             row["typed"] = typed_lines(text, function)
             row["line"] = def_line(text, function)
             row["tests"] = checking_tests(folder, function)
-            rows.setdefault(("station", station["folder"]), []).append(row)
+            rows.setdefault(("version", version["folder"]), []).append(row)
             count += row["typed"]
             file_path.write_text(stub_function(text, function, 9, 2))
             stubbed += 1
-        if station["students"]:
+        if version["students"]:
             with (target / "README.md").open("a") as file:
-                file.write("\n" + edit_section(rows[("station", station["folder"])]))
-        print(f"{color} station: {count} lines to type")
+                file.write("\n" + edit_section(rows[("version", version["folder"])]))
+        print(f"{color} color version: {count} lines to type")
         if count > MAX_TYPED_LINES:
-            print(f"  Too long: the {color} station asks for {count} lines")
+            print(f"  Too long: the {color} color version asks for {count} lines")
     print(f"Wrote {STUDENT}")
     write_edit_plan(rows)
     write_day_readmes(rows)
     print(
         f"Functions turned into stubs: {stubbed}  (expected "
-        f"{len(STUDENT_FUNCTIONS) + sum(len(st['students']) for st in STATIONS_TABLE)})"
+        f"{len(STUDENT_FUNCTIONS) + sum(len(st['students']) for st in VERSIONS_TABLE)})"
     )
     longest = max(typed, key=lambda day_period: typed[day_period])
     print(

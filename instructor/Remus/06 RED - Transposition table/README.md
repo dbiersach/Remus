@@ -4,11 +4,11 @@ Remember positions already searched, so the same position reached in two move or
 
 ## Learning objectives
 
-By the end of the station, each pair can:
+By the end of Day 9, each pair can:
 
-- Explain the idea of the station's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
-- Add the enhancement without breaking the rules. **Measured by:** `uv run pytest` passes in the station folder.
-- Run a fair experiment against Remus-WHITE: same opening, both colors. **Measured by:** In the Day 10 tournament, `play_tournament.py` in the station folder plays both 10-minute games with no illegal moves or crashes when the pair presses Run in VS Code, and the pair says why two games cannot show whether the enhancement helps.
+- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
+- Add the enhancement without breaking the rules. **Measured by:** `uv run pytest` passes in the version folder.
+- Run a fair experiment against Remus-WHITE: same opening, both colors. **Measured by:** In the Day 10 tournament, `play_tournament.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the pair presses Run in VS Code, and the pair says why two games cannot show whether the enhancement helps.
 
 ## The idea, with an example
 
@@ -67,4 +67,4 @@ Proves the rules of `probe()` with three made-up entries before any real search 
 
 ## Check it
 
-Check the work from inside this folder with `uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: Remus-RED plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 10 tournament, open `play_tournament.py` and press Run: Remus-RED plays Remus-WHITE twice, once with each color, at 10 minutes a side, and both games go into games/remus_games.pgn. Each script runs `station_match.py` from the `Remus` folder above this one.
+Check the work from inside this folder with `uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: Remus-RED plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 10 tournament, open `play_tournament.py` and press Run: Remus-RED plays Remus-WHITE twice, once with each color, at 10 minutes a side, and both games go into games/remus_games.pgn. Each script runs `version_match.py` from the `Remus` folder above this one.

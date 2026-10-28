@@ -146,7 +146,7 @@ def test_quiescence_sees_the_recapture() -> None:
 def test_mate_in_two_puzzles() -> None:
     for line in MATE_PUZZLES.read_text().splitlines():
         if "dm 2" not in line:
-            continue  # MATE.008 is a mate in 3, a Day 10 mate-solver station
+            continue  # MATE.008 is a mate in 3, left for the mate solver
         fen = " ".join(line.split()[:4])
         state = state_from_fen(fen)
         score, pv = alpha_beta_with_quiescence(

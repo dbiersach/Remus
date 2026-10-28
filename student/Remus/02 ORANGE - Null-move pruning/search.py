@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-The ORANGE station adds null_move_search, and think uses it.
+The ORANGE color version adds null_move_search, and think uses it.
 """
 
 import random
@@ -443,7 +443,7 @@ def null_move_search(
     allow_null: bool = True,
 ) -> tuple[int, list[Move]]:
     """
-    The ORANGE station search: the Day 9 search plus null-move pruning. The side
+    The Remus-ORANGE search: the Day 9 search plus null-move pruning. The side
     to move passes, so the opponent moves twice, and runs a shallower search. If
     the side to move still scores at least beta, the opponent would never allow
     this position, because a real move almost always beats a pass, so the

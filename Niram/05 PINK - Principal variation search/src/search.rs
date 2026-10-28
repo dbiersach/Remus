@@ -68,7 +68,7 @@ fn search_later_move(
     Ok((score, line))
 }
 
-/// The PINK station search: the Day 9 search plus principal variation search. The
+/// The Remus-PINK search: the Day 9 search plus principal variation search. The
 /// first move, the best one by the move ordering, gets the full window, and every
 /// later move first gets a cheap null window.
 ///

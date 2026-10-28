@@ -219,12 +219,12 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   objectives, a table of the four periods with what the pairs write in each, a timed
   sequence of activities for every period, and the checkpoint at 4:30.
   The text lives in `period_guides.py` (`OBJECTIVES`, `CHANGE_NOTES`, `LAB_NOTES`,
-  `STATION_OBJECTIVES`, `STATION_GUIDES`, `STATION_MEASURES`, `PERIOD_GUIDES`
+  `VERSION_OBJECTIVES`, `VERSION_GUIDES`, `VERSION_MEASURES`, `PERIOD_GUIDES`
   for a period that needs an illustrated guide, such as the Day 10 phase hunt, and
   `DAY_GUIDES` for the Day READMEs, which `make_student_folders.py` writes); the
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
   in `docs/images/phase_hunt/`, drawn by `uv run scripts/make_phase_hunt_figures.py`,
-  which installs matplotlib for itself alone. Measure `STATION_MEASURES` again after any
+  which installs matplotlib for itself alone. Measure `VERSION_MEASURES` again after any
   change to a color version's search or evaluation.
   Each student README adds a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it, and
@@ -244,14 +244,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   with `uv run perft.py`.
 - Every teacher tool that is not part of an engine lives in the top-level `scripts/`
   folder (David, 2026-10-28): the builders `make_period_folders.py`,
-  `make_station_folders.py`, `make_student_folders.py`, and
+  `make_version_folders.py`, `make_student_folders.py`, and
   `make_phase_hunt_figures.py`, the README text in `period_guides.py`,
-  `run_all_tests.py`, `test_reference_tools.py`, `station_league.py`,
-  `station_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
+  `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`,
+  `version_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
   top Remus folder from its own path, so it
   runs from the top folder with `uv run scripts/<name>.py`. Students never open
   `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
-  `station_match.py` in `instructor/Remus` and `student/Remus` for the Day 10
+  `version_match.py` in `instructor/Remus` and `student/Remus` for the Day 10
   tournament, and `play_match.py`, `estimate_elo.py`, and the tests inside their
   period and version folders. Put a new teacher tool in `scripts/`.
 - `period4` holds the finished code of the day, and it is the only period folder to
@@ -275,7 +275,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   demo), and their READMEs point to the GOLD folder for the engine, Lucas Chess, and
   `estimate_elo.py`. The GOLD folder is written by hand, like a `period4` folder;
   edit the finished engine there. Remus-GOLD stays out of the color matches;
-  `estimate_elo.py` rates it against Stockfish. `make_station_folders.py` builds the
+  `estimate_elo.py` rates it against Stockfish. `make_version_folders.py` builds the
   other eleven folders from the Day 9 `period4` code and the GOLD folder, rewrites
   only the GOLD README, and `make_student_folders.py` stubs each color version's functions
   in `student/Remus`. Colors name the color versions so
@@ -283,15 +283,15 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   prefix (David, 2026-10-28) orders the folders by each version's Elo over WHITE in
   the 10-minute league: 00 WHITE, 01 YELLOW, 02 ORANGE, 03 BROWN, 04 BLUE, 05 PINK,
   06 RED, 07 PURPLE, 08 GRAY, 09 CYAN, 10 GREEN, 11 GOLD. The Rust engine folders in
-  `Niram/` use the same names. `station_match.py` plays a color version
+  `Niram/` use the same names. `version_match.py` plays a color version
   against Remus-WHITE, and Remus-WHITE takes part in the color matches too.
-  `station_league.py` plays a round robin of all 12 versions, Remus-GOLD included,
+  `version_league.py` plays a round robin of all 12 versions, Remus-GOLD included,
   and fits one Elo rating per version with Remus-WHITE pinned at 0.
-  `station_elo.py` rates all 12 versions against Stockfish at five UCI_Elo levels
+  `version_elo.py` rates all 12 versions against Stockfish at five UCI_Elo levels
   from frozen copies of the color versions and writes the table to `docs/versions/remus_elo.md`.
 - `Niram/` holds Niram, every Remus version rewritten in Rust (David, 2026-10-27 and
   2026-10-28), named for Naram-Sin, Sargon's grandson: Niram-WHITE, the ten color
-  color versions, and Niram-GOLD, one Cargo crate each in folders named like the color version
+  versions, and Niram-GOLD, one Cargo crate each in folders named like the color version
   folders, with the shared rules in `Niram/rules`. It is a teacher's tool that runs
   the same engines about 50 times faster; students never edit it. Each `.rs` file
   matches the Python file of the same name, and each Niram version must visit
@@ -300,14 +300,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   times the Remus version on the same positions). `uv run scripts/engine_parity.py`
   checks all 12 pairs on 49 positions: evaluation, legal moves, book moves, and every
   depth's score, node count, and principal variation must match, and the results go
-  to `docs/versions/engine_parity.md`. Run it after any change to an engine. `station_match.py`,
-  `station_league.py`, and `station_elo.py` play the Niram programs with `--niram`
+  to `docs/versions/engine_parity.md`. Run it after any change to an engine. `version_match.py`,
+  `version_league.py`, and `version_elo.py` play the Niram programs with `--niram`
   and rate them apart from Remus, with Niram-WHITE pinned at 0; David wants leagues
   run with Niram (2026-10-28). A change to a color version's rules, evaluation, search, or
   opening book needs the same change in Niram, and a clean `engine_parity.py` run. The Python style rules above do not apply to the Rust code, which
   follows `cargo fmt` and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `estimate_elo.py`,
-  `station_match.py`, `station_league.py`, `station_elo.py`) is added to `games/remus_games.pgn` at the top of the
+  `version_match.py`, `version_league.py`, `version_elo.py`) is added to `games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson
   makes a file smarter, the new code goes into the same file under a new function
@@ -341,13 +341,15 @@ learners extend it, and save open questions. Never drop in a complete optimized 
     `.py` file a student modifies or reads, named after that file (`board.py` has
     `board.md`).
   - `docs/versions/`: `remus_versions.md`, the ten color versions and Remus-GOLD, and
-    `remus_elo.md`, which `station_elo.py` writes.
+    `remus_elo.md`, which `version_elo.py` writes.
   - `docs/briefs/`: the two briefing PDFs.
   Pictures live in `docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `docs/`.
 - Remus-WHITE, the ten color versions (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
-  are the **Remus versions** (David, 2026-10-28). Never call them "stations" in new
-  prose; the word survives only in file and function names that predate the rule.
+  are the **Remus versions** (David, 2026-10-28). Call them Remus versions or color
+  versions, never "stations", in file names, code, and prose. Game records keep the
+  Event names `Station match`, `Station league`, and `Station Elo test`, so the
+  games already in `games/remus_games.pgn` still count toward the ratings.
 
 # Part 2: Python style
 

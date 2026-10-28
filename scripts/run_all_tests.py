@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """run_all_tests.py
 
-Run the tests of every period folder and every station folder in instructor/, one
+Run the tests of every period folder and every version folder in instructor/, one
 folder at a time, and the reference-tool tests in scripts/. Each folder is a complete
 copy of Remus with the same module names (board.py, search.py, ...), so each folder
 gets its own pytest run.

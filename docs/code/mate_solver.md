@@ -1,6 +1,6 @@
 # mate_solver.py: Solve mate-in-two puzzles
 
-*First appears in `instructor/Day 09 - Add the clock and build the stations/period4`.*
+*First appears in `instructor/Day 09 - Add the clock and build the color versions/period4`.*
 
 ## The big picture
 

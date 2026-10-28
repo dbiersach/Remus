@@ -11,7 +11,7 @@ A positive score is good for White. Two terms make up the score:
 Each table is written from White's side, row 0 (rank 8) first. A Black piece reads
 the table upside down, so its row 7 uses the table's row 0.
 
-The GRAY station adds a third term, king_safety.
+The GRAY color version adds a third term, king_safety.
 """
 
 from board import EMPTY, Board

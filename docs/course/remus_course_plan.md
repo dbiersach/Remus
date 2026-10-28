@@ -518,7 +518,7 @@ test, and the mate solver solves all ten puzzles.
   the pair's repository to their own USB drive with `git clone --no-hardlinks` and
   checks that the copy opens. Each pair writes its two results on the board. Then the
   teacher shows Remus-GOLD's results against every color and Remus-WHITE from the
-  teacher's 10-minute league (`uv run scripts/station_league.py --rate-only --player GOLD`),
+  teacher's 10-minute league (`uv run scripts/version_league.py --rate-only --player GOLD`),
   and Remus-GOLD's Stockfish rating (about 1960 at 10 minutes a game, from
   [`remus_elo.md`](../versions/remus_elo.md)), as a class discussion: two games cannot tell
   one enhancement from another, and 66 games barely can. In `demo_results.py` each
@@ -554,7 +554,7 @@ The full description of each script is in `docs/code/`.
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the version folders live in `Remus/` |
+| `Day 09 - Add the clock and build the color versions` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the version folders live in `Remus/` |
 | `Day 10 - Aim Remus at a science problem` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`, the demo `demo_results.py`. The Day 10 engine is Remus-GOLD in `Remus/11 GOLD - All enhancements`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
 
 Outside the Day folders:
@@ -562,10 +562,10 @@ Outside the Day folders:
 | Path | Holds |
 | --- | --- |
 | `scripts/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
-| `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `station_league.py`, `station_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
+| `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`, `version_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
 | `scripts/run_all_tests.py` | Runs pytest on each instructor period folder in turn |
 | `scripts/make_period_folders.py` | Builds `period1` to `period3` of each instructor Day folder from `period4` |
-| `scripts/make_station_folders.py` | Builds the version folders in `instructor/Remus` from the Day 9 and Day 10 code |
+| `scripts/make_version_folders.py` | Builds the version folders in `instructor/Remus` from the Day 9 and Day 10 code |
 | `student/`, `scripts/make_student_folders.py` | The student copy of every period folder, with that period's student functions as stubs, and the script that builds it |
 | `docs/` | `course/` (this plan, the roadmap, the slide plan, the Lucas Chess guide), `code/` (the program overview and the script pages), `versions/` (the Remus versions and their ratings), and `briefs/` (the two briefing PDFs) |
 | `<skill>.py` in the student period folder, `<skill>_instructor.py` in the instructor one | Python skills labs: student file with blanks, instructor file with answers, both in the period folder of their lab (`period_guides.LABS` lists the 16 lab and demo periods) |
@@ -587,9 +587,9 @@ engine, and the engine never imports it.
 1. **GUI play through UCI.** Lucas Chess starts a launcher and talks to Remus over stdin and
    stdout. `remus.bat` changes to its own folder and runs `uv run python
    uci_engine.py`.
-2. **Matches and the tournament.** `play_match.py` and `station_match.py` use
+2. **Matches and the tournament.** `play_match.py` and `version_match.py` use
    `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes and play them
-   on a `chess.Board`, and `station_match.py` saves every game as PGN with `chess.pgn`.
+   on a `chess.Board`, and `version_match.py` saves every game as PGN with `chess.pgn`.
    python-chess rejects any illegal move
    an engine sends, so match play doubles as a rules test.
 3. **Reference checks in tests.** The tests in each period folder compare Remus perft counts, legal move lists,

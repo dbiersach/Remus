@@ -15,5 +15,5 @@ screenshots in `images/lucas_chess/` and the phase hunt figures in
 
 Three pages come from scripts, so edit the script, not the page.
 `scripts/make_student_folders.py` writes `course/student_edit_plan.md`,
-`scripts/station_elo.py` writes `versions/remus_elo.md`, and
+`scripts/version_elo.py` writes `versions/remus_elo.md`, and
 `scripts/engine_parity.py` writes `versions/engine_parity.md`.

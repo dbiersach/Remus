@@ -13,7 +13,7 @@ and sees the margin shrink as the games add up.
 ## Where this piece fits
 
 The demo runs in the Day 10, period 4 folder and uses only Python's `math` module.
-`estimate_elo.py` and `station_league.py` fit ratings with the same Elo formula.
+`estimate_elo.py` and `version_league.py` fit ratings with the same Elo formula.
 
 - **Uses:** nothing from Remus
 - **Used by:** nothing; each pair uses it to present its color version's result
