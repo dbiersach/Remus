@@ -130,29 +130,38 @@ plays only the games that are not in the games file yet. With one game per proce
 core, a 4-core computer plays about 2 games a minute, so the whole league takes
 about 3 hours and 20 minutes.
 
-### The teacher's league run
+### The teacher's league runs
 
-The teacher's run of all 396 games (October 2026) gave these ratings:
+The teacher ran all 396 games twice in October 2026: once at 1 minute plus 0.6
+seconds a move, and once at 10 minutes a game. These are the ratings:
 
-| Rank | Version | Score | Elo vs WHITE |
-| --- | --- | --- | --- |
-| 1 | Remus-GOLD | 65.2% | +99 +/- 87 |
-| 2 | Remus-PURPLE | 55.3% | +34 +/- 84 |
-| 3 | Remus-YELLOW | 53.8% | +24 +/- 84 |
-| 4 | Remus-ORANGE | 51.5% | +10 +/- 84 |
-| 5 | Remus-RED | 50.0% | +0 +/- 84 |
-| 6 | Remus-WHITE | 50.0% | 0 (pinned) |
-| 7 | Remus-BLUE | 49.2% | -5 +/- 84 |
-| 8 | Remus-BROWN | 47.7% | -14 +/- 84 |
-| 9 | Remus-PINK | 44.7% | -34 +/- 84 |
-| 10 | Remus-GRAY | 44.7% | -34 +/- 84 |
-| 11 | Remus-GREEN | 43.9% | -39 +/- 84 |
-| 12 | Remus-CYAN | 43.9% | -39 +/- 84 |
+| Version | 1 minute: score | 1 minute: Elo vs WHITE | 10 minutes: score | 10 minutes: Elo vs WHITE |
+| --- | --- | --- | --- | --- |
+| Remus-GOLD | 65.2% | +99 +/- 87 | 72.7% | +175 +/- 93 |
+| Remus-YELLOW | 53.8% | +24 +/- 84 | 52.3% | +35 +/- 84 |
+| Remus-ORANGE | 51.5% | +10 +/- 84 | 50.8% | +26 +/- 84 |
+| Remus-BROWN | 47.7% | -14 +/- 84 | 50.8% | +26 +/- 84 |
+| Remus-BLUE | 49.2% | -5 +/- 84 | 48.5% | +11 +/- 84 |
+| Remus-PINK | 44.7% | -34 +/- 84 | 47.7% | +6 +/- 84 |
+| Remus-RED | 50.0% | +0 +/- 84 | 47.7% | +6 +/- 84 |
+| Remus-PURPLE | 55.3% | +34 +/- 84 | 47.7% | +6 +/- 84 |
+| Remus-GRAY | 44.7% | -34 +/- 84 | 47.0% | +1 +/- 84 |
+| Remus-WHITE | 50.0% | 0 (pinned) | 46.2% | 0 (pinned) |
+| Remus-CYAN | 43.9% | -39 +/- 84 | 44.7% | -13 +/- 84 |
+| Remus-GREEN | 43.9% | -39 +/- 84 | 43.9% | -18 +/- 84 |
 
-Only Remus-GOLD, with all ten enhancements, has a range that stays above 0, and only
-just: +99 plus or minus 87 runs from +12 to +186. Every single station's range
-includes 0, so one enhancement alone changes Remus by less than 66 games can measure
-at 1 minute a game.
+The rows follow the 10-minute ratings. Only Remus-GOLD, with all ten enhancements,
+has a range that stays above 0. At 1 minute a game its +99 plus or minus 87 runs
+from +12 to +186; at 10 minutes its +175 plus or minus 93 runs from +82 to +268.
+More time helps Remus-GOLD most, because null move and late move reductions save
+work only at depth 3 and deeper, and Remus reaches those depths only with time to
+think. Every single station's range includes 0 at both clocks, so one enhancement
+alone changes Remus by less than 66 games can measure.
+
+The 10-minute run played its first 266 games before `thinking_time` kept a
+3-second reserve on the clock, and its last 130 games with the reserve. 3 games
+ended on time, all of them Remus-GOLD losses from the first part, so Remus-GOLD's
+true 10-minute gain is likely a little higher than +175.
 
 ## How big is each version?
 
