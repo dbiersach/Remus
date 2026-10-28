@@ -7,14 +7,14 @@ Remus-WHITE is the finished Day 9 Remus (instructor/Day 09 .../period4) with non
 the ten enhancements. Each other station folder is Remus-WHITE plus one enhancement,
 named by a color so that no station sounds better than another. A pair builds its
 station, then its Remus plays Remus-WHITE to measure how much Elo the one
-enhancement adds. Remus-GOLD, a copy of the finished Day 10 Remus, holds every
-enhancement at once.
+enhancement adds. Remus-GOLD, the finished Remus of Day 10, holds every
+enhancement at once. Its folder, instructor/Remus/11 GOLD - All enhancements, is
+written by hand, and this script only rewrites its README.md.
 
-The script copies the Day 9 files, adds the station's files from the Day 10 folder,
+The script copies the Day 9 files, adds the station's files from the GOLD folder,
 and applies the station's edits. Each search station gets a new search function
 built from alpha_beta_with_quiescence, so the one idea it adds stands out. Run it
-after any change to the Day 9 or Day 10 instructor code, then run
-make_student_folders.py.
+after any change to the Day 9 or GOLD code, then run make_student_folders.py.
 """
 
 import ast
@@ -34,7 +34,7 @@ ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
 STATIONS = INSTRUCTOR / "Remus"
 BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period4"  # Remus-WHITE
-FINAL = next(INSTRUCTOR.glob("Day 10 - *")) / "period4"  # Every enhancement at once
+FINAL = STATIONS / "11 GOLD - All enhancements"  # Every enhancement, written by hand
 
 
 def function_text(file_path: Path, name: str) -> str:
@@ -451,7 +451,7 @@ def evaluation_station(color: str, term: str, constants: list[str], label: str):
 
 
 def test_text(header: str, imports: str, tests: list[str], extra: str = "") -> str:
-    """Return a station's test_upgrades.py: its own tests plus tests from Day 10."""
+    """Return a station's test_upgrades.py: its own tests plus tests from GOLD."""
     final_tests = FINAL / "test_upgrades.py"
     bodies = "".join(function_text(final_tests, name) + "\n\n" for name in tests)
     return (
@@ -514,13 +514,13 @@ from search import MATE_SCORE, SearchInfo, alpha_beta_with_quiescence, {names}
 """
 
 # For each station: the folder name, the idea in one line, the files it copies
-# from the Day 10 folder, its edits as (file, old text, new text), its test file,
+# from the GOLD folder, its edits as (file, old text, new text), its test file,
 # and the functions the pair writes
 STATIONS_TABLE = [
     {
         "folder": "11 GOLD - All enhancements",
-        "idea": "Remus-GOLD is the finished Day 10 Remus with all ten enhancements "
-        "at once. It stays out of the color matches; estimate_elo.py measures its "
+        "idea": "Remus-GOLD is the finished Remus of Day 10, with all ten "
+        "enhancements at once. It stays out of the color matches; estimate_elo.py measures its "
         "rating against Stockfish.",
         "source": FINAL,
         "copies": [],
@@ -1023,6 +1023,10 @@ def main():
     built = []
     for station in STATIONS_TABLE:
         folder = STATIONS / station["folder"]
+        if folder == FINAL:
+            # GOLD is written by hand: only its README is rebuilt
+            (folder / "README.md").write_text(readme_text(station))
+            continue
         if folder.exists():
             shutil.rmtree(folder)
         shutil.copytree(
@@ -1041,7 +1045,8 @@ def main():
         (folder / "README.md").write_text(readme_text(station))
         built.append(folder)
     tidy(built)
-    print(f"Built {len(built)} station folders in {STATIONS}  (expected 12)")
+    print(f"Built {len(built)} station folders in {STATIONS}  (expected 11)")
+    print(f"Kept the hand-written {FINAL.name} and rewrote its README.md")
 
 
 if __name__ == "__main__":

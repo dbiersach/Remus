@@ -13,7 +13,7 @@ By the end of this period, each pair can:
 
 The lab is `python_caches.py` in `student/`, with the answers in `python_caches_instructor.py` in `instructor/`. Open `python_caches.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-The Remus code here is the same as at the end of the period before.
+The code here is the same as at the end of the period before.
 
 ## The changes and why
 

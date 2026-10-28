@@ -22,25 +22,25 @@ Day 5, Period 2.
 | `move_generation.py` | D3 P2: knight and king jumps | D3 P3: sliding pieces. D3 P4: pawns, promotion choices, `pseudo_legal_moves()`. D5 P3: en passant captures |
 | `attacks.py` | D4 P2: attacked squares, two versions | D4 P3: `find_king()` and `in_check()` |
 | `legal_moves.py` | D4 P3: the make, test, undo filter | D5 P2: adds castling moves |
-| `uci_engine.py` | D5 P4: a first engine for Lucas Chess that plays random legal moves | D7 P3: every UCI command, FEN positions, random and greedy brains. D8 P1: negamax brain. D9 P1: clock and thinking time. D10 P1: plays book moves first |
+| `uci_engine.py` | D5 P4: a first engine for Lucas Chess that plays random legal moves | D7 P3: every UCI command, FEN positions, random and greedy brains. D8 P1: negamax brain. D9 P1: clock and thinking time. Remus-GOLD: plays book moves first |
 | `remus.bat` | D5 P4: starts Remus for Lucas Chess | No changes |
 | `perft.py` | D6 P2: counts positions, `divide()` | No changes |
 | `fen.py` | D6 P4: FEN in and out | D7 P1: starts the position history |
 | `game_end.py` | D7 P1: mate, stalemate, draws | No changes |
 | `notation.py` | D7 P2: SAN in and out | No changes |
-| `console_game.py` | D7 P2: two people play in SAN | D7 P3: Remus plays greedy moves. D8 P1: Remus plays with negamax. D9 P1: Remus thinks on a clock. D10 P1: Remus plays book moves first |
-| `search.py` | D7 P3: random and greedy brains | D8 P1: minimax, negamax, and mate scores. D8 P2: alpha-beta. D8 P3: quiescence. D8 P4: move ordering, check extension, the clock. D9 P1: iterative deepening and `info` lines. D10 P1: `upgraded_search()` with memory, killers, PVS, draw sense, null moves, late move reductions |
+| `console_game.py` | D7 P2: two people play in SAN | D7 P3: Remus plays greedy moves. D8 P1: Remus plays with negamax. D9 P1: Remus thinks on a clock. Remus-GOLD: Remus plays book moves first |
+| `search.py` | D7 P3: random and greedy brains | D8 P1: minimax, negamax, and mate scores. D8 P2: alpha-beta. D8 P3: quiescence. D8 P4: move ordering, check extension, the clock. D9 P1: iterative deepening and `info` lines. Remus-GOLD: `upgraded_search()` with memory, killers, PVS, draw sense, null moves, late move reductions |
 | `play_match.py` | D7 P3: two brains play a match | No changes |
-| `evaluation.py` | D7 P4: material and piece-square tables | D10 P1: pawn structure, the mating bonus, king safety |
+| `evaluation.py` | D7 P4: material and piece-square tables | Remus-GOLD: pawn structure, the mating bonus, king safety |
 | `compare_search.py` | D8 P2: negamax against alpha-beta | No changes |
-| `move_ordering.py` | D8 P4: captures first by MVV-LVA | D10 P1: killer moves |
-| `transposition_table.py` | D10 P1: remembers searched positions | Last day |
-| `opening_book.py`, `opening_book.txt` | D10 P1: plays known openings | Last day |
+| `move_ordering.py` | D8 P4: captures first by MVV-LVA | Remus-GOLD: killer moves |
+| `transposition_table.py` | Remus-GOLD: remembers searched positions | Last day |
+| `opening_book.py`, `opening_book.txt` | Remus-GOLD: plays known openings | Last day |
 | `mate_solver.py` | D9 P4: solves the ten mate puzzles while the station matches run | No changes |
 | `hidden_peak.py` | D10 P1: Science AI, the hidden peak | Last day |
 | `phase_hunt.py` | D10 P2: the phase hunt: the evaluation `score()` and the greedy agent | D10 P3: the tree search `search()` and the benchmark that compares it with greedy |
-| `remus.sh` | D10 P4: starts Remus on a Mac or Linux computer at home | Last day |
-| `estimate_elo.py` | D10 P4: measures the Elo rating of Remus against Stockfish | Last day |
+| `remus.sh` | Remus-GOLD: starts Remus on a Mac or Linux computer at home | Last day |
+| `estimate_elo.py` | Remus-GOLD: measures the Elo rating of Remus against Stockfish | Last day |
 | `Remus/station_match.py` | D9 P2: plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
 | `Remus/station_league.py` | D10 P4: ranks all 12 Remus versions from every station game | Last day |
 
@@ -86,7 +86,7 @@ instructor folder holds the answer file `<name>_instructor.py`.
 | D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock and thinking time. `console_game.py`: uses `think()`. `test_search.py` |
 | D9 P2, P3 | Ten station folders in `Remus/` (see [stations.md](stations.md)). Lab 12 in P2: `python_caches.py` | None in the Day folder, which holds Remus-WHITE |
 | D9 P4 | `mate_solver.py` | `test_search.py`: mate-solver tests |
-| D10 P1 | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `test_upgrades.py` | `search.py`: `upgraded_search()`. `evaluation.py`: pawns, mating, king safety. `move_ordering.py`: killers. `uci_engine.py` and `console_game.py`: book moves first |
+| D10 P1 | `hidden_peak.py`, `test_hidden_peak.py`. The Day 10 folders hold only the science files; the engine is Remus-GOLD (`transposition_table.py`, `opening_book.py`, `upgraded_search()`, and the other enhancements) | None |
 | D10 P2 | `phase_hunt.py`, `test_phase_hunt.py` | None |
 | D10 P3 | None | `phase_hunt.py`: the tree search. `test_phase_hunt.py` |
-| D10 P4 | `remus.sh`, `estimate_elo.py`. Demo: `demo_results.py` | None |
+| D10 P4 | Demo: `demo_results.py` | None |

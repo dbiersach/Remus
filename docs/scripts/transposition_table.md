@@ -1,6 +1,6 @@
 # transposition_table.py: Remember positions already searched
 
-*First appears in `instructor/Day 10 - Aim Remus at a science problem/period1`.*
+*Lives in Remus-GOLD, `instructor/Remus/11 GOLD - All enhancements`, the engine of Day 10.*
 
 ## The big picture
 
@@ -62,9 +62,9 @@ best_stored_move()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `store` | Saves what the search learned about a position. | Day 10, period 1 |
-| `probe` | Returns a saved score, if it can answer this search. | Day 10, period 1 |
-| `best_stored_move` | Returns the best move saved for a position. | Day 10, period 1 |
+| `store` | Saves what the search learned about a position. | Remus-GOLD |
+| `probe` | Returns a saved score, if it can answer this search. | Remus-GOLD |
+| `best_stored_move` | Returns the best move saved for a position. | Remus-GOLD |
 
 ## Try it
 

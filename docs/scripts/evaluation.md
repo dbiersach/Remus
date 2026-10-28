@@ -73,16 +73,16 @@ explain_evaluation()
 | --- | --- | --- |
 | `material` | Counts the value of the pieces. Positive means White is ahead. | Day 7, period 4 |
 | `placement` | Adds bonus points for pieces on good squares. | Day 7, period 4 |
-| `pawn_structure` | Scores doubled, isolated, and passed pawns. | Day 10, period 1 |
-| `mating_bonus` | Rewards driving the losing king to the edge when far ahead. | Day 10, period 1 |
-| `king_safety` | Rewards pawns that shelter the king while the enemy queen is on the board. | Day 10, period 1 |
+| `pawn_structure` | Scores doubled, isolated, and passed pawns. | Remus-GOLD |
+| `mating_bonus` | Rewards driving the losing king to the edge when far ahead. | Remus-GOLD |
+| `king_safety` | Rewards pawns that shelter the king while the enemy queen is on the board. | Remus-GOLD |
 | `evaluate` | Gives the score from the point of view of the side to move. | Day 7, period 4 |
 | `explain_evaluation` | Prints each part of the score, so you can see why. | Day 7, period 4 |
 
 ## How the file grows
 
 - **Day 7, period 4:** `material`, `placement`, `evaluate`, `explain_evaluation`
-- **Day 10, period 1:** `pawn_structure`, `mating_bonus`, `king_safety`
+- **Remus-GOLD:** `pawn_structure`, `mating_bonus`, `king_safety`
 
 ## Try it
 

@@ -653,9 +653,9 @@ OBJECTIVES = {
         (
             "Explain one decision your engine made.",
             (
-                "Each pair presents one move with its score and principal variation, "
-                "from Part #3 of `demo_results.py` or its own position, and one powder "
-                "its phase hunt named."
+                "Each pair presents one move from its tournament games with the score "
+                "and principal variation that Lucas Chess shows for Remus-GOLD, and "
+                "one powder its phase hunt named."
             ),
         ),
         (
@@ -1847,11 +1847,6 @@ LAB_NOTES = {
             "enhancement helped, and more games are needed. Each pair puts in its own "
             "two tournament games, then its color's league games from the teacher's "
             "table, and compares the two ranges."
-        ),
-        (
-            "Part #3 asks `think()` about a back-rank mate and prints each depth's "
-            "score and principal variation, the line of moves Remus expects. That line "
-            "is how a pair explains why Remus chose its move."
         ),
     ],
 }

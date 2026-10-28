@@ -22,8 +22,8 @@ the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each station fol
 that copy plus one enhancement. `student/Remus`
 holds the same folders with the pair's functions stubbed.
 
-`make_station_folders.py` builds the folders from the Day 9 and Day 10 code.
-`11 GOLD - All enhancements` holds Remus-GOLD, a copy of the finished Day 10 Remus with
+`make_station_folders.py` builds the folders from the Day 9 code and the GOLD folder.
+`11 GOLD - All enhancements` holds Remus-GOLD, the finished Remus of Day 10, with
 all ten enhancements at once. Remus-GOLD stays out of the color matches;
 `uv run estimate_elo.py` inside its folder rates it against Stockfish.
 
@@ -195,8 +195,7 @@ The table counts the lines of Python code in each version. A line counts only wh
 it holds code: comment lines, docstrings, and blank lines do not count. The count
 covers only the engine's own `.py` files, the ones `uci_engine.py` loads directly or
 through another module when Lucas Chess runs that version. Test files and tools such
-as `perft.py`, `play_match.py`, and `show_board.py` do not count, and neither do the
-Day 10 science files in the GOLD folder.
+as `perft.py`, `play_match.py`, and `show_board.py` do not count.
 
 | Version | Enhancement | Engine files | Code lines | Lines over WHITE |
 | --- | --- | --- | --- | --- |

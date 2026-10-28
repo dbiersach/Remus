@@ -129,21 +129,12 @@ ARRIVALS = {
         "test_game.py": 1,
         "mate_solver.py": 4,
     },
+    # Day 10 holds only the science files; its engine is Remus-GOLD in instructor/Remus
     10: {
-        "evaluation.py": 1,
-        "move_ordering.py": 1,
-        "search.py": 1,
-        "console_game.py": 1,
-        "uci_engine.py": 1,
-        "transposition_table.py": 1,
-        "opening_book.py": 1,
-        "opening_book.txt": 1,
-        "test_upgrades.py": 1,
         "hidden_peak.py": 1,
+        "test_hidden_peak.py": 1,
         "phase_hunt.py": 2,
         "test_phase_hunt.py": 2,
-        "remus.sh": 4,
-        "estimate_elo.py": 4,
     },
 }
 
@@ -656,8 +647,9 @@ PERIOD_NOTES = {
     "pattern and counts the right and wrong calls over 200 powders.",
     (10, 4): "The tournament: each pair runs `uv run station_match.py <COLOR>` in "
     "the `Remus` folder next to the Day folders, two 10-minute games of its color "
-    "against Remus-WHITE, one with each color, all pairs at once. Running `estimate_elo.py` measures the Elo "
-    "rating of Remus against Stockfish. Both add every game to games/remus_games.pgn "
+    "against Remus-WHITE, one with each color, all pairs at once. Running "
+    "`estimate_elo.py` in the GOLD folder measures the Elo rating of Remus-GOLD "
+    "against Stockfish. Both add every game to games/remus_games.pgn "
     "at the top of the repository.",
 }
 
@@ -908,6 +900,14 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         if (row_day, row_period) == (day, period)
     ]
     sections.append("## The files")
+    if day == 10:
+        sections.append(
+            "The engine for Day 10 is Remus-GOLD, the finished Remus with all ten "
+            "enhancements, in the `Remus/11 GOLD - All enhancements` folder beside "
+            "the Day folders. Lucas Chess runs its `remus.bat`, and its "
+            "`estimate_elo.py` rates it against Stockfish. This folder holds only "
+            "the science files, which never import the engine."
+        )
     if (day, period) in LABS:
         name = LABS[(day, period)]
         kind = "demo" if name.startswith("demo_") else "lab"
@@ -915,7 +915,8 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         sections.append(
             f"{before}The {kind} is `{name}.py` in `student/`, with the answers in "
             f"`{name}_instructor.py` in `instructor/`. Open `{name}.py` in VS Code "
-            "and run it with the Run Python File button (the triangle at the top right of the editor)."
+            "and run it with the Run Python File button (the triangle at the top "
+            "right of the editor)."
         )
     if not files:
         if (day, period) not in LABS:
@@ -924,7 +925,7 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
             )
     elif not new_files and not grown_files:
         sections.append(
-            "The Remus code here is the same as at the end of the period before."
+            "The code here is the same as at the end of the period before."
         )
     if new_files:
         sections.append(
@@ -948,10 +949,15 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     if changes:
         sections.append(changes)
     if any(name.startswith("test_") for name in files):
+        example = "board.py"
+        if example not in files:
+            scripts = [n for n in files if n.endswith(".py") and "test_" not in n]
+            example = min(scripts)
         sections.append(
             "Check the work with the tests: open a terminal in VS Code inside this "
             "folder and type `uv run pytest`. To run one file on its own, such as "
-            "`board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor)."
+            f"`{example}`, open it in VS Code and click the Run Python File button "
+            "(the triangle at the top right of the editor)."
         )
     return "\n\n".join(sections) + "\n"
 

@@ -9,21 +9,12 @@ By the end of this period, each pair can:
 
 ## The files
 
+The engine for Day 10 is Remus-GOLD, the finished Remus with all ten enhancements, in the `Remus/11 GOLD - All enhancements` folder beside the Day folders. Lucas Chess runs its `remus.bat`, and its `estimate_elo.py` rates it against Stockfish. This folder holds only the science files, which never import the engine.
+
 New files this period:
 
 - `hidden_peak.py`
-- `opening_book.py`
-- `opening_book.txt`
-- `test_upgrades.py`
-- `transposition_table.py`
-
-Files that grow this period:
-
-- `console_game.py`
-- `evaluation.py`
-- `move_ordering.py`
-- `search.py`
-- `uci_engine.py`
+- `test_hidden_peak.py`
 
 Functions the pairs write this period:
 
@@ -47,7 +38,7 @@ Scores a square by its predicted value plus a bonus for being far from earlier r
 
 Returns the candidate with the highest score, just as `greedy_move()` returns the best capture. The same generate, score, and choose loop now runs on a science problem.
 
-Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `hidden_peak.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit this period
 
@@ -55,8 +46,8 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `hidden_peak.py` | `candidate_squares()` | 85 | 6 | `test_upgrades.py::test_greedy_ai_measures_where_it_looks_hot` |
+| `hidden_peak.py` | `candidate_squares()` | 85 | 6 | `test_hidden_peak.py::test_greedy_ai_measures_where_it_looks_hot` |
 | `hidden_peak.py` | `score_candidate()` | 104 | 4 | `uv run pytest` |
-| `hidden_peak.py` | `choose_next_measurement()` | 132 | 9 | `test_upgrades.py::test_greedy_ai_measures_where_it_looks_hot`, `test_upgrades.py::test_greedy_ai_beats_random_guessing` |
+| `hidden_peak.py` | `choose_next_measurement()` | 132 | 9 | `test_hidden_peak.py::test_greedy_ai_measures_where_it_looks_hot`, `test_hidden_peak.py::test_greedy_ai_beats_random_guessing` |
 
 Lines to type in all: 19. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

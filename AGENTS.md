@@ -80,7 +80,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
   attacks, game end, evaluation, search, interface) starts with the smallest correct
   version, then gains completeness, then power, then efficiency in later blocks. The
   whole engine also gets two passes: first it plays legal moves, then it plays good moves.
-- Every day ends with an engine that runs. Each period has a start tag and an end tag
+- Every day ends with an engine that runs (on Day 10, Remus-GOLD). Each period has a start tag and an end tag
   (`d3-p2-start`, `d3-p2-end`) so a pair that falls behind can rejoin.
 - Write code, comments, and lesson text for a 13-year-old reading the idea for the first
   time: short functions, concrete names, and one small example position per idea.
@@ -199,7 +199,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   code lives in one folder per workshop day, named `Day NN - <what the new code
   does>`, such as `instructor/Day 04 - Keep only legal moves`. Each Day folder holds
   four period folders, `period1` to `period4`. Each period folder is a complete,
-  runnable copy of Remus as it stands at the end of that period, with a `README.md`
+  runnable copy of Remus as it stands at the end of that period (Day 10 holds only its
+  science files), with a `README.md`
   that names the period, its new and growing files, and the functions pairs write.
   Every period README and station README also holds (David, 2026-10-27):
   - **Learning objectives** as a bulleted list, each with a **Measured by** line that
@@ -256,11 +257,16 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Day 9 Remus with none of the ten enhancements, named by David on 2026-10-27) and the
   ten enhancement stations, one folder per color (`06 RED - Transposition table`, ...).
   Each station is Remus-WHITE plus one enhancement, and `11 GOLD - All enhancements`
-  holds Remus-GOLD, a copy of the finished Day 10 Remus with all ten (David,
-  2026-10-27). Remus-GOLD stays out of the color matches; `estimate_elo.py` rates it
-  against Stockfish; the finished Day 10 Remus holds all ten. `make_station_folders.py`
-  builds them from the Day 9 and Day 10 `period4` code, and `make_student_folders.py`
-  stubs each station's functions in `student/Remus`. Colors name the stations so
+  holds Remus-GOLD, the finished Remus with all ten (David, 2026-10-27). Remus-GOLD
+  is the engine of Day 10 (David, 2026-10-28): the Day 10 period folders hold only
+  the science files (`hidden_peak.py`, `phase_hunt.py`, their tests, and the results
+  demo), and their READMEs point to the GOLD folder for the engine, Lucas Chess, and
+  `estimate_elo.py`. The GOLD folder is written by hand, like a `period4` folder;
+  edit the finished engine there. Remus-GOLD stays out of the color matches;
+  `estimate_elo.py` rates it against Stockfish. `make_station_folders.py` builds the
+  other eleven folders from the Day 9 `period4` code and the GOLD folder, rewrites
+  only the GOLD README, and `make_student_folders.py` stubs each station's functions
+  in `student/Remus`. Colors name the stations so
   that no station sounds better than another. A two-digit
   prefix (David, 2026-10-28) orders the folders by each version's Elo over WHITE in
   the 10-minute league: 00 WHITE, 01 YELLOW, 02 ORANGE, 03 BROWN, 04 BLUE, 05 PINK,
