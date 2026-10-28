@@ -49,8 +49,8 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `fen.py` | `fen_placement()` | 19 | 18 | `uv run pytest` |
-| `fen.py` | `board_from_placement()` | 39 | 14 | `uv run pytest` |
+| `fen.py` | `fen_placement()` | 21 | 18 | `uv run pytest` |
+| `fen.py` | `board_from_placement()` | 41 | 14 | `uv run pytest` |
 
 Lines to type in all: 32. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 

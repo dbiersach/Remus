@@ -7,7 +7,8 @@
 Strong players know the first few moves of popular openings by heart. Remus can
 too.
 
-opening_book.txt lists openings, one per line, in SAN. While a game follows one of
+opening_book.txt lists 43 openings, one per line, in SAN, each with a `#` comment
+above it that names the opening, such as `# Sicilian Defense, Najdorf Variation`. While a game follows one of
 those lines, Remus plays the next book move right away.
 
 ## Where this piece fits
@@ -32,11 +33,12 @@ e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7
 ```
 
 The book becomes a dict from position key to a list of moves. After 1. e4, the list
-holds e5, c5, e6, and c6.
+holds e5, c5, e6, c6, d6, d5, and Nf6.
 
 ## How it works
 
-1. `load_book()` reads opening_book.txt one line at a time.
+1. `load_book()` reads opening_book.txt one line at a time and skips blank lines and
+   lines that start with `#`.
 2. It plays each line from the start, checking every move with `parse_san()`.
 3. For each position on the way, it records the next move.
 4. A typo stops that one line. A missing file gives an empty book. Remus reports both on standard error, so Lucas Chess never sees them.
@@ -73,7 +75,7 @@ From inside a period folder that has the file, run:
 uv run opening_book.py
 ```
 
-You should see: `Book positions: 97`, the first moves in the book, and a reply to 1. e4.
+You should see: `Book positions: 250`, the first moves in the book, and a reply to 1. e4.
 
 ## Puzzle questions
 

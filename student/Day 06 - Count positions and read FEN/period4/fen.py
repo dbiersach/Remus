@@ -14,6 +14,8 @@ from board import EMPTY, Board, parse_square, print_board, square_name
 
 # The start position
 START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+# The position after 1. e4, with Black to move
+AFTER_E4_FEN = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"
 
 
 def fen_placement(board: Board) -> str:
@@ -79,9 +81,38 @@ def state_to_fen(state: dict) -> str:
     return fen + f" {state['halfmove_clock']} {state['fullmove_number']}"
 
 
-def main():
-    state = state_from_fen(START_FEN)
+def print_state(state: dict) -> None:
+    """
+    Print a game state the way a person reads it: the board, then each FEN field
+    with its meaning, then the whole FEN string.
+
+    Parameters
+    ----------
+    state : dict
+        The game state, such as one from state_from_fen().
+    """
     print_board(state["board"])
+    turn = "White" if state["turn"] == "w" else "Black"
+    castling = state["castling"] or "nobody"  # An empty string means no rights left
+    en_passant = "none"
+    if state["en_passant"] is not None:
+        en_passant = square_name(*state["en_passant"])
+    print(f"Side to move:      {turn}")
+    print(f"Castling rights:   {castling}  (K and Q for White, k and q for Black)")
+    print(f"En passant square: {en_passant}")
+    print(
+        f"Halfmove clock:    {state['halfmove_clock']}  "
+        "(moves since the last capture or pawn move)"
+    )
+    print(f"Fullmove number:   {state['fullmove_number']}")
+    print(f"FEN: {state_to_fen(state)}")
+
+
+def main():
+    # The position after 1. e4: Black to move, and e3 is the en passant square
+    print_state(state_from_fen(AFTER_E4_FEN))
+    print("  (expected: Black to move, en passant square e3)")
+    state = state_from_fen(START_FEN)
     same = state_to_fen(state) == START_FEN
     print(f"Start FEN read and written back unchanged: {same}  (expected True)")
 

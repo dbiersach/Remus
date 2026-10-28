@@ -89,7 +89,8 @@ def main():
     make_move(state, parse_san(state, "e4"))
     reply = book_move(book, state)
     reply_text = move_to_uci(reply) if reply is not None else "none"
-    print(f"A book reply to 1. e4: {reply_text}  (e7e5, c7c5, e7e6, or c7c6)")
+    print(f"A book reply to 1. e4: {reply_text}")
+    print("  (expected one of e7e5, c7c5, e7e6, c7c6, d7d6, d7d5, g8f6)")
     missing = load_book(Path(__file__).parent / "no_such_book.txt")
     print(f"Missing book file gives {len(missing)} positions  (expected 0)")
 

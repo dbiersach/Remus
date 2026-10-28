@@ -22,7 +22,9 @@ def test_opening_book_is_legal_and_answers_e4() -> None:
     make_move(state, parse_san(state, "e4"))
     reply = book_move(book, state)
     assert reply is not None
-    assert move_to_uci(reply) in ("e7e5", "c7c5", "e7e6", "c7c6")
+    # The book answers 1. e4 with e5, c5, e6, c6, d6, d5, or Nf6
+    replies = ("e7e5", "c7c5", "e7e6", "c7c6", "d7d6", "d7d5", "g8f6")
+    assert move_to_uci(reply) in replies
 
 
 def test_book_typo_is_skipped_without_touching_stdout(tmp_path, capsys) -> None:
