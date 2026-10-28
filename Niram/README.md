@@ -62,8 +62,8 @@ the Python file of the same name, with the same function names:
 | `uci_engine.rs` | `uci_engine.py` | The UCI conversation with Lucas Chess |
 | `bench.rs` | `perft.py` and this benchmark | `bench`, `perft`, and the command line |
 
-`opening_book.txt` is a copy of the Day 10 book, read by Niram-GREEN and
-Niram-GOLD. The teaching steps that `think` never calls (random, greedy, minimax,
+`opening_book.txt` is a copy of the book in `instructor/Remus/11 GOLD - All
+enhancements`, read by Niram-GREEN and Niram-GOLD. The teaching steps that `think` never calls (random, greedy, minimax,
 negamax, plain alpha-beta, and the scanning attack test) stay in Python only.
 
 ## Run it
