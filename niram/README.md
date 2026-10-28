@@ -76,6 +76,12 @@ The first run took place in a cloud Linux container (Python 3.14.6, Rust 1.97.0)
 | 5 | 228,133 | 51.00 s | 1.14 s | 4,473 | 200,699 | 45x |
 | 6 | 673,713 | 158.89 s | 2.67 s | 4,240 | 252,045 | 59x |
 
+On David's PC (DABMAIN, Windows 11), with nothing else running, depth 5 gave:
+
+| Depth | Nodes (both engines) | Remus-GOLD time | Niram-GOLD time | Remus nodes/s | Niram nodes/s | Speedup |
+| --- | --- | --- | --- | --- | --- | --- |
+| 5 | 228,133 | 31.87 s | 0.55 s | 7,158 | 416,801 | 58x |
+
 At every depth the two engines visit the same number of positions and pick the same
 best move with the same score in all ten positions, so the speedup is the language
 alone: 45 to 59 times faster, far past the factor of 10 that would make a Rust
