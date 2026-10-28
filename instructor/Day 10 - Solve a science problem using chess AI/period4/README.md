@@ -1,27 +1,19 @@
-# Day 10, Period 4: Results, tournament, take-home, and wrap-up
+# Day 10, Period 4: Science results, take-home, and wrap-up
 
-The tournament: each pair opens `play_tournament.py` in its version folder in Day 9 `period2/engines` and presses Run in VS Code: two 10-minute games of its color against Remus-WHITE, one with each color, all pairs at once. The teacher's `estimate_elo.py` in Remus-GOLD measures the Elo rating of Remus-GOLD against Stockfish. Both add every game to games/remus_games.pgn at the top of the repository.
+Each pair reports its science results: the hidden-peak benchmark and the phase hunt's right, wrong, and can't-tell counts. Then each student takes the pair's repository home on a USB drive.
 
 ## Learning objectives
 
 By the end of this period, each pair can:
 
-- Read an experiment's results and their error margins. **Measured by:** `demo_results.py` turns the pair's two tournament games, and then its color's league games, into an Elo gap and margin, and the pair says which gap is larger than its margin.
-- Explain one decision your engine made. **Measured by:** Each pair presents one move from its tournament games with the score and principal variation that Lucas Chess shows for Remus-GOLD, and one powder its phase hunt named.
+- Report a science result the way a scientist does. **Measured by:** The pair's results table gives the hidden-peak benchmark against random guessing and the phase hunt's right, wrong, and can't-tell counts for greedy and for search, from the pair's own runs.
+- Explain one decision the science AI made. **Measured by:** Each pair presents one powder its search named and one it answered with can't tell, and says which measurement would settle the second.
 - Take the code home. **Measured by:** Each student's USB copy opens and runs `uv run pytest`.
 
 ## The files
 
 The engine for Day 10 is Remus-GOLD, the finished Remus with all ten enhancements, in the teacher's `Day 09 .../period2/engines/Remus-GOLD` folder. Lucas Chess runs its `remus.bat`, and its `estimate_elo.py` rates it against Stockfish. This folder holds only the science files, which never import the engine.
 
-The demo is `demo_results.py` in `student/`, with the answers in `demo_results_instructor.py` in `instructor/`. Open `demo_results.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
-
 The code here is the same as at the end of the period before.
-
-## The changes and why
-
-The pairs fill in the blanks of `demo_results.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `demo_results_instructor.py`.
-
-Parts #1 and #2 of `demo_results.py` turn a match result into a score and an Elo gap, then into a range that holds the true gap 95 times out of 100. When the range includes 0, the match has not shown that the enhancement helped, and more games are needed. Each pair puts in its own two tournament games, then its color's league games from the teacher's table, and compares the two ranges.
 
 Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `hidden_peak.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).

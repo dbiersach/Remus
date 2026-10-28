@@ -30,7 +30,7 @@ LABS = {
     (7, 2): "python_input_output",
     (8, 2): "python_sorting",
     (9, 2): "python_caches",
-    (10, 4): "demo_results",
+    (9, 4): "demo_results",
 }
 
 # (day, period) -> [(objective, how the teacher measures it)]
@@ -593,11 +593,12 @@ OBJECTIVES = {
             ),
         ),
         (
-            "Read a match result with its uncertainty.",
+            "Read a match result with its margin of error.",
             (
-                "The pair says why two games cannot show which enhancement is "
-                "stronger, and compares the class results with the teacher's league "
-                "table."
+                "`demo_results.py` turns the pair's two battle games, and then its "
+                "color's league games, into an Elo gap and margin, and the pair says "
+                "which gap is larger than its margin and why two games cannot show "
+                "which enhancement is stronger."
             ),
         ),
     ],
@@ -655,19 +656,18 @@ OBJECTIVES = {
     ],
     (10, 4): [
         (
-            "Read an experiment's results and their error margins.",
+            "Report a science result the way a scientist does.",
             (
-                "`demo_results.py` turns the pair's two tournament games, and then its "
-                "color's league games, into an Elo gap and margin, and the pair says "
-                "which gap is larger than its margin."
+                "The pair's results table gives the hidden-peak benchmark against "
+                "random guessing and the phase hunt's right, wrong, and can't-tell "
+                "counts for greedy and for search, from the pair's own runs."
             ),
         ),
         (
-            "Explain one decision your engine made.",
+            "Explain one decision the science AI made.",
             (
-                "Each pair presents one move from its tournament games with the score "
-                "and principal variation that Lucas Chess shows for Remus-GOLD, and "
-                "one powder its phase hunt named."
+                "Each pair presents one powder its search named and one it answered "
+                "with can't tell, and says which measurement would settle the second."
             ),
         ),
         (
@@ -688,12 +688,12 @@ VERSION_OBJECTIVES = [
         "`uv run pytest` passes in the version folder.",
     ),
     (
-        "Run a fair experiment against Remus-WHITE: same opening, both colors.",
+        "Run a fair experiment: same opening, both colors.",
         (
-            "In the Day 10 tournament, `play_tournament.py` in the version folder "
-            "plays both 10-minute games with no illegal moves or crashes when the pair "
-            "presses Run in VS Code, and the pair says why "
-            "two games cannot show whether the enhancement helps."
+            "In the Day 9 battles, `play_battle.py` in the version folder plays both "
+            "10-minute games with no illegal moves or crashes when the pair presses "
+            "Run in VS Code, and the pair says why two games cannot show which "
+            "enhancement is stronger."
         ),
     ),
 ]
@@ -1854,13 +1854,13 @@ LAB_NOTES = {
             "random choice repeat on every run."
         ),
     ],
-    (10, 4): [
+    (9, 4): [
         (
             "Parts #1 and #2 of `demo_results.py` turn a match result into a score and "
             "an Elo gap, then into a range that holds the true gap 95 times out of "
             "100. When the range includes 0, the match has not shown that the "
             "enhancement helped, and more games are needed. Each pair puts in its own "
-            "two tournament games, then its color's league games from the teacher's "
+            "two battle games, then its color's league games from the teacher's "
             "table, and compares the two ranges."
         ),
     ],
@@ -3325,6 +3325,14 @@ DAY_GUIDES = {
                     "Round 2: the pairs that visited now host, against new opponents.",
                 ),
                 (
+                    45,
+                    (
+                        "While the round 2 games run, each pair turns its round 1 "
+                        "result into an Elo gap with a margin of error in "
+                        "`demo_results.py`, then tries its color's league games."
+                    ),
+                ),
+                (
                     70,
                     (
                         "The class reads the board: which colors won, and why two "
@@ -3352,8 +3360,8 @@ DAY_GUIDES = {
             "Day 10 aims the engine's ideas at real science. The same generate, score,"
             " and choose loop picks where to measure a hidden peak, and the full tree "
             "search, with make and undo, names the crystal phases in an X-ray powder "
-            "pattern. The day ends with the tournament: each pair's color plays "
-            "Remus-WHITE, and every pair takes its code home."
+            "pattern. The day ends with each pair reporting its science results, and "
+            "every pair takes its code home."
         ),
         "objectives": [
             (
@@ -3373,8 +3381,8 @@ DAY_GUIDES = {
                 '"can\'t tell".'
             ),
             (
-                "Read a match result with its margin of error, and explain one move "
-                "Remus chose."
+                "Report a science result with its counts, and explain one decision "
+                "the science AI made."
             ),
         ],
         "periods": {
@@ -3482,49 +3490,49 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "The tournament: every pair opens `play_tournament.py` in "
-                        "its version folder and presses Run in VS Code, all ten "
-                        "laptops at once. "
-                        "Its color plays two 10-minute games against Remus-WHITE, one "
-                        "with each color."
+                        "Each student copies the pair's repository to a USB drive "
+                        "with `git clone --no-hardlinks` and checks that the copy "
+                        "opens and runs `uv run pytest`."
                     ),
                 ),
                 (
-                    5,
+                    15,
                     (
-                        "While the games run, each student copies the pair's "
-                        "repository to a USB drive with `git clone --no-hardlinks` and"
-                        " checks that the copy opens."
+                        "Each pair runs `hidden_peak.py` and `phase_hunt.py` once more "
+                        "and fills in its results table: measurements against random "
+                        "guessing, and right, wrong, and can't-tell counts for greedy "
+                        "and for search. The class collects every pair's numbers on "
+                        "the board."
                     ),
                 ),
                 (
-                    35,
+                    40,
                     (
-                        "Each pair writes its two results on the board. The teacher "
-                        "shows Remus-GOLD's results from the 10-minute league and its "
-                        "Stockfish rating."
+                        "Each pair picks one powder its search named and one it "
+                        "answered with can't tell, and works out which measurement "
+                        "would settle the second."
                     ),
                 ),
                 (
-                    50,
+                    55,
                     (
-                        "In `demo_results.py` each pair turns its games into an Elo "
-                        "gap with a margin of error and lets Remus explain one move."
+                        "Each pair presents its results and its two powders in three "
+                        "minutes."
                     ),
                 ),
                 (
-                    70,
+                    80,
                     (
-                        "Each pair presents one move its engine chose and one powder "
-                        "its phase hunt named. The class closes with what comes next."
+                        "The class closes with what comes next: AI agents that steer "
+                        "real experiments at light sources such as NSLS-II."
                     ),
                 ),
             ],
         },
         "checkpoint": (
             "Every pair's `choose_next_measurement()` beats random guessing, every "
-            "pair's `search()` makes fewer wrong calls than greedy, and the tournament"
-            " games finish with no illegal moves or crashes."
+            "pair's `search()` makes fewer wrong calls than greedy, and every pair has "
+            "reported its results and taken its code home."
         ),
     },
 }
@@ -3532,7 +3540,7 @@ DAY_GUIDES = {
 
 def main():
     print(f"Periods with objectives: {len(OBJECTIVES)}  (expected 40)")
-    print(f"Functions with a change note: {len(CHANGE_NOTES)}  (expected 67)")
+    print(f"Functions with a change note: {len(CHANGE_NOTES)}  (expected 65)")
     print(f"Lab and demo periods: {len(LABS)}  (expected 16)")
     print(f"Days with an overview: {len(DAY_GUIDES)}  (expected 10)")
 

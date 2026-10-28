@@ -982,8 +982,8 @@ def readme_text(version: dict) -> str:
         sections += [
             f"## Where your code fits\n\n{guide['fits']}",
             (
-                "## The files\n\nThis folder is Remus-WHITE, the finished Day 9 Remus in the "
-                "`period2` folder above, "
+                "## The files\n\nThis folder is Remus-WHITE, the finished Day 9 Remus in "
+                "`period1`, "
                 f"plus this one enhancement. The pair writes {written}."
             ),
             f"## The changes and why\n\n{changes}",
@@ -995,9 +995,7 @@ def readme_text(version: dict) -> str:
                 "Day 9 battles, copy the visiting pair's color folder into the `engines` "
                 "folder, open `play_battle.py`, press Run, and type the visitor's "
                 f"color: Remus-{color} plays it twice at 10 minutes a side, once with "
-                "each color. In the Day 10 tournament, open `play_tournament.py` and press Run: "
-                f"Remus-{color} plays Remus-WHITE twice, once with each color, at 10 "
-                "minutes a side, and both games go into games/remus_games.pgn. Each "
+                "each color, and both games go into games/remus_games.pgn. Each "
                 "script runs `version_match.py` from the `engines` folder above this one."
             ),
         ]
@@ -1016,14 +1014,6 @@ def tidy(folders: list[Path]) -> None:
 
 
 RUN_SCRIPTS = {
-    "play_tournament.py": (
-        (
-            "The Day 10 tournament for this color version. Press Run in VS Code: Remus-{color} "
-            "plays\ntwo 10-minute games against Remus-WHITE from the same opening, White "
-            "in game 1\nand Black in game 2. The two games take about 20 minutes."
-        ),
-        [],
-    ),
     "play_battle.py": (
         (
             "The Day 9 battle for this color version. Copy the visiting pair's color "

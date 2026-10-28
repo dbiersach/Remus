@@ -9,7 +9,7 @@ uv run scripts/run_all_tests.py
 ```
 
 `version_match.py` is not in this folder. Every pair runs it from the Day 9
-`period2/engines` folder in the Day 9 battles and the Day 10 tournament, so it stays
+`period2/engines` folder in the Day 9 battles, so it stays
 beside the color versions.
 
 ## Build the folders

@@ -1,9 +1,9 @@
 #!/usr/bin/env -S uv run
 """demo_results.py
 
-Day 10, period 4 demo: read a match result. Part 1 turns wins, draws, and losses
+Day 9, period 4 demo: read a battle result. Part 1 turns wins, draws, and losses
 into an Elo gap, and Part 2 adds a 95 percent margin, the way the class reads its
-version matches.
+battles and the teacher's league.
 Replace each line that holds only # with one line of code, then run the file.
 """
 
@@ -31,7 +31,7 @@ def elo_gap(score: float) -> float:
 
 def main():
     print("Part #1 - Points, Score, and Elo Gap")
-    # Put your own color's result against Remus-WHITE here
+    # Put your own battle result here, or your color's league games
     wins, draws, losses = 9, 4, 7
     #
     #

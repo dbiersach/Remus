@@ -624,7 +624,7 @@ PERIOD_TITLES = {
     (10, 1): "Science AI: hidden_peak.py",
     (10, 2): "The phase hunt: score a guess, and the greedy agent",
     (10, 3): "The phase hunt: search every set, and verify",
-    (10, 4): "Results, tournament, take-home, and wrap-up",
+    (10, 4): "Science results, take-home, and wrap-up",
 }
 
 # A few periods need a sentence more than the title and the file list give
@@ -651,12 +651,9 @@ PERIOD_NOTES = {
     "complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
-    (10, 4): "The tournament: each pair opens `play_tournament.py` in its version "
-    "folder in Day 9 `period2/engines` and presses Run in VS Code: two 10-minute games "
-    "of its color against Remus-WHITE, one with each color, all pairs at once. The "
-    "teacher's `estimate_elo.py` in Remus-GOLD measures the Elo rating of Remus-GOLD "
-    "against Stockfish. Both add every game to games/remus_games.pgn "
-    "at the top of the repository.",
+    (10, 4): "Each pair reports its science results: the hidden-peak benchmark "
+    "and the phase hunt's right, wrong, and can't-tell counts. Then each student "
+    "takes the pair's repository home on a USB drive.",
 }
 
 # The period whose folder holds a Day's hand-edited code, when it is not period4.
