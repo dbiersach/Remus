@@ -1,22 +1,22 @@
 //! evaluation.rs
 //!
-//! Score a position in centipawns (hundredths of a pawn) without looking ahead.
-//! A positive score is good for White. Five terms make up the score:
+//! The terms that score a position in centipawns (hundredths of a pawn) without
+//! looking ahead. A positive term is good for White. Remus-WHITE adds the first two;
+//! each color's evaluate() in its own evaluation.rs adds the terms its version uses:
 //!
 //! 1. Material: the value of every piece on the board.
 //! 2. Placement: a bonus or penalty from a piece-square table, such as a knight in
 //!    the center (it attacks eight squares) against a knight in the corner (two).
-//! 3. Pawn structure: penalties for doubled and isolated pawns, a bonus for passed pawns.
-//! 4. Mating: with a big material lead, drive the losing king to the edge and bring
+//! 3. Pawn structure (PURPLE): penalties for doubled and isolated pawns, a bonus for passed pawns.
+//! 4. Mating (CYAN): with a big material lead, drive the losing king to the edge and bring
 //!    the winning king close, so Niram can finish off a won endgame.
-//! 5. King safety: while the enemy queen is on the board, a bonus for each pawn that
+//! 5. King safety (GRAY): while the enemy queen is on the board, a bonus for each pawn that
 //!    shelters the king from in front.
 //!
 //! Each table is written from White's side, row 0 (rank 8) first. A Black piece
 //! reads the table upside down, so its row 7 uses the table's row 0.
 
 use crate::board::{Board, EMPTY};
-use crate::game_state::{State, WHITE};
 
 type Table = [[i32; 8]; 8];
 
@@ -274,13 +274,4 @@ pub fn king_safety(board: &Board) -> i32 {
         }
     }
     score
-}
-
-/// Score the position for the side to move: all five terms, positive when the side
-/// to move stands better. Negamax search needs the score from the mover's side.
-pub fn evaluate(state: &State) -> i32 {
-    let board = &state.board;
-    let white_score =
-        material(board) + placement(board) + pawn_structure(board) + mating_bonus(board) + king_safety(board);
-    if state.turn == WHITE { white_score } else { -white_score }
 }

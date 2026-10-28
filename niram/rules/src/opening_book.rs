@@ -5,7 +5,9 @@
 //! line from the starting position and records, for each position along the way,
 //! the moves the book suggests there. The book is a hash map:
 //!
-//!     position_key -> list of book moves
+//! ```text
+//! position_key -> list of book moves
+//! ```
 //!
 //! Every book move is read with parse_san, which accepts only legal moves, so a
 //! typo in the file is reported and skipped. A missing file gives an empty book,
@@ -24,9 +26,11 @@ use crate::notation::parse_san;
 
 pub type Book = HashMap<String, Vec<Move>>;
 
-/// Return the path of opening_book.txt, in the niram folder beside Cargo.toml.
+/// Return the path of opening_book.txt, in the niram folder above rules/.
 pub fn book_path() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("opening_book.txt")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("..")
+        .join("opening_book.txt")
 }
 
 /// Read an opening book file into a map from position key to book moves.
@@ -68,4 +72,21 @@ pub fn book_move(book: &Book, state: &State) -> Option<Move> {
         .map(|time| time.subsec_nanos())
         .unwrap_or(0);
     Some(choices[nanos as usize % choices.len()])
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// Remus's load_book() reads 250 positions holding 292 book moves from
+    /// opening_book.txt, so Niram's must read the same.
+    #[test]
+    fn same_book_as_remus() {
+        let book = load_book(&book_path());
+        let mut moves = 0;
+        for choices in book.values() {
+            moves += choices.len();
+        }
+        assert_eq!((book.len(), moves), (250, 292));
+    }
 }

@@ -1,27 +1,28 @@
 //! uci_engine.rs
 //!
-//! Talk to a chess GUI such as Lucas Chess through the Universal Chess Interface
-//! (UCI). The GUI sends one command per line on standard input, and Niram answers on
-//! standard output. Debug text goes to standard error, where the GUI ignores it.
+//! Talk to a chess GUI such as Lucas Chess, or to a match script, through the
+//! Universal Chess Interface (UCI). The GUI sends one command per line on standard
+//! input, and Niram answers on standard output. Debug text goes to standard error,
+//! where the GUI ignores it.
 //!
-//! The search runs in a thread, so Niram can still answer "isready" and obey "stop"
-//! while it thinks. Niram plays a move from the opening book first, while the
-//! position is in the book.
+//! Niram reads one command, answers it, and only then reads the next, so a search
+//! always ends with a "bestmove" before Niram listens again. The versions with an
+//! opening book (GREEN and GOLD) play a book move first, while the position is in
+//! the book.
 
 use std::io::{BufRead, Write};
-use std::sync::Arc;
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::thread::JoinHandle;
 
 use crate::fen::{START_FEN, state_from_fen};
 use crate::game_state::{State, WHITE};
 use crate::legal_moves::legal_moves;
 use crate::make_move::make_move;
 use crate::moves::{move_from_uci, move_to_uci};
-use crate::opening_book::{book_move, book_path, load_book};
-use crate::search::think;
+use crate::opening_book::{Book, book_move, book_path, load_book};
+use crate::search_tools::ThinkFn;
 
 const DEFAULT_SECONDS: f64 = 2.0; // Thinking time when the GUI gives no clock
+const RESERVE_SECONDS: f64 = 3.0; // Clock time Niram never plans to spend, to pay for sending moves
+const MIN_SECONDS: f64 = 0.01; // The shortest think, for when the clock is nearly empty
 
 /// Send one line to the GUI and flush it, so it leaves at once.
 fn send(text: &str) {
@@ -51,12 +52,14 @@ fn set_position(words: &[&str]) -> Result<State, String> {
 
 /// Decide how many seconds to think from a "go" command: "movetime" if the GUI gives
 /// one; otherwise a thirtieth of the remaining time plus half the increment;
-/// otherwise DEFAULT_SECONDS.
+/// otherwise DEFAULT_SECONDS. The remaining time leaves out RESERVE_SECONDS, because
+/// every move also costs time the search does not see, and one move never takes
+/// more than half of the spare time.
 fn thinking_time(words: &[&str], white_to_move: bool) -> f64 {
     let value = |name: &str| -> Option<f64> {
         let index = words.iter().position(|&word| word == name)?;
         let milliseconds: f64 = words.get(index + 1)?.parse().ok()?;
-        Some(milliseconds / 1000.0) // Milliseconds to seconds
+        Some(milliseconds / 1000.0) // The GUI counts milliseconds, and Niram seconds
     };
     if let Some(movetime) = value("movetime") {
         return movetime;
@@ -67,29 +70,26 @@ fn thinking_time(words: &[&str], white_to_move: bool) -> f64 {
         ("btime", "binc")
     };
     if let Some(remaining) = value(clock) {
-        return (remaining / 30.0 + value(increment).unwrap_or(0.0) / 2.0).max(0.05);
+        let spare = remaining - RESERVE_SECONDS;
+        let seconds = spare / 30.0 + value(increment).unwrap_or(0.0) / 2.0;
+        return seconds.min(spare / 2.0).max(MIN_SECONDS);
     }
     DEFAULT_SECONDS
 }
 
-/// Read UCI commands until "quit" or the end of input.
-pub fn run() {
+/// Read UCI commands until "quit" or the end of input. `name` is the engine's name,
+/// such as "Niram-RED", `think` is its search, and `use_book` says whether it plays
+/// from the opening book.
+pub fn run(name: &str, think: ThinkFn, use_book: bool) {
     let mut state = state_from_fen(START_FEN).expect("START_FEN is valid");
-    let book = load_book(&book_path());
-    let stop = Arc::new(AtomicBool::new(false));
-    let mut worker: Option<JoinHandle<()>> = None;
+    let book = if use_book { load_book(&book_path()) } else { Book::new() };
     for line in std::io::stdin().lock().lines() {
         let Ok(line) = line else { break };
         let words: Vec<&str> = line.split_whitespace().collect();
         let Some(&command) = words.first() else { continue };
-        if matches!(command, "position" | "ucinewgame" | "go")
-            && let Some(handle) = worker.take()
-        {
-            let _ = handle.join(); // Finish the last search before changing the position
-        }
         match command {
             "uci" => {
-                send("id name Niram");
+                send(&format!("id name {name}"));
                 send("id author Turning a Chess Engine into Science AI");
                 send("uciok");
             }
@@ -97,7 +97,7 @@ pub fn run() {
             "ucinewgame" => state = state_from_fen(START_FEN).expect("START_FEN is valid"),
             "position" => match set_position(&words) {
                 Ok(new_state) => state = new_state,
-                Err(message) => eprintln!("Niram cannot read the position: {message}"),
+                Err(message) => eprintln!("{name} cannot read the position: {message}"),
             },
             "go" => {
                 if legal_moves(&mut state).is_empty() {
@@ -105,27 +105,14 @@ pub fn run() {
                 } else if let Some(opening) = book_move(&book, &state) {
                     send(&format!("bestmove {}", move_to_uci(opening)));
                 } else {
-                    stop.store(false, Ordering::Relaxed);
                     let seconds = thinking_time(&words, state.turn == WHITE);
-                    let mut search_state = state.clone();
-                    let search_stop = Arc::clone(&stop);
-                    worker = Some(std::thread::spawn(move || {
-                        let (best, _) = think(&mut search_state, Some(seconds), 64, Some(search_stop), &mut |line| {
-                            send(line)
-                        });
-                        send(&format!("bestmove {}", move_to_uci(best)));
-                    }));
+                    let (best, _) = think(&mut state, Some(seconds), 64, &mut |line| send(line));
+                    send(&format!("bestmove {}", move_to_uci(best)));
                 }
             }
-            "stop" => stop.store(true, Ordering::Relaxed),
-            "quit" => {
-                stop.store(true, Ordering::Relaxed);
-                break;
-            }
-            _ => eprintln!("Niram ignores: {line}"),
+            "stop" => {} // Each search ends on its own clock before Niram reads "stop"
+            "quit" => break,
+            _ => eprintln!("{name} ignores: {line}"),
         }
-    }
-    if let Some(handle) = worker {
-        let _ = handle.join(); // Input ended: let the last search send its move
     }
 }

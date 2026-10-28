@@ -1,29 +1,28 @@
 #!/usr/bin/env -S uv run
 """remus_benchmark.py
 
-Time Remus-GOLD on the ten positions of compare_search.py, so its speed can be
-compared with Niram-GOLD, the Rust copy of the same engine. Each position gets the
-same search that Remus-GOLD's think() runs, one depth at a time up to DEPTH, with
-no clock, so both engines visit exactly the same positions.
+Time one Remus version on the ten positions of compare_search.py, so its speed can
+be compared with the Niram engine of the same color, the Rust copy of that version.
+Each position gets that version's own think(), one depth at a time up to the depth
+asked for, with no clock, so both engines visit exactly the same positions.
 
-Run it from the repository folder with `uv run niram/remus_benchmark.py`, and run
-Niram-GOLD's benchmark with `cargo run --release -- bench` from inside niram/.
+Run it from the repository folder:
+
+    uv run niram/remus_benchmark.py GOLD        Remus-GOLD, depth 4
+    uv run niram/remus_benchmark.py WHITE 5     Remus-WHITE, depth 5
+
+and the matching Rust benchmark from inside niram/:
+
+    cargo run --release -p niram-gold -- bench
+    cargo run --release -p niram-white -- bench 5
 """
 
 import sys
 import time
 from pathlib import Path
 
-GOLD_FOLDER = (
-    Path(__file__).parent.parent / "instructor" / "Stations" / "GOLD - All enhancements"
-)
-sys.path.insert(0, str(GOLD_FOLDER))  # Import Remus-GOLD's own modules
-
-from fen import state_from_fen
-from legal_moves import legal_moves
-from moves import move_to_uci
-from search import MATE_SCORE, SearchInfo, upgraded_search
-
+STATIONS = Path(__file__).parent.parent / "instructor" / "Stations"
+DEPTH = 4  # The deepest iteration, the same for both engines
 POSITIONS = [  # The ten positions of compare_search.py
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
     "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
@@ -36,54 +35,64 @@ POSITIONS = [  # The ten positions of compare_search.py
     "4k3/8/4p3/3p4/8/8/3Q4/4K3 w - - 0 1",
     "r4rk1/1pp1qppp/p1np1n2/2b1p1B1/2B1P1b1/P1NP1N2/1PP1QPPP/R4RK1 w - - 0 10",
 ]
-DEPTH = 4  # The deepest iteration, the same for both engines
+MATE_SCORE = 100_000  # The same as search.py
 
 
-def deepen(fen: str, max_depth: int) -> tuple[int, int, str]:
-    """
-    Search one position the way think() does, one depth at a time, with no clock.
+def find_folder(color: str) -> Path:
+    """Return the station folder whose name starts with the color, such as "RED"."""
+    for folder in sorted(STATIONS.iterdir()):
+        if folder.is_dir() and folder.name.upper().startswith(color.upper() + " "):
+            return folder
+    sys.exit(f"No station folder starts with {color!r}")
 
-    Parameters
-    ----------
-    fen : str
-        The position.
-    max_depth : int
-        The deepest iteration.
 
-    Returns
-    -------
-    tuple[int, int, str]
-        The positions visited, the last score, and the best move in UCI text.
-    """
-    state = state_from_fen(fen)
-    info = SearchInfo()
-    moves = legal_moves(state)
-    score = 0
-    best = ""
-    for depth in range(1, max_depth + 1):
-        score, pv = upgraded_search(
-            state, depth, 0, -MATE_SCORE - 1, MATE_SCORE + 1, info
-        )
-        if pv:
-            best = move_to_uci(pv[0])
-        if abs(score) > MATE_SCORE - 1000 or len(moves) == 1:
-            break  # think() stops here too
-    return info.nodes, score, best
+def score_from_info(line: str) -> int:
+    """Return the score of an info line ("cp 35" gives 35, "mate 1" gives 99999)."""
+    words = line.split()
+    index = words.index("score")
+    value = int(words[index + 2])
+    if words[index + 1] == "mate":
+        plies = 2 * abs(value) - 1
+        return MATE_SCORE - plies if value > 0 else -(MATE_SCORE - plies)
+    return value
 
 
 def main():
-    max_depth = int(sys.argv[1]) if len(sys.argv) > 1 else DEPTH
-    print(f"Remus-GOLD (Python), iterative deepening to depth {max_depth}")
+    color = sys.argv[1] if len(sys.argv) > 1 else "GOLD"
+    max_depth = int(sys.argv[2]) if len(sys.argv) > 2 else DEPTH
+    folder = find_folder(color)
+    sys.path.insert(0, str(folder))  # Import that version's own modules
+
+    import search
+    from fen import state_from_fen
+    from moves import move_to_uci
+
+    # think() makes its own SearchInfo, so a SearchInfo that remembers itself lets
+    # the benchmark read the positions think() visited
+    searches = []
+
+    class RecordingInfo(search.SearchInfo):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            searches.append(self)
+
+    search.SearchInfo = RecordingInfo
+    name = "Remus-" + folder.name.split(" - ")[0]
+    print(f"{name} (Python), iterative deepening to depth {max_depth}")
     total_nodes = 0
     total_seconds = 0.0
     for number, fen in enumerate(POSITIONS, start=1):
+        state = state_from_fen(fen)
+        lines = []
         start = time.perf_counter()
-        nodes, score, best = deepen(fen, max_depth)
+        best = search.think(state, 1_000_000.0, max_depth, report=lines.append)
         seconds = time.perf_counter() - start
+        nodes = searches[-1].nodes
+        score = score_from_info(lines[-1])
         total_nodes += nodes
         total_seconds += seconds
         print(
-            f"{number:2}. {best:6} score {score:7}  nodes {nodes:10,}"
+            f"{number:2}. {move_to_uci(best):6} score {score:7}  nodes {nodes:10,}"
             f"  {seconds:8.3f} s  {nodes / seconds:12,.0f} nodes/s"
         )
     print(f"Total nodes: {total_nodes:,}")

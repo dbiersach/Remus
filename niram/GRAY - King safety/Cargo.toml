@@ -1,0 +1,9 @@
+[package]
+name = "niram-gray"
+description = "Niram-GRAY: Remus-GRAY in Rust, Remus-WHITE plus the king safety term"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+niram_rules = { path = "../rules" }

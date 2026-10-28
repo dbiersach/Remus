@@ -1,0 +1,9 @@
+[package]
+name = "niram-yellow"
+description = "Niram-YELLOW: Remus-YELLOW in Rust, Remus-WHITE plus draw sense"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+niram_rules = { path = "../rules" }

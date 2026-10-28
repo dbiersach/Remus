@@ -3,7 +3,9 @@
 //! Read and write FEN (Forsyth-Edwards Notation), the one-line text that describes
 //! a whole chess position. The start position is:
 //!
-//!     rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+//! ```text
+//! rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+//! ```
 //!
 //! The six fields are the pieces (rank 8 first), the side to move, the castling
 //! rights, the en passant square, the halfmove clock, and the fullmove number.
