@@ -213,9 +213,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   stronger, what it costs, a table of positions per depth and positions per second
   measured against Remus-WHITE, what to expect in games, and where the pair's code
   is called from.
+  Each Day folder, in `instructor/` and in `student/`, also has a `README.md` at its
+  top (David, 2026-10-28) that paints the whole day: what the day is about, its
+  objectives, a table of the four periods with what the pairs write in each, a timed
+  sequence of activities for every period, and the checkpoint at 4:30.
   The text lives in `period_guides.py` (`OBJECTIVES`, `CHANGE_NOTES`, `LAB_NOTES`,
-  `STATION_OBJECTIVES`, `STATION_GUIDES`, `STATION_MEASURES`, and `PERIOD_GUIDES`
-  for a period that needs an illustrated guide, such as the Day 10 phase hunt); the
+  `STATION_OBJECTIVES`, `STATION_GUIDES`, `STATION_MEASURES`, `PERIOD_GUIDES`
+  for a period that needs an illustrated guide, such as the Day 10 phase hunt, and
+  `DAY_GUIDES` for the Day READMEs, which `make_student_folders.py` writes); the
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
   in `docs/images/phase_hunt/`, drawn by `uv run make_phase_hunt_figures.py`, which
   installs matplotlib for itself alone. Measure `STATION_MEASURES` again after any

@@ -10,6 +10,10 @@ stay, and the body raises NotImplementedError. The tests stay complete, so they
 fail until the pair writes each function. Functions from earlier periods are
 complete, so every period folder starts from working code.
 
+It also writes docs/student_edit_plan.md and the overview README.md at the top of
+every Day folder, in instructor/ and student/ alike, from DAY_GUIDES in
+period_guides.py.
+
 Run this script again whenever the instructor code changes, after
 make_period_folders.py.
 """
@@ -20,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from make_station_folders import STATIONS_TABLE
-from period_guides import LABS
+from period_guides import DAY_GUIDES, LABS
 
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
@@ -269,6 +273,111 @@ def changed_files(folder: Path, before: Path | None) -> tuple[list[str], list[st
     return new, changed
 
 
+def pairs_write(day: int, period: int, rows: dict, station_note: str) -> str:
+    """Return what the pairs write in one period, with the lines each one takes."""
+    parts = []
+    for row in rows.get((day, period), []):
+        count = lines_text(row["typed"])
+        if row["function"]:
+            parts.append(f"`{row['function']}()` in `{row['file']}` ({count})")
+        elif row["file"] == "bug_hunt/":
+            parts.append(f"the fixes for the planted bugs in `bug_hunt/` ({count})")
+        elif row["file"].startswith("demo_"):
+            parts.append(f"the demo `{row['file']}` ({count})")
+        else:
+            parts.append(f"the lab `{row['file']}` ({count})")
+    if (day, period) in [(9, 2), (9, 3)]:
+        parts.append(f"their color station's functions, {station_note}")
+    writes = "; ".join(parts)
+    return writes[:1].upper() + writes[1:]
+
+
+# The clock time each period starts, in minutes after midnight, and the break after it
+PERIOD_STARTS = {1: 8 * 60 + 30, 2: 10 * 60 + 30, 3: 13 * 60, 4: 15 * 60}
+PERIOD_MINUTES = 90
+BREAKS = {1: "Break", 2: "Lunch", 3: "Break"}
+
+
+def clock(minutes: int) -> str:
+    """Return a time of day such as 8:30 or 1:00, from minutes after midnight."""
+    hour = (minutes // 60 - 1) % 12 + 1
+    return f"{hour}:{minutes % 60:02}"
+
+
+def day_readme(day: int, rows: dict) -> str:
+    """Return the README.md at the top of one Day folder: the day's overview."""
+    from make_period_folders import PERIOD_TITLES  # Imported here: it imports this file
+
+    guide = DAY_GUIDES[day]
+    out = [f"# Day {day}: {guide['theme']}", "", guide["summary"], ""]
+    out += ["## Objectives for the day", "", "By 4:30, each pair can:", ""]
+    out += [f"- {objective}" for objective in guide["objectives"]]
+    out += [
+        "",
+        "## The day at a glance",
+        "",
+        "| Period | Time | Title | Pairs write |",
+        "| --- | --- | --- | --- |",
+    ]
+    for period in range(1, 5):
+        start = PERIOD_STARTS[period]
+        end = start + PERIOD_MINUTES
+        writes = pairs_write(day, period, rows, "from the station README")
+        out.append(
+            f"| P{period} | {clock(start)} to {clock(end)} | "
+            f"{PERIOD_TITLES[(day, period)]} | {writes or 'Nothing: teacher code'} |"
+        )
+        if period in BREAKS:
+            next_start = PERIOD_STARTS[period + 1]
+            out.append(
+                f"| | {clock(end)} to {clock(next_start)} | {BREAKS[period]} | |"
+            )
+    for period in range(1, 5):
+        start = PERIOD_STARTS[period]
+        end = clock(start + PERIOD_MINUTES)
+        out += [
+            "",
+            f"## Period {period}, {clock(start)} to {end}: {PERIOD_TITLES[(day, period)]}",
+            "",
+            "| Time | Activity |",
+            "| --- | --- |",
+        ]
+        steps = guide["periods"][period]
+        for i, (offset, text) in enumerate(steps):
+            stop = steps[i + 1][0] if i + 1 < len(steps) else PERIOD_MINUTES
+            out.append(f"| {clock(start + offset)} to {clock(start + stop)} | {text} |")
+        out += [
+            "",
+            (
+                f"[`period{period}/README.md`](period{period}/README.md) lists the "
+                "period's learning objectives, how each one is measured, and every "
+                "change the pairs make."
+            ),
+        ]
+    out += [
+        "",
+        "## By the end of the day",
+        "",
+        f"**Checkpoint:** {guide['checkpoint']}",
+        "",
+        (
+            "Each period folder starts from working code, so a pair that falls behind "
+            "opens the next period's folder with the rest of the class."
+        ),
+    ]
+    return "\n".join(out) + "\n"
+
+
+def write_day_readmes(rows: dict) -> None:
+    """Write the overview README.md at the top of every instructor and student Day."""
+    for folder in sorted(INSTRUCTOR.glob("Day *")):
+        day = int(folder.name[4:6])
+        text = day_readme(day, rows)
+        (folder / "README.md").write_text(text)
+        (STUDENT / folder.name / "README.md").write_text(text)
+    print("Wrote the overview README.md of every Day folder  (expected 10 of each)")
+
+
 def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
     """Write docs/student_edit_plan.md: what changes and what pairs write, by period."""
     from make_period_folders import PERIOD_TITLES  # Imported here: it imports this file
@@ -295,22 +404,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
             out += ["| Period | Title | New files | Files that grow | Pairs write |"]
             out += ["| --- | --- | --- | --- | --- |"]
         new, changed = changed_files(folder, before)
-        written = rows.get((day, period), [])
-        parts = []
-        for row in written:
-            count = lines_text(row["typed"])
-            if row["function"]:
-                parts.append(f"`{row['function']}()` in `{row['file']}` ({count})")
-            elif row["file"] == "bug_hunt/":
-                parts.append(f"the fixes for the planted bugs in `bug_hunt/` ({count})")
-            elif row["file"].startswith("demo_"):
-                parts.append(f"the demo `{row['file']}` ({count})")
-            else:
-                parts.append(f"the lab `{row['file']}` ({count})")
-        if (day, period) in [(9, 2), (9, 3)]:
-            parts.append("their color station's functions, in the table below")
-        writes = "; ".join(parts)
-        writes = writes[:1].upper() + writes[1:]
+        writes = pairs_write(day, period, rows, "in the table below")
         out.append(
             f"| P{period} | {PERIOD_TITLES[(day, period)]} | "
             f"{', '.join(f'`{name}`' for name in new) or 'None'} | "
@@ -437,6 +531,7 @@ def main():
             print(f"  Too long: the {color} station asks for {count} lines")
     print(f"Wrote {STUDENT}")
     write_edit_plan(rows)
+    write_day_readmes(rows)
     print(
         f"Functions turned into stubs: {stubbed}  (expected "
         f"{len(STUDENT_FUNCTIONS) + sum(len(st['students']) for st in STATIONS_TABLE)})"
