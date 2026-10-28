@@ -645,8 +645,8 @@ PERIOD_NOTES = {
     "folder is Remus-WHITE, the starting point of every station.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
-    (10, 4): "The tournament: each pair runs `uv run station_match.py <COLOR>` in "
-    "the `Remus` folder next to the Day folders, two 10-minute games of its color "
+    (10, 4): "The tournament: each pair opens `play_tournament.py` in its station "
+    "folder under `Remus` and presses Run in VS Code: two 10-minute games of its color "
     "against Remus-WHITE, one with each color, all pairs at once. Running "
     "`estimate_elo.py` in the GOLD folder measures the Elo rating of Remus-GOLD "
     "against Stockfish. Both add every game to games/remus_games.pgn "

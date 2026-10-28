@@ -678,8 +678,9 @@ STATION_OBJECTIVES = [
     (
         "Run a fair experiment against Remus-WHITE: same opening, both colors.",
         (
-            "In the Day 10 tournament, `uv run station_match.py <COLOR>` plays both "
-            "10-minute games with no illegal moves or crashes, and the pair says why "
+            "In the Day 10 tournament, `play_tournament.py` in the station folder "
+            "plays both 10-minute games with no illegal moves or crashes when the pair "
+            "presses Run in VS Code, and the pair says why "
             "two games cannot show whether the enhancement helps."
         ),
     ),
@@ -3266,10 +3267,10 @@ DAY_GUIDES = {
                 (
                     40,
                     (
-                        "Each pair plays one short test game against Remus-WHITE with "
-                        "`uv run station_match.py <COLOR> --games 1 --minutes 2`, "
-                        "which checks only that the engine plays legal moves to the "
-                        "end."
+                        "Each pair opens `smoke_test.py` in its station folder and "
+                        "presses Run in VS Code: one 2-minute game against "
+                        "Remus-WHITE, which checks only that the engine plays legal "
+                        "moves to the end."
                     ),
                 ),
                 (
@@ -3450,8 +3451,9 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "The tournament: every pair runs `uv run station_match.py "
-                        "<COLOR>` in the `Remus` folder, all ten laptops at once. "
+                        "The tournament: every pair opens `play_tournament.py` in "
+                        "its station folder and presses Run in VS Code, all ten "
+                        "laptops at once. "
                         "Its color plays two 10-minute games against Remus-WHITE, one "
                         "with each color."
                     ),

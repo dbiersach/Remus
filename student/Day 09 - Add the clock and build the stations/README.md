@@ -50,7 +50,7 @@ By 4:30, each pair can:
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:40 | Pairs finish their station code and pass its tests. |
-| 1:40 to 2:10 | Each pair plays one short test game against Remus-WHITE with `uv run station_match.py <COLOR> --games 1 --minutes 2`, which checks only that the engine plays legal moves to the end. |
+| 1:40 to 2:10 | Each pair opens `smoke_test.py` in its station folder and presses Run in VS Code: one 2-minute game against Remus-WHITE, which checks only that the engine plays legal moves to the end. |
 | 2:10 to 2:30 | Each pair writes one sentence on the board: what its enhancement should change, and how the class will see it. |
 
 [`period3/README.md`](period3/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
