@@ -1,22 +1,35 @@
 # Remus
 
 Remus is a chess engine written in plain Python, built one lesson at a time for
-the "Turning a Chess Engine into Science AI" workshop. The name echoes Rimush,
-the son and heir of Sargon of Akkad, in tribute to Sargon (1978), the
-microcomputer chess program whose complete source was published so that people
-could learn from it.
+the "Turning a Chess Engine into Science AI" workshop.
 
-The code grows one class period at a time: each `instructor/Day NN - ...` folder holds
-`period1` to `period4`, and each period folder is a complete, runnable copy of Remus at
-the end of that period. Each Day folder's own `README.md` gives the day's objectives
-and the timed activities of its four periods. The `instructor/` folder holds
-only finished, working reference code. `student/` mirrors it, with the functions
-students write left as stubs for them to fill in. `scripts/` holds the teacher's
-tools outside the engine: the builders that write the period, version, and student
-folders, the test runner, and the league and rating scripts, each listed in
-[`scripts/README.md`](scripts/README.md). Start with
-[`docs/code/remus_program_overview.md`](docs/code/remus_program_overview.md); the course plan is
-in [`docs/course/remus_course_plan.md`](docs/course/remus_course_plan.md).
+Its name reaches back more than four thousand years. Sargon of Akkad (about 2335 to
+2279 BC) founded the Akkadian Empire in Mesopotamia, the first known great empire. In
+1978 his name went to Sargon, a chess program by Dan and Kathe Spracklen. Written in
+Z80 assembly for the Wavemate Jupiter II, Sargon won the first microcomputer chess
+tournament, at the West Coast Computer Faire in 1978, with a perfect 5-0. The
+Spracklens then published its complete source as a book, *Sargon: A Computer Chess
+Program* (Hayden, 1978), so anyone could read a real engine and learn from it. Sargon
+II, 2.5, and III followed, and Sargon III ran on the first Macintosh.
+
+Sargon of Akkad's first son and heir was Rimush (about 2279 to 2270 BC), who held the
+empire together through widespread revolts. Remus echoes Rimush: a "son of Sargon," an
+heir to the small, readable chess programs whose insides lie open for learners,
+rebuilt in modern Python.
+
+The code grows one class period at a time. The top folder holds one folder per day,
+`Day 01 - ...` to `Day 10 - ...`, and each Day folder holds `period1` to `period4`.
+Inside every period folder, `instructor/` is a complete, runnable copy of Remus at the
+end of that period, and `student/` is the same code with the functions the pairs write
+left as stubs for them to fill in. Each Day folder's own `README.md` gives the day's
+objectives and the timed activities of its four periods. Everything else sits in
+`misc/`: the course and code documents in `misc/docs/`, the games every script plays in
+`misc/games/`, and the teacher's tools in `misc/scripts/`, which hold the builders
+that write the period, version, and student folders, the test runner, and the league
+and rating scripts, each listed in
+[`misc/scripts/README.md`](misc/scripts/README.md). Start with
+[`misc/docs/code/remus_program_overview.md`](misc/docs/code/remus_program_overview.md); the course plan is
+in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md).
 
 ## Setup
 
@@ -77,24 +90,24 @@ below set up a new computer, such as the teacher's laptop or a computer at home.
    Windows installer from
    [lucaschess.pythonanywhere.com/downloads](https://lucaschess.pythonanywhere.com/downloads)
    and run it. Lucas Chess comes with Stockfish, so no other engine is needed. The
-   [Lucas Chess guide](docs/course/lucas_chess_guide.md) shows, with screenshots, how
+   [Lucas Chess guide](misc/docs/course/lucas_chess_guide.md) shows, with screenshots, how
    to add Remus through its `remus.bat` and watch it play.
 
 From here on, every file runs inside VS Code. Open a file, such as `perft.py` in
-`instructor/Day 06 - Count positions and read FEN/period4`, and click the Run Python
+`Day 06 - Count positions and read FEN/period4/instructor`, and click the Run Python
 File button (the triangle at the top right of the editor). Each file prints its own
-check, with the expected answer beside it. The teacher's tools in `scripts/`, such as
+check, with the expected answer beside it. The teacher's tools in `misc/scripts/`, such as
 the test runner and the league, are listed with their commands in
-[`scripts/README.md`](scripts/README.md).
+[`misc/scripts/README.md`](misc/scripts/README.md).
 
 The engine uses only the Python standard library. The development group adds
 `python-chess`, which the tests use as an outside reference for move counts,
 along with `pytest` and `ruff`. Lucas Chess talks to Remus over UCI.
 
-Niram-GOLD, beside Remus-GOLD in the Day 9 `period2/engines` folder, is Remus-GOLD
+Niram-GOLD, beside Remus-GOLD in the Day 9 `period2/instructor/engines` folder, is Remus-GOLD
 rewritten in Rust. It searches the same trees about 50 times faster. It is a
 teacher's experiment, outside the course; see
-[its README](<instructor/Day 09 - Add the clock and build the color versions/period2/engines/Niram-GOLD/README.md>).
+[its README](<Day 09 - Add the clock and build the color versions/period2/instructor/engines/Niram-GOLD/README.md>).
 
 ## License
 
