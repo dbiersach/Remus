@@ -334,17 +334,16 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   used by), words to know, a call tree, a plain-language line for each function, and
   questions. Write the pages for middle school readers, in short sentences, and do not
   repeat the code's comments line by line. When a file changes, update its page.
-- `docs/` holds four folders and a `README.md` that maps them (David, 2026-10-28):
+- `docs/` holds three folders and a `README.md` that maps them (David, 2026-10-28):
   - `docs/course/`: the roadmap, the course plan, the slide plan, the Lucas Chess
-    guide, the science survey, and `student_edit_plan.md`, which
-    `make_student_folders.py` writes.
+    guide, the science survey, the two briefing PDFs, and `student_edit_plan.md`,
+    which `make_student_folders.py` writes.
   - `docs/code/`: the program overview, `file_versions.md`, and one page for every
     `.py` file a student modifies or reads, named after that file (`board.py` has
     `board.md`).
   - `docs/engines/`: the Remus versions and their Niram twins: `remus_versions.md`,
     the ten color versions and Remus-GOLD; `remus_elo.md`, which `version_elo.py`
     writes; and `engine_parity.md`, which `engine_parity.py` writes.
-  - `docs/briefs/`: the two briefing PDFs.
   Pictures live in `docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `docs/`.
 - Remus-WHITE, the ten color versions (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
