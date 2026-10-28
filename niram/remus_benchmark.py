@@ -15,7 +15,7 @@ import time
 from pathlib import Path
 
 GOLD_FOLDER = (
-    Path(__file__).parent.parent / "instructor" / "Stations" / "GOLD - All enhancements"
+    Path(__file__).parent.parent / "instructor" / "Stations" / "11 GOLD - All enhancements"
 )
 sys.path.insert(0, str(GOLD_FOLDER))  # Import Remus-GOLD's own modules
 

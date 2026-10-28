@@ -4,7 +4,7 @@ Niram-GOLD is Remus-GOLD rewritten in Rust. Remus echoes Rimush, the son of Sarg
 Akkad; Niram shortens Naram-Sin, Sargon's grandson, the next heir in the family line.
 
 Niram-GOLD keeps the exact rules, evaluation, and search of
-`instructor/Stations/GOLD - All enhancements`: the same board of 64 characters, the
+`instructor/Stations/11 GOLD - All enhancements`: the same board of 64 characters, the
 same move order, the same five evaluation terms, and the same `upgraded_search` with
 its transposition table, killer moves, principal variation search, draw sense,
 null-move pruning, and late move reductions. Given the same position and depth, both

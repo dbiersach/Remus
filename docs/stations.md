@@ -14,14 +14,16 @@ better than another before the games are played.
 
 ## Where the stations live
 
-`instructor/Stations` holds `WHITE - No enhancements` and one folder per station,
-such as `RED - Transposition table`. The WHITE folder is a complete, runnable copy of
+`instructor/Stations` holds `00 WHITE - No enhancements` and one folder per station,
+such as `06 RED - Transposition table`. The number in front of each name ranks the
+station by its rating over Remus-WHITE in the teacher's 10-minute league (below), so
+the folders list from 00 WHITE to 11 GOLD. The WHITE folder is a complete, runnable copy of
 the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each station folder is
 that copy plus one enhancement. `student/Stations`
 holds the same folders with the pair's functions stubbed.
 
 `make_station_folders.py` builds the folders from the Day 9 and Day 10 code.
-`GOLD - All enhancements` holds Remus-GOLD, a copy of the finished Day 10 Remus with
+`11 GOLD - All enhancements` holds Remus-GOLD, a copy of the finished Day 10 Remus with
 all ten enhancements at once. Remus-GOLD stays out of the color matches;
 `uv run estimate_elo.py` inside its folder rates it against Stockfish.
 
