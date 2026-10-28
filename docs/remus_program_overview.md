@@ -34,7 +34,11 @@ files that are new or growing, the functions the pairs write, and a paragraph on
 change and why (the text comes from `period_guides.py`). `period4` holds the finished code of the day. `make_period_folders.py`
 builds `period1` to `period3` from it, so a file that grows during the day, such as
 `make_move.py` on Day 5, gains castling in `period2`, en passant in `period3`, and
-promotion in `period4`.
+promotion in `period4`. Above the period folders, each Day folder's `README.md` gives
+the whole day at a glance: its objectives, what the pairs write in each period, a
+timed sequence of activities for all four periods, and the checkpoint at 4:30.
+`make_student_folders.py` writes it from `DAY_GUIDES` in `period_guides.py` into the
+instructor and student Day folders alike.
 
 `student/` mirrors `instructor/`. In each student period folder, the functions the class
 writes in that period are stubs that raise `NotImplementedError`, and the tests fail
