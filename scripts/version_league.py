@@ -86,8 +86,8 @@ def read_results(
         The TimeControl of the games to count, such as "600+0" from time_control().
     event : str
         LEAGUE_EVENT counts every version game, version_match.py games included.
-        Any other Event name, such as "Station league 2", counts only the games
-        of that league.
+        Any other Event name, such as "Niram league 1", counts only the games
+        of that league, whatever its name starts with.
     engine : str
         "Remus" or "Niram": only games between two versions of that engine count,
         so Remus and Niram get separate ratings.
@@ -104,9 +104,10 @@ def read_results(
     with GAMES_PATH.open() as file:
         while (game := chess.pgn.read_game(file)) is not None:
             headers = game.headers
-            if not headers.get("Event", "").startswith(EVENT_PREFIX):
-                continue
-            if event != LEAGUE_EVENT and headers.get("Event") != event:
+            if event == LEAGUE_EVENT:
+                if not headers.get("Event", "").startswith(EVENT_PREFIX):
+                    continue
+            elif headers.get("Event") != event:
                 continue
             if headers.get("Result") not in points or "StartMoves" not in headers:
                 continue
