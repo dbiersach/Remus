@@ -448,9 +448,9 @@ moves" milestone.
 | GRAY | King safety: reward the pawn shield while queens are on |
 
 - **P3. Enhancement stations: test and measure.** Each pair finishes its station,
-  passes its tests, and plays one short smoke-test game against Remus-WHITE with
-  `uv run station_match.py <COLOR> --games 1 --minutes 2`, which only checks that the
-  engine plays legal moves to the end. Each pair writes one sentence on the board:
+  passes its tests, and plays one short smoke-test game against Remus-WHITE: it opens
+  `smoke_test.py` in its station folder and presses Run in VS Code. The 2-minute game
+  only checks that the engine plays legal moves to the end. Each pair writes one sentence on the board:
   what its enhancement should change, and how the class will see it.
 - **P4. The mate solver.** The class meets the ten mate puzzles.
   **Students write:** `mating_move(state, moves_left)` in `mate_solver.py`, the
@@ -511,8 +511,8 @@ test, and the mate solver solves all ten puzzles.
   beamline. A "can't tell" sends the scientist back for a second measurement, such as
   X-ray fluorescence, which tells gold from silver at once.
 - **P4. Results, tournament, take-home, and wrap-up.** The tournament comes first.
-  Every pair runs `uv run station_match.py <COLOR>` in the `Remus` folder next to
-  the Day folders on its own laptop, all ten at once: its color plays two 10-minute games against
+  Every pair opens `play_tournament.py` in its station folder under `Remus` and
+  presses Run in VS Code on its own laptop, all ten at once: its color plays two 10-minute games against
   Remus-WHITE from the same opening, with White in game 1 and Black in game 2. The two
   games run side by side and take about 20 to 30 minutes, while each student copies
   the pair's repository to their own USB drive with `git clone --no-hardlinks` and

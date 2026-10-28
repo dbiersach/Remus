@@ -997,11 +997,13 @@ def readme_text(station: dict) -> str:
             f"## The changes and why\n\n{changes}",
             (
                 "## Check it\n\nCheck the work from inside this folder with "
-                "`uv run pytest`. In the Day 10 tournament, "
-                f"`uv run station_match.py {color}` in the `Remus` folder above this "
-                "one plays "
-                f"Remus-{color} against Remus-WHITE twice, once with each color, at "
-                "10 minutes a side, and adds both games to games/remus_games.pgn."
+                "`uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: "
+                f"Remus-{color} plays one 2-minute game against Remus-WHITE, which "
+                "shows that the engine plays legal moves to the end of a game. In the "
+                "Day 10 tournament, open `play_tournament.py` and press Run: "
+                f"Remus-{color} plays Remus-WHITE twice, once with each color, at 10 "
+                "minutes a side, and both games go into games/remus_games.pgn. Each "
+                "script runs `station_match.py` from the `Remus` folder above this one."
             ),
         ]
     return "\n\n".join(sections) + "\n"
@@ -1016,6 +1018,46 @@ def tidy(folders: list[Path]) -> None:
         check=False,
     )
     subprocess.run(ruff + ["format", "--quiet", *paths], check=True)
+
+
+RUN_SCRIPTS = {
+    "play_tournament.py": (
+        (
+            "The Day 10 tournament for this station. Press Run in VS Code: Remus-{color} "
+            "plays\ntwo 10-minute games against Remus-WHITE from the same opening, White "
+            "in game 1\nand Black in game 2. The two games take about 20 minutes."
+        ),
+        [],
+    ),
+    "smoke_test.py": (
+        (
+            "The Day 9 smoke test for this station. Press Run in VS Code: Remus-{color} "
+            "plays\none 2-minute game against Remus-WHITE, which shows that the engine "
+            "plays legal\nmoves to the end of a game. Nobody reads the result."
+        ),
+        ["--games", "1", "--minutes", "2"],
+    ),
+}  # File name -> (what it does, the extra arguments for station_match.py)
+
+
+def run_script_text(name: str, color: str) -> str:
+    """Return a script that runs station_match.py for one color from the Run button."""
+    about, extra = RUN_SCRIPTS[name]
+    arguments = ""
+    for word in [color, *extra]:
+        arguments += f', "{word}"'
+    return (
+        f'#!/usr/bin/env -S uv run\n"""{name}\n\n{about.format(color=color)}\n'
+        "station_match.py, in the Remus folder above this one, plays the games and "
+        'adds\nthem to games/remus_games.pgn.\n"""\n\n'
+        "import subprocess\nimport sys\nfrom pathlib import Path\n\n\n"
+        "def main():\n"
+        '    match_path = Path(__file__).parent.parent / "station_match.py"\n'
+        '    print(f"Running {match_path}")\n'
+        "    # sys.executable is the Python that VS Code runs, with python-chess\n"
+        f"    subprocess.run([sys.executable, str(match_path){arguments}], check=True)\n"
+        '\n\nif __name__ == "__main__":\n    main()\n'
+    )
 
 
 def main():
@@ -1043,6 +1085,11 @@ def main():
         if station["tests"]:
             (folder / "test_upgrades.py").write_text(station["tests"])
         (folder / "README.md").write_text(readme_text(station))
+        if station["students"]:
+            color = station["folder"].split(" - ")[0].split()[-1]
+            for name in RUN_SCRIPTS:
+                (folder / name).write_text(run_script_text(name, color))
+                (folder / name).chmod(0o755)  # The shebang runs it on Mac and Linux
         built.append(folder)
     tidy(built)
     print(f"Built {len(built)} station folders in {STATIONS}  (expected 11)")

@@ -85,7 +85,15 @@ uv run station_match.py RED --games 1 --minutes 2
                                        # the Day 9 smoke test: one short game
 ```
 
-In the Day 10 tournament every pair runs `uv run station_match.py <COLOR>` on its own
+Pairs never type these commands. Every color folder holds two short scripts that run
+`station_match.py` for its own color, so a pair opens one in VS Code and presses Run:
+
+| Script | When | What it plays |
+| --- | --- | --- |
+| `smoke_test.py` | Day 9, period 3 | One 2-minute game against Remus-WHITE, to show the engine plays legal moves to the end |
+| `play_tournament.py` | Day 10, period 4 | The tournament: two 10-minute games against Remus-WHITE, one with each color |
+
+In the Day 10 tournament every pair presses Run on `play_tournament.py` on its own
 laptop, all ten at once. Its color plays two games against Remus-WHITE from the same
 opening: White in game 1 and Black in game 2. The two games run side by side and take
 about 20 minutes, 30 with setup. Each pair writes its two results on the board. Two
