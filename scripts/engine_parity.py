@@ -31,7 +31,7 @@ Run it from the repository folder:
     uv run scripts/engine_parity.py --nodes 100000  Deeper searches, slower Remus
     uv run scripts/engine_parity.py RED GOLD        Only some versions
 
-The results go to docs/versions/engine_parity.md. The exit code is 1 if anything differs.
+The results go to docs/engines/engine_parity.md. The exit code is 1 if anything differs.
 """
 
 import argparse
@@ -47,7 +47,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 REMUS_FOLDER = ROOT / "instructor" / "Remus"
 NIRAM = ROOT / "Niram"
-REPORT_PATH = ROOT / "docs" / "versions" / "engine_parity.md"
+REPORT_PATH = ROOT / "docs" / "engines" / "engine_parity.md"
 DEFAULT_NODES = 25_000  # Remus searches this many positions in about 3 to 8 seconds
 FIELDS = ["key", "eval", "legal", "ordered", "book", "info", "nodes", "best"]
 
@@ -506,7 +506,7 @@ def main():
 def write_report(
     folders, niram_results, remus_seconds, mismatches, book_rows, arguments, elapsed
 ):
-    """Write docs/versions/engine_parity.md with one row per version and one per position."""
+    """Write docs/engines/engine_parity.md with one row per version and one per position."""
     colors = [color_of(folder) for folder in folders]
     text = "# Engine parity: Remus and Niram\n\n"
     text += (

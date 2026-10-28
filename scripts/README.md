@@ -44,11 +44,11 @@ the Rust copies in `Niram/` instead, after `cargo build --release` inside `Niram
 | Script | What it does |
 | --- | --- |
 | `version_league.py` | Plays a round robin of all 12 versions on a 10-minute clock and fits one Elo rating each, with Remus-WHITE pinned at 0. `--rate-only` prints the ratings from saved games. |
-| `version_elo.py` | Rates all 12 versions against Stockfish at five strengths and writes the table to `docs/versions/remus_elo.md`. `--report-only` writes the table from saved games. |
+| `version_elo.py` | Rates all 12 versions against Stockfish at five strengths and writes the table to `docs/engines/remus_elo.md`. `--report-only` writes the table from saved games. |
 
 ## Compare Remus with Niram
 
 | Script | What it does |
 | --- | --- |
-| `engine_parity.py` | Checks that every Niram engine matches its Remus twin on 49 positions: evaluation, legal moves, book moves, and every search depth's score, node count, and best line. It writes `docs/versions/engine_parity.md` and exits with code 1 if anything differs. |
+| `engine_parity.py` | Checks that every Niram engine matches its Remus twin on 49 positions: evaluation, legal moves, book moves, and every search depth's score, node count, and best line. It writes `docs/engines/engine_parity.md` and exits with code 1 if anything differs. |
 | `remus_benchmark.py` | Times one Remus version, such as `GOLD`, on the ten positions of `compare_search.py`, so its speed can be compared with the Niram benchmark of the same color. |

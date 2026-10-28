@@ -289,7 +289,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `version_league.py` plays a round robin of all 12 versions, Remus-GOLD included,
   and fits one Elo rating per version with Remus-WHITE pinned at 0.
   `version_elo.py` rates all 12 versions against Stockfish at five UCI_Elo levels
-  from frozen copies of the color versions and writes the table to `docs/versions/remus_elo.md`.
+  from frozen copies of the color versions and writes the table to `docs/engines/remus_elo.md`.
 - `Niram/` holds Niram, every Remus version rewritten in Rust (David, 2026-10-27 and
   2026-10-28), named for Naram-Sin, Sargon's grandson: Niram-WHITE, the ten color
   versions, and Niram-GOLD, one Cargo crate each in folders named like the color version
@@ -301,7 +301,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   times the Remus version on the same positions). `uv run scripts/engine_parity.py`
   checks all 12 pairs on 49 positions: evaluation, legal moves, book moves, and every
   depth's score, node count, and principal variation must match, and the results go
-  to `docs/versions/engine_parity.md`. Run it after any change to an engine. `version_match.py`,
+  to `docs/engines/engine_parity.md`. Run it after any change to an engine. `version_match.py`,
   `version_league.py`, and `version_elo.py` play the Niram programs with `--niram`
   and rate them apart from Remus, with Niram-WHITE pinned at 0; David wants leagues
   run with Niram (2026-10-28). A change to a color version's rules, evaluation, search, or
@@ -341,8 +341,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - `docs/code/`: the program overview, `file_versions.md`, and one page for every
     `.py` file a student modifies or reads, named after that file (`board.py` has
     `board.md`).
-  - `docs/versions/`: `remus_versions.md`, the ten color versions and Remus-GOLD, and
-    `remus_elo.md`, which `version_elo.py` writes.
+  - `docs/engines/`: the Remus versions and their Niram twins: `remus_versions.md`,
+    the ten color versions and Remus-GOLD; `remus_elo.md`, which `version_elo.py`
+    writes; and `engine_parity.md`, which `engine_parity.py` writes.
   - `docs/briefs/`: the two briefing PDFs.
   Pictures live in `docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `docs/`.

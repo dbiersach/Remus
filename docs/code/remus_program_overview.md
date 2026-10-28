@@ -163,8 +163,8 @@ The pages, in the order the class builds them:
 | [`mate_solver.py`](mate_solver.md) | Solve mate-in-two puzzles |
 | [`estimate_elo.py`](estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
 | [`demo_results.py`](demo_results.md) | Day 10 demo: read a match result |
-| [`version_match.py`](../versions/remus_versions.md) | Plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |
-| [`scripts/version_league.py`](../versions/remus_versions.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
+| [`version_match.py`](../engines/remus_versions.md) | Plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |
+| [`scripts/version_league.py`](../engines/remus_versions.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](hidden_peak.md) | Science AI: find the hidden peak |
 | [`phase_hunt.py`](phase_hunt.md) | Science AI: name the crystals in a powder |
 | [The test files](tests.md) | Checking that Remus works |
