@@ -42,6 +42,8 @@ A digit means that many empty squares. `8` is a whole empty rank.
 2. `board_from_placement()` turns the first field into the 8x8 board.
 3. The other fields fill in the turn, castling, en passant square, and clocks.
 4. `state_to_fen()` runs the other way, using `fen_placement()`.
+5. `print_state()` shows a state the way a person reads it: the board, each FEN
+   field with its meaning, and the whole FEN line.
 
 ## Call tree
 
@@ -57,6 +59,11 @@ state_from_fen()
 state_to_fen()
     square_name()  [board.py]
     fen_placement()
+
+print_state()
+    print_board()  [board.py]
+    square_name()  [board.py]
+    state_to_fen()
 ```
 
 ## The functions
@@ -67,6 +74,7 @@ state_to_fen()
 | `board_from_placement` | Reads the first FEN field into a board. | Day 6, period 4 |
 | `state_from_fen` | Reads a full FEN line into a game state. | Day 6, period 4 |
 | `state_to_fen` | Writes a game state as a full FEN line. | Day 6, period 4 |
+| `print_state` | Prints the board, each FEN field with its meaning, and the FEN line. | Day 6, period 4 |
 
 ## Try it
 
@@ -76,7 +84,8 @@ From inside a period folder that has the file, run:
 uv run fen.py
 ```
 
-You should see: The starting board, then `Start FEN read and written back unchanged: True`.
+You should see: the board after 1. e4 with Black to move and en passant square e3,
+the FEN line for that position, then `Start FEN read and written back unchanged: True`.
 
 ## Puzzle questions
 

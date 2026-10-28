@@ -1,16 +1,104 @@
 # Remus opening book: one opening per line, written in SAN from the starting position.
-# Lines starting with "#" are comments. Remus checks every move with its own move
-# generator, so a typo here is reported and skipped, never played.
+# Lines starting with "#" are comments, and the comment above each line names its
+# opening. Remus checks every move with its own move generator, so a typo here is
+# reported and skipped, never played. Every line is 10 half-moves (5 moves each).
+
+# 1. e4 e5: open games
+# Ruy Lopez, Closed Variation
 e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7
+# Ruy Lopez, Berlin Defense
+e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6
+# Ruy Lopez, Exchange Variation
+e4 e5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 O-O f6
+# Italian Game, Giuoco Pianissimo
 e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6
+# Italian Game, Two Knights Defense, quiet line
+e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O
+# Scotch Game
 e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6
+# Four Knights Game, Spanish Variation
+e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O
+# Petrov Defense
+e4 e5 Nf3 Nf6 Nxe5 d6 Nf3 Nxe4 d4 d5
+# Philidor Defense
+e4 e5 Nf3 d6 d4 Nf6 Nc3 Nbd7 Bc4 Be7
+# Vienna Game
+e4 e5 Nc3 Nf6 g3 d5 exd5 Nxd5 Bg2 Nxc3
+
+# 1. e4 c5: Sicilian Defense
+# Sicilian Defense, Najdorf Variation
 e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6
+# Sicilian Defense, Classical Variation
+e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 Nc6
+# Sicilian Defense, Scheveningen Variation
+e4 c5 Nf3 e6 d4 cxd4 Nxd4 Nf6 Nc3 d6
+# Sicilian Defense, Taimanov Variation
+e4 c5 Nf3 e6 d4 cxd4 Nxd4 Nc6 Nc3 Qc7
+# Sicilian Defense, Sveshnikov Variation
+e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 Nf6 Nc3 e5
+# Sicilian Defense, Accelerated Dragon
 e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6 Nc3 Bg7
+# Sicilian Defense, Alapin Variation
+e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6
+
+# 1. e4, other defenses
+# French Defense, Classical Variation
 e4 e6 d4 d5 Nc3 Nf6 Bg5 Be7 e5 Nfd7
+# French Defense, Winawer Variation
+e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3
+# French Defense, Tarrasch Variation
+e4 e6 d4 d5 Nd2 Nf6 e5 Nfd7 Bd3 c5
+# French Defense, Advance Variation
+e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6
+# Caro-Kann Defense, Classical Variation
 e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6
+# Caro-Kann Defense, Advance Variation
+e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5
+# Pirc Defense, Classical Variation
+e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be2 O-O
+# Scandinavian Defense
+e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 c6
+# Alekhine Defense, Modern Variation
+e4 Nf6 e5 Nd5 d4 d6 Nf3 Bg4 Be2 e6
+
+# 1. d4 d5: closed games
+# Queen's Gambit Declined, Orthodox Defense
 d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O
+# Queen's Gambit Declined, Exchange Variation
+d4 d5 c4 e6 Nc3 Nf6 cxd5 exd5 Bg5 Be7
+# Queen's Gambit Accepted
+d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5
+# Slav Defense, Main Line
 d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5
+# Semi-Slav Defense
+d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7
+# London System
+d4 d5 Bf4 Nf6 e3 e6 Nf3 c5 c3 Nc6
+
+# 1. d4 Nf6: Indian defenses
+# Nimzo-Indian Defense, Rubinstein Variation
 d4 Nf6 c4 e6 Nc3 Bb4 e3 O-O Bd3 d5
+# Queen's Indian Defense
+d4 Nf6 c4 e6 Nf3 b6 g3 Ba6 b3 Bb4
+# Bogo-Indian Defense
+d4 Nf6 c4 e6 Nf3 Bb4 Bd2 Qe7 g3 Nc6
+# Catalan Opening
+d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O
+# King's Indian Defense, Classical Variation
 d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O
+# Grunfeld Defense, Exchange Variation
+d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3
+# Modern Benoni Defense
+d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6
+
+# 1. d4, other defenses
+# Dutch Defense, Classical Variation
+d4 f5 g3 Nf6 Bg2 e6 Nf3 Be7 O-O O-O
+
+# Flank openings
+# English Opening, Four Knights Variation
 c4 e5 Nc3 Nf6 Nf3 Nc6 g3 d5 cxd5 Nxd5
+# English Opening, Symmetrical Variation
+c4 c5 Nc3 Nc6 g3 g6 Bg2 Bg7 Nf3 e6
+# Reti Opening
 Nf3 d5 g3 Nf6 Bg2 c6 O-O Bg4 d3 Nbd7
