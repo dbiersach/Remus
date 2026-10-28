@@ -39,7 +39,6 @@ Day 5, Period 2.
 | `mate_solver.py` | D9 P4: solves the GameWorks mate puzzles while the station matches run | No changes |
 | `hidden_peak.py` | D10 P1: Science AI, the hidden peak | Last day |
 | `beam_time.py` | D10 P2: the beamline problem: estimates and the chance of a wrong call | D10 P3: the look-ahead `gain()` and `choose_next_sample()` |
-| `tournament.py` | D10 P4: the class round robin | Last day |
 | `remus.sh` | D10 P4: starts Remus on a Mac or Linux computer at home | Last day |
 | `estimate_elo.py` | D10 P4: measures the Elo rating of Remus against Stockfish | Last day |
 | `Stations/station_match.py` | D9 P2: plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
@@ -91,4 +90,4 @@ instructor folder holds the answer file `<name>_instructor.py`.
 | D10 P1 | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `test_upgrades.py` | `search.py`: `upgraded_search()`. `evaluation.py`: pawns, mating, king safety. `move_ordering.py`: killers. `uci_engine.py` and `console_game.py`: book moves first |
 | D10 P2 | `beam_time.py`, `test_beam_time.py` | None |
 | D10 P3 | None | `beam_time.py`: the look-ahead. `test_beam_time.py` |
-| D10 P4 | `tournament.py`, `remus.sh`, `estimate_elo.py`. Demo: `demo_results.py` | None |
+| D10 P4 | `remus.sh`, `estimate_elo.py`. Demo: `demo_results.py` | None |

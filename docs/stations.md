@@ -70,23 +70,36 @@ The evaluation stations (PURPLE, CYAN, GRAY) add one term to `evaluate()` and on
 line to `explain_evaluation()`. The GREEN station asks the book before searching, in
 both `uci_engine.py` and `console_game.py`.
 
-## Measure the gain: station_match.py
+## The Day 10 tournament: station_match.py
 
 `instructor/Stations/station_match.py` plays a station's Remus against Remus-WHITE,
-or against another station, at 1 minute plus 0.6 seconds a move. It adds
-every game to `games/remus_games.pgn` and prints the score and the Elo gap.
+or against another station, at 10 minutes a side. It adds every game to
+`games/remus_games.pgn` and prints the score.
 
 ```bash
-uv run station_match.py RED            # Remus-RED against Remus-WHITE, 20 games
+uv run station_match.py RED            # Remus-RED against Remus-WHITE, 2 games
 uv run station_match.py RED BLUE       # Remus-RED against Remus-BLUE
+uv run station_match.py RED --games 1 --minutes 2
+                                       # the Day 9 smoke test: one short game
 ```
 
-Twenty games take about 20 to 30 minutes with two games at once: each game lasts
-about two minutes, because each side has 1 minute plus 0.6 seconds a move. Nobody needs to watch, so
-every laptop runs its own color against Remus-WHITE at the same time. Remus-WHITE
-also plays in the color-on-color matches, to show how far each station climbs above
-its starting point. In the games file every player is named `Remus-<COLOR>`, such as
-`Remus-WHITE`, so a player name never reads like the side to move.
+In the Day 10 tournament every pair runs `uv run station_match.py <COLOR>` on its own
+laptop, all ten at once. Its color plays two games against Remus-WHITE from the same
+opening: White in game 1 and Black in game 2. The two games run side by side and take
+about 20 minutes, 30 with setup. Each pair writes its two results on the board. Two
+games cannot show whether an enhancement helps, so the script prints no Elo gap for
+fewer than 10 games. The teacher then shows Remus-GOLD's score against every color
+and Remus-WHITE from the teacher's league:
+
+```bash
+uv run station_league.py --rate-only --player GOLD
+```
+
+The Day 9 smoke test plays one game on a short clock only to prove that the station's
+engine plays legal moves to the end; nobody reads its result.
+
+In the games file every player is named `Remus-<COLOR>`, such as `Remus-WHITE`, so a
+player name never reads like the side to move.
 
 ### Why the games start from openings
 

@@ -13,6 +13,8 @@ Usage:
     uv run station_league.py                 the round robin, then the ratings
     uv run station_league.py --games 4       4 games for each pair of players
     uv run station_league.py --rate-only     only the ratings, from the saved games
+    uv run station_league.py --rate-only --player GOLD
+                                             also Remus-GOLD's score against each
     uv run station_league.py --at-once 16    16 games at a time
     uv run station_league.py --event "Station league 2"
                                              a second league, kept and rated apart
@@ -260,6 +262,34 @@ def print_ratings(results: list[Result], clock: str) -> None:
         )
 
 
+def print_head_to_head(results: list[Result], player: str) -> None:
+    """
+    Print one player's score against each opponent, such as Remus-GOLD's.
+
+    Parameters
+    ----------
+    results : list[Result]
+        Every game as (White, Black, White's points).
+    player : str
+        The player to report, such as "Remus-GOLD".
+    """
+    played = {}
+    scored = {}
+    for white, black, points in results:
+        if player == white:
+            opponent, gained = black, points
+        elif player == black:
+            opponent, gained = white, 1 - points
+        else:
+            continue
+        played[opponent] = played.get(opponent, 0) + 1
+        scored[opponent] = scored.get(opponent, 0.0) + gained
+    print(f"{player} against each opponent:")
+    print(f"  {'Opponent':13} {'Games':>5}  {'Points':>6}")
+    for opponent in sorted(played):
+        print(f"  {opponent:13} {played[opponent]:>5}  {scored[opponent]:6g}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Rank every Remus version.")
     parser.add_argument("--games", type=int, default=6, help="games for each pair")
@@ -274,6 +304,7 @@ def main():
     parser.add_argument(
         "--event", default=LEAGUE_EVENT, help="the Event name of this league's games"
     )
+    parser.add_argument("--player", help='also show one color\'s games, such as "GOLD"')
     options = parser.parse_args()
     clock = time_control(options.minutes, options.increment)
     start = time.perf_counter()
@@ -285,7 +316,10 @@ def main():
             options.at_once,
             options.event,
         )
-    print_ratings(read_results(clock, options.event), clock)
+    results = read_results(clock, options.event)
+    print_ratings(results, clock)
+    if options.player:
+        print_head_to_head(results, f"Remus-{options.player.upper()}")
     print(f"Total run time (sec): {time.perf_counter() - start:.3f}")
 
 

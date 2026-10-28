@@ -568,7 +568,7 @@ OBJECTIVES = {
         (
             "Test an enhancement before trusting it.",
             (
-                "The station passes `uv run pytest` and a two-game smoke test against "
+                "The station passes `uv run pytest` and a one-game smoke test against "
                 "Remus-WHITE with no illegal moves."
             ),
         ),
@@ -581,13 +581,6 @@ OBJECTIVES = {
         ),
     ],
     (9, 4): [
-        (
-            "Run a fair experiment: same opponent, same openings, both colors.",
-            (
-                "Each laptop's `station_match.py` run starts with no errors and adds "
-                "games to the games file."
-            ),
-        ),
         (
             "Solve mate puzzles with a yes-or-no search.",
             "The mate-solver tests pass on all ten GameWorks puzzles.",
@@ -642,8 +635,9 @@ OBJECTIVES = {
         (
             "Read an experiment's results and their error margins.",
             (
-                "`demo_results.py` turns the pair's own match result into an Elo gap "
-                "and margin, and the pair says whether the gap is larger than the margin."
+                "`demo_results.py` turns the pair's two tournament games, and then its "
+                "color's league games, into an Elo gap and margin, and the pair says "
+                "which gap is larger than its margin."
             ),
         ),
         (
@@ -672,10 +666,11 @@ STATION_OBJECTIVES = [
         "`uv run pytest` passes in the station folder.",
     ),
     (
-        "Measure the enhancement against Remus-WHITE.",
+        "Run a fair experiment against Remus-WHITE: same opening, both colors.",
         (
-            "`uv run station_match.py <COLOR>` finishes, and the pair reads its Elo gap "
-            "and margin from the output."
+            "In the Day 10 tournament, `uv run station_match.py <COLOR>` plays both "
+            "10-minute games with no illegal moves or crashes, and the pair says why "
+            "two games cannot show whether the enhancement helps."
         ),
     ),
 ]
@@ -1206,7 +1201,8 @@ LAB_NOTES = {
             "an Elo gap, then into a range that holds the true gap 95 times out of "
             "100. When the range includes 0, the match has not shown that the "
             "enhancement helped, and more games are needed. Each pair puts in its own "
-            "color's result."
+            "two tournament games, then its color's league games from the teacher's "
+            "table, and compares the two ranges."
         ),
         (
             "Part #3 asks `think()` about a back-rank mate and prints each depth's "
