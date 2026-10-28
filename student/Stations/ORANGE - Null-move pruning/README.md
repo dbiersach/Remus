@@ -1,6 +1,6 @@
 # Remus-ORANGE: Null-move pruning
 
-Pass the turn in a shallow search: if passing still wins, a real move will too, so stop early.
+Let the opponent move twice in a shallow search. If Remus is still too far ahead, the opponent would never allow this position, so stop searching it.
 
 ## Learning objectives
 

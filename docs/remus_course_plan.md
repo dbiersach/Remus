@@ -443,7 +443,7 @@ and alpha-beta returns the same score as negamax with fewer nodes.
 | YELLOW | Draw sense: a repeated position scores 0 inside the search | `DrawGame` |
 | PURPLE | Pawn structure: doubled, isolated, and passed pawns | `PawnStrVal`, `PassPawnRank` |
 | CYAN | Mating bonus: push the losing king to the edge | `Mating` mode in `CalcPVTable` |
-| ORANGE | Null-move pruning: pass the turn in a shallow search | (not in GameWorks) |
+| ORANGE | Null-move pruning: give the opponent two moves in a row; if Remus is still too far ahead, stop searching | (not in GameWorks) |
 | BROWN | Late move reductions: search late, quiet moves one ply shallower | (not in GameWorks) |
 | GRAY | King safety: reward the pawn shield while queens are on | (not in GameWorks) |
 
