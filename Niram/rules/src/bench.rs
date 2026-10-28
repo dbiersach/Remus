@@ -6,17 +6,26 @@
 //! ```text
 //! niram-red bench [depth]        Time the search on ten positions
 //! niram-red perft [depth] [fen]  Count the leaf positions of the legal move tree
+//! niram-red parity FILE NODES    Print what the engine sees and chooses in each
+//!                                position of FILE, for scripts/engine_parity.py
+//! niram-red book                 Print every position and move of the opening book
 //! ```
 
 use std::time::Instant;
 
 use crate::fen::{START_FEN, state_from_fen};
-use crate::game_state::State;
+use crate::game_state::{State, position_key};
 use crate::legal_moves::legal_moves;
 use crate::make_move::{make_move, undo_move};
-use crate::moves::move_to_uci;
+use crate::move_ordering::order_moves;
+use crate::moves::{Move, move_to_uci};
+use crate::opening_book::{Book, book_path, load_book};
 use crate::search_tools::{MATE_SCORE, ThinkFn};
 use crate::uci_engine;
+use crate::uci_engine::set_position;
+
+/// A version's evaluate(): the score of a position for the side to move.
+pub type EvalFn = fn(&State) -> i32;
 
 pub const BENCH_POSITIONS: [&str; 10] = [
     // The ten positions of Remus's compare_search.py and scripts/remus_benchmark.py
@@ -32,6 +41,7 @@ pub const BENCH_POSITIONS: [&str; 10] = [
     "r4rk1/1pp1qppp/p1np1n2/2b1p1B1/2B1P1b1/P1NP1N2/1PP1QPPP/R4RK1 w - - 0 10",
 ];
 const BENCH_DEPTH: i32 = 4; // The deepest iteration, the same as remus_benchmark.py
+const PARITY_MAX_DEPTH: i32 = 12; // The deepest search the parity check ever asks for
 
 /// One bench position's result: the best move, the score, and the positions visited.
 pub struct BenchLine {
@@ -127,6 +137,104 @@ pub fn with_commas(count: u64) -> String {
     text
 }
 
+/// Return moves as UCI text separated by spaces, such as "e2e4 g1f3".
+fn moves_text(moves: &[Move]) -> String {
+    let mut words = Vec::with_capacity(moves.len());
+    for &mv in moves {
+        words.push(move_to_uci(mv));
+    }
+    words.join(" ")
+}
+
+/// Return an info line without its timing words ("nps" and "time"), which differ
+/// from run to run and from Remus, whose info lines leave them out.
+fn without_timing(line: &str) -> String {
+    let words: Vec<&str> = line.split_whitespace().collect();
+    let mut kept = Vec::with_capacity(words.len());
+    let mut index = 0;
+    while index < words.len() {
+        if words[index] == "nps" || words[index] == "time" {
+            index += 2;
+        } else {
+            kept.push(words[index]);
+            index += 1;
+        }
+    }
+    kept.join(" ")
+}
+
+/// Run think() on a fresh copy of the position, with no clock, to `depth`, and
+/// return its info lines, its best move, and the positions it visited.
+fn search_to_depth(command: &str, think: ThinkFn, depth: i32) -> (Vec<String>, Move, u64) {
+    let words: Vec<&str> = command.split_whitespace().collect();
+    let mut state = set_position(&words).expect("parity positions are valid");
+    let mut lines = Vec::new();
+    let (best, info) = think(&mut state, None, depth, &mut |line| {
+        lines.push(without_timing(line));
+    });
+    (lines, best, info.nodes)
+}
+
+/// Print, for each position of the file, what scripts/engine_parity.py compares
+/// with Remus: the position key, the evaluation, the legal moves in generation
+/// order and in search order, the book moves, and a search to a fixed depth.
+///
+/// Each line of the file is "name<TAB>position command", such as
+/// "start<TAB>position startpos moves e2e4". The search depth is the deepest one
+/// that visits at most `budget` positions, so Remus can repeat it in a few seconds;
+/// a search that ends early on a forced mate or a single legal move stops there.
+fn parity(file_path: &str, budget: u64, think: ThinkFn, evaluate: EvalFn, use_book: bool) {
+    let text = std::fs::read_to_string(file_path).expect("parity needs a readable file");
+    let book = if use_book { load_book(&book_path()) } else { Book::new() };
+    for line in text.lines() {
+        let Some((name, command)) = line.split_once('\t') else {
+            continue;
+        };
+        let words: Vec<&str> = command.split_whitespace().collect();
+        let mut state = set_position(&words).expect("parity positions are valid");
+        let moves = legal_moves(&mut state);
+        println!("case\t{name}");
+        println!("key\t{}", position_key(&state));
+        println!("eval\t{}", evaluate(&state));
+        println!("legal\t{}", moves_text(&moves));
+        println!("ordered\t{}", moves_text(&order_moves(&moves, &state.board, None, &[])));
+        let book_moves = book.get(&position_key(&state)).cloned().unwrap_or_default();
+        println!("book\t{}", moves_text(&book_moves));
+        if moves.is_empty() {
+            println!("depth\t0");
+            println!("best\t0000");
+            continue;
+        }
+        let mut chosen = search_to_depth(command, think, 1);
+        let mut depth = 1;
+        while depth < PARITY_MAX_DEPTH && chosen.0.len() == depth as usize {
+            let deeper = search_to_depth(command, think, depth + 1);
+            if deeper.2 > budget {
+                break;
+            }
+            chosen = deeper;
+            depth += 1;
+        }
+        println!("depth\t{depth}");
+        for info in &chosen.0 {
+            println!("info\t{info}");
+        }
+        println!("nodes\t{}", chosen.2);
+        println!("best\t{}", move_to_uci(chosen.1));
+    }
+}
+
+/// Print every position of the opening book with its moves, one position per line
+/// in key order, for scripts/engine_parity.py to compare with Remus's book.
+fn print_book() {
+    let book = load_book(&book_path());
+    let mut keys: Vec<&String> = book.keys().collect();
+    keys.sort();
+    for key in keys {
+        println!("{key}\t{}", moves_text(&book[key]));
+    }
+}
+
 /// Count the leaf positions of the legal move tree to a fixed depth.
 pub fn perft(state: &mut State, depth: i32) -> u64 {
     if depth == 0 {
@@ -141,8 +249,9 @@ pub fn perft(state: &mut State, depth: i32) -> u64 {
     count
 }
 
-/// Run the command line: "bench", "perft", or, with no argument, the UCI loop.
-pub fn run_command_line(name: &str, think: ThinkFn, use_book: bool) {
+/// Run the command line: "bench", "perft", "parity", "book", or, with no argument,
+/// the UCI loop.
+pub fn run_command_line(name: &str, think: ThinkFn, evaluate: EvalFn, use_book: bool) {
     let arguments: Vec<String> = std::env::args().collect();
     let command = arguments.get(1).map(|text| text.as_str()).unwrap_or("uci");
     match command {
@@ -166,6 +275,12 @@ pub fn run_command_line(name: &str, think: ThinkFn, use_book: bool) {
             println!("perft({depth}) = {}", with_commas(count));
             println!("Total run time (sec): {:.3}", start.elapsed().as_secs_f64());
         }
+        "parity" => {
+            let file_path = arguments.get(2).expect("parity needs a file of positions");
+            let budget = arguments.get(3).and_then(|text| text.parse().ok()).unwrap_or(30_000);
+            parity(file_path, budget, think, evaluate, use_book);
+        }
+        "book" => print_book(),
         _ => uci_engine::run(name, think, use_book),
     }
 }

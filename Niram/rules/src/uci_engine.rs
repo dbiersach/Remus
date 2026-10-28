@@ -33,7 +33,7 @@ fn send(text: &str) {
 
 /// Build the state that a "position" command describes, such as
 /// "position startpos moves e2e4 e7e5".
-fn set_position(words: &[&str]) -> Result<State, String> {
+pub fn set_position(words: &[&str]) -> Result<State, String> {
     let moves_at = words.iter().position(|&word| word == "moves");
     let mut state = if words.get(1) == Some(&"startpos") {
         state_from_fen(START_FEN)?

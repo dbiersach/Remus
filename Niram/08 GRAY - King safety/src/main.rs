@@ -11,7 +11,7 @@ mod evaluation;
 mod search;
 
 fn main() {
-    niram_rules::bench::run_command_line("Niram-GRAY", search::think, false);
+    niram_rules::bench::run_command_line("Niram-GRAY", search::think, evaluation::evaluate, false);
 }
 
 #[cfg(test)]

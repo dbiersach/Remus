@@ -12,7 +12,7 @@ mod evaluation;
 mod search;
 
 fn main() {
-    niram_rules::bench::run_command_line("Niram-GOLD", search::think, true);
+    niram_rules::bench::run_command_line("Niram-GOLD", search::think, evaluation::evaluate, true);
 }
 
 #[cfg(test)]
