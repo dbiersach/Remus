@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-The RED station adds table_search, and think uses it.
+The RED color version adds table_search, and think uses it.
 """
 
 import random
@@ -405,7 +405,7 @@ def table_search(
     first: Move | None = None,
 ) -> tuple[int, list[Move]]:
     """
-    The RED station search: the Day 9 search plus a transposition table. A
+    The Remus-RED search: the Day 9 search plus a transposition table. A
     position already searched deeply enough is not searched again, and its stored
     best move is tried first.
 

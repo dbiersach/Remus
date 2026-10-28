@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the PURPLE station: pawn structure.
+Tests for the PURPLE color version: pawn structure.
 """
 
 from evaluation import pawn_structure

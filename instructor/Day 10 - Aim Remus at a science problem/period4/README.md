@@ -1,6 +1,6 @@
 # Day 10, Period 4: Results, tournament, take-home, and wrap-up
 
-The tournament: each pair opens `play_tournament.py` in its station folder under `Remus` and presses Run in VS Code: two 10-minute games of its color against Remus-WHITE, one with each color, all pairs at once. Running `estimate_elo.py` in the GOLD folder measures the Elo rating of Remus-GOLD against Stockfish. Both add every game to games/remus_games.pgn at the top of the repository.
+The tournament: each pair opens `play_tournament.py` in its version folder under `Remus` and presses Run in VS Code: two 10-minute games of its color against Remus-WHITE, one with each color, all pairs at once. Running `estimate_elo.py` in the GOLD folder measures the Elo rating of Remus-GOLD against Stockfish. Both add every game to games/remus_games.pgn at the top of the repository.
 
 ## Learning objectives
 

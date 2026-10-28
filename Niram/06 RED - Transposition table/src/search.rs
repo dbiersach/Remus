@@ -45,7 +45,7 @@ pub fn quiescence(state: &mut State, mut alpha: i32, beta: i32, info: &mut Searc
     Ok(alpha)
 }
 
-/// The RED station search: the Day 9 search plus a transposition table. A position
+/// The Remus-RED search: the Day 9 search plus a transposition table. A position
 /// already searched deeply enough is not searched again, and its stored best move
 /// is tried first.
 ///

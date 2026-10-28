@@ -3,7 +3,7 @@
 # rules/ holds what every version shares: the board, the rules of chess, FEN, SAN,
 # the opening book, the evaluation terms, move ordering, the transposition table,
 # the search helpers, the UCI loop, and the benchmark. Each color folder holds one
-# engine: its evaluate(), its search, and its think(), like the station folders
+# engine: its evaluate(), its search, and its think(), like the version folders
 # of instructor/Remus.
 [workspace]
 resolver = "3"

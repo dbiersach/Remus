@@ -1,6 +1,6 @@
 # Remus-WHITE: No enhancements
 
-Remus-WHITE is the finished Day 9 Remus with none of the ten enhancements. Every station starts from it, and every station match measures against it.
+Remus-WHITE is the finished Day 9 Remus with none of the ten enhancements. Every color version starts from it, and every version match measures against it.
 
 ## The idea, with an example
 
@@ -8,7 +8,7 @@ Remus-WHITE thinks the way the class built it through Day 9. `think()` searches 
 
 ## Why it matters
 
-Every color station is Remus-WHITE plus exactly one change. Playing each station against Remus-WHITE is a fair experiment: same openings, both colors, and only one thing different.
+Every color version is Remus-WHITE plus exactly one change. Playing each color version against Remus-WHITE is a fair experiment: same openings, both colors, and only one thing different.
 
 ## What it costs
 
@@ -28,4 +28,4 @@ Remus-WHITE is pinned at 0 in every league table, so every other version's ratin
 
 ## Check it
 
-Check it from inside this folder with `uv run pytest`. From the `Remus` folder above this one, `uv run station_match.py WHITE RED` plays it against a station.
+Check it from inside this folder with `uv run pytest`. From the `Remus` folder above this one, `uv run version_match.py WHITE RED` plays it against a color version.

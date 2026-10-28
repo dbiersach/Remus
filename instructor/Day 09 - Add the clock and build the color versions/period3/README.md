@@ -1,10 +1,10 @@
-# Day 9, Period 3: Enhancement stations: test and measure
+# Day 9, Period 3: Color versions: test and measure
 
 ## Learning objectives
 
 By the end of this period, each pair can:
 
-- Test an enhancement before trusting it. **Measured by:** The station passes `uv run pytest` and a one-game smoke test against Remus-WHITE with no illegal moves.
+- Test an enhancement before trusting it. **Measured by:** The color version passes `uv run pytest` and a one-game smoke test against Remus-WHITE with no illegal moves.
 - Predict what the enhancement changes. **Measured by:** Each pair writes one sentence on the board: what should change, and how the class will see it in the match results.
 
 ## The files

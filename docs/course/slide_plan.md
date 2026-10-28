@@ -94,7 +94,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 8.6 | The horizon effect | A queen captures a pawn at depth 0 and is lost one move later. Quiescence keeps searching captures until the position is quiet |
 | 8.7 | Move ordering | An MVV-LVA grid: victim across, attacker down. Pawn takes queen first, queen takes pawn last |
 
-## Day 9: Add the clock and build the stations
+## Day 9: Add the clock and build the color versions
 
 | Slide | Title | What it shows |
 | --- | --- | --- |

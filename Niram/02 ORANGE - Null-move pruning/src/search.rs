@@ -44,7 +44,7 @@ pub fn quiescence(state: &mut State, mut alpha: i32, beta: i32, info: &mut Searc
     Ok(alpha)
 }
 
-/// The ORANGE station search: the Day 9 search plus null-move pruning. The side to
+/// The Remus-ORANGE search: the Day 9 search plus null-move pruning. The side to
 /// move passes, so the opponent moves twice, and runs a shallower search. If the
 /// side to move still scores at least beta, the opponent would never allow this
 /// position, because a real move almost always beats a pass, so the position is

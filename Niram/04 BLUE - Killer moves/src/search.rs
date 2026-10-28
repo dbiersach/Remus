@@ -44,7 +44,7 @@ pub fn quiescence(state: &mut State, mut alpha: i32, beta: i32, info: &mut Searc
     Ok(alpha)
 }
 
-/// The BLUE station search: the Day 9 search plus killer moves. A quiet move that
+/// The Remus-BLUE search: the Day 9 search plus killer moves. A quiet move that
 /// caused a cutoff at this ply is tried right after the captures in the next
 /// position at the same ply.
 ///

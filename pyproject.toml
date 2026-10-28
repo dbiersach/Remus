@@ -49,7 +49,7 @@ target-version = "py314"
 testpaths = ["scripts"]
 addopts = "-q"
 
-# station_league.py and station_elo.py in scripts/ import station_match.py from
+# version_league.py and version_elo.py in scripts/ import version_match.py from
 # instructor/Remus, where every pair runs it in the Day 10 tournament.
 [tool.pyright]
 executionEnvironments = [

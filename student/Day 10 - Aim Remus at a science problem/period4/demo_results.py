@@ -3,7 +3,7 @@
 
 Day 10, period 4 demo: read a match result. Part 1 turns wins, draws, and losses
 into an Elo gap, and Part 2 adds a 95 percent margin, the way the class reads its
-station matches.
+version matches.
 Replace each line that holds only # with one line of code, then run the file.
 """
 

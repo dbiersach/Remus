@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the GRAY station: king safety.
+Tests for the GRAY color version: king safety.
 """
 
 from evaluation import king_safety

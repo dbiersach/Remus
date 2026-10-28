@@ -1,9 +1,9 @@
 #!/usr/bin/env -S uv run
-"""station_match.py
+"""version_match.py
 
-Measure how much one enhancement station adds. A station's Remus plays a match
+Measure how much one color version adds. A color version's Remus plays a match
 against Remus-WHITE (the finished Day 9 Remus with no enhancements), or against
-another station, with python-chess as the referee. Every game is added to the class
+another color version, with python-chess as the referee. Every game is added to the class
 games file, games/remus_games.pgn at the top of the Remus folder, and the script
 turns the score into an Elo gap. This is a teacher tool: the engine itself never
 imports python-chess.
@@ -13,11 +13,11 @@ the starting position would be the same game twice. Each pair of games therefore
 starts from one of the OPENINGS, three moves deep, and each player takes White once.
 
 Usage:
-    uv run station_match.py RED            Remus-RED against Remus-WHITE, 2 games
-    uv run station_match.py RED BLUE       Remus-RED against Remus-BLUE
-    uv run station_match.py RED --games 1 --minutes 2
+    uv run version_match.py RED            Remus-RED against Remus-WHITE, 2 games
+    uv run version_match.py RED BLUE       Remus-RED against Remus-BLUE
+    uv run version_match.py RED --games 1 --minutes 2
                                            one short game, to check the engine runs
-    uv run station_match.py RED --niram    Niram-RED against Niram-WHITE
+    uv run version_match.py RED --niram    Niram-RED against Niram-WHITE
 
 With --niram the match plays Niram, the Rust copies of the same versions in the
 Niram folder, which choose the same moves as Remus about 50 times faster. Build
@@ -27,8 +27,8 @@ Each side gets 10 minutes, because Remus searches only a few thousand positions 
 second and a shorter clock stops every version too shallow for most enhancements
 to help. The two games run at once, so the match takes about 20 minutes.
 
-A color names a station folder, so "RED" finds "06 RED - Transposition table".
-The number in front ranks the stations by the teacher's league, WHITE first.
+A color names a version folder, so "RED" finds "06 RED - Transposition table".
+The number in front ranks the color versions by the teacher's league, WHITE first.
 """
 
 import argparse
@@ -45,7 +45,7 @@ import chess
 import chess.engine
 import chess.pgn
 
-STATIONS = Path(__file__).parent
+REMUS_FOLDER = Path(__file__).parent
 # The top Remus folder is the nearest folder above this one with pyproject.toml
 REPOSITORY = Path(__file__).parent
 for folder in Path(__file__).parents:
@@ -53,7 +53,7 @@ for folder in Path(__file__).parents:
         REPOSITORY = folder
         break
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
-YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every station
+YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every color version
 MINUTES = 10.0  # Each side's clock
 INCREMENT = 0.0  # Seconds added after each move
 GAMES_AT_ONCE = 2  # Each game runs two engine processes
@@ -113,16 +113,16 @@ def all_players(engine: str = "Remus") -> list[Player]:
     Parameters
     ----------
     engine : str
-        "Remus" for the Python stations in this folder, or "Niram" for their
+        "Remus" for the Python color versions in this folder, or "Niram" for their
         Rust copies, which cargo builds into NIRAM_PROGRAMS.
 
     Returns
     -------
     list[Player]
-        Each version's name, such as "Remus-RED", and its program: a station
+        Each version's name, such as "Remus-RED", and its program: a color version
         folder for Remus, or the program file for Niram.
     """
-    home = STATIONS if engine == "Remus" else NIRAM
+    home = REMUS_FOLDER if engine == "Remus" else NIRAM
     players = []
     for folder in sorted(home.iterdir()):
         if not folder.is_dir() or " - " not in folder.name:
@@ -356,8 +356,8 @@ def play_game(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Measure an enhancement station.")
-    parser.add_argument("first", help='a station color, such as "RED"')
+    parser = argparse.ArgumentParser(description="Measure a color version.")
+    parser.add_argument("first", help='a color, such as "RED"')
     parser.add_argument("second", nargs="?", default=YARDSTICK)
     parser.add_argument("--games", type=int, default=2, help="games in the match")
     parser.add_argument("--minutes", type=float, default=MINUTES, help="each clock")
@@ -413,7 +413,7 @@ def main():
     if options.games >= 10:
         print(f"Elo gap: {elo_gap(points, options.games):+.0f} for {first[0]}")
     else:
-        print("Too few games for an Elo gap: station_league.py rates every version")
+        print("Too few games for an Elo gap: version_league.py rates every version")
     print(f"Total run time (sec): {time.perf_counter() - start:.3f}")
 
 

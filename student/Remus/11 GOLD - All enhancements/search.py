@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-Day 10 adds the upgrade stations to one final search, upgraded_search: a
+Day 10 adds the enhancements of the color versions to one final search, upgraded_search: a
 transposition table, killer moves, principal variation search, draw sense,
 null-move pruning, and late move reductions.
 """
@@ -593,7 +593,7 @@ def upgraded_search(
     allow_null: bool = True,
 ) -> tuple[int, list[Move]]:
     """
-    The final Day 10 search: alpha_beta_with_quiescence plus the upgrade stations.
+    The final Day 10 search: alpha_beta_with_quiescence plus the ten enhancements.
 
     - Draw sense: a position that repeats inside the search, or that reaches the
       fifty-move limit, scores 0.

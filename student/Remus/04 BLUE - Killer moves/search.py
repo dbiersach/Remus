@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-The BLUE station adds killer_search, and think uses it.
+The BLUE color version adds killer_search, and think uses it.
 """
 
 import random
@@ -411,7 +411,7 @@ def killer_search(
     first: Move | None = None,
 ) -> tuple[int, list[Move]]:
     """
-    The BLUE station search: the Day 9 search plus killer moves. A quiet move
+    The Remus-BLUE search: the Day 9 search plus killer moves. A quiet move
     that caused a cutoff at this ply is tried right after the captures in the
     next position at the same ply.
 

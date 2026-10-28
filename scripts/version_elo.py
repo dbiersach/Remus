@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
-"""station_elo.py
+"""version_elo.py
 
-Rate every Remus version against Stockfish: Remus-WHITE, the ten color stations,
+Rate every Remus version against Stockfish: Remus-WHITE, the ten color versions,
 and Remus-GOLD.
 
 Each version plays Stockfish at five strengths (UCI_Elo), from Stockfish's weakest
@@ -10,8 +10,8 @@ and 3 as Black, on a 10 minute clock. The script then finds each version's Elo
 rating the way estimate_elo.py does, adds every game to games/remus_games.pgn, and
 writes the table of ratings to docs/versions/remus_elo.md.
 
-Before the first game, the script copies every station folder into a temporary
-folder and runs the engines from that copy. A change to the station code during
+Before the first game, the script copies every version folder into a temporary
+folder and runs the engines from that copy. A change to the color version code during
 the hours the games take then cannot change a version halfway through its games.
 
 Remus is pure Python, so it plays weaker when it shares a processor core. Each
@@ -19,10 +19,10 @@ game needs about one core, because only one engine of a game thinks at a time:
 keep --workers at or below the number of physical cores.
 
 Usage:
-    uv run scripts/station_elo.py --workers 16         all 12 versions, 360 games
-    uv run scripts/station_elo.py --colors WHITE GOLD  only some versions
-    uv run scripts/station_elo.py --report-only        only the ratings, saved games
-    uv run scripts/station_elo.py --niram              the same for Niram, in Rust
+    uv run scripts/version_elo.py --workers 16         all 12 versions, 360 games
+    uv run scripts/version_elo.py --colors WHITE GOLD  only some versions
+    uv run scripts/version_elo.py --report-only        only the ratings, saved games
+    uv run scripts/version_elo.py --niram              the same for Niram, in Rust
 
 With --niram the games use Niram, the Rust copies of the same 12 versions in the
 Niram folder, which choose the same moves as Remus about 50 times faster. Build
@@ -49,10 +49,10 @@ import chess
 import chess.engine
 import chess.pgn
 
-# station_match.py lives beside the Remus versions in instructor/Remus
+# version_match.py lives beside the Remus versions in instructor/Remus
 sys.path.insert(0, str(Path(__file__).parent.parent / "instructor" / "Remus"))
 
-from station_match import Player, all_players, engine_command
+from version_match import Player, all_players, engine_command
 
 # The top Remus folder is the nearest folder above this one with pyproject.toml
 REPOSITORY = Path(__file__).parent

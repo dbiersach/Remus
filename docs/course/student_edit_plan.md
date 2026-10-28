@@ -74,13 +74,13 @@
 | P3 | The horizon effect and quiescence | None | `search.py`, `test_search.py` | `quiescence()` in `search.py` (15 lines) |
 | P4 | Move ordering | `move_ordering.py` | `search.py`, `test_search.py` | `mvv_lva_score()` in `move_ordering.py` (8 lines) |
 
-## Day 09 - Add the clock and build the stations
+## Day 09 - Add the clock and build the color versions
 
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Iterative deepening, the clock, and UCI info | None | `console_game.py`, `search.py`, `test_game.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
-| P2 | Python lab 12 and the enhancement stations | `python_caches_instructor.py` | None | The lab `python_caches.py` (7 lines); their color station's functions, in the table below |
-| P3 | Enhancement stations: test and measure | None | None | Their color station's functions, in the table below |
+| P2 | Python lab 12 and the color versions | `python_caches_instructor.py` | None | The lab `python_caches.py` (7 lines); their color version's functions, in the table below |
+| P3 | Color versions: test and measure | None | None | Their color version's functions, in the table below |
 | P4 | The mate solver | `mate_solver.py` | `test_search.py` | `mating_move()` in `mate_solver.py` (22 lines) |
 
 ## Day 10 - Aim Remus at a science problem
@@ -92,11 +92,11 @@
 | P3 | The phase hunt: search every set, and verify | None | `phase_hunt.py`, `test_phase_hunt.py` | `search()` in `phase_hunt.py` (13 lines) |
 | P4 | Results, tournament, take-home, and wrap-up | `demo_results_instructor.py` | None | The demo `demo_results.py` (13 lines) |
 
-## Enhancement stations (Day 9, periods 2 and 3)
+## Color versions (Day 9, periods 2 and 3)
 
-Each pair writes the functions of one color station in `student/Remus`.
+Each pair writes the functions of one color version in `student/Remus`.
 
-| Station | Pairs write |
+| Color version | Pairs write |
 | --- | --- |
 | 11 GOLD - All enhancements | Nothing: a finished engine |
 | 00 WHITE - No enhancements | Nothing: a finished engine |

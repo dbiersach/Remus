@@ -619,8 +619,8 @@ PERIOD_TITLES = {
     (8, 3): "The horizon effect and quiescence",
     (8, 4): "Move ordering",
     (9, 1): "Iterative deepening, the clock, and UCI info",
-    (9, 2): "Python lab 12 and the enhancement stations",
-    (9, 3): "Enhancement stations: test and measure",
+    (9, 2): "Python lab 12 and the color versions",
+    (9, 3): "Color versions: test and measure",
     (9, 4): "The mate solver",
     (10, 1): "Science AI: hidden_peak.py",
     (10, 2): "The phase hunt: score a guess, and the greedy agent",
@@ -641,12 +641,12 @@ PERIOD_NOTES = {
     "planted bugs. Running `hunt.py` inside it shows where the counts go wrong.",
     (7, 3): "Register `remus.bat` from this folder in Lucas Chess again: Remus now "
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
-    (9, 2): "Each pair builds one color station in the `Remus` folder next to the "
+    (9, 2): "Each pair builds one color version in the `Remus` folder next to the "
     "Day folders, such as `06 RED - Transposition table`. The code in this Day "
-    "folder is Remus-WHITE, the starting point of every station.",
+    "folder is Remus-WHITE, the starting point of every color version.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
-    (10, 4): "The tournament: each pair opens `play_tournament.py` in its station "
+    (10, 4): "The tournament: each pair opens `play_tournament.py` in its version "
     "folder under `Remus` and presses Run in VS Code: two 10-minute games of its color "
     "against Remus-WHITE, one with each color, all pairs at once. Running "
     "`estimate_elo.py` in the GOLD folder measures the Elo rating of Remus-GOLD "
@@ -925,9 +925,7 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
                 "This period comes before any Remus code, so the folder is empty."
             )
     elif not new_files and not grown_files:
-        sections.append(
-            "The code here is the same as at the end of the period before."
-        )
+        sections.append("The code here is the same as at the end of the period before.")
     if new_files:
         sections.append(
             "New files this period:\n\n"

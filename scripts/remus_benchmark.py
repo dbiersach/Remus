@@ -21,7 +21,7 @@ import sys
 import time
 from pathlib import Path
 
-STATIONS = Path(__file__).parent.parent / "instructor" / "Remus"
+REMUS_FOLDER = Path(__file__).parent.parent / "instructor" / "Remus"
 DEPTH = 4  # The deepest iteration, the same for both engines
 POSITIONS = [  # The ten positions of compare_search.py
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -39,13 +39,13 @@ MATE_SCORE = 100_000  # The same as search.py
 
 
 def find_folder(color: str) -> Path:
-    """Return the station folder of a color: "RED" finds "06 RED - Transposition table"."""
-    for folder in sorted(STATIONS.iterdir()):
+    """Return the version folder of a color: "RED" finds "06 RED - Transposition table"."""
+    for folder in sorted(REMUS_FOLDER.iterdir()):
         if folder.is_dir() and " - " in folder.name:
             words = folder.name.split(" - ")[0].split()
             if words[len(words) - 1] == color.upper():
                 return folder
-    sys.exit(f"No station folder has the color {color!r}")
+    sys.exit(f"No version folder has the color {color!r}")
 
 
 def score_from_info(line: str) -> int:

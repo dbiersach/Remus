@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-The YELLOW station adds draw_sense_search, and think uses it.
+The YELLOW color version adds draw_sense_search, and think uses it.
 """
 
 import random
@@ -424,7 +424,7 @@ def draw_sense_search(
     first: Move | None = None,
 ) -> tuple[int, list[Move]]:
     """
-    The YELLOW station search: the Day 9 search plus draw sense. A position
+    The Remus-YELLOW search: the Day 9 search plus draw sense. A position
     that repeats, or that reaches the fifty-move limit, scores 0.
 
     Parameters

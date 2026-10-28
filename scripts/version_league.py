@@ -1,25 +1,25 @@
 #!/usr/bin/env -S uv run
-"""station_league.py
+"""version_league.py
 
-Rank every Remus version: Remus-WHITE, the ten color stations, and Remus-GOLD.
+Rank every Remus version: Remus-WHITE, the ten color versions, and Remus-GOLD.
 
 A league plays a round robin: every version plays every other version, a few games
-each, from the OPENINGS of station_match.py. Then the script fits one Elo rating to
-every player from all the station games in games/remus_games.pgn, including the
-games station_match.py played. Remus-WHITE, with no enhancements, is pinned at 0,
+each, from the OPENINGS of version_match.py. Then the script fits one Elo rating to
+every player from all the version games in games/remus_games.pgn, including the
+games version_match.py played. Remus-WHITE, with no enhancements, is pinned at 0,
 so each rating is that version's gain over Remus-WHITE.
 
 Usage:
-    uv run scripts/station_league.py             the round robin, then the ratings
-    uv run scripts/station_league.py --games 4   4 games for each pair of players
-    uv run scripts/station_league.py --rate-only only the ratings, from saved games
-    uv run scripts/station_league.py --rate-only --player GOLD
+    uv run scripts/version_league.py             the round robin, then the ratings
+    uv run scripts/version_league.py --games 4   4 games for each pair of players
+    uv run scripts/version_league.py --rate-only only the ratings, from saved games
+    uv run scripts/version_league.py --rate-only --player GOLD
                                                  also Remus-GOLD's score against each
-    uv run scripts/station_league.py --at-once 16
+    uv run scripts/version_league.py --at-once 16
                                                  16 games at a time
-    uv run scripts/station_league.py --event "Station league 2"
+    uv run scripts/version_league.py --event "Station league 2"
                                                  a second league, rated apart
-    uv run scripts/station_league.py --niram     the same league for Niram, in Rust
+    uv run scripts/version_league.py --niram     the same league for Niram, in Rust
 
 League games last 10 minutes a side. Remus searches only a few thousand positions a
 second, so a shorter clock stops every version after 2 to 4 plies, too shallow for
@@ -32,7 +32,7 @@ a 10 minute Niram game searches as deep as a Remus game of many hours. Niram
 games are rated apart from Remus games, with Niram-WHITE pinned at 0. Build the
 Niram programs first with "cargo build --release" inside Niram.
 
-This is a teacher tool, like station_match.py: the engine never imports python-chess.
+This is a teacher tool, like version_match.py: the engine never imports python-chess.
 """
 
 import argparse
@@ -46,10 +46,10 @@ from pathlib import Path
 
 import chess.pgn
 
-# station_match.py lives beside the Remus versions in instructor/Remus
+# version_match.py lives beside the Remus versions in instructor/Remus
 sys.path.insert(0, str(Path(__file__).parent.parent / "instructor" / "Remus"))
 
-from station_match import (
+from version_match import (
     GAMES_PATH,
     OPENINGS,
     YARDSTICK,
@@ -60,7 +60,7 @@ from station_match import (
 
 MINUTES = 10.0  # Each side's clock in a league game
 INCREMENT = 0.0  # Seconds added after each move
-EVENT_PREFIX = "Station"  # Events of station_match.py and of this league
+EVENT_PREFIX = "Station"  # Events of version_match.py and of this league
 LEAGUE_EVENT = "Station league"  # The Event header of every league game
 PRIOR_DRAWS = 1  # Pretend draws against Remus-WHITE, so a perfect score stays finite
 SCALE = 400 / math.log(10)  # Elo points per unit of the natural logarithm
@@ -74,7 +74,7 @@ def read_results(
     clock: str, event: str = LEAGUE_EVENT, engine: str = "Remus"
 ) -> list[Result]:
     """
-    Return (White, Black, White's points) for every station game at one clock.
+    Return (White, Black, White's points) for every version game at one clock.
 
     Only games that start from one of the OPENINGS count. Remus plays the same
     move in the same position, so games from the starting position replay one
@@ -85,7 +85,7 @@ def read_results(
     clock : str
         The TimeControl of the games to count, such as "600+0" from time_control().
     event : str
-        LEAGUE_EVENT counts every station game, station_match.py games included.
+        LEAGUE_EVENT counts every version game, version_match.py games included.
         Any other Event name, such as "Station league 2", counts only the games
         of that league.
     engine : str
@@ -262,7 +262,7 @@ def print_ratings(results: list[Result], clock: str, anchor: str) -> None:
         scored[white] += points
         scored[black] += 1 - points
     print(
-        f"Ratings from {len(results)} station games at {clock}, {anchor} pinned at 0:"
+        f"Ratings from {len(results)} version games at {clock}, {anchor} pinned at 0:"
     )
     print(f"  {'Rank':>4}  {'Player':13} {'Games':>5}  {'Score':>6}  Elo vs WHITE")
     standings = []

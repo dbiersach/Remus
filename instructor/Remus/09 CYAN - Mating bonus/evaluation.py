@@ -11,7 +11,7 @@ A positive score is good for White. Two terms make up the score:
 Each table is written from White's side, row 0 (rank 8) first. A Black piece reads
 the table upside down, so its row 7 uses the table's row 0.
 
-The CYAN station adds a third term, mating_bonus.
+The CYAN color version adds a third term, mating_bonus.
 """
 
 from board import EMPTY, Board
