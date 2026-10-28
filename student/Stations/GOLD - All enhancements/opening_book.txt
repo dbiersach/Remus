@@ -1,7 +1,12 @@
 # Remus opening book: one opening per line, written in SAN from the starting position.
 # Lines starting with "#" are comments, and the comment above each line names its
 # opening. Remus checks every move with its own move generator, so a typo here is
-# reported and skipped, never played. Every line is 10 half-moves (5 moves each).
+# reported and skipped, never played. Every opening line is 10 half-moves (5 moves
+# each).
+#
+# A line that starts with "White:" or "Black:" shows how that side defends against
+# a trap that snags beginners. Remus stores only the defender's moves from it, so
+# Remus answers the trap at once but never sets the trap itself.
 
 # 1. e4 e5: open games
 # Ruy Lopez, Closed Variation
@@ -102,3 +107,31 @@ c4 e5 Nc3 Nf6 Nf3 Nc6 g3 d5 cxd5 Nxd5
 c4 c5 Nc3 Nc6 g3 g6 Bg2 Bg7 Nf3 e6
 # Reti Opening, King's Indian Attack setup
 Nf3 d5 g3 Nf6 Bg2 c6 O-O Bg4 d3 Nbd7
+
+# Traps that snag beginners, and how to defend against them
+# Scholar's Mate try with Qh5: g6 blocks, then Nf6 guards f7 again
+Black: e4 e5 Bc4 Nc6 Qh5 g6 Qf3 Nf6
+# Wayward Queen Attack: the same defense when the queen comes out first
+Black: e4 e5 Qh5 Nc6 Bc4 g6 Qf3 Nf6
+# Scholar's Mate try with Qf3: Nf6 blocks the queen's path to f7
+Black: e4 e5 Bc4 Nc6 Qf3 Nf6
+# Fried Liver Attack: 5... Na5 instead of 5... Nxd5, which lets White sac on f7
+Black: e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5 c6 dxc6 bxc6 Be2 h6
+# Legal's Mate: after Nxe5, Black takes the knight, never the queen on d1
+Black: e4 e5 Nf3 d6 Bc4 Bg4 Nc3 Nc6 Nxe5 Nxe5
+# Smothered mate in the Caro-Kann: 5... Ndf6, because 5... Ngf6 allows Nd6 mate
+Black: e4 c6 d4 d5 Nc3 dxe4 Nxe4 Nd7 Qe2 Ndf6
+# Blackburne Shilling Gambit: Nxd4, because Nxe5 runs into Qg5
+White: e4 e5 Nf3 Nc6 Bc4 Nd4 Nxd4 exd4 O-O
+# Stafford Gambit: d3 and Be2 shut the traps on f2 and the e-file
+White: e4 e5 Nf3 Nf6 Nxe5 Nc6 Nxc6 dxc6 d3 Bc5 Be2
+# Fishing Pole Trap: never take hxg4, which opens the h-file for Black's rook
+White: e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Ng4 h3 h5 c3
+# Noah's Ark Trap: Bd5, because Qxd4 lets c5 and c4 trap the bishop
+White: e4 e5 Nf3 Nc6 Bb5 a6 Ba4 d6 d4 b5 Bb3 Nxd4 Nxd4 exd4 Bd5
+# Elephant Trap: e3, because Nxd5 loses a piece to Nxd5
+White: d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 cxd5 exd5 e3
+# Lasker Trap in the Albin Countergambit: Nf3 and g3, never an early e3
+White: d4 d5 c4 e5 dxe5 d4 Nf3 Nc6 g3
+# Englund Gambit Trap: Nc3, because Bc3 loses to Bb4
+White: d4 e5 dxe5 Nc6 Nf3 Qe7 Bf4 Qb4 Bd2 Qxb2 Nc3

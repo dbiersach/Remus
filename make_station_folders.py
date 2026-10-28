@@ -660,6 +660,8 @@ STATIONS_TABLE = [
             [
                 "test_opening_book_is_legal_and_answers_e4",
                 "test_book_typo_is_skipped_without_touching_stdout",
+                "test_trap_line_stores_only_the_defenders_moves",
+                "test_book_answers_scholars_mate_but_never_tries_it",
                 "test_missing_book_never_stops_play",
             ],
         ),

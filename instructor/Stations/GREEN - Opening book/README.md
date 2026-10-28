@@ -12,7 +12,7 @@ By the end of the station, each pair can:
 
 ## The idea, with an example
 
-`opening_book.txt` holds 13 well-known openings, five moves for each side, written in SAN: `e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7` is the Ruy Lopez. `load_book()` plays every line on a board from the starting position and records, for each position it passes, which moves the book plays there. After 1. e4 the book holds ...e5, ...c5, ...e6, and ...c6. `book_move()` picks one of them at random, so Remus-GREEN does not play the same opening every game. Once the game leaves the book, Remus searches as usual.
+`opening_book.txt` holds 43 well-known openings, five moves for each side, written in SAN: `e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7` is the Ruy Lopez. `load_book()` plays every line on a board from the starting position and records, for each position it passes, which moves the book plays there. After 1. e4 the book holds seven replies: ...e5, ...c5, ...e6, ...c6, ...d5, ...d6, and ...Nf6. `book_move()` picks one of them at random, so Remus-GREEN does not play the same opening every game. Once the game leaves the book, Remus searches as usual.
 
 ## Why it makes Remus stronger
 
@@ -33,7 +33,7 @@ Each version searched the ten positions of `compare_search.py`, one depth at a t
 
 ## What to expect
 
-The time saved goes to later moves. Remus thinks about one thirtieth of its remaining clock per move, so five instant book moves leave roughly a minute and a half more for the middlegame. The effect in the station matches is small, because every match game starts from one of 32 openings three moves deep, and only some of them are in the book. A league rating near 0 is the expected result: the book matters most in games that start from the first move. The benchmark below never asks the book, so its numbers match Remus-WHITE's exactly.
+The time saved goes to later moves. Remus thinks about one thirtieth of its remaining clock per move, so five instant book moves leave roughly a minute and a half more for the middlegame. Every station match game starts from one of 32 openings three moves deep, and 24 of those positions are in the book, so Remus-GREEN usually gets two more instant moves before it searches. The book saves the most time in games that start from the first move. The benchmark below never asks the book, so its numbers match Remus-WHITE's exactly.
 
 ## Where your code fits
 
