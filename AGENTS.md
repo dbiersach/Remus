@@ -268,7 +268,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   run it after `make_period_folders.py`, and never edit a student stub by hand.
 - `instructor/Remus` holds Remus-WHITE (`00 WHITE - No enhancements`, the finished
   Day 9 Remus with none of the ten enhancements, named by David on 2026-10-27) and the
-  ten color versions, one folder per color (`06 RED - Transposition table`, ...).
+  ten color versions, one folder per color (`10 RED - Transposition table`, ...).
   Each color version is Remus-WHITE plus one enhancement, and `11 GOLD - All enhancements`
   holds Remus-GOLD, the finished Remus with all ten (David, 2026-10-27). Remus-GOLD
   is the engine of Day 10 (David, 2026-10-28): the Day 10 period folders hold only
@@ -282,8 +282,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   in `student/Remus`. Colors name the color versions so
   that no color version sounds better than another. A two-digit
   prefix (David, 2026-10-28) orders the folders by each version's Elo over WHITE in
-  the 10-minute league: 00 WHITE, 01 YELLOW, 02 ORANGE, 03 BROWN, 04 BLUE, 05 PINK,
-  06 RED, 07 PURPLE, 08 GRAY, 09 CYAN, 10 GREEN, 11 GOLD. The Rust engine folders in
+  the teacher's league (Niram league 1, 660 games at 10 minutes a side, with GREEN's
+  and GOLD's games started from move 1 so their book plays): 00 WHITE, 01 GRAY,
+  02 YELLOW, 03 CYAN, 04 PINK, 05 ORANGE, 06 BROWN, 07 PURPLE, 08 GREEN, 09 BLUE,
+  10 RED, 11 GOLD. The Rust engine folders in
   `Niram/` use the same names. `version_match.py` plays a color version
   against Remus-WHITE, and Remus-WHITE takes part in the color matches too.
   `version_league.py` plays a round robin of all 12 versions, Remus-GOLD included,

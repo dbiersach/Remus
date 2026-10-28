@@ -39,7 +39,7 @@ MATE_SCORE = 100_000  # The same as search.py
 
 
 def find_folder(color: str) -> Path:
-    """Return the version folder of a color: "RED" finds "06 RED - Transposition table"."""
+    """Return the version folder of a color: "RED" finds "10 RED - Transposition table"."""
     for folder in sorted(REMUS_FOLDER.iterdir()):
         if folder.is_dir() and " - " in folder.name:
             words = folder.name.split(" - ")[0].split()

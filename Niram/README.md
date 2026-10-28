@@ -19,21 +19,21 @@ Python.
 
 The folders carry the same names as the version folders, with the same two-digit
 prefix, so that both list in the order of each version's Elo over WHITE in the
-10-minute Remus league:
+teacher's league:
 
 | Folder | Program | Search | Evaluation |
 | --- | --- | --- | --- |
 | `00 WHITE - No enhancements` | `niram-white` | `alpha_beta_with_quiescence` | material, placement |
-| `01 YELLOW - Draw sense` | `niram-yellow` | `draw_sense_search` | material, placement |
-| `02 ORANGE - Null-move pruning` | `niram-orange` | `null_move_search` | material, placement |
-| `03 BROWN - Late move reductions` | `niram-brown` | `reduced_search` | material, placement |
-| `04 BLUE - Killer moves` | `niram-blue` | `killer_search` | material, placement |
-| `05 PINK - Principal variation search` | `niram-pink` | `pvs_search` | material, placement |
-| `06 RED - Transposition table` | `niram-red` | `table_search` | material, placement |
+| `01 GRAY - King safety` | `niram-gray` | `alpha_beta_with_quiescence` | + king safety |
+| `02 YELLOW - Draw sense` | `niram-yellow` | `draw_sense_search` | material, placement |
+| `03 CYAN - Mating bonus` | `niram-cyan` | `alpha_beta_with_quiescence` | + mating bonus |
+| `04 PINK - Principal variation search` | `niram-pink` | `pvs_search` | material, placement |
+| `05 ORANGE - Null-move pruning` | `niram-orange` | `null_move_search` | material, placement |
+| `06 BROWN - Late move reductions` | `niram-brown` | `reduced_search` | material, placement |
 | `07 PURPLE - Pawn structure` | `niram-purple` | `alpha_beta_with_quiescence` | + pawn structure |
-| `08 GRAY - King safety` | `niram-gray` | `alpha_beta_with_quiescence` | + king safety |
-| `09 CYAN - Mating bonus` | `niram-cyan` | `alpha_beta_with_quiescence` | + mating bonus |
-| `10 GREEN - Opening book` | `niram-green` | `alpha_beta_with_quiescence`, after the book | material, placement |
+| `08 GREEN - Opening book` | `niram-green` | `alpha_beta_with_quiescence`, after the book | material, placement |
+| `09 BLUE - Killer moves` | `niram-blue` | `killer_search` | material, placement |
+| `10 RED - Transposition table` | `niram-red` | `table_search` | material, placement |
 | `11 GOLD - All enhancements` | `niram-gold` | `upgraded_search`, after the book | all five terms |
 
 Each version folder holds only what makes that version different: `evaluation.rs`

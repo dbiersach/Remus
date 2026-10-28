@@ -1,6 +1,6 @@
 # Day 9, Period 2: Python lab 12 and the color versions
 
-Each pair builds one color version in the `Remus` folder next to the Day folders, such as `06 RED - Transposition table`. The code in this Day folder is Remus-WHITE, the starting point of every color version.
+Each pair builds one color version in the `Remus` folder next to the Day folders, such as `10 RED - Transposition table`. The code in this Day folder is Remus-WHITE, the starting point of every color version.
 
 ## Learning objectives
 

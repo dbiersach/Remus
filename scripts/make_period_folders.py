@@ -642,7 +642,7 @@ PERIOD_NOTES = {
     (7, 3): "Register `remus.bat` from this folder in Lucas Chess again: Remus now "
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
     (9, 2): "Each pair builds one color version in the `Remus` folder next to the "
-    "Day folders, such as `06 RED - Transposition table`. The code in this Day "
+    "Day folders, such as `10 RED - Transposition table`. The code in this Day "
     "folder is Remus-WHITE, the starting point of every color version.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
