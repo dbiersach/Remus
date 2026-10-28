@@ -81,8 +81,8 @@ cargo run --release -p niram-white -- perft 5   # 4,865,609 from the start posit
 The matching Python benchmark runs from the repository folder and takes a color:
 
 ```bash
-uv run Niram/remus_benchmark.py GOLD        # Remus-GOLD, depth 4
-uv run Niram/remus_benchmark.py RED 3       # Remus-RED, depth 3
+uv run scripts/remus_benchmark.py GOLD      # Remus-GOLD, depth 4
+uv run scripts/remus_benchmark.py RED 3     # Remus-RED, depth 3
 ```
 
 To play a Niram version in Lucas Chess, run `cargo build --release` and add
@@ -92,14 +92,15 @@ batch file.
 
 ## Leagues and matches with Niram
 
-The three station scripts in `instructor/Remus` take `--niram`, which plays the
-Niram programs in place of the Python stations. Build the programs first.
+The three station scripts take `--niram`, which plays the Niram programs in place
+of the Python stations. Build the programs first. `station_match.py` runs from
+`instructor/Remus`, and the other two run from the top Remus folder.
 
 ```bash
-uv run station_match.py RED --niram              # Niram-RED against Niram-WHITE
-uv run station_league.py --niram --at-once 16    # the round robin of all 12
-uv run station_league.py --niram --rate-only     # only the Niram ratings
-uv run station_elo.py --niram --workers 16       # all 12 against Stockfish
+uv run station_match.py RED --niram                   # Niram-RED against Niram-WHITE
+uv run scripts/station_league.py --niram --at-once 16 # the round robin of all 12
+uv run scripts/station_league.py --niram --rate-only  # only the Niram ratings
+uv run scripts/station_elo.py --niram --workers 16    # all 12 against Stockfish
 ```
 
 Niram games carry the names Niram-WHITE to Niram-GOLD and are rated apart from the

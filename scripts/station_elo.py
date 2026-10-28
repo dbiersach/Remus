@@ -19,10 +19,10 @@ game needs about one core, because only one engine of a game thinks at a time:
 keep --workers at or below the number of physical cores.
 
 Usage:
-    uv run station_elo.py --workers 16          all 12 versions, 360 games
-    uv run station_elo.py --colors WHITE GOLD   only some versions
-    uv run station_elo.py --report-only         only the ratings, from saved games
-    uv run station_elo.py --niram               the same for Niram, in Rust
+    uv run scripts/station_elo.py --workers 16         all 12 versions, 360 games
+    uv run scripts/station_elo.py --colors WHITE GOLD  only some versions
+    uv run scripts/station_elo.py --report-only        only the ratings, saved games
+    uv run scripts/station_elo.py --niram              the same for Niram, in Rust
 
 With --niram the games use Niram, the Rust copies of the same 12 versions in the
 Niram folder, which choose the same moves as Remus about 50 times faster. Build
@@ -48,6 +48,10 @@ from pathlib import Path
 import chess
 import chess.engine
 import chess.pgn
+
+# station_match.py lives beside the Remus versions in instructor/Remus
+sys.path.insert(0, str(Path(__file__).parent.parent / "instructor" / "Remus"))
+
 from station_match import Player, all_players, engine_command
 
 # The top Remus folder is the nearest folder above this one with pyproject.toml

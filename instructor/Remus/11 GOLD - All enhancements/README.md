@@ -29,4 +29,4 @@ Remus-GOLD is the only version whose gain over Remus-WHITE is larger than its er
 
 ## Check it
 
-Check it from inside this folder with `uv run pytest`, and rate it against Stockfish with `uv run estimate_elo.py`. From the `Remus` folder above this one, `uv run station_league.py --rate-only --player GOLD` shows its score against every other version in the teacher's league.
+Check it from inside this folder with `uv run pytest`, and rate it against Stockfish with `uv run estimate_elo.py`. From the top Remus folder, `uv run scripts/station_league.py --rate-only --player GOLD` shows its score against every other version in the teacher's league.

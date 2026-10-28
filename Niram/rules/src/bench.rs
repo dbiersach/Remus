@@ -19,7 +19,7 @@ use crate::search_tools::{MATE_SCORE, ThinkFn};
 use crate::uci_engine;
 
 pub const BENCH_POSITIONS: [&str; 10] = [
-    // The ten positions of Remus's compare_search.py and Niram/remus_benchmark.py
+    // The ten positions of Remus's compare_search.py and scripts/remus_benchmark.py
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
     "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
     "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5",

@@ -42,7 +42,7 @@ Day 5, Period 2.
 | `remus.sh` | Remus-GOLD: starts Remus on a Mac or Linux computer at home | Last day |
 | `estimate_elo.py` | Remus-GOLD: measures the Elo rating of Remus against Stockfish | Last day |
 | `Remus/station_match.py` | D9 P2: plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
-| `Remus/station_league.py` | D10 P4: ranks all 12 Remus versions from every station game | Last day |
+| `scripts/station_league.py` | D10 P4: ranks all 12 Remus versions from every station game | Last day |
 
 ## Table 2: By period
 

@@ -2,7 +2,7 @@
 
 Twelve versions of Remus played Stockfish 19 on David's PC on 2026-10-27: Remus-WHITE
 (the finished Day 9 Remus with no enhancements), the ten color stations, and
-Remus-GOLD (all ten enhancements). `instructor/Remus/station_elo.py` ran the
+Remus-GOLD (all ten enhancements). `scripts/station_elo.py` ran the
 games and fit the ratings, and every game is in `games/remus_games.pgn` under the
 Event "Station Elo test".
 
@@ -113,13 +113,13 @@ scored mostly by punishing a rare gross blunder from the weakened Stockfish, and
 
 ## Run it again
 
-From the `instructor/Remus` folder on a computer with at least 16 physical cores:
+From the top Remus folder on a computer with at least 16 physical cores:
 
 ```
-uv run station_elo.py --workers 16
+uv run scripts/station_elo.py --workers 16
 ```
 
 A run that stops partway picks up from the games already in `games/remus_games.pgn`.
-`uv run station_elo.py --report-only` prints the table from the saved games without
+`uv run scripts/station_elo.py --report-only` prints the table from the saved games without
 playing any. Keep `--workers` at or below the number of physical cores, because
 pure-Python Remus plays weaker when it shares a core.

@@ -63,7 +63,7 @@ uv run pytest test_board.py
 ```
 
 A dot means a test passed. An `F` means it failed, with a report below. To run the
-tests of every finished folder in `instructor/`, run `uv run run_all_tests.py` from
+tests of every finished folder in `instructor/`, run `uv run scripts/run_all_tests.py` from
 the top of the repository.
 
 ## Puzzle questions

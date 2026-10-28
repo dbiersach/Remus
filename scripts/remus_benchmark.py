@@ -8,8 +8,8 @@ asked for, with no clock, so both engines visit exactly the same positions.
 
 Run it from the repository folder:
 
-    uv run Niram/remus_benchmark.py GOLD        Remus-GOLD, depth 4
-    uv run Niram/remus_benchmark.py WHITE 5     Remus-WHITE, depth 5
+    uv run scripts/remus_benchmark.py GOLD        Remus-GOLD, depth 4
+    uv run scripts/remus_benchmark.py WHITE 5     Remus-WHITE, depth 5
 
 and the matching Rust benchmark from inside Niram/:
 

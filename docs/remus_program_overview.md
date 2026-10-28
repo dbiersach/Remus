@@ -84,11 +84,16 @@ one folder at a time:
 
 ```bash
 uv run pytest "instructor/Day 04 - Keep only legal moves/period3"
-uv run run_all_tests.py
+uv run scripts/run_all_tests.py
 ```
 
-`run_all_tests.py` runs every period folder in `instructor/` in turn, then the reference-tool tests in
-`tests/`.
+`scripts/run_all_tests.py` runs every period folder in `instructor/` in turn, then the
+reference-tool tests in `tests/`. The `scripts/` folder holds every teacher tool that
+is not part of an engine: the builders that write the period, station, and student
+folders, `period_guides.py` with the README text, the test runner, the league and
+Stockfish rating scripts, and the Niram benchmark. Students never open it.
+`station_match.py` stays in the `Remus` folders, because every pair runs it there in
+the Day 10 tournament.
 
 ## The puzzle box and its pieces
 
@@ -158,7 +163,7 @@ The pages, in the order the class builds them:
 | [`estimate_elo.py`](scripts/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
 | [`demo_results.py`](scripts/demo_results.md) | Day 10 demo: read a match result |
 | [`station_match.py`](stations.md) | Plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |
-| [`station_league.py`](stations.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
+| [`scripts/station_league.py`](stations.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](scripts/hidden_peak.md) | Science AI: find the hidden peak |
 | [`phase_hunt.py`](scripts/phase_hunt.md) | Science AI: name the crystals in a powder |
 | [The test files](scripts/tests.md) | Checking that Remus works |
@@ -170,7 +175,7 @@ The pages, in the order the class builds them:
 | Native Python engine | `board.py` to `search.py` | Board, rules, legal moves, state, search, evaluation, move choice |
 | Console driver | `console_game.py` | Prints the board and reads SAN moves typed in the terminal |
 | UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with Lucas Chess on standard input and output |
-| Teacher tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `Remus/station_match.py`, `Remus/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
+| Teacher tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `Remus/station_match.py`, `scripts/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
 
 ## The core data structures
 

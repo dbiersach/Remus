@@ -223,8 +223,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   for a period that needs an illustrated guide, such as the Day 10 phase hunt, and
   `DAY_GUIDES` for the Day READMEs, which `make_student_folders.py` writes); the
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
-  in `docs/images/phase_hunt/`, drawn by `uv run make_phase_hunt_figures.py`, which
-  installs matplotlib for itself alone. Measure `STATION_MEASURES` again after any
+  in `docs/images/phase_hunt/`, drawn by `uv run scripts/make_phase_hunt_figures.py`,
+  which installs matplotlib for itself alone. Measure `STATION_MEASURES` again after any
   change to a station's search or evaluation.
   Each student README adds a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it, and
@@ -242,6 +242,17 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Nothing in a period folder imports from another folder. Modules import each other
   by name (`from board import new_board`), so any module runs from inside its folder
   with `uv run perft.py`.
+- Every teacher tool that is not part of an engine lives in the top-level `scripts/`
+  folder (David, 2026-10-28): the builders `make_period_folders.py`,
+  `make_station_folders.py`, `make_student_folders.py`, and
+  `make_phase_hunt_figures.py`, the README text in `period_guides.py`,
+  `run_all_tests.py`, `station_league.py`, `station_elo.py`, and
+  `remus_benchmark.py`. Each one finds the top Remus folder from its own path, so it
+  runs from the top folder with `uv run scripts/<name>.py`. Students never open
+  `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
+  `station_match.py` in `instructor/Remus` and `student/Remus` for the Day 10
+  tournament, and `play_match.py`, `estimate_elo.py`, and the tests inside their
+  period and station folders. Put a new teacher tool in `scripts/`.
 - `period4` holds the finished code of the day, and it is the only period folder to
   edit by hand. `make_period_folders.py` builds `period1` to `period3` from it: its
   `ARRIVALS` table says in which period each file takes its finished form, and its
@@ -284,7 +295,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   the same engines about 50 times faster; students never edit it. Each `.rs` file
   matches the Python file of the same name, and each Niram version must visit
   exactly the same number of positions as its Remus twin at each depth
-  (`cargo test --release` inside `Niram/`; `uv run Niram/remus_benchmark.py COLOR`
+  (`cargo test --release` inside `Niram/`; `uv run scripts/remus_benchmark.py COLOR`
   times the Remus version on the same positions). `station_match.py`,
   `station_league.py`, and `station_elo.py` play the Niram programs with `--niram`
   and rate them apart from Remus, with Niram-WHITE pinned at 0; David wants leagues
@@ -307,7 +318,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Tests sit next to the modules in each period folder. The module names repeat from
   folder to folder, so pytest runs one folder at a time
   (`uv run pytest "instructor/Day 04 - Keep only legal moves/period3"`);
-  `uv run run_all_tests.py` runs them all. `tests/` holds the reference-tool tests and `mate_puzzles.epd`. A test
+  `uv run scripts/run_all_tests.py` runs them all. `tests/` holds the reference-tool
+  tests and `mate_puzzles.epd`. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
 - Every `.py` file a student modifies or reads has a page in `docs/scripts/`, the
