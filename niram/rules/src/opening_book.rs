@@ -9,6 +9,10 @@
 //! position_key -> list of book moves
 //! ```
 //!
+//! A line that starts with "White:" or "Black:" shows how that side defends against
+//! a trap. Niram records only the defender's moves from such a line, so it answers
+//! the trap at once but never sets the trap itself.
+//!
 //! Every book move is read with parse_san, which accepts only legal moves, so a
 //! typo in the file is reported and skipped. A missing file gives an empty book,
 //! and an empty book never stops play: Niram simply searches instead. Reports go to
@@ -33,6 +37,16 @@ pub fn book_path() -> PathBuf {
         .join("opening_book.txt")
 }
 
+/// Split a book line into its defender ('w', 'b', or None for both sides) and its moves.
+pub fn read_defender(line: &str) -> (Option<char>, Vec<&str>) {
+    let words: Vec<&str> = line.split_whitespace().collect();
+    match words[0] {
+        "White:" => (Some('w'), words[1..].to_vec()),
+        "Black:" => (Some('b'), words[1..].to_vec()),
+        _ => (None, words),
+    }
+}
+
 /// Read an opening book file into a map from position key to book moves.
 pub fn load_book(file_path: &PathBuf) -> Book {
     let mut book = Book::new();
@@ -44,15 +58,19 @@ pub fn load_book(file_path: &PathBuf) -> Book {
         if line.trim().is_empty() || line.starts_with('#') {
             continue;
         }
+        let (defender, words) = read_defender(line);
         let mut state = state_from_fen(START_FEN).expect("START_FEN is valid");
-        for word in line.split_whitespace() {
+        for word in words {
             let Ok(mv) = parse_san(&mut state, word) else {
                 eprintln!("Book line skipped at {word:?}: {line}");
                 break;
             };
-            let moves_here = book.entry(position_key(&state)).or_default();
-            if !moves_here.contains(&mv) {
-                moves_here.push(mv);
+            // A trap line teaches the defense, so the attacker's moves stay out
+            if defender.is_none() || defender == Some(state.turn) {
+                let moves_here = book.entry(position_key(&state)).or_default();
+                if !moves_here.contains(&mv) {
+                    moves_here.push(mv);
+                }
             }
             make_move(&mut state, mv);
         }
@@ -78,7 +96,7 @@ pub fn book_move(book: &Book, state: &State) -> Option<Move> {
 mod tests {
     use super::*;
 
-    /// Remus's load_book() reads 250 positions holding 292 book moves from
+    /// Remus's load_book() reads 285 positions holding 328 book moves from
     /// opening_book.txt, so Niram's must read the same.
     #[test]
     fn same_book_as_remus() {
@@ -87,6 +105,6 @@ mod tests {
         for choices in book.values() {
             moves += choices.len();
         }
-        assert_eq!((book.len(), moves), (250, 292));
+        assert_eq!((book.len(), moves), (285, 328));
     }
 }

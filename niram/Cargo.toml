@@ -9,18 +9,18 @@
 resolver = "3"
 members = [
     "rules",
-    "WHITE - No enhancements",
-    "RED - Transposition table",
-    "GREEN - Opening book",
-    "BLUE - Killer moves",
-    "PINK - Principal variation search",
-    "YELLOW - Draw sense",
-    "PURPLE - Pawn structure",
-    "CYAN - Mating bonus",
-    "ORANGE - Null-move pruning",
-    "BROWN - Late move reductions",
-    "GRAY - King safety",
-    "GOLD - All enhancements",
+    "00 WHITE - No enhancements",
+    "01 YELLOW - Draw sense",
+    "02 ORANGE - Null-move pruning",
+    "03 BROWN - Late move reductions",
+    "04 BLUE - Killer moves",
+    "05 PINK - Principal variation search",
+    "06 RED - Transposition table",
+    "07 PURPLE - Pawn structure",
+    "08 GRAY - King safety",
+    "09 CYAN - Mating bonus",
+    "10 GREEN - Opening book",
+    "11 GOLD - All enhancements",
 ]
 
 [workspace.package]

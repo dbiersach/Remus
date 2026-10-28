@@ -22,6 +22,12 @@ Usage:
     uv run station_elo.py --workers 16          all 12 versions, 360 games
     uv run station_elo.py --colors WHITE GOLD   only some versions
     uv run station_elo.py --report-only         only the ratings, from saved games
+    uv run station_elo.py --niram               the same for Niram, in Rust
+
+With --niram the games use Niram, the Rust copies of the same 12 versions in the
+niram folder, which choose the same moves as Remus about 50 times faster. Build
+them first with "cargo build --release" inside niram. Niram games are rated apart
+from Remus games.
 
 A game already in the games file is not played twice, so a run that stops
 partway, such as when the computer restarts, picks up where it stopped.
@@ -42,8 +48,8 @@ from pathlib import Path
 import chess
 import chess.engine
 import chess.pgn
+from station_match import Player, all_players, engine_command
 
-STATIONS = Path(__file__).parent
 # The top Remus folder is the nearest folder above this one with pyproject.toml
 REPOSITORY = Path(__file__).parent
 for folder in Path(__file__).parents:
@@ -66,32 +72,21 @@ INCREMENT = 0.0  # Seconds added after each move
 STOCKFISH_OVERHEAD = 1000
 ELO_SCALE = 400 / math.log(10)  # Turns a rating gap into the logistic curve's units
 
-Player = tuple[str, Path]  # A version's name, such as "Remus-RED", and its folder
 Job = tuple[Player, int, int]  # (player, Stockfish UCI_Elo, game number at that level)
 
 
-def all_players() -> list[Player]:
-    """Return the name and folder of every station, Remus-WHITE first."""
-    players = []
-    for folder in sorted(STATIONS.iterdir()):
-        if folder.is_dir() and " - " in folder.name:
-            name = f"Remus-{folder.name.split(' - ')[0]}"
-            if name == "Remus-WHITE":
-                players.insert(0, (name, folder))
-            else:
-                players.append((name, folder))
-    return players
-
-
 def freeze(players: list[Player]) -> list[Player]:
-    """Copy every player's folder into a new temporary folder and return the copies."""
+    """Copy every player's program into a new temporary folder and return the copies."""
     frozen_root = Path(tempfile.mkdtemp(prefix="remus_frozen_"))
     frozen = []
-    for name, folder in players:
-        copy = frozen_root / folder.name
-        shutil.copytree(
-            folder, copy, ignore=shutil.ignore_patterns("__pycache__", "*.pgn")
-        )
+    for name, program in players:
+        copy = frozen_root / program.name
+        if program.is_file():
+            shutil.copy2(program, copy)
+        else:
+            shutil.copytree(
+                program, copy, ignore=shutil.ignore_patterns("__pycache__", "*.pgn")
+            )
         frozen.append((name, copy))
     print(f"Frozen copies of {len(frozen)} versions in {frozen_root}")
     return frozen
@@ -166,7 +161,7 @@ def play_game(player: Player, stockfish_path: str, elo: int, number: int):
     Parameters
     ----------
     player : Player
-        The Remus version's name and its frozen folder.
+        The Remus or Niram version's name and its frozen program.
     stockfish_path : str
         The Stockfish program.
     elo : int
@@ -174,11 +169,10 @@ def play_game(player: Player, stockfish_path: str, elo: int, number: int):
     number : int
         The game number at this strength, from 1. Remus takes White in the odd games.
     """
-    name, folder = player
+    name, program = player
     remus_white = number % 2 == 1
-    remus = chess.engine.SimpleEngine.popen_uci(
-        [sys.executable, str(folder / "uci_engine.py")], cwd=folder
-    )
+    command, folder = engine_command(program)
+    remus = chess.engine.SimpleEngine.popen_uci(command, cwd=folder)
     stockfish = chess.engine.SimpleEngine.popen_uci(stockfish_path)
     stockfish.configure(
         {
@@ -235,11 +229,12 @@ def play_game(player: Player, stockfish_path: str, elo: int, number: int):
     return game
 
 
-def read_results() -> dict[str, dict[int, list[float]]]:
+def read_results(engine: str = "Remus") -> dict[str, dict[int, list[float]]]:
     """
-    Return every saved game of this script as Remus points by version and level.
+    Return every saved game of this script as points by version and level.
 
     The answer looks like {"Remus-RED": {1320: [1.0, 0.5, ...], ...}, ...}.
+    Only the versions of one engine, "Remus" or "Niram", count.
     """
     results = {}
     if not GAMES_PATH.exists():
@@ -250,10 +245,12 @@ def read_results() -> dict[str, dict[int, list[float]]]:
             if headers.get("Event") != EVENT or headers.get("Result") not in points:
                 continue
             white_points = points[headers["Result"]]
-            if headers["White"].startswith("Remus-"):
+            if headers["Black"].startswith("Stockfish"):
                 name, remus_points = headers["White"], white_points
             else:
                 name, remus_points = headers["Black"], 1 - white_points
+            if not name.startswith(engine + "-"):
+                continue
             elo = int(headers["Round"].split(".")[0])
             results.setdefault(name, {}).setdefault(elo, []).append(remus_points)
     return results
@@ -268,7 +265,7 @@ def played_games() -> set[tuple[str, str]]:
         while (headers := chess.pgn.read_headers(file)) is not None:
             if headers.get("Event") == EVENT:
                 remus = headers["White"]
-                if not remus.startswith("Remus-"):
+                if remus.startswith("Stockfish"):
                     remus = headers["Black"]
                 played.add((remus, headers.get("Round", "")))
     return played
@@ -362,13 +359,17 @@ def main():
     )
     parser.add_argument("--stockfish", default=None, help="path to Stockfish")
     parser.add_argument("--report-only", action="store_true", help="skip the games")
+    parser.add_argument(
+        "--niram", action="store_true", help="play the Rust versions in niram/"
+    )
     options = parser.parse_args()
     start = time.perf_counter()
-    players = all_players()
+    engine = "Niram" if options.niram else "Remus"
+    players = all_players(engine)
     if options.colors:
         wanted = []
         for color in options.colors:
-            wanted.append(f"Remus-{color.upper()}")
+            wanted.append(f"{engine}-{color.upper()}")
         chosen = []
         for player in players:
             if player[0] in wanted:
@@ -378,7 +379,7 @@ def main():
         stockfish_path = options.stockfish or find_stockfish()
         print(f"Stockfish: {stockfish_path}")
         play_all(players, stockfish_path, options.workers)
-    table = write_report(read_results())
+    table = write_report(read_results(engine))
     print(table)
     print(f"Total run time (sec): {time.perf_counter() - start:.3f}")
 

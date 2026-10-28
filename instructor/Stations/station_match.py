@@ -17,13 +17,18 @@ Usage:
     uv run station_match.py RED BLUE       Remus-RED against Remus-BLUE
     uv run station_match.py RED --games 1 --minutes 2
                                            one short game, to check the engine runs
+    uv run station_match.py RED --niram    Niram-RED against Niram-WHITE
+
+With --niram the match plays Niram, the Rust copies of the same versions in the
+niram folder, which choose the same moves as Remus about 50 times faster. Build
+them first with "cargo build --release" inside niram.
 
 Each side gets 10 minutes, because Remus searches only a few thousand positions a
 second and a shorter clock stops every version too shallow for most enhancements
 to help. The two games run at once, so the match takes about 20 minutes.
 
-Colors match the start of a station folder name, so "RED" finds
-"RED - Transposition table".
+Colors match the color word of a version folder's name, so "RED" finds
+"RED - Transposition table" (or "06 RED - Transposition table").
 """
 
 import argparse
@@ -54,6 +59,8 @@ INCREMENT = 0.0  # Seconds added after each move
 GAMES_AT_ONCE = 2  # Each game runs two engine processes
 ERRORS_PATH = REPOSITORY / "games" / "engine_errors.log"  # What engines print to stderr
 SILENCE_GRACE = 10.0  # Seconds past its clock an engine may take before it forfeits
+NIRAM = REPOSITORY / "niram"  # Niram: every Remus version rewritten in Rust
+NIRAM_PROGRAMS = NIRAM / "target" / "release"  # Where cargo build --release puts them
 # Well-known openings, three moves for each side, in UCI notation
 OPENINGS = [
     "e2e4 e7e5 g1f3 b8c6 f1b5 a7a6",  # Ruy Lopez
@@ -90,13 +97,65 @@ OPENINGS = [
     "e2e4 e7e5 g1f3 b8c6 b1c3 g8f6",  # Four Knights
 ]
 
+Player = tuple[str, Path]  # A version's name, such as "Remus-RED", and its program
 
-def find_player(color: str) -> tuple[str, Path]:
-    """Return a player's name, such as "Remus-RED", and its station folder."""
-    for folder in sorted(STATIONS.iterdir()):
-        if folder.is_dir() and folder.name.upper().startswith(color.upper() + " "):
-            return f"Remus-{folder.name.split(' - ')[0]}", folder
-    sys.exit(f"No station folder starts with {color!r}")
+
+def version_color(folder_name: str) -> str:
+    """Return the color in a version folder's name: "RED" from "06 RED - Transposition table"."""
+    words = folder_name.split(" - ")[0].split()
+    return words[len(words) - 1].upper()
+
+
+def all_players(engine: str = "Remus") -> list[Player]:
+    """
+    Return the name and program of every version of one engine, WHITE first.
+
+    Parameters
+    ----------
+    engine : str
+        "Remus" for the Python stations in this folder, or "Niram" for their
+        Rust copies, which cargo builds into NIRAM_PROGRAMS.
+
+    Returns
+    -------
+    list[Player]
+        Each version's name, such as "Remus-RED", and its program: a station
+        folder for Remus, or the program file for Niram.
+    """
+    home = STATIONS if engine == "Remus" else NIRAM
+    players = []
+    for folder in sorted(home.iterdir()):
+        if not folder.is_dir() or " - " not in folder.name:
+            continue
+        color = version_color(folder.name)
+        program = folder
+        if engine == "Niram":
+            program = NIRAM_PROGRAMS / f"niram-{color.lower()}"
+            if sys.platform == "win32":
+                program = program.with_suffix(".exe")
+            if not program.exists():
+                sys.exit(f"No {program}: run 'cargo build --release' inside {NIRAM}")
+        if color == YARDSTICK:
+            players.insert(0, (f"{engine}-{color}", program))
+        else:
+            players.append((f"{engine}-{color}", program))
+    return players
+
+
+def find_player(color: str, engine: str = "Remus") -> Player:
+    """Return one version's name, such as "Remus-RED", and its program."""
+    for player in all_players(engine):
+        if player[0] == f"{engine}-{color.upper()}":
+            return player
+    sys.exit(f"No {engine} version has the color {color!r}")
+
+
+def engine_command(program: Path) -> tuple[list[str], Path]:
+    """Return the command that starts a version, and the folder it runs in."""
+    # A Niram version is one program file; a Remus version is a folder of Python
+    if program.is_file():
+        return [str(program)], program.parent
+    return [sys.executable, str(program / "uci_engine.py")], program
 
 
 def elo_gap(points: float, games: int) -> float:
@@ -180,8 +239,8 @@ def save_engine_errors(game: chess.pgn.Game, names: list[str], logs: list) -> No
 
 
 def referee(
-    white: tuple[str, Path],
-    black: tuple[str, Path],
+    white: Player,
+    black: Player,
     opening: str,
     minutes: float,
     increment: float,
@@ -206,8 +265,7 @@ def referee(
     """
     engines = []
     for side in range(2):  # 0 is White, 1 is Black
-        folder = (white, black)[side][1]
-        command = [sys.executable, str(folder / "uci_engine.py")]
+        command, folder = engine_command((white, black)[side][1])
         engines.append(
             chess.engine.SimpleEngine.popen_uci(command, cwd=folder, stderr=logs[side])
         )
@@ -255,8 +313,8 @@ def referee(
 
 
 def play_game(
-    white: tuple[str, Path],
-    black: tuple[str, Path],
+    white: Player,
+    black: Player,
     event: str,
     opening: str = "",
     minutes: float = MINUTES,
@@ -267,8 +325,8 @@ def play_game(
 
     Parameters
     ----------
-    white, black : tuple[str, Path]
-        Each player's name and station folder, from find_player().
+    white, black : Player
+        Each player's name and program, from find_player().
     event : str
         The Event header of the game.
     opening : str
@@ -306,10 +364,14 @@ def main():
     parser.add_argument(
         "--increment", type=float, default=INCREMENT, help="seconds added per move"
     )
+    parser.add_argument(
+        "--niram", action="store_true", help="play the Rust versions in niram/"
+    )
     options = parser.parse_args()
     clock = (options.minutes, options.increment)
-    first = find_player(options.first)
-    second = find_player(options.second)
+    engine = "Niram" if options.niram else "Remus"
+    first = find_player(options.first, engine)
+    second = find_player(options.second, engine)
     event = f"Station match {first[0]} vs {second[0]}"
 
     print(
