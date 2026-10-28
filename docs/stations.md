@@ -130,7 +130,7 @@ plays only the games that are not in the games file yet. At 10 minutes a game, t
 teacher's 24-core computer, playing 16 games at a time, finished about one game a
 minute, so the whole league takes about 6 to 7 hours.
 
-### The teacher's league runs
+### The teacher's league run
 
 The teacher ran all 396 games in October 2026 at 10 minutes a game. These are the
 ratings:
