@@ -2,9 +2,9 @@
 
 Remus is a chess engine written in pure, native Python as a teaching project for the
 **"Turning a Chess Engine into Science AI"** workshop. The full lesson plan lives in
-[`docs/course/workshop_roadmap.md`](docs/course/workshop_roadmap.md) and the
-day-by-day course in [`docs/course/remus_course_plan.md`](docs/course/remus_course_plan.md); read both
-before starting any lesson. [`docs/code/remus_program_overview.md`](docs/code/remus_program_overview.md)
+[`misc/docs/course/workshop_roadmap.md`](misc/docs/course/workshop_roadmap.md) and the
+day-by-day course in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md); read both
+before starting any lesson. [`misc/docs/code/remus_program_overview.md`](misc/docs/code/remus_program_overview.md)
 explains how the code fits together.
 
 This file holds every project and style rule, so that every AI tool used with this
@@ -46,7 +46,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
 - Remus is an instructional engine for a **two-week, 60-hour course** taught to
   students about **13 years old**: 10 days, four 90-minute periods a day (8:30 to 10:00,
   10:30 to 12:00, 1:00 to 2:30, 3:00 to 4:30). The day-by-day plan lives in
-  [`docs/course/remus_course_plan.md`](docs/course/remus_course_plan.md), and the code is split into modules
+  [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md), and the code is split into modules
   and checkpoints that follow that plan period by period.
 - 20 students work in **10 pairs** (driver and navigator, swapping every period). Each
   pair gets an identical, preconfigured **Windows 11** class laptop with git, `uv`,
@@ -86,7 +86,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
   time: short functions, concrete names, and one small example position per idea.
 - The class never builds a GUI. Every laptop uses **Lucas Chess** (David,
   2026-10-27), which runs Remus as a UCI engine through `remus.bat`.
-  [`docs/course/lucas_chess_guide.md`](docs/course/lucas_chess_guide.md) shows students, step by step
+  [`misc/docs/course/lucas_chess_guide.md`](misc/docs/course/lucas_chess_guide.md) shows students, step by step
   with screenshots, how to add Remus and watch it play Stockfish at 1500 Elo.
   `python-chess` runs matches and checks results from outside the engine.
 - **No GitHub for students.** They are minors, so they create no online accounts. The
@@ -194,14 +194,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   import `chess`; only tests and optional display code (`show_board.py`) may.
 - Lucas Chess is a desktop application, not a Python dependency. It hosts Remus as an
   external UCI engine and comes preinstalled on the class laptops.
-- Finished, ready-to-run reference code lives in the root `instructor/` folder, which
-  keeps the solution code apart from the code students write and change. Inside it the
-  code lives in one folder per workshop day, named `Day NN - <what the new code
-  does>`, such as `instructor/Day 04 - Keep only legal moves`. Each Day folder holds
-  four period folders, `period1` to `period4`. Each period folder is a complete,
-  runnable copy of Remus as it stands at the end of that period (Day 10 holds only its
-  science files, and Day 9 periods 2 to 4 hold no engine code: see below), with a
-  `README.md`
+- The top folder holds one folder per workshop day, named `Day NN - <what the new
+  code does>`, such as `Day 04 - Keep only legal moves` (David, 2026-10-28). Each Day
+  folder holds four period folders, `period1` to `period4`, and each period folder
+  holds two folders: `instructor/`, the finished, ready-to-run reference code, and
+  `student/`, the code students write and change. Each `instructor/` folder is a
+  complete, runnable copy of Remus as it stands at the end of that period (Day 10
+  holds only its science files, and Day 9 periods 2 to 4 hold no engine code: see
+  below), with a `README.md`
   that names the period, its new and growing files, and the functions pairs write.
   Every period README and color version README also holds (David, 2026-10-27):
   - **Learning objectives** as a bulleted list, each with a **Measured by** line that
@@ -215,8 +215,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   stronger, what it costs, a table of positions per depth and positions per second
   measured against Remus-WHITE, what to expect in games, and where the pair's code
   is called from.
-  Each Day folder, in `instructor/` and in `student/`, also has a `README.md` at its
-  top (David, 2026-10-28) that paints the whole day: what the day is about, its
+  Each Day folder also has one `README.md` at its top (David, 2026-10-28) that paints the whole day: what the day is about, its
   objectives, a table of the four periods with what the pairs write in each, a timed
   sequence of activities for every period, and the checkpoint at 4:30.
   The text lives in `period_guides.py` (`OBJECTIVES`, `CHANGE_NOTES`, `LAB_NOTES`,
@@ -224,12 +223,12 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   for a period that needs an illustrated guide, such as the Day 10 phase hunt, and
   `DAY_GUIDES` for the Day READMEs, which `make_student_folders.py` writes); the
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
-  in `docs/images/phase_hunt/`, drawn by `uv run scripts/make_phase_hunt_figures.py`,
+  in `misc/docs/images/phase_hunt/`, drawn by `uv run misc/scripts/make_phase_hunt_figures.py`,
   which installs matplotlib for itself alone. Measure `VERSION_MEASURES` again after any
   change to a color version's search or evaluation.
   Each student README adds a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it, and
-  `docs/course/student_edit_plan.md` lists the same plan for the whole course.
+  `misc/docs/course/student_edit_plan.md` lists the same plan for the whole course.
 - Each Python skills lab lives in its own period folder (David, 2026-10-28; there is
   no separate `labs/` folder): the student file with `#` blanks, `<name>.py`, in the
   student period folder, and the answer file, `<name>_instructor.py`, in the
@@ -246,36 +245,37 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Nothing in a period folder imports from another folder. Modules import each other
   by name (`from board import new_board`), so any module runs from inside its folder
   with `uv run perft.py`.
-- Every teacher tool that is not part of an engine lives in the top-level `scripts/`
-  folder (David, 2026-10-28): the builders `make_period_folders.py`,
+- Every teacher tool that is not part of an engine lives in `misc/scripts/`
+  (David, 2026-10-28): the builders `make_period_folders.py`,
   `make_version_folders.py`, `make_student_folders.py`, and
   `make_phase_hunt_figures.py`, the README text in `period_guides.py`,
   `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`,
   `version_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
   top Remus folder from its own path, so it
-  runs from the top folder with `uv run scripts/<name>.py`. Students never open
-  `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
-  `version_match.py` in the Day 9 `period2/engines` folder for the battles, and `play_match.py`, `estimate_elo.py`, and the tests inside their
-  period and version folders. Put a new teacher tool in `scripts/`, and list every
-  script there in `scripts/README.md` with what it does (David, 2026-10-28).
-- `period4` holds the finished code of the day, and it is the only period folder to
-  edit by hand. Day 9 is the exception (David, 2026-10-28): its engine, Remus-WHITE,
-  is finished in `period1`, which is the folder to edit by hand, and periods 2 to 4
-  hold only their README, the period 2 lab, and `period2/engines`.
-  `make_period_folders.py` builds the other period folders from it: its
+  runs from the top folder with `uv run misc/scripts/<name>.py`. Students never open
+  `misc/scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
+  `version_match.py` in the Day 9 `period2/instructor/engines` and
+  `period2/student/engines` folders for the battles, and `play_match.py`, `estimate_elo.py`, and the tests inside their
+  period and version folders. Put a new teacher tool in `misc/scripts/`, and list every
+  script there in `misc/scripts/README.md` with what it does (David, 2026-10-28).
+- `period4/instructor` holds the finished code of the day, and it is the only period
+  folder to edit by hand. Day 9 is the exception (David, 2026-10-28): its engine, Remus-WHITE,
+  is finished in `period1/instructor`, which is the folder to edit by hand, and
+  periods 2 to 4 hold only their README, the period 2 lab, and `period2/.../engines`.
+  `make_period_folders.py` builds the other instructor period folders from it: its
   `ARRIVALS` table says in which period each file takes its finished form, and its
   `CHANGES` table says what the earlier periods leave out of a file that grows during
   the day. Run it after any change to the instructor code.
-- `student/` mirrors `instructor/` day by day and period by period. In each student
-  period folder, the functions the students write in that period are stubs: the
+- Each period's `student/` folder mirrors the `instructor/` folder beside it. In each
+  student folder, the functions the students write in that period are stubs: the
   signature and docstring stay and the body raises `NotImplementedError`, so the
   tests fail until a pair writes the function. `make_student_folders.py` builds
-  `student/` from `instructor/` and lists every student function by day and period;
+  every `student/` folder from its `instructor/` sibling and lists every student function by day and period;
   run it after `make_period_folders.py`, and never edit a student stub by hand.
-- The Remus versions live in `instructor/Day 09 - Add the clock and build the color
-  versions/period2/engines` (David, 2026-10-28). Remus-WHITE, the finished Day 9
+- The Remus versions live in `Day 09 - Add the clock and build the color
+  versions/period2/instructor/engines` (David, 2026-10-28). Remus-WHITE, the finished Day 9
   Remus with none of the ten enhancements (named by David on 2026-10-27), is the
-  Day 9 `period1` folder; it has no folder of its own. `engines/` holds the ten color
+  Day 9 `period1/instructor` folder; it has no folder of its own. `engines/` holds the ten color
   versions, one folder per color (`10 RED - Transposition table`, ...), each
   Remus-WHITE plus one enhancement, and `version_match.py`. It also holds
   `Remus-GOLD`, the finished Remus with all ten (David, 2026-10-27), and
@@ -283,11 +283,11 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   2026-10-28): the Day 10 period folders hold only the science files
   (`hidden_peak.py`, `phase_hunt.py`, their tests, and the results demo), and their
   READMEs point to Remus-GOLD for the engine, Lucas Chess, and `estimate_elo.py`.
-  Remus-GOLD is written by hand, like a `period4` folder; edit the finished engine
+  Remus-GOLD is written by hand, like a `period4/instructor` folder; edit the finished engine
   there. `make_version_folders.py` builds the ten color folders from the Day 9
-  `period1` code and Remus-GOLD and rewrites only the GOLD README.
-  `make_student_folders.py` stubs each color version's functions in the student
-  `period2/engines`, which holds only the ten colors and `version_match.py`: no
+  `period1/instructor` code and Remus-GOLD and rewrites only the GOLD README.
+  `make_student_folders.py` stubs each color version's functions in the
+  `period2/student/engines` folder, which holds only the ten colors and `version_match.py`: no
   pair ever writes GOLD. Colors name the color versions so that no color version
   sounds better than another. A two-digit prefix (David, 2026-10-28) orders the
   folders by each version's Elo over WHITE in the teacher's league (Niram league 1,
@@ -299,17 +299,17 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
   with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions against
   Stockfish at five UCI_Elo levels from frozen copies of the versions and writes the
-  table to `docs/engines/remus_elo.md`.
-- `Niram-GOLD` (in `period2/engines`) holds Remus-GOLD rewritten in Rust, named for
+  table to `misc/docs/engines/remus_elo.md`.
+- `Niram-GOLD` (in `period2/instructor/engines`) holds Remus-GOLD rewritten in Rust, named for
   Naram-Sin, Sargon's grandson: a Cargo workspace with the shared rules in `rules/`
   and the engine in `gold/`. It is a teacher's tool that runs the same engine about
   50 times faster; students never edit it. Each `.rs` file matches the Python file of
   the same name, and Niram-GOLD must visit exactly the same number of positions as
   Remus-GOLD at each depth (`cargo test --release` inside `Niram-GOLD`;
-  `uv run scripts/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).
-  `uv run scripts/engine_parity.py` checks the pair on 49 positions: evaluation,
+  `uv run misc/scripts/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).
+  `uv run misc/scripts/engine_parity.py` checks the pair on 49 positions: evaluation,
   legal moves, book moves, and every depth's score, node count, and principal
-  variation must match, and the results go to `docs/engines/engine_parity.md`. A
+  variation must match, and the results go to `misc/docs/engines/engine_parity.md`. A
   change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
   change in Niram-GOLD and a clean `engine_parity.py` run. The Rust copies of WHITE
   and the ten colors were deleted (David, 2026-10-28) after Niram league 1, whose
@@ -318,7 +318,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Python style rules above do not apply to the Rust code, which follows `cargo fmt`
   and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `estimate_elo.py`,
-  `version_match.py`, `version_league.py`, `version_elo.py`) is added to `games/remus_games.pgn` at the top of the
+  `version_match.py`, `version_league.py`, `version_elo.py`) is added to `misc/games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson
   makes a file smarter, the new code goes into the same file under a new function
@@ -332,35 +332,38 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   code.
 - Tests sit next to the modules in each period folder. The module names repeat from
   folder to folder, so pytest runs one folder at a time
-  (`uv run pytest "instructor/Day 04 - Keep only legal moves/period3"`);
-  `uv run scripts/run_all_tests.py` runs them all, and `uv run pytest` from the top
-  folder runs `scripts/test_reference_tools.py`. The ten mate puzzles,
+  (`uv run pytest "Day 04 - Keep only legal moves/period3/instructor"`);
+  `uv run misc/scripts/run_all_tests.py` runs them all, and `uv run pytest` from the top
+  folder runs `misc/scripts/test_reference_tools.py`. The ten mate puzzles,
   `mate_puzzles.epd`, sit beside `test_search.py` in every Day 8
   and Day 9 period folder and every version folder that reads them. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
-- Every `.py` file a student modifies or reads has a page in `docs/code/`, the
+- Every `.py` file a student modifies or reads has a page in `misc/docs/code/`, the
   "puzzle box top" for that file: the big picture first, then where it fits (uses and
   used by), words to know, a call tree, a plain-language line for each function, and
   questions. Write the pages for middle school readers, in short sentences, and do not
   repeat the code's comments line by line. When a file changes, update its page.
-- `docs/` holds three folders and a `README.md` that maps them (David, 2026-10-28):
-  - `docs/course/`: the roadmap, the course plan, the slide plan, the Lucas Chess
+- `misc/` holds everything that is not a Day folder (David, 2026-10-28): `docs/`,
+  `games/`, and `scripts/`, so the top folder shows the ten Day folders and little
+  else.
+- `misc/docs/` holds three folders and a `README.md` that maps them (David, 2026-10-28):
+  - `misc/docs/course/`: the roadmap, the course plan, the slide plan, the Lucas Chess
     guide, the science survey, the two briefing PDFs, and `student_edit_plan.md`,
     which `make_student_folders.py` writes.
-  - `docs/code/`: the program overview, `file_versions.md`, and one page for every
+  - `misc/docs/code/`: the program overview, `file_versions.md`, and one page for every
     `.py` file a student modifies or reads, named after that file (`board.py` has
     `board.md`).
-  - `docs/engines/`: the Remus versions and Niram-GOLD: `remus_versions.md`,
+  - `misc/docs/engines/`: the Remus versions and Niram-GOLD: `remus_versions.md`,
     the ten color versions and Remus-GOLD; `remus_elo.md`, which `version_elo.py`
     writes; and `engine_parity.md`, which `engine_parity.py` writes.
-  Pictures live in `docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
-  into the folder of its subject; nothing else sits at the top of `docs/`.
+  Pictures live in `misc/docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
+  into the folder of its subject; nothing else sits at the top of `misc/docs/`.
 - Remus-WHITE, the ten color versions (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
   are the **Remus versions** (David, 2026-10-28). Call them Remus versions or color
   versions, never "stations", in file names, code, and prose. Game records keep the
   Event names `Station match`, `Station league`, and `Station Elo test`, so the
-  games already in `games/remus_games.pgn` still count toward the ratings.
+  games already in `misc/games/remus_games.pgn` still count toward the ratings.
 
 # Part 2: Python style
 
@@ -528,10 +531,10 @@ passant captures that expose the king."
 Python skills labs use the same pattern as David's course repositories: a student file
 with blanks and an instructor file with the answers.
 
-- The student file `student/Day 02 .../period2/python_dicts.py` prints a heading for each part
+- The student file `Day 02 .../period2/student/python_dicts.py` prints a heading for each part
   (`print("Part #1 - Create a Dict and Read Items")`) and leaves one `#` line for each
   line the student writes.
-- The instructor file `instructor/Day 02 .../period2/python_dicts_instructor.py`
+- The instructor file `Day 02 .../period2/instructor/python_dicts_instructor.py`
   mirrors it line for line with the answers filled in. Its filename docstring names the instructor file.
 - Keeping the two files line-aligned lets the teacher diff them and lets a student
   compare a finished lab with the answer.
@@ -545,8 +548,8 @@ end tag holds the teacher's solution.
 - Use lowercase `snake_case` for all files, Python and data alike.
 - File names should be **descriptive and topic-based**, for example `board_display.py`,
   `move_generation.py`, `perft.py`.
-- Instructor answer files add `_instructor` and live in an `instructor/` folder beside
-  the student file.
+- Instructor answer files add `_instructor` and live in the `instructor/` folder beside
+  the period's `student/` folder.
 
 ## File input and output
 
@@ -582,7 +585,7 @@ the course repositories: ruff's default rules plus `I` (import order), `C4`
 formats the code.
 
 The code must also show no type errors in VS Code's Pylance. Check a Day folder with
-`uvx pyright "instructor/Day 03 - Generate piece moves/period4"`. When a function can return
+`uvx pyright "Day 03 - Generate piece moves/period4/instructor"`. When a function can return
 `None`, such as `color_of()` or `game_result()`, test for `None` before using the
 result.
 

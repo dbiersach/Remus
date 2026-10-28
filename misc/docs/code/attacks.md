@@ -1,0 +1,108 @@
+# attacks.py: Is this square under attack?
+
+*First appears in `Day 04 - Keep only legal moves/period2/instructor`.*
+
+## The big picture
+
+A king may not stay in check. To know that, Remus must answer one question: is
+this square attacked?
+
+This file answers it two ways. `is_attacked_by_scanning` asks every enemy piece.
+`is_square_attacked` stands on the square and looks outward. Remus uses
+`is_square_attacked` because it checks fewer squares.
+
+## Where this piece fits
+
+attacks.py uses board.py, game_state.py, and move_generation.py. legal_moves.py, game_end.py, notation.py, and search.py use it.
+
+- **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`move_generation.py`](move_generation.md)
+- **Used by:** [`game_end.py`](game_end.md), [`legal_moves.py`](legal_moves.md), [`notation.py`](notation.md), [`search.py`](search.md)
+
+## Words to know
+
+- **attacked:** an enemy piece could capture on that square.
+- **check:** the king's square is attacked.
+- **super piece:** pretend a piece on the square can move every way. Whatever it could capture is an attacker.
+- **ray:** a straight line of squares from one square to the edge.
+
+## What it stores
+
+`is_square_attacked` looks outward from the square like this:
+
+```text
+   along rook lines      -> finds an enemy rook or queen
+   along bishop lines    -> finds an enemy bishop or queen
+   at knight jumps       -> finds an enemy knight
+   at pawn squares       -> finds an enemy pawn
+   at the 8 next squares -> finds the enemy king
+```
+
+## How it works
+
+1. `in_check()` finds the king with `find_king()`.
+2. It asks `is_square_attacked()` about the king's square.
+3. `is_square_attacked()` checks knights, the king, pawns, and the lines in turn.
+4. `first_piece()` walks along a line and stops at the first piece it meets.
+
+## Call tree
+
+Each function is listed with the functions it calls, indented below it.
+A name in [brackets] lives in another file.
+
+```text
+is_attacked_by_scanning()
+    color_of()  [game_state.py]
+    piece_moves()  [move_generation.py]
+
+in_check()
+    is_square_attacked()
+        attacked_by_knight()
+            piece_at_offsets()
+                on_board()  [move_generation.py]
+                piece_at()  [board.py]
+        attacked_by_pawn()
+            piece_at_offsets()
+        attacked_by_king()
+            piece_at_offsets()
+        attacked_along_lines()
+            first_piece()
+                on_board()  [move_generation.py]
+            color_of()  [game_state.py]
+    find_king()
+```
+
+## The functions
+
+| Function | What it does | Arrives |
+| --- | --- | --- |
+| `is_attacked_by_scanning` | Asks every enemy piece if it can reach the square. | Day 4, period 2 |
+| `piece_at_offsets` | Looks at a list of nearby squares for one piece, such as a Black knight. | Day 4, period 2 |
+| `attacked_by_knight` | Looks for an enemy knight one jump away. | Day 4, period 2 |
+| `attacked_by_king` | Looks for the enemy king one step away. | Day 4, period 2 |
+| `attacked_by_pawn` | Looks for an enemy pawn that captures onto the square. | Day 4, period 2 |
+| `first_piece` | Walks in one direction and returns the first piece it meets. | Day 4, period 2 |
+| `attacked_along_lines` | Looks along straight and diagonal lines for a rook, bishop, or queen. | Day 4, period 2 |
+| `is_square_attacked` | Looks outward from the square for any attacker. | Day 4, period 2 |
+| `find_king` | Finds the square of a king. | Day 4, period 3 |
+| `in_check` | Says True if that side's king is attacked. | Day 4, period 3 |
+
+## How the file grows
+
+- **Day 4, period 2:** `is_attacked_by_scanning`, `piece_at_offsets`, `attacked_by_knight`, `attacked_by_king`, `attacked_by_pawn`, `first_piece`, `attacked_along_lines`, `is_square_attacked`
+- **Day 4, period 3:** `find_king`, `in_check`
+
+## Try it
+
+Open `attacks.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
+
+You should see: Which side attacks f3 at the start, and `Both attack checks agree on 96 of 96 squares`.
+
+## Puzzle questions
+
+1. At the start, which White pieces attack f3?
+2. Why can a pawn attack a square it cannot move to?
+
+## Slides
+
+Slides 4.1, 4.2 in the [slide plan](../course/slide_plan.md).

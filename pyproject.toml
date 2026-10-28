@@ -28,32 +28,33 @@ lint.extend-select = ["I", "C4", "ISC", "SIM", "TCH"]
 # import style everywhere.
 lint.ignore = ["TC002", "TC003"]
 # A student stub keeps the imports its finished version needs, as hints, so
-# unused imports are allowed in student/. A student lab file (python_*.py) holds a
+# unused imports are allowed in every student folder. A student lab file (python_*.py) holds a
 # lone # on each line the pair types, so its blanks and the variables they would
 # use stay as they are, and the formatter leaves the file alone. A demo file
 # (demo_*.py) follows the same pattern. The imports a lab needs stay in the student
 # file, so the pair's blanks can use them.
-lint.per-file-ignores = { "student/**" = ["F401"], "**/python_*.py" = ["F401", "F841", "PLR2044"], "**/demo_*.py" = ["F401", "F841", "PLR2044"] }
+lint.per-file-ignores = { "**/student/**" = ["F401"], "**/python_*.py" = ["F401", "F841", "PLR2044"], "**/demo_*.py" = ["F401", "F841", "PLR2044"] }
 format.exclude = [
-    "student/**/python_*.py",
-    "student/**/demo_*.py",
+    "**/student/**/python_*.py",
+    "**/student/**/demo_*.py",
 ]
 show-fixes = true
 target-version = "py314"
 
 # Each period folder is a complete copy of Remus, so module names repeat from folder
 # to folder. Run one folder at a time, such as
-# uv run pytest "instructor/Day 06 - Count positions and read FEN/period2", or
-# scripts/run_all_tests.py for all. The color versions sit inside Day 9 period2, in
-# engines/, so pytest leaves that folder out and tests each color version on its own.
+# uv run pytest "Day 06 - Count positions and read FEN/period2/instructor", or
+# misc/scripts/run_all_tests.py for all. The color versions sit inside Day 9
+# period2, in engines/, so pytest leaves that folder out and tests each color
+# version on its own.
 [tool.pytest.ini_options]
-testpaths = ["scripts"]
+testpaths = ["misc/scripts"]
 norecursedirs = [".*", "__pycache__", "engines", "target", "venv"]
 addopts = "-q"
 
-# version_league.py and version_elo.py in scripts/ import version_match.py from
-# the Day 9 period2/engines folder, where every pair runs it for the battles.
+# version_league.py and version_elo.py in misc/scripts/ import version_match.py from
+# the Day 9 period2/instructor/engines folder, where every pair runs it for the battles.
 [tool.pyright]
 executionEnvironments = [
-    { root = "scripts", extraPaths = ["instructor/Day 09 - Add the clock and build the color versions/period2/engines"] },
+    { root = "misc/scripts", extraPaths = ["Day 09 - Add the clock and build the color versions/period2/instructor/engines"] },
 ]
