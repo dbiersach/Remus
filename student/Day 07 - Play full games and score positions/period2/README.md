@@ -47,7 +47,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `notation.py` | `parse_san()` | 94 | 5 | `test_game.py::test_parse_san_finds_each_move` |
+| `notation.py` | `parse_san()` | 90 | 5 | `test_game.py::test_parse_san_finds_each_move` |
 
 Lines to type in all: 5. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 

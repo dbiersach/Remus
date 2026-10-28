@@ -69,8 +69,7 @@ greedy_move()
 minimax()
     legal_moves()  [legal_moves.py]
     white_score()
-        material()  [evaluation.py]
-        placement()  [evaluation.py]
+        evaluate()  [evaluation.py]
     in_check()  [attacks.py]
     make_move()  [make_move.py]
     undo_move()  [make_move.py]
@@ -158,11 +157,11 @@ think_move()
 | --- | --- | --- |
 | `SearchInfo` | Holds what one search counts and needs: positions visited, the clock, and memory. | Day 8, period 1 |
 | `SearchTimeout` | A signal that stops the search when time is up. | Day 8, period 4 |
-| `check_time` | Raises SearchTimeout if time is up or the GUI said stop. | Day 8, period 4 |
+| `check_time` | Raises SearchTimeout if time is up. | Day 8, period 4 |
 | `random_move` | Picks any legal move at random. | Day 7, period 3 |
 | `capture_value` | Says how much the captured piece is worth. | Day 7, period 3 |
 | `greedy_move` | Picks the move that captures the most valuable piece. | Day 7, period 3 |
-| `white_score` | Scores a position from White's side, for minimax. | Day 8, period 1 |
+| `white_score` | Turns `evaluate()`'s score for the side to move into White's score, for minimax. | Day 8, period 1 |
 | `minimax` | Looks ahead. White picks the highest score, Black the lowest. | Day 8, period 1 |
 | `negamax` | Does the same as minimax with one function and a minus sign. | Day 8, period 1 |
 | `best_move` | Tries every first move with negamax and keeps the best. | Day 8, period 1 |

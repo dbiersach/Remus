@@ -22,8 +22,11 @@ START_ROWS = [  # The starting position, row 0 (rank 8) first
     "RNBQKBNR",
 ]
 
+Square = tuple[int, int]  # A (row, col) pair, such as (6, 4) for e2
+Board = list[list[str]]  # Eight rows of eight squares, row 0 (rank 8) first
 
-def new_board() -> list[list[str]]:
+
+def new_board() -> Board:
     """Return a fresh board set up in the starting position."""
     board = []
     for row in START_ROWS:
@@ -31,13 +34,13 @@ def new_board() -> list[list[str]]:
     return board
 
 
-def print_board(board: list[list[str]]) -> None:
+def print_board(board: Board) -> None:
     """
     Print the board with rank numbers on the left and file letters below.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board, row 0 first (rank 8).
     """
     for row in range(8):
@@ -69,7 +72,7 @@ def square_name(row: int, col: int) -> str:
     return BOARD_FILES[col] + BOARD_RANKS[row]
 
 
-def parse_square(name: str) -> tuple[int, int]:
+def parse_square(name: str) -> Square:
     """
     Convert an algebraic square name to (row, col) coordinates.
 
@@ -80,7 +83,7 @@ def parse_square(name: str) -> tuple[int, int]:
 
     Returns
     -------
-    tuple[int, int]
+    Square
         The (row, col) of the square, such as (6, 4) for "e2".
 
     Raises
@@ -95,13 +98,13 @@ def parse_square(name: str) -> tuple[int, int]:
     return row, col
 
 
-def piece_at(board: list[list[str]], square: tuple[int, int]) -> str:
+def piece_at(board: Board, square: Square) -> str:
     """Return the piece on a (row, col) square, or EMPTY."""
     row, col = square
     return board[row][col]
 
 
-def set_piece(board: list[list[str]], square: tuple[int, int], piece: str) -> None:
+def set_piece(board: Board, square: Square, piece: str) -> None:
     """Put a piece (or EMPTY) on a (row, col) square."""
     row, col = square
     board[row][col] = piece

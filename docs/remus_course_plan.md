@@ -146,7 +146,7 @@ every drill uses chess data so the skill is fresh when the engine needs it.
 | 9 | D6 P4 | `split`, `int()`, exceptions with `try` and `ValueError` | Read a FEN string and print its six fields |
 | 10 | D7 P2 | `random.choice`, a loop that keeps the best so far, `sys.stdin`, `print(..., flush=True)`, `sys.stderr` | A tiny program that echoes lines, then answers `isready` with `readyok` |
 | 11 | D8 P2 | keeping a list in order with `insert`, `time.perf_counter()`, `float("inf")` | Sort captures by victim value; time a perft run |
-| 12 | D9 P2 | Dicts as caches, tuples as keys, `math.dist`, `random.seed`, `threading.Event` (teacher demo) | Remember perft counts already computed; measure the distance from `d4` to `g7` |
+| 12 | D9 P2 | Dicts as caches, tuples as keys, `math.dist`, `random.seed` | Remember perft counts already computed; measure the distance from `d4` to `g7` |
 
 ## Unplugged warm-ups
 
@@ -292,8 +292,10 @@ refresher with a demonstration board comes right before the code that needs each
 - **P2. Attacks.** Refresher on check, pins, and discovered check. `attacks.py`
   version 1 loops over the enemy pieces, as GameWorks `Attacks` does. Version 2 stands
   on the square and looks outward like a "super piece."
-  **Students write:** `attacked_by_knight()`, `attacked_by_pawn()`, `attacked_by_king()`.
-  The teacher writes the sliding-line part, which reuses `slide()`.
+  **Students write:** `piece_at_offsets()`, the one loop that looks for a knight, a
+  king, or a pawn a fixed step away, then `attacked_by_pawn()` and `attacked_by_king()`
+  on top of it. The teacher writes `attacked_by_knight()` as the model call, and the
+  sliding-line part, `first_piece()` and `attacked_along_lines()`.
 - **P3. Check and the legal filter.** Unplugged warm-up: "Pin hunt." **Students write:** `in_check(state, color)` and
   `legal_moves(state)`: make each pseudo-legal move, reject it if the mover's king is
   attacked, undo it.
@@ -418,8 +420,8 @@ and alpha-beta returns the same score as negamax with fewer nodes.
 ### Day 9: The clock, and the enhancement stations
 
 - **P1. Iterative deepening, the clock, and UCI info.** The teacher reads `go
-  movetime`, `wtime`, `btime`, `winc`, and `binc`, moves the search into a thread with
-  a stop flag, and writes `format_info()`, which prints `info depth 3 score cp 35 nodes
+  movetime`, `wtime`, `btime`, `winc`, and `binc`, turns the clock into a thinking
+  time, and writes `format_info()`, which prints `info depth 3 score cp 35 nodes
   4120 pv e2e4 e7e5 g1f3` so the GUI shows Remus thinking. **Students write:**
   `think()`, the deepening loop: depth 1, then 2, then 3, keeping the best move of the
   deepest search that finished before the clock ran out. The Remus at the end of this period is **Remus-WHITE**, with
@@ -553,7 +555,7 @@ The full description of each script is in `docs/scripts/`.
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thread, `stop`), `console_game.py` (uses `think`); the station folders live in `Stations/` |
+| `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the station folders live in `Stations/` |
 | `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `phase_hunt.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_phase_hunt.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
 
 Outside the Day folders:

@@ -36,6 +36,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `negamax()` | 115 | 17 | `test_search.py::test_negamax_finds_mate_in_one`, `test_search.py::test_minimax_and_negamax_agree`, `test_search.py::test_stalemate_scores_zero` |
+| `search.py` | `negamax()` | 114 | 17 | `test_search.py::test_negamax_finds_mate_in_one`, `test_search.py::test_minimax_and_negamax_agree`, `test_search.py::test_stalemate_scores_zero` |
 
 Lines to type in all: 17. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

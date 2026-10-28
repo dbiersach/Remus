@@ -12,22 +12,20 @@ stop, and move ordering tries strong moves first.
 """
 
 import random
-import threading
 import time
 from dataclasses import dataclass
 
 from attacks import in_check
 from board import EMPTY, piece_at
-from evaluation import PIECE_VALUES, evaluate, material, placement
+from evaluation import PIECE_VALUES, evaluate
 from fen import state_from_fen
 from legal_moves import legal_moves
 from make_move import make_move, state_snapshot, undo_move
 from move_ordering import order_moves
 from moves import Move, move_to_uci
 
-MATE_SCORE = (
-    100_000  # Larger than any material count; a mate n plies away scores MATE_SCORE - n
-)
+# Larger than any material count; a mate n plies away scores MATE_SCORE - n
+MATE_SCORE = 100_000
 
 
 @dataclass
@@ -36,7 +34,6 @@ class SearchInfo:
 
     nodes: int = 0  # Positions visited
     deadline: float | None = None  # time.perf_counter() value when the search must stop
-    stop: threading.Event | None = None  # Set by the GUI's "stop" command
 
 
 class SearchTimeout(Exception):
@@ -44,9 +41,8 @@ class SearchTimeout(Exception):
 
 
 def check_time(info: SearchInfo) -> None:
-    """Raise SearchTimeout if the deadline has passed or the GUI said stop."""
-    out_of_time = info.deadline is not None and time.perf_counter() > info.deadline
-    if out_of_time or (info.stop is not None and info.stop.is_set()):
+    """Raise SearchTimeout if the deadline has passed."""
+    if info.deadline is not None and time.perf_counter() > info.deadline:
         raise SearchTimeout
 
 
@@ -92,7 +88,7 @@ def greedy_move(state: dict) -> Move:
 
 def white_score(state: dict) -> int:
     """Return the evaluation from White's side, as minimax uses it."""
-    return material(state["board"]) + placement(state["board"])
+    return evaluate(state) if state["turn"] == "w" else -evaluate(state)
 
 
 def minimax(state: dict, depth: int, info: SearchInfo) -> int:

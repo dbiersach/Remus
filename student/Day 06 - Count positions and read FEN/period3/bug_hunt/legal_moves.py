@@ -9,7 +9,7 @@ so castling_moves checks them before the move joins the list.
 
 from attacks import in_check, is_square_attacked
 from board import EMPTY, piece_at
-from game_state import WHITE, new_game, opponent
+from game_state import color_of, new_game, opponent
 from make_move import make_move, undo_move
 from move_generation import pseudo_legal_moves
 from moves import Move
@@ -43,7 +43,8 @@ def castling_moves(state: dict) -> list[Move]:
     enemy = opponent(color)
     moves = []
     for right, king_from, king_to, must_be_empty, crossed in CASTLES:
-        if right not in state["castling"] or right.isupper() != (color == WHITE):
+        # A right is lettered like its king: "K" and "Q" for White, "k" and "q" for Black
+        if right not in state["castling"] or color_of(right) != color:
             continue
         path_is_empty = True
         for square in must_be_empty:

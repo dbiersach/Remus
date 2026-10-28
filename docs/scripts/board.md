@@ -26,6 +26,9 @@ board.py is the bottom piece of the puzzle. It uses no other Remus file, and alm
 - **file:** a column of the chessboard, named by a letter from a to h.
 - **rank:** a row of the chessboard, named by a number from 1 to 8.
 - **list of lists:** a Python list where each item is another list. Here, 8 rows of 8 squares.
+- **type alias:** a short name for a long type. `Square` means `tuple[int, int]`, a
+  `(row, col)` pair, and `Board` means `list[list[str]]`, the grid of letters. Every
+  other file writes `board: Board, square: Square` instead of the brackets.
 
 ## What it stores
 

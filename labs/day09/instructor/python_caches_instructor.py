@@ -2,7 +2,7 @@
 """python_caches_instructor.py
 
 Day 9, period 2, Python lab 12: a dict as a cache with tuple keys, math.dist(),
-random.seed(), and a teacher demo of threading.Event. The chess drill remembers
+and random.seed(). The chess drill remembers
 perft counts it has already computed, the idea behind the RED station's
 transposition table.
 The student file python_caches.py leaves one # line for each line the pair types.
@@ -10,7 +10,6 @@ The student file python_caches.py leaves one # line for each line the pair types
 
 import math
 import random
-import threading
 import time
 
 from game_state import new_game
@@ -24,12 +23,6 @@ def remembered_perft(cache: dict, name: str, depth: int) -> int:
     if key not in cache:
         cache[key] = perft(new_game(), depth)
     return cache[key]
-
-
-def count_until_stopped(stop: threading.Event, counts: list[int]) -> None:
-    """Add 1 to counts[0] again and again until another thread sets the stop flag."""
-    while not stop.is_set():
-        counts[0] += 1
 
 
 def main():
@@ -55,17 +48,6 @@ def main():
     random.seed(2016)
     second_roll = random.randint(1, 6)
     print(f"Same roll after the same seed: {first_roll == second_roll}  (expected True)")
-
-    print("Part #4 - Teacher Demo: Stop a Thread with threading.Event")
-    # think() runs in a thread like this one, and the UCI "stop" command sets the flag
-    stop = threading.Event()
-    counts = [0]
-    worker = threading.Thread(target=count_until_stopped, args=(stop, counts))
-    worker.start()
-    time.sleep(0.2)
-    stop.set()
-    worker.join()
-    print(f"The thread counted to {counts[0]:,} before the flag stopped it")
 
 
 if __name__ == "__main__":

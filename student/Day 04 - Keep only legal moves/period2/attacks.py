@@ -9,29 +9,28 @@ looks outward like a "super piece": along the lines for rooks, bishops, and quee
 and at the knight, pawn, and king squares nearby. Version 2 is the one Remus uses.
 """
 
-from board import EMPTY, parse_square, piece_at
+from board import EMPTY, Board, Square, parse_square, piece_at
 from game_state import BLACK, WHITE, color_of, new_game
 from move_generation import (
     BISHOP_DIRECTIONS,
     KING_STEPS,
     KNIGHT_JUMPS,
     ROOK_DIRECTIONS,
+    Direction,
     on_board,
     piece_moves,
 )
 
 
-def is_attacked_by_scanning(
-    board: list[list[str]], square: tuple[int, int], by_color: str
-) -> bool:
+def is_attacked_by_scanning(board: Board, square: Square, by_color: str) -> bool:
     """
     Version 1: ask every enemy piece whether it attacks the square.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
-    square : tuple[int, int]
+    square : Square
         The (row, col) of the square to test.
     by_color : str
         The color of the attacking side.
@@ -60,27 +59,47 @@ def is_attacked_by_scanning(
     return False
 
 
-def attacked_by_knight(
-    board: list[list[str]], square: tuple[int, int], by_color: str
+def piece_at_offsets(
+    board: Board, square: Square, piece: str, offsets: list[Direction]
 ) -> bool:
-    """Return True if a knight of by_color is one knight jump away."""
+    """
+    Return True if the piece stands one of the offsets away from the square.
+
+    Parameters
+    ----------
+    board : Board
+        The board.
+    square : Square
+        The (row, col) of the square to test.
+    piece : str
+        The piece to look for, such as "N" for a White knight.
+    offsets : list[Direction]
+        The steps from the square to look at, such as KNIGHT_JUMPS.
+
+    Returns
+    -------
+    bool
+        True if one of the squares the offsets reach holds the piece.
+    """
     # Day 4, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
-    raise NotImplementedError("Day 4 P2: write attacked_by_knight()")
+    raise NotImplementedError("Day 4 P2: write piece_at_offsets()")
 
 
-def attacked_by_king(
-    board: list[list[str]], square: tuple[int, int], by_color: str
-) -> bool:
+def attacked_by_knight(board: Board, square: Square, by_color: str) -> bool:
+    """Return True if a knight of by_color is one knight jump away."""
+    knight = "N" if by_color == WHITE else "n"
+    return piece_at_offsets(board, square, knight, KNIGHT_JUMPS)
+
+
+def attacked_by_king(board: Board, square: Square, by_color: str) -> bool:
     """Return True if the king of by_color is one step away."""
     # Day 4, period 2: write this function.
     # The docstring above says what it must do; the tests check it.
     raise NotImplementedError("Day 4 P2: write attacked_by_king()")
 
 
-def attacked_by_pawn(
-    board: list[list[str]], square: tuple[int, int], by_color: str
-) -> bool:
+def attacked_by_pawn(board: Board, square: Square, by_color: str) -> bool:
     """
     Return True if a pawn of by_color attacks the square.
 
@@ -92,9 +111,7 @@ def attacked_by_pawn(
     raise NotImplementedError("Day 4 P2: write attacked_by_pawn()")
 
 
-def first_piece(
-    board: list[list[str]], square: tuple[int, int], direction: tuple[int, int]
-) -> str:
+def first_piece(board: Board, square: Square, direction: Direction) -> str:
     """Return the first piece met walking from the square in a direction, or EMPTY."""
     row, col = square
     row_change, col_change = direction
@@ -106,9 +123,7 @@ def first_piece(
     return EMPTY
 
 
-def attacked_along_lines(
-    board: list[list[str]], square: tuple[int, int], by_color: str
-) -> bool:
+def attacked_along_lines(board: Board, square: Square, by_color: str) -> bool:
     """Return True if a rook, bishop, or queen of by_color attacks along a line."""
     for direction in ROOK_DIRECTIONS:
         piece = first_piece(board, square, direction)
@@ -121,17 +136,15 @@ def attacked_along_lines(
     return False
 
 
-def is_square_attacked(
-    board: list[list[str]], square: tuple[int, int], by_color: str
-) -> bool:
+def is_square_attacked(board: Board, square: Square, by_color: str) -> bool:
     """
     Version 2: look outward from the square for any attacker of by_color.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
-    square : tuple[int, int]
+    square : Square
         The (row, col) of the square to test.
     by_color : str
         The color of the attacking side.

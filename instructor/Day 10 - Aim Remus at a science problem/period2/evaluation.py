@@ -20,17 +20,10 @@ Day 10 adds two upgrade-station terms, both ideas from Turbo GameWorks Chess:
    shelters the king from in front.
 """
 
-from board import EMPTY
+from board import EMPTY, Board
 from fen import START_FEN, state_from_fen
 
-PIECE_VALUES = {
-    "P": 100,
-    "N": 300,
-    "B": 300,
-    "R": 500,
-    "Q": 900,
-    "K": 0,
-}  # In centipawns
+PIECE_VALUES = {"P": 100, "N": 300, "B": 300, "R": 500, "Q": 900, "K": 0}  # Centipawns
 
 PAWN_TABLE = [  # Pawns gain as they advance, most in the center
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -82,16 +75,6 @@ KING_TABLE = [  # The king hides behind its pawns until the endgame
     [20, 20, 0, 0, 0, 0, 20, 20],
     [20, 30, 10, 0, 0, 10, 30, 20],
 ]
-QUEEN_TABLE = [  # The queen is strong anywhere
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-]
 DOUBLED_PAWN = 8  # Penalty for each pawn that shares its file with another of its color
 ISOLATED_PAWN = (
     20  # Penalty for a pawn with no friendly pawn on either neighboring file
@@ -108,18 +91,17 @@ PLACEMENT_TABLES = {
     "N": KNIGHT_TABLE,
     "B": BISHOP_TABLE,
     "R": ROOK_TABLE,
-    "Q": QUEEN_TABLE,
     "K": KING_TABLE,
 }
 
 
-def material(board: list[list[str]]) -> int:
+def material(board: Board) -> int:
     """
     Return the material balance in centipawns, positive when White is ahead.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
 
     Returns
@@ -139,14 +121,14 @@ def material(board: list[list[str]]) -> int:
     return score
 
 
-def placement(board: list[list[str]]) -> int:
+def placement(board: Board) -> int:
     """Return the piece-square bonus in centipawns, positive when it favors White."""
     score = 0
     for row in range(8):
         for col in range(8):
             piece = board[row][col]
-            if piece == EMPTY:
-                continue
+            if piece == EMPTY or piece.upper() == "Q":
+                continue  # The queen has no table: it is strong on any square
             table = PLACEMENT_TABLES[piece.upper()]
             if piece.isupper():
                 score += table[row][col]
@@ -155,13 +137,13 @@ def placement(board: list[list[str]]) -> int:
     return score
 
 
-def pawn_structure(board: list[list[str]]) -> int:
+def pawn_structure(board: Board) -> int:
     """
     Score the pawn structure in centipawns, positive when it favors White.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
 
     Returns
@@ -202,13 +184,13 @@ def pawn_structure(board: list[list[str]]) -> int:
     return score
 
 
-def mating_bonus(board: list[list[str]]) -> int:
+def mating_bonus(board: Board) -> int:
     """
     Return a bonus for cornering the losing king, positive when it favors White.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
 
     Returns
@@ -245,13 +227,13 @@ def mating_bonus(board: list[list[str]]) -> int:
     return bonus if lead > 0 else -bonus
 
 
-def king_safety(board: list[list[str]]) -> int:
+def king_safety(board: Board) -> int:
     """
     Score the pawn shields in front of both kings, positive when it favors White.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
 
     Returns

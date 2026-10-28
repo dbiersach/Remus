@@ -9,18 +9,18 @@ treats them as the end of the game, the way chess GUIs and engine tournaments do
 """
 
 from attacks import in_check
-from board import EMPTY
+from board import EMPTY, Board
 from fen import state_from_fen
 from legal_moves import legal_moves
 
 
-def insufficient_material(board: list[list[str]]) -> bool:
+def insufficient_material(board: Board) -> bool:
     """
     Return True if neither side can ever checkmate.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
 
     Returns

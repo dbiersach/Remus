@@ -17,13 +17,12 @@ null-move pruning, and late move reductions.
 """
 
 import random
-import threading
 import time
 from dataclasses import dataclass, field
 
 from attacks import in_check
-from board import EMPTY, piece_at
-from evaluation import PIECE_VALUES, evaluate, material, placement
+from board import EMPTY, Board, Square, piece_at
+from evaluation import PIECE_VALUES, evaluate
 from fen import state_from_fen
 from game_state import opponent, position_key
 from legal_moves import legal_moves
@@ -32,9 +31,8 @@ from move_ordering import order_moves
 from moves import Move, move_to_uci
 from transposition_table import EXACT, LOWER, UPPER, best_stored_move, probe, store
 
-MATE_SCORE = (
-    100_000  # Larger than any material count; a mate n plies away scores MATE_SCORE - n
-)
+# Larger than any material count; a mate n plies away scores MATE_SCORE - n
+MATE_SCORE = 100_000
 NULL_MOVE_REDUCTION = 2  # How many plies shallower the null-move search looks
 LATE_MOVE_INDEX = 3  # Moves after the first three in the ordered list count as late
 
@@ -45,7 +43,6 @@ class SearchInfo:
 
     nodes: int = 0  # Positions visited
     deadline: float | None = None  # time.perf_counter() value when the search must stop
-    stop: threading.Event | None = None  # Set by the GUI's "stop" command
     table: dict = field(
         default_factory=dict
     )  # Transposition table: position_key -> entry
@@ -57,9 +54,8 @@ class SearchTimeout(Exception):
 
 
 def check_time(info: SearchInfo) -> None:
-    """Raise SearchTimeout if the deadline has passed or the GUI said stop."""
-    out_of_time = info.deadline is not None and time.perf_counter() > info.deadline
-    if out_of_time or (info.stop is not None and info.stop.is_set()):
+    """Raise SearchTimeout if the deadline has passed."""
+    if info.deadline is not None and time.perf_counter() > info.deadline:
         raise SearchTimeout
 
 
@@ -105,7 +101,7 @@ def greedy_move(state: dict) -> Move:
 
 def white_score(state: dict) -> int:
     """Return the evaluation from White's side, as minimax uses it."""
-    return material(state["board"]) + placement(state["board"])
+    return evaluate(state) if state["turn"] == "w" else -evaluate(state)
 
 
 def minimax(state: dict, depth: int, info: SearchInfo) -> int:
@@ -407,9 +403,7 @@ def alpha_beta_with_quiescence(
     return alpha, best_line
 
 
-def remember_killer(
-    info: SearchInfo, ply: int, move: Move, board: list[list[str]]
-) -> None:
+def remember_killer(info: SearchInfo, ply: int, move: Move, board: Board) -> None:
     """Keep a quiet move that caused a cutoff as one of two killers for this ply."""
     if piece_at(board, move.to_square) != EMPTY or move.promotion is not None:
         return  # Captures are already ordered first
@@ -419,7 +413,7 @@ def remember_killer(
         del killers[2:]
 
 
-def make_null_move(state: dict) -> tuple[int, int] | None:
+def make_null_move(state: dict) -> Square | None:
     """
     Pass the turn without moving a piece: the null move. Chess has no such move,
     but the search uses it to ask "is my position so good that even passing wins?"
@@ -431,7 +425,7 @@ def make_null_move(state: dict) -> tuple[int, int] | None:
 
     Returns
     -------
-    tuple[int, int] | None
+    Square | None
         The en passant target before the null move, which undo_null_move restores.
     """
     en_passant = state["en_passant"]
@@ -441,14 +435,14 @@ def make_null_move(state: dict) -> tuple[int, int] | None:
     return en_passant
 
 
-def undo_null_move(state: dict, en_passant: tuple[int, int] | None) -> None:
+def undo_null_move(state: dict, en_passant: Square | None) -> None:
     """Take back a null move, restoring the side to move and the en passant target."""
     state["history"].pop()
     state["turn"] = opponent(state["turn"])
     state["en_passant"] = en_passant
 
 
-def has_pieces(board: list[list[str]], color: str) -> bool:
+def has_pieces(board: Board, color: str) -> bool:
     """Return True if the color has a knight, bishop, rook, or queen."""
     pieces = "NBRQ" if color == "w" else "nbrq"
     for row in board:
@@ -551,13 +545,7 @@ def null_move_cutoff(
 
 
 def search_later_move(
-    state: dict,
-    depth: int,
-    ply: int,
-    alpha: int,
-    beta: int,
-    info: SearchInfo,
-    cut: int,
+    state: dict, depth: int, ply: int, alpha: int, beta: int, info: SearchInfo, cut: int
 ) -> tuple[int, list[Move]]:
     """
     Search a move after the first one: a cheap test first, a full search only if needed.
@@ -743,13 +731,7 @@ def format_info(depth: int, score: int, nodes: int, pv: list[Move]) -> str:
     return f"info depth {depth} score {score_text} nodes {nodes} pv{line}"
 
 
-def think(
-    state: dict,
-    seconds: float = 2.0,
-    max_depth: int = 64,
-    stop: threading.Event | None = None,
-    report=None,
-) -> Move:
+def think(state: dict, seconds: float = 2.0, max_depth: int = 64, report=None) -> Move:
     """
     Search one move deeper at a time until time runs out, and return the best move.
 
@@ -761,8 +743,6 @@ def think(
         How long to think.
     max_depth : int
         The deepest search to try.
-    stop : threading.Event | None
-        An event the GUI sets to stop the search early.
     report : callable | None
         Called with each finished depth's info line, such as the UCI send().
         Each depth runs upgraded_search; its transposition table carries the best
@@ -773,7 +753,7 @@ def think(
     Move
         The best move of the deepest search that finished.
     """
-    info = SearchInfo(deadline=time.perf_counter() + seconds, stop=stop)
+    info = SearchInfo(deadline=time.perf_counter() + seconds)
     moves = legal_moves(state)
     best = order_moves(moves, state["board"])[0]
     for depth in range(1, max_depth + 1):
