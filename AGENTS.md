@@ -214,8 +214,11 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   measured against Remus-WHITE, what to expect in games, and where the pair's code
   is called from.
   The text lives in `period_guides.py` (`OBJECTIVES`, `CHANGE_NOTES`, `LAB_NOTES`,
-  `STATION_OBJECTIVES`, `STATION_GUIDES`, `STATION_MEASURES`); the builders write it
-  into the READMEs, so edit it there. Measure `STATION_MEASURES` again after any
+  `STATION_OBJECTIVES`, `STATION_GUIDES`, `STATION_MEASURES`, and `PERIOD_GUIDES`
+  for a period that needs an illustrated guide, such as the Day 10 phase hunt); the
+  builders write it into the READMEs, so edit it there. The phase hunt pictures live
+  in `docs/images/phase_hunt/`, drawn by `uv run make_phase_hunt_figures.py`, which
+  installs matplotlib for itself alone. Measure `STATION_MEASURES` again after any
   change to a station's search or evaluation.
   Each student README adds a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it, and
