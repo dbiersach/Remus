@@ -1,6 +1,6 @@
 # python_lists.py: A board is a list of rows
 
-*Day 1, period 3. The lab file is `labs/day01/python_lists.py`, and the answers are in `labs/day01/instructor/python_lists_instructor.py`.*
+*Day 1, period 3. The lab file is `student/Day 01 - Draw the board/period3/python_lists.py`, and the answers are in `instructor/Day 01 - Draw the board/period3/python_lists_instructor.py`.*
 
 ## The big picture
 

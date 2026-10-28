@@ -10,7 +10,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_sorting.py` in `student/`, with the answers in `python_sorting_instructor.py` in `instructor/`. Both come from `labs/day08/`. Run it with `uv run python_sorting.py`.
+The lab is `python_sorting.py` in `student/`, with the answers in `python_sorting_instructor.py` in `instructor/`. Run it with `uv run python_sorting.py`.
 
 New files this period:
 

@@ -1,6 +1,6 @@
 # python_input_output.py: Read commands, answer at once
 
-*Day 7, period 2. The lab file is `labs/day07/python_input_output.py`, and the answers are in `labs/day07/instructor/python_input_output_instructor.py`.*
+*Day 7, period 2. The lab file is `student/Day 07 - Play full games and score positions/period2/python_input_output.py`, and the answers are in `instructor/Day 07 - Play full games and score positions/period2/python_input_output_instructor.py`.*
 
 ## The big picture
 

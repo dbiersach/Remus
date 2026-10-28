@@ -12,7 +12,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-This period comes before any Remus code. The lab is `python_setup.py` in `student/`, with the answers in `python_setup_instructor.py` in `instructor/`. Both come from `labs/day01/`. Run it with `uv run python_setup.py`.
+This period comes before any Remus code. The lab is `python_setup.py` in `student/`, with the answers in `python_setup_instructor.py` in `instructor/`. Run it with `uv run python_setup.py`.
 
 ## The changes and why
 

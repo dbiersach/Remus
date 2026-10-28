@@ -10,7 +10,8 @@ the language at a middle school reading level: short sentences, one idea each.
 """
 
 # The Python skills lab files, by (day, period). Each name has a student file
-# labs/dayNN/<name>.py and an answer file labs/dayNN/instructor/<name>_instructor.py
+# <name>.py in the student period folder and an answer file <name>_instructor.py in
+# the instructor period folder; both are written by hand and kept by the builders
 LABS = {
     (1, 1): "python_setup",
     (1, 2): "python_strings",

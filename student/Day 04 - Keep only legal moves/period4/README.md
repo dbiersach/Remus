@@ -9,7 +9,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The demo is `demo_practice_positions.py` in `student/`, with the answers in `demo_practice_positions_instructor.py` in `instructor/`. Both come from `labs/day04/`. Run it with `uv run demo_practice_positions.py`.
+The demo is `demo_practice_positions.py` in `student/`, with the answers in `demo_practice_positions_instructor.py` in `instructor/`. Run it with `uv run demo_practice_positions.py`.
 
 Files that grow this period:
 

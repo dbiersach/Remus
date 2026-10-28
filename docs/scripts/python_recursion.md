@@ -1,6 +1,6 @@
 # python_recursion.py: A function that calls itself
 
-*Day 6, period 1. The lab file is `labs/day06/python_recursion.py`, and the answers are in `labs/day06/instructor/python_recursion_instructor.py`.*
+*Day 6, period 1. The lab file is `student/Day 06 - Count positions and read FEN/period1/python_recursion.py`, and the answers are in `instructor/Day 06 - Count positions and read FEN/period1/python_recursion_instructor.py`.*
 
 ## The big picture
 

@@ -1,6 +1,6 @@
 # python_fen_fields.py: The six fields of FEN
 
-*Day 6, period 4. The lab file is `labs/day06/python_fen_fields.py`, and the answers are in `labs/day06/instructor/python_fen_fields_instructor.py`.*
+*Day 6, period 4. The lab file is `student/Day 06 - Count positions and read FEN/period4/python_fen_fields.py`, and the answers are in `instructor/Day 06 - Count positions and read FEN/period4/python_fen_fields_instructor.py`.*
 
 ## The big picture
 

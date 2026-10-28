@@ -18,8 +18,9 @@ rebuilds the three earlier periods from it:
 Each period folder also gets a README.md that says what the period is about, its
 learning objectives and how each one is measured, which files changed, and one
 paragraph on every change the students make, all from period_guides.py. A Python
-lab or demo period gets its answer file from labs/dayNN/instructor/, and Day 6,
-period 3 gets the bug_hunt folder: a copy of the period's code with three planted
+lab or demo period keeps its answer file, <name>_instructor.py, which lives in
+that period folder and survives each rebuild, and Day 6, period 3 gets the bug_hunt
+folder: a copy of the period's code with three planted
 bugs for the pairs to find with divide().
 
 Run make_student_folders.py after this script.
@@ -36,7 +37,6 @@ from period_guides import CHANGE_NOTES, LAB_NOTES, LABS, OBJECTIVES, PERIOD_GUID
 
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
-LABS_FOLDER = ROOT / "labs"  # The Python skills labs, one folder per day
 SAVED_OUTPUT_SUFFIXES = {".pgn", ".svg"}  # Games and board pictures that scripts save
 BUG_HUNT_PERIOD = (6, 3)  # The period whose folder holds bug_hunt/
 BUG_HUNT_FILES = [  # The Remus files that bug_hunt/ copies, so that perft runs there
@@ -913,8 +913,8 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         before = "This period comes before any Remus code. " if not files else ""
         sections.append(
             f"{before}The {kind} is `{name}.py` in `student/`, with the answers in "
-            f"`{name}_instructor.py` in `instructor/`. Both come from "
-            f"`labs/day{day:02}/`. Run it with `uv run {name}.py`."
+            f"`{name}_instructor.py` in `instructor/`. Run it with "
+            f"`uv run {name}.py`."
         )
     if not files:
         if (day, period) not in LABS:
@@ -1005,17 +1005,27 @@ def write_bug_hunt(folder: Path) -> None:
                 text = text.replace(correct, planted)
         (hunt / name).write_text(text)
         shutil.copymode(folder / name, hunt / name)
-    shutil.copy2(LABS_FOLDER / "day06" / "bug_hunt" / "hunt.py", hunt / "hunt.py")
     (hunt / "README.md").write_text(bug_hunt_readme(with_answers=True))
 
 
-def copy_lab(day: int, period: int, folder: Path) -> None:
-    """Copy a lab or demo period's answer file into its instructor period folder."""
-    if (day, period) not in LABS:
-        return
-    name = f"{LABS[(day, period)]}_instructor.py"
-    source = LABS_FOLDER / f"day{day:02}" / "instructor" / name
-    shutil.copy2(source, folder / name)
+def keep_hand_written(day: int, period: int, folder: Path) -> dict[str, str]:
+    """
+    Read the hand-written files of a period folder before the rebuild deletes it.
+
+    A lab's answer file and the bug hunt's hunt.py are written by hand inside their
+    period folder, so the rebuild reads them first and writes them back after.
+    """
+    names = []
+    if (day, period) in LABS:
+        names.append(f"{LABS[(day, period)]}_instructor.py")
+    if (day, period) == BUG_HUNT_PERIOD:
+        names.append("bug_hunt/hunt.py")
+    kept = {}
+    for name in names:
+        if not (folder / name).exists():
+            raise FileNotFoundError(f"{folder / name} is hand-written; restore it")
+        kept[name] = (folder / name).read_text()
+    return kept
 
 
 def write_folder(folder: Path, files: dict[str, str], day_end_folder: Path) -> None:
@@ -1050,7 +1060,7 @@ def main():
         day_end = read_folder(end_folder)
         day_end.pop("README.md", None)
         for name in lab_answer_files(day):
-            day_end.pop(name, None)  # copy_lab() writes the answer files of period4
+            day_end.pop(name, None)  # A lab's answer file belongs to its own period
         files_before = day_before
         for period in range(1, 5):
             if period == 4:
@@ -1058,13 +1068,14 @@ def main():
             else:
                 files = build_period(day, period, day_end, day_before)
                 folder = day_folder(day) / f"period{period}"
+                kept = keep_hand_written(day, period, folder)
                 write_folder(folder, files, end_folder)
-                copy_lab(day, period, folder)
                 if (day, period) == BUG_HUNT_PERIOD:
                     write_bug_hunt(folder)
+                for name, text in kept.items():
+                    (folder / name).write_text(text, newline="")
+                    (folder / name).chmod(0o755)  # Each script runs on its own
                 built.append(folder)
-            if period == 4:
-                copy_lab(day, period, end_folder)
             readme = readme_text(day, period, files, files_before)
             (day_folder(day) / f"period{period}" / "README.md").write_text(readme)
             files_before = files
