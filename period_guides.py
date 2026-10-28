@@ -2,7 +2,9 @@
 """period_guides.py
 
 The teaching text of every period README: the learning objectives, each with a way
-to measure it, and one paragraph for every change the pairs make to the code.
+to measure it, and one paragraph for every change the pairs make to the code. It
+also holds the overview of every day, which goes into the README.md at the top of
+each Day folder.
 
 make_period_folders.py writes this text into each instructor period README, and
 make_student_folders.py into each student period README and station README. Keep
@@ -584,7 +586,7 @@ OBJECTIVES = {
     (9, 4): [
         (
             "Solve mate puzzles with a yes-or-no search.",
-            "The mate-solver tests pass on all ten GameWorks puzzles.",
+            "The mate-solver tests pass on all ten mate puzzles.",
         ),
     ],
     (10, 1): [
@@ -1854,11 +1856,1657 @@ LAB_NOTES = {
     ],
 }
 
+# The README.md at the top of each Day folder: what the day is about, its
+# objectives, the timed steps of each period, and the checkpoint at 4:30.
+# Each step is (minutes after the period starts, what happens), and a step lasts
+# until the next one starts.
+DAY_GUIDES = {
+    1: {
+        "theme": "Setup and the board",
+        "summary": (
+            "Day 1 forms the pairs, checks the laptops, and teaches the first Python: "
+            "strings and lists. In the last period each pair writes its first Remus "
+            "code. By 4:30 Remus prints its own board, converts a square name such as "
+            "e2 into a (row, col) pair and back, and draws the board as a picture."
+        ),
+        "objectives": [
+            (
+                "Open a Python file in VS Code, run it with the Run Python File "
+                "button, and read what it prints."
+            ),
+            (
+                "Turn a square name such as e2 into numbers with indexing, `ord()`, "
+                "and `chr()`, and print the answer in an f-string."
+            ),
+            (
+                "Build an 8x8 board as a list of rows and read one square with "
+                "`board[row][col]`."
+            ),
+            "Say where each rank lives: row 0 is rank 8, and column 0 is file a.",
+            "Write the first four Remus functions in `board.py`.",
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        "Welcome. The finished Remus plays a game in Lucas Chess on "
+                        "the projector."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "The story of the name: Sargon, the 1978 chess program, and "
+                        "Rimush, the first son of Sargon of Akkad. Remus is a son of "
+                        "Sargon."
+                    ),
+                ),
+                (
+                    25,
+                    (
+                        "Form the ten pairs. The driver types and the navigator reads "
+                        "and checks; the two swap roles every period. Each pair picks "
+                        "a team name for `CONTRIBUTORS.md`."
+                    ),
+                ),
+                (
+                    40,
+                    (
+                        "Notation on the demonstration board: square names, SAN for "
+                        "people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs "
+                        "(`g1f3`)."
+                    ),
+                ),
+                (
+                    55,
+                    (
+                        "Pairs type the 6 lines of `python_setup.py` and run it. It "
+                        "checks the laptop, greets the team, and prints a first chess "
+                        "line. The teacher and the assistant check that every laptop "
+                        "passes `uv run pytest` and opens Lucas Chess."
+                    ),
+                ),
+                (
+                    80,
+                    (
+                        "Exit ticket: each student lists three of the five parts of a "
+                        "chess engine (board, moves, rules, search, evaluation) and "
+                        "one job of each."
+                    ),
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        "Slides: a script, `print()`, variables, and strings indexed "
+                        "from 0."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "The teacher shows `ord()` and `chr()` on the projector: the "
+                        "letter e is file number 4 because a is 0."
+                    ),
+                ),
+                (
+                    25,
+                    (
+                        "Pairs work through the four parts of `python_strings.py`, "
+                        "running the file after each part."
+                    ),
+                ),
+                (
+                    70,
+                    (
+                        "Check together without running code: what is the file number "
+                        "of h4, and of a1? Why does file a count as 0?"
+                    ),
+                ),
+                (
+                    80,
+                    "Pairs compare their printouts with the pair next to them.",
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        'Unplugged warm-up, "Call the square": the teacher calls (6,'
+                        " 4), the navigator puts a token on the printed board, and the"
+                        " driver names the square, e2. Then the partners swap."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: lists, `for` and `range()`, `len()`, and a list of "
+                        "lists."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Pairs work through the four parts of `python_lists.py`: a "
+                        "list of pieces, a loop over every square, the board as a list"
+                        " of rows, and the pawns in a row."
+                    ),
+                ),
+                (
+                    75,
+                    (
+                        "Without running code, each pair names `board[4][4]` (e4) and "
+                        "says why row 0 is rank 8."
+                    ),
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "Slides: the Remus board is an 8x8 list of one-character "
+                        "strings. Uppercase is White, lowercase is Black, and `.` is "
+                        "empty. The teacher walks through `new_board()`."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs write `print_board()`, `square_name()`, "
+                        "`parse_square()`, and `piece_at()` in `board.py` and run `uv "
+                        "run pytest` after each one."
+                    ),
+                ),
+                (
+                    60,
+                    (
+                        "Pairs run `show_board.py`, which draws their board as a "
+                        "picture in the web browser."
+                    ),
+                ),
+                (
+                    70,
+                    (
+                        "Show and choose: two or three pairs show their "
+                        "`parse_square()` on the projector, the class picks one for "
+                        "clarity, and the teacher adds it to the class repository with"
+                        " the pair's team name in `CONTRIBUTORS.md`."
+                    ),
+                ),
+                (
+                    85,
+                    (
+                        "Checkpoint: running `board.py` prints the start board and "
+                        '"b1 holds N, expected N".'
+                    ),
+                ),
+            ],
+        },
+        "checkpoint": (
+            'Running `board.py` prints the start board and "b1 holds N, expected N",'
+            " and `test_board.py` passes."
+        ),
+    },
+    2: {
+        "theme": "Functions and records",
+        "summary": (
+            "Day 2 teaches functions, tests, dicts, and dataclasses, then uses them "
+            "for the heart of every chess engine: making a move and taking it back "
+            "exactly. By 4:30 Remus holds a whole game state, and ten moves made and "
+            "undone return the exact start state."
+        ),
+        "objectives": [
+            (
+                "Write a function with type hints and a docstring, and check it with "
+                "`assert` and pytest."
+            ),
+            (
+                "Store named facts in a dict and a dataclass, and show why `b2 = "
+                "board` gives one board two names instead of making a copy."
+            ),
+            (
+                "Name the parts of a game state: the board, the side to move, castling"
+                " rights, the en passant square, the two clocks, and the history."
+            ),
+            "Turn a move into UCI text such as `e2e4` and back.",
+            "Make a move, record everything it destroys, and undo it exactly.",
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        "Slides: functions, parameters, `return`, type hints, and "
+                        "docstrings."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs work through Parts #1 to #3 of `python_functions.py`: "
+                        "call a function, write their own, and unpack a square tuple "
+                        "such as `row, col = (6, 4)`."
+                    ),
+                ),
+                (
+                    55,
+                    (
+                        "Slides: `assert` and pytest. The teacher breaks a function on"
+                        " purpose and the class reads the failing test together."
+                    ),
+                ),
+                (
+                    65,
+                    (
+                        "Pairs finish Part #4, which checks their functions with "
+                        "`assert`."
+                    ),
+                ),
+                (
+                    80,
+                    (
+                        "Wrap-up: each pair says what a failing test tells them and "
+                        "where to look first."
+                    ),
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        "Slides: a dict holds named facts, and a dataclass describes a"
+                        " record with fixed fields."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs work through Parts #1 and #2 of `python_dicts.py` and "
+                        "watch `b2 = board` change both boards."
+                    ),
+                ),
+                (
+                    45,
+                    (
+                        "The teacher explains aliasing on the whiteboard: two names, "
+                        "one list. Then pairs write Parts #3 and #4: a real copy, and "
+                        "a dataclass that describes a move."
+                    ),
+                ),
+                (
+                    80,
+                    (
+                        "Wrap-up: why would a chess engine break if it changed a board"
+                        " it meant to copy?"
+                    ),
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        "Slides: the game state dict in `new_game()` and the `Move` "
+                        "dataclass with `from_square`, `to_square`, and `promotion`."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs write `is_white()` and `color_of()` in `game_state.py`,"
+                        " then `move_to_uci()` and `move_from_uci()` in `moves.py`, "
+                        "with `uv run pytest` after each."
+                    ),
+                ),
+                (
+                    65,
+                    (
+                        "Pairs run `game_state.py` and `moves.py` and compare the "
+                        "printouts with the expected answers."
+                    ),
+                ),
+                (
+                    75,
+                    (
+                        "Show and choose: the class picks one `move_from_uci()` for "
+                        "the class repository."
+                    ),
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        'Unplugged warm-up, "Undo from the card": one partner makes '
+                        "three moves with sticky-note pieces and writes an undo card "
+                        "for each. The other partner restores the start position from "
+                        "the cards alone."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: what a move destroys (the captured piece, the clocks,"
+                        " the side to move) and the undo record that saves it. The "
+                        'teacher shows `state_snapshot()` and the "make ten, undo '
+                        'ten, compare" test.'
+                    ),
+                ),
+                (
+                    25,
+                    (
+                        "Pairs write `make_move()` and `undo_move()` in `make_move.py`"
+                        " until the tests pass."
+                    ),
+                ),
+                (
+                    75,
+                    (
+                        "Show and choose for `make_move()`, then the checkpoint: ten "
+                        "moves made and undone give back the exact start state."
+                    ),
+                ),
+            ],
+        },
+        "checkpoint": (
+            "Ten moves made and undone return the exact start state, and "
+            "`test_make_move.py` passes."
+        ),
+    },
+    3: {
+        "theme": "Loops that walk the board",
+        "summary": (
+            "Day 3 teaches loops that walk across the board, then uses them to "
+            "generate the moves of every piece. By 4:30 Remus finds the 20 moves of "
+            "the start position, and `show_board.py` draws an arrow for every move the"
+            " pairs' code finds."
+        ),
+        "objectives": [
+            "Repeat steps with `while`, and stop early with `break`.",
+            (
+                "Store a direction as a (row step, column step) tuple and walk it to "
+                "the edge of the board or to the first piece."
+            ),
+            "Generate knight and king moves from a list of jumps.",
+            "Generate rook, bishop, and queen moves by sliding in each direction.",
+            "Generate pawn pushes, including the double step from the start rank.",
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        "Slides: `while`, `break`, `continue`, and a list of direction"
+                        " tuples."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs work through the four parts of `python_loops.py`: "
+                        "repeat with `while`, store a direction, walk from d4 until "
+                        "the edge or a piece, and try another direction."
+                    ),
+                ),
+                (
+                    65,
+                    (
+                        "The teacher runs the walk on the projector with a piece in "
+                        "the way and the class predicts where it stops."
+                    ),
+                ),
+                (
+                    80,
+                    (
+                        "Wrap-up: which loop stops at the edge, and which line stops "
+                        "it at a piece?"
+                    ),
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        'Unplugged warm-up, "Shade the reach": pairs shade every '
+                        "square a knight on d4, a knight on a1, and a bishop on c1 can"
+                        " reach, and compare counts with the next pair (8, 2, and 7)."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: an offset list for the knight. The teacher writes "
+                        "`knight_moves()` on the projector."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Pairs write `king_moves()` the same way and "
+                        "pass the jumping-piece tests: a knight on a1 has 2 moves and "
+                        "a king on a1 has 3."
+                    ),
+                ),
+                (
+                    50,
+                    (
+                        "Pairs run `show_board.py`, which draws an arrow for every "
+                        "move their generator returns, and count the arrows."
+                    ),
+                ),
+                (
+                    70,
+                    (
+                        "Pairs try their own squares, such as a king in a corner, and "
+                        "predict the arrows before they run the file."
+                    ),
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        "Slides: a sliding piece walks one direction until the edge or"
+                        " the first piece, and captures that piece only if it is an "
+                        "enemy."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs write `slide()` in `move_generation.py`. The teacher's "
+                        "`slider_moves()` calls it with the rook, bishop, and queen "
+                        "directions."
+                    ),
+                ),
+                (
+                    60,
+                    (
+                        "Exercise: a rook on an empty board has 14 moves. Pairs check "
+                        "it with the tests and the arrow picture."
+                    ),
+                ),
+                (
+                    75,
+                    "Show and choose for `slide()`.",
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "Slides: pawns move forward toward row 0 for White, push one "
+                        "or two squares, and capture diagonally. The teacher writes "
+                        "the captures and the four promotion choices."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs write `pawn_pushes()`: the single step and the double "
+                        "step from the start rank."
+                    ),
+                ),
+                (
+                    55,
+                    (
+                        "Pairs run the tests and the arrow picture on the start "
+                        "position."
+                    ),
+                ),
+                (
+                    75,
+                    (
+                        "Checkpoint: `pseudo_legal_moves()` finds 20 moves from the "
+                        "start."
+                    ),
+                ),
+            ],
+        },
+        "checkpoint": (
+            "`pseudo_legal_moves()` returns 20 moves from the start position."
+        ),
+    },
+    4: {
+        "theme": "Legal moves",
+        "summary": (
+            "Day 4 teaches modules and git, then the rule that makes a move legal: the"
+            " mover's own king must be safe after it. By 4:30 Remus finds attacks and "
+            "check, and keeps only the legal moves, so a pinned knight has no moves "
+            "and a king in check has only escapes."
+        ),
+        "objectives": [
+            (
+                "Import functions from another file, and explain why every Remus file "
+                "keeps its prints inside `main()`."
+            ),
+            (
+                "Save work with git: fetch, switch to a new branch, commit, and read "
+                "the log."
+            ),
+            ("Decide whether a square is attacked by looking outward from the square."),
+            "Keep only legal moves: make each move, test the king, and undo it.",
+            (
+                "Predict the legal moves of a position, then check the prediction with"
+                " Remus."
+            ),
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        "Slides: a module is a file, `import` reads it, and `if "
+                        '__name__ == "__main__"` keeps a file quiet when another '
+                        "file imports it."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs work through Parts #1 to #3 of `python_modules.py`: "
+                        "every file has a `__name__`, use yesterday's `board.py` and "
+                        "`move_generation.py`, and list the knight moves from g1."
+                    ),
+                ),
+                (
+                    50,
+                    (
+                        "Slides: git. The teacher shows `fetch`, `switch -c`, "
+                        "`commit`, and `log` on the projector."
+                    ),
+                ),
+                (
+                    60,
+                    ("Pairs finish Part #4 and save the lab with their first commit."),
+                ),
+                (
+                    80,
+                    ("Every pair shows its `git log` to the teacher or the assistant."),
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        "Chess refresher on the demonstration board: check, pins, and "
+                        "discovered check."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: a square is attacked if a piece could capture there. "
+                        'Stand on the square and look outward like a "super piece". '
+                        "The teacher writes `attacked_by_knight()` and the "
+                        "sliding-line part."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Pairs write `piece_at_offsets()`, then `attacked_by_pawn()` "
+                        "and `attacked_by_king()` on top of it."
+                    ),
+                ),
+                (
+                    70,
+                    "Pairs run the attack tests and the file's self-check.",
+                ),
+                (
+                    80,
+                    "Show and choose for `piece_at_offsets()`.",
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        'Unplugged warm-up, "Pin hunt": on four printed positions, '
+                        "pairs cross out every move that leaves the mover's king "
+                        "attacked."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: a move is legal only if the mover's king is safe "
+                        "after the move. Make it, test the king, undo it."
+                    ),
+                ),
+                (
+                    25,
+                    (
+                        "Pairs write `in_check()` and `legal_moves()` until the tests "
+                        "pass."
+                    ),
+                ),
+                (
+                    65,
+                    "Pairs compare Remus's answers with their pin hunt worksheets.",
+                ),
+                (
+                    75,
+                    "Show and choose for `legal_moves()`.",
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "Slides: the workshop's first three verification positions: "
+                        "the start, a king in check, and a pinned knight."
+                    ),
+                ),
+                (
+                    10,
+                    (
+                        "In `demo_practice_positions.py` pairs type each position and "
+                        "write their prediction of its legal move count before Remus "
+                        "counts."
+                    ),
+                ),
+                (
+                    50,
+                    (
+                        "Part #4: each pair builds a position of its own and trades it"
+                        " with the next pair, who predict before they run it."
+                    ),
+                ),
+                (
+                    75,
+                    (
+                        "Checkpoint: a pinned knight has zero legal moves, and a king "
+                        "in check has only escapes."
+                    ),
+                ),
+            ],
+        },
+        "checkpoint": (
+            "A pinned knight has zero legal moves, a king in check has only escapes, "
+            "and `test_legal_moves.py` passes."
+        ),
+    },
+    5: {
+        "theme": "Special moves",
+        "summary": (
+            "Day 5 adds the rare rules: castling, en passant, the double step, and "
+            "promotion and underpromotion, each with an exact undo. It closes the "
+            "first week with a payoff: by 4:30 every pair plays its own Remus in Lucas"
+            " Chess, where Remus answers with random legal moves."
+        ),
+        "objectives": [
+            (
+                "Use a set, `in`, a dict lookup, and `replace()` on the castling "
+                'rights string `"KQkq"`.'
+            ),
+            (
+                "State the five conditions for castling, and say which moves take away"
+                " each castling right."
+            ),
+            (
+                "Explain why the pawn an en passant capture removes is not on the "
+                "square the capturing pawn lands on."
+            ),
+            (
+                "Show that a knight promotion can win where a queen promotion "
+                "stalemates."
+            ),
+            "Register Remus in Lucas Chess and play a game against it.",
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        "Slides: a set holds each item once, `in` asks a yes-or-no "
+                        "question, and a dict looks up a value by its key."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs work through the four parts of `python_sets.py`, ending"
+                        ' with `replace()` removing "K" from "KQkq" when the h1 '
+                        "rook moves."
+                    ),
+                ),
+                (
+                    65,
+                    (
+                        "The class lists, on the board, every move that removes a "
+                        "castling right."
+                    ),
+                ),
+                (
+                    80,
+                    "Wrap-up and a preview of castling.",
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        "Chess refresher on the demonstration board: the five castling"
+                        " conditions. The rook may cross an attacked square (b1), and "
+                        "a rook captured on its home square removes that right."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: the teacher's castling generation and the "
+                        "attacked-square checks."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Pairs write `update_castling_rights()`, the table of which "
+                        "moves remove K, Q, k, or q."
+                    ),
+                ),
+                (
+                    50,
+                    (
+                        "Pairs run the castling tests and build one castling position "
+                        "of their own to test."
+                    ),
+                ),
+                (
+                    80,
+                    "Show and choose for `update_castling_rights()`.",
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        "Chess refresher: en passant is allowed only on the very next "
+                        "move after a two-square push, and the captured pawn is not on"
+                        " the destination square."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: the double step sets the en passant target. The "
+                        "teacher walks through the en passant make and undo."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Pairs write `en_passant_victim_square()`, "
+                        "then trace a capture and its undo on the printed board."
+                    ),
+                ),
+                (
+                    55,
+                    (
+                        "Pairs run the en passant tests, including the rare capture "
+                        "that exposes the king along the rank."
+                    ),
+                ),
+                (
+                    80,
+                    (
+                        "Wrap-up: which square does the undo put the captured pawn "
+                        "back on?"
+                    ),
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "Puzzle on the demonstration board: promoting to a knight "
+                        "wins, and promoting to a queen stalemates. The teacher shows "
+                        "promotion in `make_move()` and `undo_move()`."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "In `demo_promotion.py` pairs write the loop that tries all "
+                        "four promotions and prints stalemate or checkmate for each."
+                    ),
+                ),
+                (
+                    45,
+                    (
+                        "The teacher hands out `uci_engine.py` and `remus.bat`. Pairs "
+                        "register `remus.bat` from this period folder in Lucas Chess, "
+                        "following the [Lucas Chess guide](../../docs/lucas_chess_guide.md)."
+                    ),
+                ),
+                (
+                    60,
+                    (
+                        "Pairs play their own Remus, which answers with random legal "
+                        "moves. Every special move works on a real board."
+                    ),
+                ),
+                (
+                    85,
+                    "Checkpoint: every special-move test passes.",
+                ),
+            ],
+        },
+        "checkpoint": (
+            "Every special-move test passes, every special move undoes exactly, and "
+            "Remus plays random legal moves in Lucas Chess."
+        ),
+    },
+    6: {
+        "theme": "Counting the tree, and FEN",
+        "summary": (
+            "Day 6 teaches recursion and uses it to count every position the rules "
+            "allow, a check called perft. Matching the counts of trusted chess "
+            "programs proves the rules are right. By 4:30 perft matches the reference "
+            "counts and Remus reads and writes positions as FEN text."
+        ),
+        "objectives": [
+            "Write a recursive function with a base case and a recursive case.",
+            (
+                "Count the positions of the move tree to a fixed depth with `perft()`:"
+                " 20, 400, and 8,902 from the start."
+            ),
+            (
+                "Find a broken rule by comparing counts under each root move with "
+                "python-chess."
+            ),
+            (
+                "Read a FEN string with `split()` and `int()`, and catch a bad field "
+                "with `try` and `ValueError`."
+            ),
+            "Turn a board into the placement part of FEN and back.",
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        "Slides: a function that calls itself, its base case, and the "
+                        "call stack."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs work through the three parts of `python_recursion.py`: "
+                        "count down, count the leaves of a small tree, and count the "
+                        "paths of a knight."
+                    ),
+                ),
+                (
+                    65,
+                    (
+                        "The teacher draws the call stack of a short count on the "
+                        "whiteboard while the class traces it."
+                    ),
+                ),
+                (
+                    80,
+                    "Wrap-up: what stops a recursion?",
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        'Unplugged warm-up, "Count by hand": in a king and pawn '
+                        "against king position, pairs list every move two plies deep "
+                        "on index cards and count the leaves."
+                    ),
+                ),
+                (
+                    15,
+                    "Slides: perft counts the leaves of the legal move tree.",
+                ),
+                (
+                    25,
+                    (
+                        "Pairs write `perft()` and run it on the warm-up position to "
+                        "check their cards."
+                    ),
+                ),
+                (
+                    55,
+                    (
+                        "Pairs run `perft.py` from the start: 20, 400, and 8,902. The "
+                        "teacher shows `divide()`, which prints the count under each "
+                        "root move."
+                    ),
+                ),
+                (
+                    80,
+                    "Show and choose for `perft()`.",
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        "Slides: `test_perft.py` compares Remus with python-chess on "
+                        "the standard positions."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Bug hunt: the `bug_hunt` folder holds a copy of Remus with "
+                        "three planted bugs. Pairs run `hunt.py` there and race to "
+                        "find each bug from the root moves whose counts disagree."
+                    ),
+                ),
+                (
+                    70,
+                    "Pairs explain each bug they found and the rule it broke.",
+                ),
+                (
+                    85,
+                    (
+                        "Wrap-up: the hunt is over when `hunt.py` prints 0 root moves "
+                        "that disagree."
+                    ),
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "Slides: the six fields of FEN, `split()`, `int()`, and "
+                        "`ValueError`."
+                    ),
+                ),
+                (
+                    10,
+                    "Pairs work through `python_fen_fields.py`.",
+                ),
+                (
+                    30,
+                    (
+                        "Pairs write `fen_placement()` and `board_from_placement()` in"
+                        " `fen.py`. The teacher writes the other five fields."
+                    ),
+                ),
+                (
+                    80,
+                    (
+                        "Checkpoint: every test position loads from FEN and perft "
+                        "matches the reference."
+                    ),
+                ),
+            ],
+        },
+        "checkpoint": (
+            "Perft matches the reference at depth 3 for the start and the standard "
+            "positions, and every test position loads from FEN. The rules are "
+            "verified, so the search can begin."
+        ),
+    },
+    7: {
+        "theme": "A whole game, and judging a position",
+        "summary": (
+            "Day 7 turns the rules into a whole game. Remus learns when a game ends, "
+            "reads moves in standard notation, plays its first moves with a plan, and "
+            "scores a position. By 4:30 a full game in Lucas Chess ends with the right"
+            ' result and reason. This is the "legal moves" milestone: from here on, '
+            "the work is about good moves."
+        ),
+        "objectives": [
+            (
+                "Name every way a game ends: checkmate, stalemate, threefold "
+                "repetition, the fifty-move rule, and insufficient material."
+            ),
+            (
+                "Read a move a player types in SAN by matching it against the legal "
+                "moves."
+            ),
+            (
+                "Pick a random move, and pick the biggest capture with a loop that "
+                "keeps the best so far."
+            ),
+            "Explain how Remus and Lucas Chess talk over UCI.",
+            (
+                "Score a position by its material in centipawns, and read the "
+                "piece-square tables."
+            ),
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        "Chess refresher: stalemate, repetition, the fifty and 75-move"
+                        " rules, and insufficient material, with a six-position quiz."
+                    ),
+                ),
+                (
+                    20,
+                    (
+                        "Slides: the halfmove clock and `position_key()`, which the "
+                        "teacher writes."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Pairs write `insufficient_material()` and `game_result()` in "
+                        "`game_end.py`."
+                    ),
+                ),
+                (
+                    75,
+                    (
+                        "Pairs check their answers on the quiz positions, then show "
+                        "and choose."
+                    ),
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        "Slides: SAN. The teacher walks through `move_to_san()`, "
+                        "including `Nbd2` and the `+` and `#` endings."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs write `parse_san()`: build the SAN of every legal move "
+                        "and return the one that matches."
+                    ),
+                ),
+                (
+                    35,
+                    (
+                        "Pairs play each other with `console_game.py`, typing moves in"
+                        " SAN."
+                    ),
+                ),
+                (
+                    50,
+                    (
+                        "Pairs work through `python_input_output.py`: "
+                        "`random.choice()`, a loop that keeps the best so far, stderr,"
+                        " and a tiny program that answers `isready` with `readyok`."
+                    ),
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        "Slides: a brain is a function that picks a move. Random picks"
+                        " any legal move, and greedy takes the most valuable capture."
+                    ),
+                ),
+                (
+                    10,
+                    "Pairs write `random_move()` and `greedy_move()`.",
+                ),
+                (
+                    40,
+                    (
+                        "The class reads the Day 5 `uci_engine.py` line by line. The "
+                        "teacher extends it with FEN positions and a choice of brains."
+                    ),
+                ),
+                (
+                    60,
+                    (
+                        "Pairs register `remus.bat` from this folder in Lucas Chess "
+                        "again and play greedy Remus."
+                    ),
+                ),
+                (
+                    75,
+                    (
+                        "Pairs run `play_match.py`: random Remus against greedy Remus "
+                        "for 20 games, with the score at the end."
+                    ),
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "Pairs rank three printed positions and write one reason for "
+                        "each. The reasons become the evaluation terms."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Chess refresher: piece values (pawn 1, knight 3, bishop 3, "
+                        "rook 5, queen 9) and the fork, pin, and skewer."
+                    ),
+                ),
+                (
+                    25,
+                    "Pairs write `material()` in centipawns, scored for White.",
+                ),
+                (
+                    50,
+                    (
+                        "The teacher shows the piece-square tables and "
+                        "`explain_evaluation()`, which prints every term. A knight on "
+                        "d4 attacks eight squares; on a1 it attacks two."
+                    ),
+                ),
+                (
+                    65,
+                    (
+                        "Each pair proposes one change to one table, and the class "
+                        "votes."
+                    ),
+                ),
+                (
+                    85,
+                    "Checkpoint: `explain_evaluation()` gives 0 for the start.",
+                ),
+            ],
+        },
+        "checkpoint": (
+            "A full game in Lucas Chess ends with the correct result and reason, and "
+            "`explain_evaluation()` gives 0 for the start position."
+        ),
+    },
+    8: {
+        "theme": "Searching ahead, then smarter",
+        "summary": (
+            "Day 8 teaches Remus to look ahead. It starts with minimax, folds it into "
+            "negamax, prunes it with alpha-beta, keeps capturing past the horizon with"
+            " quiescence, and tries the best captures first. By 4:30 Remus finds every"
+            " mate in 1 and every puzzle mate in 2."
+        ),
+        "objectives": [
+            "Back up scores through a game tree by hand, the way minimax does.",
+            (
+                "Write negamax: one function that flips the sign of each reply's score"
+                " and prefers the faster mate."
+            ),
+            (
+                "Explain an alpha-beta cutoff, and show that alpha-beta gives the same"
+                " score with fewer nodes."
+            ),
+            (
+                "Explain the horizon effect, and stop it with a quiescence search that"
+                " may stand pat."
+            ),
+            (
+                "Order captures by most valuable victim, least valuable attacker, and "
+                "measure the nodes it saves."
+            ),
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        'Unplugged warm-up, "Paper minimax": pairs back up max and '
+                        "min on a printed two-ply tree and circle the best move. A "
+                        "seven-student human tree can act it out at the front of the "
+                        "room."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "The teacher writes `minimax()` to depth 2 with a node "
+                        "counter, and pairs compare its answer with their worksheets."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Slides: negamax, the same search in one function: flip the "
+                        "sign, wrap make and undo in `try/finally`, and score "
+                        "checkmate as `-(MATE_SCORE - ply)`."
+                    ),
+                ),
+                (
+                    40,
+                    (
+                        "Pairs write `negamax()` until the tests show it agrees with "
+                        "minimax and leaves the root state unchanged."
+                    ),
+                ),
+                (
+                    80,
+                    "Show and choose for `negamax()`.",
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        'Unplugged warm-up, "Fewest flips": the same tree as '
+                        "face-down cards. Pairs turn a card only when the answer could"
+                        " still change."
+                    ),
+                ),
+                (
+                    15,
+                    "Slides: alpha and beta, and the cutoff.",
+                ),
+                (
+                    25,
+                    (
+                        "Pairs write `alpha_beta()` beside `negamax()` and run "
+                        "`compare_search.py`: the same score, fewer nodes."
+                    ),
+                ),
+                (
+                    55,
+                    (
+                        "Pairs work through `python_sorting.py`: `insert()` puts the "
+                        'biggest victim first, `float("inf")`, and timing a perft '
+                        "run."
+                    ),
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        "Puzzle: at depth 2 Remus takes a defended pawn with its "
+                        "queen. Why? The class names the horizon effect."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: quiescence keeps searching captures until the "
+                        "position is quiet. The teacher writes `capture_moves()`."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Pairs write `quiescence()`, which may stand pat with the "
+                        "evaluation or try a capture that does better."
+                    ),
+                ),
+                (
+                    70,
+                    "Pairs run the puzzle again: Remus keeps its queen.",
+                ),
+                (
+                    80,
+                    "Show and choose for `quiescence()`.",
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "Slides: alpha-beta cuts more when the best move comes first. "
+                        "Most valuable victim, least valuable attacker (MVV-LVA)."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs write `mvv_lva_score()`. The teacher writes "
+                        "`order_moves()` and the check extension."
+                    ),
+                ),
+                (
+                    40,
+                    (
+                        "Pairs measure node counts before and after ordering with "
+                        "`compare_search.py`."
+                    ),
+                ),
+                (
+                    65,
+                    "Pairs run the mate puzzles.",
+                ),
+                (
+                    80,
+                    "Checkpoint: every mate in 1 and every puzzle mate in 2.",
+                ),
+            ],
+        },
+        "checkpoint": (
+            "Remus finds every mate in 1 and every puzzle mate in 2, and alpha-beta "
+            "returns the same score as negamax with fewer nodes."
+        ),
+    },
+    9: {
+        "theme": "The clock and the stations",
+        "summary": (
+            "Day 9 gives Remus a clock, then splits the class into ten enhancement "
+            "stations. Each pair adds one idea to the same engine, Remus-WHITE, and "
+            "tests it. By 4:30 every station passes its tests and plays a legal game, "
+            "and the mate solver solves all ten puzzles."
+        ),
+        "objectives": [
+            (
+                "Search deeper one step at a time and keep the best move of the "
+                "deepest search that finished before time ran out."
+            ),
+            (
+                "Read the `info` lines Remus sends to Lucas Chess: depth, score, "
+                "nodes, and the principal variation."
+            ),
+            "Use a dict as a cache with a tuple as its key.",
+            (
+                "Add one enhancement to Remus-WHITE, test it, and say what it should "
+                "change in a game."
+            ),
+            "Solve a mate puzzle with a yes-or-no search.",
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        "Slides: the clock. The teacher reads `go movetime`, `wtime`, "
+                        "and `btime`, turns them into a thinking time, and writes "
+                        "`format_info()`."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs write `think()` (the iterative deepening loop): depth "
+                        "1, then 2, then 3, keeping the best move of the deepest "
+                        "search that finished."
+                    ),
+                ),
+                (
+                    55,
+                    (
+                        "Show and choose for `think()`. The chosen code makes "
+                        "Remus-WHITE, the Remus with none of the enhancements and the "
+                        "starting point of every station."
+                    ),
+                ),
+                (
+                    65,
+                    (
+                        "The class watches Remus-WHITE play a 5-minute game against "
+                        "Stockfish at 1500 Elo in Lucas Chess and reads the `info` "
+                        "lines as it thinks."
+                    ),
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        "Pairs work through `python_caches.py`: a dict remembers "
+                        "answers, `math.dist()`, and `random.seed()`."
+                    ),
+                ),
+                (
+                    20,
+                    (
+                        "Slides: the ten color stations. Each is Remus-WHITE plus one "
+                        "enhancement, such as RED (transposition table) or BLUE "
+                        "(killer moves). Colors name the stations so that no station "
+                        "sounds better than another."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Each pair opens its color station in the `Remus` folder "
+                        "next to the Day folders, reads the station README, and writes the station's stubbed "
+                        "code."
+                    ),
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    "Pairs finish their station code and pass its tests.",
+                ),
+                (
+                    40,
+                    (
+                        "Each pair plays one short test game against Remus-WHITE with "
+                        "`uv run station_match.py <COLOR> --games 1 --minutes 2`, "
+                        "which checks only that the engine plays legal moves to the "
+                        "end."
+                    ),
+                ),
+                (
+                    70,
+                    (
+                        "Each pair writes one sentence on the board: what its "
+                        "enhancement should change, and how the class will see it."
+                    ),
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "Slides: the ten mate puzzles: nine mates in 2 and one mate in"
+                        " 3. A mate search asks a yes-or-no question instead of a "
+                        "score."
+                    ),
+                ),
+                (
+                    15,
+                    "Pairs write `mating_move()` in `mate_solver.py`.",
+                ),
+                (
+                    55,
+                    (
+                        "Pairs run `mate_solver.py` on all ten puzzles, including the "
+                        "mate in 3."
+                    ),
+                ),
+                (
+                    80,
+                    (
+                        "Checkpoint: every station passes its tests, and the mate "
+                        "solver solves all ten."
+                    ),
+                ),
+            ],
+        },
+        "checkpoint": (
+            "Every station passes its tests and its one-game test match, and the mate "
+            "solver solves all ten puzzles."
+        ),
+    },
+    10: {
+        "theme": "Science AI at the beamline",
+        "summary": (
+            "Day 10 aims the engine's ideas at real science. The same generate, score,"
+            " and choose loop picks where to measure a hidden peak, and the full tree "
+            "search, with make and undo, names the crystal phases in an X-ray powder "
+            "pattern. The day ends with the tournament: each pair's color plays "
+            "Remus-WHITE, and every pair takes its code home."
+        ),
+        "objectives": [
+            (
+                "Map the parts of a chess engine onto a science problem: moves, make "
+                "and undo, evaluation, and search."
+            ),
+            (
+                "Choose the next measurement by trading off exploring the unknown "
+                "against exploiting what the readings predict."
+            ),
+            (
+                "Score a guess about which phases are in a powder, and compare a "
+                "greedy agent with a full search."
+            ),
+            (
+                "Verify a search on known answers, and say when the right answer is "
+                '"can\'t tell".'
+            ),
+            (
+                "Read a match result with its margin of error, and explain one move "
+                "Remus chose."
+            ),
+        ],
+        "periods": {
+            1: [
+                (
+                    0,
+                    (
+                        'Unplugged warm-up, "Find the hidden peak": a 10x10 grid '
+                        "hides a hot spot, and each pair gets five measurements to "
+                        "find it."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Slides: the map from chess to science. Legal moves become "
+                        "squares not yet measured, and the evaluation becomes "
+                        "predicted value plus distance to the nearest reading."
+                    ),
+                ),
+                (
+                    25,
+                    (
+                        "Pairs write `candidate_squares()`, `score_candidate()`, and "
+                        "`choose_next_measurement()` in `hidden_peak.py`."
+                    ),
+                ),
+                (
+                    65,
+                    (
+                        "Pairs tune `explore_weight` and post their 100-grid benchmark"
+                        " average on the board, next to random guessing."
+                    ),
+                ),
+            ],
+            2: [
+                (
+                    0,
+                    (
+                        "A scientist (or the teacher) shows the NSLS-II PDF beamline "
+                        "and its daily question: which crystal phases are in this "
+                        "powder?"
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        'Unplugged warm-up, "Name the powder": pairs lay paper '
+                        "fingerprint strips over a printed mystery pattern."
+                    ),
+                ),
+                (
+                    30,
+                    (
+                        "Pairs write `score()` in `phase_hunt.py`: a point for each "
+                        "explained peak, and a point lost for each extra peak, missing"
+                        " peak, and phase used."
+                    ),
+                ),
+                (
+                    55,
+                    (
+                        "Pairs write `greedy_phases()`, which adds the best phase "
+                        "again and again with `append` and `pop`. Greedy names 166 of "
+                        "200 powders right and 34 wrong, and it mistakes silver for "
+                        "gold."
+                    ),
+                ),
+            ],
+            3: [
+                (
+                    0,
+                    (
+                        "The teacher draws the tree of phase sets next to Remus's game"
+                        " tree: a set is a position, adding a phase is a move, and "
+                        "taking it back is the undo."
+                    ),
+                ),
+                (
+                    15,
+                    (
+                        "Pairs write `search()`, which scores every set of up to three"
+                        " phases and keeps every set that ties for the best score."
+                    ),
+                ),
+                (
+                    50,
+                    (
+                        "The class verifies on 200 known powders: 139 right, 52 "
+                        "\"can't tell\", and 9 wrong, against greedy's 34 wrong. Pairs"
+                        " change `PHASE_COST` and `MISSING` and watch the verdicts "
+                        "move."
+                    ),
+                ),
+                (
+                    75,
+                    (
+                        "The teacher closes with the programs that search the same "
+                        "tree on real synchrotron data, and the beamline agent at "
+                        "Brookhaven."
+                    ),
+                ),
+            ],
+            4: [
+                (
+                    0,
+                    (
+                        "The tournament: every pair runs `uv run station_match.py "
+                        "<COLOR>` in the `Remus` folder, all ten laptops at once. "
+                        "Its color plays two 10-minute games against Remus-WHITE, one "
+                        "with each color."
+                    ),
+                ),
+                (
+                    5,
+                    (
+                        "While the games run, each student copies the pair's "
+                        "repository to a USB drive with `git clone --no-hardlinks` and"
+                        " checks that the copy opens."
+                    ),
+                ),
+                (
+                    35,
+                    (
+                        "Each pair writes its two results on the board. The teacher "
+                        "shows Remus-GOLD's results from the 10-minute league and its "
+                        "Stockfish rating."
+                    ),
+                ),
+                (
+                    50,
+                    (
+                        "In `demo_results.py` each pair turns its games into an Elo "
+                        "gap with a margin of error and lets Remus explain one move."
+                    ),
+                ),
+                (
+                    70,
+                    (
+                        "Each pair presents one move its engine chose and one powder "
+                        "its phase hunt named. The class closes with what comes next."
+                    ),
+                ),
+            ],
+        },
+        "checkpoint": (
+            "Every pair's `choose_next_measurement()` beats random guessing, every "
+            "pair's `search()` makes fewer wrong calls than greedy, and the tournament"
+            " games finish with no illegal moves or crashes."
+        ),
+    },
+}
+
 
 def main():
     print(f"Periods with objectives: {len(OBJECTIVES)}  (expected 40)")
     print(f"Functions with a change note: {len(CHANGE_NOTES)}  (expected 67)")
     print(f"Lab and demo periods: {len(LABS)}  (expected 16)")
+    print(f"Days with an overview: {len(DAY_GUIDES)}  (expected 10)")
 
 
 if __name__ == "__main__":

@@ -44,7 +44,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 
 | Slide | Title | What it shows |
 | --- | --- | --- |
-| 4.1 | Two ways to ask "is f3 attacked?" | Left: version 1 asks every enemy piece. Right: version 2 stands on f3 and looks outward like a super piece |
+| 4.1 | Two ways to ask "is f3 attacked?" | Left: `is_attacked_by_scanning` asks every enemy piece. Right: `is_square_attacked` stands on f3 and looks outward like a super piece |
 | 4.2 | Looking outward | From one square: rays for rooks and queens, diagonals for bishops and queens, knight squares, pawn squares, king squares. `first_piece` stops at the first piece on each ray |
 | 4.3 | The legal filter | Make the move, ask `in_check` for the mover, undo the move. Keep it only if the king is safe |
 | 4.4 | Three positions one rule catches | A pinned knight, a discovered check, and a king stepping into check, all rejected by the same filter |

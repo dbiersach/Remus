@@ -27,7 +27,7 @@ def test_pawn_attacks_diagonally_forward() -> None:
     assert not is_square_attacked(board, parse_square("e5"), WHITE)
 
 
-def test_both_attack_versions_agree() -> None:
+def test_both_attack_checks_agree() -> None:
     state = position({"e4": "Q", "b2": "N", "g7": "p", "c6": "b", "a1": "K", "h8": "k"})
     board = state["board"]
     for row in range(8):

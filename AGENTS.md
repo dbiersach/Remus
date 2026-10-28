@@ -213,9 +213,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   stronger, what it costs, a table of positions per depth and positions per second
   measured against Remus-WHITE, what to expect in games, and where the pair's code
   is called from.
+  Each Day folder, in `instructor/` and in `student/`, also has a `README.md` at its
+  top (David, 2026-10-28) that paints the whole day: what the day is about, its
+  objectives, a table of the four periods with what the pairs write in each, a timed
+  sequence of activities for every period, and the checkpoint at 4:30.
   The text lives in `period_guides.py` (`OBJECTIVES`, `CHANGE_NOTES`, `LAB_NOTES`,
-  `STATION_OBJECTIVES`, `STATION_GUIDES`, `STATION_MEASURES`, and `PERIOD_GUIDES`
-  for a period that needs an illustrated guide, such as the Day 10 phase hunt); the
+  `STATION_OBJECTIVES`, `STATION_GUIDES`, `STATION_MEASURES`, `PERIOD_GUIDES`
+  for a period that needs an illustrated guide, such as the Day 10 phase hunt, and
+  `DAY_GUIDES` for the Day READMEs, which `make_student_folders.py` writes); the
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
   in `docs/images/phase_hunt/`, drawn by `uv run make_phase_hunt_figures.py`, which
   installs matplotlib for itself alone. Measure `STATION_MEASURES` again after any
@@ -307,16 +312,6 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - `docs/` holds the program overview, one page per major script in `docs/scripts/`,
   the slide plan, the course plan, the roadmap, the Lucas Chess guide (with its
   screenshots in `docs/images/lucas_chess/`), and the two briefing PDFs.
-
-## Licensed local files
-
-The `Turbo Pascal Toolbox 4.0 - GameWorks/` folder holds the original Borland disks
-and archive as a historical reference for the workshop. It is copyrighted software,
-excluded from git by `.gitignore`. Never stage, commit, or push anything in it, and
-never edit `.gitignore` in a way that would let it through. Never quote large parts of
-its source into the repository; describe the ideas and write Remus's own code. The one
-approved exception (David, 2026-10-26) is the ten `MATE.00x` puzzle positions, stored
-as FEN in `tests/mate_puzzles.epd`.
 
 # Part 2: Python style
 

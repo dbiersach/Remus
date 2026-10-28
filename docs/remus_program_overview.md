@@ -34,7 +34,11 @@ files that are new or growing, the functions the pairs write, and a paragraph on
 change and why (the text comes from `period_guides.py`). `period4` holds the finished code of the day. `make_period_folders.py`
 builds `period1` to `period3` from it, so a file that grows during the day, such as
 `make_move.py` on Day 5, gains castling in `period2`, en passant in `period3`, and
-promotion in `period4`.
+promotion in `period4`. Above the period folders, each Day folder's `README.md` gives
+the whole day at a glance: its objectives, what the pairs write in each period, a
+timed sequence of activities for all four periods, and the checkpoint at 4:30.
+`make_student_folders.py` writes it from `DAY_GUIDES` in `period_guides.py` into the
+instructor and student Day folders alike.
 
 `student/` mirrors `instructor/`. In each student period folder, the functions the class
 writes in that period are stubs that raise `NotImplementedError`, and the tests fail
@@ -238,22 +242,6 @@ and depth each Niram version visits exactly as many positions as its Remus twin 
 picks the same moves, about 50 times faster: some 200,000 positions a second against
 about 4,000. The station scripts play Niram with `--niram`, so a league of 10-minute
 games searches as deep as a Remus league of 8-hour games. See [`Niram/README.md`](../Niram/README.md).
-
-## Where the ideas come from
-
-Remus borrows its approach from Turbo GameWorks Chess 4.0 (Borland, 1987) without
-copying its code:
-
-| GameWorks idea | Remus |
-| --- | --- |
-| Piece values 256, 768, 768, 1216, 2304 | Centipawns 100, 300, 300, 500, 900 (`evaluation.py`) |
-| `Attacks` asks each piece about a square | `is_attacked_by_scanning` (`attacks.py`) |
-| `KillingMove` | `remember_killer` and `KILLER_SCORE` |
-| `PawnStrVal`, `PassPawnRank` | `pawn_structure` |
-| `Mating` mode and `DistAn` | `mating_bonus` and `CENTER_DISTANCE` |
-| Zero-window search | Principal variation search in `upgraded_search` |
-| `OPENING.LIB` | `opening_book.txt`, written in SAN |
-| `MATE.001` to `MATE.010` | `tests/mate_puzzles.epd` and `mate_solver.py` |
 
 ## Science AI
 

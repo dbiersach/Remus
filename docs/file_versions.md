@@ -36,7 +36,7 @@ Day 5, Period 2.
 | `move_ordering.py` | D8 P4: captures first by MVV-LVA | D10 P1: killer moves |
 | `transposition_table.py` | D10 P1: remembers searched positions | Last day |
 | `opening_book.py`, `opening_book.txt` | D10 P1: plays known openings | Last day |
-| `mate_solver.py` | D9 P4: solves the GameWorks mate puzzles while the station matches run | No changes |
+| `mate_solver.py` | D9 P4: solves the ten mate puzzles while the station matches run | No changes |
 | `hidden_peak.py` | D10 P1: Science AI, the hidden peak | Last day |
 | `phase_hunt.py` | D10 P2: the phase hunt: the evaluation `score()` and the greedy agent | D10 P3: the tree search `search()` and the benchmark that compares it with greedy |
 | `remus.sh` | D10 P4: starts Remus on a Mac or Linux computer at home | Last day |

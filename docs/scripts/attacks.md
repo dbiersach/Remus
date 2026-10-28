@@ -7,8 +7,9 @@
 A king may not stay in check. To know that, Remus must answer one question: is
 this square attacked?
 
-This file answers it two ways. Version 1 asks every enemy piece. Version 2 stands on
-the square and looks outward. Remus uses version 2 because it checks fewer squares.
+This file answers it two ways. `is_attacked_by_scanning` asks every enemy piece.
+`is_square_attacked` stands on the square and looks outward. Remus uses
+`is_square_attacked` because it checks fewer squares.
 
 ## Where this piece fits
 
@@ -26,7 +27,7 @@ attacks.py uses board.py, game_state.py, and move_generation.py. legal_moves.py,
 
 ## What it stores
 
-Version 2 looks outward from the square like this:
+`is_square_attacked` looks outward from the square like this:
 
 ```text
    along rook lines      -> finds an enemy rook or queen
@@ -74,14 +75,14 @@ in_check()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `is_attacked_by_scanning` | Version 1: asks every enemy piece if it can reach the square. | Day 4, period 2 |
+| `is_attacked_by_scanning` | Asks every enemy piece if it can reach the square. | Day 4, period 2 |
 | `piece_at_offsets` | Looks at a list of nearby squares for one piece, such as a Black knight. | Day 4, period 2 |
 | `attacked_by_knight` | Looks for an enemy knight one jump away. | Day 4, period 2 |
 | `attacked_by_king` | Looks for the enemy king one step away. | Day 4, period 2 |
 | `attacked_by_pawn` | Looks for an enemy pawn that captures onto the square. | Day 4, period 2 |
 | `first_piece` | Walks in one direction and returns the first piece it meets. | Day 4, period 2 |
 | `attacked_along_lines` | Looks along straight and diagonal lines for a rook, bishop, or queen. | Day 4, period 2 |
-| `is_square_attacked` | Version 2: looks outward from the square for any attacker. | Day 4, period 2 |
+| `is_square_attacked` | Looks outward from the square for any attacker. | Day 4, period 2 |
 | `find_king` | Finds the square of a king. | Day 4, period 3 |
 | `in_check` | Says True if that side's king is attacked. | Day 4, period 3 |
 
@@ -95,7 +96,7 @@ in_check()
 Open `attacks.py` from a period folder that has the file in VS Code, and click the Run Python File
 button (the triangle at the top right of the editor).
 
-You should see: Which side attacks f3 at the start, and `Versions 1 and 2 agree on 96 of 96 squares`.
+You should see: Which side attacks f3 at the start, and `Both attack checks agree on 96 of 96 squares`.
 
 ## Puzzle questions
 

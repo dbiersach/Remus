@@ -1,8 +1,8 @@
 #!/usr/bin/env -S uv run
 """mate_solver.py
 
-Solve "White to play and mate in n moves" puzzles, like the MATE.001 to MATE.010
-problems that came with Turbo GameWorks Chess. A mate solver asks a yes-or-no
+Solve "White to play and mate in n moves" puzzles, such as the ten MATE.001 to
+MATE.010 problems in tests/mate_puzzles.epd. A mate solver asks a yes-or-no
 question instead of computing a score:
 
     Does the attacker have a move such that every defender reply still allows

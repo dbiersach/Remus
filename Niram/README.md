@@ -64,7 +64,7 @@ the Python file of the same name, with the same function names:
 
 `opening_book.txt` is a copy of the Day 10 book, read by Niram-GREEN and
 Niram-GOLD. The teaching steps that `think` never calls (random, greedy, minimax,
-negamax, plain alpha-beta, and version 1 of the attack test) stay in Python only.
+negamax, plain alpha-beta, and the scanning attack test) stay in Python only.
 
 ## Run it
 

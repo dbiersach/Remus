@@ -8,7 +8,8 @@ could learn from it.
 
 The code grows one class period at a time: each `instructor/Day NN - ...` folder holds
 `period1` to `period4`, and each period folder is a complete, runnable copy of Remus at
-the end of that period. The `instructor/` folder holds
+the end of that period. Each Day folder's own `README.md` gives the day's objectives
+and the timed activities of its four periods. The `instructor/` folder holds
 only finished, working reference code. `student/` mirrors it, with the functions
 students write left as stubs for them to fill in. Start with
 [`docs/remus_program_overview.md`](docs/remus_program_overview.md); the course plan is

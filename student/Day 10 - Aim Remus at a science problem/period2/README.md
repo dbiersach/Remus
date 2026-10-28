@@ -171,7 +171,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `phase_hunt.py` | `score()` | 110 | 11 | `test_phase_hunt.py::test_score_rewards_explained_peaks_and_punishes_the_rest`, `test_search.py::test_negamax_finds_mate_in_one`, `test_search.py::test_quiescence_stands_pat_or_takes_a_free_pawn`, `test_search.py::test_gameworks_mate_in_two_puzzles`, `test_upgrades.py::test_upgraded_search_finds_a_mate_in_two` |
+| `phase_hunt.py` | `score()` | 110 | 11 | `test_phase_hunt.py::test_score_rewards_explained_peaks_and_punishes_the_rest`, `test_search.py::test_negamax_finds_mate_in_one`, `test_search.py::test_quiescence_stands_pat_or_takes_a_free_pawn`, `test_search.py::test_mate_in_two_puzzles`, `test_upgrades.py::test_upgraded_search_finds_a_mate_in_two` |
 | `phase_hunt.py` | `greedy_phases()` | 134 | 17 | `test_phase_hunt.py::test_greedy_names_a_clean_mixture`, `test_phase_hunt.py::test_greedy_mistakes_silver_for_gold` |
 
 Lines to type in all: 28. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

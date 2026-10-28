@@ -25,7 +25,7 @@ from search import (
 
 MATE_PUZZLES = (
     Path(__file__).parent.parent.parent.parent / "tests" / "mate_puzzles.epd"
-)  # GameWorks MATE.00x
+)  # Ten puzzles, MATE.001 to MATE.010
 
 MATES_IN_ONE = [  # (FEN, the mating move)
     ("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1", "a1a8"),  # Back-rank mate
@@ -143,7 +143,7 @@ def test_quiescence_sees_the_recapture() -> None:
     assert move_to_uci(line[0]) != "d2d5"
 
 
-def test_gameworks_mate_in_two_puzzles() -> None:
+def test_mate_in_two_puzzles() -> None:
     for line in MATE_PUZZLES.read_text().splitlines():
         if "dm 2" not in line:
             continue  # MATE.008 is a mate in 3, a Day 10 mate-solver station

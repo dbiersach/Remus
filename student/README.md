@@ -2,7 +2,8 @@
 
 This folder is where you write Remus. It has one folder for each day of the
 workshop, the same as `instructor/`, and each Day folder has four period folders,
-`period1` to `period4`.
+`period1` to `period4`. The `README.md` at the top of each Day folder shows the
+whole day: what you will learn, and what happens in each period, from 8:30 to 4:30.
 
 Each period folder starts with working code from the periods before. Its
 `README.md` lists what you will learn and how you will show it, the files that are
@@ -29,7 +30,8 @@ of Remus with three planted bugs for you to find and fix.
 2. Read the function's docstring. It says what the function must do.
 3. Delete the two stub comments and the `raise` line, and write the body.
 4. Run the tests from inside the period folder: `uv run pytest`.
-5. Run the file itself, such as `uv run board.py`, and compare with the expected answers.
+5. Run the file itself, such as `board.py`, with VS Code's Run Python File button,
+   and compare with the expected answers.
 
 A test that fails with `NotImplementedError` points to a function you have not
 written yet.
