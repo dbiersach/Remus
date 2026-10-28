@@ -541,7 +541,7 @@ VERSIONS_TABLE = [
         "students": [],
     },
     {
-        "folder": "06 RED - Transposition table",
+        "folder": "10 RED - Transposition table",
         "idea": "Remember positions already searched, so the same position reached "
         "in two move orders is scored once.",
         "copies": ["transposition_table.py"],
@@ -591,7 +591,7 @@ VERSIONS_TABLE = [
         ],
     },
     {
-        "folder": "10 GREEN - Opening book",
+        "folder": "08 GREEN - Opening book",
         "idea": "Play the first moves of well-known openings from a book instead of "
         "searching.",
         "copies": ["opening_book.py", "opening_book.txt"],
@@ -673,7 +673,7 @@ VERSIONS_TABLE = [
         ],
     },
     {
-        "folder": "04 BLUE - Killer moves",
+        "folder": "09 BLUE - Killer moves",
         "idea": "Try quiet moves that caused a cutoff at the same depth right after "
         "the captures.",
         "copies": ["move_ordering.py"],
@@ -715,7 +715,7 @@ VERSIONS_TABLE = [
         ],
     },
     {
-        "folder": "05 PINK - Principal variation search",
+        "folder": "04 PINK - Principal variation search",
         "idea": "Search the first move with the full window and every other move "
         "with a cheap null window first.",
         "copies": [],
@@ -735,7 +735,7 @@ VERSIONS_TABLE = [
         ],
     },
     {
-        "folder": "01 YELLOW - Draw sense",
+        "folder": "02 YELLOW - Draw sense",
         "idea": "Score a repeated position, or one at the fifty-move limit, as a "
         "draw inside the search.",
         "copies": [],
@@ -796,7 +796,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         "students": [("evaluation.py", "pawn_structure")],
     },
     {
-        "folder": "09 CYAN - Mating bonus",
+        "folder": "03 CYAN - Mating bonus",
         "idea": "With a big material lead, drive the losing king to the edge and "
         "bring the winning king close.",
         "copies": [],
@@ -815,7 +815,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         "students": [("evaluation.py", "mating_bonus")],
     },
     {
-        "folder": "02 ORANGE - Null-move pruning",
+        "folder": "05 ORANGE - Null-move pruning",
         "idea": "Let the opponent move twice in a shallow search. If Remus is still "
         "too far ahead, the opponent would never allow this position, so stop "
         "searching it.",
@@ -866,7 +866,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         ],
     },
     {
-        "folder": "03 BROWN - Late move reductions",
+        "folder": "06 BROWN - Late move reductions",
         "idea": "Search late, quiet moves one ply shallower, and in full only if "
         "they surprise.",
         "copies": [],
@@ -900,7 +900,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         ],
     },
     {
-        "folder": "08 GRAY - King safety",
+        "folder": "01 GRAY - King safety",
         "idea": "While the enemy queen is on the board, reward pawns that shelter "
         "the king.",
         "copies": [],
@@ -974,7 +974,7 @@ def readme_text(version: dict) -> str:
             "and rate it against Stockfish by opening `estimate_elo.py` and clicking "
             "Run Python File. From the "
             "top Remus folder, "
-            "`uv run scripts/version_league.py --rate-only --player GOLD` "
+            '`uv run scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD` '
             "shows its score against every other version in the teacher's league."
         )
     elif not version["students"]:

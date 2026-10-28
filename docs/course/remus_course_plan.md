@@ -518,11 +518,11 @@ test, and the mate solver solves all ten puzzles.
   the pair's repository to their own USB drive with `git clone --no-hardlinks` and
   checks that the copy opens. Each pair writes its two results on the board. Then the
   teacher shows Remus-GOLD's results against every color and Remus-WHITE from the
-  teacher's 10-minute league (`uv run scripts/version_league.py --rate-only --player GOLD`),
+  teacher's league (`uv run scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD`),
   and Remus-GOLD's Stockfish rating (about 1960 at 10 minutes a game, from
   [`remus_elo.md`](../engines/remus_elo.md)), as a class discussion: two games cannot tell
-  one enhancement from another, and 66 games barely can. In `demo_results.py` each
-  pair turns its two games, and then its color's 66 league games, into an Elo gap with
+  one enhancement from another, and 110 games barely can. In `demo_results.py` each
+  pair turns its two games, and then its color's 110 league games, into an Elo gap with
   a margin of error and lets Remus explain one move. Each pair then
   explains one move its engine chose, with the score and principal variation, and one
   powder its phase hunt named. Close with what comes next: bitboards, Zobrist

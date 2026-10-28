@@ -256,7 +256,7 @@ def version_folders() -> list[Path]:
 
 
 def color_of(folder: Path) -> str:
-    """Return the color in a folder name: "06 RED - Transposition table" gives "RED"."""
+    """Return the color in a folder name: "10 RED - Transposition table" gives "RED"."""
     return folder.name.split(" - ")[0].split()[1]
 
 

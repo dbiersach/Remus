@@ -27,7 +27,7 @@ Each side gets 10 minutes, because Remus searches only a few thousand positions 
 second and a shorter clock stops every version too shallow for most enhancements
 to help. The two games run at once, so the match takes about 20 minutes.
 
-A color names a version folder, so "RED" finds "06 RED - Transposition table".
+A color names a version folder, so "RED" finds "10 RED - Transposition table".
 The number in front ranks the color versions by the teacher's league, WHITE first.
 """
 
@@ -101,7 +101,7 @@ Player = tuple[str, Path]  # A version's name, such as "Remus-RED", and its prog
 
 
 def version_color(folder_name: str) -> str:
-    """Return the color in a version folder's name: "RED" from "06 RED - Transposition table"."""
+    """Return the color in a version folder's name: "RED" from "10 RED - Transposition table"."""
     words = folder_name.split(" - ")[0].split()
     return words[len(words) - 1].upper()
 

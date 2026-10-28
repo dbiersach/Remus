@@ -41,7 +41,7 @@ Each version searched the ten positions of `compare_search.py`, one depth at a t
 
 ## What to expect
 
-Fewer positions for the same depth, and the biggest savings in endgames, where a few pieces shuffle between the same squares and nearly every position is reached many ways. Positions per second stay close to Remus-WHITE's.
+Remus-RED is the only single color version that rated clearly above Remus-WHITE in the teacher's league: +101 plus or minus 67. Fewer positions for the same depth, and the biggest savings in endgames, where a few pieces shuffle between the same squares and nearly every position is reached many ways. Positions per second stay close to Remus-WHITE's.
 
 ## Where your code fits
 
@@ -68,15 +68,3 @@ Proves the rules of `probe()` with three made-up entries before any real search 
 ## Check it
 
 Check the work from inside this folder with `uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: Remus-RED plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 10 tournament, open `play_tournament.py` and press Run: Remus-RED plays Remus-WHITE twice, once with each color, at 10 minutes a side, and both games go into games/remus_games.pgn. Each script runs `version_match.py` from the `Remus` folder above this one.
-
-## What you edit this period
-
-Every other function in this folder is finished. Change only these, and only below each docstring:
-
-| File | Function | Starts at line | Lines to type | Tests that check it |
-| --- | --- | --- | --- | --- |
-| `transposition_table.py` | `store()` | 25 | 3 | `test_upgrades.py::test_transposition_table_bounds` |
-| `transposition_table.py` | `probe()` | 34 | 11 | `test_upgrades.py::test_transposition_table_bounds` |
-| `test_upgrades.py` | `test_transposition_table_bounds()` | 17 | 13 | `uv run pytest` |
-
-Lines to type in all: 27. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

@@ -15,7 +15,7 @@ better than another before the games are played.
 ## Where the color versions live
 
 `instructor/Remus` holds `00 WHITE - No enhancements` and one folder per color version,
-such as `06 RED - Transposition table`. The number in front of each name ranks the
+such as `10 RED - Transposition table`. The number in front of each name ranks the
 color version by its rating over Remus-WHITE in the teacher's 10-minute league (below), so
 the folders list from 00 WHITE to 11 GOLD. The WHITE folder is a complete, runnable copy of
 the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each version folder is
@@ -24,8 +24,7 @@ holds the same folders with the pair's functions stubbed.
 
 `make_version_folders.py` builds the folders from the Day 9 code and the GOLD folder.
 `11 GOLD - All enhancements` holds Remus-GOLD, the finished Remus of Day 10, with
-all ten enhancements at once. Remus-GOLD stays out of the color matches;
-running `estimate_elo.py` inside its folder rates it against Stockfish.
+all ten enhancements at once.
 
 ## The ten color versions
 
@@ -102,7 +101,7 @@ fewer than 10 games. The teacher then shows Remus-GOLD's score against every col
 and Remus-WHITE from the teacher's league, run from the top Remus folder:
 
 ```bash
-uv run scripts/version_league.py --rate-only --player GOLD
+uv run scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD
 ```
 
 The Day 9 smoke test plays one game on a short clock only to prove that the color version's
@@ -123,7 +122,7 @@ takes White once. The games file stores the opening in a `StartMoves` header.
 
 `scripts/version_league.py`, run from the top Remus folder, plays a round robin: each of the 12 versions
 (Remus-WHITE, the ten color versions, and Remus-GOLD) plays each other version 6 times,
-396 games in all. Then it fits one Elo rating to every version from every color version
+396 games in all, or as many times as `--games` asks. Then it fits one Elo rating to every version from every color version
 game in the games file, the games of `version_match.py` included, with Remus-WHITE
 pinned at 0. Each rating is that version's gain over Remus-WHITE. The league plays
 at 10 minutes a side with no increment, because Remus in Python searches too slowly
@@ -136,7 +135,14 @@ uv run scripts/version_league.py --at-once 16   # the round robin, 16 games at a
 uv run scripts/version_league.py --rate-only    # only the ratings, from the saved games
 uv run scripts/version_league.py --at-once 16 --event "Station league 2"
                                                 # a new league, rated apart from the others
+uv run scripts/version_league.py --book-start   # GREEN's and GOLD's games from move 1
 ```
+
+The six opening moves hand every version a short book, so they hide most of what the
+book of Remus-GREEN and Remus-GOLD is worth. With `--book-start`, every game with
+GREEN or GOLD starts from the starting position instead. Their book picks among its
+moves at random, so their games still differ from each other, while the other pairs
+keep the openings. Rate such a league with `--book-start` as well.
 
 `--niram` plays the same league with Niram, the Rust copies of all 12 versions in
 the `Niram` folder (see [`Niram/README.md`](../../Niram/README.md)). Niram picks the
@@ -169,34 +175,49 @@ time, finished about one game a minute, so the whole league took about 7 hours. 
 
 ### The teacher's league run
 
-The teacher ran all 396 games in October 2026 at 10 minutes a game. These are the
-ratings:
+The teacher ran a league of 660 games in October 2026: every version played every
+other version 10 times, 5 times with each color, at 10 minutes a side. The league
+ran on Niram, the Rust twins of the 12 versions, which choose the same moves as
+Remus about 50 times faster. A 10-minute Niram game therefore searches about as deep
+as a Remus game of 8 hours, so the table shows what each enhancement adds with
+plenty of time to think, deeper than a class laptop reaches in 10 minutes. The 450
+games between versions without a book started from the 32 openings. The 210 games
+with Remus-GREEN or Remus-GOLD started from the starting position (`--book-start`),
+so their book played from move 1. No game ended on time, by a crash, or by an
+illegal move.
 
-| Rank | Version | Score | Elo vs WHITE |
-| --- | --- | --- | --- |
-| 1 | Remus-GOLD | 72.7% | +175 +/- 93 |
-| 2 | Remus-YELLOW | 52.3% | +35 +/- 84 |
-| 3 | Remus-ORANGE | 50.8% | +26 +/- 84 |
-| 4 | Remus-BROWN | 50.8% | +26 +/- 84 |
-| 5 | Remus-BLUE | 48.5% | +11 +/- 84 |
-| 6 | Remus-PINK | 47.7% | +6 +/- 84 |
-| 7 | Remus-RED | 47.7% | +6 +/- 84 |
-| 8 | Remus-PURPLE | 47.7% | +6 +/- 84 |
-| 9 | Remus-GRAY | 47.0% | +1 +/- 84 |
-| 10 | Remus-WHITE | 46.2% | 0 (pinned) |
-| 11 | Remus-CYAN | 44.7% | -13 +/- 84 |
-| 12 | Remus-GREEN | 43.9% | -18 +/- 84 |
+| Rank | Version | Wins-draws-losses | Score | Elo vs WHITE |
+| --- | --- | --- | --- | --- |
+| 1 | Remus-GOLD | 79-30-1 | 85.5% | +339 +/- 91 |
+| 2 | Remus-RED | 27-71-12 | 56.8% | +101 +/- 67 |
+| 3 | Remus-BLUE | 20-74-16 | 51.8% | +67 +/- 67 |
+| 4 | Remus-GREEN | 22-67-21 | 50.5% | +58 +/- 66 |
+| 5 | Remus-PURPLE | 16-76-18 | 49.1% | +49 +/- 66 |
+| 6 | Remus-BROWN | 6-89-15 | 45.9% | +28 +/- 66 |
+| 7 | Remus-ORANGE | 8-84-18 | 45.5% | +25 +/- 67 |
+| 8 | Remus-PINK | 10-79-21 | 45.0% | +22 +/- 67 |
+| 9 | Remus-CYAN | 12-74-24 | 44.5% | +19 +/- 67 |
+| 10 | Remus-YELLOW | 14-65-31 | 42.3% | +4 +/- 67 |
+| 11 | Remus-GRAY | 10-73-27 | 42.3% | +4 +/- 67 |
+| 12 | Remus-WHITE | 7-76-27 | 40.9% | 0 (pinned) |
 
-Only Remus-GOLD, with all ten enhancements, has a range that stays above 0: its +175
-plus or minus 93 runs from +82 to +268. Null move and late move reductions save work
-only at depth 3 and deeper, and Remus reaches those depths only with time to think.
-Every single color version's range includes 0, so one enhancement alone changes Remus by
-less than 66 games can measure.
+Each version played 110 games. Remus-YELLOW and Remus-GRAY scored the same 46.5
+points; Remus-YELLOW ranks above because it beat Remus-GRAY 5.5 to 4.5. The folder
+numbers follow this table, from `01 GRAY` to `10 RED`.
 
-The run played its first 266 games before `thinking_time` kept a 3-second reserve
-on the clock, and its last 130 games with the reserve. 3 games ended on time, all
-in the first part and all with Remus-GOLD playing White: Remus-GOLD lost two of them
-on time, against Remus-PINK and Remus-YELLOW, and Remus-WHITE lost the third.
+Remus-GOLD, with all ten enhancements, wins most of its games: its +339 plus or minus
+91 runs from +248 to +430, and it scored at least 6.5 of 10 against every other
+version. Remus-RED, the transposition table, is the only single enhancement whose
+range stays above 0, from +34 to +168. Every other color version's range includes 0,
+so one of those enhancements alone changes Remus by less than 110 games can measure.
+Most games end in a draw (the versions share one evaluation and one search), so each
+game moves a rating by little.
+
+The book changes Remus-GREEN's result. In the same league with every game started
+from the 32 openings, Remus-GREEN scored 47 of 110 points and rated +7, last among
+the color versions. From the starting position it scored 55.5 points and rated +58.
+Both ranges overlap, so the gain is likely but not proven. With the openings,
+Remus-RED rated +132 and Remus-GOLD +340.
 
 ## How big is each version?
 
@@ -233,7 +254,10 @@ because its book reads moves in SAN and so loads `notation.py` as well.
 2. The YELLOW color version's whole enhancement is a 2-line function. Why can such a small change still win games?
 3. Which color versions change the score Remus finds at a fixed depth, and which only find
    the same score faster?
-4. In the teacher's league, no single color version measured clearly stronger than
-   Remus-WHITE, but Remus-GOLD did. How can ten small gains that each hide inside the
-   error bar add up to one gain that shows?
-4. Remus-GOLD has every enhancement. Why might it gain less than the ten gains added up?
+4. In the teacher's league, only Remus-RED among the single color versions measured
+   clearly stronger than Remus-WHITE, but Remus-GOLD gained far more. How can ten
+   small gains that each hide inside the error bar add up to one gain that shows?
+5. Remus-GREEN rated +7 when every game started three moves deep, and +58 when its
+   games started from move 1. Why does the start of a game matter so much more to
+   GREEN than to RED?
+6. Remus-GOLD has every enhancement. Why might it gain less than the ten gains added up?

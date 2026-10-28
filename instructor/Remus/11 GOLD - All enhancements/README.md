@@ -25,8 +25,8 @@ Each version searched the ten positions of `compare_search.py`, one depth at a t
 
 ## What to expect
 
-Remus-GOLD is the only version whose gain over Remus-WHITE is larger than its error margin in the teacher's 10-minute league, and it gains more the longer the clock, because null moves and late move reductions save work only at depth 3 and deeper.
+In the teacher's league, where every version searched about as deep as Remus does in a game of several hours, Remus-GOLD scored 85 percent and rated +339 plus or minus 91 over Remus-WHITE, far ahead of every single color version. It gains more the longer the clock, because null moves and late move reductions save work only at depth 3 and deeper.
 
 ## Check it
 
-Check it from inside this folder with `uv run pytest`, and rate it against Stockfish by opening `estimate_elo.py` and clicking Run Python File. From the top Remus folder, `uv run scripts/version_league.py --rate-only --player GOLD` shows its score against every other version in the teacher's league.
+Check it from inside this folder with `uv run pytest`, and rate it against Stockfish by opening `estimate_elo.py` and clicking Run Python File. From the top Remus folder, `uv run scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD` shows its score against every other version in the teacher's league.
