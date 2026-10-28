@@ -36,11 +36,8 @@ The pair types 18 lines.
 
 ## Try it
 
-From inside `student/Day 02 - Make and undo moves/period2`, run:
-
-```bash
-uv run python_dicts.py
-```
+Open `python_dicts.py` in `student/Day 02 - Make and undo moves/period2` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: w, KQkq, then b; a pawn that shows on both names; a copy that changes alone; and `Move(from_square='e2', to_square='e4')`.
 

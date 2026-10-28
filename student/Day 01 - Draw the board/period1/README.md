@@ -6,13 +6,13 @@ Watch the finished Remus play in Lucas Chess, form pairs, and check that every l
 
 By the end of this period, each pair can:
 
-- Start VS Code, open a terminal, and run a Python file with `uv run`. **Measured by:** `uv run python_setup.py` prints Python 3.14 or later and `python-chess installed: True` on the pair's laptop.
+- Start VS Code, open a Python file, and run it with the Run Python File button (the triangle at the top right of the editor). **Measured by:** Running `python_setup.py` prints Python 3.14 or later and `python-chess installed: True` on the pair's laptop.
 - Store text in a variable and print it inside an f-string. **Measured by:** Part #2 of `python_setup.py` greets the pair's own team name and counts its characters correctly.
 - Name the parts of a chess engine that Remus will grow: board, moves, rules, search, and evaluation. **Measured by:** Exit ticket: each student lists three of the five parts and one job of each.
 
 ## The files
 
-This period comes before any Remus code. The lab is `python_setup.py` in `student/`, with the answers in `python_setup_instructor.py` in `instructor/`. Run it with `uv run python_setup.py`.
+This period comes before any Remus code. The lab is `python_setup.py` in `student/`, with the answers in `python_setup_instructor.py` in `instructor/`. Open `python_setup.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 ## The changes and why
 
@@ -28,4 +28,4 @@ Part #3: you store White's back rank as one string and print the letter at index
 
 Open `python_setup.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
-Lines to type in all: 6. Check the work with `uv run python_setup.py` and compare each printed result with the expected value beside it.
+Lines to type in all: 6. Check the work by running `python_setup.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

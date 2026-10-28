@@ -68,11 +68,8 @@ best_stored_move()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run transposition_table.py
-```
+Open `transposition_table.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: A saved score found at depth 3, and `None` when the search asks for depth 4.
 

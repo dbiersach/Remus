@@ -21,7 +21,7 @@ later Remus file starts with imports like these.
 
 - **module:** a Python file that other files import.
 - **import:** runs another file once and hands over its names, such as `new_board`.
-- **__name__:** `"__main__"` in the file that `uv run` starts, and the file's own name when it is imported.
+- **__name__:** `"__main__"` in the file that VS Code runs, and the file's own name when it is imported.
 - **git branch:** a separate line of commits, so an experiment never breaks the class code.
 
 ## How it works
@@ -35,11 +35,8 @@ The pair types 11 lines.
 
 ## Try it
 
-From inside `student/Day 04 - Keep only legal moves/period1`, run:
-
-```bash
-uv run python_modules.py
-```
+Open `python_modules.py` in `student/Day 04 - Keep only legal moves/period1` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: `__main__`, then `board`, then the knight moves g1f3 and g1h3, then the commands for the terminal.
 

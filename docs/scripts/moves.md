@@ -62,11 +62,8 @@ move_from_uci()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run moves.py
-```
+Open `moves.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: `g1f3` turned into a `Move` and back into `g1f3`.
 

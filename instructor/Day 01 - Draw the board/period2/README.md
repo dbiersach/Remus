@@ -11,7 +11,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-This period comes before any Remus code. The lab is `python_strings.py` in `student/`, with the answers in `python_strings_instructor.py` in `instructor/`. Run it with `uv run python_strings.py`.
+This period comes before any Remus code. The lab is `python_strings.py` in `student/`, with the answers in `python_strings_instructor.py` in `instructor/`. Open `python_strings.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 ## The changes and why
 

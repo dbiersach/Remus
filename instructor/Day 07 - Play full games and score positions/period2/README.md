@@ -10,7 +10,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_input_output.py` in `student/`, with the answers in `python_input_output_instructor.py` in `instructor/`. Run it with `uv run python_input_output.py`.
+The lab is `python_input_output.py` in `student/`, with the answers in `python_input_output_instructor.py` in `instructor/`. Open `python_input_output.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 New files this period:
 
@@ -39,4 +39,4 @@ Parts #3 and #4 talk the way a UCI engine does. The program reads one command pe
 
 Finds the legal move that matches typed SAN, such as Nf3, by writing the SAN of every legal move and comparing. Matching against real moves means any text Remus accepts is a legal move.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).

@@ -61,11 +61,8 @@ read_puzzles()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run mate_solver.py
-```
+Open `mate_solver.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: Each puzzle, the move found, the expected move, and the time. MATE.008, a mate in 3, takes about 6 seconds.
 

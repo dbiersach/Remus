@@ -35,9 +35,9 @@ LABS = {
 OBJECTIVES = {
     (1, 1): [
         (
-            "Start VS Code, open a terminal, and run a Python file with `uv run`.",
+            "Start VS Code, open a Python file, and run it with the Run Python File button (the triangle at the top right of the editor).",
             (
-                "`uv run python_setup.py` prints Python 3.14 or later and "
+                "Running `python_setup.py` prints Python 3.14 or later and "
                 "`python-chess installed: True` on the pair's laptop."
             ),
         ),
@@ -111,7 +111,7 @@ OBJECTIVES = {
         (
             "Print the board with rank numbers and file letters.",
             (
-                "`uv run board.py` prints the start board with 8 at the top and a to h "
+                "Running `board.py` prints the start board with 8 at the top and a to h "
                 "below it."
             ),
         ),
@@ -224,7 +224,7 @@ OBJECTIVES = {
         (
             "See the moves a generator returns.",
             (
-                "`uv run show_board.py` draws one arrow per king move, and the pair "
+                "Running `show_board.py` draws one arrow per king move, and the pair "
                 "counts the arrows."
             ),
         ),
@@ -347,7 +347,7 @@ OBJECTIVES = {
         (
             "Explain why a player sometimes promotes to a knight.",
             (
-                "`uv run demo_promotion.py` prints stalemate for b8=Q, b8=R, and b8=B "
+                "Running `demo_promotion.py` prints stalemate for b8=Q, b8=R, and b8=B "
                 "and checkmate for b8=N, and the pair says why the queen only draws."
             ),
         ),
@@ -372,7 +372,7 @@ OBJECTIVES = {
     (6, 2): [
         (
             "Count the positions of the move tree with `perft()`.",
-            "`uv run perft.py` prints 20, 400, and 8,902 for depths 1 to 3.",
+            "Running `perft.py` prints 20, 400, and 8,902 for depths 1 to 3.",
         ),
         (
             "Explain why perft proves the rules right.",
@@ -387,7 +387,7 @@ OBJECTIVES = {
         (
             "Find a planted bug with `divide()`.",
             (
-                "`uv run hunt.py` in `bug_hunt/` points at three bugs; the pair fixes at "
+                "Running `hunt.py` in `bug_hunt/` points at three bugs; the pair fixes at "
                 "least two of them and names the root move that showed each one."
             ),
         ),
@@ -455,14 +455,14 @@ OBJECTIVES = {
         ),
         (
             "Measure one brain against another.",
-            "`uv run play_match.py` shows greedy Remus scoring more than random Remus.",
+            "Running `play_match.py` shows greedy Remus scoring more than random Remus.",
         ),
     ],
     (7, 4): [
         (
             "Count material in centipawns.",
             (
-                "The evaluation tests pass, and `uv run evaluation.py` prints -200 for "
+                "The evaluation tests pass, and running `evaluation.py` prints -200 for "
                 "a knight against a rook."
             ),
         ),
@@ -498,7 +498,7 @@ OBJECTIVES = {
         (
             "Show that alpha-beta keeps the answer and saves work.",
             (
-                "The `alpha_beta` tests pass, and `uv run compare_search.py` prints the "
+                "The `alpha_beta` tests pass, and running `compare_search.py` prints the "
                 "same scores as negamax with fewer nodes."
             ),
         ),
@@ -633,7 +633,7 @@ OBJECTIVES = {
                 "cannot decide."
             ),
             (
-                "`uv run phase_hunt.py` shows the search making fewer wrong calls "
+                "Running `phase_hunt.py` shows the search making fewer wrong calls "
                 "than greedy, and the pair names the extra measurement that would "
                 "tell gold from silver."
             ),
@@ -1258,7 +1258,7 @@ sounds just as sure as when it is right.
 ![Gold's and silver's four peaks side by side, each pair inside the 0.3 degree
 tolerance]({PHASE_HUNT_IMAGES}/gold_and_silver.png)
 
-Run `uv run phase_hunt.py` when both functions pass their tests. Greedy names 166 of
+Run `phase_hunt.py` in VS Code when both functions pass their tests. Greedy names 166 of
 the 200 benchmark powders right and 34 wrong. In period 3 you write `search()`, which
 scores every guess of up to three phases, 176 of them, and keeps every guess that
 ties for the best score. When gold and silver tie, the search can answer "can't
@@ -1715,16 +1715,16 @@ LAB_NOTES = {
             "hands over its functions, so no code is copied."
         ),
         (
-            "Part #1 prints `__name__`: the file that `uv run` starts is `__main__`, and "
+            "Part #1 prints `__name__`: the file that VS Code runs is `__main__`, and "
             "an imported file keeps its own name. That is why `board.py` prints its "
-            "board under `uv run board.py` and stays silent when the lab imports it, and "
+            "board when VS Code runs `board.py` and stays silent when the lab imports it, and "
             "why every Remus print sits inside `main()`."
         ),
         (
             "Part #2 calls `new_board()` and `knight_moves()` from the imported files "
-            "and lists the two knight moves from g1. Parts #3 and #4 run in the "
-            "terminal: `uv run board.py` on its own, then a git branch, a commit, and "
-            "the log."
+            "and lists the two knight moves from g1. Part #3 runs "
+            "`board.py` on its own in VS Code, and Part #4 makes a git branch, a "
+            "commit, and the log in the terminal."
         ),
     ],
     (4, 4): [

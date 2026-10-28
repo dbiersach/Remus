@@ -10,7 +10,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_functions.py` in `student/`, with the answers in `python_functions_instructor.py` in `instructor/`. Run it with `uv run python_functions.py`.
+The lab is `python_functions.py` in `student/`, with the answers in `python_functions_instructor.py` in `instructor/`. Open `python_functions.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 The Remus code here is the same as at the end of the period before.
 
@@ -26,4 +26,4 @@ Part #3 packs e4 into the tuple `(4, 4)` and unpacks it with `row, col = square`
 
 Part #4 runs the two test functions, whose `assert` lines stop the program when a check fails. `uv run pytest python_functions.py` runs the same tests and prints a report, and breaking one test on purpose shows what a failure looks like before a real one happens.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).

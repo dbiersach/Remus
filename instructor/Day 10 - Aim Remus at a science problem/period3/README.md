@@ -5,7 +5,7 @@
 By the end of this period, each pair can:
 
 - Search every set of phases with make and undo, as Remus searches moves. **Measured by:** The `search` tests pass: the phases list comes back unchanged, and the search scores 176 sets, one for each set of up to three phases.
-- Verify a method against known answers, and say when the data cannot decide. **Measured by:** `uv run phase_hunt.py` shows the search making fewer wrong calls than greedy, and the pair names the extra measurement that would tell gold from silver.
+- Verify a method against known answers, and say when the data cannot decide. **Measured by:** Running `phase_hunt.py` shows the search making fewer wrong calls than greedy, and the pair names the extra measurement that would tell gold from silver.
 
 ## The tree you search
 
@@ -56,4 +56,4 @@ In `student/` these functions raise `NotImplementedError` until a pair writes th
 
 Scores the set of phases it is given, keeps every set that ties for the best score, and calls itself on each set one phase larger, adding a phase with append and taking it back with pop. Phases go in library order only, so each set is scored once instead of once for every order, 176 sets instead of 821. Keeping every tied set lets the search say gold or silver when the pattern cannot tell them apart, as CrystalShift and Dara report every likely answer.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).

@@ -47,7 +47,7 @@ Scores a square by its predicted value plus a bonus for being far from earlier r
 
 Returns the candidate with the highest score, just as `greedy_move()` returns the best capture. The same generate, score, and choose loop now runs on a science problem.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit this period
 

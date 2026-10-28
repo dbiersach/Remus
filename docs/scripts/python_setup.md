@@ -33,11 +33,8 @@ The pair types 6 lines.
 
 ## Try it
 
-From inside `student/Day 01 - Draw the board/period1`, run:
-
-```bash
-uv run python_setup.py
-```
+Open `python_setup.py` in `student/Day 01 - Draw the board/period1` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: Python 3.14 or later, `python-chess installed: True`, and `K` for the king.
 

@@ -37,11 +37,8 @@ The pair types 16 lines.
 
 ## Try it
 
-From inside `student/Day 07 - Play full games and score positions/period2`, run:
-
-```bash
-uv run python_input_output.py
-```
+Open `python_input_output.py` in `student/Day 07 - Play full games and score positions/period2` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: a random move, q, the note, and then readyok and echo hello for the lines you type.
 

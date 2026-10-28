@@ -8,7 +8,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_sets.py` in `student/`, with the answers in `python_sets_instructor.py` in `instructor/`. Run it with `uv run python_sets.py`.
+The lab is `python_sets.py` in `student/`, with the answers in `python_sets_instructor.py` in `instructor/`. Open `python_sets.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 The Remus code here is the same as at the end of the period before.
 
@@ -22,4 +22,4 @@ Parts #2 and #3 ask questions with `in`, of a set and of a dict. The dict `right
 
 Part #4 removes rights with `replace()`, one letter at a time, starting from `"KQkq"`. `update_castling_rights()` in `make_move.py` does exactly this in period 2.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).

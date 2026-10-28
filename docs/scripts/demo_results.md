@@ -37,11 +37,8 @@ The pair types 15 lines.
 
 ## Try it
 
-From inside `student/Day 10 - Aim Remus at a science problem/period4`, run:
-
-```bash
-uv run demo_results.py
-```
+Open `demo_results.py` in `student/Day 10 - Aim Remus at a science problem/period4` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: 11.0 points of 20, a gap of +35 between -121 and +208, "more games are needed", and the move a1a8 with score mate 1.
 

@@ -78,11 +78,8 @@ print_state()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run fen.py
-```
+Open `fen.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: the board after 1. e4 with Black to move and en passant square e3,
 the FEN line for that position, then `Start FEN read and written back unchanged: True`.

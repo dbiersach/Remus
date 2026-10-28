@@ -26,7 +26,7 @@ In `student/` these functions raise `NotImplementedError` until a pair writes th
 
 Walks one direction from a square, adding a move for each empty square, and stops at the edge or at the first piece. An enemy piece can be captured, so its square is added before the walk stops; a friendly piece is not. Rooks, bishops, and queens all use this walk with different directions.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit this period
 

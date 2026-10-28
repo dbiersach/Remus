@@ -111,11 +111,8 @@ pseudo_legal_moves()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run move_generation.py
-```
+Open `move_generation.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: `Pseudo-legal moves from the start: 20`, a knight on a1 with 2 moves, and a rook on d4 with 14.
 

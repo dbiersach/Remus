@@ -92,11 +92,8 @@ benchmark()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run hidden_peak.py
-```
+Open `hidden_peak.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: The average for random guessing, three greedy AIs, and the expectimax AI. It takes about a minute.
 

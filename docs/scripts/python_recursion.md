@@ -34,11 +34,8 @@ The pair types 11 lines.
 
 ## Try it
 
-From inside `student/Day 06 - Count positions and read FEN/period1`, run:
-
-```bash
-uv run python_recursion.py
-```
+Open `python_recursion.py` in `student/Day 06 - Count positions and read FEN/period1` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: 3, 2, 1, Go!; 6 leaves and 2 under e4; and 2, 12, and 64 knight paths from a1.
 

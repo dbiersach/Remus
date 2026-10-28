@@ -43,11 +43,8 @@ main()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run compare_search.py
-```
+Open `compare_search.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: Ten lines like `negamax 24,942 positions, alpha-beta 4,226 positions, same score`.
 

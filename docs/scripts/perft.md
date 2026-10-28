@@ -68,11 +68,8 @@ divide()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run perft.py
-```
+Open `perft.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: `perft(1) = 20`, `perft(2) = 400`, `perft(3) = 8,902`, and how long each took.
 

@@ -18,11 +18,18 @@ Usage:
     uv run station_league.py --at-once 16    16 games at a time
     uv run station_league.py --event "Station league 2"
                                              a second league, kept and rated apart
+    uv run station_league.py --niram         the same league for Niram, in Rust
 
 League games last 10 minutes a side. Remus searches only a few thousand positions a
 second, so a shorter clock stops every version after 2 to 4 plies, too shallow for
 most enhancements to help. Games at one clock are rated apart from games at another
 clock.
+
+With --niram the league plays Niram, the Rust copies of the same 12 versions in
+the niram folder. Niram chooses the same moves as Remus about 50 times faster, so
+a 10 minute Niram game searches as deep as a Remus game of many hours. Niram
+games are rated apart from Remus games, with Niram-WHITE pinned at 0. Build the
+Niram programs first with "cargo build --release" inside niram.
 
 This is a teacher tool, like station_match.py: the engine never imports python-chess.
 """
@@ -38,14 +45,12 @@ import chess.pgn
 from station_match import (
     GAMES_PATH,
     OPENINGS,
-    STATIONS,
     YARDSTICK,
-    find_player,
+    all_players,
     play_game,
     time_control,
 )
 
-ANCHOR = f"Remus-{YARDSTICK}"  # Remus-WHITE is rated 0
 MINUTES = 10.0  # Each side's clock in a league game
 INCREMENT = 0.0  # Seconds added after each move
 EVENT_PREFIX = "Station"  # Events of station_match.py and of this league
@@ -58,17 +63,9 @@ GAMES_AT_ONCE = os.cpu_count() or 2
 Result = tuple[str, str, float]  # (White, Black, White's points)
 
 
-def all_colors() -> list[str]:
-    """Return the color of every station folder, such as "RED"."""
-    colors = []
-    for folder in sorted(STATIONS.iterdir()):
-        if folder.is_dir() and " - " in folder.name:
-            # A folder name such as "06 RED - Transposition table" holds the color
-            colors.append(folder.name.split(" - ")[0].split(" ")[1])
-    return colors
-
-
-def read_results(clock: str, event: str = LEAGUE_EVENT) -> list[Result]:
+def read_results(
+    clock: str, event: str = LEAGUE_EVENT, engine: str = "Remus"
+) -> list[Result]:
     """
     Return (White, Black, White's points) for every station game at one clock.
 
@@ -84,6 +81,9 @@ def read_results(clock: str, event: str = LEAGUE_EVENT) -> list[Result]:
         LEAGUE_EVENT counts every station game, station_match.py games included.
         Any other Event name, such as "Station league 2", counts only the games
         of that league.
+    engine : str
+        "Remus" or "Niram": only games between two versions of that engine count,
+        so Remus and Niram get separate ratings.
 
     Returns
     -------
@@ -105,6 +105,10 @@ def read_results(clock: str, event: str = LEAGUE_EVENT) -> list[Result]:
                 continue
             if headers.get("TimeControl") != clock:
                 continue
+            if not headers["White"].startswith(engine + "-"):
+                continue
+            if not headers["Black"].startswith(engine + "-"):
+                continue
             results.append(
                 (headers["White"], headers["Black"], points[headers["Result"]])
             )
@@ -116,7 +120,7 @@ def expected_score(rating: float, opponent: float) -> float:
     return 1 / (1 + 10 ** ((opponent - rating) / 400))
 
 
-def fit_ratings(results: list[Result]) -> dict[str, tuple[float, float]]:
+def fit_ratings(results: list[Result], anchor: str) -> dict[str, tuple[float, float]]:
     """
     Find the Elo ratings that best explain every result.
 
@@ -124,11 +128,13 @@ def fit_ratings(results: list[Result]) -> dict[str, tuple[float, float]]:
     ----------
     results : list[Result]
         Every game as (White, Black, White's points).
+    anchor : str
+        The player pinned at 0, such as "Remus-WHITE".
 
     Returns
     -------
     dict[str, tuple[float, float]]
-        For each player, the rating and its 95 percent margin. ANCHOR is 0.
+        For each player, the rating and its 95 percent margin. The anchor is 0.
 
     Each round moves every rating toward the one where the player's expected
     points equal its real points, the way estimate_elo.py finds a rating
@@ -139,11 +145,14 @@ def fit_ratings(results: list[Result]) -> dict[str, tuple[float, float]]:
         for name in (white, black):
             if name not in players:
                 players.append(name)
+    # The anchor takes part in the pretend draws even if it played no real game
+    if results and anchor not in players:
+        players.append(anchor)
     players.sort()
     games = list(results)
     for name in players:
-        if name != ANCHOR:
-            games += [(name, ANCHOR, 0.5)] * PRIOR_DRAWS
+        if name != anchor:
+            games += [(name, anchor, 0.5)] * PRIOR_DRAWS
     ratings = dict.fromkeys(players, 0.0)
     weight = dict.fromkeys(players, 0.0)
     for _ in range(500):
@@ -156,11 +165,11 @@ def fit_ratings(results: list[Result]) -> dict[str, tuple[float, float]]:
             weight[white] += expected * (1 - expected)
             weight[black] += expected * (1 - expected)
         for name in players:
-            if name != ANCHOR and weight[name] > 0:
+            if name != anchor and weight[name] > 0:
                 ratings[name] += SCALE * surplus[name] / weight[name]
     fitted = {}
     for name in players:
-        margin = 1.96 * SCALE / math.sqrt(weight[name]) if name != ANCHOR else 0.0
+        margin = 1.96 * SCALE / math.sqrt(weight[name]) if name != anchor else 0.0
         fitted[name] = (ratings[name], margin)
     return fitted
 
@@ -185,6 +194,7 @@ def play_league(
     increment: float,
     games_at_once: int,
     event: str,
+    engine: str,
 ) -> None:
     """
     Play every pair of players games_per_pair times, adding each game to the file.
@@ -192,9 +202,7 @@ def play_league(
     A league game already in the file is not played twice, so a league that
     stops partway, such as when the computer restarts, picks up where it stopped.
     """
-    players = []
-    for color in all_colors():
-        players.append(find_player(color))
+    players = all_players(engine)
     jobs = []
     opening_number = 0
     opening = OPENINGS[0]
@@ -236,9 +244,9 @@ def play_league(
             )
 
 
-def print_ratings(results: list[Result], clock: str) -> None:
+def print_ratings(results: list[Result], clock: str, anchor: str) -> None:
     """Print every player's games, score, and rating, strongest first."""
-    fitted = fit_ratings(results)
+    fitted = fit_ratings(results, anchor)
     played = dict.fromkeys(fitted, 0)
     scored = dict.fromkeys(fitted, 0.0)
     for white, black, points in results:
@@ -247,7 +255,7 @@ def print_ratings(results: list[Result], clock: str) -> None:
         scored[white] += points
         scored[black] += 1 - points
     print(
-        f"Ratings from {len(results)} station games at {clock}, {ANCHOR} pinned at 0:"
+        f"Ratings from {len(results)} station games at {clock}, {anchor} pinned at 0:"
     )
     print(f"  {'Rank':>4}  {'Player':13} {'Games':>5}  {'Score':>6}  Elo vs WHITE")
     standings = []
@@ -256,7 +264,9 @@ def print_ratings(results: list[Result], clock: str) -> None:
     standings.sort()
     for rank, (_, name) in enumerate(standings, start=1):
         rating, margin = fitted[name]
-        share = 100 * scored[name] / played[name]
+        share = 0.0  # The anchor may have no games of its own
+        if played[name] > 0:
+            share = 100 * scored[name] / played[name]
         print(
             f"  {rank:>4}  {name:13} {played[name]:>5}  {share:5.1f}%  "
             f"{rating:+5.0f} +/- {margin:.0f}"
@@ -306,7 +316,12 @@ def main():
         "--event", default=LEAGUE_EVENT, help="the Event name of this league's games"
     )
     parser.add_argument("--player", help='also show one color\'s games, such as "GOLD"')
+    parser.add_argument(
+        "--niram", action="store_true", help="play the Rust versions in niram/"
+    )
     options = parser.parse_args()
+    engine = "Niram" if options.niram else "Remus"
+    anchor = f"{engine}-{YARDSTICK}"
     clock = time_control(options.minutes, options.increment)
     start = time.perf_counter()
     if not options.rate_only:
@@ -316,11 +331,12 @@ def main():
             options.increment,
             options.at_once,
             options.event,
+            engine,
         )
-    results = read_results(clock, options.event)
-    print_ratings(results, clock)
+    results = read_results(clock, options.event, engine)
+    print_ratings(results, clock, anchor)
     if options.player:
-        print_head_to_head(results, f"Remus-{options.player.upper()}")
+        print_head_to_head(results, f"{engine}-{options.player.upper()}")
     print(f"Total run time (sec): {time.perf_counter() - start:.3f}")
 
 

@@ -86,11 +86,8 @@ explain_evaluation()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run evaluation.py
-```
+Open `evaluation.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: Every part of the score for the start (all 0), then a centered knight worth +70.
 

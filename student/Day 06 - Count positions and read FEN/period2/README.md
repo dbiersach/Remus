@@ -4,7 +4,7 @@
 
 By the end of this period, each pair can:
 
-- Count the positions of the move tree with `perft()`. **Measured by:** `uv run perft.py` prints 20, 400, and 8,902 for depths 1 to 3.
+- Count the positions of the move tree with `perft()`. **Measured by:** Running `perft.py` prints 20, 400, and 8,902 for depths 1 to 3.
 - Explain why perft proves the rules right. **Measured by:** Exit ticket: one sentence on what a wrong count tells you.
 
 ## The files
@@ -25,7 +25,7 @@ In `student/` these functions raise `NotImplementedError` until a pair writes th
 
 Counts every position reached after exactly `depth` moves, by making each legal move, counting below it, and undoing it. The counts from the start (20, 400, 8,902) are published, so a match proves the rules right and a mismatch points to a bug.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit this period
 

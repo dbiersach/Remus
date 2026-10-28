@@ -1,12 +1,12 @@
 # Day 1, Period 4: board.py: the board and its square names
 
-`uv run show_board.py` draws the board as a picture in the web browser.
+Running `show_board.py` draws the board as a picture in the web browser.
 
 ## Learning objectives
 
 By the end of this period, each pair can:
 
-- Print the board with rank numbers and file letters. **Measured by:** `uv run board.py` prints the start board with 8 at the top and a to h below it.
+- Print the board with rank numbers and file letters. **Measured by:** Running `board.py` prints the start board with 8 at the top and a to h below it.
 - Convert between square names and (row, col) in both directions. **Measured by:** `test_board.py` passes, including e2 to (6, 4) and back.
 - Reject text that is not a square. **Measured by:** `parse_square("i9")` raises `ValueError`, and the pair explains which check catches it.
 
@@ -45,7 +45,7 @@ Does the reverse: turns e4 into (4, 4), and raises `ValueError` for text that is
 
 Unpacks a square into its row and column and returns the piece there. Almost every rule in Remus asks "what is on this square?", so this tiny function is the one they all call.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit this period
 

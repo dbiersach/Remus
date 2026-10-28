@@ -76,11 +76,8 @@ opponent()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run game_state.py
-```
+Open `game_state.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: The start board, `Side to move: w`, and the colors of a few pieces.
 

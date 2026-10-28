@@ -640,22 +640,22 @@ PERIOD_TITLES = {
 PERIOD_NOTES = {
     (1, 1): "Watch the finished Remus play in Lucas Chess, form pairs, and check that "
     "every laptop runs `uv run pytest`.",
-    (1, 4): "`uv run show_board.py` draws the board as a picture in the web browser.",
-    (3, 2): "`uv run show_board.py` draws an arrow for every move a generator returns.",
+    (1, 4): "Running `show_board.py` draws the board as a picture in the web browser.",
+    (3, 2): "Running `show_board.py` draws an arrow for every move a generator returns.",
     (5, 4): "Register `remus.bat` from this folder as an engine in Lucas Chess and "
     "play your own Remus. It plays random legal moves, and every special move works.",
     (6, 3): "The `bug_hunt` folder holds a copy of this period's Remus with three "
-    "planted bugs. `uv run hunt.py` inside it shows where the counts go wrong.",
+    "planted bugs. Running `hunt.py` inside it shows where the counts go wrong.",
     (7, 3): "Register `remus.bat` from this folder in Lucas Chess again: Remus now "
-    "plays greedy moves. `uv run play_match.py` plays random Remus against greedy Remus.",
+    "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
     (9, 2): "Each pair builds one color station in the `Stations` folder, such as "
     "`RED - Transposition table`. The code in this Day folder is Remus-WHITE, the "
     "starting point of every station.",
-    (10, 2): "`uv run phase_hunt.py` names the crystal phases in an X-ray powder "
+    (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
     (10, 4): "The tournament: each pair runs `uv run station_match.py <COLOR>` in "
     "the `Stations` folder, two 10-minute games of its color against Remus-WHITE, one "
-    "with each color, all pairs at once. `uv run estimate_elo.py` measures the Elo "
+    "with each color, all pairs at once. Running `estimate_elo.py` measures the Elo "
     "rating of Remus against Stockfish. Both add every game to games/remus_games.pgn "
     "at the top of the Remus folder.",
 }
@@ -913,8 +913,8 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         before = "This period comes before any Remus code. " if not files else ""
         sections.append(
             f"{before}The {kind} is `{name}.py` in `student/`, with the answers in "
-            f"`{name}_instructor.py` in `instructor/`. Run it with "
-            f"`uv run {name}.py`."
+            f"`{name}_instructor.py` in `instructor/`. Open `{name}.py` in VS Code "
+            "and run it with the Run Python File button (the triangle at the top right of the editor)."
         )
     if not files:
         if (day, period) not in LABS:
@@ -948,8 +948,9 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         sections.append(changes)
     if any(name.startswith("test_") for name in files):
         sections.append(
-            "Check the work from inside this folder with `uv run pytest`, and run any "
-            "file on its own, such as `uv run board.py`."
+            "Check the work with the tests: open a terminal in VS Code inside this "
+            "folder and type `uv run pytest`. To run one file on its own, such as "
+            "`board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor)."
         )
     return "\n\n".join(sections) + "\n"
 
@@ -971,7 +972,7 @@ def bug_hunt_readme(with_answers: bool) -> str:
         (
             "The Remus files in this folder are a copy of the Day 6, period 3 code, "
             "with three bugs planted in them. Each bug breaks one chess rule. Run "
-            "`uv run hunt.py` from inside this folder: it uses `divide()` to count "
+            "`hunt.py` from inside this folder in VS Code: it uses `divide()` to count "
             "the positions under every root move of four standard positions, and "
             "prints each root move where Remus and python-chess disagree."
         ),

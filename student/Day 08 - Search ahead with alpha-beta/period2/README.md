@@ -5,12 +5,12 @@
 By the end of this period, each pair can:
 
 - Explain an alpha-beta cutoff. **Measured by:** "Fewest flips": the pair reaches the right move while turning fewer cards than the whole tree.
-- Show that alpha-beta keeps the answer and saves work. **Measured by:** The `alpha_beta` tests pass, and `uv run compare_search.py` prints the same scores as negamax with fewer nodes.
+- Show that alpha-beta keeps the answer and saves work. **Measured by:** The `alpha_beta` tests pass, and running `compare_search.py` prints the same scores as negamax with fewer nodes.
 - Keep a list in order with `insert()`, start a best value at minus infinity, and time code. **Measured by:** `python_sorting.py` puts the queen first, finds the best victim, and prints the run time of `perft(3)`.
 
 ## The files
 
-The lab is `python_sorting.py` in `student/`, with the answers in `python_sorting_instructor.py` in `instructor/`. Run it with `uv run python_sorting.py`.
+The lab is `python_sorting.py` in `student/`, with the answers in `python_sorting_instructor.py` in `instructor/`. Open `python_sorting.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 New files this period:
 
@@ -41,7 +41,7 @@ Part #3 times `perft(3)` with `time.perf_counter()`, the clock that `compare_sea
 
 Does the same work as negamax, but carries two numbers: alpha, the score the mover is already sure of, and beta, the score the opponent will not allow. As soon as one move scores beta or more, the opponent would never let this position happen, so the other moves are skipped. The answer is the same as negamax, and far fewer positions are visited, so Remus can look deeper in the same time.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit this period
 
@@ -57,4 +57,4 @@ Lines to type in all: 16. Each stub is two comment lines that start with `# Day 
 
 Open `python_sorting.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
-Lines to type in all: 19. Check the work with `uv run python_sorting.py` and compare each printed result with the expected value beside it.
+Lines to type in all: 19. Check the work by running `python_sorting.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

@@ -34,11 +34,8 @@ The pair types 25 lines.
 
 ## Try it
 
-From inside `student/Day 01 - Draw the board/period3`, run:
-
-```bash
-uv run python_lists.py
-```
+Open `python_lists.py` in `student/Day 01 - Draw the board/period3` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: 8 pieces, `q` on the d-file, the starting position with Black at the top, and 7 White pawns left on rank 2.
 

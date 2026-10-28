@@ -33,11 +33,8 @@ The pair types 7 lines.
 
 ## Try it
 
-From inside `student/Day 09 - Add the clock and build the stations/period2`, run:
-
-```bash
-uv run python_caches.py
-```
+Open `python_caches.py` in `student/Day 09 - Add the clock and build the stations/period2` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: 8,902 twice, the second at once; 4.243 squares; and True.
 

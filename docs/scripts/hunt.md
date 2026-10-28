@@ -26,7 +26,7 @@ the same way it is in `test_perft.py`.
 
 ## How it works
 
-1. Run `uv run hunt.py` in `bug_hunt/` and read the root moves it prints.
+1. Run `hunt.py` in `bug_hunt/` in VS Code and read the root moves it prints.
 2. For each move, ask which rule that move or the replies to it need: castling, en passant, or promotion.
 3. Find the line in `bug_hunt/` that breaks the rule, fix it, and run the hunt again.
 
@@ -34,11 +34,8 @@ The pair fixes 3 lines.
 
 ## Try it
 
-From inside `student/Day 06 - Count positions and read FEN/period3/bug_hunt`, run:
-
-```bash
-uv run hunt.py
-```
+Open `hunt.py` in `student/Day 06 - Count positions and read FEN/period3/bug_hunt` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: 13 root moves that disagree before any fix, and 0 once all three bugs are fixed.
 
