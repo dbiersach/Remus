@@ -107,7 +107,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 9.7 | Exact, lower, upper | Three number lines showing what a stored bound proves for a new `(alpha, beta)` window |
 | 9.8 | Killer moves | Two slots per ply; a quiet move that caused a cutoff jumps the queue in sibling positions |
 | 9.9 | Principal variation search | The first move gets the full window; the rest get a null window `(alpha, alpha + 1)` and a re-search only on a surprise |
-| 9.10 | Null-move pruning | Remus passes the turn and searches 2 plies shallower; if the score still beats beta, the real moves are skipped |
+| 9.10 | Null-move pruning | Remus passes, so the opponent moves twice, and searches 2 plies shallower; if Remus still scores at least beta, the opponent would never allow the position, so its real moves are skipped |
 | 9.11 | Late move reductions | A move list with the first three moves at full depth and the late, quiet moves one ply shallower, with a re-search on a surprise |
 | 9.12 | Pawn structure | Doubled, isolated, and passed pawns on one diagram with their points |
 | 9.13 | King safety | A castled king with its three shield pawns, 15 points each while the enemy queen is on the board |

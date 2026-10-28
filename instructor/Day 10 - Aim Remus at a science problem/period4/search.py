@@ -615,8 +615,10 @@ def upgraded_search(
     - Principal variation search: the first move gets the full window; every other
       move first gets a null window (alpha, alpha + 1) that only asks "is this
       move better?", and is searched again in full only when the answer is yes.
-    - Null-move pruning: if passing the turn still scores at least beta in a
-      shallower search, a real move will too, so the position is cut off early.
+    - Null-move pruning: Remus passes, so the opponent moves twice, and runs a
+      shallower search. If Remus still scores at least beta, the opponent would
+      never allow this position, because a real move almost always beats a pass,
+      so the position is cut off early.
     - Late move reductions: late, quiet moves get a search one ply shallower,
       and a full-depth search only if they turn out better than alpha.
 

@@ -273,9 +273,11 @@ ORANGE_HELPERS = (
 
 ORANGE_SEARCH = station_search(
     "null_move_search",
-    """    The ORANGE station search: the Day 9 search plus null-move pruning. If the
-    side to move could pass and still score at least beta in a shallower search,
-    a real move will too, so the position is cut off early.""",
+    """    The ORANGE station search: the Day 9 search plus null-move pruning. The side
+    to move passes, so the opponent moves twice, and runs a shallower search. If
+    the side to move still scores at least beta, the opponent would never allow
+    this position, because a real move almost always beats a pass, so the
+    position is cut off early.""",
     [
         (
             """    first: Move | None = None,
@@ -800,8 +802,9 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
     },
     {
         "folder": "ORANGE - Null-move pruning",
-        "idea": "Pass the turn in a shallow search: if passing still wins, a real "
-        "move will too, so stop early.",
+        "idea": "Let the opponent move twice in a shallow search. If Remus is still "
+        "too far ahead, the opponent would never allow this position, so stop "
+        "searching it.",
         "copies": [],
         "edits": search_station(
             "ORANGE",
