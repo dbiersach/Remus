@@ -1,6 +1,6 @@
 # python_strings.py: Square names are text
 
-*Day 1, period 2. The lab file is `labs/day01/python_strings.py`, and the answers are in `labs/day01/instructor/python_strings_instructor.py`.*
+*Day 1, period 2. The lab file is `student/Day 01 - Draw the board/period2/python_strings.py`, and the answers are in `instructor/Day 01 - Draw the board/period2/python_strings_instructor.py`.*
 
 ## The big picture
 

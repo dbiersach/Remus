@@ -1,6 +1,6 @@
 # demo_results.py: Read a match result and explain a move
 
-*Day 10, period 4. The demo file is `labs/day10/demo_results.py`, and the answers are in `labs/day10/instructor/demo_results_instructor.py`.*
+*Day 10, period 4. The demo file is `student/Day 10 - Aim Remus at a science problem/period4/demo_results.py`, and the answers are in `instructor/Day 10 - Aim Remus at a science problem/period4/demo_results_instructor.py`.*
 
 ## The big picture
 

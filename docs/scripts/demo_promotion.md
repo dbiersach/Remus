@@ -1,6 +1,6 @@
 # demo_promotion.py: Why a pawn becomes a knight
 
-*Day 5, period 4. The demo file is `labs/day05/demo_promotion.py`, and the answers are in `labs/day05/instructor/demo_promotion_instructor.py`.*
+*Day 5, period 4. The demo file is `student/Day 05 - Add castling, en passant, and promotion/period4/demo_promotion.py`, and the answers are in `instructor/Day 05 - Add castling, en passant, and promotion/period4/demo_promotion_instructor.py`.*
 
 ## The big picture
 

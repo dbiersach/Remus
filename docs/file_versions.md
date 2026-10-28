@@ -48,13 +48,12 @@ Day 5, Period 2.
 
 Lab periods and review periods change no Remus code. Their folders are copies of the
 period before, so a pair can always open the newest folder. Each Python lab
-(`python_*.py`) and each demo (`demo_*.py`) comes from `labs/dayNN/` and lives only in
-its own period folder; the student folder holds the file with blanks, and the
+(`python_*.py`) and each demo (`demo_*.py`) lives only in its own period folder; the student folder holds the file with blanks, and the
 instructor folder holds the answer file `<name>_instructor.py`.
 
 | Period | New files | Changed files |
 | --- | --- | --- |
-| D1 P1 to P3 | No Remus code yet. Each folder holds its Python lab from `labs/day01/`: `python_setup.py` (P1), `python_strings.py` (P2), and `python_lists.py` (P3), with the answer file `<name>_instructor.py` in `instructor/` | None |
+| D1 P1 to P3 | No Remus code yet. Each folder holds its Python lab: `python_setup.py` (P1), `python_strings.py` (P2), and `python_lists.py` (P3), with the answer file `<name>_instructor.py` in `instructor/` | None |
 | D1 P4 | `board.py`, `show_board.py`, `test_board.py` | None |
 | D2 P1 | Lab 3: `python_functions.py` | None |
 | D2 P2 | Lab 4: `python_dicts.py` | None |

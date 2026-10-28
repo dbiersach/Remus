@@ -25,7 +25,6 @@ from period_guides import LABS
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
 STUDENT = ROOT / "student"
-LABS_FOLDER = ROOT / "labs"  # The Python skills labs, one folder per day
 MAX_TYPED_LINES = 40  # Most lines of code a pair types in one period
 EditRow = dict[str, Any]  # One function a pair writes: file, name, line, tests
 
@@ -351,6 +350,13 @@ def main():
         day = int(folder.parent.name[4:6])
         period = int(folder.name.removeprefix("period"))
         target = STUDENT / folder.parent.name / folder.name
+        lab_text = ""
+        if (day, period) in LABS:
+            # The lab file with blanks is written by hand in the student folder
+            lab_path = target / f"{LABS[(day, period)]}.py"
+            if not lab_path.exists():
+                raise FileNotFoundError(f"{lab_path} is hand-written; restore it")
+            lab_text = lab_path.read_text()
         if target.exists():
             shutil.rmtree(target)  # Rebuild each student period folder from scratch
         shutil.copytree(
@@ -379,7 +385,8 @@ def main():
             name = LABS[(day, period)]
             (target / f"{name}_instructor.py").unlink()
             lab_path = target / f"{name}.py"
-            shutil.copy2(LABS_FOLDER / f"day{day:02}" / f"{name}.py", lab_path)
+            lab_path.write_text(lab_text, newline="")
+            lab_path.chmod(0o755)  # Each script runs on its own
             count = lab_blanks(lab_path.read_text())
             typed[(day, period)] = typed.get((day, period), 0) + count
             row = {"file": f"{name}.py", "function": "", "typed": count}

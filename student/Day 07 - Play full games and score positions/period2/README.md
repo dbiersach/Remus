@@ -10,7 +10,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_input_output.py` in `student/`, with the answers in `python_input_output_instructor.py` in `instructor/`. Both come from `labs/day07/`. Run it with `uv run python_input_output.py`.
+The lab is `python_input_output.py` in `student/`, with the answers in `python_input_output_instructor.py` in `instructor/`. Run it with `uv run python_input_output.py`.
 
 New files this period:
 

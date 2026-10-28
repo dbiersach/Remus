@@ -12,7 +12,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The demo is `demo_results.py` in `student/`, with the answers in `demo_results_instructor.py` in `instructor/`. Both come from `labs/day10/`. Run it with `uv run demo_results.py`.
+The demo is `demo_results.py` in `student/`, with the answers in `demo_results_instructor.py` in `instructor/`. Run it with `uv run demo_results.py`.
 
 New files this period:
 

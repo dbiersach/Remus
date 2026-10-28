@@ -9,7 +9,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_fen_fields.py` in `student/`, with the answers in `python_fen_fields_instructor.py` in `instructor/`. Both come from `labs/day06/`. Run it with `uv run python_fen_fields.py`.
+The lab is `python_fen_fields.py` in `student/`, with the answers in `python_fen_fields_instructor.py` in `instructor/`. Run it with `uv run python_fen_fields.py`.
 
 New files this period:
 

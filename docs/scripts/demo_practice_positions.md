@@ -1,6 +1,6 @@
 # demo_practice_positions.py: Predict, then count
 
-*Day 4, period 4. The demo file is `labs/day04/demo_practice_positions.py`, and the answers are in `labs/day04/instructor/demo_practice_positions_instructor.py`.*
+*Day 4, period 4. The demo file is `student/Day 04 - Keep only legal moves/period4/demo_practice_positions.py`, and the answers are in `instructor/Day 04 - Keep only legal moves/period4/demo_practice_positions_instructor.py`.*
 
 ## The big picture
 

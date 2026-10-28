@@ -1,6 +1,6 @@
 # python_loops.py: Walk until something stops you
 
-*Day 3, period 1. The lab file is `labs/day03/python_loops.py`, and the answers are in `labs/day03/instructor/python_loops_instructor.py`.*
+*Day 3, period 1. The lab file is `student/Day 03 - Generate piece moves/period1/python_loops.py`, and the answers are in `instructor/Day 03 - Generate piece moves/period1/python_loops_instructor.py`.*
 
 ## The big picture
 

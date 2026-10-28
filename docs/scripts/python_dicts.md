@@ -1,6 +1,6 @@
 # python_dicts.py: A dict, a copy, and a dataclass
 
-*Day 2, period 2. The lab file is `labs/day02/python_dicts.py`, and the answers are in `labs/day02/instructor/python_dicts_instructor.py`.*
+*Day 2, period 2. The lab file is `student/Day 02 - Make and undo moves/period2/python_dicts.py`, and the answers are in `instructor/Day 02 - Make and undo moves/period2/python_dicts_instructor.py`.*
 
 ## The big picture
 
