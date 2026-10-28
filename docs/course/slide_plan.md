@@ -113,7 +113,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 9.13 | King safety | A castled king with its three shield pawns, 15 points each while the enemy queen is on the board |
 | 9.14 | Finishing a won endgame | The `mating_bonus` heat map: the losing king pushed to the edge, the winning king closing in |
 | 9.15 | The opening book | Book lines in SAN turned into a dict from `position_key` to moves, drawn as a small tree |
-| 9.16 | The tournament plan | Each color plays Remus-WHITE twice on Day 10, once with each color, at 10 minutes a side, all ten laptops at once; then Remus-GOLD against everyone from the teacher's league |
+| 9.16 | Reading a battle result | Two games, an Elo gap, and its margin of error from `demo_results.py`, beside the same color's 110 league games and their much narrower margin |
 | 9.17 | Color battles | The two rounds of pairings, how to copy a color folder from the USB stick over the host's folder, `play_battle.py`, and the class score table that the league table answers at the end |
 
 ## Day 10: Solve a science problem using chess AI
@@ -129,4 +129,4 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 10.7 | The tree of phase sets | The empty set at the root, one phase per branch, beside Remus's game tree; crossed-out branches that repeat a set in another order (821 sets down to 176) |
 | 10.8 | Verify | A bar chart over 200 known powders: greedy 166 right and 34 wrong; search 139 right, 52 can't tell, 9 wrong; the gold and silver peaks side by side |
 | 10.9 | The real thing | CrystalShift and Dara search the same tree on real synchrotron data; Brookhaven's Crystallography Companion Agent names phases live at the NSLS-II PDF beamline; the gpCAM agent at the CMS beamline chooses where to measure next |
-| 10.10 | The round robin | The circle method for 10 entrants: one fixed, the rest rotate; 9 rounds, 45 games |
+| 10.10 | Our results | The class results table: each pair's hidden-peak measurements against random, and greedy and search counts on the 200 powders |

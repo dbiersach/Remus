@@ -237,8 +237,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   written by hand, and the builders read them before a rebuild and write them back,
   so edit a lab in place. Every period that has no Remus
   function for the pairs holds a lab or a short demo (`demo_*.py`) with blanks,
-  except Day 9, period 4 (David, 2026-10-28): the pairs carry their color versions
-  on USB drives to other laptops and play battles with `play_battle.py`.
+  except Day 10, period 4 (David, 2026-10-28), where the pairs report their science
+  results and take their code home. Day 10 is about the science only; the chess
+  matches end with the Day 9 battles.
   Demos that use the engine run only inside their period folder. Day 6, period 3
   also gets `bug_hunt/`, which `make_period_folders.py` builds by planting the three
   bugs of `PLANTED_BUGS` in a copy of the period's code.
@@ -254,8 +255,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   top Remus folder from its own path, so it
   runs from the top folder with `uv run scripts/<name>.py`. Students never open
   `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
-  `version_match.py` in the Day 9 `period2/engines` folder for the battles and the
-  Day 10 tournament, and `play_match.py`, `estimate_elo.py`, and the tests inside their
+  `version_match.py` in the Day 9 `period2/engines` folder for the battles, and `play_match.py`, `estimate_elo.py`, and the tests inside their
   period and version folders. Put a new teacher tool in `scripts/`, and list every
   script there in `scripts/README.md` with what it does (David, 2026-10-28).
 - `period4` holds the finished code of the day, and it is the only period folder to

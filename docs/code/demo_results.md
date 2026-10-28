@@ -1,22 +1,22 @@
-# demo_results.py: Read a match result
+# demo_results.py: Read a battle result
 
-*Day 10, period 4. The demo file is `student/Day 10 - Solve a science problem using chess AI/period4/demo_results.py`, and the answers are in `instructor/Day 10 - Solve a science problem using chess AI/period4/demo_results_instructor.py`.*
+*Day 9, period 4. The demo file is `student/Day 09 - Add the clock and build the color versions/period4/demo_results.py`, and the answers are in `instructor/Day 09 - Add the clock and build the color versions/period4/demo_results_instructor.py`.*
 
 ## The big picture
 
 A match ends with a score, but luck plays a part, and luck plays a larger part the
 fewer games there are. This demo turns wins, draws, and losses into an Elo gap and a
 margin of error, and says whether the result shows a real difference. A pair puts in
-its two tournament games first, then its color's games from the teacher's league,
+its two battle games first, then its color's games from the teacher's league,
 and sees the margin shrink as the games add up.
 
 ## Where this piece fits
 
-The demo runs in the Day 10, period 4 folder and uses only Python's `math` module.
+The demo runs in the Day 9, period 4 folder, during the second round of battles, and uses only Python's `math` module.
 `estimate_elo.py` and `version_league.py` fit ratings with the same Elo formula.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; each pair uses it to present its color version's result
+- **Used by:** nothing; each pair uses it to read its battle and its color's league result
 
 ## Words to know
 
@@ -33,7 +33,7 @@ The pair types 13 lines.
 
 ## Try it
 
-Open `demo_results.py` in `student/Day 10 - Solve a science problem using chess AI/period4` in VS Code, and click the Run Python File button (the
+Open `demo_results.py` in `student/Day 09 - Add the clock and build the color versions/period4` in VS Code, and click the Run Python File button (the
 triangle at the top right of the editor).
 
 You should see: 11.0 points of 20, a gap of +35 between -121 and +208, and "more games are needed".

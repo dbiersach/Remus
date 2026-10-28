@@ -91,7 +91,7 @@ version, and student
 folders, `period_guides.py` with the README text, the test runner, the league and
 Stockfish rating scripts, and the Niram benchmark. Students never open it.
 `version_match.py` stays in the Day 9 `period2/engines` folders, because every pair
-runs it there in the Day 9 battles and the Day 10 tournament.
+runs it there in the Day 9 battles.
 
 ## The puzzle box and its pieces
 
@@ -158,8 +158,8 @@ The pages, in the order the class builds them:
 | [`transposition_table.py`](transposition_table.md) | Remember positions already searched |
 | [`opening_book.py`](opening_book.md) | Play known openings without thinking |
 | [`estimate_elo.py`](estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
-| [`demo_results.py`](demo_results.md) | Day 10 demo: read a match result |
-| [`version_match.py`](../engines/remus_versions.md) | Plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |
+| [`demo_results.py`](demo_results.md) | Day 9 demo: read a battle result |
+| [`version_match.py`](../engines/remus_versions.md) | Plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements, or against another color: the Day 9 battles |
 | [`scripts/version_league.py`](../engines/remus_versions.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](hidden_peak.md) | Science AI: find the hidden peak |
 | [`phase_hunt.py`](phase_hunt.md) | Science AI: name the crystals in a powder |

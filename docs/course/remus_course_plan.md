@@ -49,7 +49,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 7 | A whole game, and judging a position | `random`, a loop that keeps the best so far, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
 | 8 | Searching ahead, then smarter | Recursion review, keeping a list in order with `insert` | Minimax, negamax, alpha-beta, quiescence, move ordering |
 | 9 | The clock and the color versions | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one color version per pair; battles between the colors |
-| 10 | Solve a science problem using chess AI | `math.dist`, `random.seed`, `append` and `pop` as make and undo | A measurement AI that finds a hidden peak; a phase hunt that names the crystals in an X-ray pattern; results and the tournament against Remus-WHITE |
+| 10 | Solve a science problem using chess AI | `math.dist`, `random.seed`, `append` and `pop` as make and undo | A measurement AI that finds a hidden peak; a phase hunt that names the crystals in an X-ray pattern; each pair reports its science results |
 
 Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special move
 in place, and Week 2 opens with recursion and perft. Perft on Monday gives every pair a
@@ -459,8 +459,11 @@ moves" milestone.
   visitor's color. The two colors play twice at 10 minutes a side, once with each
   color, and each pair writes the score on the board. The class reads the board and
   asks why two games prove little; the teacher then shows the league table from
-  `docs/engines/remus_versions.md`, 110 games for each color. Each host runs
-  `git restore` on the visitor's folder before the end of the period.
+  `docs/engines/remus_versions.md`, 110 games for each color. While round 2 runs, each
+  pair puts its round 1 score into the demo `demo_results.py`, which turns it into an
+  Elo gap with a margin of error, then tries its color's 110 league games and sees the
+  margin shrink. Each host runs `git restore` on the visitor's folder before the end
+  of the period.
 
 **Checkpoint `d9-p4-end`:** every color version passes its tests and its one-game smoke
 test, and has played two battles against other colors.
@@ -516,28 +519,23 @@ test, and has played two battles against other colors.
   Crystallography Companion Agent, which answers the same question live at the PDF
   beamline. A "can't tell" sends the scientist back for a second measurement, such as
   X-ray fluorescence, which tells gold from silver at once.
-- **P4. Results, tournament, take-home, and wrap-up.** The tournament comes first.
-  Every pair opens `play_tournament.py` in its color folder in Day 9 `period2/engines` and
-  presses Run in VS Code on its own laptop, all ten at once: its color plays two 10-minute games against
-  Remus-WHITE from the same opening, with White in game 1 and Black in game 2. The two
-  games run side by side and take about 20 to 30 minutes, while each student copies
-  the pair's repository to their own USB drive with `git clone --no-hardlinks` and
-  checks that the copy opens. Each pair writes its two results on the board. Then the
-  teacher shows Remus-GOLD's results against every color and Remus-WHITE from the
-  teacher's league (`uv run scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD`),
-  and Remus-GOLD's Stockfish rating (about 1960 at 10 minutes a game, from
-  [`remus_elo.md`](../engines/remus_elo.md)), as a class discussion: two games cannot tell
-  one enhancement from another, and 110 games barely can. In `demo_results.py` each
-  pair turns its two games, and then its color's 110 league games, into an Elo gap with
-  a margin of error and lets Remus explain one move. Each pair then
-  explains one move its engine chose, with the score and principal variation, and one
-  powder its phase hunt named. Close with what comes next: bitboards, Zobrist
-  hashing, endgame tablebases, and a stronger "Manishtushu" engine.
+- **P4. Science results, take-home, and wrap-up.** Day 10 stays on the science; the
+  chess matches end with the Day 9 battles. First each student copies the pair's
+  repository to a USB drive with `git clone --no-hardlinks` and checks that the copy
+  opens and runs `uv run pytest`. Then each pair runs `hidden_peak.py` and
+  `phase_hunt.py` once more and fills in a results table: how many measurements its
+  `choose_next_measurement()` needs against random guessing, and the right, wrong, and
+  can't-tell counts of greedy and search on the 200 powders. The class collects every
+  pair's numbers on the board and asks why the pairs' counts agree or differ. Each
+  pair then picks one powder its search named and one it answered with "can't tell",
+  works out which second measurement would settle it, and presents both in three
+  minutes. Close with what comes next: AI agents that steer real experiments at light
+  sources such as NSLS-II.
 
 **Checkpoint `d10-p4-end`:** every pair's `choose_next_measurement()` beats random
 guessing on the 100-grid benchmark, every pair's `search()` makes fewer wrong calls
-than greedy on the 200-powder benchmark, and the tournament games finished with no illegal
-moves, crashes, or lost synchronization.
+than greedy on the 200-powder benchmark, and every pair has reported its results and
+taken its code home.
 
 ## Code breakdown by day
 
@@ -561,7 +559,7 @@ The full description of each script is in `docs/code/`.
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
 | `Day 09 - Add the clock and build the color versions` | `play_battle.py` in each color version folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the color versions live in `period2/engines` |
-| `Day 10 - Solve a science problem using chess AI` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`, the demo `demo_results.py`. The Day 10 engine is Remus-GOLD in the teacher's Day 9 `period2/engines/Remus-GOLD`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
+| `Day 10 - Solve a science problem using chess AI` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`. The Day 10 engine is Remus-GOLD in the teacher's Day 9 `period2/engines/Remus-GOLD`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
 
 Outside the Day folders:
 
@@ -593,7 +591,7 @@ engine, and the engine never imports it.
 1. **GUI play through UCI.** Lucas Chess starts a launcher and talks to Remus over stdin and
    stdout. `remus.bat` changes to its own folder and runs `uv run python
    uci_engine.py`.
-2. **Matches and the tournament.** `play_match.py` and `version_match.py` use
+2. **Matches and the battles.** `play_match.py` and `version_match.py` use
    `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes and play them
    on a `chess.Board`, and `version_match.py` saves every game as PGN with `chess.pgn`.
    python-chess rejects any illegal move

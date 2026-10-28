@@ -22,7 +22,7 @@ By 4:30, each pair can:
 | | 12:00 to 1:00 | Lunch | |
 | P3 | 1:00 to 2:30 | Color versions: test and measure | Their color version's functions, from the version README |
 | | 2:30 to 3:00 | Break | |
-| P4 | 3:00 to 4:30 | Color battles | Nothing: teacher code |
+| P4 | 3:00 to 4:30 | Color battles | The demo `demo_results.py` (13 lines) |
 
 ## Period 1, 8:30 to 10:00: Iterative deepening, the clock, and UCI info
 
@@ -61,7 +61,8 @@ By 4:30, each pair can:
 | --- | --- |
 | 3:00 to 3:10 | Slides: how a battle works. Each pair copies its own color folder from `period2/engines` onto its USB stick. The teacher posts the pairings for two rounds; in each round five pairs host and five visit. |
 | 3:10 to 3:40 | Round 1. The visiting pair copies its color folder over the folder of the same color in the host laptop's `engines` folder. The host opens `play_battle.py` in its own color folder, presses Run in VS Code, and types the visitor's color. Two 10-minute games run side by side, one with each color. Each pair writes the score on the board. |
-| 3:40 to 4:10 | Round 2: the pairs that visited now host, against new opponents. |
+| 3:40 to 3:45 | Round 2: the pairs that visited now host, against new opponents. |
+| 3:45 to 4:10 | While the round 2 games run, each pair turns its round 1 result into an Elo gap with a margin of error in `demo_results.py`, then tries its color's league games. |
 | 4:10 to 4:25 | The class reads the board: which colors won, and why two games prove little. The teacher shows the league table, 110 games for each color, and compares. |
 | 4:25 to 4:30 | Each host restores the visitor's folder with `git restore` so its own repository holds only its own color. |
 

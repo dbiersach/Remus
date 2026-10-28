@@ -75,7 +75,7 @@ The evaluation color versions (PURPLE, CYAN, GRAY) add one term to `evaluate()` 
 line to `explain_evaluation()`. The GREEN color version asks the book before searching, in
 both `uci_engine.py` and `console_game.py`.
 
-## The Day 10 tournament: version_match.py
+## The Day 9 battles: version_match.py
 
 `version_match.py`, in `period2/engines`, plays a color version's Remus against Remus-WHITE,
 or against another color version, at 10 minutes a side. It adds every game to
@@ -88,14 +88,13 @@ uv run version_match.py RED --games 1 --minutes 2
                                        # the Day 9 smoke test: one short game
 ```
 
-Pairs never type these commands. Every color folder holds three short scripts that run
+Pairs never type these commands. Every color folder holds two short scripts that run
 `version_match.py` for its own color, so a pair opens one in VS Code and presses Run:
 
 | Script | When | What it plays |
 | --- | --- | --- |
 | `smoke_test.py` | Day 9, period 3 | One 2-minute game against Remus-WHITE, to show the engine plays legal moves to the end |
 | `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting color version, one with each color |
-| `play_tournament.py` | Day 10, period 4 | The tournament: two 10-minute games against Remus-WHITE, one with each color |
 
 In the Day 9 battles a visiting pair brings its color folder on a USB drive and
 copies it over the folder of the same color in the host's `period2/engines`, which
@@ -105,17 +104,12 @@ color, such as `RED`. The two colors play twice from the same opening, once with
 color, about 20 minutes for both games. Each battle goes on the board as a row of the
 class table, and the period has room for two rounds. At the end of the period each
 host runs `git restore` on the visitor's folder, which puts the stubs back, so the
-laptop holds only its own pair's code. The teacher then shows the league table below,
-which rates every color from 110 games: two games show who won a battle, not which
-idea is stronger.
-
-In the Day 10 tournament every pair presses Run on `play_tournament.py` on its own
-laptop, all ten at once. Its color plays two games against Remus-WHITE from the same
-opening: White in game 1 and Black in game 2. The two games run side by side and take
-about 20 minutes, 30 with setup. Each pair writes its two results on the board. Two
-games cannot show whether an enhancement helps, so the script prints no Elo gap for
-fewer than 10 games. The teacher then shows Remus-GOLD's score against every color
-and Remus-WHITE from the teacher's league, run from the top Remus folder:
+laptop holds only its own pair's code. Two games cannot show which enhancement is
+stronger, so the script prints no Elo gap for fewer than 10 games; while round 2
+runs, each pair puts its round 1 score into `demo_results.py` and sees how wide the
+margin of error is. The teacher then shows the league table below, which rates every
+color from 110 games, and Remus-GOLD's score against every color and Remus-WHITE,
+run from the top Remus folder:
 
 ```bash
 uv run scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD

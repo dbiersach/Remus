@@ -8,7 +8,7 @@ By the end of Day 9, each pair can:
 
 - Explain the idea of the color version's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `uv run pytest` passes in the version folder.
-- Run a fair experiment against Remus-WHITE: same opening, both colors. **Measured by:** In the Day 10 tournament, `play_tournament.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the pair presses Run in VS Code, and the pair says why two games cannot show whether the enhancement helps.
+- Run a fair experiment: same opening, both colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the pair presses Run in VS Code, and the pair says why two games cannot show which enhancement is stronger.
 
 ## The idea, with an example
 
@@ -41,7 +41,7 @@ Fewer positions for the same depth, most of all in quiet middlegame positions wi
 
 ## The files
 
-This folder is Remus-WHITE, the finished Day 9 Remus in the `period2` folder above, plus this one enhancement. The pair writes `remember_killer()` in `search.py`, `order_moves()` in `move_ordering.py`, `test_killers_keep_two_quiet_moves()` in `test_upgrades.py`.
+This folder is Remus-WHITE, the finished Day 9 Remus in `period1`, plus this one enhancement. The pair writes `remember_killer()` in `search.py`, `order_moves()` in `move_ordering.py`, `test_killers_keep_two_quiet_moves()` in `test_upgrades.py`.
 
 ## The changes and why
 
@@ -59,4 +59,4 @@ Feeds three cutoff moves to `remember_killer()` and checks that only the two new
 
 ## Check it
 
-Check the work from inside this folder with `uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: Remus-BLUE plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, copy the visiting pair's color folder into the `engines` folder, open `play_battle.py`, press Run, and type the visitor's color: Remus-BLUE plays it twice at 10 minutes a side, once with each color. In the Day 10 tournament, open `play_tournament.py` and press Run: Remus-BLUE plays Remus-WHITE twice, once with each color, at 10 minutes a side, and both games go into games/remus_games.pgn. Each script runs `version_match.py` from the `engines` folder above this one.
+Check the work from inside this folder with `uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: Remus-BLUE plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, copy the visiting pair's color folder into the `engines` folder, open `play_battle.py`, press Run, and type the visitor's color: Remus-BLUE plays it twice at 10 minutes a side, once with each color, and both games go into games/remus_games.pgn. Each script runs `version_match.py` from the `engines` folder above this one.

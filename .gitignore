@@ -20,7 +20,7 @@ tasks/
 # Pictures that show_board.py saves beside itself
 board.svg
 
-# The class games file: every game that play_match.py, tournament.py, and
+# The class games file: every game that play_match.py, version_match.py, and
 # estimate_elo.py play stays on the computer that played it
 /games/
 
