@@ -32,7 +32,7 @@ import sys
 from pathlib import Path
 
 from make_student_folders import STUDENT_FUNCTIONS
-from period_guides import CHANGE_NOTES, LAB_NOTES, LABS, OBJECTIVES
+from period_guides import CHANGE_NOTES, LAB_NOTES, LABS, OBJECTIVES, PERIOD_GUIDES
 
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
@@ -915,6 +915,8 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     if (day, period) in PERIOD_NOTES:
         sections.append(PERIOD_NOTES[(day, period)])
     sections.append(objectives_section(day, period))
+    if (day, period) in PERIOD_GUIDES:
+        sections.append(PERIOD_GUIDES[(day, period)])
     new_files = [name for name in files if name not in files_before]
     grown_files = [
         name

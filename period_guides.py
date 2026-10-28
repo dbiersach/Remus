@@ -1145,6 +1145,173 @@ STATION_MEASURES = {
     "GRAY": {"nodes": 459_732, "seconds": 93.3, "depth": 3.1},
 }
 
+# Picture folder, as a path from a period README (instructor/ or student/, Day, period)
+PHASE_HUNT_IMAGES = "../../../docs/images/phase_hunt"
+
+# A longer illustrated guide for a period that needs more than the objectives and
+# change notes, written into the README right after the objectives.
+# make_phase_hunt_figures.py draws the pictures.
+PERIOD_GUIDES = {
+    (10, 2): f"""## The experiment: what is in this powder?
+
+Scientists at Brookhaven National Laboratory mix chemicals, heat them, and get a
+gray powder. Did they make the new material they wanted, or something else? The
+powder looks the same either way. To find out, they take it to a beamline at the
+National Synchrotron Light Source II (NSLS-II), one of the brightest X-ray sources
+in the world, and shine its X-ray beam through the powder.
+
+![The experiment: X-rays go through a powder and make rings on a detector, and the
+rings turn into a pattern of peaks]({PHASE_HUNT_IMAGES}/experiment.png)
+
+A powder is millions of tiny crystals. In a crystal, the atoms sit in rows, as
+neatly as the squares of a chessboard. The rows bounce the X-rays off at a few
+special angles, so the detector shows bright rings. Each ring becomes a **peak**
+in the pattern on the right. The angle of a peak is called **2θ** ("two theta"),
+measured in degrees.
+
+## Every crystal has a fingerprint
+
+Each kind of crystal, called a **phase**, has its own spacing between its rows of
+atoms. So each phase makes peaks at its own angles: a fingerprint. Bragg's law, a
+rule from 1913, turns the spacing into the angles. `phase_hunt.py` holds the
+fingerprints of ten real phases, with their four strongest peaks each, in the
+dictionary `LIBRARY`.
+
+![The fingerprints of the ten phases in the library, each a row of four colored
+peaks, with where you meet each one]({PHASE_HUNT_IMAGES}/fingerprints.png)
+
+Look closely: gold and silver have almost the same fingerprint. That will matter
+later.
+
+## The mystery powder
+
+A powder can hold two or three phases at once. Then the pattern shows **all** their
+peaks together, and the job is to work out which fingerprints were mixed. Here is
+powder 23 from the benchmark. `make_pattern(23)` makes it.
+
+![A pattern with eight peaks. Which crystals made them?]({PHASE_HUNT_IMAGES}/mystery_powder.png)
+
+Real patterns are messy, and `make_pattern()` makes them messy on purpose. A real
+peak lands a little away from its library angle (up to 0.15 degrees here), and a
+weak peak can hide in the noise (each peak shows up 85 times out of 100). So two
+peaks count as the same peak when they are within `TOLERANCE`, 0.3 degrees.
+
+## What Remus is searching
+
+In chess, Remus tries moves, looks at each position, and keeps the best. In the
+phase hunt, the program tries **guesses**. A guess is a set of phases, such as
+silicon + halite. Adding a phase to the guess is like making a move, and taking it
+back out is like undoing it. The program scores every guess and keeps the best one.
+
+| Chess engine | Phase hunt |
+| --- | --- |
+| A position | A guess: the set of phases chosen so far |
+| Legal moves | The phases in the library that are not in the guess yet |
+| `make_move()` and `undo_move()` | `phases.append(name)` and `phases.pop()` |
+| `material()`, the evaluation | `score()`: how well the guess explains the peaks |
+| `greedy_move()` | `greedy_phases()`: add the phase that helps most, again and again |
+
+## Your first function: `score()`
+
+`score(phases, measured)` grades a guess, the way a teacher grades a test. It looks
+at every peak twice:
+
+1. For each **measured** peak (a dot in the picture): +1 if a phase in the guess
+   explains it (green ✓), -1 if no phase does (orange ?).
+2. For each **predicted** peak (a stick): -1 if the pattern does not show it
+   (red ✗). A real phase would have made that peak.
+3. Then -1 for each phase in the guess, so that a simpler explanation wins a tie.
+
+![Three guesses for powder 23, each peak marked explained, left over, or missing,
+with the points for each]({PHASE_HUNT_IMAGES}/scoring.png)
+
+Silicon alone explains 4 peaks and leaves 4 over: 4 - 4 - 0 - 1 = -1 point.
+Silicon + halite explains all 8: 8 - 0 - 0 - 2 = 6 points. Adding zincite explains
+nothing new, and two of its peaks are missing: 8 - 0 - 2 - 3 = 3 points. The best
+guess is the one with the most points.
+
+The helpers `predicted_peaks(phases)` (every peak of every phase in the guess, in one
+list) and `matches(peak, peaks)` (is some peak within `TOLERANCE`?) are finished, so
+`score()` needs only two loops and a few `+=` and `-=` lines.
+
+## Your second function: `greedy_phases()`
+
+`greedy_phases(measured)` builds a guess one phase at a time. At each step it tries
+adding every phase that is not in the guess yet (`append`), scores the guess, takes
+the phase back out (`pop`), and remembers the phase with the best score. If that
+phase raises the score, it stays. If no phase helps, the guess is finished.
+
+![Greedy on powder 23: step 1 picks silicon, step 2 picks halite, step 3 finds
+nothing that helps and stops]({PHASE_HUNT_IMAGES}/greedy_steps.png)
+
+In step 1, silicon and halite tie at -1. Greedy keeps the first one it found,
+silicon, and picks up halite in step 2. On powder 23 greedy gets the right answer.
+
+## Where greedy goes wrong
+
+Greedy never looks back, and it never doubts. Powder 12 holds anatase and silver.
+Silver's peaks sit less than 0.3 degrees from gold's, so the peaks fit gold exactly
+as well. Gold comes first in the library, so greedy says "anatase and gold" and
+sounds just as sure as when it is right.
+
+![Gold's and silver's four peaks side by side, each pair inside the 0.3 degree
+tolerance]({PHASE_HUNT_IMAGES}/gold_and_silver.png)
+
+Run `uv run phase_hunt.py` when both functions pass their tests. Greedy names 166 of
+the 200 benchmark powders right and 34 wrong. In period 3 you write `search()`, which
+scores every guess of up to three phases, 176 of them, and keeps every guess that
+ties for the best score. When gold and silver tie, the search can answer "can't
+tell", and a scientist knows to take a second measurement.
+
+## Real scientists do this
+
+Naming the phases in a powder pattern is called **phase identification**, and
+beamline scientists do it every day. At the NSLS-II Pair Distribution Function (PDF)
+beamline, Brookhaven's Crystallography Companion Agent names phases while the data
+comes in. The CrystalShift program (Cornell, 2025) and the Dara program (Berkeley Lab,
+2025) search a tree of phase sets the way your code will in period 3, on real
+patterns from the synchrotrons SSRL and CHESS and from a self-driving lab.
+`docs/science_tree_search_survey.md` lists the papers.
+
+## Words to know
+
+- **phase:** one kind of crystal, such as quartz. A powder can mix several phases.
+- **peak:** a bright spot in the X-ray pattern, at an angle called 2θ.
+- **fingerprint:** the list of a phase's peaks, in `LIBRARY`.
+- **tolerance:** how close two peaks must be, 0.3 degrees, to count as one peak.
+- **guess:** a set of phases that might explain the pattern.
+- **greedy:** always take the step that looks best right now, and never go back.""",
+    (10, 3): f"""## The tree you search
+
+In period 2, `greedy_phases()` built one guess, one phase at a time. In this period,
+`search()` scores **every** guess of up to three phases. The guesses form a tree,
+like Remus's game tree: the empty guess at the top, one more phase on each level
+down. Going down a branch adds a phase (`append`, like making a move), and coming
+back up takes it out (`pop`, like undoing it). The period 2 README explains the
+experiment and the score.
+
+![The tree of guesses for powder 23, using 4 of the 10 phases and 2 levels, with
+the score of each guess; silicon + halite scores best]({PHASE_HUNT_IMAGES}/search_tree.png)
+
+Silicon + halite is the same guess as halite + silicon, just as two move orders can
+reach the same chess position. So `search()` adds phases only in library order,
+from `PHASE_NAMES[start]` on. With 10 phases and 3 levels, that scores 176 guesses
+instead of 821.
+
+`search()` keeps every guess that ties for the best score in `hunt.sets`, not just
+the first. When the answer is one guess, the search is sure. When gold and silver tie,
+the answer holds both, and the verdict is "can't tell".
+
+![Over 200 powders, greedy is right 166 times and wrong 34 times; the search is
+right 139 times, says can't tell 52 times, and is wrong 9
+times]({PHASE_HUNT_IMAGES}/verdicts.png)
+
+Greedy names more powders right, because it guesses gold every time and gold is
+right half the time. The search is wrong far less often, and it says so when the
+pattern cannot decide. A scientist then takes a second measurement, such as X-ray
+fluorescence, which tells gold from silver at once.""",
+}
+
 # (file, function) -> one paragraph: what the change does, why, and the big picture
 CHANGE_NOTES = {
     ("board.py", "print_board"): "Prints the board one row at a time, with the rank "

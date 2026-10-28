@@ -7,6 +7,36 @@ By the end of this period, each pair can:
 - Search every set of phases with make and undo, as Remus searches moves. **Measured by:** The `search` tests pass: the phases list comes back unchanged, and the search scores 176 sets, one for each set of up to three phases.
 - Verify a method against known answers, and say when the data cannot decide. **Measured by:** `uv run phase_hunt.py` shows the search making fewer wrong calls than greedy, and the pair names the extra measurement that would tell gold from silver.
 
+## The tree you search
+
+In period 2, `greedy_phases()` built one guess, one phase at a time. In this period,
+`search()` scores **every** guess of up to three phases. The guesses form a tree,
+like Remus's game tree: the empty guess at the top, one more phase on each level
+down. Going down a branch adds a phase (`append`, like making a move), and coming
+back up takes it out (`pop`, like undoing it). The period 2 README explains the
+experiment and the score.
+
+![The tree of guesses for powder 23, using 4 of the 10 phases and 2 levels, with
+the score of each guess; silicon + halite scores best](../../../docs/images/phase_hunt/search_tree.png)
+
+Silicon + halite is the same guess as halite + silicon, just as two move orders can
+reach the same chess position. So `search()` adds phases only in library order,
+from `PHASE_NAMES[start]` on. With 10 phases and 3 levels, that scores 176 guesses
+instead of 821.
+
+`search()` keeps every guess that ties for the best score in `hunt.sets`, not just
+the first. When the answer is one guess, the search is sure. When gold and silver tie,
+the answer holds both, and the verdict is "can't tell".
+
+![Over 200 powders, greedy is right 166 times and wrong 34 times; the search is
+right 139 times, says can't tell 52 times, and is wrong 9
+times](../../../docs/images/phase_hunt/verdicts.png)
+
+Greedy names more powders right, because it guesses gold every time and gold is
+right half the time. The search is wrong far less often, and it says so when the
+pattern cannot decide. A scientist then takes a second measurement, such as X-ray
+fluorescence, which tells gold from silver at once.
+
 ## The files
 
 Files that grow this period:
