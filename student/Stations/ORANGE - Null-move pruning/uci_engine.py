@@ -6,12 +6,12 @@ The GUI sends one command per line on standard input, and Remus answers on stand
 output. Debug text goes to standard error, where the GUI ignores it.
 
 The first argument picks the brain: "random", "greedy", "negamax", or "think" (the
-default), which searches deeper and deeper until its time is up. The search runs in a
-thread, so Remus can still answer "isready" and obey "stop" while it thinks.
+default), which searches deeper and deeper until its time is up. Remus reads one
+command, answers it, and only then reads the next, so a search always ends with a
+"bestmove" before Remus listens again.
 """
 
 import sys
-import threading
 
 from fen import START_FEN, state_from_fen
 from legal_moves import legal_moves
@@ -99,24 +99,14 @@ def thinking_time(words: list[str], white_to_move: bool) -> float:
     return DEFAULT_SECONDS
 
 
-def search_and_send(state: dict, seconds: float, stop: threading.Event) -> None:
-    """Think in the background, then send the best move to the GUI."""
-    move = think(state, seconds, stop=stop, report=send)
-    send(f"bestmove {move_to_uci(move)}")
-
-
 def main():
     brain_name = sys.argv[1] if len(sys.argv) > 1 else "think"
     state = state_from_fen(START_FEN)
-    stop = threading.Event()
-    worker = None
     for line in sys.stdin:
         words = line.split()
         if not words:
             continue
         command = words[0]
-        if worker is not None and command in ("position", "ucinewgame", "go"):
-            worker.join()  # Finish the last search before changing the position
         if command == "uci":
             send("id name Remus")
             send("id author Turning a Chess Engine into Science AI")
@@ -133,21 +123,15 @@ def main():
             elif brain_name in BRAINS:
                 send(f"bestmove {move_to_uci(BRAINS[brain_name](state))}")
             else:
-                stop.clear()
                 seconds = thinking_time(words, state["turn"] == "w")
-                worker = threading.Thread(
-                    target=search_and_send, args=(state, seconds, stop)
-                )
-                worker.start()
+                move = think(state, seconds, report=send)
+                send(f"bestmove {move_to_uci(move)}")
         elif command == "stop":
-            stop.set()
+            pass  # Each search ends on its own clock before Remus reads "stop"
         elif command == "quit":
-            stop.set()
             break
         else:
             print(f"Remus ignores: {line.strip()}", file=sys.stderr)
-    if worker is not None:
-        worker.join()  # Input ended: let the last search send its move
 
 
 if __name__ == "__main__":

@@ -23,7 +23,6 @@ A first, small version arrives on Day 5, period 4. It follows games from the sta
 - **UCI:** Universal Chess Interface, the text language between chess GUIs and engines.
 - **GUI:** graphical user interface: the window with the board you click on.
 - **standard input and output:** the lines a program reads in and prints out.
-- **thread:** a second line of work that runs at the same time as the first.
 
 ## What it stores
 
@@ -45,7 +44,7 @@ Lucas Chess -> go wtime 60000 btime 60000   Remus -> info depth 3 ... bestmove e
    it never counts the last 3 seconds, because sending each move costs a little time
    the search does not see. Without that reserve, a long game with no increment
    runs the clock out.
-5. `search_and_send()` runs `think()` in a thread, so Remus can still answer `isready` and `stop`.
+5. On `go`, `think()` searches until its time is up, and Remus sends `bestmove` before it reads the next command.
 6. `send()` prints each answer and flushes it right away.
 
 ## Call tree
@@ -65,11 +64,9 @@ main()
     book_move()  [opening_book.py]
     legal_moves()  [legal_moves.py]
     thinking_time()
+    think()  [search.py]
     move_to_uci()  [moves.py]
-    search_and_send()
-        think()  [search.py]
-        send()
-        move_to_uci()  [moves.py]
+    send()
 ```
 
 ## The functions
@@ -79,12 +76,11 @@ main()
 | `send` | Sends one line to Lucas Chess right away. | Day 5, period 4 |
 | `set_position` | Builds the game state from a position command. | Day 5, period 4 |
 | `thinking_time` | Decides how many seconds to think from the clock. | Day 9, period 1 |
-| `search_and_send` | Thinks in the background, then sends the best move. | Day 9, period 1 |
 
 ## How the file grows
 
 - **Day 5, period 4:** `send`, `set_position`
-- **Day 9, period 1:** `thinking_time`, `search_and_send`
+- **Day 9, period 1:** `thinking_time`
 
 ## Try it
 
