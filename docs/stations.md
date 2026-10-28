@@ -99,10 +99,10 @@ opening: White in game 1 and Black in game 2. The two games run side by side and
 about 20 minutes, 30 with setup. Each pair writes its two results on the board. Two
 games cannot show whether an enhancement helps, so the script prints no Elo gap for
 fewer than 10 games. The teacher then shows Remus-GOLD's score against every color
-and Remus-WHITE from the teacher's league:
+and Remus-WHITE from the teacher's league, run from the top Remus folder:
 
 ```bash
-uv run station_league.py --rate-only --player GOLD
+uv run scripts/station_league.py --rate-only --player GOLD
 ```
 
 The Day 9 smoke test plays one game on a short clock only to prove that the station's
@@ -121,7 +121,7 @@ takes White once. The games file stores the opening in a `StartMoves` header.
 
 ## Rank every version: station_league.py
 
-`instructor/Remus/station_league.py` plays a round robin: each of the 12 versions
+`scripts/station_league.py`, run from the top Remus folder, plays a round robin: each of the 12 versions
 (Remus-WHITE, the ten stations, and Remus-GOLD) plays each other version 6 times,
 396 games in all. Then it fits one Elo rating to every version from every station
 game in the games file, the games of `station_match.py` included, with Remus-WHITE
@@ -132,10 +132,10 @@ name another clock, and the script rates the games of each clock apart from the
 others, since a version that searches deeper can gain more with more time to think.
 
 ```bash
-uv run station_league.py --at-once 16   # the round robin, 16 games at a time
-uv run station_league.py --rate-only    # only the ratings, from the saved games
-uv run station_league.py --at-once 16 --event "Station league 2"
-                                        # a new league, rated apart from the others
+uv run scripts/station_league.py --at-once 16   # the round robin, 16 games at a time
+uv run scripts/station_league.py --rate-only    # only the ratings, from the saved games
+uv run scripts/station_league.py --at-once 16 --event "Station league 2"
+                                                # a new league, rated apart from the others
 ```
 
 `--niram` plays the same league with Niram, the Rust copies of all 12 versions in

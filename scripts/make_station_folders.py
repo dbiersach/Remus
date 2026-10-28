@@ -30,7 +30,7 @@ from period_guides import (
     STATION_OBJECTIVES,
 )
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
 INSTRUCTOR = ROOT / "instructor"
 STATIONS = INSTRUCTOR / "Remus"
 BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period4"  # Remus-WHITE
@@ -970,8 +970,8 @@ def readme_text(station: dict) -> str:
         sections.append(
             "## Check it\n\nCheck it from inside this folder with `uv run pytest`, "
             "and rate it against Stockfish with `uv run estimate_elo.py`. From the "
-            "`Remus` folder above this one, "
-            "`uv run station_league.py --rate-only --player GOLD` "
+            "top Remus folder, "
+            "`uv run scripts/station_league.py --rate-only --player GOLD` "
             "shows its score against every other version in the teacher's league."
         )
     elif not station["students"]:

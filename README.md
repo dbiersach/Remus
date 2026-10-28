@@ -11,7 +11,9 @@ The code grows one class period at a time: each `instructor/Day NN - ...` folder
 the end of that period. Each Day folder's own `README.md` gives the day's objectives
 and the timed activities of its four periods. The `instructor/` folder holds
 only finished, working reference code. `student/` mirrors it, with the functions
-students write left as stubs for them to fill in. Start with
+students write left as stubs for them to fill in. `scripts/` holds the teacher's
+tools outside the engine: the builders that write the period, station, and student
+folders, the test runner, and the league and rating scripts. Start with
 [`docs/remus_program_overview.md`](docs/remus_program_overview.md); the course plan is
 in [`docs/remus_course_plan.md`](docs/remus_course_plan.md).
 
@@ -21,7 +23,7 @@ Remus uses [uv](https://docs.astral.sh/uv/) and Python 3.14.
 
 ```bash
 uv sync
-uv run run_all_tests.py
+uv run scripts/run_all_tests.py
 uv run "instructor/Day 06 - Count positions and read FEN/period4/perft.py"
 ```
 

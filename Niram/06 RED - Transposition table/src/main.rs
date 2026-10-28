@@ -19,7 +19,7 @@ mod tests {
     use niram_rules::bench::bench_nodes;
 
     /// Remus-RED visits 58,531 positions on the bench positions at depth 3
-    /// (uv run Niram/remus_benchmark.py RED 3), so Niram-RED must visit the same.
+    /// (uv run scripts/remus_benchmark.py RED 3), so Niram-RED must visit the same.
     #[test]
     fn same_node_count_as_remus() {
         assert_eq!(bench_nodes(crate::search::think, 3), 58_531);

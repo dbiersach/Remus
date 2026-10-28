@@ -35,7 +35,7 @@ from pathlib import Path
 from make_student_folders import STUDENT_FUNCTIONS
 from period_guides import CHANGE_NOTES, LAB_NOTES, LABS, OBJECTIVES, PERIOD_GUIDES
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
 INSTRUCTOR = ROOT / "instructor"
 SAVED_OUTPUT_SUFFIXES = {".pgn", ".svg"}  # Games and board pictures that scripts save
 BUG_HUNT_PERIOD = (6, 3)  # The period whose folder holds bug_hunt/

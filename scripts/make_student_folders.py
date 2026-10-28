@@ -26,7 +26,7 @@ from typing import Any
 from make_station_folders import STATIONS_TABLE
 from period_guides import DAY_GUIDES, LABS
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
 INSTRUCTOR = ROOT / "instructor"
 STUDENT = ROOT / "student"
 MAX_TYPED_LINES = 40  # Most lines of code a pair types in one period
@@ -498,8 +498,7 @@ def main():
                     file.write("\n" + section)
     # Each station folder stubs the functions its pair writes during the station
     (STUDENT / "Remus").mkdir(exist_ok=True)
-    for name in ["station_match.py", "station_league.py"]:
-        shutil.copy2(INSTRUCTOR / "Remus" / name, STUDENT / "Remus" / name)
+    shutil.copy2(INSTRUCTOR / "Remus" / "station_match.py", STUDENT / "Remus")
     for station in STATIONS_TABLE:
         folder = INSTRUCTOR / "Remus" / station["folder"]
         target = STUDENT / "Remus" / station["folder"]

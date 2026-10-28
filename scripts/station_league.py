@@ -10,15 +10,16 @@ games station_match.py played. Remus-WHITE, with no enhancements, is pinned at 0
 so each rating is that version's gain over Remus-WHITE.
 
 Usage:
-    uv run station_league.py                 the round robin, then the ratings
-    uv run station_league.py --games 4       4 games for each pair of players
-    uv run station_league.py --rate-only     only the ratings, from the saved games
-    uv run station_league.py --rate-only --player GOLD
-                                             also Remus-GOLD's score against each
-    uv run station_league.py --at-once 16    16 games at a time
-    uv run station_league.py --event "Station league 2"
-                                             a second league, kept and rated apart
-    uv run station_league.py --niram         the same league for Niram, in Rust
+    uv run scripts/station_league.py             the round robin, then the ratings
+    uv run scripts/station_league.py --games 4   4 games for each pair of players
+    uv run scripts/station_league.py --rate-only only the ratings, from saved games
+    uv run scripts/station_league.py --rate-only --player GOLD
+                                                 also Remus-GOLD's score against each
+    uv run scripts/station_league.py --at-once 16
+                                                 16 games at a time
+    uv run scripts/station_league.py --event "Station league 2"
+                                                 a second league, rated apart
+    uv run scripts/station_league.py --niram     the same league for Niram, in Rust
 
 League games last 10 minutes a side. Remus searches only a few thousand positions a
 second, so a shorter clock stops every version after 2 to 4 plies, too shallow for
@@ -38,10 +39,16 @@ import argparse
 import itertools
 import math
 import os
+import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 
 import chess.pgn
+
+# station_match.py lives beside the Remus versions in instructor/Remus
+sys.path.insert(0, str(Path(__file__).parent.parent / "instructor" / "Remus"))
+
 from station_match import (
     GAMES_PATH,
     OPENINGS,

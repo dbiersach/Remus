@@ -10,7 +10,7 @@ Draw the pictures in the Day 10 READMEs that explain phase_hunt.py.
 A teacher tool, like the other make_*.py scripts. It reads the phase library and the
 benchmark from the finished Day 10 phase_hunt.py and saves PNG files in
 docs/images/phase_hunt/. The inline script block above names matplotlib, so
-`uv run make_phase_hunt_figures.py` installs it for this script alone; Remus itself
+`uv run scripts/make_phase_hunt_figures.py` installs it for this script alone; Remus itself
 and the class laptops never need it.
 """
 
@@ -26,7 +26,7 @@ matplotlib.use("Agg")  # Draw straight to files, with no window
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, FancyArrowPatch, FancyBboxPatch
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
 DAY10 = next((ROOT / "instructor").glob("Day 10 - *")) / "period4"
 sys.path.insert(0, str(DAY10))
 
