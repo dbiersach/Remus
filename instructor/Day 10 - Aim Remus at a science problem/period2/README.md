@@ -128,7 +128,7 @@ beamline, Brookhaven's Crystallography Companion Agent names phases while the da
 comes in. The CrystalShift program (Cornell, 2025) and the Dara program (Berkeley Lab,
 2025) search a tree of phase sets the way your code will in period 3, on real
 patterns from the synchrotrons SSRL and CHESS and from a self-driving lab.
-`docs/science_tree_search_survey.md` lists the papers.
+`docs/course/science_tree_search_survey.md` lists the papers.
 
 ## Words to know
 

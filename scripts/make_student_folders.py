@@ -10,7 +10,7 @@ stay, and the body raises NotImplementedError. The tests stay complete, so they
 fail until the pair writes each function. Functions from earlier periods are
 complete, so every period folder starts from working code.
 
-It also writes docs/student_edit_plan.md and the overview README.md at the top of
+It also writes docs/course/student_edit_plan.md and the overview README.md at the top of
 every Day folder, in instructor/ and student/ alike, from DAY_GUIDES in
 period_guides.py.
 
@@ -379,7 +379,7 @@ def write_day_readmes(rows: dict) -> None:
 
 
 def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
-    """Write docs/student_edit_plan.md: what changes and what pairs write, by period."""
+    """Write docs/course/student_edit_plan.md: what changes and what pairs write, by period."""
     from make_period_folders import PERIOD_TITLES  # Imported here: it imports this file
 
     out = [
@@ -431,7 +431,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
         out.append(
             f"| {station['folder']} | {writes or 'Nothing: a finished engine'} |"
         )
-    file_path = ROOT / "docs" / "student_edit_plan.md"
+    file_path = ROOT / "docs" / "course" / "student_edit_plan.md"
     file_path.write_text("\n".join(out) + "\n")
     print(f"Wrote {file_path}")
 

@@ -583,7 +583,7 @@ captures stop.""",
     ],
 }
 
-# The title of every period, from docs/remus_course_plan.md
+# The title of every period, from docs/course/remus_course_plan.md
 PERIOD_TITLES = {
     (1, 1): "Welcome and setup",
     (1, 2): "Python lab 1: scripts, strings, ord and chr, f-strings",

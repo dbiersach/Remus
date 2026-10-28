@@ -2,9 +2,9 @@
 
 Remus is a chess engine written in pure, native Python as a teaching project for the
 **"Turning a Chess Engine into Science AI"** workshop. The full lesson plan lives in
-[`docs/workshop_roadmap.md`](docs/workshop_roadmap.md) and the
-day-by-day course in [`docs/remus_course_plan.md`](docs/remus_course_plan.md); read both
-before starting any lesson. [`docs/remus_program_overview.md`](docs/remus_program_overview.md)
+[`docs/course/workshop_roadmap.md`](docs/course/workshop_roadmap.md) and the
+day-by-day course in [`docs/course/remus_course_plan.md`](docs/course/remus_course_plan.md); read both
+before starting any lesson. [`docs/code/remus_program_overview.md`](docs/code/remus_program_overview.md)
 explains how the code fits together.
 
 This file holds every project and style rule, so that every AI tool used with this
@@ -46,7 +46,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
 - Remus is an instructional engine for a **two-week, 60-hour course** taught to
   students about **13 years old**: 10 days, four 90-minute periods a day (8:30 to 10:00,
   10:30 to 12:00, 1:00 to 2:30, 3:00 to 4:30). The day-by-day plan lives in
-  [`docs/remus_course_plan.md`](docs/remus_course_plan.md), and the code is split into modules
+  [`docs/course/remus_course_plan.md`](docs/course/remus_course_plan.md), and the code is split into modules
   and checkpoints that follow that plan period by period.
 - 20 students work in **10 pairs** (driver and navigator, swapping every period). Each
   pair gets an identical, preconfigured **Windows 11** class laptop with git, `uv`,
@@ -86,7 +86,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
   time: short functions, concrete names, and one small example position per idea.
 - The class never builds a GUI. Every laptop uses **Lucas Chess** (David,
   2026-10-27), which runs Remus as a UCI engine through `remus.bat`.
-  [`docs/lucas_chess_guide.md`](docs/lucas_chess_guide.md) shows students, step by step
+  [`docs/course/lucas_chess_guide.md`](docs/course/lucas_chess_guide.md) shows students, step by step
   with screenshots, how to add Remus and watch it play Stockfish at 1500 Elo.
   `python-chess` runs matches and checks results from outside the engine.
 - **No GitHub for students.** They are minors, so they create no online accounts. The
@@ -202,14 +202,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   runnable copy of Remus as it stands at the end of that period (Day 10 holds only its
   science files), with a `README.md`
   that names the period, its new and growing files, and the functions pairs write.
-  Every period README and station README also holds (David, 2026-10-27):
+  Every period README and color version README also holds (David, 2026-10-27):
   - **Learning objectives** as a bulleted list, each with a **Measured by** line that
     says how the teacher sees a pair has learned it: a named test that passes, a
     printed result, or something the pair explains without running code.
   - **The changes and why**: one paragraph for every function or lab part the pair
     writes, saying what the code does, why it is written that way, and how it fits
     the whole engine.
-  Every station README (David, 2026-10-28) also explains its enhancement in enough
+  Every color version README (David, 2026-10-28) also explains its enhancement in enough
   detail for a pair to work from it alone: a worked example, why it makes Remus
   stronger, what it costs, a table of positions per depth and positions per second
   measured against Remus-WHITE, what to expect in games, and where the pair's code
@@ -225,10 +225,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
   in `docs/images/phase_hunt/`, drawn by `uv run scripts/make_phase_hunt_figures.py`,
   which installs matplotlib for itself alone. Measure `STATION_MEASURES` again after any
-  change to a station's search or evaluation.
+  change to a color version's search or evaluation.
   Each student README adds a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it, and
-  `docs/student_edit_plan.md` lists the same plan for the whole course.
+  `docs/course/student_edit_plan.md` lists the same plan for the whole course.
 - Each Python skills lab lives in its own period folder (David, 2026-10-28; there is
   no separate `labs/` folder): the student file with `#` blanks, `<name>.py`, in the
   student period folder, and the answer file, `<name>_instructor.py`, in the
@@ -252,7 +252,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
   `station_match.py` in `instructor/Remus` and `student/Remus` for the Day 10
   tournament, and `play_match.py`, `estimate_elo.py`, and the tests inside their
-  period and station folders. Put a new teacher tool in `scripts/`.
+  period and version folders. Put a new teacher tool in `scripts/`.
 - `period4` holds the finished code of the day, and it is the only period folder to
   edit by hand. `make_period_folders.py` builds `period1` to `period3` from it: its
   `ARRIVALS` table says in which period each file takes its finished form, and its
@@ -266,8 +266,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   run it after `make_period_folders.py`, and never edit a student stub by hand.
 - `instructor/Remus` holds Remus-WHITE (`00 WHITE - No enhancements`, the finished
   Day 9 Remus with none of the ten enhancements, named by David on 2026-10-27) and the
-  ten enhancement stations, one folder per color (`06 RED - Transposition table`, ...).
-  Each station is Remus-WHITE plus one enhancement, and `11 GOLD - All enhancements`
+  ten color versions, one folder per color (`06 RED - Transposition table`, ...).
+  Each color version is Remus-WHITE plus one enhancement, and `11 GOLD - All enhancements`
   holds Remus-GOLD, the finished Remus with all ten (David, 2026-10-27). Remus-GOLD
   is the engine of Day 10 (David, 2026-10-28): the Day 10 period folders hold only
   the science files (`hidden_peak.py`, `phase_hunt.py`, their tests, and the results
@@ -276,21 +276,21 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   edit the finished engine there. Remus-GOLD stays out of the color matches;
   `estimate_elo.py` rates it against Stockfish. `make_station_folders.py` builds the
   other eleven folders from the Day 9 `period4` code and the GOLD folder, rewrites
-  only the GOLD README, and `make_student_folders.py` stubs each station's functions
-  in `student/Remus`. Colors name the stations so
-  that no station sounds better than another. A two-digit
+  only the GOLD README, and `make_student_folders.py` stubs each color version's functions
+  in `student/Remus`. Colors name the color versions so
+  that no color version sounds better than another. A two-digit
   prefix (David, 2026-10-28) orders the folders by each version's Elo over WHITE in
   the 10-minute league: 00 WHITE, 01 YELLOW, 02 ORANGE, 03 BROWN, 04 BLUE, 05 PINK,
   06 RED, 07 PURPLE, 08 GRAY, 09 CYAN, 10 GREEN, 11 GOLD. The Rust engine folders in
-  `Niram/` use the same names. `station_match.py` plays a station
+  `Niram/` use the same names. `station_match.py` plays a color version
   against Remus-WHITE, and Remus-WHITE takes part in the color matches too.
   `station_league.py` plays a round robin of all 12 versions, Remus-GOLD included,
   and fits one Elo rating per version with Remus-WHITE pinned at 0.
   `station_elo.py` rates all 12 versions against Stockfish at five UCI_Elo levels
-  from frozen copies of the stations and writes the table to `docs/station_elo.md`.
+  from frozen copies of the color versions and writes the table to `docs/versions/remus_elo.md`.
 - `Niram/` holds Niram, every Remus version rewritten in Rust (David, 2026-10-27 and
   2026-10-28), named for Naram-Sin, Sargon's grandson: Niram-WHITE, the ten color
-  stations, and Niram-GOLD, one Cargo crate each in folders named like the station
+  color versions, and Niram-GOLD, one Cargo crate each in folders named like the color version
   folders, with the shared rules in `Niram/rules`. It is a teacher's tool that runs
   the same engines about 50 times faster; students never edit it. Each `.rs` file
   matches the Python file of the same name, and each Niram version must visit
@@ -299,7 +299,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   times the Remus version on the same positions). `station_match.py`,
   `station_league.py`, and `station_elo.py` play the Niram programs with `--niram`
   and rate them apart from Remus, with Niram-WHITE pinned at 0; David wants leagues
-  run with Niram (2026-10-28). A change to a station's rules, evaluation, search, or
+  run with Niram (2026-10-28). A change to a color version's rules, evaluation, search, or
   opening book needs the same change in Niram. The Python style rules above do not apply to the Rust code, which
   follows `cargo fmt` and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `estimate_elo.py`,
@@ -322,14 +322,26 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   tests and `mate_puzzles.epd`. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
-- Every `.py` file a student modifies or reads has a page in `docs/scripts/`, the
+- Every `.py` file a student modifies or reads has a page in `docs/code/`, the
   "puzzle box top" for that file: the big picture first, then where it fits (uses and
   used by), words to know, a call tree, a plain-language line for each function, and
   questions. Write the pages for middle school readers, in short sentences, and do not
   repeat the code's comments line by line. When a file changes, update its page.
-- `docs/` holds the program overview, one page per major script in `docs/scripts/`,
-  the slide plan, the course plan, the roadmap, the Lucas Chess guide (with its
-  screenshots in `docs/images/lucas_chess/`), and the two briefing PDFs.
+- `docs/` holds four folders and a `README.md` that maps them (David, 2026-10-28):
+  - `docs/course/`: the roadmap, the course plan, the slide plan, the Lucas Chess
+    guide, the science survey, and `student_edit_plan.md`, which
+    `make_student_folders.py` writes.
+  - `docs/code/`: the program overview, `file_versions.md`, and one page for every
+    `.py` file a student modifies or reads, named after that file (`board.py` has
+    `board.md`).
+  - `docs/versions/`: `remus_versions.md`, the ten color versions and Remus-GOLD, and
+    `remus_elo.md`, which `station_elo.py` writes.
+  - `docs/briefs/`: the two briefing PDFs.
+  Pictures live in `docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
+  into the folder of its subject; nothing else sits at the top of `docs/`.
+- Remus-WHITE, the ten color versions (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
+  are the **Remus versions** (David, 2026-10-28). Never call them "stations" in new
+  prose; the word survives only in file and function names that predate the rule.
 
 # Part 2: Python style
 

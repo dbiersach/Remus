@@ -8,7 +8,7 @@ Each version plays Stockfish at five strengths (UCI_Elo), from Stockfish's weake
 setting, 1320, up to 2500. At every strength a version plays 6 games, 3 as White
 and 3 as Black, on a 10 minute clock. The script then finds each version's Elo
 rating the way estimate_elo.py does, adds every game to games/remus_games.pgn, and
-writes the table of ratings to docs/station_elo.md.
+writes the table of ratings to docs/versions/remus_elo.md.
 
 Before the first game, the script copies every station folder into a temporary
 folder and runs the engines from that copy. A change to the station code during
@@ -61,7 +61,7 @@ for folder in Path(__file__).parents:
         REPOSITORY = folder
         break
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
-REPORT_PATH = REPOSITORY / "docs" / "station_elo.md"  # The table of ratings
+REPORT_PATH = REPOSITORY / "docs" / "versions" / "remus_elo.md"  # The table of ratings
 LUCAS_CHESS_ENGINES = (
     Path.home() / "AppData" / "Local" / "Programs" / "LucasChessR" / "bin" / "OS"
 )  # Where Lucas Chess keeps the Stockfish it installs on Windows
