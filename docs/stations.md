@@ -130,6 +130,13 @@ uv run station_league.py --at-once 16 --event "Station league 2"
                                         # a new league, rated apart from the others
 ```
 
+`--niram` plays the same league with Niram, the Rust copies of all 12 versions in
+the `niram` folder (see [`niram/README.md`](../niram/README.md)). Niram picks the
+same moves as Remus about 50 times faster, so a 10-minute Niram game searches about
+as many positions as an 8-hour Remus game. Niram games are rated apart from Remus
+games, with Niram-WHITE pinned at 0, and `station_match.py` and `station_elo.py`
+take `--niram` too.
+
 Without `--at-once`, the league plays one game per processor thread. Give it the
 number of cores or fewer, because each game needs a whole core to itself to use its
 clock fairly.

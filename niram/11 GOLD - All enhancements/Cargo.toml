@@ -1,0 +1,9 @@
+[package]
+name = "niram-gold"
+description = "Niram-GOLD: Remus-GOLD in Rust, with all ten enhancements"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+niram_rules = { path = "../rules" }

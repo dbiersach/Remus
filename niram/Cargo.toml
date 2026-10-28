@@ -1,12 +1,32 @@
-[package]
-name = "niram"
-version = "0.1.0"
-edition = "2024"
-description = "Niram-GOLD: Remus-GOLD rewritten in Rust, with the same search and evaluation"
-license = "MIT"
+# Niram: Remus rewritten in Rust, one engine for each Remus version.
+#
+# rules/ holds what every version shares: the board, the rules of chess, FEN, SAN,
+# the opening book, the evaluation terms, move ordering, the transposition table,
+# the search helpers, the UCI loop, and the benchmark. Each color folder holds one
+# engine: its evaluate(), its search, and its think(), like the station folders
+# of instructor/Stations.
+[workspace]
+resolver = "3"
+members = [
+    "rules",
+    "00 WHITE - No enhancements",
+    "01 YELLOW - Draw sense",
+    "02 ORANGE - Null-move pruning",
+    "03 BROWN - Late move reductions",
+    "04 BLUE - Killer moves",
+    "05 PINK - Principal variation search",
+    "06 RED - Transposition table",
+    "07 PURPLE - Pawn structure",
+    "08 GRAY - King safety",
+    "09 CYAN - Mating bonus",
+    "10 GREEN - Opening book",
+    "11 GOLD - All enhancements",
+]
 
-# Niram uses the Rust standard library only, the way Remus uses Python's.
-[dependencies]
+[workspace.package]
+version = "0.2.0"
+edition = "2024"
+license = "BSD-3-Clause"
 
 [profile.release]
 debug = false

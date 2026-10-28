@@ -230,12 +230,14 @@ The search makes and undoes moves on the one live state. A `try/finally` around 
 3. The engine imports only the Python standard library.
 4. Every script prints a result next to the expected answer.
 
-## Niram-GOLD, the Rust copy
+## Niram, the Rust copy
 
-`niram/` holds Niram-GOLD, Remus-GOLD rewritten in Rust with the same rules,
-evaluation, and search. On the same positions and depth it visits exactly as many
-positions as Remus-GOLD and picks the same moves, about 50 times faster: some 200,000
-positions a second against about 4,000. See [`niram/README.md`](../niram/README.md).
+`niram/` holds Niram, all 12 Remus versions (WHITE, the ten stations, and GOLD)
+rewritten in Rust with the same rules, evaluation, and search. On the same positions
+and depth each Niram version visits exactly as many positions as its Remus twin and
+picks the same moves, about 50 times faster: some 200,000 positions a second against
+about 4,000. The station scripts play Niram with `--niram`, so a league of 10-minute
+games searches as deep as a Remus league of 8-hour games. See [`niram/README.md`](../niram/README.md).
 
 ## Where the ideas come from
 
