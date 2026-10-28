@@ -72,11 +72,9 @@ Day 8 still finds `negamax` on Day 10.
 
 ### Running the code
 
-Run a script from inside its period folder, or give its path:
-
-```bash
-uv run "instructor/Day 06 - Count positions and read FEN/period4/perft.py"
-```
+Open a script in VS Code, such as `perft.py` in
+`instructor/Day 06 - Count positions and read FEN/period4`, and click the Run Python
+File button (the triangle at the top right of the editor).
 
 Every script prints its own check, with the expected answer beside it. Tests sit next
 to the modules. Because each period folder repeats the same module names, pytest runs
@@ -84,10 +82,9 @@ one folder at a time:
 
 ```bash
 uv run pytest "instructor/Day 04 - Keep only legal moves/period3"
-uv run scripts/run_all_tests.py
 ```
 
-`scripts/run_all_tests.py` runs every period folder in `instructor/` in turn, then the
+The teacher's `scripts/run_all_tests.py` runs every period folder in `instructor/` in turn, then the
 reference-tool tests in `scripts/test_reference_tools.py`. The `scripts/` folder holds
 every teacher tool that is not part of an engine: the builders that write the period,
 version, and student
