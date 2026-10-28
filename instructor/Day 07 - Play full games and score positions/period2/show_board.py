@@ -19,9 +19,7 @@ from game_state import WHITE
 from move_generation import knight_moves
 from moves import Move
 
-PICTURE_PATH = (
-    Path(__file__).parent / "board.svg"
-)  # The picture, saved beside this file
+PICTURE_PATH = Path(__file__).parent / "board.svg"  # The picture, beside this file
 
 
 def to_python_chess(board: list[list[str]]) -> chess.Board:

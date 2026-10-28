@@ -7,7 +7,7 @@ record that holds everything the move changed, so undo_move can put it all back.
 Castling changes more than two squares: the king and a rook both move.
 """
 
-from board import EMPTY, piece_at, print_board, set_piece
+from board import EMPTY, Square, piece_at, print_board, set_piece
 from game_state import BLACK, new_game, opponent
 from moves import Move, move_from_uci
 
@@ -44,7 +44,7 @@ def update_castling_rights(rights: str, move: Move) -> str:
     return rights
 
 
-def castling_rook_move(move: Move) -> tuple[tuple[int, int], tuple[int, int]]:
+def castling_rook_move(move: Move) -> tuple[Square, Square]:
     """Return the (from, to) squares of the rook in a castling move."""
     row = move.from_square[0]
     if move.to_square[1] == 6:  # Kingside: the rook goes from the h-file to the f-file
@@ -141,32 +141,15 @@ def state_snapshot(state: dict) -> str:
         for piece in row:
             text += piece
         text += "/"
-    fields = [
-        state["turn"],
-        state["castling"],
-        str(state["en_passant"]),
-        str(state["halfmove_clock"]),
-        str(state["fullmove_number"]),
-    ]
-    for field in fields:
-        text += " " + field
+    text += f" {state['turn']} {state['castling']} {state['en_passant']}"
+    text += f" {state['halfmove_clock']} {state['fullmove_number']}"
     return text
 
 
 def main():
     state = new_game()
     start = state_snapshot(state)
-    texts = [
-        "e2e4",
-        "e7e5",
-        "g1f3",
-        "b8c6",
-        "f1c4",
-        "g8f6",
-        "e1g1",
-        "f8c5",
-        "e8g8",
-    ]
+    texts = ["e2e4", "e7e5", "g1f3", "b8c6", "f1c4", "g8f6", "e1g1", "f8c5", "e8g8"]
     undo_records = []
     for text in texts:
         undo_records.append(make_move(state, move_from_uci(text)))

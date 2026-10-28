@@ -47,12 +47,8 @@ def move_to_san(state: dict, move: Move) -> str:
         if move.promotion is not None:
             text += "=" + move.promotion.upper()
     else:
-        text = (
-            kind
-            + disambiguation(state, move, piece)
-            + ("x" if is_capture else "")
-            + target
-        )
+        capture_mark = "x" if is_capture else ""
+        text = kind + disambiguation(state, move, piece) + capture_mark + target
 
     undo = make_move(state, move)
     if in_check(state, state["turn"]):

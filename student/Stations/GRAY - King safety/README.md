@@ -59,6 +59,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `evaluation.py` | `king_safety()` | 144 | 24 | `test_upgrades.py::test_king_safety_rewards_the_pawn_shield` |
+| `evaluation.py` | `king_safety()` | 126 | 24 | `test_upgrades.py::test_king_safety_rewards_the_pawn_shield` |
 
 Lines to type in all: 24. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

@@ -15,9 +15,7 @@ import chess
 import chess.svg
 from board import EMPTY, new_board
 
-PICTURE_PATH = (
-    Path(__file__).parent / "board.svg"
-)  # The picture, saved beside this file
+PICTURE_PATH = Path(__file__).parent / "board.svg"  # The picture, beside this file
 
 
 def to_python_chess(board: list[list[str]]) -> chess.Board:

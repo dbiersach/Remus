@@ -3,7 +3,7 @@
 Tests for pseudo-legal move generation on small, hand-checked positions.
 """
 
-from board import EMPTY, parse_square, set_piece
+from board import EMPTY, Board, parse_square, set_piece
 from game_state import BLACK, WHITE, new_game
 from move_generation import (
     BISHOP_DIRECTIONS,
@@ -19,7 +19,7 @@ from move_generation import (
 from moves import move_to_uci
 
 
-def empty_board() -> list[list[str]]:
+def empty_board() -> Board:
     return [[EMPTY] * 8 for _ in range(8)]
 
 

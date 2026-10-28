@@ -67,7 +67,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `search_later_move()` | 400 | 6 | `uv run pytest` |
+| `search.py` | `search_later_move()` | 396 | 6 | `uv run pytest` |
 | `test_upgrades.py` | `test_pvs_search_agrees_with_alpha_beta()` | 14 | 7 | `uv run pytest` |
 | `test_upgrades.py` | `test_a_null_window_answers_only_better_or_not()` | 23 | 5 | `uv run pytest` |
 

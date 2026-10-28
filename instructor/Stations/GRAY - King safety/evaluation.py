@@ -14,17 +14,10 @@ the table upside down, so its row 7 uses the table's row 0.
 The GRAY station adds a third term, king_safety.
 """
 
-from board import EMPTY
+from board import EMPTY, Board
 from fen import START_FEN, state_from_fen
 
-PIECE_VALUES = {
-    "P": 100,
-    "N": 300,
-    "B": 300,
-    "R": 500,
-    "Q": 900,
-    "K": 0,
-}  # In centipawns
+PIECE_VALUES = {"P": 100, "N": 300, "B": 300, "R": 500, "Q": 900, "K": 0}  # Centipawns
 
 PAWN_TABLE = [  # Pawns gain as they advance, most in the center
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -76,16 +69,6 @@ KING_TABLE = [  # The king hides behind its pawns until the endgame
     [20, 20, 0, 0, 0, 0, 20, 20],
     [20, 30, 10, 0, 0, 10, 30, 20],
 ]
-QUEEN_TABLE = [  # The queen is strong anywhere
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-]
 SHIELD_PAWN = (
     15  # Bonus for each pawn on the king's file or a neighbor, 1 or 2 rows ahead
 )
@@ -94,18 +77,17 @@ PLACEMENT_TABLES = {
     "N": KNIGHT_TABLE,
     "B": BISHOP_TABLE,
     "R": ROOK_TABLE,
-    "Q": QUEEN_TABLE,
     "K": KING_TABLE,
 }
 
 
-def material(board: list[list[str]]) -> int:
+def material(board: Board) -> int:
     """
     Return the material balance in centipawns, positive when White is ahead.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
 
     Returns
@@ -125,14 +107,14 @@ def material(board: list[list[str]]) -> int:
     return score
 
 
-def placement(board: list[list[str]]) -> int:
+def placement(board: Board) -> int:
     """Return the piece-square bonus in centipawns, positive when it favors White."""
     score = 0
     for row in range(8):
         for col in range(8):
             piece = board[row][col]
-            if piece == EMPTY:
-                continue
+            if piece == EMPTY or piece.upper() == "Q":
+                continue  # The queen has no table: it is strong on any square
             table = PLACEMENT_TABLES[piece.upper()]
             if piece.isupper():
                 score += table[row][col]
@@ -141,13 +123,13 @@ def placement(board: list[list[str]]) -> int:
     return score
 
 
-def king_safety(board: list[list[str]]) -> int:
+def king_safety(board: Board) -> int:
     """
     Score the pawn shields in front of both kings, positive when it favors White.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board.
 
     Returns

@@ -34,8 +34,8 @@
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Python lab 6: modules, imports, __main__, git | `python_modules_instructor.py` | None | The lab `python_modules.py` (11 lines) |
-| P2 | Attacks | `attacks.py`, `test_legal_moves.py` | None | `attacked_by_knight()` in `attacks.py` (7 lines); `attacked_by_pawn()` in `attacks.py` (8 lines); `attacked_by_king()` in `attacks.py` (7 lines) |
-| P3 | Check and the legal filter | `legal_moves.py` | `attacks.py`, `test_legal_moves.py` | `in_check()` in `attacks.py` (3 lines); `legal_moves()` in `legal_moves.py` (8 lines) |
+| P2 | Attacks | `attacks.py`, `test_legal_moves.py` | None | `piece_at_offsets()` in `attacks.py` (6 lines); `attacked_by_pawn()` in `attacks.py` (3 lines); `attacked_by_king()` in `attacks.py` (2 lines) |
+| P3 | Check and the legal filter | `legal_moves.py` | `attacks.py`, `test_legal_moves.py` | `in_check()` in `attacks.py` (2 lines); `legal_moves()` in `legal_moves.py` (8 lines) |
 | P4 | Practice positions | `demo_practice_positions_instructor.py` | `test_legal_moves.py` | The demo `demo_practice_positions.py` (14 lines) |
 
 ## Day 05 - Add castling, en passant, and promotion

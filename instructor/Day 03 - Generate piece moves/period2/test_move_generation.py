@@ -3,13 +3,13 @@
 Tests for pseudo-legal move generation on small, hand-checked positions.
 """
 
-from board import EMPTY, parse_square
+from board import EMPTY, Board, parse_square
 from game_state import WHITE
 from move_generation import king_moves, knight_moves
 from moves import move_to_uci
 
 
-def empty_board() -> list[list[str]]:
+def empty_board() -> Board:
     return [[EMPTY] * 8 for _ in range(8)]
 
 

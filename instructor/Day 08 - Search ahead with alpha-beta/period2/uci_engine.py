@@ -16,11 +16,8 @@ from make_move import make_move
 from moves import move_from_uci, move_to_uci
 from search import greedy_move, negamax_move, random_move
 
-BRAINS = {
-    "random": random_move,
-    "greedy": greedy_move,
-    "negamax": negamax_move,
-}  # By name
+# Move choosers, by name
+BRAINS = {"random": random_move, "greedy": greedy_move, "negamax": negamax_move}
 
 
 def send(text: str) -> None:

@@ -10,21 +10,20 @@ The six fields are the pieces (rank 8 first), the side to move, the castling rig
 the en passant square, the halfmove clock, and the fullmove number.
 """
 
-from board import EMPTY, parse_square, print_board, square_name
+from board import EMPTY, Board, parse_square, print_board, square_name
 from game_state import position_key
 
-START_FEN = (
-    "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"  # The start position
-)
+# The start position
+START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 
-def fen_placement(board: list[list[str]]) -> str:
+def fen_placement(board: Board) -> str:
     """
     Return the piece-placement field of FEN for a board.
 
     Parameters
     ----------
-    board : list[list[str]]
+    board : Board
         The board, row 0 (rank 8) first.
 
     Returns
@@ -53,7 +52,7 @@ def fen_placement(board: list[list[str]]) -> str:
     return placement
 
 
-def board_from_placement(text: str) -> list[list[str]]:
+def board_from_placement(text: str) -> Board:
     """
     Build a board from the piece-placement field of FEN.
 
@@ -64,7 +63,7 @@ def board_from_placement(text: str) -> list[list[str]]:
 
     Returns
     -------
-    list[list[str]]
+    Board
         The board, row 0 (rank 8) first.
     """
     board = []
@@ -104,13 +103,8 @@ def state_to_fen(state: dict) -> str:
         "-" if state["en_passant"] is None else square_name(*state["en_passant"])
     )
     castling = state["castling"] or "-"  # FEN writes "-" when no one can castle
-    fen = fen_placement(state["board"])
-    fen += " " + state["turn"]
-    fen += " " + castling
-    fen += " " + en_passant
-    fen += " " + str(state["halfmove_clock"])
-    fen += " " + str(state["fullmove_number"])
-    return fen
+    fen = f"{fen_placement(state['board'])} {state['turn']} {castling} {en_passant}"
+    return fen + f" {state['halfmove_clock']} {state['fullmove_number']}"
 
 
 def main():

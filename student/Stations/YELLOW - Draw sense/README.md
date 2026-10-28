@@ -71,7 +71,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `is_draw_in_search()` | 400 | 2 | `test_upgrades.py::test_a_repeated_position_is_a_draw`, `test_upgrades.py::test_the_fifty_move_limit_is_a_draw` |
+| `search.py` | `is_draw_in_search()` | 396 | 2 | `test_upgrades.py::test_a_repeated_position_is_a_draw`, `test_upgrades.py::test_the_fifty_move_limit_is_a_draw` |
 | `test_upgrades.py` | `test_draw_sense_search_agrees_with_alpha_beta()` | 21 | 7 | `uv run pytest` |
 | `test_upgrades.py` | `test_a_repeated_position_is_a_draw()` | 30 | 5 | `uv run pytest` |
 | `test_upgrades.py` | `test_the_fifty_move_limit_is_a_draw()` | 37 | 2 | `uv run pytest` |

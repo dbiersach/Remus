@@ -8,14 +8,14 @@ Captures come first, ordered by MVV-LVA: Most Valuable Victim, Least Valuable
 Attacker. Pawn takes queen comes before queen takes pawn.
 """
 
-from board import EMPTY, piece_at
+from board import EMPTY, Board, piece_at
 from evaluation import PIECE_VALUES
 from fen import state_from_fen
 from legal_moves import legal_moves
 from moves import Move, move_to_uci
 
 
-def mvv_lva_score(move: Move, board: list[list[str]]) -> int:
+def mvv_lva_score(move: Move, board: Board) -> int:
     """
     Score a move for ordering: high for a big capture by a small piece.
 
@@ -23,7 +23,7 @@ def mvv_lva_score(move: Move, board: list[list[str]]) -> int:
     ----------
     move : Move
         The move to score.
-    board : list[list[str]]
+    board : Board
         The board before the move.
 
     Returns
@@ -39,7 +39,7 @@ def mvv_lva_score(move: Move, board: list[list[str]]) -> int:
 
 
 def order_moves(
-    moves: list[Move], board: list[list[str]], first: Move | None = None
+    moves: list[Move], board: Board, first: Move | None = None
 ) -> list[Move]:
     """
     Return the moves sorted best first.
@@ -48,7 +48,7 @@ def order_moves(
     ----------
     moves : list[Move]
         The moves to order.
-    board : list[list[str]]
+    board : Board
         The board before the moves.
     first : Move | None
         A move to try before all others, such as the best move from the previous,
