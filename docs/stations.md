@@ -158,8 +158,10 @@ work only at depth 3 and deeper, and Remus reaches those depths only with time t
 think. Every single station's range includes 0 at both clocks, so one enhancement
 alone changes Remus by less than 66 games can measure.
 
-In the 10-minute run, 3 games ended on time, all of them Remus-GOLD losses played
-before `thinking_time` kept a 3-second reserve on the clock.
+The 10-minute run played its first 266 games before `thinking_time` kept a
+3-second reserve on the clock, and its last 130 games with the reserve. 3 games
+ended on time, all of them Remus-GOLD losses from the first part, so Remus-GOLD's
+true 10-minute gain is likely a little higher than +175.
 
 ## How big is each version?
 
