@@ -18,8 +18,10 @@ better than another before the games are played.
 such as `10 RED - Transposition table`. The number in front of each name ranks the
 color version by its rating over Remus-WHITE in the teacher's 10-minute league (below), so
 the folders list from 00 WHITE to 11 GOLD. The WHITE folder is a complete, runnable copy of
-the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each version folder is
-that copy plus one enhancement. `student/Remus`
+the Day 9 Remus at the end of period 1 (`instructor/Day 09 .../period1`), when its engine
+is finished and before the pairs start their color versions, and each version folder is
+that copy plus one enhancement. The mate solver that pairs write in period 4 stays in
+the Day 9 folder and in Remus-GOLD. `student/Remus`
 holds the same folders with the pair's functions stubbed.
 
 `make_version_folders.py` builds the folders from the Day 9 code and the GOLD folder.

@@ -36,7 +36,7 @@ Day 5, Period 2.
 | `move_ordering.py` | D8 P4: captures first by MVV-LVA | Remus-GOLD: killer moves |
 | `transposition_table.py` | Remus-GOLD: remembers searched positions | Last day |
 | `opening_book.py`, `opening_book.txt` | Remus-GOLD: plays known openings | Last day |
-| `mate_solver.py` | D9 P4: solves the ten mate puzzles while the color version matches run | No changes |
+| `mate_solver.py` | D9 P4: solves the ten mate puzzles; stays out of Remus-WHITE and the ten color versions | No changes |
 | `hidden_peak.py` | D10 P1: Science AI, the hidden peak | Last day |
 | `phase_hunt.py` | D10 P2: the phase hunt: the evaluation `score()` and the greedy agent | D10 P3: the tree search `search()` and the benchmark that compares it with greedy |
 | `estimate_elo.py` | Remus-GOLD: measures the Elo rating of Remus against Stockfish | Last day |

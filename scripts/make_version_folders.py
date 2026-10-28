@@ -3,8 +3,10 @@
 
 Build one folder per color version in instructor/Remus.
 
-Remus-WHITE is the finished Day 9 Remus (instructor/Day 09 .../period4) with none of
-the ten enhancements. Each other version folder is Remus-WHITE plus one enhancement,
+Remus-WHITE is the Day 9 Remus at the end of period 1 (instructor/Day 09 .../period1),
+with none of the ten enhancements. Its engine is complete before the pairs start their
+color versions in period 2, so it leaves out mate_solver.py, which pairs write in
+period 4. Each other version folder is Remus-WHITE plus one enhancement,
 named by a color so that no color version sounds better than another. A pair builds its
 color version, then its Remus plays Remus-WHITE to measure how much Elo the one
 enhancement adds. Remus-GOLD, the finished Remus of Day 10, holds every
@@ -33,10 +35,8 @@ from period_guides import (
 ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
 INSTRUCTOR = ROOT / "instructor"
 REMUS_FOLDER = INSTRUCTOR / "Remus"
-BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period4"  # Remus-WHITE
+BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period1"  # Remus-WHITE
 FINAL = REMUS_FOLDER / "11 GOLD - All enhancements"  # Written by hand
-# Day 9 already runs these slow tests on the same rules, so the versions leave them out
-DAY_9_ONLY_TESTS = [("test_search.py", "test_mate_solver_solves_all_mate_puzzles")]
 
 
 def function_text(file_path: Path, name: str) -> str:
@@ -1081,11 +1081,6 @@ def main():
         )
         for name in version["copies"]:
             shutil.copy2(FINAL / name, folder / name)
-        for file_name, name in DAY_9_ONLY_TESTS:
-            file_path = folder / file_name
-            test = function_text(file_path, name) + "\n\n"
-            text = replace_once(file_path.read_text(), test, "", version["folder"])
-            file_path.write_text(text)
         for file_name, old, new in version["edits"]:
             file_path = folder / file_name
             text = replace_once(file_path.read_text(), old, new, version["folder"])

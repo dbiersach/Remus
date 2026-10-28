@@ -277,7 +277,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `estimate_elo.py`. The GOLD folder is written by hand, like a `period4` folder;
   edit the finished engine there. Remus-GOLD stays out of the color matches;
   `estimate_elo.py` rates it against Stockfish. `make_version_folders.py` builds the
-  other eleven folders from the Day 9 `period4` code and the GOLD folder, rewrites
+  other eleven folders from the Day 9 `period1` code, the engine before the
+  period 4 mate solver, and the GOLD folder, rewrites
   only the GOLD README, and `make_student_folders.py` stubs each color version's functions
   in `student/Remus`. Colors name the color versions so
   that no color version sounds better than another. A two-digit
