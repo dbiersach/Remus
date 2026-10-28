@@ -12,7 +12,7 @@ matches what you typed.
 
 ## Where this piece fits
 
-notation.py uses board.py, attacks.py, legal_moves.py, and make_move.py. console_game.py, opening_book.py, and mate_solver.py use it.
+notation.py uses board.py, attacks.py, legal_moves.py, and make_move.py. console_game.py and opening_book.py use it.
 
 - **Uses:** [`attacks.py`](attacks.md), [`board.py`](board.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md)
 - **Uses only in its self-check:** [`fen.py`](fen.md)

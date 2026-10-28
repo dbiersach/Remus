@@ -22,7 +22,7 @@ holds four period folders, `period1` to `period4`, one for each class period:
 | `Day 06 - Count positions and read FEN` | Proves the rules right by counting positions against published totals, then reads and writes FEN |
 | `Day 07 - Play full games and score positions` | Adds game endings, SAN, two simple brains, the UCI link to the GUI, and the evaluation |
 | `Day 08 - Search ahead with alpha-beta` | Looks ahead with minimax and negamax, then prunes with alpha-beta, searches captures to quiet positions, and orders moves |
-| `Day 09 - Add the clock and build the color versions` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten color versions, and adds a mate solver |
+| `Day 09 - Add the clock and build the color versions` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten color versions, and ends with battles between the colors |
 | `Day 10 - Aim Remus at a science problem` | Holds only the hidden-peak and phase-hunt Science AI; the Day 10 engine is Remus-GOLD in `Remus/11 GOLD - All enhancements`, with all ten enhancements |
 
 The Day folders live inside the root `instructor/` folder. `instructor/` holds only
@@ -157,7 +157,6 @@ The pages, in the order the class builds them:
 | [`python_caches.py`](python_caches.md) | Day 9 lab: remember answers in a dict |
 | [`transposition_table.py`](transposition_table.md) | Remember positions already searched |
 | [`opening_book.py`](opening_book.md) | Play known openings without thinking |
-| [`mate_solver.py`](mate_solver.md) | Solve mate-in-two puzzles |
 | [`estimate_elo.py`](estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
 | [`demo_results.py`](demo_results.md) | Day 10 demo: read a match result |
 | [`version_match.py`](../engines/remus_versions.md) | Plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |

@@ -6,8 +6,8 @@ Remus-WHITE is the finished Day 9 Remus with none of the enhancements. It alread
 searches with alpha-beta, quiescence, move ordering, iterative deepening, and a
 clock. Ten ideas can make it stronger. On Day 9, in periods 2 and 3, each pair builds
 one of them, so the class can measure which idea adds the most strength. In period 4
-every pair starts its matches, which run with nobody watching while the pairs write
-the mate solver.
+the pairs carry their color versions to each other's laptops and play battles to find
+out which color is strongest.
 
 Each color version has a color instead of a number or a letter, so no color version sounds
 better than another before the games are played.
@@ -20,8 +20,7 @@ color version by its rating over Remus-WHITE in the teacher's 10-minute league (
 the folders list from 00 WHITE to 11 GOLD. The WHITE folder is a complete, runnable copy of
 the Day 9 Remus at the end of period 1 (`instructor/Day 09 .../period1`), when its engine
 is finished and before the pairs start their color versions, and each version folder is
-that copy plus one enhancement. The mate solver that pairs write in period 4 stays in
-the Day 9 folder and in Remus-GOLD. `student/Remus`
+that copy plus one enhancement. `student/Remus`
 holds the same folders with the pair's functions stubbed.
 
 `make_version_folders.py` builds the folders from the Day 9 code and the GOLD folder.
@@ -86,13 +85,26 @@ uv run version_match.py RED --games 1 --minutes 2
                                        # the Day 9 smoke test: one short game
 ```
 
-Pairs never type these commands. Every color folder holds two short scripts that run
+Pairs never type these commands. Every color folder holds three short scripts that run
 `version_match.py` for its own color, so a pair opens one in VS Code and presses Run:
 
 | Script | When | What it plays |
 | --- | --- | --- |
 | `smoke_test.py` | Day 9, period 3 | One 2-minute game against Remus-WHITE, to show the engine plays legal moves to the end |
+| `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting color version, one with each color |
 | `play_tournament.py` | Day 10, period 4 | The tournament: two 10-minute games against Remus-WHITE, one with each color |
+
+In the Day 9 battles a visiting pair brings its color folder on a USB drive and
+copies it over the folder of the same color in the host's `Remus` folder, which
+holds that color with its functions still stubbed. The
+host presses Run on `play_battle.py` in its own color folder and types the visitor's
+color, such as `RED`. The two colors play twice from the same opening, once with each
+color, about 20 minutes for both games. Each battle goes on the board as a row of the
+class table, and the period has room for two rounds. At the end of the period each
+host runs `git restore` on the visitor's folder, which puts the stubs back, so the
+laptop holds only its own pair's code. The teacher then shows the league table below,
+which rates every color from 110 games: two games show who won a battle, not which
+idea is stronger.
 
 In the Day 10 tournament every pair presses Run on `play_tournament.py` on its own
 laptop, all ten at once. Its color plays two games against Remus-WHITE from the same

@@ -13,10 +13,10 @@ This file answers it two ways. `is_attacked_by_scanning` asks every enemy piece.
 
 ## Where this piece fits
 
-attacks.py uses board.py, game_state.py, and move_generation.py. legal_moves.py, game_end.py, notation.py, search.py, and mate_solver.py use it.
+attacks.py uses board.py, game_state.py, and move_generation.py. legal_moves.py, game_end.py, notation.py, and search.py use it.
 
 - **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`move_generation.py`](move_generation.md)
-- **Used by:** [`game_end.py`](game_end.md), [`legal_moves.py`](legal_moves.md), [`mate_solver.py`](mate_solver.md), [`notation.py`](notation.md), [`search.py`](search.md)
+- **Used by:** [`game_end.py`](game_end.md), [`legal_moves.py`](legal_moves.md), [`notation.py`](notation.md), [`search.py`](search.md)
 
 ## Words to know
 

@@ -235,7 +235,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   instructor one. `period_guides.LABS` names the period of each. Both files are
   written by hand, and the builders read them before a rebuild and write them back,
   so edit a lab in place. Every period that has no Remus
-  function for the pairs holds a lab or a short demo (`demo_*.py`) with blanks.
+  function for the pairs holds a lab or a short demo (`demo_*.py`) with blanks,
+  except Day 9, period 4 (David, 2026-10-28): the pairs carry their color versions
+  on USB drives to other laptops and play battles with `play_battle.py`.
   Demos that use the engine run only inside their period folder. Day 6, period 3
   also gets `bug_hunt/`, which `make_period_folders.py` builds by planting the three
   bugs of `PLANTED_BUGS` in a copy of the period's code.
@@ -277,8 +279,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `estimate_elo.py`. The GOLD folder is written by hand, like a `period4` folder;
   edit the finished engine there. Remus-GOLD stays out of the color matches;
   `estimate_elo.py` rates it against Stockfish. `make_version_folders.py` builds the
-  other eleven folders from the Day 9 `period1` code, the engine before the
-  period 4 mate solver, and the GOLD folder, rewrites
+  other eleven folders from the Day 9 `period1` code, the finished Remus-WHITE
+  engine, and the GOLD folder, rewrites
   only the GOLD README, and `make_student_folders.py` stubs each color version's functions
   in `student/Remus`. Colors name the color versions so
   that no color version sounds better than another. A two-digit
@@ -328,7 +330,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   (`uv run pytest "instructor/Day 04 - Keep only legal moves/period3"`);
   `uv run scripts/run_all_tests.py` runs them all, and `uv run pytest` from the top
   folder runs `scripts/test_reference_tools.py`. The ten mate puzzles,
-  `mate_puzzles.epd`, sit beside `mate_solver.py` and `test_search.py` in every Day 8
+  `mate_puzzles.epd`, sit beside `test_search.py` in every Day 8
   and Day 9 period folder and every version folder that reads them. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.

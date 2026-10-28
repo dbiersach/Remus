@@ -1,6 +1,6 @@
 # Day 9: The clock and the color versions
 
-Day 9 gives Remus a clock, then splits the class into ten enhancement color versions. Each pair adds one idea to the same engine, Remus-WHITE, and tests it. By 4:30 every color version passes its tests and plays a legal game, and the mate solver solves all ten puzzles.
+Day 9 gives Remus a clock, then splits the class into ten enhancement color versions. Each pair adds one idea to the same engine, Remus-WHITE, and tests it. In period 4 the pairs carry their colors to each other's laptops on USB sticks and battle. By 4:30 every color version passes its tests and has played two battles.
 
 ## Objectives for the day
 
@@ -10,7 +10,7 @@ By 4:30, each pair can:
 - Read the `info` lines Remus sends to Lucas Chess: depth, score, nodes, and the principal variation.
 - Use a dict as a cache with a tuple as its key.
 - Add one enhancement to Remus-WHITE, test it, and say what it should change in a game.
-- Solve a mate puzzle with a yes-or-no search.
+- Play two color versions against each other, and read the result with its uncertainty.
 
 ## The day at a glance
 
@@ -22,7 +22,7 @@ By 4:30, each pair can:
 | | 12:00 to 1:00 | Lunch | |
 | P3 | 1:00 to 2:30 | Color versions: test and measure | Their color version's functions, from the version README |
 | | 2:30 to 3:00 | Break | |
-| P4 | 3:00 to 4:30 | The mate solver | `mating_move()` in `mate_solver.py` (22 lines) |
+| P4 | 3:00 to 4:30 | Color battles | Nothing: teacher code |
 
 ## Period 1, 8:30 to 10:00: Iterative deepening, the clock, and UCI info
 
@@ -55,19 +55,20 @@ By 4:30, each pair can:
 
 [`period3/README.md`](period3/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
 
-## Period 4, 3:00 to 4:30: The mate solver
+## Period 4, 3:00 to 4:30: Color battles
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:15 | Slides: the ten mate puzzles: nine mates in 2 and one mate in 3. A mate search asks a yes-or-no question instead of a score. |
-| 3:15 to 3:55 | Pairs write `mating_move()` in `mate_solver.py`. |
-| 3:55 to 4:20 | Pairs run `mate_solver.py` on all ten puzzles, including the mate in 3. |
-| 4:20 to 4:30 | Checkpoint: every color version passes its tests, and the mate solver solves all ten. |
+| 3:00 to 3:10 | Slides: how a battle works. Each pair copies its own color folder from `Remus` onto its USB stick. The teacher posts the pairings for two rounds; in each round five pairs host and five visit. |
+| 3:10 to 3:40 | Round 1. The visiting pair copies its color folder over the folder of the same color in the host laptop's `Remus` folder. The host opens `play_battle.py` in its own color folder, presses Run in VS Code, and types the visitor's color. Two 10-minute games run side by side, one with each color. Each pair writes the score on the board. |
+| 3:40 to 4:10 | Round 2: the pairs that visited now host, against new opponents. |
+| 4:10 to 4:25 | The class reads the board: which colors won, and why two games prove little. The teacher shows the league table, 110 games for each color, and compares. |
+| 4:25 to 4:30 | Each host restores the visitor's folder with `git restore` so its own repository holds only its own color. |
 
 [`period4/README.md`](period4/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
 
 ## By the end of the day
 
-**Checkpoint:** Every color version passes its tests and its one-game test match, and the mate solver solves all ten puzzles.
+**Checkpoint:** Every color version passes its tests and its one-game test match, and has played two battles against other colors.
 
 Each period folder starts from working code, so a pair that falls behind opens the next period's folder with the rest of the class.

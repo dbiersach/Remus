@@ -10,7 +10,6 @@ from evaluation import king_safety, mating_bonus, pawn_structure
 from fen import START_FEN, state_from_fen
 from game_state import position_key
 from make_move import make_move, state_snapshot
-from mate_solver import read_puzzles
 from moves import Move, move_from_uci, move_to_uci
 from notation import move_to_san, parse_san
 from opening_book import BOOK_PATH, book_move, load_book
@@ -135,7 +134,8 @@ def test_upgraded_search_saves_work_and_keeps_the_state() -> None:
 def test_upgraded_search_finds_a_mate_in_two() -> None:
     """Be4 is a quiet move late in the list, so late move reductions first search it
     two plies shallower; depth 5 leaves room to prove the mate in 3 plies."""
-    fen, best, _, _ = read_puzzles()[0]  # MATE.001: Be4
+    fen = "8/2pR2p1/2B2p2/KPk5/2p2r1r/2p2bQ1/8/8 w - - 0 1"  # MATE.001
+    best = "Be4"
     state = state_from_fen(fen)
     score, pv = upgraded_search(state, 5, 0, *WIDE, SearchInfo())
     assert score == MATE_SCORE - 3
