@@ -11,7 +11,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_caches.py` in `student/`, with the answers in `python_caches_instructor.py` in `instructor/`. Both come from `labs/day09/`. Run it with `uv run python_caches.py`.
+The lab is `python_caches.py` in `student/`, with the answers in `python_caches_instructor.py` in `instructor/`. Run it with `uv run python_caches.py`.
 
 The Remus code here is the same as at the end of the period before.
 

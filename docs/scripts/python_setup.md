@@ -1,6 +1,6 @@
 # python_setup.py: Is the laptop ready?
 
-*Day 1, period 1. The lab file is `labs/day01/python_setup.py`, and the answers are in `labs/day01/instructor/python_setup_instructor.py`.*
+*Day 1, period 1. The lab file is `student/Day 01 - Draw the board/period1/python_setup.py`, and the answers are in `instructor/Day 01 - Draw the board/period1/python_setup_instructor.py`.*
 
 ## The big picture
 

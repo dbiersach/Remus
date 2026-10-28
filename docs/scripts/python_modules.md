@@ -1,6 +1,6 @@
 # python_modules.py: One file uses another
 
-*Day 4, period 1. The lab file is `labs/day04/python_modules.py`, and the answers are in `labs/day04/instructor/python_modules_instructor.py`.*
+*Day 4, period 1. The lab file is `student/Day 04 - Keep only legal moves/period1/python_modules.py`, and the answers are in `instructor/Day 04 - Keep only legal moves/period1/python_modules_instructor.py`.*
 
 ## The big picture
 

@@ -1,6 +1,6 @@
 # python_sorting.py: Sort, start at minus infinity, time it
 
-*Day 8, period 2. The lab file is `labs/day08/python_sorting.py`, and the answers are in `labs/day08/instructor/python_sorting_instructor.py`.*
+*Day 8, period 2. The lab file is `student/Day 08 - Search ahead with alpha-beta/period2/python_sorting.py`, and the answers are in `instructor/Day 08 - Search ahead with alpha-beta/period2/python_sorting_instructor.py`.*
 
 ## The big picture
 

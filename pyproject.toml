@@ -35,8 +35,6 @@ lint.ignore = ["TC002", "TC003"]
 # file, so the pair's blanks can use them.
 lint.per-file-ignores = { "student/**" = ["F401"], "**/python_*.py" = ["F401", "F841", "PLR2044"], "**/demo_*.py" = ["F401", "F841", "PLR2044"] }
 format.exclude = [
-    "labs/day*/python_*.py",
-    "labs/day*/demo_*.py",
     "student/**/python_*.py",
     "student/**/demo_*.py",
 ]

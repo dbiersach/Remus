@@ -10,7 +10,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_dicts.py` in `student/`, with the answers in `python_dicts_instructor.py` in `instructor/`. Both come from `labs/day02/`. Run it with `uv run python_dicts.py`.
+The lab is `python_dicts.py` in `student/`, with the answers in `python_dicts_instructor.py` in `instructor/`. Run it with `uv run python_dicts.py`.
 
 The Remus code here is the same as at the end of the period before.
 

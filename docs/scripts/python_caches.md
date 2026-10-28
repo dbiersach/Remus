@@ -1,6 +1,6 @@
 # python_caches.py: Remember answers in a dict
 
-*Day 9, period 2. The lab file is `labs/day09/python_caches.py`, and the answers are in `labs/day09/instructor/python_caches_instructor.py`.*
+*Day 9, period 2. The lab file is `student/Day 09 - Add the clock and build the stations/period2/python_caches.py`, and the answers are in `instructor/Day 09 - Add the clock and build the stations/period2/python_caches_instructor.py`.*
 
 ## The big picture
 

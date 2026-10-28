@@ -223,10 +223,12 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Each student README adds a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it, and
   `docs/student_edit_plan.md` lists the same plan for the whole course.
-- Python skills labs live in `labs/dayNN/` (student file with `#` blanks) and
-  `labs/dayNN/instructor/` (`<name>_instructor.py`); `period_guides.LABS` names the
-  period of each, and the builders copy the answer file into the instructor period
-  folder and the blank file into the student one. Every period that has no Remus
+- Each Python skills lab lives in its own period folder (David, 2026-10-28; there is
+  no separate `labs/` folder): the student file with `#` blanks, `<name>.py`, in the
+  student period folder, and the answer file, `<name>_instructor.py`, in the
+  instructor one. `period_guides.LABS` names the period of each. Both files are
+  written by hand, and the builders read them before a rebuild and write them back,
+  so edit a lab in place. Every period that has no Remus
   function for the pairs holds a lab or a short demo (`demo_*.py`) with blanks.
   Demos that use the engine run only inside their period folder. Day 6, period 3
   also gets `bug_hunt/`, which `make_period_folders.py` builds by planting the three
@@ -476,11 +478,11 @@ passant captures that expose the king."
 Python skills labs use the same pattern as David's course repositories: a student file
 with blanks and an instructor file with the answers.
 
-- The student file `labs/day02/python_dicts.py` prints a heading for each part
+- The student file `student/Day 02 .../period2/python_dicts.py` prints a heading for each part
   (`print("Part #1 - Create a Dict and Read Items")`) and leaves one `#` line for each
   line the student writes.
-- The instructor file `labs/day02/instructor/python_dicts_instructor.py` mirrors it line
-  for line with the answers filled in. Its filename docstring names the instructor file.
+- The instructor file `instructor/Day 02 .../period2/python_dicts_instructor.py`
+  mirrors it line for line with the answers filled in. Its filename docstring names the instructor file.
 - Keeping the two files line-aligned lets the teacher diff them and lets a student
   compare a finished lab with the answer.
 

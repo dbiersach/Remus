@@ -1,6 +1,6 @@
 # python_functions.py: Small questions as functions
 
-*Day 2, period 1. The lab file is `labs/day02/python_functions.py`, and the answers are in `labs/day02/instructor/python_functions_instructor.py`.*
+*Day 2, period 1. The lab file is `student/Day 02 - Make and undo moves/period1/python_functions.py`, and the answers are in `instructor/Day 02 - Make and undo moves/period1/python_functions_instructor.py`.*
 
 ## The big picture
 

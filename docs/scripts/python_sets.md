@@ -1,6 +1,6 @@
 # python_sets.py: Castling rights as letters
 
-*Day 5, period 1. The lab file is `labs/day05/python_sets.py`, and the answers are in `labs/day05/instructor/python_sets_instructor.py`.*
+*Day 5, period 1. The lab file is `student/Day 05 - Add castling, en passant, and promotion/period1/python_sets.py`, and the answers are in `instructor/Day 05 - Add castling, en passant, and promotion/period1/python_sets_instructor.py`.*
 
 ## The big picture
 

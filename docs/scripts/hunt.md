@@ -1,6 +1,6 @@
 # hunt.py: Find three planted bugs
 
-*Day 6, period 3. The demo file is `labs/day06/bug_hunt/hunt.py`. `make_period_folders.py` copies it into the `bug_hunt` folder of the period and plants three bugs in that folder's Remus files.*
+*Day 6, period 3. The demo file is `bug_hunt/hunt.py` in the period folder. `make_period_folders.py` keeps it when it rebuilds the folder and plants three bugs in that folder's Remus files.*
 
 ## The big picture
 
