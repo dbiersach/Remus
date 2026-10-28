@@ -3,10 +3,12 @@
 
 Decide whether a square is attacked, and whether a king is in check.
 
-Version 1 loops over the enemy pieces and asks each one "do you attack this
-square?", the way Turbo GameWorks Chess does. Version 2 stands on the square and
-looks outward like a "super piece": along the lines for rooks, bishops, and queens,
-and at the knight, pawn, and king squares nearby. Version 2 is the one Remus uses.
+The file answers "is this square attacked?" in two ways. is_attacked_by_scanning()
+loops over the enemy pieces and asks each one "do you attack this square?".
+is_square_attacked() stands on the square and looks outward like a "super piece":
+along the lines for rooks, bishops, and queens, and at the knight, pawn, and king
+squares nearby. main() checks that the two agree, and Remus calls
+is_square_attacked() because it looks at far fewer squares.
 """
 
 from board import EMPTY, Board, Square, parse_square, piece_at
@@ -24,7 +26,7 @@ from move_generation import (
 
 def is_attacked_by_scanning(board: Board, square: Square, by_color: str) -> bool:
     """
-    Version 1: ask every enemy piece whether it attacks the square.
+    Ask every piece of by_color whether it attacks the square.
 
     Parameters
     ----------
@@ -38,7 +40,7 @@ def is_attacked_by_scanning(board: Board, square: Square, by_color: str) -> bool
     Returns
     -------
     bool
-        True if any piece of by_color attacks the square. Version 1 reuses the move
+        True if any piece of by_color attacks the square. The scan reuses the move
         generator, so it does not count a square that holds a piece of by_color
         (a defended piece). Check and castling never ask about such a square.
     """
@@ -140,7 +142,7 @@ def attacked_along_lines(board: Board, square: Square, by_color: str) -> bool:
 
 def is_square_attacked(board: Board, square: Square, by_color: str) -> bool:
     """
-    Version 2: look outward from the square for any attacker of by_color.
+    Look outward from the square for any attacker of by_color.
 
     Parameters
     ----------
@@ -211,11 +213,11 @@ def main():
         for col in range(8):
             for color in (WHITE, BLACK):
                 if color_of(board[row][col]) == color:
-                    continue  # Version 1 skips squares held by the attacker
+                    continue  # The scan never counts a square held by the attacker
                 tests += 1
-                version_1 = is_attacked_by_scanning(board, (row, col), color)
-                agree += version_1 == is_square_attacked(board, (row, col), color)
-    print(f"Versions 1 and 2 agree on {agree} of {tests} squares  (expected all)")
+                scanned = is_attacked_by_scanning(board, (row, col), color)
+                agree += scanned == is_square_attacked(board, (row, col), color)
+    print(f"Both attack checks agree on {agree} of {tests} squares  (expected all)")
     print(f"White in check at the start: {in_check(state, WHITE)}  (expected False)")
 
 

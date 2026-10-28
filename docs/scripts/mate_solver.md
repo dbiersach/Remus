@@ -4,7 +4,7 @@
 
 ## The big picture
 
-Turbo GameWorks Chess came with ten puzzles: White to play and mate in 2 or 3 moves.
+`tests/mate_puzzles.epd` holds ten puzzles: White to play and mate in 2 or 3 moves.
 This file solves all ten.
 
 It asks a yes-or-no question instead of giving scores. Is there a White move where

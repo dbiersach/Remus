@@ -4,7 +4,7 @@
 
 By the end of this period, each pair can:
 
-- Solve mate puzzles with a yes-or-no search. **Measured by:** The mate-solver tests pass on all ten GameWorks puzzles.
+- Solve mate puzzles with a yes-or-no search. **Measured by:** The mate-solver tests pass on all ten mate puzzles.
 
 ## The files
 
