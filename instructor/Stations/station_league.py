@@ -145,6 +145,9 @@ def fit_ratings(results: list[Result], anchor: str) -> dict[str, tuple[float, fl
         for name in (white, black):
             if name not in players:
                 players.append(name)
+    # The anchor takes part in the pretend draws even if it played no real game
+    if results and anchor not in players:
+        players.append(anchor)
     players.sort()
     games = list(results)
     for name in players:
@@ -261,7 +264,9 @@ def print_ratings(results: list[Result], clock: str, anchor: str) -> None:
     standings.sort()
     for rank, (_, name) in enumerate(standings, start=1):
         rating, margin = fitted[name]
-        share = 100 * scored[name] / played[name]
+        share = 0.0  # The anchor may have no games of its own
+        if played[name] > 0:
+            share = 100 * scored[name] / played[name]
         print(
             f"  {rank:>4}  {name:13} {played[name]:>5}  {share:5.1f}%  "
             f"{rating:+5.0f} +/- {margin:.0f}"

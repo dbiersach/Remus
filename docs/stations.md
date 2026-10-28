@@ -14,14 +14,16 @@ better than another before the games are played.
 
 ## Where the stations live
 
-`instructor/Stations` holds `WHITE - No enhancements` and one folder per station,
-such as `RED - Transposition table`. The WHITE folder is a complete, runnable copy of
+`instructor/Stations` holds `00 WHITE - No enhancements` and one folder per station,
+such as `06 RED - Transposition table`. The number in front of each name ranks the
+station by its rating over Remus-WHITE in the teacher's 10-minute league (below), so
+the folders list from 00 WHITE to 11 GOLD. The WHITE folder is a complete, runnable copy of
 the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each station folder is
 that copy plus one enhancement. `student/Stations`
 holds the same folders with the pair's functions stubbed.
 
 `make_station_folders.py` builds the folders from the Day 9 and Day 10 code.
-`GOLD - All enhancements` holds Remus-GOLD, a copy of the finished Day 10 Remus with
+`11 GOLD - All enhancements` holds Remus-GOLD, a copy of the finished Day 10 Remus with
 all ten enhancements at once. Remus-GOLD stays out of the color matches;
 `uv run estimate_elo.py` inside its folder rates it against Stockfish.
 
@@ -127,6 +129,13 @@ uv run station_league.py --rate-only    # only the ratings, from the saved games
 uv run station_league.py --at-once 16 --event "Station league 2"
                                         # a new league, rated apart from the others
 ```
+
+`--niram` plays the same league with Niram, the Rust copies of all 12 versions in
+the `niram` folder (see [`niram/README.md`](../niram/README.md)). Niram picks the
+same moves as Remus about 50 times faster, so a 10-minute Niram game searches about
+as many positions as an 8-hour Remus game. Niram games are rated apart from Remus
+games, with Niram-WHITE pinned at 0, and `station_match.py` and `station_elo.py`
+take `--niram` too.
 
 Without `--at-once`, the league plays one game per processor thread. Give it the
 number of cores or fewer, because each game needs a whole core to itself to use its

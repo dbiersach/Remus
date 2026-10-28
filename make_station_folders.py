@@ -518,7 +518,7 @@ from search import MATE_SCORE, SearchInfo, alpha_beta_with_quiescence, {names}
 # and the functions the pair writes
 STATIONS_TABLE = [
     {
-        "folder": "GOLD - All enhancements",
+        "folder": "11 GOLD - All enhancements",
         "idea": "Remus-GOLD is the finished Day 10 Remus with all ten enhancements "
         "at once. It stays out of the color matches; estimate_elo.py measures its "
         "rating against Stockfish.",
@@ -529,7 +529,7 @@ STATIONS_TABLE = [
         "students": [],
     },
     {
-        "folder": "WHITE - No enhancements",
+        "folder": "00 WHITE - No enhancements",
         "idea": "Remus-WHITE is the finished Day 9 Remus with none of the ten "
         "enhancements. Every station starts from it, and every station match "
         "measures against it.",
@@ -539,7 +539,7 @@ STATIONS_TABLE = [
         "students": [],
     },
     {
-        "folder": "RED - Transposition table",
+        "folder": "06 RED - Transposition table",
         "idea": "Remember positions already searched, so the same position reached "
         "in two move orders is scored once.",
         "copies": ["transposition_table.py"],
@@ -589,7 +589,7 @@ STATIONS_TABLE = [
         ],
     },
     {
-        "folder": "GREEN - Opening book",
+        "folder": "10 GREEN - Opening book",
         "idea": "Play the first moves of well-known openings from a book instead of "
         "searching.",
         "copies": ["opening_book.py", "opening_book.txt"],
@@ -671,7 +671,7 @@ STATIONS_TABLE = [
         ],
     },
     {
-        "folder": "BLUE - Killer moves",
+        "folder": "04 BLUE - Killer moves",
         "idea": "Try quiet moves that caused a cutoff at the same depth right after "
         "the captures.",
         "copies": ["move_ordering.py"],
@@ -713,7 +713,7 @@ STATIONS_TABLE = [
         ],
     },
     {
-        "folder": "PINK - Principal variation search",
+        "folder": "05 PINK - Principal variation search",
         "idea": "Search the first move with the full window and every other move "
         "with a cheap null window first.",
         "copies": [],
@@ -733,7 +733,7 @@ STATIONS_TABLE = [
         ],
     },
     {
-        "folder": "YELLOW - Draw sense",
+        "folder": "01 YELLOW - Draw sense",
         "idea": "Score a repeated position, or one at the fifty-move limit, as a "
         "draw inside the search.",
         "copies": [],
@@ -772,7 +772,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         ],
     },
     {
-        "folder": "PURPLE - Pawn structure",
+        "folder": "07 PURPLE - Pawn structure",
         "idea": "Penalize doubled and isolated pawns and reward passed pawns.",
         "copies": [],
         "edits": evaluation_station(
@@ -794,7 +794,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         "students": [("evaluation.py", "pawn_structure")],
     },
     {
-        "folder": "CYAN - Mating bonus",
+        "folder": "09 CYAN - Mating bonus",
         "idea": "With a big material lead, drive the losing king to the edge and "
         "bring the winning king close.",
         "copies": [],
@@ -813,7 +813,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         "students": [("evaluation.py", "mating_bonus")],
     },
     {
-        "folder": "ORANGE - Null-move pruning",
+        "folder": "02 ORANGE - Null-move pruning",
         "idea": "Let the opponent move twice in a shallow search. If Remus is still "
         "too far ahead, the opponent would never allow this position, so stop "
         "searching it.",
@@ -864,7 +864,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         ],
     },
     {
-        "folder": "BROWN - Late move reductions",
+        "folder": "03 BROWN - Late move reductions",
         "idea": "Search late, quiet moves one ply shallower, and in full only if "
         "they surprise.",
         "copies": [],
@@ -898,7 +898,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         ],
     },
     {
-        "folder": "GRAY - King safety",
+        "folder": "08 GRAY - King safety",
         "idea": "While the enemy queen is on the board, reward pawns that shelter "
         "the king.",
         "copies": [],
@@ -944,7 +944,8 @@ def measured_table(color: str) -> str:
 
 def readme_text(station: dict) -> str:
     """Return the README.md that explains one station folder."""
-    color, name = station["folder"].split(" - ")
+    number_and_color, name = station["folder"].split(" - ")
+    color = number_and_color.split(" ")[1]  # "00 WHITE" gives "WHITE"
     guide = STATION_GUIDES[color]
     sections = [
         f"# Remus-{color}: {name}\n\n{station['idea']}",

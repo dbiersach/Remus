@@ -245,29 +245,38 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   tests fail until a pair writes the function. `make_student_folders.py` builds
   `student/` from `instructor/` and lists every student function by day and period;
   run it after `make_period_folders.py`, and never edit a student stub by hand.
-- `instructor/Stations` holds Remus-WHITE (`WHITE - No enhancements`, the finished
+- `instructor/Stations` holds Remus-WHITE (`00 WHITE - No enhancements`, the finished
   Day 9 Remus with none of the ten enhancements, named by David on 2026-10-27) and the
-  ten enhancement stations, one folder per color (`RED - Transposition table`, ...).
-  Each station is Remus-WHITE plus one enhancement, and `GOLD - All enhancements`
+  ten enhancement stations, one folder per color (`06 RED - Transposition table`, ...).
+  Each station is Remus-WHITE plus one enhancement, and `11 GOLD - All enhancements`
   holds Remus-GOLD, a copy of the finished Day 10 Remus with all ten (David,
   2026-10-27). Remus-GOLD stays out of the color matches; `estimate_elo.py` rates it
   against Stockfish; the finished Day 10 Remus holds all ten. `make_station_folders.py`
   builds them from the Day 9 and Day 10 `period4` code, and `make_student_folders.py`
   stubs each station's functions in `student/Stations`. Colors name the stations so
-  that no station sounds better than another. `station_match.py` plays a station
+  that no station sounds better than another. A two-digit
+  prefix (David, 2026-10-28) orders the folders by each version's Elo over WHITE in
+  the 10-minute league: 00 WHITE, 01 YELLOW, 02 ORANGE, 03 BROWN, 04 BLUE, 05 PINK,
+  06 RED, 07 PURPLE, 08 GRAY, 09 CYAN, 10 GREEN, 11 GOLD. The Rust engine folders in
+  `niram/` use the same names. `station_match.py` plays a station
   against Remus-WHITE, and Remus-WHITE takes part in the color matches too.
   `station_league.py` plays a round robin of all 12 versions, Remus-GOLD included,
   and fits one Elo rating per version with Remus-WHITE pinned at 0.
   `station_elo.py` rates all 12 versions against Stockfish at five UCI_Elo levels
   from frozen copies of the stations and writes the table to `docs/station_elo.md`.
-- `niram/` holds Niram-GOLD, Remus-GOLD rewritten in Rust (David, 2026-10-27), named
-  for Naram-Sin, Sargon's grandson. It is a teacher's experiment that measures how much
-  faster the same engine runs in a compiled language; students never edit it. Each
-  `.rs` file matches the Python file of the same name, and Niram must visit exactly
-  the same number of positions as Remus-GOLD at each depth (`cargo test --release`
-  inside `niram/`; `uv run niram/remus_benchmark.py` times Remus-GOLD on the same
-  positions). A change to Remus-GOLD's rules, evaluation, or search needs the same
-  change in Niram. The Python style rules above do not apply to the Rust code, which
+- `niram/` holds Niram, every Remus version rewritten in Rust (David, 2026-10-27 and
+  2026-10-28), named for Naram-Sin, Sargon's grandson: Niram-WHITE, the ten color
+  stations, and Niram-GOLD, one Cargo crate each in folders named like the station
+  folders, with the shared rules in `niram/rules`. It is a teacher's tool that runs
+  the same engines about 50 times faster; students never edit it. Each `.rs` file
+  matches the Python file of the same name, and each Niram version must visit
+  exactly the same number of positions as its Remus twin at each depth
+  (`cargo test --release` inside `niram/`; `uv run niram/remus_benchmark.py COLOR`
+  times the Remus version on the same positions). `station_match.py`,
+  `station_league.py`, and `station_elo.py` play the Niram programs with `--niram`
+  and rate them apart from Remus, with Niram-WHITE pinned at 0; David wants leagues
+  run with Niram (2026-10-28). A change to a station's rules, evaluation, search, or
+  opening book needs the same change in Niram. The Python style rules above do not apply to the Rust code, which
   follows `cargo fmt` and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `estimate_elo.py`,
   `station_match.py`, `station_league.py`, `station_elo.py`) is added to `games/remus_games.pgn` at the top of the

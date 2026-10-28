@@ -27,8 +27,8 @@ Each side gets 10 minutes, because Remus searches only a few thousand positions 
 second and a shorter clock stops every version too shallow for most enhancements
 to help. The two games run at once, so the match takes about 20 minutes.
 
-Colors match the color word of a version folder's name, so "RED" finds
-"RED - Transposition table" (or "06 RED - Transposition table").
+A color names a station folder, so "RED" finds "06 RED - Transposition table".
+The number in front ranks the stations by the teacher's league, WHITE first.
 """
 
 import argparse

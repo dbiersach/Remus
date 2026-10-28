@@ -409,7 +409,7 @@ def main():
             target,
             ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg"),
         )
-        color = station["folder"].split(" - ")[0]
+        color = station["folder"].split(" - ")[0].split(" ")[1]
         count = 0
         for file_name, function in station["students"]:
             file_path = target / file_name

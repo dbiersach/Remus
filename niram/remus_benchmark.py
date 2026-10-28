@@ -39,11 +39,13 @@ MATE_SCORE = 100_000  # The same as search.py
 
 
 def find_folder(color: str) -> Path:
-    """Return the station folder whose name starts with the color, such as "RED"."""
+    """Return the station folder of a color: "RED" finds "06 RED - Transposition table"."""
     for folder in sorted(STATIONS.iterdir()):
-        if folder.is_dir() and folder.name.upper().startswith(color.upper() + " "):
-            return folder
-    sys.exit(f"No station folder starts with {color!r}")
+        if folder.is_dir() and " - " in folder.name:
+            words = folder.name.split(" - ")[0].split()
+            if words[len(words) - 1] == color.upper():
+                return folder
+    sys.exit(f"No station folder has the color {color!r}")
 
 
 def score_from_info(line: str) -> int:
