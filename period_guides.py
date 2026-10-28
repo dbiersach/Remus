@@ -604,30 +604,37 @@ OBJECTIVES = {
     ],
     (10, 2): [
         (
-            "Estimate a value and its error from noisy readings.",
-            "The `estimate` test passes: four readings cut the error in half.",
+            "Score a guess about what a powder holds.",
+            (
+                "The `score` test passes, and the pair explains why an extra phase "
+                "costs a point even when every peak is explained."
+            ),
         ),
         (
-            "Score an experiment by the wrong calls to expect.",
+            "Build an answer greedily, one best step at a time.",
             (
-                "The `expected_wrong_calls` test passes, and the pair explains why an "
-                "unmeasured sample counts as 0.5."
+                "The `greedy_phases` tests pass, and the pair explains why greedy "
+                "names gold for a powder that holds silver."
             ),
         ),
     ],
     (10, 3): [
         (
-            "Look ahead with pretend readings, the way Remus looks ahead with moves.",
+            "Search every set of phases with make and undo, as Remus searches moves.",
             (
-                "The `gain` test passes: a close call (52) gains more from a shot than "
-                "a clear one (90)."
+                "The `search` tests pass: the phases list comes back unchanged, and "
+                "the search scores 176 sets, one for each set of up to three phases."
             ),
         ),
         (
-            "Verify a model by comparing its predictions with results.",
             (
-                "`uv run beam_time.py` shows largest gain beating equal time, and the "
-                "pair compares each expected count with the real count."
+                "Verify a method against known answers, and say when the data "
+                "cannot decide."
+            ),
+            (
+                "`uv run phase_hunt.py` shows the search making fewer wrong calls "
+                "than greedy, and the pair names the extra measurement that would "
+                "tell gold from silver."
             ),
         ),
     ],
@@ -644,8 +651,8 @@ OBJECTIVES = {
             "Explain one decision your engine made.",
             (
                 "Each pair presents one move with its score and principal variation, "
-                "from Part #3 of `demo_results.py` or its own position, and one choice "
-                "its beam time agent made."
+                "from Part #3 of `demo_results.py` or its own position, and one powder "
+                "its phase hunt named."
             ),
         ),
         (
@@ -1285,19 +1292,23 @@ CHANGE_NOTES = {
     ("hidden_peak.py", "choose_next_measurement"): "Returns the candidate with the "
     "highest score, just as `greedy_move()` returns the best capture. The same "
     "generate, score, and choose loop now runs on a science problem.",
-    ("beam_time.py", "estimate"): "Averages a sample's readings and works out the "
-    "error: the noise divided by the square root of the number of readings. Four "
-    "readings cut the error in half, which is why some samples deserve more shots.",
-    ("beam_time.py", "expected_wrong_calls"): "Adds up the chance of a wrong call "
-    "over all eight samples. It is the evaluation of the experiment, like "
-    "`material()` for a chess position: a smaller total means a better plan.",
-    ("beam_time.py", "gain"): "Looks one shot ahead: tries three pretend readings "
-    "(one noise step low, on the average, one step high), averages the chance of a "
-    "wrong call after each, and returns how much the chance drops. Pretend readings "
-    "are like the moves Remus makes and undoes while it searches.",
-    ("beam_time.py", "choose_next_sample"): "Returns the sample whose next shot has "
-    "the largest gain. With it, the agent spends beam time where a call is still "
-    "close, and makes fewer wrong calls than giving every sample equal time.",
+    ("phase_hunt.py", "score"): "Scores a guess about which phases are in the "
+    "powder: a point for each measured peak the phases explain, and a point lost for "
+    "each peak left over, each predicted peak that is missing, and each phase used. "
+    "It is the evaluation of the science problem, like `material()` for a chess "
+    "position, and the cost per phase makes the simpler explanation win a tie.",
+    ("phase_hunt.py", "greedy_phases"): "Adds the phase that raises the score most, "
+    "then the next, and stops when no phase helps, the way `greedy_move()` takes the "
+    "biggest capture. Each phase is tried with append and taken back with pop, like "
+    "make and undo. Greedy gives one answer and never doubts it, so it names gold "
+    "for a powder of silver.",
+    ("phase_hunt.py", "search"): "Scores the set of phases it is given, keeps every "
+    "set that ties for the best score, and calls itself on each set one phase "
+    "larger, adding a phase with append and taking it back with pop. Phases go in "
+    "library order only, so each set is scored once instead of once for every "
+    "order, 176 sets instead of 821. Keeping every tied set lets the search say "
+    "gold or silver when the pattern cannot tell them apart, as CrystalShift and "
+    "Dara report every likely answer.",
     ("transposition_table.py", "probe"): "Looks up a position in the table and "
     "returns a stored score only when it answers this search: it was searched deep "
     "enough, and its bound fits the window. One position reached by two move orders "

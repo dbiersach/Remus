@@ -124,9 +124,9 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 10.2 | The hidden peak | A 10x10 grid with readings so far, the predicted values, and the square the AI chooses next |
 | 10.3 | Explore against exploit | Three runs with explore weight 0, 8, and 40 and their average measurements |
 | 10.4 | The benchmark | A bar chart: random guessing about 54 measurements, greedy AI about 9 |
-| 10.5 | Beam time | A sample holder with eight samples, each with its readings and error bar against the line at 50; 40 shots to share |
-| 10.6 | The chance of a wrong call | A bell curve around a sample's average; the tail on the far side of the line at 50 is the chance the call is wrong |
-| 10.7 | Look ahead with pretend readings | Three pretend readings (one noise step low, on the average, one step high) with chances 1/4, 1/2, 1/4, beside Remus making and undoing a move |
-| 10.8 | Verify | A bar chart of wrong calls per holder (random 0.94, equal time 0.83, largest gain 0.65), each beside the count the agent expected |
-| 10.9 | The real thing | The NSLS-II autonomous agent runs the same loop with a Gaussian process instead of the hand-built model |
+| 10.5 | Fingerprints | Four phases' peak strips over an X-ray pattern; a powder of quartz and rutile shows the peaks of both |
+| 10.6 | Score a guess | One pattern with three guesses: explained peaks in green, left-over peaks in orange, missing peaks in red, and each guess's score |
+| 10.7 | The tree of phase sets | The empty set at the root, one phase per branch, beside Remus's game tree; crossed-out branches that repeat a set in another order (821 sets down to 176) |
+| 10.8 | Verify | A bar chart over 200 known powders: greedy 166 right and 34 wrong; search 139 right, 52 can't tell, 9 wrong; the gold and silver peaks side by side |
+| 10.9 | The real thing | CrystalShift and Dara search the same tree on real synchrotron data; Brookhaven's Crystallography Companion Agent names phases live at the NSLS-II PDF beamline; the gpCAM agent at the CMS beamline chooses where to measure next |
 | 10.10 | The round robin | The circle method for 10 entrants: one fixed, the rest rotate; 9 rounds, 45 games |

@@ -33,7 +33,7 @@ python-chess as an outside judge, to compare its answers with Remus's.
 | `test_game.py` | 6 | FEN, and from Day 7 SAN, game endings, and the UCI engine |
 | `test_search.py` | 7 | Evaluation and the first brains, then minimax, negamax, alpha-beta, mates, and the mate solver |
 | `test_upgrades.py` | 10 | The Day 10 upgrades and the hidden-peak Science AI |
-| `test_beam_time.py` | 10 | The beam time agent: estimates, wrong-call chances, the look-ahead, and the benchmark |
+| `test_phase_hunt.py` | 10 | The phase hunt: the score, the greedy agent, the tree search with make and undo, and the benchmark |
 
 ## How a test works
 

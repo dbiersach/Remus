@@ -22,12 +22,15 @@ Crystallography Companion Agent, so the story leads back to Brookhaven.
 
 **Recommendation 1:** replace `beam_time.py` (Day 10, periods 2 and 3) with a phase
 identification search, `phase_hunt.py`. It is the most chess-like real problem found,
-and a prototype fits the 40-line cap.
+and the built lab fits the 40-line cap.
 
 **Recommendation 2:** keep `hidden_peak.py` (Day 10, period 1), and anchor it in the
 real gpCAM papers from the CMS beamline. If David prefers to keep `beam_time.py`
 too, re-anchor it on the published NSLS-II BadSeed problem (stay on a sample or move
 on), which it already resembles.
+
+**Decision (David, 2026-10-28):** build `phase_hunt.py` and retire `beam_time.py`.
+The built lab and its benchmark are described under Recommendation 1.
 
 ## How the candidates were judged
 
@@ -228,51 +231,57 @@ peaks, look a few phases deeper, take the phase back, and keep the best set.
 | `greedy_move()` vs alpha-beta | Add the single best phase each time vs search three deep |
 | Perft against python-chess | Known mixtures: does the search name the true phases? |
 
-### What the prototype shows
+### What the benchmark shows
 
-A throwaway prototype (not in the repository) used ten real phases with four
-textbook peak positions each, a matching tolerance of 0.3 degrees, and random
-mixtures of one to three phases in which each peak shows up 85 percent of the time.
-Over 200 seeded mixtures:
+David chose Recommendation 1 on 2026-10-28, and `phase_hunt.py` replaces
+`beam_time.py` in Day 10, periods 2 and 3. The library holds ten real phases, each
+with its four strongest peaks, computed with Bragg's law from published lattice sizes
+for copper X-rays (1.5406 angstrom). Two of them, gold and silver, have lattice
+sizes 0.2 percent apart, so their peaks land less than 0.3 degrees apart and no
+peak list can tell them apart. Each benchmark powder mixes one to three phases; each
+peak shows up 85 times in 100 and lands up to 0.15 degrees from its true angle.
 
-| Agent | Correct sets | Nodes per pattern |
-| --- | --- | --- |
-| Greedy: add the best phase one at a time | 152 of 200 | 30 or fewer |
-| Search three deep, every order | about 84 percent (41 of a 50-mixture run) | 821 |
-| Search three deep, library order only | 167 of 200 | 176 |
+The first throwaway prototype seemed to show look-ahead beating greedy (152 against
+167 of 200 right). A closer check found that the gap came from ties: when two sets
+scored the same, the search returned whichever it met first, and that set was
+sometimes the true one. With ties counted as ties, a full search and greedy agree on
+almost every powder of a clean library, because a phase that explains peaks of two
+real phases at once almost never happens with four peaks per phase.
 
-Look-ahead beats greedy, and the ordering rule cuts the tree from 821 nodes to 176
-without changing the answer, the same lesson as alpha-beta against minimax. The
-misses come from overlapping peaks and missing peaks, which opens the real science
-question of how much measurement is enough.
+What the search does give, and greedy cannot, is every answer that ties for the best
+score. That is the main point of Dara ("multiple-hypothesis") and CrystalShift (a
+probability for each phase combination): a scientist needs to know when the pattern
+alone cannot decide. The built lab therefore scores each answer with three verdicts:
+
+| Agent (200 known powders) | Right | Can't tell | Wrong |
+| --- | --- | --- | --- |
+| Greedy: add the best phase, again and again | 166 | 0 | 34 |
+| Search: every set of up to three phases, every tie kept | 139 | 52 | 9 |
+
+Greedy names gold for every gold or silver powder, so it is right when the powder
+holds gold and wrong when it holds silver, and it never knows which. The search is
+wrong on 9 powders, almost all with missing peaks, and says "can't tell" on 52, most
+of them gold or silver: the cue for a second measurement, such as X-ray
+fluorescence, which tells the two metals apart at once. Adding phases in library
+order scores 176 sets per powder instead of 821, the same lesson as move ordering.
+Each phase also costs one point, so a simpler explanation wins a tie, the role that
+Dara's "keep a phase only if it improves the fit by 2 percent" rule plays.
 
 ### Who writes what
 
-- **Teacher writes:** the phase library (peak lists), `make_pattern(names, seed)`
-  (a mixture with missing and shifted peaks), `matches(peak, peaks)`, the greedy
-  agent, and the benchmark.
-- **Pairs write, period 2 (about 15 lines):** `score(phases, measured)`, the
-  evaluation: +1 for each explained peak, -1 for each unexplained peak, -2 for each
-  predicted peak that is missing.
-- **Pairs write, period 3 (about 15 to 18 lines):** `search(phases, measured, depth,
-  start)`, the recursive look-ahead with append (make) and pop (undo) and the
-  ordering rule. Then the class benchmarks greedy against search and verifies on
-  known mixtures.
+- **Teacher writes:** the phase library, `matches()`, `predicted_peaks()`,
+  `make_pattern(seed)`, the `Hunt` record, `judge()`, and the benchmark.
+- **Pairs write, period 2 (28 lines):** `score(phases, measured)`, the evaluation
+  (11 lines), and `greedy_phases(measured)`, the greedy agent with append and pop
+  as make and undo (17 lines).
+- **Pairs write, period 3 (13 lines):** `search(phases, measured, depth, start,
+  hunt)`, the recursive search that keeps every tied set. Then the class runs the
+  benchmark and changes `PHASE_COST` and `MISSING` to watch the verdicts move.
 
-Both functions hold a central idea (evaluation, then search with make and undo), and
-neither one is plumbing. Both stay under the 40-line cap.
+### Still open
 
-### Before building it
-
-- Take the reference peak positions from a real database such as the
-  [Crystallography Open Database](https://www.crystallography.net/) for Cu K-alpha
-  radiation, so every number in the library traces to a source. The prototype used
-  rounded textbook values.
-- Ask the NSLS-II PDF or XPD beamline staff (the same contact the management brief
-  asks about) for one real measured pattern of a two-phase mixture. A real pattern
-  as the final test would make the capstone fully authentic.
-- Decide what happens to `beam_time.py`: retire it, or move it to an optional
-  extension re-anchored on BadSeed.
+- Ask the NSLS-II PDF or XPD beamline staff for one real measured pattern of a
+  two-phase powder, to use as the final test. The management brief now asks for it.
 
 ## Recommendation 2: keep `hidden_peak.py`, anchored on gpCAM
 

@@ -159,7 +159,8 @@ The engine must run without Lucas Chess or `python-chess` installed.
 11. Transposition table (plain dict), opening list, tablebase probing at the boundary
 12. UCI loop and play in Lucas Chess
 13. Science AI: aim the same generate, score, and choose loop at a hidden-peak
-    measurement problem (`science/hidden_peak.py`)
+    measurement problem (`hidden_peak.py`), then the full tree search at X-ray phase
+    identification (`phase_hunt.py`)
 
 Each lesson has a "Ready to move on when" gate in the workshop file. Don't skip a gate.
 
@@ -274,7 +275,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `upgraded_search`), and the older function stays. Never add version numbers to file
   names.
 - The Science AI lessons are `hidden_peak.py` (Day 10, `period1` on) and
-  `beam_time.py`, the beamline problem (Day 10, `period2` on). Both use the standard
+  `phase_hunt.py`, X-ray phase identification by tree search (Day 10, `period2`
+  on). Both use the standard
   library only and do not import the engine: they reuse the engine's ideas, not its
   code.
 - Tests sit next to the modules in each period folder. The module names repeat from
