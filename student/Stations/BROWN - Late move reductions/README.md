@@ -8,7 +8,7 @@ By the end of the station, each pair can:
 
 - Explain the idea of the station's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `uv run pytest` passes in the station folder.
-- Measure the enhancement against Remus-WHITE. **Measured by:** `uv run station_match.py <COLOR>` finishes, and the pair reads its Elo gap and margin from the output.
+- Run a fair experiment against Remus-WHITE: same opening, both colors. **Measured by:** In the Day 10 tournament, `uv run station_match.py <COLOR>` plays both 10-minute games with no illegal moves or crashes, and the pair says why two games cannot show whether the enhancement helps.
 
 ## The files
 

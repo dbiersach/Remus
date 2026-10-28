@@ -30,7 +30,7 @@ in [`AGENTS.md`](../AGENTS.md) apply to everything below.
 | First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
 | First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
-| Matches | Day 9: each color station plays Remus-WHITE, plus 15 planned color-on-color showcase matches, unattended. Day 10: a round robin of the 10 pair engines and the results |
+| Matches | Day 10: each pair's color station plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the teacher's league |
 | Mate puzzles | The ten GameWorks `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 | Documentation | `docs/remus_program_overview.md` for the whole program, one page per major script in `docs/scripts/`, and `docs/slide_plan.md` for the PowerPoint slides |
 
@@ -49,8 +49,8 @@ plugs it into a GUI, and teaches Remus to think.
 | 6 | Counting the tree, and FEN | Recursion; `split`, exceptions | Perft matches the reference counts; FEN in and out |
 | 7 | A whole game, and judging a position | `random`, a loop that keeps the best so far, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
 | 8 | Searching ahead, then smarter | Recursion review, keeping a list in order with `insert` | Minimax, negamax, alpha-beta, quiescence, move ordering |
-| 9 | The clock and the stations | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhancement station per pair; station matches; a mate solver |
-| 10 | Science AI at the beamline | `math.dist`, `math.sqrt`, `random.seed` | A measurement AI that finds a hidden peak; a beam time agent for a beamline problem; results and tournament |
+| 9 | The clock and the stations | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhancement station per pair; a mate solver |
+| 10 | Science AI at the beamline | `math.dist`, `math.sqrt`, `random.seed` | A measurement AI that finds a hidden peak; a beam time agent for a beamline problem; results and the tournament against Remus-WHITE |
 
 Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special move
 in place, and Week 2 opens with recursion and perft. Perft on Monday gives every pair a
@@ -116,7 +116,6 @@ and nothing leaves the classroom except on the USB drives at the end.
 | Start a period | Pair | `git fetch instructor --tags`, then `git switch -c d3-p3 d3-p3-start`. One branch per period keeps each period's work separate and easy to find |
 | Catch up after falling behind | Pair | `git switch -c d3-p3-catchup d3-p3-end` |
 | Hand in a picked function | Pair and teacher | The teacher copies the function from the pair's screen or from a file the pair saves to the class USB stick, then commits it with a `CONTRIBUTORS.md` line |
-| Hand in an engine for the tournament | Pair | `git bundle create <team>.bundle --all` onto the class USB stick; the teacher fetches each bundle into a branch on the tournament laptop |
 | Take it home | Pair | `git clone --no-hardlinks . <usb>/remus` copies the source and full history but not the `.venv` folder, which only works on the laptop that built it. At home: install `uv`, run `uv sync`, install the free Lucas Chess (Windows or Linux) from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). A student with a Mac or Linux computer at home uses `remus.sh` instead; Lucas Chess has no Mac version, so a Mac needs another UCI chess app |
 
 School Wi-Fi sometimes blocks laptops from reaching each other. Test `git fetch
@@ -448,58 +447,16 @@ and alpha-beta returns the same score as negamax with fewer nodes.
 | GRAY | King safety: reward the pawn shield while queens are on | (not in GameWorks) |
 
 - **P3. Enhancement stations: test and measure.** Each pair finishes its station,
-  passes its tests, and plays a two-game smoke test against Remus-WHITE with
-  `uv run station_match.py <COLOR> --games 2`. Each pair writes one sentence on the
-  board: what its enhancement should change, and how the class will see it.
-- **P4. Launch the station matches, and the mate solver.** Each laptop starts
-  `uv run station_match.py <COLOR>`, 20 games against Remus-WHITE, and then its share
-  of the 15 planned color-on-color showcase matches (see "The match plan" below). The
-  matches run with nobody watching, through the evening if needed, and add every game
-  to `games/remus_games.pgn`. While they run, the class meets the ten GameWorks mate
-  puzzles. **Students write:** `mating_move(state, moves_left)` in `mate_solver.py`,
-  the yes-or-no search that solves all ten, including the mate in 3 (`MATE.008`).
+  passes its tests, and plays one short smoke-test game against Remus-WHITE with
+  `uv run station_match.py <COLOR> --games 1 --minutes 2`, which only checks that the
+  engine plays legal moves to the end. Each pair writes one sentence on the board:
+  what its enhancement should change, and how the class will see it.
+- **P4. The mate solver.** The class meets the ten GameWorks mate puzzles.
+  **Students write:** `mating_move(state, moves_left)` in `mate_solver.py`, the
+  yes-or-no search that solves all ten, including the mate in 3 (`MATE.008`).
 
-**Checkpoint `d9-p4-end`:** every station passes its tests, and every laptop is
-playing its matches with no illegal moves or losses on time.
-
-#### The match plan
-
-Every color plays Remus-WHITE, the yardstick, so the ten Elo gaps compare fairly.
-On top of those ten matches, each color plays three planned showcase matches, 15 in
-all, chosen so that each one answers a question the class can predict before the
-games start. The first color named hosts the match on its laptop with
-`uv run station_match.py <COLOR> <COLOR>`, so no laptop hosts more than two. Each
-match is 20 games and takes about 20 to 30 minutes at two games at once.
-
-| # | Match | The question the class predicts | Teacher's league run (6 games) |
-| --- | --- | --- | --- |
-| 1 | RED vs BLUE | Remembering positions or trying the best moves first: which saves more search? | 2.5-3.5 |
-| 2 | PINK vs RED | PVS saves work only when good moves come first. Does it pay off against a table that remembers? | 3-3 |
-| 3 | ORANGE vs BROWN | Skipping a turn or searching late moves less deeply: which shortcut misses less? | 2.5-3.5 |
-| 4 | PURPLE vs GRAY | Healthy pawns or a safe king: which knowledge wins more games? | 3.5-2.5 |
-| 5 | CYAN vs YELLOW | Knowing how to finish a win or knowing when a game is drawn? | 2-4 |
-| 6 | GREEN vs ORANGE | A book of good openings or a deeper search in every position? | 2.5-3.5 |
-| 7 | PURPLE vs RED | Chess knowledge against search speed | 3-3 |
-| 8 | YELLOW vs BLUE | Does a sense for draws matter when the other side searches faster? | 3.5-2.5 |
-| 9 | GRAY vs CYAN | Two ways to think about the king: protect your own or hunt the other one | 2.5-3.5 |
-| 10 | GREEN vs PINK | Does the book's head start last once both sides leave the book? | 3-3 |
-| 11 | BROWN vs PURPLE | Searching more moves or understanding pawns better? | 2.5-3.5 |
-| 12 | BLUE vs GREEN | Good move order in every position or good moves in the opening only? | 3.5-2.5 |
-| 13 | PINK vs BROWN | Both re-search when a move surprises them. Which one gets surprised less? | 1.5-4.5 |
-| 14 | ORANGE vs CYAN | Null-move pruning searches deeper but can be fooled in endgames. Does the mating bonus punish it? | 3.5-2.5 |
-| 15 | YELLOW vs GRAY | Avoiding bad draws or avoiding a weak king? | 3-3 |
-
-Each color plays three matches: RED (1, 2, 7), BLUE (1, 8, 12), PINK (2, 10, 13),
-ORANGE (3, 6, 14), BROWN (3, 11, 13), PURPLE (4, 7, 11), GRAY (4, 9, 15), CYAN (5, 9,
-14), YELLOW (5, 8, 15), and GREEN (6, 10, 12). The last column comes from the
-teacher's `station_league.py` run of 396 games, and 13 of the 15 matches ended 3-3
-or one game apart. Even 66 games per version leave each league rating with an error
-bar of about 84 Elo, so most stations are not yet told apart (see
-[`stations.md`](stations.md)). That is the lesson of the 20-game matches: the class
-predicts, the games decide, and more games narrow the error bar.
-
-Remus-GOLD, with all ten enhancements, stays out of the matches; the teacher rates it
-against Stockfish with `estimate_elo.py`.
+**Checkpoint `d9-p4-end`:** every station passes its tests and its one-game smoke
+test, and the mate solver solves all ten puzzles.
 
 ### Day 10: Science AI at the beamline
 
@@ -544,20 +501,27 @@ against Stockfish with `estimate_elo.py`.
   same loop with a statistical model (a Gaussian process) in place of the hand-built
   one. When Brookhaven shares a real beamline problem for the course, it replaces the
   sample holder in this period, and the agent's loop stays the same.
-- **P4. Results, tournament, take-home, and wrap-up.** The station results go on the
-  projector: each color's Elo gap against Remus-WHITE, the showcase results, and
-  Remus-GOLD's Stockfish rating (about 1520). `tournament.py` runs the round robin of the
-  pairs' engines on the teacher's laptop (about 70 minutes) while each student copies the pair's repository to their own
-  USB drive with `git clone --no-hardlinks` and checks that the copy opens. In
-  `demo_results.py` each pair turns its color's match result into an Elo gap with a
-  margin of error and lets Remus explain one move. Each pair then
+- **P4. Results, tournament, take-home, and wrap-up.** The tournament comes first.
+  Every pair runs `uv run station_match.py <COLOR>` in the `Stations` folder on its
+  own laptop, all ten at once: its color plays two 10-minute games against
+  Remus-WHITE from the same opening, with White in game 1 and Black in game 2. The two
+  games run side by side and take about 20 to 30 minutes, while each student copies
+  the pair's repository to their own USB drive with `git clone --no-hardlinks` and
+  checks that the copy opens. Each pair writes its two results on the board. Then the
+  teacher shows Remus-GOLD's results against every color and Remus-WHITE from the
+  teacher's 10-minute league (`uv run station_league.py --rate-only --player GOLD`),
+  and Remus-GOLD's Stockfish rating (about 1960 at 10 minutes a game, from
+  [`station_elo.md`](station_elo.md)), as a class discussion: two games cannot tell
+  one enhancement from another, and 66 games barely can. In `demo_results.py` each
+  pair turns its two games, and then its color's 66 league games, into an Elo gap with
+  a margin of error and lets Remus explain one move. Each pair then
   explains one move its engine chose, with the score and principal variation, and one
   choice its beam time agent made. Close with what comes next: bitboards, Zobrist
   hashing, endgame tablebases, and a stronger "Manishtushu" engine.
 
 **Checkpoint `d10-p4-end`:** every pair's `choose_next_measurement()` beats random
 guessing on the 100-grid benchmark, every pair's `choose_next_sample()` beats equal
-time on the 200-holder benchmark, and the station matches finished with no illegal
+time on the 200-holder benchmark, and the tournament games finished with no illegal
 moves, crashes, or lost synchronization.
 
 ## Code breakdown by day
@@ -582,7 +546,7 @@ The full description of each script is in `docs/scripts/`.
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
 | `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thread, `stop`), `console_game.py` (uses `think`); the station folders live in `Stations/` |
-| `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `beam_time.py`, `tournament.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_beam_time.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
+| `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `beam_time.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_beam_time.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
 
 Outside the Day folders:
 
@@ -633,9 +597,10 @@ engine, and the engine never imports it.
    `remus.sh` does the same; it must be marked executable with `chmod +x remus.sh`, and
    it calls `uv` by its full path (usually `~/.local/bin/uv`) because a desktop app
    does not read the shell's `PATH`.
-2. **Matches and the tournament.** `play_match.py` and `tournament.py` use
-   `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes, plays them on a
-   `chess.Board`, and `tournament.py` saves every game as PGN with `chess.pgn`. python-chess rejects any illegal move
+2. **Matches and the tournament.** `play_match.py` and `station_match.py` use
+   `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes and play them
+   on a `chess.Board`, and `station_match.py` saves every game as PGN with `chess.pgn`.
+   python-chess rejects any illegal move
    an engine sends, so match play doubles as a rules test.
 3. **Reference checks in tests.** The tests in each period folder compare Remus perft counts, legal move lists,
    FEN round trips, SAN text, and game results with `chess.Board` on the same position.

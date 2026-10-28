@@ -258,7 +258,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   positions). A change to Remus-GOLD's rules, evaluation, or search needs the same
   change in Niram. The Python style rules above do not apply to the Rust code, which
   follows `cargo fmt` and `cargo clippy`.
-- Every game any script plays (`play_match.py`, `tournament.py`, `estimate_elo.py`,
+- Every game any script plays (`play_match.py`, `estimate_elo.py`,
   `station_match.py`, `station_league.py`, `station_elo.py`) is added to `games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson

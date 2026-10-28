@@ -13,7 +13,7 @@ give Remus a rating of its own.
 
 ## Where this piece fits
 
-estimate_elo.py starts uci_engine.py and Stockfish. It uses python-chess as the referee, the way tournament.py does.
+estimate_elo.py starts uci_engine.py and Stockfish. It uses python-chess as the referee, the way station_match.py does.
 
 - **Uses:** no other Remus file
 - **Used by:** no other Remus file

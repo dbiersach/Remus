@@ -4,9 +4,11 @@
 
 ## The big picture
 
-A match of 20 games ends with a score, but luck plays a part in 20 games. This demo
-turns wins, draws, and losses into an Elo gap and a margin of error, and says whether
-the result shows a real difference. Then it asks Remus to think about one position
+A match ends with a score, but luck plays a part, and luck plays a larger part the
+fewer games there are. This demo turns wins, draws, and losses into an Elo gap and a
+margin of error, and says whether the result shows a real difference. A pair puts in
+its two tournament games first, then its color's games from the teacher's league,
+and sees the margin shrink as the games add up. Then it asks Remus to think about one position
 and prints the score and the line of moves Remus expects at each depth.
 
 ## Where this piece fits

@@ -1,12 +1,9 @@
-# Day 9, Period 4: Launch the station matches, and the mate solver
-
-Each pair starts `uv run station_match.py <COLOR>` in the `Stations` folder, which plays its station against Remus-WHITE with nobody watching. Meanwhile the pairs write the mate solver.
+# Day 9, Period 4: The mate solver
 
 ## Learning objectives
 
 By the end of this period, each pair can:
 
-- Run a fair experiment: same opponent, same openings, both colors. **Measured by:** Each laptop's `station_match.py` run starts with no errors and adds games to the games file.
 - Solve mate puzzles with a yes-or-no search. **Measured by:** The mate-solver tests pass on all ten GameWorks puzzles.
 
 ## The files
