@@ -971,7 +971,8 @@ def readme_text(version: dict) -> str:
     if color == "GOLD":
         sections.append(
             "## Check it\n\nCheck it from inside this folder with `uv run pytest`, "
-            "and rate it against Stockfish with `uv run estimate_elo.py`. From the "
+            "and rate it against Stockfish by opening `estimate_elo.py` and clicking "
+            "Run Python File. From the "
             "top Remus folder, "
             "`uv run scripts/version_league.py --rate-only --player GOLD` "
             "shows its score against every other version in the teacher's league."

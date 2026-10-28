@@ -25,7 +25,7 @@ holds the same folders with the pair's functions stubbed.
 `make_version_folders.py` builds the folders from the Day 9 code and the GOLD folder.
 `11 GOLD - All enhancements` holds Remus-GOLD, the finished Remus of Day 10, with
 all ten enhancements at once. Remus-GOLD stays out of the color matches;
-`uv run estimate_elo.py` inside its folder rates it against Stockfish.
+running `estimate_elo.py` inside its folder rates it against Stockfish.
 
 ## The ten color versions
 

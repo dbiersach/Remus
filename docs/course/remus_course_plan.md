@@ -134,7 +134,7 @@ every drill uses chess data so the skill is fresh when the engine needs it.
 
 | Lab | Day | Skills | Chess drill |
 | --- | --- | --- | --- |
-| 1 | D1 P2 | VS Code, terminal, `uv run file.py`, `print`, variables, strings, indexing, `ord` and `chr`, f-strings | Turn `"e2"` into file number 4 and rank number 2 |
+| 1 | D1 P2 | VS Code and its Run Python File button, `print`, variables, strings, indexing, `ord` and `chr`, f-strings | Turn `"e2"` into file number 4 and rank number 2 |
 | 2 | D1 P3 | Lists, `for` and `range`, `len`, nested lists, `board[row][col]` | Print an 8x8 grid of dots, then count the pawns in a row |
 | 3 | D2 P1 | Functions, parameters, `return`, type hints, docstrings, tuples and unpacking, `assert`, pytest | `is_white("N")`, `on_board(row, col)` with tests |
 | 4 | D2 P2 | Dicts, `dataclass`, `None`, mutation, aliasing, `copy` and `deepcopy`, `==` on lists | Show `b2 = board` changing both boards; fix it with a copy |
@@ -248,7 +248,7 @@ refresher with a demonstration board comes right before the code that needs each
   **Students write:** `print_board()`, `square_name(row, col)`,
   `parse_square(name)` (which rejects `"i9"`), `piece_at(board, square)`.
 
-**Checkpoint `d1-p4-end`:** `uv run board.py` prints the start board and
+**Checkpoint `d1-p4-end`:** running `board.py` prints the start board and
 "b1 holds N, expected N".
 
 ### Day 2: Functions and records
@@ -273,7 +273,7 @@ refresher with a demonstration board comes right before the code that needs each
 - **P2. Jumping pieces.** Unplugged warm-up: "Shade the reach." The teacher writes
   `knight_moves()` from an offset list.
   **Students write:** `king_moves()` the same way. Exercise: a knight on `a1` has two
-  moves, to `b3` and `c2`. `uv run show_board.py` draws an arrow for every move the
+  moves, to `b3` and `c2`. running `show_board.py` draws an arrow for every move the
   generator returns, so pairs see their own moves on a real board.
 - **P3. Sliding pieces.** **Students write:** `slide(board, square, direction)`, the
   loop that walks one direction and stops at the first piece, capturing it if it is
@@ -348,7 +348,7 @@ catch-up period: a pair that falls behind checks out the period's end tag and re
   with `python-chess` on the standard positions. The teacher plants three bugs in a copy
   (en passant pawn left on the board, castling through check, a missing promotion
   piece); pairs race to find them with `divide`. The copy is the `bug_hunt` folder
-  inside the period folder, and `uv run hunt.py` there prints every root move whose
+  inside the period folder, and running `hunt.py` there prints every root move whose
   count disagrees with `python-chess`.
 - **P4. Python lab 9 and FEN.** The lab, `python_fen_fields.py`, covers `split` and
   exceptions. Then
@@ -541,7 +541,7 @@ the end of that period. `period4` is the finished code of the day, and
 `make_period_folders.py` builds the three earlier periods from it.
 [`file_versions.md`](../code/file_versions.md) lists which period adds or grows each file. The
 table names the folders without the `instructor/` prefix. Every module ends with a visible self-check, as `AGENTS.md`
-requires, so a pair can run any file from inside the folder with `uv run perft.py`.
+requires, so a pair can open any file in the folder and run it with the Run Python File button.
 The full description of each script is in `docs/code/`.
 
 | Folder | New files | Files that grow |
