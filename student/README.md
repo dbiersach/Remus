@@ -74,7 +74,6 @@ written yet.
 | 8 | 3 | `search.py` | `quiescence` |
 | 8 | 4 | `move_ordering.py` | `mvv_lva_score` |
 | 9 | 1 | `search.py` | `think` |
-| 9 | 4 | `mate_solver.py` | `mating_move` |
 | 10 | 1 | `hidden_peak.py` | `candidate_squares` |
 | 10 | 1 | `hidden_peak.py` | `score_candidate` |
 | 10 | 1 | `hidden_peak.py` | `choose_next_measurement` |

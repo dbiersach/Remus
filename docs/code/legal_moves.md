@@ -15,7 +15,7 @@ illegal. Undo it either way.
 legal_moves.py uses attacks.py, move_generation.py, and make_move.py. Almost every file above it calls `legal_moves()`.
 
 - **Uses:** [`attacks.py`](attacks.md), [`board.py`](board.md), [`game_state.py`](game_state.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`moves.py`](moves.md)
-- **Used by:** [`game_end.py`](game_end.md), [`mate_solver.py`](mate_solver.md), [`notation.py`](notation.md), [`perft.py`](perft.md), [`search.py`](search.md), [`uci_engine.py`](uci_engine.md)
+- **Used by:** [`game_end.py`](game_end.md), [`notation.py`](notation.md), [`perft.py`](perft.md), [`search.py`](search.md), [`uci_engine.py`](uci_engine.md)
 
 ## Words to know
 

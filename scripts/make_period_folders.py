@@ -128,7 +128,6 @@ ARRIVALS = {
         "console_game.py": 1,
         "uci_engine.py": 1,
         "test_game.py": 1,
-        "mate_solver.py": 4,
     },
     # Day 10 holds only the science files; its engine is Remus-GOLD in instructor/Remus
     10: {
@@ -621,7 +620,7 @@ PERIOD_TITLES = {
     (9, 1): "Iterative deepening, the clock, and UCI info",
     (9, 2): "Python lab 12 and the color versions",
     (9, 3): "Color versions: test and measure",
-    (9, 4): "The mate solver",
+    (9, 4): "Color battles",
     (10, 1): "Science AI: hidden_peak.py",
     (10, 2): "The phase hunt: score a guess, and the greedy agent",
     (10, 3): "The phase hunt: search every set, and verify",
@@ -635,6 +634,12 @@ PERIOD_NOTES = {
     (1, 4): "Running `show_board.py` draws the board as a picture in the web browser.",
     (3, 2): "Running `show_board.py` draws an arrow for every move a generator "
     "returns.",
+    (9, 4): "The battles run in the `Remus` folder next to the Day folders. Each pair "
+    "copies its own color folder onto a USB stick. On the host laptop, the visitors "
+    "copy that folder over the folder of the same color in `Remus`, and the host "
+    "opens `play_battle.py` in its own color folder, presses Run Python File, and "
+    "types the visitor's color. Remus plays two 10-minute games, one with each color, "
+    "side by side.",
     (5, 4): "Register `remus.bat` from this folder as an engine in Lucas Chess and "
     "play your own Remus. It plays random legal moves, and every special move works.",
     (6, 3): "The `bug_hunt` folder holds a copy of this period's Remus with three "

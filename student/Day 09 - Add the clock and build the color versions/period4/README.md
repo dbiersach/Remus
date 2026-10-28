@@ -1,41 +1,16 @@
-# Day 9, Period 4: The mate solver
+# Day 9, Period 4: Color battles
+
+The battles run in the `Remus` folder next to the Day folders. Each pair copies its own color folder onto a USB stick. On the host laptop, the visitors copy that folder over the folder of the same color in `Remus`, and the host opens `play_battle.py` in its own color folder, presses Run Python File, and types the visitor's color. Remus plays two 10-minute games, one with each color, side by side.
 
 ## Learning objectives
 
 By the end of this period, each pair can:
 
-- Solve mate puzzles with a yes-or-no search. **Measured by:** The mate-solver tests pass on all ten mate puzzles.
+- Run a fair match between two color versions. **Measured by:** The pair copies its color folder to another pair's laptop, plays two games against that pair's color, one with each color, and writes the result on the board.
+- Read a match result with its uncertainty. **Measured by:** The pair says why two games cannot show which enhancement is stronger, and compares the class results with the teacher's league table.
 
 ## The files
 
-New files this period:
-
-- `mate_solver.py`
-
-Files that grow this period:
-
-- `test_search.py`
-
-Functions the pairs write this period:
-
-- `mating_move()` in `mate_solver.py`
-
-In `student/` these functions raise `NotImplementedError` until a pair writes them. In `instructor/` they are finished.
-
-## The changes and why
-
-### `mating_move()` in `mate_solver.py`
-
-Looks for a move after which every defense still loses to a mate in one move fewer. On the last move only checks are tried, because only a check can be mate. A yes-or-no question is much faster to answer than a full search with scores.
+The code here is the same as at the end of the period before.
 
 Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
-
-## What you edit this period
-
-Every other function in this folder is finished. Change only these, and only below each docstring:
-
-| File | Function | Starts at line | Lines to type | Tests that check it |
-| --- | --- | --- | --- | --- |
-| `mate_solver.py` | `mating_move()` | 29 | 22 | `test_search.py::test_mate_solver_solves_all_mate_puzzles`, `test_search.py::test_mate_solver_finds_no_mate_when_there_is_none` |
-
-Lines to type in all: 22. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

@@ -585,8 +585,20 @@ OBJECTIVES = {
     ],
     (9, 4): [
         (
-            "Solve mate puzzles with a yes-or-no search.",
-            "The mate-solver tests pass on all ten mate puzzles.",
+            "Run a fair match between two color versions.",
+            (
+                "The pair copies its color folder to another pair's laptop, plays two "
+                "games against that pair's color, one with each color, and writes the "
+                "result on the board."
+            ),
+        ),
+        (
+            "Read a match result with its uncertainty.",
+            (
+                "The pair says why two games cannot show which enhancement is "
+                "stronger, and compares the class results with the teacher's league "
+                "table."
+            ),
         ),
     ],
     (10, 1): [
@@ -1461,10 +1473,6 @@ CHANGE_NOTES = {
     "the middle of a search, the unfinished search is thrown away. Each finished "
     "depth also puts its best move first for the next depth, so alpha-beta cuts off "
     "more. This is iterative deepening, and it lets Remus play on any clock.",
-    ("mate_solver.py", "mating_move"): "Looks for a move after which every defense "
-    "still loses to a mate in one move fewer. On the last move only checks are "
-    "tried, because only a check can be mate. A yes-or-no question is much faster to "
-    "answer than a full search with scores.",
     ("hidden_peak.py", "candidate_squares"): "Lists every square not measured yet. "
     'These are the "legal moves" of the science problem: the places the AI could '
     "measure next.",
@@ -3185,8 +3193,9 @@ DAY_GUIDES = {
         "summary": (
             "Day 9 gives Remus a clock, then splits the class into ten enhancement "
             "color versions. Each pair adds one idea to the same engine, Remus-WHITE, and "
-            "tests it. By 4:30 every color version passes its tests and plays a legal game, "
-            "and the mate solver solves all ten puzzles."
+            "tests it. In period 4 the pairs carry their colors to each other's laptops "
+            "on USB sticks and battle. By 4:30 every color version passes its tests and "
+            "has played two battles."
         ),
         "objectives": [
             (
@@ -3202,7 +3211,10 @@ DAY_GUIDES = {
                 "Add one enhancement to Remus-WHITE, test it, and say what it should "
                 "change in a game."
             ),
-            "Solve a mate puzzle with a yes-or-no search.",
+            (
+                "Play two color versions against each other, and read the result "
+                "with its uncertainty."
+            ),
         ],
         "periods": {
             1: [
@@ -3291,34 +3303,47 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Slides: the ten mate puzzles: nine mates in 2 and one mate in"
-                        " 3. A mate search asks a yes-or-no question instead of a "
-                        "score."
+                        "Slides: how a battle works. Each pair copies its own color "
+                        "folder from `Remus` onto its USB stick. The teacher posts the "
+                        "pairings for two rounds; in each round five pairs host and "
+                        "five visit."
                     ),
                 ),
                 (
-                    15,
-                    "Pairs write `mating_move()` in `mate_solver.py`.",
-                ),
-                (
-                    55,
+                    10,
                     (
-                        "Pairs run `mate_solver.py` on all ten puzzles, including the "
-                        "mate in 3."
+                        "Round 1. The visiting pair copies its color folder over the "
+                        "folder of the same color in the host laptop's `Remus` "
+                        "folder. The host opens `play_battle.py` in its own color "
+                        "folder, presses Run in VS Code, and types the visitor's "
+                        "color. Two 10-minute games run side by side, one with each "
+                        "color. Each pair writes the score on the board."
                     ),
                 ),
                 (
-                    80,
+                    40,
+                    "Round 2: the pairs that visited now host, against new opponents.",
+                ),
+                (
+                    70,
                     (
-                        "Checkpoint: every color version passes its tests, and the mate "
-                        "solver solves all ten."
+                        "The class reads the board: which colors won, and why two "
+                        "games prove little. The teacher shows the league table, 110 "
+                        "games for each color, and compares."
+                    ),
+                ),
+                (
+                    85,
+                    (
+                        "Each host restores the visitor's folder with `git restore` so "
+                        "its own repository holds only its own color."
                     ),
                 ),
             ],
         },
         "checkpoint": (
-            "Every color version passes its tests and its one-game test match, and the mate "
-            "solver solves all ten puzzles."
+            "Every color version passes its tests and its one-game test match, and "
+            "has played two battles against other colors."
         ),
     },
     10: {

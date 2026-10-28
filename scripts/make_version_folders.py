@@ -3,8 +3,9 @@
 
 Build one folder per color version in instructor/Remus.
 
-Remus-WHITE is the finished Day 9 Remus (instructor/Day 09 .../period4) with none of
-the ten enhancements. Each other version folder is Remus-WHITE plus one enhancement,
+Remus-WHITE is the Day 9 Remus at the end of period 1 (instructor/Day 09 .../period1),
+with none of the ten enhancements. Its engine is complete before the pairs start their
+color versions in period 2. Each other version folder is Remus-WHITE plus one enhancement,
 named by a color so that no color version sounds better than another. A pair builds its
 color version, then its Remus plays Remus-WHITE to measure how much Elo the one
 enhancement adds. Remus-GOLD, the finished Remus of Day 10, holds every
@@ -33,10 +34,8 @@ from period_guides import (
 ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
 INSTRUCTOR = ROOT / "instructor"
 REMUS_FOLDER = INSTRUCTOR / "Remus"
-BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period4"  # Remus-WHITE
+BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period1"  # Remus-WHITE
 FINAL = REMUS_FOLDER / "11 GOLD - All enhancements"  # Written by hand
-# Day 9 already runs these slow tests on the same rules, so the versions leave them out
-DAY_9_ONLY_TESTS = [("test_search.py", "test_mate_solver_solves_all_mate_puzzles")]
 
 
 def function_text(file_path: Path, name: str) -> str:
@@ -1003,7 +1002,10 @@ def readme_text(version: dict) -> str:
                 "`uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: "
                 f"Remus-{color} plays one 2-minute game against Remus-WHITE, which "
                 "shows that the engine plays legal moves to the end of a game. In the "
-                "Day 10 tournament, open `play_tournament.py` and press Run: "
+                "Day 9 battles, copy the visiting pair's color folder into the `Remus` "
+                "folder, open `play_battle.py`, press Run, and type the visitor's "
+                f"color: Remus-{color} plays it twice at 10 minutes a side, once with "
+                "each color. In the Day 10 tournament, open `play_tournament.py` and press Run: "
                 f"Remus-{color} plays Remus-WHITE twice, once with each color, at 10 "
                 "minutes a side, and both games go into games/remus_games.pgn. Each "
                 "script runs `version_match.py` from the `Remus` folder above this one."
@@ -1032,6 +1034,16 @@ RUN_SCRIPTS = {
         ),
         [],
     ),
+    "play_battle.py": (
+        (
+            "The Day 9 battle for this color version. Copy the visiting pair's color "
+            "folder into\nthe Remus folder on this laptop, press Run in VS Code, and "
+            "type the visitor's\ncolor. Remus-{color} plays two 10-minute games "
+            "against it from the same opening,\nWhite in game 1 and Black in game 2. "
+            "The two games take about 20 minutes."
+        ),
+        ["OPPONENT"],
+    ),
     "smoke_test.py": (
         (
             "The Day 9 smoke test for this color version. Press Run in VS Code: Remus-{color} "
@@ -1047,15 +1059,25 @@ def run_script_text(name: str, color: str) -> str:
     """Return a script that runs version_match.py for one color from the Run button."""
     about, extra = RUN_SCRIPTS[name]
     arguments = ""
+    ask = ""
     for word in [color, *extra]:
-        arguments += f', "{word}"'
+        if word == "OPPONENT":
+            arguments += ", opponent"
+            # The visitor types its color, such as RED, in the VS Code terminal
+            ask = (
+                '    opponent = input("The visiting color, such as RED: ")'
+                ".strip().upper()\n"
+            )
+        else:
+            arguments += f', "{word}"'
     return (
         f'#!/usr/bin/env -S uv run\n"""{name}\n\n{about.format(color=color)}\n'
         "version_match.py, in the Remus folder above this one, plays the games and "
         'adds\nthem to games/remus_games.pgn.\n"""\n\n'
         "import subprocess\nimport sys\nfrom pathlib import Path\n\n\n"
         "def main():\n"
-        '    match_path = Path(__file__).parent.parent / "version_match.py"\n'
+        + ask
+        + '    match_path = Path(__file__).parent.parent / "version_match.py"\n'
         '    print(f"Running {match_path}")\n'
         "    # sys.executable is the Python that VS Code runs, with python-chess\n"
         f"    subprocess.run([sys.executable, str(match_path){arguments}], check=True)\n"
@@ -1081,11 +1103,6 @@ def main():
         )
         for name in version["copies"]:
             shutil.copy2(FINAL / name, folder / name)
-        for file_name, name in DAY_9_ONLY_TESTS:
-            file_path = folder / file_name
-            test = function_text(file_path, name) + "\n\n"
-            text = replace_once(file_path.read_text(), test, "", version["folder"])
-            file_path.write_text(text)
         for file_name, old, new in version["edits"]:
             file_path = folder / file_name
             text = replace_once(file_path.read_text(), old, new, version["folder"])

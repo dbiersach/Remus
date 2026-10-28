@@ -11,7 +11,6 @@ from pathlib import Path
 from evaluation import evaluate, material, placement
 from fen import START_FEN, state_from_fen
 from make_move import state_snapshot
-from mate_solver import mating_move, read_puzzles
 from move_ordering import mvv_lva_score, order_moves
 from moves import move_from_uci, move_to_uci
 from notation import move_to_san
@@ -152,7 +151,7 @@ def test_quiescence_sees_the_recapture() -> None:
 def test_mate_in_two_puzzles() -> None:
     for line in MATE_PUZZLES.read_text().splitlines():
         if "dm 2" not in line:
-            continue  # MATE.008 is a mate in 3, a job for mate_solver.py
+            continue  # MATE.008 is a mate in 3, deeper than this search
         fen = " ".join(line.split()[:4])
         state = state_from_fen(fen)
         score, pv = alpha_beta_with_quiescence(
@@ -161,21 +160,6 @@ def test_mate_in_two_puzzles() -> None:
         key_move = line.split("bm ")[1].split(";")[0]
         assert score == MATE_SCORE - 3, line
         assert move_to_san(state, pv[0]).rstrip("+#") == key_move, line
-
-
-def test_mate_solver_solves_all_mate_puzzles() -> None:
-    """Ten puzzles: nine mates in 2 and MATE.008, a mate in 3."""
-    puzzles = read_puzzles()
-    assert len(puzzles) == 10
-    for fen, best, length, name in puzzles:
-        state = state_from_fen(fen)
-        move = mating_move(state, length)
-        assert move is not None, name
-        assert move_to_san(state, move).rstrip("+#") == best, name
-
-
-def test_mate_solver_finds_no_mate_when_there_is_none() -> None:
-    assert mating_move(state_from_fen(START_FEN), 1) is None
 
 
 def test_format_info() -> None:

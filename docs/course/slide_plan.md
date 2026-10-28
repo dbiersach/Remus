@@ -114,7 +114,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 9.14 | Finishing a won endgame | The `mating_bonus` heat map: the losing king pushed to the edge, the winning king closing in |
 | 9.15 | The opening book | Book lines in SAN turned into a dict from `position_key` to moves, drawn as a small tree |
 | 9.16 | The tournament plan | Each color plays Remus-WHITE twice on Day 10, once with each color, at 10 minutes a side, all ten laptops at once; then Remus-GOLD against everyone from the teacher's league |
-| 9.17 | The mate solver | An AND/OR tree: the attacker needs one move that works, the defender's every reply must fail. MATE.008 solved in about 6 seconds |
+| 9.17 | Color battles | The two rounds of pairings, how to copy a color folder from the USB stick over the host's folder, `play_battle.py`, and the class score table that the league table answers at the end |
 
 ## Day 10: Aim Remus at a science problem
 

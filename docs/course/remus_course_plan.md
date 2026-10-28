@@ -48,7 +48,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 6 | Counting the tree, and FEN | Recursion; `split`, exceptions | Perft matches the reference counts; FEN in and out |
 | 7 | A whole game, and judging a position | `random`, a loop that keeps the best so far, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
 | 8 | Searching ahead, then smarter | Recursion review, keeping a list in order with `insert` | Minimax, negamax, alpha-beta, quiescence, move ordering |
-| 9 | The clock and the color versions | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one color version per pair; a mate solver |
+| 9 | The clock and the color versions | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one color version per pair; battles between the colors |
 | 10 | Science AI at the beamline | `math.dist`, `random.seed`, `append` and `pop` as make and undo | A measurement AI that finds a hidden peak; a phase hunt that names the crystals in an X-ray pattern; results and the tournament against Remus-WHITE |
 
 Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special move
@@ -452,12 +452,18 @@ moves" milestone.
   `smoke_test.py` in its version folder and presses Run in VS Code. The 2-minute game
   only checks that the engine plays legal moves to the end. Each pair writes one sentence on the board:
   what its enhancement should change, and how the class will see it.
-- **P4. The mate solver.** The class meets the ten mate puzzles.
-  **Students write:** `mating_move(state, moves_left)` in `mate_solver.py`, the
-  yes-or-no search that solves all ten, including the mate in 3 (`MATE.008`).
+- **P4. Color battles.** Each pair copies its color folder onto its USB stick. In
+  each of two rounds five pairs host and five visit: the visitors copy their folder
+  over the folder of the same color in the host laptop's `Remus` folder, and the host
+  opens `play_battle.py` in its own color folder, presses Run, and types the
+  visitor's color. The two colors play twice at 10 minutes a side, once with each
+  color, and each pair writes the score on the board. The class reads the board and
+  asks why two games prove little; the teacher then shows the league table from
+  `docs/engines/remus_versions.md`, 110 games for each color. Each host runs
+  `git restore` on the visitor's folder before the end of the period.
 
 **Checkpoint `d9-p4-end`:** every color version passes its tests and its one-game smoke
-test, and the mate solver solves all ten puzzles.
+test, and has played two battles against other colors.
 
 ### Day 10: Science AI at the beamline
 
@@ -554,7 +560,7 @@ The full description of each script is in `docs/code/`.
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build the color versions` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the version folders live in `Remus/` |
+| `Day 09 - Add the clock and build the color versions` | `play_battle.py` in each color version folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the version folders live in `Remus/` |
 | `Day 10 - Aim Remus at a science problem` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`, the demo `demo_results.py`. The Day 10 engine is Remus-GOLD in `Remus/11 GOLD - All enhancements`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
 
 Outside the Day folders:
