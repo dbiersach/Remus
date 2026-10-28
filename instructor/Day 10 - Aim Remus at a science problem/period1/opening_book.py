@@ -8,6 +8,10 @@ moves the book suggests there. The book is a dict:
 
     position_key -> list of book moves
 
+A line that starts with "White:" or "Black:" shows how that side defends against
+a trap. Remus records only the defender's moves from such a line, so it answers
+the trap at once but never sets the trap itself.
+
 Every book move is read with parse_san, which accepts only legal moves, so a typo
 in the file is reported and skipped. A missing file is reported and gives an empty
 book, and an empty book never stops play: Remus simply searches instead. Reports go
@@ -28,6 +32,29 @@ from notation import parse_san
 BOOK_PATH = Path(__file__).parent / "opening_book.txt"
 
 
+def read_defender(line: str) -> tuple[str | None, list[str]]:
+    """
+    Split a book line into its defender and its moves.
+
+    Parameters
+    ----------
+    line : str
+        One line of the book, such as "Black: e4 e5 Bc4 Nc6 Qh5 g6".
+
+    Returns
+    -------
+    tuple[str | None, list[str]]
+        "w" or "b" for a trap line that only that side may use, or None for an
+        opening that both sides may play, then the moves in SAN.
+    """
+    words = line.split()
+    if words[0] == "White:":
+        return "w", words[1:]
+    if words[0] == "Black:":
+        return "b", words[1:]
+    return None, words
+
+
 def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
     """
     Read an opening book file into a dict from position key to book moves.
@@ -35,7 +62,8 @@ def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
     Parameters
     ----------
     file_path : Path
-        The book file: one opening per line in SAN, "#" for comments.
+        The book file: one opening per line in SAN, "#" for comments, and
+        "White:" or "Black:" in front of a line that only that side may use.
 
     Returns
     -------
@@ -53,16 +81,19 @@ def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
     for line in file_path.read_text().splitlines():
         if not line.strip() or line.startswith("#"):
             continue
+        defender, words = read_defender(line)
         state = state_from_fen(START_FEN)
-        for text in line.split():
+        for text in words:
             try:
                 move = parse_san(state, text)
             except ValueError:
                 print(f"Book line skipped at {text!r}: {line}", file=sys.stderr)
                 break
-            moves_here = book.setdefault(position_key(state), [])
-            if move not in moves_here:
-                moves_here.append(move)
+            # A trap line teaches the defense, so the attacker's moves stay out
+            if defender is None or state["turn"] == defender:
+                moves_here = book.setdefault(position_key(state), [])
+                if move not in moves_here:
+                    moves_here.append(move)
             make_move(state, move)
     return book
 

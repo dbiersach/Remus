@@ -101,7 +101,7 @@ Each pair writes the functions of one color station in `student/Stations`.
 | GOLD - All enhancements | Nothing: a finished engine |
 | WHITE - No enhancements | Nothing: a finished engine |
 | RED - Transposition table | `store()` in `transposition_table.py` (3 lines); `probe()` in `transposition_table.py` (11 lines); `test_transposition_table_bounds()` in `test_upgrades.py` (13 lines) |
-| GREEN - Opening book | `load_book()` in `opening_book.py` (22 lines); `book_move()` in `opening_book.py` (2 lines) |
+| GREEN - Opening book | `load_book()` in `opening_book.py` (24 lines); `book_move()` in `opening_book.py` (2 lines) |
 | BLUE - Killer moves | `remember_killer()` in `search.py` (6 lines); `order_moves()` in `move_ordering.py` (16 lines); `test_killers_keep_two_quiet_moves()` in `test_upgrades.py` (5 lines) |
 | PINK - Principal variation search | `search_later_move()` in `search.py` (6 lines); `test_pvs_search_agrees_with_alpha_beta()` in `test_upgrades.py` (7 lines); `test_a_null_window_answers_only_better_or_not()` in `test_upgrades.py` (5 lines) |
 | YELLOW - Draw sense | `is_draw_in_search()` in `search.py` (2 lines); `test_draw_sense_search_agrees_with_alpha_beta()` in `test_upgrades.py` (7 lines); `test_a_repeated_position_is_a_draw()` in `test_upgrades.py` (5 lines); `test_the_fifty_move_limit_is_a_draw()` in `test_upgrades.py` (2 lines) |

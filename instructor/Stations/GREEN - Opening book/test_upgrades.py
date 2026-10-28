@@ -38,6 +38,32 @@ def test_book_typo_is_skipped_without_touching_stdout(tmp_path, capsys) -> None:
     assert "Nf9" in output.err
 
 
+def test_trap_line_stores_only_the_defenders_moves(tmp_path) -> None:
+    """A "Black:" line teaches Black's defense and never White's trap."""
+    file_path = tmp_path / "trap_book.txt"
+    file_path.write_text("Black: e4 e5 Bc4 Nc6 Qh5 g6\n")
+    book = load_book(file_path)
+    assert len(book) == 3  # After 1. e4, after 2. Bc4, and after 3. Qh5
+    state = state_from_fen(START_FEN)
+    assert book_move(book, state) is None  # White's 1. e4 is not stored
+    make_move(state, parse_san(state, "e4"))
+    reply = book_move(book, state)
+    assert reply is not None
+    assert move_to_uci(reply) == "e7e5"
+
+
+def test_book_answers_scholars_mate_but_never_tries_it() -> None:
+    book = load_book()
+    state = state_from_fen(START_FEN)
+    for text in ("e4", "e5", "Bc4", "Nc6"):
+        make_move(state, parse_san(state, text))
+    assert book_move(book, state) is None  # White never plays 3. Qh5 from the book
+    make_move(state, parse_san(state, "Qh5"))
+    reply = book_move(book, state)
+    assert reply is not None
+    assert move_to_uci(reply) == "g7g6"
+
+
 def test_missing_book_never_stops_play() -> None:
     book = load_book(BOOK_PATH.with_name("no_such_book.txt"))
     assert book == {}

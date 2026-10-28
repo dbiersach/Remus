@@ -63,7 +63,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `opening_book.py` | `load_book()` | 31 | 22 | `test_upgrades.py::test_opening_book_is_legal_and_answers_e4`, `test_upgrades.py::test_book_typo_is_skipped_without_touching_stdout`, `test_upgrades.py::test_missing_book_never_stops_play` |
-| `opening_book.py` | `book_move()` | 51 | 2 | `test_upgrades.py::test_opening_book_is_legal_and_answers_e4`, `test_upgrades.py::test_missing_book_never_stops_play` |
+| `opening_book.py` | `load_book()` | 58 | 24 | `test_upgrades.py::test_opening_book_is_legal_and_answers_e4`, `test_upgrades.py::test_book_typo_is_skipped_without_touching_stdout`, `test_upgrades.py::test_trap_line_stores_only_the_defenders_moves`, `test_upgrades.py::test_book_answers_scholars_mate_but_never_tries_it`, `test_upgrades.py::test_missing_book_never_stops_play` |
+| `opening_book.py` | `book_move()` | 79 | 2 | `test_upgrades.py::test_opening_book_is_legal_and_answers_e4`, `test_upgrades.py::test_trap_line_stores_only_the_defenders_moves`, `test_upgrades.py::test_book_answers_scholars_mate_but_never_tries_it`, `test_upgrades.py::test_missing_book_never_stops_play` |
 
-Lines to type in all: 24. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+Lines to type in all: 26. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
