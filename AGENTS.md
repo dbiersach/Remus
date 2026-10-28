@@ -246,8 +246,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   folder (David, 2026-10-28): the builders `make_period_folders.py`,
   `make_station_folders.py`, `make_student_folders.py`, and
   `make_phase_hunt_figures.py`, the README text in `period_guides.py`,
-  `run_all_tests.py`, `station_league.py`, `station_elo.py`, and
-  `remus_benchmark.py`. Each one finds the top Remus folder from its own path, so it
+  `run_all_tests.py`, `station_league.py`, `station_elo.py`,
+  `remus_benchmark.py`, and `engine_parity.py`. Each one finds the top Remus folder from its own path, so it
   runs from the top folder with `uv run scripts/<name>.py`. Students never open
   `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
   `station_match.py` in `instructor/Remus` and `student/Remus` for the Day 10
@@ -296,11 +296,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   matches the Python file of the same name, and each Niram version must visit
   exactly the same number of positions as its Remus twin at each depth
   (`cargo test --release` inside `Niram/`; `uv run scripts/remus_benchmark.py COLOR`
-  times the Remus version on the same positions). `station_match.py`,
+  times the Remus version on the same positions). `uv run scripts/engine_parity.py`
+  checks all 12 pairs on 49 positions: evaluation, legal moves, book moves, and every
+  depth's score, node count, and principal variation must match, and the results go
+  to `docs/versions/engine_parity.md`. Run it after any change to an engine. `station_match.py`,
   `station_league.py`, and `station_elo.py` play the Niram programs with `--niram`
   and rate them apart from Remus, with Niram-WHITE pinned at 0; David wants leagues
   run with Niram (2026-10-28). A change to a color version's rules, evaluation, search, or
-  opening book needs the same change in Niram. The Python style rules above do not apply to the Rust code, which
+  opening book needs the same change in Niram, and a clean `engine_parity.py` run. The Python style rules above do not apply to the Rust code, which
   follows `cargo fmt` and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `estimate_elo.py`,
   `station_match.py`, `station_league.py`, `station_elo.py`) is added to `games/remus_games.pgn` at the top of the

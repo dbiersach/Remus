@@ -60,7 +60,7 @@ the Python file of the same name, with the same function names:
 | `fen.rs`, `notation.rs` | `fen.py`, `notation.py` | FEN and SAN |
 | `opening_book.rs` | `opening_book.py` | Book moves from `opening_book.txt`, defend-only trap lines included |
 | `uci_engine.rs` | `uci_engine.py` | The UCI conversation with Lucas Chess |
-| `bench.rs` | `perft.py` and this benchmark | `bench`, `perft`, and the command line |
+| `bench.rs` | `perft.py` and this benchmark | `bench`, `perft`, `parity`, `book`, and the command line |
 
 `opening_book.txt` is a copy of the book in `instructor/Remus/11 GOLD - All
 enhancements`, read by Niram-GREEN and Niram-GOLD. The teaching steps that `think` never calls (random, greedy, minimax,
@@ -130,6 +130,23 @@ The matching Python benchmark runs from the repository folder and takes a color:
 ```bash
 uv run scripts/remus_benchmark.py GOLD      # Remus-GOLD, depth 4
 uv run scripts/remus_benchmark.py RED 3     # Remus-RED, depth 3
+```
+
+`scripts/engine_parity.py` checks that every Niram version thinks exactly like its
+Remus twin, on 49 positions that cover openings and book trap lines, tactics,
+checks, castling, en passant, promotion, endgames, repetition, the fifty-move rule,
+and mate puzzles. For each position it compares the evaluation, the legal moves in
+generation and search order, the book moves, and a search with no clock: every
+depth's score, node count, and principal variation, and the best move. Each Niram
+program's `parity` command picks the deepest search that stays within a node
+budget, and Remus repeats that search on every CPU core. `book` prints Niram's
+whole opening book for the same comparison. The latest results are in
+[docs/versions/engine_parity.md](../docs/versions/engine_parity.md).
+
+```bash
+uv run scripts/engine_parity.py                  # All 12 versions, 25,000 nodes
+uv run scripts/engine_parity.py --nodes 100000   # Deeper searches (Remus takes longer)
+uv run scripts/engine_parity.py RED GOLD         # Only some versions
 ```
 
 To play a Niram version in Lucas Chess, run `cargo build --release` and add

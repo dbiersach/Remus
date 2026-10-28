@@ -563,7 +563,7 @@ Outside the Day folders:
 | --- | --- |
 | `tests/mate_puzzles.epd` | The ten mate puzzles as FEN |
 | `tests/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
-| `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `station_league.py`, `station_elo.py`, `remus_benchmark.py`, and `make_phase_hunt_figures.py` |
+| `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `station_league.py`, `station_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
 | `scripts/run_all_tests.py` | Runs pytest on each instructor period folder in turn |
 | `scripts/make_period_folders.py` | Builds `period1` to `period3` of each instructor Day folder from `period4` |
 | `scripts/make_station_folders.py` | Builds the version folders in `instructor/Remus` from the Day 9 and Day 10 code |

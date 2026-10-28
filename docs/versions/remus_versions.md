@@ -140,7 +140,8 @@ uv run scripts/station_league.py --at-once 16 --event "Station league 2"
 
 `--niram` plays the same league with Niram, the Rust copies of all 12 versions in
 the `Niram` folder (see [`Niram/README.md`](../../Niram/README.md)). Niram picks the
-same moves as Remus about 50 times faster, so a 10-minute Niram game searches about
+same moves as Remus about 50 times faster ([`engine_parity.md`](engine_parity.md) shows
+the check), so a 10-minute Niram game searches about
 as many positions as an 8-hour Remus game. Niram games are rated apart from Remus
 games, with Niram-WHITE pinned at 0, and `station_match.py` and `station_elo.py`
 take `--niram` too.
