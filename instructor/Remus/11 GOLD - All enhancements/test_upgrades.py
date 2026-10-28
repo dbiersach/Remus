@@ -1,22 +1,14 @@
 """test_upgrades.py
 
-Tests for the Day 10 upgrade stations: pawn structure, the mating bonus, king
+Tests for the ten enhancements of Remus-GOLD: pawn structure, the mating bonus, king
 safety, the transposition table, killer moves, null moves, late move reductions,
-upgraded_search, the opening book, and the hidden-peak Science AI.
+upgraded_search, and the opening book.
 """
 
 from board import EMPTY
 from evaluation import king_safety, mating_bonus, pawn_structure
 from fen import START_FEN, state_from_fen
 from game_state import position_key
-from hidden_peak import (
-    PEAK,
-    benchmark,
-    candidate_squares,
-    choose_next_measurement,
-    make_grid,
-    random_strategy,
-)
 from make_move import make_move, state_snapshot
 from mate_solver import read_puzzles
 from moves import Move, move_from_uci, move_to_uci
@@ -204,21 +196,3 @@ def test_missing_book_never_stops_play() -> None:
     book = load_book(BOOK_PATH.with_name("no_such_book.txt"))
     assert book == {}
     assert book_move(book, state_from_fen(START_FEN)) is None
-
-
-def test_hidden_peak_grid_has_one_peak() -> None:
-    grid = make_grid(7)
-    assert sum(row.count(PEAK) for row in grid) == 1
-    assert make_grid(7) == grid  # The same seed makes the same sample
-
-
-def test_greedy_ai_measures_where_it_looks_hot() -> None:
-    readings = {(5, 5): 10, (2, 2): 90}
-    choice = choose_next_measurement(readings, explore_weight=0)
-    assert choice in candidate_squares(readings)
-    assert abs(choice[0] - 2) <= 1 and abs(choice[1] - 2) <= 1
-
-
-def test_greedy_ai_beats_random_guessing() -> None:
-    """Over 20 samples random guessing needs far more measurements than greedy."""
-    assert benchmark(choose_next_measurement, 20) < benchmark(random_strategy, 20) / 2

@@ -170,12 +170,12 @@ think_move()
 | `capture_moves` | Lists only the captures and promotions. | Day 8, period 3 |
 | `quiescence` | Keeps searching captures until the position is quiet. | Day 8, period 3 |
 | `alpha_beta_with_quiescence` | The full Day 9 search: alpha-beta, quiescence, and good move order. | Day 8, period 4 |
-| `remember_killer` | Remembers a quiet move that caused a cutoff, to try it early next time. | Day 10, period 1 |
-| `make_null_move` | Passes the turn without moving, so the search can test a pass. | Day 10, period 1 |
-| `undo_null_move` | Takes back a null move. | Day 10, period 1 |
-| `has_pieces` | Checks that a side has a piece besides pawns and the king. | Day 10, period 1 |
-| `reduction` | Says how many plies to cut from a late, quiet move. | Day 10, period 1 |
-| `upgraded_search` | The Day 10 search, with memory, killer moves, draw sense, null moves, and late move reductions. | Day 10, period 1 |
+| `remember_killer` | Remembers a quiet move that caused a cutoff, to try it early next time. | Remus-GOLD |
+| `make_null_move` | Passes the turn without moving, so the search can test a pass. | Remus-GOLD |
+| `undo_null_move` | Takes back a null move. | Remus-GOLD |
+| `has_pieces` | Checks that a side has a piece besides pawns and the king. | Remus-GOLD |
+| `reduction` | Says how many plies to cut from a late, quiet move. | Remus-GOLD |
+| `upgraded_search` | The Day 10 search, with memory, killer moves, draw sense, null moves, and late move reductions. | Remus-GOLD |
 | `format_info` | Writes a line telling the GUI the depth, score, and best line. | Day 9, period 1 |
 | `think` | Searches deeper and deeper until time runs out, then returns the best move. | Day 9, period 1 |
 | `think_move` | The thinking brain, with two seconds per move. | Day 9, period 1 |
@@ -188,7 +188,7 @@ think_move()
 - **Day 8, period 3:** `capture_moves`, `quiescence`
 - **Day 8, period 4:** `SearchTimeout`, `check_time`, `alpha_beta_with_quiescence`
 - **Day 9, period 1:** `format_info`, `think`, `think_move`
-- **Day 10, period 1:** `remember_killer`, `make_null_move`, `undo_null_move`, `has_pieces`, `reduction`, `upgraded_search`
+- **Remus-GOLD:** `remember_killer`, `make_null_move`, `undo_null_move`, `has_pieces`, `reduction`, `upgraded_search`
 
 ## Try it
 

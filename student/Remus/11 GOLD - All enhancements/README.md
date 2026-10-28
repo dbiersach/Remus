@@ -1,6 +1,6 @@
 # Remus-GOLD: All enhancements
 
-Remus-GOLD is the finished Day 10 Remus with all ten enhancements at once. It stays out of the color matches; estimate_elo.py measures its rating against Stockfish.
+Remus-GOLD is the finished Remus of Day 10, with all ten enhancements at once. It stays out of the color matches; estimate_elo.py measures its rating against Stockfish.
 
 ## The idea, with an example
 

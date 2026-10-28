@@ -1,18 +1,13 @@
 #!/usr/bin/env -S uv run
 """demo_results_instructor.py
 
-Day 10, period 4 demo: read a match result and explain one move. Part 1 turns
-wins, draws, and losses into an Elo gap with a 95 percent margin, the way the
-class reads its station matches. Part 2 asks Remus to think about one position
-and prints its score and principal variation at every depth.
+Day 10, period 4 demo: read a match result. Part 1 turns wins, draws, and losses
+into an Elo gap, and Part 2 adds a 95 percent margin, the way the class reads its
+station matches.
 The student file demo_results.py leaves one # line for each line the pair types.
 """
 
 import math
-
-from fen import state_from_fen
-from moves import move_to_uci
-from search import think
 
 
 def elo_gap(score: float) -> float:
@@ -57,13 +52,6 @@ def main():
         print("The gap is larger than its margin: the enhancement made a difference")
     else:
         print("The margin reaches past 0: more games are needed to be sure")
-
-    print("Part #3 - Explain One Move")
-    # A back-rank mate: White's rook reaches a8 and Black's own pawns trap the king
-    state = state_from_fen("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1")
-    # report=print shows the depth, score, nodes, and principal variation of each search
-    move = think(state, seconds=2.0, report=print)
-    print(f"Remus plays {move_to_uci(move)}  (expected a1a8, score mate 1)")
 
 
 if __name__ == "__main__":

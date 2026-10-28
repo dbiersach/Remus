@@ -555,7 +555,7 @@ The full description of each script is in `docs/scripts/`.
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
 | `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the station folders live in `Remus/` |
-| `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `phase_hunt.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_phase_hunt.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
+| `Day 10 - Aim Remus at a science problem` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`, the demo `demo_results.py`. The Day 10 engine is Remus-GOLD in `Remus/11 GOLD - All enhancements`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
 
 Outside the Day folders:
 

@@ -1,6 +1,6 @@
 # estimate_elo.py: How strong is Remus?
 
-*First appears in `instructor/Day 10 - Aim Remus at a science problem/period4`.*
+*Lives in Remus-GOLD, `instructor/Remus/11 GOLD - All enhancements`, the engine of Day 10.*
 
 ## The big picture
 
@@ -57,11 +57,11 @@ main()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `find_stockfish` | Finds Stockfish on the PATH or in Lucas Chess's engine folder. | Day 10, period 4 |
-| `expected_score` | Gives the points per game the Elo formula expects. | Day 10, period 4 |
-| `estimate_rating` | Finds the rating that best fits all the results, and its error margin. | Day 10, period 4 |
-| `play_game` | Plays Remus against Stockfish at one rating and returns the game as PGN. | Day 10, period 4 |
-| `remus_points` | Reads Remus's points (1, 0.5, or 0) from one game. | Day 10, period 4 |
+| `find_stockfish` | Finds Stockfish on the PATH or in Lucas Chess's engine folder. | Remus-GOLD |
+| `expected_score` | Gives the points per game the Elo formula expects. | Remus-GOLD |
+| `estimate_rating` | Finds the rating that best fits all the results, and its error margin. | Remus-GOLD |
+| `play_game` | Plays Remus against Stockfish at one rating and returns the game as PGN. | Remus-GOLD |
+| `remus_points` | Reads Remus's points (1, 0.5, or 0) from one game. | Remus-GOLD |
 
 ## Try it
 

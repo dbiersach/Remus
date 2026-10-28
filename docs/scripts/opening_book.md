@@ -1,6 +1,6 @@
 # opening_book.py: Play known openings without thinking
 
-*First appears in `instructor/Day 10 - Aim Remus at a science problem/period1`.*
+*Lives in Remus-GOLD, `instructor/Remus/11 GOLD - All enhancements`, the engine of Day 10.*
 
 ## The big picture
 
@@ -72,9 +72,9 @@ book_move()
 
 | Function | What it does | Arrives |
 | --- | --- | --- |
-| `read_defender` | Splits a book line into the side that may use it and its moves. | Day 10, period 1 |
-| `load_book` | Reads the opening file into a dict of positions and moves. | Day 10, period 1 |
-| `book_move` | Picks a book move for this position, or None. | Day 10, period 1 |
+| `read_defender` | Splits a book line into the side that may use it and its moves. | Remus-GOLD |
+| `load_book` | Reads the opening file into a dict of positions and moves. | Remus-GOLD |
+| `book_move` | Picks a book move for this position, or None. | Remus-GOLD |
 
 ## Try it
 

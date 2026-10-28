@@ -23,7 +23,7 @@ holds four period folders, `period1` to `period4`, one for each class period:
 | `Day 07 - Play full games and score positions` | Adds game endings, SAN, two simple brains, the UCI link to the GUI, and the evaluation |
 | `Day 08 - Search ahead with alpha-beta` | Looks ahead with minimax and negamax, then prunes with alpha-beta, searches captures to quiet positions, and orders moves |
 | `Day 09 - Add the clock and build the stations` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten enhancement stations, and adds a mate solver |
-| `Day 10 - Aim Remus at a science problem` | Holds all ten enhancements and the hidden-peak and phase-hunt Science AI |
+| `Day 10 - Aim Remus at a science problem` | Holds only the hidden-peak and phase-hunt Science AI; the Day 10 engine is Remus-GOLD in `Remus/11 GOLD - All enhancements`, with all ten enhancements |
 
 The Day folders live inside the root `instructor/` folder. `instructor/` holds only
 finished reference code that runs as it is, with no blanks to fill in, so the solution
@@ -156,7 +156,7 @@ The pages, in the order the class builds them:
 | [`opening_book.py`](scripts/opening_book.md) | Play known openings without thinking |
 | [`mate_solver.py`](scripts/mate_solver.md) | Solve mate-in-two puzzles |
 | [`estimate_elo.py`](scripts/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
-| [`demo_results.py`](scripts/demo_results.md) | Day 10 demo: read a match result and explain a move |
+| [`demo_results.py`](scripts/demo_results.md) | Day 10 demo: read a match result |
 | [`station_match.py`](stations.md) | Plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |
 | [`station_league.py`](stations.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](scripts/hidden_peak.md) | Science AI: find the hidden peak |

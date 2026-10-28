@@ -141,6 +141,8 @@ patterns from the synchrotrons SSRL and CHESS and from a self-driving lab.
 
 ## The files
 
+The engine for Day 10 is Remus-GOLD, the finished Remus with all ten enhancements, in the `Remus/11 GOLD - All enhancements` folder beside the Day folders. Lucas Chess runs its `remus.bat`, and its `estimate_elo.py` rates it against Stockfish. This folder holds only the science files, which never import the engine.
+
 New files this period:
 
 - `phase_hunt.py`
@@ -163,7 +165,7 @@ Scores a guess about which phases are in the powder: a point for each measured p
 
 Adds the phase that raises the score most, then the next, and stops when no phase helps, the way `greedy_move()` takes the biggest capture. Each phase is tried with append and taken back with pop, like make and undo. Greedy gives one answer and never doubts it, so it names gold for a powder of silver.
 
-Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `hidden_peak.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit this period
 
@@ -171,7 +173,7 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `phase_hunt.py` | `score()` | 110 | 11 | `test_phase_hunt.py::test_score_rewards_explained_peaks_and_punishes_the_rest`, `test_search.py::test_negamax_finds_mate_in_one`, `test_search.py::test_quiescence_stands_pat_or_takes_a_free_pawn`, `test_search.py::test_mate_in_two_puzzles`, `test_upgrades.py::test_upgraded_search_finds_a_mate_in_two` |
+| `phase_hunt.py` | `score()` | 110 | 11 | `test_phase_hunt.py::test_score_rewards_explained_peaks_and_punishes_the_rest` |
 | `phase_hunt.py` | `greedy_phases()` | 134 | 17 | `test_phase_hunt.py::test_greedy_names_a_clean_mixture`, `test_phase_hunt.py::test_greedy_mistakes_silver_for_gold` |
 
 Lines to type in all: 28. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
