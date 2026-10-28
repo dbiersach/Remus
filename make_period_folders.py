@@ -641,23 +641,24 @@ PERIOD_NOTES = {
     (1, 1): "Watch the finished Remus play in Lucas Chess, form pairs, and check that "
     "every laptop runs `uv run pytest`.",
     (1, 4): "Running `show_board.py` draws the board as a picture in the web browser.",
-    (3, 2): "Running `show_board.py` draws an arrow for every move a generator returns.",
+    (3, 2): "Running `show_board.py` draws an arrow for every move a generator "
+    "returns.",
     (5, 4): "Register `remus.bat` from this folder as an engine in Lucas Chess and "
     "play your own Remus. It plays random legal moves, and every special move works.",
     (6, 3): "The `bug_hunt` folder holds a copy of this period's Remus with three "
     "planted bugs. Running `hunt.py` inside it shows where the counts go wrong.",
     (7, 3): "Register `remus.bat` from this folder in Lucas Chess again: Remus now "
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
-    (9, 2): "Each pair builds one color station in the `Stations` folder, such as "
-    "`RED - Transposition table`. The code in this Day folder is Remus-WHITE, the "
-    "starting point of every station.",
+    (9, 2): "Each pair builds one color station in the `Remus` folder next to the "
+    "Day folders, such as `06 RED - Transposition table`. The code in this Day "
+    "folder is Remus-WHITE, the starting point of every station.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
     (10, 4): "The tournament: each pair runs `uv run station_match.py <COLOR>` in "
-    "the `Stations` folder, two 10-minute games of its color against Remus-WHITE, one "
-    "with each color, all pairs at once. Running `estimate_elo.py` measures the Elo "
+    "the `Remus` folder next to the Day folders, two 10-minute games of its color "
+    "against Remus-WHITE, one with each color, all pairs at once. Running `estimate_elo.py` measures the Elo "
     "rating of Remus against Stockfish. Both add every game to games/remus_games.pgn "
-    "at the top of the Remus folder.",
+    "at the top of the repository.",
 }
 
 # Every Python module name that appears in any Day folder

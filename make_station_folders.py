@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """make_station_folders.py
 
-Build one folder per enhancement station in instructor/Stations.
+Build one folder per enhancement station in instructor/Remus.
 
 Remus-WHITE is the finished Day 9 Remus (instructor/Day 09 .../period4) with none of
 the ten enhancements. Each other station folder is Remus-WHITE plus one enhancement,
@@ -32,7 +32,7 @@ from period_guides import (
 
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
-STATIONS = INSTRUCTOR / "Stations"
+STATIONS = INSTRUCTOR / "Remus"
 BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period4"  # Remus-WHITE
 FINAL = next(INSTRUCTOR.glob("Day 10 - *")) / "period4"  # Every enhancement at once
 
@@ -970,14 +970,15 @@ def readme_text(station: dict) -> str:
         sections.append(
             "## Check it\n\nCheck it from inside this folder with `uv run pytest`, "
             "and rate it against Stockfish with `uv run estimate_elo.py`. From the "
-            "Stations folder, `uv run station_league.py --rate-only --player GOLD` "
+            "`Remus` folder above this one, "
+            "`uv run station_league.py --rate-only --player GOLD` "
             "shows its score against every other version in the teacher's league."
         )
     elif not station["students"]:
         sections.append(
             "## Check it\n\nCheck it from inside this folder with `uv run pytest`. "
-            f"From the Stations folder, `uv run station_match.py {color} RED` plays "
-            "it against a station."
+            "From the `Remus` folder above this one, "
+            f"`uv run station_match.py {color} RED` plays it against a station."
         )
     else:
         written = ", ".join(
@@ -997,7 +998,8 @@ def readme_text(station: dict) -> str:
             (
                 "## Check it\n\nCheck the work from inside this folder with "
                 "`uv run pytest`. In the Day 10 tournament, "
-                f"`uv run station_match.py {color}` in the Stations folder plays "
+                f"`uv run station_match.py {color}` in the `Remus` folder above this "
+                "one plays "
                 f"Remus-{color} against Remus-WHITE twice, once with each color, at "
                 "10 minutes a side, and adds both games to games/remus_games.pgn."
             ),

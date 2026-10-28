@@ -29,10 +29,10 @@ The engine uses only the Python standard library. The development group adds
 along with `pytest` and `ruff`. Lucas Chess, the desktop chess GUI, is installed
 separately and talks to Remus over UCI.
 
-`niram/` holds Niram, a Rust copy of all 12 Remus versions, from Niram-WHITE to
+`Niram/` holds Niram, a Rust copy of all 12 Remus versions, from Niram-WHITE to
 Niram-GOLD, that searches the same trees about 50 times faster. The station
 scripts play it with `--niram`. It is a teacher's experiment, outside the course; see
-[`niram/README.md`](niram/README.md).
+[`Niram/README.md`](Niram/README.md).
 
 ## License
 

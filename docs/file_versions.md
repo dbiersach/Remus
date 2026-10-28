@@ -41,8 +41,8 @@ Day 5, Period 2.
 | `phase_hunt.py` | D10 P2: the phase hunt: the evaluation `score()` and the greedy agent | D10 P3: the tree search `search()` and the benchmark that compares it with greedy |
 | `remus.sh` | D10 P4: starts Remus on a Mac or Linux computer at home | Last day |
 | `estimate_elo.py` | D10 P4: measures the Elo rating of Remus against Stockfish | Last day |
-| `Stations/station_match.py` | D9 P2: plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
-| `Stations/station_league.py` | D10 P4: ranks all 12 Remus versions from every station game | Last day |
+| `Remus/station_match.py` | D9 P2: plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
+| `Remus/station_league.py` | D10 P4: ranks all 12 Remus versions from every station game | Last day |
 
 ## Table 2: By period
 
@@ -84,7 +84,7 @@ instructor folder holds the answer file `<name>_instructor.py`.
 | D8 P3 | None | `search.py`: quiescence. `test_search.py` |
 | D8 P4 | `move_ordering.py` | `search.py`: ordering, check extension, clock. `test_search.py` |
 | D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock and thinking time. `console_game.py`: uses `think()`. `test_search.py` |
-| D9 P2, P3 | Ten station folders in `Stations/` (see [stations.md](stations.md)). Lab 12 in P2: `python_caches.py` | None in the Day folder, which holds Remus-WHITE |
+| D9 P2, P3 | Ten station folders in `Remus/` (see [stations.md](stations.md)). Lab 12 in P2: `python_caches.py` | None in the Day folder, which holds Remus-WHITE |
 | D9 P4 | `mate_solver.py` | `test_search.py`: mate-solver tests |
 | D10 P1 | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `test_upgrades.py` | `search.py`: `upgraded_search()`. `evaluation.py`: pawns, mating, king safety. `move_ordering.py`: killers. `uci_engine.py` and `console_game.py`: book moves first |
 | D10 P2 | `phase_hunt.py`, `test_phase_hunt.py` | None |

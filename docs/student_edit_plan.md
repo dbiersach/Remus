@@ -94,7 +94,7 @@
 
 ## Enhancement stations (Day 9, periods 2 and 3)
 
-Each pair writes the functions of one color station in `student/Stations`.
+Each pair writes the functions of one color station in `student/Remus`.
 
 | Station | Pairs write |
 | --- | --- |

@@ -323,7 +323,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
     out += [
         "## Enhancement stations (Day 9, periods 2 and 3)",
         "",
-        "Each pair writes the functions of one color station in `student/Stations`.",
+        "Each pair writes the functions of one color station in `student/Remus`.",
         "",
         "| Station | Pairs write |",
         "| --- | --- |",
@@ -403,12 +403,12 @@ def main():
                 for section in sections:
                     file.write("\n" + section)
     # Each station folder stubs the functions its pair writes during the station
-    (STUDENT / "Stations").mkdir(exist_ok=True)
+    (STUDENT / "Remus").mkdir(exist_ok=True)
     for name in ["station_match.py", "station_league.py"]:
-        shutil.copy2(INSTRUCTOR / "Stations" / name, STUDENT / "Stations" / name)
+        shutil.copy2(INSTRUCTOR / "Remus" / name, STUDENT / "Remus" / name)
     for station in STATIONS_TABLE:
-        folder = INSTRUCTOR / "Stations" / station["folder"]
-        target = STUDENT / "Stations" / station["folder"]
+        folder = INSTRUCTOR / "Remus" / station["folder"]
+        target = STUDENT / "Remus" / station["folder"]
         if target.exists():
             shutil.rmtree(target)
         shutil.copytree(
