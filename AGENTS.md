@@ -323,8 +323,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   folder to folder, so pytest runs one folder at a time
   (`uv run pytest "instructor/Day 04 - Keep only legal moves/period3"`);
   `uv run scripts/run_all_tests.py` runs them all, and `uv run pytest` from the top
-  folder runs `scripts/test_reference_tools.py`. `tests/` holds `mate_puzzles.epd`,
-  which the mate solver and the search tests read. A test
+  folder runs `scripts/test_reference_tools.py`. The ten mate puzzles,
+  `mate_puzzles.epd`, sit beside `mate_solver.py` and `test_search.py` in every Day 8
+  and Day 9 period folder and every version folder that reads them. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
 - Every `.py` file a student modifies or reads has a page in `docs/code/`, the

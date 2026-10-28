@@ -12,7 +12,7 @@ from moves import move_to_uci
 from search import MATE_SCORE, SearchInfo, alpha_beta, best_move, minimax, negamax
 
 MATE_PUZZLES = (
-    Path(__file__).parent.parent.parent.parent / "tests" / "mate_puzzles.epd"
+    Path(__file__).parent / "mate_puzzles.epd"
 )  # Ten puzzles, MATE.001 to MATE.010
 
 MATES_IN_ONE = [  # (FEN, the mating move)

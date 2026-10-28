@@ -2,7 +2,7 @@
 """mate_solver.py
 
 Solve "White to play and mate in n moves" puzzles, such as the ten MATE.001 to
-MATE.010 problems in tests/mate_puzzles.epd. A mate solver asks a yes-or-no
+MATE.010 problems in mate_puzzles.epd. A mate solver asks a yes-or-no
 question instead of computing a score:
 
     Does the attacker have a move such that every defender reply still allows
@@ -23,7 +23,7 @@ from make_move import make_move, state_snapshot, undo_move
 from moves import Move
 from notation import move_to_san
 
-PUZZLE_PATH = Path(__file__).parent.parent.parent.parent / "tests" / "mate_puzzles.epd"
+PUZZLE_PATH = Path(__file__).parent / "mate_puzzles.epd"
 
 
 def mating_move(state: dict, moves_left: int) -> Move | None:

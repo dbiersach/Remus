@@ -15,6 +15,7 @@ The lab is `python_sorting.py` in `student/`, with the answers in `python_sortin
 New files this period:
 
 - `compare_search.py`
+- `mate_puzzles.epd`
 
 Files that grow this period:
 

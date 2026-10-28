@@ -4,7 +4,7 @@
 
 ## The big picture
 
-`tests/mate_puzzles.epd` holds ten puzzles: White to play and mate in 2 or 3 moves.
+`mate_puzzles.epd`, in the same folder, holds ten puzzles: White to play and mate in 2 or 3 moves.
 This file solves all ten.
 
 It asks a yes-or-no question instead of giving scores. Is there a White move where
@@ -12,7 +12,7 @@ every Black reply still loses to mate?
 
 ## Where this piece fits
 
-mate_solver.py uses legal_moves.py, make_move.py, attacks.py, and notation.py. It reads the puzzles from tests/mate_puzzles.epd.
+mate_solver.py uses legal_moves.py, make_move.py, attacks.py, and notation.py. It reads the puzzles from mate_puzzles.epd in its own folder.
 
 - **Uses:** [`attacks.py`](attacks.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md)
 - **Uses only in its self-check:** [`fen.py`](fen.md), [`notation.py`](notation.md)

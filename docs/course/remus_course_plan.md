@@ -30,7 +30,7 @@ to everything below.
 | First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Matches | Day 10: each pair's color version plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the teacher's league |
-| Mate puzzles | The ten `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
+| Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 | Documentation | `docs/code/remus_program_overview.md` for the whole program, one page per script in `docs/code/`, and `docs/course/slide_plan.md` for the PowerPoint slides |
 
 ## The shape of the two weeks
@@ -214,7 +214,7 @@ refresher with a demonstration board comes right before the code that needs each
    tree for Day 8.
 5. **Collect test positions as FEN:** the ten verification exercises in the workshop
    file, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
-   mate puzzles in `tests/mate_puzzles.epd`, and a horizon-effect position.
+   mate puzzles in `mate_puzzles.epd`, and a horizon-effect position.
 6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
    both partners take the code home, plus one class stick for bundles. Give the assistant
    the Day 1 checklist. With preconfigured laptops, Day 1 Period 1 needs only a quick
@@ -414,7 +414,7 @@ moves" milestone.
   Pairs measure node counts before and after.
 
 **Checkpoint `d8-p4-end`:** Remus finds every mate in 1 and every mate in 2 of
-`tests/mate_puzzles.epd`, and alpha-beta returns the same score as negamax with fewer nodes.
+`mate_puzzles.epd`, and alpha-beta returns the same score as negamax with fewer nodes.
 
 ### Day 9: The clock, and the color versions
 
@@ -561,7 +561,6 @@ Outside the Day folders:
 
 | Path | Holds |
 | --- | --- |
-| `tests/mate_puzzles.epd` | The ten mate puzzles as FEN |
 | `scripts/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
 | `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `station_league.py`, `station_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
 | `scripts/run_all_tests.py` | Runs pytest on each instructor period folder in turn |

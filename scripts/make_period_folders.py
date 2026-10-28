@@ -119,6 +119,7 @@ ARRIVALS = {
         "console_game.py": 1,
         "uci_engine.py": 1,
         "compare_search.py": 2,
+        "mate_puzzles.epd": 2,
         "move_ordering.py": 4,
     },
     9: {
