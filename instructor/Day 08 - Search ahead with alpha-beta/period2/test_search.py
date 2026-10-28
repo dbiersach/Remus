@@ -13,7 +13,7 @@ from search import MATE_SCORE, SearchInfo, alpha_beta, best_move, minimax, negam
 
 MATE_PUZZLES = (
     Path(__file__).parent.parent.parent.parent / "tests" / "mate_puzzles.epd"
-)  # GameWorks MATE.00x
+)  # Ten puzzles, MATE.001 to MATE.010
 
 MATES_IN_ONE = [  # (FEN, the mating move)
     ("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1", "a1a8"),  # Back-rank mate

@@ -7,9 +7,8 @@ when it meets a strong move early, so a good order means fewer positions to visi
 Captures come first, ordered by MVV-LVA: Most Valuable Victim, Least Valuable
 Attacker. Pawn takes queen comes before queen takes pawn.
 
-Day 10 adds killer moves, an idea from Turbo GameWorks Chess: a quiet move that
-caused a cutoff at some depth will often cause one again in a sibling position, so
-it goes right after the captures.
+Day 10 adds killer moves: a quiet move that caused a cutoff at some depth will
+often cause one again in a sibling position, so it goes right after the captures.
 """
 
 from board import EMPTY, Board, piece_at

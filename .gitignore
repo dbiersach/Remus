@@ -17,11 +17,6 @@ tasks/
 # Scratch space for reviews and experiments. Nothing in it is ever committed.
 /tmp/
 
-# The original Turbo Pascal Toolbox 4.0 GameWorks disks and archive are
-# Borland's copyrighted software, kept locally as a historical reference for
-# the workshop. They must never be committed or pushed.
-/Turbo Pascal Toolbox 4.0 - GameWorks/
-
 # Pictures that show_board.py saves beside itself
 board.svg
 
