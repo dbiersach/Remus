@@ -8,9 +8,8 @@ output. Debug text goes to standard error, where the GUI ignores it.
 The first argument picks the brain: "random", "greedy", "negamax", or "think" (the
 default), which searches deeper and deeper until its time is up. Remus reads one
 command, answers it, and only then reads the next, so a search always ends with a
-"bestmove" before Remus listens again. The
-"think" brain plays a move from the opening book first, while the position is in
-the book.
+"bestmove" before Remus listens again. The "think" brain plays a move from the
+opening book first, while the position is in the book.
 """
 
 import sys

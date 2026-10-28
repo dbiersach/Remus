@@ -90,7 +90,7 @@
 | P1 | Science AI: hidden_peak.py | `hidden_peak.py`, `opening_book.py`, `opening_book.txt`, `test_upgrades.py`, `transposition_table.py` | `console_game.py`, `evaluation.py`, `move_ordering.py`, `search.py`, `uci_engine.py` | `candidate_squares()` in `hidden_peak.py` (6 lines); `score_candidate()` in `hidden_peak.py` (4 lines); `choose_next_measurement()` in `hidden_peak.py` (9 lines) |
 | P2 | The beamline problem: represent and evaluate | `beam_time.py`, `test_beam_time.py` | None | `estimate()` in `beam_time.py` (3 lines); `expected_wrong_calls()` in `beam_time.py` (7 lines) |
 | P3 | The beamline problem: look ahead and verify | None | `beam_time.py`, `test_beam_time.py` | `gain()` in `beam_time.py` (8 lines); `choose_next_sample()` in `beam_time.py` (5 lines) |
-| P4 | Results, tournament, take-home, and wrap-up | `demo_results_instructor.py`, `estimate_elo.py`, `remus.sh`, `tournament.py` | `uci_engine.py` | The demo `demo_results.py` (15 lines) |
+| P4 | Results, tournament, take-home, and wrap-up | `demo_results_instructor.py`, `estimate_elo.py`, `remus.sh`, `tournament.py` | None | The demo `demo_results.py` (15 lines) |
 
 ## Enhancement stations (Day 9, periods 2 and 3)
 
