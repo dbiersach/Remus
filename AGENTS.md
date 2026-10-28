@@ -200,7 +200,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   does>`, such as `instructor/Day 04 - Keep only legal moves`. Each Day folder holds
   four period folders, `period1` to `period4`. Each period folder is a complete,
   runnable copy of Remus as it stands at the end of that period (Day 10 holds only its
-  science files), with a `README.md`
+  science files, and Day 9 periods 2 to 4 hold no engine code: see below), with a
+  `README.md`
   that names the period, its new and growing files, and the functions pairs write.
   Every period README and color version README also holds (David, 2026-10-27):
   - **Learning objectives** as a bulleted list, each with a **Measured by** line that
@@ -253,12 +254,15 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   top Remus folder from its own path, so it
   runs from the top folder with `uv run scripts/<name>.py`. Students never open
   `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
-  `version_match.py` in `instructor/Remus` and `student/Remus` for the Day 10
-  tournament, and `play_match.py`, `estimate_elo.py`, and the tests inside their
+  `version_match.py` in the Day 9 `period2/engines` folder for the battles and the
+  Day 10 tournament, and `play_match.py`, `estimate_elo.py`, and the tests inside their
   period and version folders. Put a new teacher tool in `scripts/`, and list every
   script there in `scripts/README.md` with what it does (David, 2026-10-28).
 - `period4` holds the finished code of the day, and it is the only period folder to
-  edit by hand. `make_period_folders.py` builds `period1` to `period3` from it: its
+  edit by hand. Day 9 is the exception (David, 2026-10-28): its engine, Remus-WHITE,
+  is finished in `period1`, which is the folder to edit by hand, and periods 2 to 4
+  hold only their README, the period 2 lab, and `period2/engines`.
+  `make_period_folders.py` builds the other period folders from it: its
   `ARRIVALS` table says in which period each file takes its finished form, and its
   `CHANGES` table says what the earlier periods leave out of a file that grows during
   the day. Run it after any change to the instructor code.
@@ -268,50 +272,51 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   tests fail until a pair writes the function. `make_student_folders.py` builds
   `student/` from `instructor/` and lists every student function by day and period;
   run it after `make_period_folders.py`, and never edit a student stub by hand.
-- `instructor/Remus` holds Remus-WHITE (`00 WHITE - No enhancements`, the finished
-  Day 9 Remus with none of the ten enhancements, named by David on 2026-10-27) and the
-  ten color versions, one folder per color (`10 RED - Transposition table`, ...).
-  Each color version is Remus-WHITE plus one enhancement, and `11 GOLD - All enhancements`
-  holds Remus-GOLD, the finished Remus with all ten (David, 2026-10-27). Remus-GOLD
-  is the engine of Day 10 (David, 2026-10-28): the Day 10 period folders hold only
-  the science files (`hidden_peak.py`, `phase_hunt.py`, their tests, and the results
-  demo), and their READMEs point to the GOLD folder for the engine, Lucas Chess, and
-  `estimate_elo.py`. The GOLD folder is written by hand, like a `period4` folder;
-  edit the finished engine there. Remus-GOLD stays out of the color matches;
-  `estimate_elo.py` rates it against Stockfish. `make_version_folders.py` builds the
-  other eleven folders from the Day 9 `period1` code, the finished Remus-WHITE
-  engine, and the GOLD folder, rewrites
-  only the GOLD README, and `make_student_folders.py` stubs each color version's functions
-  in `student/Remus`. Colors name the color versions so
-  that no color version sounds better than another. A two-digit
-  prefix (David, 2026-10-28) orders the folders by each version's Elo over WHITE in
-  the teacher's league (Niram league 1, 660 games at 10 minutes a side, with GREEN's
-  and GOLD's games started from move 1 so their book plays): 00 WHITE, 01 GRAY,
-  02 YELLOW, 03 CYAN, 04 PINK, 05 ORANGE, 06 BROWN, 07 PURPLE, 08 GREEN, 09 BLUE,
-  10 RED, 11 GOLD. The Rust engine folders in
-  `Niram/` use the same names. `version_match.py` plays a color version
-  against Remus-WHITE, and Remus-WHITE takes part in the color matches too.
-  `version_league.py` plays a round robin of all 12 versions, Remus-GOLD included,
-  and fits one Elo rating per version with Remus-WHITE pinned at 0.
-  `version_elo.py` rates all 12 versions against Stockfish at five UCI_Elo levels
-  from frozen copies of the color versions and writes the table to `docs/engines/remus_elo.md`.
-- `Niram/` holds Niram, every Remus version rewritten in Rust (David, 2026-10-27 and
-  2026-10-28), named for Naram-Sin, Sargon's grandson: Niram-WHITE, the ten color
-  versions, and Niram-GOLD, one Cargo crate each in folders named like the color version
-  folders, with the shared rules in `Niram/rules`. It is a teacher's tool that runs
-  the same engines about 50 times faster; students never edit it. Each `.rs` file
-  matches the Python file of the same name, and each Niram version must visit
-  exactly the same number of positions as its Remus twin at each depth
-  (`cargo test --release` inside `Niram/`; `uv run scripts/remus_benchmark.py COLOR`
-  times the Remus version on the same positions). `uv run scripts/engine_parity.py`
-  checks all 12 pairs on 49 positions: evaluation, legal moves, book moves, and every
-  depth's score, node count, and principal variation must match, and the results go
-  to `docs/engines/engine_parity.md`. Run it after any change to an engine. `version_match.py`,
-  `version_league.py`, and `version_elo.py` play the Niram programs with `--niram`
-  and rate them apart from Remus, with Niram-WHITE pinned at 0; David wants leagues
-  run with Niram (2026-10-28). A change to a color version's rules, evaluation, search, or
-  opening book needs the same change in Niram, and a clean `engine_parity.py` run. The Python style rules above do not apply to the Rust code, which
-  follows `cargo fmt` and `cargo clippy`.
+- The Remus versions live in `instructor/Day 09 - Add the clock and build the color
+  versions/period2/engines` (David, 2026-10-28). Remus-WHITE, the finished Day 9
+  Remus with none of the ten enhancements (named by David on 2026-10-27), is the
+  Day 9 `period1` folder; it has no folder of its own. `engines/` holds the ten color
+  versions, one folder per color (`10 RED - Transposition table`, ...), each
+  Remus-WHITE plus one enhancement, and `version_match.py`. It also holds
+  `Remus-GOLD`, the finished Remus with all ten (David, 2026-10-27), and
+  `Niram-GOLD`, the same engine in Rust. Remus-GOLD is the engine of Day 10 (David,
+  2026-10-28): the Day 10 period folders hold only the science files
+  (`hidden_peak.py`, `phase_hunt.py`, their tests, and the results demo), and their
+  READMEs point to Remus-GOLD for the engine, Lucas Chess, and `estimate_elo.py`.
+  Remus-GOLD is written by hand, like a `period4` folder; edit the finished engine
+  there. `make_version_folders.py` builds the ten color folders from the Day 9
+  `period1` code and Remus-GOLD and rewrites only the GOLD README.
+  `make_student_folders.py` stubs each color version's functions in the student
+  `period2/engines`, which holds only the ten colors and `version_match.py`: no
+  pair ever writes GOLD. Colors name the color versions so that no color version
+  sounds better than another. A two-digit prefix (David, 2026-10-28) orders the
+  folders by each version's Elo over WHITE in the teacher's league (Niram league 1,
+  660 games at 10 minutes a side, with GREEN's and GOLD's games started from move 1
+  so their book plays): 01 GRAY, 02 YELLOW, 03 CYAN, 04 PINK, 05 ORANGE, 06 BROWN,
+  07 PURPLE, 08 GREEN, 09 BLUE, 10 RED. `version_match.py` plays a color version
+  against Remus-WHITE or another color, and `play_battle.py` in each color folder
+  runs it for the Day 9 battles. `version_league.py` plays a round robin of all 12
+  versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
+  with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions against
+  Stockfish at five UCI_Elo levels from frozen copies of the versions and writes the
+  table to `docs/engines/remus_elo.md`.
+- `Niram-GOLD` (in `period2/engines`) holds Remus-GOLD rewritten in Rust, named for
+  Naram-Sin, Sargon's grandson: a Cargo workspace with the shared rules in `rules/`
+  and the engine in `gold/`. It is a teacher's tool that runs the same engine about
+  50 times faster; students never edit it. Each `.rs` file matches the Python file of
+  the same name, and Niram-GOLD must visit exactly the same number of positions as
+  Remus-GOLD at each depth (`cargo test --release` inside `Niram-GOLD`;
+  `uv run scripts/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).
+  `uv run scripts/engine_parity.py` checks the pair on 49 positions: evaluation,
+  legal moves, book moves, and every depth's score, node count, and principal
+  variation must match, and the results go to `docs/engines/engine_parity.md`. A
+  change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
+  change in Niram-GOLD and a clean `engine_parity.py` run. The Rust copies of WHITE
+  and the ten colors were deleted (David, 2026-10-28) after Niram league 1, whose
+  games stay in the games file: `version_league.py --niram --rate-only` and
+  `version_elo.py --niram` rate those saved games, with Niram-WHITE pinned at 0. The
+  Python style rules above do not apply to the Rust code, which follows `cargo fmt`
+  and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `estimate_elo.py`,
   `version_match.py`, `version_league.py`, `version_elo.py`) is added to `games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.
@@ -346,7 +351,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - `docs/code/`: the program overview, `file_versions.md`, and one page for every
     `.py` file a student modifies or reads, named after that file (`board.py` has
     `board.md`).
-  - `docs/engines/`: the Remus versions and their Niram twins: `remus_versions.md`,
+  - `docs/engines/`: the Remus versions and Niram-GOLD: `remus_versions.md`,
     the ten color versions and Remus-GOLD; `remus_elo.md`, which `version_elo.py`
     writes; and `engine_parity.md`, which `engine_parity.py` writes.
   Pictures live in `docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes

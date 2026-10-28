@@ -8,8 +8,9 @@ each one from the top Remus folder:
 uv run scripts/run_all_tests.py
 ```
 
-`version_match.py` is not in this folder. Every pair runs it from `instructor/Remus`
-or `student/Remus` in the Day 10 tournament, so it stays beside the Remus versions.
+`version_match.py` is not in this folder. Every pair runs it from the Day 9
+`period2/engines` folder in the Day 9 battles and the Day 10 tournament, so it stays
+beside the color versions.
 
 ## Build the folders
 
@@ -23,8 +24,8 @@ uv run scripts/make_student_folders.py
 
 | Script | What it does |
 | --- | --- |
-| `make_period_folders.py` | Builds `period1` to `period3` of every instructor Day folder from `period4`. Its `ARRIVALS` table says in which period each file arrives, and its `CHANGES` table says what the earlier periods leave out. It also writes every period README and plants the three bugs in Day 6, period 3 `bug_hunt/`. |
-| `make_version_folders.py` | Builds Remus-WHITE and the ten color versions in `instructor/Remus` from the Day 9 `period1` code, the finished Remus-WHITE engine, and the hand-written GOLD folder, and writes every version README. |
+| `make_period_folders.py` | Builds `period1` to `period3` of every instructor Day folder from `period4`, and on Day 9 writes periods 2 to 4 with no engine code, keeping `period2/engines`. Its `ARRIVALS` table says in which period each file arrives, and its `CHANGES` table says what the earlier periods leave out. It also writes every period README and plants the three bugs in Day 6, period 3 `bug_hunt/`. |
+| `make_version_folders.py` | Builds the ten color versions in the Day 9 `period2/engines` folder from the Day 9 `period1` code (Remus-WHITE) and the hand-written `Remus-GOLD` beside them, and writes every version README. |
 | `make_student_folders.py` | Builds `student/` from `instructor/`, with each period's student functions as stubs. It also writes the Day overview READMEs and `docs/course/student_edit_plan.md`, and prints the most lines a pair types in one period. |
 | `period_guides.py` | Holds the text the builders write into the READMEs: learning objectives, how each is measured, a paragraph for every change, the version guides, and the Day overviews. Edit README text here, not in the READMEs. |
 | `make_phase_hunt_figures.py` | Draws the pictures in `docs/images/phase_hunt/` for the Day 10 phase hunt README. It installs matplotlib for itself alone. |
@@ -38,8 +39,9 @@ uv run scripts/make_student_folders.py
 
 ## Play and rate the Remus versions
 
-Every game these scripts play goes into `games/remus_games.pgn`. Add `--niram` to play
-the Rust copies in `Niram/` instead, after `cargo build --release` inside `Niram/`.
+Every game these scripts play goes into `games/remus_games.pgn`. The teacher's league
+ran on Rust copies of the 12 versions; only Niram-GOLD is kept, so `--niram` rates
+those saved games and plays none.
 
 | Script | What it does |
 | --- | --- |
@@ -50,5 +52,5 @@ the Rust copies in `Niram/` instead, after `cargo build --release` inside `Niram
 
 | Script | What it does |
 | --- | --- |
-| `engine_parity.py` | Checks that every Niram engine matches its Remus twin on 49 positions: evaluation, legal moves, book moves, and every search depth's score, node count, and best line. It writes `docs/engines/engine_parity.md` and exits with code 1 if anything differs. |
-| `remus_benchmark.py` | Times one Remus version, such as `GOLD`, on the ten positions of `compare_search.py`, so its speed can be compared with the Niram benchmark of the same color. |
+| `engine_parity.py` | Checks that Niram-GOLD matches Remus-GOLD on 49 positions: evaluation, legal moves, book moves, and every search depth's score, node count, and best line. It writes `docs/engines/engine_parity.md` and exits with code 1 if anything differs. |
+| `remus_benchmark.py` | Times one Remus version, such as `GOLD`, on the ten positions of `compare_search.py`, so the speed of Remus-GOLD can be compared with the Niram-GOLD benchmark. |

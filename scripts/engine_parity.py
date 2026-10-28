@@ -1,15 +1,15 @@
 #!/usr/bin/env -S uv run
 """engine_parity.py
 
-Check that every Niram engine thinks exactly like its Remus twin. For each of the
-12 versions and each test position, the script compares what the two engines see
-and choose:
+Check that Niram-GOLD, the Rust copy of Remus-GOLD, thinks exactly like its Remus
+twin. For each test position, the script compares what the two engines see and
+choose:
 
 - the position key, which the opening book and the repetition count use
 - the version's own evaluate() of the position
 - the legal moves, in the order the generator makes them
 - the same moves in the order the search tries them (MVV-LVA)
-- the opening book moves (GREEN and GOLD)
+- the opening book moves
 - a fixed-depth search: every depth's score, node count, and principal variation,
   and the best move
 
@@ -18,18 +18,16 @@ tactics, checks, castling, en passant, promotion, endgames, draws by repetition,
 the fifty-move rule, insufficient material, mate puzzles, checkmate, and stalemate.
 
 Time never decides how deep a search goes, so the two engines must match exactly.
-Rust is about 50 times faster, so Niram chooses the depth: for each version and
-position, the deepest search that visits at most --nodes positions. Remus then
+Rust is about 50 times faster, so Niram chooses the depth: for each position, the deepest search that visits at most --nodes positions. Remus then
 repeats that search to the same depth, one position per CPU core.
 
 The book check compares Niram's whole opening book, position by position, with
-the books Remus-GREEN and Remus-GOLD load.
+the book Remus-GOLD loads.
 
 Run it from the repository folder:
 
-    uv run scripts/engine_parity.py                 All 12 versions, 25,000 nodes
+    uv run scripts/engine_parity.py                 25,000 nodes a search
     uv run scripts/engine_parity.py --nodes 100000  Deeper searches, slower Remus
-    uv run scripts/engine_parity.py RED GOLD        Only some versions
 
 The results go to docs/engines/engine_parity.md. The exit code is 1 if anything differs.
 """
@@ -45,8 +43,11 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-REMUS_FOLDER = ROOT / "instructor" / "Remus"
-NIRAM = ROOT / "Niram"
+ENGINES_FOLDER = next((ROOT / "instructor").glob("Day 09 - *")) / "period2" / "engines"
+GOLD_FOLDER = (
+    ENGINES_FOLDER / "Remus-GOLD"
+)  # The finished Remus, with all ten enhancements
+NIRAM = ENGINES_FOLDER / "Niram-GOLD"  # Remus-GOLD rewritten in Rust
 REPORT_PATH = ROOT / "docs" / "engines" / "engine_parity.md"
 DEFAULT_NODES = 25_000  # Remus searches this many positions in about 3 to 8 seconds
 FIELDS = ["key", "eval", "legal", "ordered", "book", "info", "nodes", "best"]
@@ -247,21 +248,17 @@ CASES = [
 
 
 def version_folders() -> list[Path]:
-    """Return the 12 Remus version folders, 00 WHITE to 11 GOLD."""
-    folders = []
-    for folder in sorted(REMUS_FOLDER.iterdir()):
-        if folder.is_dir() and " - " in folder.name:
-            folders.append(folder)
-    return folders
+    """Return the Remus version folders that have a Niram twin: Remus-GOLD alone."""
+    return [GOLD_FOLDER]
 
 
 def color_of(folder: Path) -> str:
-    """Return the color in a folder name: "10 RED - Transposition table" gives "RED"."""
-    return folder.name.split(" - ")[0].split()[1]
+    """Return the color in a folder name: "Remus-GOLD" gives "GOLD"."""
+    return folder.name.split("-")[-1]
 
 
 def niram_program(color: str) -> Path:
-    """Return the Niram program of a color, such as Niram/target/release/niram-red."""
+    """Return the Niram program of a color, such as Niram-GOLD/target/release/niram-gold."""
     name = "niram-" + color.lower()
     if sys.platform == "win32":
         name += ".exe"
@@ -413,19 +410,12 @@ def first_difference(niram: dict, remus: dict) -> str | None:
 
 def main():
     parser = argparse.ArgumentParser(description="Check that Niram matches Remus")
-    parser.add_argument("colors", nargs="*", help="versions to check (default: all)")
     parser.add_argument("--nodes", type=int, default=DEFAULT_NODES)
     parser.add_argument("--workers", type=int, default=os.cpu_count() or 1)
     parser.add_argument("--no-build", action="store_true", help="skip cargo build")
     arguments = parser.parse_args()
 
-    wanted = []
-    for color in arguments.colors:
-        wanted.append(color.upper())
-    folders = []
-    for folder in version_folders():
-        if not wanted or color_of(folder) in wanted:
-            folders.append(folder)
+    folders = version_folders()
     if not arguments.no_build:
         print("Building Niram (cargo build --release)")
         subprocess.run(
@@ -510,8 +500,8 @@ def write_report(
     colors = [color_of(folder) for folder in folders]
     text = "# Engine parity: Remus and Niram\n\n"
     text += (
-        "`scripts/engine_parity.py` checks that each Niram engine thinks exactly like "
-        "the Remus version of the same color. For every position below, both engines "
+        "`scripts/engine_parity.py` checks that Niram-GOLD thinks exactly like "
+        "Remus-GOLD. For every position below, both engines "
         "report the position key, the version's evaluation, the legal moves in "
         "generation order and in search order, the book moves, and a search with no "
         "clock: each depth's score, node count, and principal variation, and the best "
@@ -520,7 +510,7 @@ def write_report(
         "in any field counts as a mismatch.\n\n"
     )
     text += (
-        f"Last run: {date.today().isoformat()}, {len(colors)} versions, "
+        f"Last run: {date.today().isoformat()}, Remus-GOLD and Niram-GOLD, "
         f"{len(CASES)} positions, {len(colors) * len(CASES)} searches, "
         f"{len(mismatches)} mismatches, {elapsed / 60:.1f} minutes on "
         f"{arguments.workers} cores.\n\n"
@@ -550,15 +540,15 @@ def write_report(
         )
     text += "\n## Opening book\n\n"
     text += (
-        "Niram reads `Niram/opening_book.txt`; the check compares every position and "
-        "move of its book, in order, with the book each Remus version loads.\n\n"
+        "Niram reads `Niram-GOLD/opening_book.txt`; the check compares every position "
+        "and move of its book, in order, with the book Remus-GOLD loads.\n\n"
     )
     text += "| Version | Positions | Moves | Same as Niram's book | Same file |\n"
     text += "| --- | ---: | ---: | --- | --- |\n"
     for color, positions, moves, same_book, same_file in book_rows:
         text += f"| {color} | {positions} | {moves} | {'yes' if same_book else 'NO'} | {'yes' if same_file else 'NO'} |\n"
     text += "\n## Positions\n\n"
-    text += "The depth column gives the depth each version searched, WHITE first.\n\n"
+    text += "The depth column gives the depth each search reached.\n\n"
     text += "| Position | What it tests | Depths |\n| --- | --- | --- |\n"
     for name, purpose, _ in CASES:
         depths = ""

@@ -1,6 +1,6 @@
 # opening_book.py: Play known openings without thinking
 
-*Lives in Remus-GOLD, `instructor/Remus/11 GOLD - All enhancements`, the engine of Day 10.*
+*Lives in Remus-GOLD, in the teacher's `instructor/Day 09 - Add the clock and build the color versions/period2/engines/Remus-GOLD`, the engine of Day 10.*
 
 ## The big picture
 
@@ -78,7 +78,7 @@ book_move()
 
 ## Try it
 
-Open `opening_book.py` from a period folder that has the file in VS Code, and click the Run Python File
+Open `opening_book.py` from the Remus-GOLD folder in VS Code, and click the Run Python File
 button (the triangle at the top right of the editor).
 
 You should see: `Book positions: 285`, the first moves in the book, and a reply to 1. e4.

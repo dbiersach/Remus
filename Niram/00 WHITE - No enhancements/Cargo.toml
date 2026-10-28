@@ -1,9 +1,0 @@
-[package]
-name = "niram-white"
-description = "Niram-WHITE: Remus-WHITE in Rust, no enhancements: the finished Day 9 Remus"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-
-[dependencies]
-niram_rules = { path = "../rules" }

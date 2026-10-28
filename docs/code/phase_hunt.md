@@ -1,6 +1,6 @@
 # phase_hunt.py: Science AI: name the crystals in a powder
 
-*First appears in `instructor/Day 10 - Aim Remus at a science problem/period2`.*
+*First appears in `instructor/Day 10 - Solve a science problem using chess AI/period2`.*
 
 ## The big picture
 

@@ -39,7 +39,7 @@ Day 5, Period 2.
 | `hidden_peak.py` | D10 P1: Science AI, the hidden peak | Last day |
 | `phase_hunt.py` | D10 P2: the phase hunt: the evaluation `score()` and the greedy agent | D10 P3: the tree search `search()` and the benchmark that compares it with greedy |
 | `estimate_elo.py` | Remus-GOLD: measures the Elo rating of Remus against Stockfish | Last day |
-| `Remus/version_match.py` | D9 P2: plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
+| `period2/engines/version_match.py` | D9 P2: plays one color version against Remus-WHITE, the Day 9 Remus with no enhancements, from 32 openings | Last day |
 | `scripts/version_league.py` | D10 P4: ranks all 12 Remus versions from every color version game | Last day |
 
 ## Table 2: By period
@@ -82,7 +82,7 @@ instructor folder holds the answer file `<name>_instructor.py`.
 | D8 P3 | None | `search.py`: quiescence. `test_search.py` |
 | D8 P4 | `move_ordering.py` | `search.py`: ordering, check extension, clock. `test_search.py` |
 | D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock and thinking time. `console_game.py`: uses `think()`. `test_search.py` |
-| D9 P2, P3 | Ten version folders in `Remus/` (see [remus_versions.md](../engines/remus_versions.md)). Lab 12 in P2: `python_caches.py` | None in the Day folder, which holds Remus-WHITE |
+| D9 P2, P3 | Ten color version folders in `period2/engines` (see [remus_versions.md](../engines/remus_versions.md)). Lab 12 in P2: `python_caches.py` | None: from period 2 on, the Day 9 period folders hold no engine code, and Remus-WHITE stays in `period1` |
 | D9 P4 | `play_battle.py` in each color version folder: color battles between pairs | None |
 | D10 P1 | `hidden_peak.py`, `test_hidden_peak.py`. The Day 10 folders hold only the science files; the engine is Remus-GOLD (`transposition_table.py`, `opening_book.py`, `upgraded_search()`, and the other enhancements) | None |
 | D10 P2 | `phase_hunt.py`, `test_phase_hunt.py` | None |

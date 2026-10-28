@@ -1,9 +1,0 @@
-[package]
-name = "niram-orange"
-description = "Niram-ORANGE: Remus-ORANGE in Rust, Remus-WHITE plus null-move pruning"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-
-[dependencies]
-niram_rules = { path = "../rules" }

@@ -129,7 +129,7 @@ ARRIVALS = {
         "uci_engine.py": 1,
         "test_game.py": 1,
     },
-    # Day 10 holds only the science files; its engine is Remus-GOLD in instructor/Remus
+    # Day 10 holds only the science files; its engine is Remus-GOLD in Day 9 period2/engines
     10: {
         "hidden_peak.py": 1,
         "test_hidden_peak.py": 1,
@@ -634,9 +634,9 @@ PERIOD_NOTES = {
     (1, 4): "Running `show_board.py` draws the board as a picture in the web browser.",
     (3, 2): "Running `show_board.py` draws an arrow for every move a generator "
     "returns.",
-    (9, 4): "The battles run in the `Remus` folder next to the Day folders. Each pair "
-    "copies its own color folder onto a USB stick. On the host laptop, the visitors "
-    "copy that folder over the folder of the same color in `Remus`, and the host "
+    (9, 4): "The battles run in `period2/engines`. Each pair copies its own color "
+    "folder onto a USB stick. On the host laptop, the visitors copy that folder over "
+    "the folder of the same color in `period2/engines`, and the host "
     "opens `play_battle.py` in its own color folder, presses Run Python File, and "
     "types the visitor's color. Remus plays two 10-minute games, one with each color, "
     "side by side.",
@@ -646,18 +646,24 @@ PERIOD_NOTES = {
     "planted bugs. Running `hunt.py` inside it shows where the counts go wrong.",
     (7, 3): "Register `remus.bat` from this folder in Lucas Chess again: Remus now "
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
-    (9, 2): "Each pair builds one color version in the `Remus` folder next to the "
-    "Day folders, such as `10 RED - Transposition table`. The code in this Day "
-    "folder is Remus-WHITE, the starting point of every color version.",
+    (9, 2): "Each pair builds one color version in the `engines` folder inside this "
+    "one, such as `engines/10 RED - Transposition table`. Each color folder is a "
+    "complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
     (10, 4): "The tournament: each pair opens `play_tournament.py` in its version "
-    "folder under `Remus` and presses Run in VS Code: two 10-minute games of its color "
-    "against Remus-WHITE, one with each color, all pairs at once. Running "
-    "`estimate_elo.py` in the GOLD folder measures the Elo rating of Remus-GOLD "
+    "folder in Day 9 `period2/engines` and presses Run in VS Code: two 10-minute games "
+    "of its color against Remus-WHITE, one with each color, all pairs at once. The "
+    "teacher's `estimate_elo.py` in Remus-GOLD measures the Elo rating of Remus-GOLD "
     "against Stockfish. Both add every game to games/remus_games.pgn "
     "at the top of the repository.",
 }
+
+# The period whose folder holds a Day's hand-edited code, when it is not period4.
+# Day 9's engine, Remus-WHITE, is finished in period 1. From period 2 on, each pair
+# works in its color version folder in period2/engines, so periods 2 to 4 hold no
+# engine code.
+SOURCE_PERIOD = {9: 1}
 
 # Every Python module name that appears in any Day folder
 LOCAL_MODULES = {path.stem for path in INSTRUCTOR.glob("Day */period4/*.py")}
@@ -909,22 +915,30 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     if day == 10:
         sections.append(
             "The engine for Day 10 is Remus-GOLD, the finished Remus with all ten "
-            "enhancements, in the `Remus/11 GOLD - All enhancements` folder beside "
-            "the Day folders. Lucas Chess runs its `remus.bat`, and its "
+            "enhancements, in the teacher's `Day 09 .../period2/engines/Remus-GOLD` "
+            "folder. Lucas Chess runs its `remus.bat`, and its "
             "`estimate_elo.py` rates it against Stockfish. This folder holds only "
             "the science files, which never import the engine."
         )
     if (day, period) in LABS:
         name = LABS[(day, period)]
         kind = "demo" if name.startswith("demo_") else "lab"
-        before = "This period comes before any Remus code. " if not files else ""
+        before = ""
+        if not files and day not in SOURCE_PERIOD:
+            before = "This period comes before any Remus code. "
         sections.append(
             f"{before}The {kind} is `{name}.py` in `student/`, with the answers in "
             f"`{name}_instructor.py` in `instructor/`. Open `{name}.py` in VS Code "
             "and run it with the Run Python File button (the triangle at the top "
             "right of the editor)."
         )
-    if not files:
+    if not files and day in SOURCE_PERIOD:
+        sections.append(
+            "This folder holds no engine code. Each pair works in its own color "
+            "version folder in `period2/engines`, a complete copy of Remus-WHITE plus "
+            "one enhancement. Remus-WHITE itself is the `period1` folder."
+        )
+    elif not files:
         if (day, period) not in LABS:
             sections.append(
                 "This period comes before any Remus code, so the folder is empty."
@@ -1042,9 +1056,14 @@ def keep_hand_written(day: int, period: int, folder: Path) -> dict[str, str]:
 
 def write_folder(folder: Path, files: dict[str, str], day_end_folder: Path) -> None:
     """Write a period folder, copying file permissions from the period4 copy."""
-    if folder.exists():
-        shutil.rmtree(folder)
-    folder.mkdir()
+    folder.mkdir(exist_ok=True)
+    for path in folder.iterdir():
+        if path.name == "engines":
+            continue  # make_version_folders.py builds the color versions in Day 9
+        if path.is_dir():
+            shutil.rmtree(path)
+        else:
+            path.unlink()
     for name, text in files.items():
         file_path = folder / name
         file_path.write_text(text, newline="")
@@ -1068,17 +1087,21 @@ def main():
     day_before = {}
     built = []
     for day in range(1, 11):
-        end_folder = day_folder(day) / "period4"
+        source = SOURCE_PERIOD.get(day, 4)
+        end_folder = day_folder(day) / f"period{source}"
         day_end = read_folder(end_folder)
         day_end.pop("README.md", None)
         for name in lab_answer_files(day):
             day_end.pop(name, None)  # A lab's answer file belongs to its own period
         files_before = day_before
         for period in range(1, 5):
-            if period == 4:
+            if period == source:
                 files = day_end
             else:
-                files = build_period(day, period, day_end, day_before)
+                if period > source:
+                    files = {}  # Only the README and a lab, written by hand
+                else:
+                    files = build_period(day, period, day_end, day_before)
                 folder = day_folder(day) / f"period{period}"
                 kept = keep_hand_written(day, period, folder)
                 write_folder(folder, files, end_folder)

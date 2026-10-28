@@ -19,7 +19,8 @@ Usage:
                                                  16 games at a time
     uv run scripts/version_league.py --event "Station league 2"
                                                  a second league, rated apart
-    uv run scripts/version_league.py --niram     the same league for Niram, in Rust
+    uv run scripts/version_league.py --niram --rate-only --event "Niram league 1"
+                                                 the saved Niram league, rated
     uv run scripts/version_league.py --book-start
                                                  GREEN's and GOLD's games from move 1
 
@@ -28,11 +29,11 @@ second, so a shorter clock stops every version after 2 to 4 plies, too shallow f
 most enhancements to help. Games at one clock are rated apart from games at another
 clock.
 
-With --niram the league plays Niram, the Rust copies of the same 12 versions in
-the Niram folder. Niram chooses the same moves as Remus about 50 times faster, so
-a 10 minute Niram game searches as deep as a Remus game of many hours. Niram
-games are rated apart from Remus games, with Niram-WHITE pinned at 0. Build the
-Niram programs first with "cargo build --release" inside Niram.
+The teacher's league ran on Niram, Rust copies of the same 12 versions that chose
+the same moves as Remus about 50 times faster, so a 10 minute Niram game searched
+as deep as a Remus game of many hours. Only Niram-GOLD is kept, in the Niram-GOLD
+folder, but the Niram games stay in the games file: --niram with --rate-only rates
+them apart from Remus games, with Niram-WHITE pinned at 0.
 
 Every game starts from one of the OPENINGS of version_match.py, three moves for each
 side, because a version with no book plays the same game again from the starting
@@ -56,8 +57,9 @@ from pathlib import Path
 
 import chess.pgn
 
-# version_match.py lives beside the Remus versions in instructor/Remus
-sys.path.insert(0, str(Path(__file__).parent.parent / "instructor" / "Remus"))
+# version_match.py lives beside the color versions in Day 9, period2/engines
+INSTRUCTOR = Path(__file__).parent.parent / "instructor"
+sys.path.insert(0, str(next(INSTRUCTOR.glob("Day 09 - *")) / "period2" / "engines"))
 
 from version_match import (
     GAMES_PATH,
@@ -230,7 +232,6 @@ def play_league(
     increment: float,
     games_at_once: int,
     event: str,
-    engine: str,
     book_start: bool = False,
 ) -> None:
     """
@@ -241,7 +242,7 @@ def play_league(
     With book_start, every game with GREEN or GOLD starts from the starting
     position, so their opening book plays from the first move.
     """
-    players = all_players(engine)
+    players = all_players()
     jobs = []
     opening_number = 0
     opening = OPENINGS[0]
@@ -359,7 +360,7 @@ def main():
     )
     parser.add_argument("--player", help='also show one color\'s games, such as "GOLD"')
     parser.add_argument(
-        "--niram", action="store_true", help="play the Rust versions in Niram/"
+        "--niram", action="store_true", help="rate the saved Niram games"
     )
     parser.add_argument(
         "--book-start",
@@ -371,6 +372,8 @@ def main():
     anchor = f"{engine}-{YARDSTICK}"
     clock = time_control(options.minutes, options.increment)
     start = time.perf_counter()
+    if options.niram and not options.rate_only:
+        sys.exit("Only Niram-GOLD is kept, so --niram works only with --rate-only")
     if not options.rate_only:
         play_league(
             options.games,
@@ -378,7 +381,6 @@ def main():
             options.increment,
             options.at_once,
             options.event,
-            engine,
             options.book_start,
         )
     results = read_results(clock, options.event, engine, options.book_start)

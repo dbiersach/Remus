@@ -416,12 +416,14 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
     out += [
         "## Color versions (Day 9, periods 2 and 3)",
         "",
-        "Each pair writes the functions of one color version in `student/Remus`.",
+        "Each pair writes the functions of one color version in `period2/engines`.",
         "",
         "| Color version | Pairs write |",
         "| --- | --- |",
     ]
     for version in VERSIONS_TABLE:
+        if not version["students"]:
+            continue  # Remus-GOLD stays in the teacher's folders
         written = rows.get(("version", version["folder"]), [])  # type: ignore[arg-type]
         writes = "; ".join(
             f"`{row['function']}()` in `{row['file']}` ({lines_text(row['typed'])})"
@@ -455,7 +457,7 @@ def main():
         shutil.copytree(
             folder,
             target,
-            ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg"),
+            ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg", "target"),
         )
         for stub_day, stub_period, file_name, function in STUDENT_FUNCTIONS:
             if (stub_day, stub_period) != (day, period):
@@ -495,14 +497,19 @@ def main():
             with (target / "README.md").open("a") as file:
                 for section in sections:
                     file.write("\n" + section)
-    # Each version folder stubs the functions its pair writes on Day 9
-    (STUDENT / "Remus").mkdir(exist_ok=True)
-    shutil.copy2(INSTRUCTOR / "Remus" / "version_match.py", STUDENT / "Remus")
+    # Each color version folder stubs the functions its pair writes on Day 9. The
+    # student engines folder holds the ten color versions and version_match.py, but
+    # not Remus-GOLD or Niram-GOLD, which stay in the teacher's folders.
+    engines = next(INSTRUCTOR.glob("Day 09 - *")) / "period2" / "engines"
+    student_engines = STUDENT / engines.parent.parent.name / "period2" / "engines"
+    shutil.rmtree(student_engines / "Niram-GOLD", ignore_errors=True)
     for version in VERSIONS_TABLE:
-        folder = INSTRUCTOR / "Remus" / version["folder"]
-        target = STUDENT / "Remus" / version["folder"]
+        folder = engines / version["folder"]
+        target = student_engines / version["folder"]
         if target.exists():
             shutil.rmtree(target)
+        if not version["students"]:
+            continue
         shutil.copytree(
             folder,
             target,

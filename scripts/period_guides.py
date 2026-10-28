@@ -3271,8 +3271,8 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Each pair opens its color version in the `Remus` folder "
-                        "next to the Day folders, reads the version README, and writes the color version's stubbed "
+                        "Each pair opens its color version in `period2/engines`, "
+                        "reads the version README, and writes the color version's stubbed "
                         "code."
                     ),
                 ),
@@ -3304,7 +3304,7 @@ DAY_GUIDES = {
                     0,
                     (
                         "Slides: how a battle works. Each pair copies its own color "
-                        "folder from `Remus` onto its USB stick. The teacher posts the "
+                        "folder from `period2/engines` onto its USB stick. The teacher posts the "
                         "pairings for two rounds; in each round five pairs host and "
                         "five visit."
                     ),
@@ -3313,7 +3313,7 @@ DAY_GUIDES = {
                     10,
                     (
                         "Round 1. The visiting pair copies its color folder over the "
-                        "folder of the same color in the host laptop's `Remus` "
+                        "folder of the same color in the host laptop's `engines` "
                         "folder. The host opens `play_battle.py` in its own color "
                         "folder, presses Run in VS Code, and types the visitor's "
                         "color. Two 10-minute games run side by side, one with each "
@@ -3347,7 +3347,7 @@ DAY_GUIDES = {
         ),
     },
     10: {
-        "theme": "Science AI at the beamline",
+        "theme": "Solve a science problem using chess AI",
         "summary": (
             "Day 10 aims the engine's ideas at real science. The same generate, score,"
             " and choose loop picks where to measure a hidden peak, and the full tree "
