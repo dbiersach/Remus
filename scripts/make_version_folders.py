@@ -35,6 +35,8 @@ INSTRUCTOR = ROOT / "instructor"
 REMUS_FOLDER = INSTRUCTOR / "Remus"
 BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period4"  # Remus-WHITE
 FINAL = REMUS_FOLDER / "11 GOLD - All enhancements"  # Written by hand
+# Day 9 already runs these slow tests on the same rules, so the versions leave them out
+DAY_9_ONLY_TESTS = [("test_search.py", "test_mate_solver_solves_all_mate_puzzles")]
 
 
 def function_text(file_path: Path, name: str) -> str:
@@ -1078,6 +1080,11 @@ def main():
         )
         for name in version["copies"]:
             shutil.copy2(FINAL / name, folder / name)
+        for file_name, name in DAY_9_ONLY_TESTS:
+            file_path = folder / file_name
+            test = function_text(file_path, name) + "\n\n"
+            text = replace_once(file_path.read_text(), test, "", version["folder"])
+            file_path.write_text(text)
         for file_name, old, new in version["edits"]:
             file_path = folder / file_name
             text = replace_once(file_path.read_text(), old, new, version["folder"])
