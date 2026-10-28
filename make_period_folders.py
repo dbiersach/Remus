@@ -142,7 +142,6 @@ ARRIVALS = {
         "hidden_peak.py": 1,
         "phase_hunt.py": 2,
         "test_phase_hunt.py": 2,
-        "tournament.py": 4,
         "remus.sh": 4,
         "estimate_elo.py": 4,
     },
@@ -652,7 +651,7 @@ PERIOD_TITLES = {
     (9, 1): "Iterative deepening, the clock, and UCI info",
     (9, 2): "Python lab 12 and the enhancement stations",
     (9, 3): "Enhancement stations: test and measure",
-    (9, 4): "Launch the station matches, and the mate solver",
+    (9, 4): "The mate solver",
     (10, 1): "Science AI: hidden_peak.py",
     (10, 2): "The phase hunt: score a guess, and the greedy agent",
     (10, 3): "The phase hunt: search every set, and verify",
@@ -674,14 +673,13 @@ PERIOD_NOTES = {
     (9, 2): "Each pair builds one color station in the `Stations` folder, such as "
     "`RED - Transposition table`. The code in this Day folder is Remus-WHITE, the "
     "starting point of every station.",
-    (9, 4): "Each pair starts `uv run station_match.py <COLOR>` in the `Stations` "
-    "folder, which plays its station against Remus-WHITE with nobody watching. "
-    "Meanwhile the pairs write the mate solver.",
     (10, 2): "`uv run phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
-    (10, 4): "`uv run tournament.py` plays the class round robin, and "
-    "`uv run estimate_elo.py` measures the Elo rating of Remus against Stockfish. "
-    "Both add every game to games/remus_games.pgn at the top of the Remus folder.",
+    (10, 4): "The tournament: each pair runs `uv run station_match.py <COLOR>` in "
+    "the `Stations` folder, two 10-minute games of its color against Remus-WHITE, one "
+    "with each color, all pairs at once. `uv run estimate_elo.py` measures the Elo "
+    "rating of Remus against Stockfish. Both add every game to games/remus_games.pgn "
+    "at the top of the Remus folder.",
 }
 
 # Every Python module name that appears in any Day folder

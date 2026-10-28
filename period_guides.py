@@ -568,7 +568,7 @@ OBJECTIVES = {
         (
             "Test an enhancement before trusting it.",
             (
-                "The station passes `uv run pytest` and a two-game smoke test against "
+                "The station passes `uv run pytest` and a one-game smoke test against "
                 "Remus-WHITE with no illegal moves."
             ),
         ),
@@ -581,13 +581,6 @@ OBJECTIVES = {
         ),
     ],
     (9, 4): [
-        (
-            "Run a fair experiment: same opponent, same openings, both colors.",
-            (
-                "Each laptop's `station_match.py` run starts with no errors and adds "
-                "games to the games file."
-            ),
-        ),
         (
             "Solve mate puzzles with a yes-or-no search.",
             "The mate-solver tests pass on all ten GameWorks puzzles.",
@@ -649,8 +642,9 @@ OBJECTIVES = {
         (
             "Read an experiment's results and their error margins.",
             (
-                "`demo_results.py` turns the pair's own match result into an Elo gap "
-                "and margin, and the pair says whether the gap is larger than the margin."
+                "`demo_results.py` turns the pair's two tournament games, and then its "
+                "color's league games, into an Elo gap and margin, and the pair says "
+                "which gap is larger than its margin."
             ),
         ),
         (
@@ -679,13 +673,477 @@ STATION_OBJECTIVES = [
         "`uv run pytest` passes in the station folder.",
     ),
     (
-        "Measure the enhancement against Remus-WHITE.",
+        "Run a fair experiment against Remus-WHITE: same opening, both colors.",
         (
-            "`uv run station_match.py <COLOR>` finishes, and the pair reads its Elo gap "
-            "and margin from the output."
+            "In the Day 10 tournament, `uv run station_match.py <COLOR>` plays both "
+            "10-minute games with no illegal moves or crashes, and the pair says why "
+            "two games cannot show whether the enhancement helps."
         ),
     ),
 ]
+
+# The long explanation in each station README, by color. Each section is Markdown:
+# "example" walks through one concrete case, "why" says how the idea makes Remus
+# stronger, "cost" says what it spends (positions per second, memory, re-searches),
+# "expect" says what the pair should see in the numbers and in games, and "fits"
+# traces where the pair's code is called from.
+STATION_GUIDES = {
+    "WHITE": {
+        "why_title": "Why it matters",
+        "example": (
+            "Remus-WHITE thinks the way the class built it through Day 9. `think()` "
+            "searches 1 ply deep, then 2, then 3, until its time for the move runs out, "
+            "and plays the best move of the deepest search that finished. Each search "
+            "is alpha-beta: once one reply shows a move is worse than a move already "
+            "found, Remus stops looking at that move. At the end of every line, "
+            "quiescence keeps playing captures until the position is quiet, so Remus "
+            "never stops counting in the middle of a trade. Captures are tried first, "
+            "most valuable victim and least valuable attacker first (MVV-LVA), and the "
+            "best move of the last depth is tried before everything else."
+        ),
+        "why": (
+            "Every color station is Remus-WHITE plus exactly one change. Playing each "
+            "station against Remus-WHITE is a fair experiment: same openings, both "
+            "colors, and only one thing different."
+        ),
+        "cost": (
+            "Remus-WHITE is pure Python, so it searches only a few thousand positions "
+            "a second. Most of them are quiescence positions at the ends of lines. "
+            "With 10 minutes for a game, Remus thinks about 20 seconds a move and "
+            "usually finishes depth 4 or 5 in the middlegame."
+        ),
+        "expect": (
+            "Remus-WHITE is pinned at 0 in every league table, so every other "
+            "version's rating is its gain or loss against Remus-WHITE."
+        ),
+    },
+    "GOLD": {
+        "why_title": "Why it is stronger",
+        "example": (
+            "Remus-GOLD is the finished Day 10 Remus: Remus-WHITE plus all ten "
+            "enhancements working together in one search, `upgraded_search()`. It "
+            "probes the transposition table (RED), tries a null move (ORANGE), orders "
+            "the moves with the stored best move and killers first (RED, BLUE), "
+            "searches later moves with a null window (PINK) and late quiet moves one "
+            "ply shallower (BROWN), scores repeated positions as draws (YELLOW), plays "
+            "from the opening book (GREEN), and adds pawn structure, the mating bonus, "
+            "and king safety to its evaluation (PURPLE, CYAN, GRAY)."
+        ),
+        "why": (
+            "The search tricks multiply. The table and the killers put the best move "
+            "first, a good first move makes PVS's null windows cheap, and null moves "
+            "and late move reductions remove whole subtrees. Together they reach a "
+            "ply or two deeper in the same time than Remus-WHITE, and the better "
+            "evaluation chooses better among the moves it sees."
+        ),
+        "cost": (
+            "Its evaluation does three more scans of the board for every position, so "
+            "Remus-GOLD evaluates fewer positions a second than Remus-WHITE. It wins "
+            "that time back by visiting far fewer positions for each depth."
+        ),
+        "expect": (
+            "Remus-GOLD is the only version whose gain over Remus-WHITE is larger "
+            "than its error margin in the teacher's 10-minute league, and it gains "
+            "more the longer the clock, because null moves and late move reductions "
+            "save work only at depth 3 and deeper."
+        ),
+    },
+    "RED": {
+        "example": (
+            "1. Nf3 Nf6 2. d4 and 1. d4 Nf6 2. Nf3 reach the same position by two "
+            "different move orders. Chess players call that a transposition. A "
+            "search meets transpositions all the time: Remus playing Nf3 then d4 "
+            "against ...Nf6 and ...e6 reaches one position four ways. Remus-WHITE "
+            "searches that position four times. Remus-RED searches it once, writes "
+            "the result in a dict (the transposition table), and looks it up the "
+            "other three times.\n\n"
+            "Each entry, keyed by `position_key`, holds the depth searched, the "
+            "score, the move that was best, and a bound that says how much the score "
+            "can be trusted. Alpha-beta often stops early, so a score is not always "
+            "exact:\n\n"
+            "- `EXACT`: the search found the true score.\n"
+            "- `LOWER`: a move caused a cutoff, so the true score is at least this "
+            "much.\n"
+            "- `UPPER`: no move beat alpha, so the true score is at most this much.\n\n"
+            "`probe()` answers from the table only when the stored search went at "
+            "least as deep as the one needed and the bound settles the question. A "
+            'lower bound of +120 settles a search that only asks "is it at least '
+            '+100?" (beta = 100), but not one that asks for the exact score.'
+        ),
+        "why": (
+            "A lookup replaces a whole subtree. Even when the stored score cannot "
+            "be used, because it is too shallow or its bound does not settle the "
+            "question, the stored best move is tried first. Iterative deepening "
+            "makes this pay twice: the depth 3 search fills the table with best "
+            "moves that put the depth 4 search's best move first almost everywhere, "
+            "and alpha-beta prunes most when the best move comes first."
+        ),
+        "cost": (
+            "One dict lookup and one dict write per position. The key is already in "
+            "the game history, so it costs nothing to build. The table starts empty "
+            "for every move and holds one entry per position searched, a few hundred "
+            "thousand at most, which a laptop's memory holds easily. Mate scores are "
+            "not stored, because a mate score counts plies from the root, so the "
+            "same position gets a different mate score at a different ply."
+        ),
+        "expect": (
+            "Fewer positions for the same depth, and the biggest savings in endgames, "
+            "where a few pieces shuffle between the same squares and nearly every "
+            "position is reached many ways. Positions per second stay close to "
+            "Remus-WHITE's."
+        ),
+        "fits": (
+            "`table_search()` in `search.py` replaces Remus-WHITE's search. At the "
+            "top of every position it calls `probe()`, and if the answer is a score, "
+            "it returns at once. After a cutoff it calls `store()` with `LOWER`; "
+            "after searching every move it calls `store()` with `EXACT` if a move "
+            "beat alpha and `UPPER` if none did. `store()` keeps the deeper of two "
+            "results for the same position."
+        ),
+    },
+    "GREEN": {
+        "example": (
+            "`opening_book.txt` holds 13 well-known openings, five moves for each "
+            "side, written in SAN: `e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7` is the Ruy "
+            "Lopez. `load_book()` plays every line on a board from the starting "
+            "position and records, for each position it passes, which moves the "
+            "book plays there. After 1. e4 the book holds ...e5, ...c5, ...e6, and "
+            "...c6. `book_move()` picks one of them at random, so Remus-GREEN does "
+            "not play the same opening every game. Once the game leaves the book, "
+            "Remus searches as usual."
+        ),
+        "why": (
+            "Searching the opening is slow and not very good: at depth 4 Remus "
+            "cannot see why 1. e4 e5 2. Nf3 Nc6 3. Bb5 works. A book move costs no "
+            "thinking time and comes from a century of human play. Every book move "
+            "also passes through `parse_san()` and Remus's own legal move generator, "
+            "so a typo in the book file is reported and skipped, never played."
+        ),
+        "cost": (
+            "Nothing during the search: the book is read once when the engine "
+            "starts, and asking it is one dict lookup. Positions per second and "
+            "positions per depth are the same as Remus-WHITE's, because the search "
+            "itself does not change."
+        ),
+        "expect": (
+            "The time saved goes to later moves. Remus thinks about one thirtieth of "
+            "its remaining clock per move, so five instant book moves leave roughly "
+            "a minute and a half more for the middlegame. The effect in the station "
+            "matches is small, because every match game starts from one of 32 "
+            "openings three moves deep, and only some of them are in the book. A "
+            "league rating near 0 is the expected result: the book matters most in "
+            "games that start from the first move. The benchmark below never asks "
+            "the book, so its numbers match Remus-WHITE's exactly."
+        ),
+        "fits": (
+            "`uci_engine.py` and `console_game.py` ask `book_move()` before they "
+            "search. `None` means the position is not in the book, and the engine "
+            "calls `think()` as Remus-WHITE does."
+        ),
+    },
+    "BLUE": {
+        "example": (
+            "Black has just made a weak move, and White's quiet move Qh5 threatens "
+            "mate on f7. Deep in the search, the same Qh5 refutes many different "
+            "Black moves at the same ply: almost any Black move that does not defend "
+            "f7 loses to it. Remus-WHITE tries the captures first, then the quiet "
+            "moves in the order the generator found them, so it may try 20 quiet "
+            "moves before Qh5 each time. Remus-BLUE remembers Qh5 as a killer move "
+            "for that ply, because it caused a cutoff there, and tries it right "
+            "after the captures in every other position at the same ply."
+        ),
+        "why": (
+            "Alpha-beta cuts off a position as soon as one move is good enough to "
+            "refute it. The sooner that move comes, the fewer moves are searched. "
+            "Captures are easy to rank by value, but quiet moves have no such order. "
+            "Killers give the quiet moves an order learned from the search itself."
+        ),
+        "cost": (
+            "Very little: two moves stored per ply, and a check whether each quiet "
+            "move is one of them while ordering. Positions per second stay close to "
+            "Remus-WHITE's."
+        ),
+        "expect": (
+            "Fewer positions for the same depth, most of all in quiet middlegame "
+            "positions with many moves. A killer that is a capture or a promotion is "
+            "not stored, because captures and promotions are already ordered first."
+        ),
+        "fits": (
+            "`killer_search()` in `search.py` calls `remember_killer()` whenever a "
+            "quiet move causes a cutoff, and passes the killers of the next ply to "
+            "`order_moves()` in `move_ordering.py`. `order_moves()` scores captures "
+            "by MVV-LVA, gives a killer `KILLER_SCORE` (50, below every capture and "
+            "above every other quiet move), and puts the best move of the last "
+            "depth in front of them all."
+        ),
+    },
+    "PINK": {
+        "example": (
+            "After Remus has searched its first move and found it scores +30, the "
+            'only question about each other move is "is it better than +30?" '
+            "Remus-WHITE searches every move with the full window, alpha to beta, "
+            "to find its exact score. Remus-PINK searches the later moves with a "
+            "null window from +30 to +31. A null window has no room between alpha "
+            "and beta, so every reply either fails low (worse than +30) or fails "
+            "high (better), and cutoffs come at once. Only a move that fails high "
+            "gets a second search with the full window to find how much better it "
+            "is."
+        ),
+        "why": (
+            "With good move ordering the first move is usually the best one, so "
+            "most later moves fail low on the cheap null-window search and never "
+            "need a full one. This is principal variation search, PVS: the first "
+            "move is searched as the principal variation, and the rest only have to "
+            "prove that they are worse."
+        ),
+        "cost": (
+            "A move that turns out better than the first one is searched twice. PVS "
+            "saves work only when the move ordering is good; with poor ordering the "
+            "re-searches can cost more than the null windows save."
+        ),
+        "expect": (
+            "Fewer positions for the same depth, and the same move in "
+            "almost every position, because PVS changes how much Remus searches, "
+            "not what it finds. PVS gains much more in Remus-GOLD, where the table "
+            "and the killers make the first move the best one far more often."
+        ),
+        "fits": (
+            "`pvs_search()` in `search.py` searches the first move with the full "
+            "window and calls `search_later_move()` for every other move. The move "
+            "is already made when `search_later_move()` runs, and the score comes "
+            "back from the opponent's point of view, so the code flips its sign "
+            "and the window, as negamax does."
+        ),
+    },
+    "YELLOW": {
+        "example": (
+            "Remus-WHITE is a rook behind, and the opponent's king can be checked "
+            "forever. Inside its search, Remus-WHITE scores the position after the "
+            "third repetition as a rook behind, because nothing in its search knows "
+            "that the game ends there as a draw. So it avoids the checks and loses "
+            "slowly. Remus-YELLOW scores any position that already appeared in the "
+            "game or in the search line as 0, a draw, and so does a position after "
+            "100 half moves with no capture or pawn move (the fifty-move rule). It "
+            "sees that the checks save half a point and plays them."
+        ),
+        "why": (
+            "The same knowledge works the other way. A side that is ahead stops "
+            "repeating positions, because a repetition scores 0 instead of its +300 "
+            "lead. A repetition can only be claimed after the third time, but the "
+            "search treats the second time as a draw: if repeating once is the best "
+            "either side can do, it can repeat again."
+        ),
+        "cost": (
+            "`is_draw_in_search()` counts the position key in the game history at "
+            "every position, a short list scan. Positions per second stay close to "
+            "Remus-WHITE's, and the search saves work when it meets a repetition, "
+            "because a draw ends that line at once."
+        ),
+        "expect": (
+            "More draws in lost positions and fewer accidental draws in won ones. "
+            "The benchmark positions below start with no game history, so they hold "
+            "almost no repetitions and the numbers match Remus-WHITE's; the "
+            "difference shows up in games."
+        ),
+        "fits": (
+            "`draw_sense_search()` in `search.py` calls `is_draw_in_search()` at the "
+            "top of every position below the root, before any move is generated. "
+            "The root is skipped, because Remus must still choose a move there."
+        ),
+    },
+    "PURPLE": {
+        "example": (
+            "White pawns on c2, c3, and e4, Black pawns on d6 and e5: White's c-pawns "
+            "are doubled (two on one file), and the e4 pawn is isolated (no White "
+            "pawn on the d- or f-file beside it). Remus-PURPLE scores each doubled "
+            "pawn -8 and each isolated pawn -20. A passed pawn, with no enemy pawn in "
+            "front of it on its own file or a neighboring file, earns a bonus that "
+            "grows as it advances: 0, 10, 20, 40, 60, and then 70 one step from "
+            "promotion. Remus-WHITE counts every pawn as 100 plus its square's "
+            "placement value and sees none of this."
+        ),
+        "why": (
+            "Pawns cannot move backward, so a weak pawn stays weak for the whole "
+            "game, and a passed pawn becomes a queen threat that ties down enemy "
+            "pieces. A search at depth 4 cannot see those long-term effects, but an "
+            "evaluation term can score them in every position."
+        ),
+        "cost": (
+            "`pawn_structure()` scans the board for pawns, then looks ahead of each "
+            "pawn for enemy pawns, in every evaluated position. Evaluation is most "
+            "of Remus's work at the ends of lines, so Remus-PURPLE evaluates fewer "
+            "positions a second than Remus-WHITE. The number of positions per depth "
+            "changes a little either way, because different scores lead alpha-beta "
+            "to different cutoffs."
+        ),
+        "expect": (
+            "Better pawn moves: Remus-PURPLE avoids doubling its own pawns, attacks "
+            "isolated enemy pawns, and pushes passed pawns in the endgame. The cost "
+            "in speed can cancel the gain at a short clock."
+        ),
+        "fits": (
+            "`white_score()` in `evaluation.py` adds `pawn_structure(board)` to "
+            "material and placement, and `explain_evaluation()` prints it as its own "
+            "line, so a pair can see the term in any position."
+        ),
+    },
+    "CYAN": {
+        "example": (
+            "White has king and rook, Black has only a king. Mate needs the Black "
+            "king on the edge, and it takes far more than 4 plies of good moves to "
+            "drive it there. Remus-WHITE sees no mate within its depth and scores "
+            "every rook move the same, +500, so it shuffles. Remus-CYAN adds a bonus "
+            "once one side leads by at least 200 and the losing side has at most 600 "
+            "left: 10 points for each step the losing king stands from the center, "
+            "and 4 points for each step the winning king has closed in. Now every "
+            "move that squeezes the king toward the edge scores higher, and the "
+            "search walks it into a mating net."
+        ),
+        "why": (
+            "An evaluation term can stand in for a search that is too deep to run. "
+            'The bonus turns a long plan, "push the king to the edge, then mate", '
+            "into small steps that a shallow search can see."
+        ),
+        "cost": (
+            "One scan of the board to count material and find the kings, in every "
+            "evaluated position. In most positions the margins are not met and the "
+            "bonus is 0, so the cost is the scan only."
+        ),
+        "expect": (
+            "Faster wins in won endgames, and no change before that. Many games are "
+            "decided or drawn before such an endgame appears, so the league rating "
+            "moves little."
+        ),
+        "fits": (
+            "`white_score()` in `evaluation.py` adds `mating_bonus(board)` to "
+            "material and placement. `CENTER_DISTANCE` gives each row and column's "
+            "distance from the center: 3 on the edge, 0 in the middle."
+        ),
+    },
+    "ORANGE": {
+        "example": (
+            "Somewhere in the search, Remus is a knight ahead in a line it is "
+            "checking. Earlier in the tree, the opponent already found a different "
+            "move that keeps the game even. That earlier choice is beta: any line "
+            "better for Remus than beta, the opponent will simply avoid. Before "
+            "searching its 35 real moves here, Remus-ORANGE tries a cheap test. It "
+            "passes, so the opponent gets two moves in a row, and searches 2 plies "
+            "shallower than usual. If Remus still scores at least beta after "
+            "giving away a whole move, then a real move would do even better, because "
+            "moving is almost always better than passing. The opponent will never "
+            "allow this position, so Remus stops searching it without trying one "
+            "real move."
+        ),
+        "why": (
+            "Most positions deep in a search are lopsided, and the null move "
+            "removes them with one shallow search instead of a full one. The "
+            "positions saved go into searching the close lines one ply deeper."
+        ),
+        "cost": (
+            "An extra shallow search at every position 3 or more plies from the "
+            "leaves, which is wasted when the test fails. The test can also be "
+            "wrong. In zugzwang, every legal move makes the position worse, and "
+            "passing would be the best move if it were allowed; this happens "
+            "mostly in pawn endings. So Remus never passes when it is in check, "
+            "when it has only king and pawns, right after a pass, or at the root."
+        ),
+        "expect": (
+            "Far fewer positions for the same depth once the search reaches depth "
+            "3 and deeper, and the same moves in most positions. The saving grows "
+            "with depth, so null moves help most at longer clocks."
+        ),
+        "fits": (
+            "`null_move_search()` in `search.py` calls `make_null_move()`, searches "
+            "the pass with the window (-beta, -beta + 1) at `depth - 1 - "
+            "NULL_MOVE_REDUCTION`, and calls `undo_null_move()` in a `finally` "
+            "block. A pass changes the side to move, clears the en passant target, "
+            "and adds a history entry, and `undo_null_move()` must restore all "
+            "three exactly, like every undo in Remus."
+        ),
+    },
+    "BROWN": {
+        "example": (
+            "Remus orders its moves: the best move from the last depth first, then "
+            "captures, then quiet moves. In a position with 35 moves, the best one "
+            "is almost always among the first three. Remus-BROWN searches the first "
+            "three moves at full depth and every later quiet move one ply "
+            "shallower. A late move that still beats alpha at the shallower depth is "
+            "a surprise, and Remus searches it again at full depth before trusting "
+            "it."
+        ),
+        "why": (
+            "Most of a search's work goes into proving that bad moves are bad. Late "
+            "move reductions prove it more cheaply, and the re-search keeps the "
+            "rare good late move from being missed. Captures, promotions, and "
+            "checks are never reduced, because they change the position too much "
+            "to judge from a shallow search."
+        ),
+        "cost": (
+            "Each surprise costs a second search. The reduction only starts with 3 "
+            "or more plies to go, so it does nothing in a depth 2 search."
+        ),
+        "expect": (
+            "Fewer positions for the same depth, growing with depth, and now and "
+            "then a different move, because a reduced search can miss a quiet move "
+            "that only works deep down."
+        ),
+        "fits": (
+            "`reduced_search()` in `search.py` makes each move, asks `reduction()` "
+            "how many plies to cut (1 or 0), and searches at `depth - 1 - cut`. If "
+            "a cut search scores above alpha, it searches the move again at full "
+            "depth. `LATE_MOVE_INDEX` (3) says where the late moves begin."
+        ),
+    },
+    "GRAY": {
+        "example": (
+            "White has castled kingside: king on g1, pawns on f2, g2, and h2. Each of "
+            "the king's three files has a White pawn one or two squares in front, so "
+            "Remus-GRAY adds 3 x 15 = 45 points. Push the h-pawn to h4, and the h-file "
+            "no longer shelters the king: 30 points. The bonus counts only while "
+            "the enemy queen is on the board, because the queen is the piece that "
+            "makes an open king dangerous. Once the queens come off, the king should "
+            "walk toward the center, and the term is 0."
+        ),
+        "why": (
+            "A king attack takes many moves to build, too many for a depth 4 search "
+            "to see. The shield bonus teaches Remus to castle and to keep the pawns "
+            "in front of its king, before an attack is in range of the search."
+        ),
+        "cost": (
+            "A scan of the board for the enemy queen and the king, and up to six "
+            "squares checked in front of the king, in every evaluated position. "
+            "Remus-GRAY evaluates a few positions a second fewer than Remus-WHITE."
+        ),
+        "expect": (
+            "Earlier castling, fewer pawn pushes in front of its own king, and a "
+            "reason to trade queens when its own shield is broken."
+        ),
+        "fits": (
+            "`white_score()` in `evaluation.py` adds `king_safety(board)` to "
+            "material and placement. White's pawns stand in front of its king at "
+            "smaller rows, because row 0 is rank 8, so the code steps the other way "
+            "for Black."
+        ),
+    },
+}
+
+# Each version's search on the ten positions of compare_search.py, measured with
+# think() on one computer: positions to finish depth 4, the seconds that took, and
+# the average deepest depth finished in 5 seconds a position
+STATION_MEASURES = {
+    "WHITE": {"nodes": 431_212, "seconds": 83.2, "depth": 3.1},
+    "GOLD": {"nodes": 84_812, "seconds": 18.8, "depth": 4.9},
+    "RED": {"nodes": 243_223, "seconds": 48.7, "depth": 3.7},
+    "GREEN": {"nodes": 431_212, "seconds": 85.4, "depth": 3.2},
+    "BLUE": {"nodes": 328_889, "seconds": 65.8, "depth": 3.4},
+    "PINK": {"nodes": 289_419, "seconds": 50.2, "depth": 3.3},
+    "YELLOW": {"nodes": 431_138, "seconds": 85.4, "depth": 3.1},
+    "PURPLE": {"nodes": 452_398, "seconds": 99.5, "depth": 3.1},
+    "CYAN": {"nodes": 425_602, "seconds": 87.5, "depth": 3.1},
+    "ORANGE": {"nodes": 273_470, "seconds": 47.9, "depth": 3.5},
+    "BROWN": {"nodes": 162_998, "seconds": 31.5, "depth": 3.7},
+    "GRAY": {"nodes": 459_732, "seconds": 93.3, "depth": 3.1},
+}
 
 # (file, function) -> one paragraph: what the change does, why, and the big picture
 CHANGE_NOTES = {
@@ -876,9 +1334,9 @@ CHANGE_NOTES = {
     "pushing the losing king to the edge and bringing the winning king close. "
     "Without it, Remus can be a queen up and still wander without mating.",
     ("search.py", "make_null_move"): "Passes the turn without moving a piece, and "
-    "returns the en passant target so it can be put back. If the position is still "
-    "winning after a free move for the opponent, a real move will be too, so the "
-    "search can stop early.",
+    "returns the en passant target so it can be put back. The opponent then moves "
+    "twice in a row, and if Remus still scores at least beta, the opponent would "
+    "never allow the position, so the search can stop early.",
     ("search.py", "undo_null_move"): "Takes the pass back: removes its history entry, "
     "gives the turn back, and restores the en passant target. Like every undo in "
     "Remus, it must restore the state exactly.",
@@ -1217,7 +1675,8 @@ LAB_NOTES = {
             "an Elo gap, then into a range that holds the true gap 95 times out of "
             "100. When the range includes 0, the match has not shown that the "
             "enhancement helped, and more games are needed. Each pair puts in its own "
-            "color's result."
+            "two tournament games, then its color's league games from the teacher's "
+            "table, and compares the two ranges."
         ),
         (
             "Part #3 asks `think()` about a back-rank mate and prints each depth's "

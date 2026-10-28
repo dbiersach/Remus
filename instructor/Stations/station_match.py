@@ -13,9 +13,14 @@ the starting position would be the same game twice. Each pair of games therefore
 starts from one of the OPENINGS, three moves deep, and each player takes White once.
 
 Usage:
-    uv run station_match.py RED            Remus-RED against Remus-WHITE
+    uv run station_match.py RED            Remus-RED against Remus-WHITE, 2 games
     uv run station_match.py RED BLUE       Remus-RED against Remus-BLUE
-    uv run station_match.py RED --games 20
+    uv run station_match.py RED --games 1 --minutes 2
+                                           one short game, to check the engine runs
+
+Each side gets 10 minutes, because Remus searches only a few thousand positions a
+second and a shorter clock stops every version too shallow for most enhancements
+to help. The two games run at once, so the match takes about 20 minutes.
 
 Colors match the start of a station folder name, so "RED" finds
 "RED - Transposition table".
@@ -44,8 +49,8 @@ for folder in Path(__file__).parents:
         break
 GAMES_PATH = REPOSITORY / "games" / "remus_games.pgn"  # Every game any script plays
 YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every station
-MINUTES = 1.0  # Each side's clock
-INCREMENT = 0.6  # Seconds added after each move
+MINUTES = 10.0  # Each side's clock
+INCREMENT = 0.0  # Seconds added after each move
 GAMES_AT_ONCE = 2  # Each game runs two engine processes
 ERRORS_PATH = REPOSITORY / "games" / "engine_errors.log"  # What engines print to stderr
 SILENCE_GRACE = 10.0  # Seconds past its clock an engine may take before it forfeits
@@ -296,13 +301,21 @@ def main():
     parser = argparse.ArgumentParser(description="Measure an enhancement station.")
     parser.add_argument("first", help='a station color, such as "RED"')
     parser.add_argument("second", nargs="?", default=YARDSTICK)
-    parser.add_argument("--games", type=int, default=20, help="games in the match")
+    parser.add_argument("--games", type=int, default=2, help="games in the match")
+    parser.add_argument("--minutes", type=float, default=MINUTES, help="each clock")
+    parser.add_argument(
+        "--increment", type=float, default=INCREMENT, help="seconds added per move"
+    )
     options = parser.parse_args()
+    clock = (options.minutes, options.increment)
     first = find_player(options.first)
     second = find_player(options.second)
     event = f"Station match {first[0]} vs {second[0]}"
 
-    print(f"{event}: {options.games} games at {MINUTES:g} min + {INCREMENT} s")
+    print(
+        f"{event}: {options.games} games at {options.minutes:g} min + "
+        f"{options.increment:g} s"
+    )
     print(f"Adding every game to {GAMES_PATH}")
     GAMES_PATH.parent.mkdir(exist_ok=True)
     # Games 0 and 1 share an opening, and the first player takes White in game 0
@@ -319,7 +332,7 @@ def main():
         for number in range(len(pairings)):
             white, black = pairings[number]
             opening = OPENINGS[number // 2 % len(OPENINGS)]
-            jobs.append(pool.submit(play_game, white, black, event, opening))
+            jobs.append(pool.submit(play_game, white, black, event, opening, *clock))
         for number, job in enumerate(jobs, start=1):
             game = job.result()
             with GAMES_PATH.open("a") as file:
@@ -334,7 +347,11 @@ def main():
                 f"{game.headers['Result']} {ending}"
             )
     print(f"{first[0]} scored {points:g} / {options.games} against {second[0]}")
-    print(f"Elo gap: {elo_gap(points, options.games):+.0f} for {first[0]}")
+    # A few games say little: one lucky win moves the gap by about 200 points
+    if options.games >= 10:
+        print(f"Elo gap: {elo_gap(points, options.games):+.0f} for {first[0]}")
+    else:
+        print("Too few games for an Elo gap: station_league.py rates every version")
     print(f"Total run time (sec): {time.perf_counter() - start:.3f}")
 
 

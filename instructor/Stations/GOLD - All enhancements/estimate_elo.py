@@ -3,7 +3,7 @@
 
 Measure the playing strength of Remus. Remus plays Stockfish set to a fixed
 strength (UCI_Elo), level after level, and the script turns the results into an
-estimated Elo rating. python-chess is the referee, as in tournament.py, and every
+estimated Elo rating. python-chess is the referee, as in play_match.py, and every
 finished game is added at once to the class games file, games/remus_games.pgn at
 the top of the Remus folder, so no game is ever lost.
 This is a teacher tool: the engine itself never imports python-chess.

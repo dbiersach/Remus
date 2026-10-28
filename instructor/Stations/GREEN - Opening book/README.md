@@ -8,7 +8,36 @@ By the end of the station, each pair can:
 
 - Explain the idea of the station's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `uv run pytest` passes in the station folder.
-- Measure the enhancement against Remus-WHITE. **Measured by:** `uv run station_match.py <COLOR>` finishes, and the pair reads its Elo gap and margin from the output.
+- Run a fair experiment against Remus-WHITE: same opening, both colors. **Measured by:** In the Day 10 tournament, `uv run station_match.py <COLOR>` plays both 10-minute games with no illegal moves or crashes, and the pair says why two games cannot show whether the enhancement helps.
+
+## The idea, with an example
+
+`opening_book.txt` holds 13 well-known openings, five moves for each side, written in SAN: `e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7` is the Ruy Lopez. `load_book()` plays every line on a board from the starting position and records, for each position it passes, which moves the book plays there. After 1. e4 the book holds ...e5, ...c5, ...e6, and ...c6. `book_move()` picks one of them at random, so Remus-GREEN does not play the same opening every game. Once the game leaves the book, Remus searches as usual.
+
+## Why it makes Remus stronger
+
+Searching the opening is slow and not very good: at depth 4 Remus cannot see why 1. e4 e5 2. Nf3 Nc6 3. Bb5 works. A book move costs no thinking time and comes from a century of human play. Every book move also passes through `parse_san()` and Remus's own legal move generator, so a typo in the book file is reported and skipped, never played.
+
+## What it costs
+
+Nothing during the search: the book is read once when the engine starts, and asking it is one dict lookup. Positions per second and positions per depth are the same as Remus-WHITE's, because the search itself does not change.
+
+## Measured against Remus-WHITE
+
+Each version searched the ten positions of `compare_search.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
+
+| Version | Positions to finish depth 4 | Share of Remus-WHITE's | Positions per second | Average depth in 5 seconds |
+| --- | ---: | ---: | ---: | ---: |
+| Remus-WHITE | 431,212 | 100% | 5,183 | 3.1 |
+| Remus-GREEN | 431,212 | 100% | 5,049 | 3.2 |
+
+## What to expect
+
+The time saved goes to later moves. Remus thinks about one thirtieth of its remaining clock per move, so five instant book moves leave roughly a minute and a half more for the middlegame. The effect in the station matches is small, because every match game starts from one of 32 openings three moves deep, and only some of them are in the book. A league rating near 0 is the expected result: the book matters most in games that start from the first move. The benchmark below never asks the book, so its numbers match Remus-WHITE's exactly.
+
+## Where your code fits
+
+`uci_engine.py` and `console_game.py` ask `book_move()` before they search. `None` means the position is not in the book, and the engine calls `think()` as Remus-WHITE does.
 
 ## The files
 
@@ -24,4 +53,6 @@ Reads the book file line by line, checks every SAN move with Remus's own rules, 
 
 Looks the position up in the book and picks one of its moves at random, or returns None when the game has left the book. The random pick keeps Remus from playing the same opening every game.
 
-Check the work from inside this folder with `uv run pytest`. Then measure the gain from the Stations folder with `uv run station_match.py GREEN`, which plays Remus-GREEN against Remus-WHITE and adds every game to games/remus_games.pgn.
+## Check it
+
+Check the work from inside this folder with `uv run pytest`. In the Day 10 tournament, `uv run station_match.py GREEN` in the Stations folder plays Remus-GREEN against Remus-WHITE twice, once with each color, at 10 minutes a side, and adds both games to games/remus_games.pgn.

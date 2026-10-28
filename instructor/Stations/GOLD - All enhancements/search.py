@@ -489,6 +489,112 @@ def reduction(
     return 1 if late and quiet and not gives_check else 0
 
 
+def is_draw_in_search(state: dict) -> bool:
+    """
+    Return True if the search has reached a draw it can claim right away.
+
+    Parameters
+    ----------
+    state : dict
+        The game state.
+
+    Returns
+    -------
+    bool
+        True if the position has already appeared earlier in the game or the
+        search, or if the fifty-move limit (100 plies with no capture or pawn
+        move) is reached.
+    """
+    key = state["history"][-1]
+    return state["history"].count(key) >= 2 or state["halfmove_clock"] >= 100
+
+
+def null_move_cutoff(
+    state: dict, depth: int, ply: int, beta: int, info: SearchInfo
+) -> bool:
+    """
+    Pass the turn, search shallower, and say whether passing still holds beta.
+
+    Parameters
+    ----------
+    state : dict
+        The game state. It is unchanged when the function returns.
+    depth : int
+        How many plies the search still looks ahead from this position.
+    ply : int
+        How many moves from the root this position is.
+    beta : int
+        The score above which the opponent will avoid this position.
+    info : SearchInfo
+        Counts positions and holds the deadline, table, and killers.
+
+    Returns
+    -------
+    bool
+        True if the side to move scores at least beta even after passing. A real
+        move is almost always better than passing, so the position is cut off.
+    """
+    en_passant = make_null_move(state)
+    try:
+        score, _ = upgraded_search(
+            state,
+            depth - 1 - NULL_MOVE_REDUCTION,
+            ply + 1,
+            -beta,
+            -beta + 1,
+            info,
+            allow_null=False,
+        )
+    finally:
+        undo_null_move(state, en_passant)
+    return -score >= beta
+
+
+def search_later_move(
+    state: dict,
+    depth: int,
+    ply: int,
+    alpha: int,
+    beta: int,
+    info: SearchInfo,
+    cut: int,
+) -> tuple[int, list[Move]]:
+    """
+    Search a move after the first one: a cheap test first, a full search only if needed.
+
+    Parameters
+    ----------
+    state : dict
+        The game state after the move. It is unchanged when the function returns.
+    depth : int
+        How many plies to look ahead after the move.
+    ply : int
+        How many moves from the root the position after the move is.
+    alpha, beta : int
+        The window of the position before the move.
+    info : SearchInfo
+        Counts positions and holds the deadline, table, and killers.
+    cut : int
+        Plies to cut from the first test, from reduction(): 1 for a late, quiet
+        move, otherwise 0.
+
+    Returns
+    -------
+    tuple[int, list[Move]]
+        The move's score for the side that made it, and the line that follows it.
+    """
+    # The null window (alpha, alpha + 1) only asks "is this move better than alpha?"
+    score, line = upgraded_search(state, depth - cut, ply, -alpha - 1, -alpha, info)
+    score = -score
+    if cut > 0 and score > alpha:  # A late move surprised: test it at full depth
+        score, line = upgraded_search(state, depth, ply, -alpha - 1, -alpha, info)
+        score = -score
+    if alpha < score < beta:  # Better than alpha: find its exact score
+        score, line = upgraded_search(state, depth, ply, -beta, -alpha, info)
+        score = -score
+    return score, line
+
+
 def upgraded_search(
     state: dict,
     depth: int,
@@ -509,8 +615,10 @@ def upgraded_search(
     - Principal variation search: the first move gets the full window; every other
       move first gets a null window (alpha, alpha + 1) that only asks "is this
       move better?", and is searched again in full only when the answer is yes.
-    - Null-move pruning: if passing the turn still scores at least beta in a
-      shallower search, a real move will too, so the position is cut off early.
+    - Null-move pruning: Remus passes, so the opponent moves twice, and runs a
+      shallower search. If Remus still scores at least beta, the opponent would
+      never allow this position, because a real move almost always beats a pass,
+      so the position is cut off early.
     - Late move reductions: late, quiet moves get a search one ply shallower,
       and a full-depth search only if they turn out better than alpha.
 
@@ -538,41 +646,29 @@ def upgraded_search(
     """
     info.nodes += 1
     check_time(info)
-    key = state["history"][-1]
-    if ply > 0 and (state["history"].count(key) >= 2 or state["halfmove_clock"] >= 100):
+    if ply > 0 and is_draw_in_search(state):
         return 0, []  # Draw sense: a repeated position is a draw, not a gain
     in_check_now = in_check(state, state["turn"])
     if in_check_now:
         depth += 1
     if depth <= 0:
         return quiescence(state, alpha, beta, info), []
+    key = state["history"][-1]
     stored = probe(info.table, key, depth, alpha, beta)
     if ply > 0 and stored is not None:
         return stored, []
     # Null-move pruning, skipped in check (passing would be illegal) and with only
     # pawns left, where passing can be better than any move (zugzwang)
-    can_pass = allow_null and ply > 0 and not in_check_now and depth >= 3
-    if (
-        can_pass
+    can_pass = (
+        allow_null
+        and ply > 0
+        and not in_check_now
+        and depth >= 3
         and abs(beta) < MATE_SCORE - 1000
         and has_pieces(state["board"], state["turn"])
-    ):
-        en_passant = make_null_move(state)
-        try:
-            score, _ = upgraded_search(
-                state,
-                depth - 1 - NULL_MOVE_REDUCTION,
-                ply + 1,
-                -beta,
-                -beta + 1,
-                info,
-                allow_null=False,
-            )
-            score = -score
-        finally:
-            undo_null_move(state, en_passant)
-        if score >= beta:
-            return beta, []
+    )
+    if can_pass and null_move_cutoff(state, depth, ply, beta, info):
+        return beta, []
     moves = legal_moves(state)
     if not moves:
         return (-(MATE_SCORE - ply) if in_check_now else 0), []
@@ -583,10 +679,9 @@ def upgraded_search(
         moves, state["board"], best_stored_move(info.table, key), info.killers.get(ply)
     )
     for index, move in enumerate(ordered):
-        cut = 0
         undo = make_move(state, move)
         try:
-            if index == 0:
+            if index == 0:  # The first move gets the full window
                 score, line = upgraded_search(
                     state, depth - 1, ply + 1, -beta, -alpha, info
                 )
@@ -594,22 +689,9 @@ def upgraded_search(
             else:
                 gives_check = in_check(state, state["turn"])
                 cut = reduction(depth, index, move, undo["captured"], gives_check)
-                score, line = upgraded_search(
-                    state, depth - 1 - cut, ply + 1, -alpha - 1, -alpha, info
+                score, line = search_later_move(
+                    state, depth - 1, ply + 1, alpha, beta, info, cut
                 )
-                score = -score
-                if cut and score > alpha:  # A late move surprised: search full depth
-                    score, line = upgraded_search(
-                        state, depth - 1, ply + 1, -alpha - 1, -alpha, info
-                    )
-                    score = -score
-                if (
-                    alpha < score < beta
-                ):  # A surprise: search it again with the full window
-                    score, line = upgraded_search(
-                        state, depth - 1, ply + 1, -beta, -alpha, info
-                    )
-                    score = -score
         finally:
             undo_move(state, undo)
         if score >= beta:

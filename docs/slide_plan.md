@@ -100,20 +100,20 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | --- | --- | --- |
 | 9.1 | Iterative deepening | A timeline of depth 1, 2, 3, 4 with the clock running out during depth 5; the best move from depth 4 is played |
 | 9.2 | Stopping safely | `SearchTimeout` unwinding the recursion; each `finally` undoes its move, so the root position is intact |
-| 9.3 | Thinking in a thread | The UCI loop and the search thread side by side, with the stop event between them |
+| 9.3 | One command at a time | The UCI loop reads `go`, the search runs until the clock says stop, and `bestmove` goes out before the next command is read |
 | 9.4 | The principal variation | An `info depth 4 score cp 35 pv ...` line drawn as moves on the board |
 | 9.5 | The enhancement stations | The ten color stations with the idea each one adds, and Remus-WHITE, the Day 9 Remus with no enhancements, which they all play |
 | 9.6 | Transpositions | 1. Nf3 Nf6 2. Nc3 and 1. Nc3 Nf6 2. Nf3 reach one position. A table entry: depth, score, bound, best move |
 | 9.7 | Exact, lower, upper | Three number lines showing what a stored bound proves for a new `(alpha, beta)` window |
 | 9.8 | Killer moves | Two slots per ply; a quiet move that caused a cutoff jumps the queue in sibling positions |
 | 9.9 | Principal variation search | The first move gets the full window; the rest get a null window `(alpha, alpha + 1)` and a re-search only on a surprise |
-| 9.10 | Null-move pruning | Remus passes the turn and searches 2 plies shallower; if the score still beats beta, the real moves are skipped |
+| 9.10 | Null-move pruning | Remus passes, so the opponent moves twice, and searches 2 plies shallower; if Remus still scores at least beta, the opponent would never allow the position, so its real moves are skipped |
 | 9.11 | Late move reductions | A move list with the first three moves at full depth and the late, quiet moves one ply shallower, with a re-search on a surprise |
 | 9.12 | Pawn structure | Doubled, isolated, and passed pawns on one diagram with their points |
 | 9.13 | King safety | A castled king with its three shield pawns, 15 points each while the enemy queen is on the board |
 | 9.14 | Finishing a won endgame | The `mating_bonus` heat map: the losing king pushed to the edge, the winning king closing in |
 | 9.15 | The opening book | Book lines in SAN turned into a dict from `position_key` to moves, drawn as a small tree |
-| 9.16 | The match plan | Each color against Remus-WHITE, plus the planned color-on-color showcase matches, all running with nobody watching |
+| 9.16 | The tournament plan | Each color plays Remus-WHITE twice on Day 10, once with each color, at 10 minutes a side, all ten laptops at once; then Remus-GOLD against everyone from the teacher's league |
 | 9.17 | The mate solver | An AND/OR tree: the attacker needs one move that works, the defender's every reply must fail. MATE.008 solved in about 6 seconds |
 
 ## Day 10: Aim Remus at a science problem
