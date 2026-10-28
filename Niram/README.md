@@ -4,7 +4,7 @@ Niram is Remus rewritten in Rust. Remus echoes Rimush, the son of Sargon of Akka
 Niram shortens Naram-Sin, Sargon's grandson, the next heir in the family line.
 
 Niram holds one engine for each of the 12 versions in `instructor/Remus`:
-Niram-WHITE with no enhancements, the ten color stations, and Niram-GOLD with all
+Niram-WHITE with no enhancements, the ten color versions, and Niram-GOLD with all
 ten. Each Niram version keeps the exact rules, evaluation, and search of the Remus
 version of the same color: the same board of 64 characters, the same move order,
 and the same evaluation terms and search function. Given the same position and
@@ -17,7 +17,7 @@ Python.
 
 ## Folders
 
-The folders carry the same names as the station folders, with the same two-digit
+The folders carry the same names as the version folders, with the same two-digit
 prefix, so that both list in the order of each version's Elo over WHITE in the
 10-minute Remus league:
 
@@ -38,8 +38,8 @@ prefix, so that both list in the order of each version's Elo over WHITE in the
 
 Each version folder holds only what makes that version different: `evaluation.rs`
 with its `evaluate`, `search.rs` with its search function, `quiescence`, and
-`think`, and `main.rs`. Each station is Remus-WHITE plus exactly one enhancement,
-so no station needs code from another; only GOLD combines all ten.
+`think`, and `main.rs`. Each color version is Remus-WHITE plus exactly one enhancement,
+so no color version needs code from another; only GOLD combines all ten.
 
 Everything the versions share sits in `rules/`, and each of its Rust files matches
 the Python file of the same name, with the same function names:
@@ -134,13 +134,13 @@ uv run scripts/remus_benchmark.py RED 3     # Remus-RED, depth 3
 
 To play a Niram version in Lucas Chess, run `cargo build --release` and add
 `Niram/target/release/niram-gold.exe` (or any other color) as a UCI engine, the same
-way the [Lucas Chess guide](../docs/lucas_chess_guide.md) adds Remus. It needs no
+way the [Lucas Chess guide](../docs/course/lucas_chess_guide.md) adds Remus. It needs no
 batch file.
 
 ## Leagues and matches with Niram
 
-The three station scripts take `--niram`, which plays the Niram programs in place
-of the Python stations. Build the programs first. `station_match.py` runs from
+The three match and rating scripts take `--niram`, which plays the Niram programs in place
+of the Python color versions. Build the programs first. `station_match.py` runs from
 `instructor/Remus`, and the other two run from the top Remus folder.
 
 ```bash

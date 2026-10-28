@@ -12,10 +12,10 @@ the end of that period. Each Day folder's own `README.md` gives the day's object
 and the timed activities of its four periods. The `instructor/` folder holds
 only finished, working reference code. `student/` mirrors it, with the functions
 students write left as stubs for them to fill in. `scripts/` holds the teacher's
-tools outside the engine: the builders that write the period, station, and student
+tools outside the engine: the builders that write the period, version, and student
 folders, the test runner, and the league and rating scripts. Start with
-[`docs/remus_program_overview.md`](docs/remus_program_overview.md); the course plan is
-in [`docs/remus_course_plan.md`](docs/remus_course_plan.md).
+[`docs/code/remus_program_overview.md`](docs/code/remus_program_overview.md); the course plan is
+in [`docs/course/remus_course_plan.md`](docs/course/remus_course_plan.md).
 
 ## Setup
 
@@ -33,7 +33,7 @@ along with `pytest` and `ruff`. Lucas Chess, the desktop chess GUI, is installed
 separately and talks to Remus over UCI.
 
 `Niram/` holds Niram, a Rust copy of all 12 Remus versions, from Niram-WHITE to
-Niram-GOLD, that searches the same trees about 50 times faster. The station
+Niram-GOLD, that searches the same trees about 50 times faster. The match and league
 scripts play it with `--niram`. It is a teacher's experiment, outside the course; see
 [`Niram/README.md`](Niram/README.md).
 

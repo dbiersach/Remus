@@ -25,8 +25,8 @@ of Remus with three planted bugs for you to find and fix.
 
 ## How to work on a function
 
-1. Read the period's `README.md`, then the page for the file in `docs/scripts/`,
-   such as `docs/scripts/board.md`.
+1. Read the period's `README.md`, then the page for the file in `docs/code/`,
+   such as `docs/code/board.md`.
 2. Read the function's docstring. It says what the function must do.
 3. Delete the two stub comments and the `raise` line, and write the body.
 4. Run the tests from inside the period folder: `uv run pytest`.
@@ -82,6 +82,6 @@ written yet.
 | 10 | 2 | `phase_hunt.py` | `greedy_phases` |
 | 10 | 3 | `phase_hunt.py` | `search` |
 
-On Day 9, periods 2 and 3, each pair also writes the functions of its color station in `Remus/`, listed in `docs/stations.md`.
+On Day 9, periods 2 and 3, each pair also writes the functions of its color version in `Remus/`, listed in `docs/versions/remus_versions.md`.
 
 The finished versions are in `instructor/`. Try on your own first.
