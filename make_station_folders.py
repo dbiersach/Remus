@@ -588,14 +588,11 @@ STATIONS_TABLE = [
         "edits": [
             (
                 "uci_engine.py",
+                '"bestmove" before Remus listens again.\n',
                 (
-                    'thread, so Remus can still answer "isready" and obey "stop" while '
-                    "it thinks.\n"
-                ),
-                (
-                    'thread, so Remus can still answer "isready" and obey "stop" while '
-                    'it thinks. The\n"think" brain plays a move from the opening book '
-                    "first, while the position is in\nthe book.\n"
+                    '"bestmove" before Remus listens again. The "think" brain plays a '
+                    "move from the\nopening book first, while the position is in the "
+                    "book.\n"
                 ),
             ),
             (
@@ -605,8 +602,8 @@ STATIONS_TABLE = [
             ),
             (
                 "uci_engine.py",
-                "    stop = threading.Event()\n",
-                "    book = load_book()\n    stop = threading.Event()\n",
+                "    state = state_from_fen(START_FEN)\n    for line",
+                "    state = state_from_fen(START_FEN)\n    book = load_book()\n    for line",
             ),
             (
                 "uci_engine.py",
@@ -618,10 +615,10 @@ STATIONS_TABLE = [
             ),
             (
                 "uci_engine.py",
-                "            else:\n                stop.clear()\n",
+                "            else:\n                seconds = thinking_time(",
                 (
                     '            elif opening is not None:\n                send(f"bestmove '
-                    '{move_to_uci(opening)}")\n            else:\n                stop.clear()\n'
+                    '{move_to_uci(opening)}")\n            else:\n                seconds = thinking_time('
                 ),
             ),
             (

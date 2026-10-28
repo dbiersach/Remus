@@ -15,6 +15,8 @@ Usage:
     uv run station_league.py --rate-only     only the ratings, from the saved games
     uv run station_league.py --minutes 10 --increment 0 --at-once 16
                                              10-minute games, 16 at a time
+    uv run station_league.py --minutes 10 --increment 0 --event "Station league 2"
+                                             a second league, kept and rated apart
 
 Games at one clock are rated apart from games at another clock, because a deeper
 search can matter more with more time to think.
@@ -62,7 +64,7 @@ def all_colors() -> list[str]:
     return colors
 
 
-def read_results(clock: str) -> list[Result]:
+def read_results(clock: str, event: str = LEAGUE_EVENT) -> list[Result]:
     """
     Return (White, Black, White's points) for every station game at one clock.
 
@@ -74,6 +76,10 @@ def read_results(clock: str) -> list[Result]:
     ----------
     clock : str
         The TimeControl of the games to count, such as "600+0" from time_control().
+    event : str
+        LEAGUE_EVENT counts every station game, station_match.py games included.
+        Any other Event name, such as "Station league 2", counts only the games
+        of that league.
 
     Returns
     -------
@@ -88,6 +94,8 @@ def read_results(clock: str) -> list[Result]:
         while (game := chess.pgn.read_game(file)) is not None:
             headers = game.headers
             if not headers.get("Event", "").startswith(EVENT_PREFIX):
+                continue
+            if event != LEAGUE_EVENT and headers.get("Event") != event:
                 continue
             if headers.get("Result") not in points or "StartMoves" not in headers:
                 continue
@@ -153,17 +161,14 @@ def fit_ratings(results: list[Result]) -> dict[str, tuple[float, float]]:
     return fitted
 
 
-def played_league_games(clock: str) -> list[tuple[str, str, str]]:
-    """Return (White, Black, StartMoves) for every league game at one clock."""
+def played_league_games(clock: str, event: str) -> list[tuple[str, str, str]]:
+    """Return (White, Black, StartMoves) for every game of one league at one clock."""
     played = []
     if not GAMES_PATH.exists():
         return played
     with GAMES_PATH.open() as file:
         while (headers := chess.pgn.read_headers(file)) is not None:
-            if (
-                headers.get("Event") == LEAGUE_EVENT
-                and headers.get("TimeControl") == clock
-            ):
+            if headers.get("Event") == event and headers.get("TimeControl") == clock:
                 played.append(
                     (headers["White"], headers["Black"], headers.get("StartMoves", ""))
                 )
@@ -171,7 +176,11 @@ def played_league_games(clock: str) -> list[tuple[str, str, str]]:
 
 
 def play_league(
-    games_per_pair: int, minutes: float, increment: float, games_at_once: int
+    games_per_pair: int,
+    minutes: float,
+    increment: float,
+    games_at_once: int,
+    event: str,
 ) -> None:
     """
     Play every pair of players games_per_pair times, adding each game to the file.
@@ -192,7 +201,7 @@ def play_league(
                 opening_number += 1
             white, black = (first, second) if number % 2 == 0 else (second, first)
             jobs.append((white, black, opening))
-    played = played_league_games(time_control(minutes, increment))
+    played = played_league_games(time_control(minutes, increment), event)
     waiting = []
     for white, black, opening in jobs:
         if (white[0], black[0], opening) in played:
@@ -210,9 +219,7 @@ def play_league(
         futures = []
         for white, black, opening in waiting:
             futures.append(
-                pool.submit(
-                    play_game, white, black, LEAGUE_EVENT, opening, minutes, increment
-                )
+                pool.submit(play_game, white, black, event, opening, minutes, increment)
             )
         for number, future in enumerate(futures, start=len(jobs) - len(waiting) + 1):
             game = future.result()
@@ -263,12 +270,21 @@ def main():
     parser.add_argument(
         "--at-once", type=int, default=GAMES_AT_ONCE, help="games played at once"
     )
+    parser.add_argument(
+        "--event", default=LEAGUE_EVENT, help="the Event name of this league's games"
+    )
     options = parser.parse_args()
     clock = time_control(options.minutes, options.increment)
     start = time.perf_counter()
     if not options.rate_only:
-        play_league(options.games, options.minutes, options.increment, options.at_once)
-    print_ratings(read_results(clock), clock)
+        play_league(
+            options.games,
+            options.minutes,
+            options.increment,
+            options.at_once,
+            options.event,
+        )
+    print_ratings(read_results(clock, options.event), clock)
     print(f"Total run time (sec): {time.perf_counter() - start:.3f}")
 
 

@@ -100,7 +100,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | --- | --- | --- |
 | 9.1 | Iterative deepening | A timeline of depth 1, 2, 3, 4 with the clock running out during depth 5; the best move from depth 4 is played |
 | 9.2 | Stopping safely | `SearchTimeout` unwinding the recursion; each `finally` undoes its move, so the root position is intact |
-| 9.3 | Thinking in a thread | The UCI loop and the search thread side by side, with the stop event between them |
+| 9.3 | One command at a time | The UCI loop reads `go`, the search runs until the clock says stop, and `bestmove` goes out before the next command is read |
 | 9.4 | The principal variation | An `info depth 4 score cp 35 pv ...` line drawn as moves on the board |
 | 9.5 | The enhancement stations | The ten color stations with the idea each one adds, and Remus-WHITE, the Day 9 Remus with no enhancements, which they all play |
 | 9.6 | Transpositions | 1. Nf3 Nf6 2. Nc3 and 1. Nc3 Nf6 2. Nf3 reach one position. A table entry: depth, score, bound, best move |
