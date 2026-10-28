@@ -35,11 +35,8 @@ The pair types 13 lines.
 
 ## Try it
 
-From inside `student/Day 01 - Draw the board/period2`, run:
-
-```bash
-uv run python_strings.py
-```
+Open `python_strings.py` in `student/Day 01 - Draw the board/period2` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: file letter e and rank digit 2, file number 4, the square g7, and `True` for `"N".isupper()`.
 

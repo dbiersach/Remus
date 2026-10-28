@@ -119,11 +119,8 @@ show_benchmark()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run phase_hunt.py
-```
+Open `phase_hunt.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: A powder of anatase and silver that greedy names as anatase and gold, the search's two tied answers, the verdicts of both agents over 200 powders, and 176 sets scored against 821.
 

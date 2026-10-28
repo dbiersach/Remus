@@ -1,6 +1,6 @@
 # Day 10, Period 4: Results, tournament, take-home, and wrap-up
 
-The tournament: each pair runs `uv run station_match.py <COLOR>` in the `Stations` folder, two 10-minute games of its color against Remus-WHITE, one with each color, all pairs at once. `uv run estimate_elo.py` measures the Elo rating of Remus against Stockfish. Both add every game to games/remus_games.pgn at the top of the Remus folder.
+The tournament: each pair runs `uv run station_match.py <COLOR>` in the `Stations` folder, two 10-minute games of its color against Remus-WHITE, one with each color, all pairs at once. Running `estimate_elo.py` measures the Elo rating of Remus against Stockfish. Both add every game to games/remus_games.pgn at the top of the Remus folder.
 
 ## Learning objectives
 
@@ -12,7 +12,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The demo is `demo_results.py` in `student/`, with the answers in `demo_results_instructor.py` in `instructor/`. Run it with `uv run demo_results.py`.
+The demo is `demo_results.py` in `student/`, with the answers in `demo_results_instructor.py` in `instructor/`. Open `demo_results.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 New files this period:
 
@@ -27,4 +27,4 @@ Parts #1 and #2 of `demo_results.py` turn a match result into a score and an Elo
 
 Part #3 asks `think()` about a back-rank mate and prints each depth's score and principal variation, the line of moves Remus expects. That line is how a pair explains why Remus chose its move.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).

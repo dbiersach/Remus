@@ -61,11 +61,8 @@ game_result()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run game_end.py
-```
+Open `game_end.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: Fool's mate as `('0-1', 'checkmate')`, a stalemate, a draw with king and knight, and `None` for the start.
 

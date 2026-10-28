@@ -34,11 +34,8 @@ The pair types 14 lines.
 
 ## Try it
 
-From inside `student/Day 05 - Add castling, en passant, and promotion/period1`, run:
-
-```bash
-uv run python_sets.py
-```
+Open `python_sets.py` in `student/Day 05 - Add castling, en passant, and promotion/period1` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: 2 squares, True and False, K, then the rights Qkq and Q.
 

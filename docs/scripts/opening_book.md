@@ -78,11 +78,8 @@ book_move()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run opening_book.py
-```
+Open `opening_book.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: `Book positions: 285`, the first moves in the book, and a reply to 1. e4.
 

@@ -35,11 +35,8 @@ The pair types 8 lines.
 
 ## Try it
 
-From inside `student/Day 06 - Count positions and read FEN/period4`, run:
-
-```bash
-uv run python_fen_fields.py
-```
+Open `python_fen_fields.py` in `student/Day 06 - Count positions and read FEN/period4` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: 6 fields, then each field with its name, then "x is not a number".
 

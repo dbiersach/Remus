@@ -1,6 +1,6 @@
 # Day 10, Period 2: The phase hunt: score a guess, and the greedy agent
 
-`uv run phase_hunt.py` names the crystal phases in an X-ray powder pattern and counts the right and wrong calls over 200 powders.
+Running `phase_hunt.py` names the crystal phases in an X-ray powder pattern and counts the right and wrong calls over 200 powders.
 
 ## Learning objectives
 
@@ -114,7 +114,7 @@ sounds just as sure as when it is right.
 ![Gold's and silver's four peaks side by side, each pair inside the 0.3 degree
 tolerance](../../../docs/images/phase_hunt/gold_and_silver.png)
 
-Run `uv run phase_hunt.py` when both functions pass their tests. Greedy names 166 of
+Run `phase_hunt.py` in VS Code when both functions pass their tests. Greedy names 166 of
 the 200 benchmark powders right and 34 wrong. In period 3 you write `search()`, which
 scores every guess of up to three phases, 176 of them, and keeps every guess that
 ties for the best score. When gold and silver tie, the search can answer "can't
@@ -163,7 +163,7 @@ Scores a guess about which phases are in the powder: a point for each measured p
 
 Adds the phase that raises the score most, then the next, and stops when no phase helps, the way `greedy_move()` takes the biggest capture. Each phase is tried with append and taken back with pop, like make and undo. Greedy gives one answer and never doubts it, so it names gold for a powder of silver.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit this period
 

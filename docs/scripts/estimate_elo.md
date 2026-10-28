@@ -65,11 +65,8 @@ main()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run estimate_elo.py
-```
+Open `estimate_elo.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: The result of every game, the score at each level, and the estimated Elo with its error margin.
 

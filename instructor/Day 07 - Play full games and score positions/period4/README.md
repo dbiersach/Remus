@@ -4,7 +4,7 @@
 
 By the end of this period, each pair can:
 
-- Count material in centipawns. **Measured by:** The evaluation tests pass, and `uv run evaluation.py` prints -200 for a knight against a rook.
+- Count material in centipawns. **Measured by:** The evaluation tests pass, and running `evaluation.py` prints -200 for a knight against a rook.
 - Explain a piece-square table. **Measured by:** The pair says why a knight scores more on d4 than on a1, using the number of squares it attacks (8 and 2).
 
 ## The files
@@ -26,4 +26,4 @@ In `student/` these functions raise `NotImplementedError` until a pair writes th
 
 Adds up the pieces in centipawns (pawn 100, knight 300, bishop 300, rook 500, queen 900), plus for White and minus for Black. It is the first evaluation term, and the search uses it to tell good positions from bad ones.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).

@@ -11,7 +11,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-This period comes before any Remus code. The lab is `python_lists.py` in `student/`, with the answers in `python_lists_instructor.py` in `instructor/`. Run it with `uv run python_lists.py`.
+This period comes before any Remus code. The lab is `python_lists.py` in `student/`, with the answers in `python_lists_instructor.py` in `instructor/`. Open `python_lists.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 ## The changes and why
 
@@ -29,4 +29,4 @@ Part #4: you play 1. e4 by changing two squares, then count the White pawns left
 
 Open `python_lists.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
-Lines to type in all: 25. Check the work with `uv run python_lists.py` and compare each printed result with the expected value beside it.
+Lines to type in all: 25. Check the work by running `python_lists.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

@@ -34,11 +34,8 @@ The pair types 19 lines.
 
 ## Try it
 
-From inside `student/Day 08 - Search ahead with alpha-beta/period2`, run:
-
-```bash
-uv run python_sorting.py
-```
+Open `python_sorting.py` in `student/Day 08 - Search ahead with alpha-beta/period2` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: `['q', 'r', 'n', 'p']`, the best victim q worth 9, and 8,902 positions with the run time.
 

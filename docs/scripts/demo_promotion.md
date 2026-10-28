@@ -34,11 +34,8 @@ The pair types 12 lines.
 
 ## Try it
 
-From inside `student/Day 05 - Add castling, en passant, and promotion/period4`, run:
-
-```bash
-uv run demo_promotion.py
-```
+Open `demo_promotion.py` in `student/Day 05 - Add castling, en passant, and promotion/period4` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: the puzzle board, stalemate for Q, R, and B, checkmate for N, and True for the snapshot.
 

@@ -64,11 +64,8 @@ show_moves()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run show_board.py
-```
+Open `show_board.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: A picture of the board in the web browser. On Day 3 and later, four arrows show the knight moves from the start.
 

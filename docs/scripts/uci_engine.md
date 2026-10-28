@@ -84,11 +84,8 @@ main()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run uci_engine.py
-```
+Open `uci_engine.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: Nothing at first. Type `uci`, then `isready`, then `go`. Type `quit` to stop.
 

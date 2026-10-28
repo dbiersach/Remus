@@ -38,10 +38,11 @@ The pair types 16 lines.
 
 ## Try it
 
-From inside `student/Day 02 - Make and undo moves/period1`, run:
+Open `python_functions.py` in `student/Day 02 - Make and undo moves/period1` in VS Code,
+and click the Run Python File button (the triangle at the top right of the editor).
+Then open a terminal in VS Code inside that folder and type:
 
 ```bash
-uv run python_functions.py
 uv run pytest python_functions.py
 ```
 

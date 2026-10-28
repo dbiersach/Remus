@@ -10,7 +10,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The lab is `python_dicts.py` in `student/`, with the answers in `python_dicts_instructor.py` in `instructor/`. Run it with `uv run python_dicts.py`.
+The lab is `python_dicts.py` in `student/`, with the answers in `python_dicts_instructor.py` in `instructor/`. Open `python_dicts.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 The Remus code here is the same as at the end of the period before.
 
@@ -26,10 +26,10 @@ Part #3 makes a real copy with `deepcopy()`, which copies every row. The copy ch
 
 Part #4: you write a `dataclass` with two fields and print one of them. Remus's `Move` in `moves.py` is the same record with a third field for the promotion piece.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit in the lab
 
 Open `python_dicts.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
-Lines to type in all: 18. Check the work with `uv run python_dicts.py` and compare each printed result with the expected value beside it.
+Lines to type in all: 18. Check the work by running `python_dicts.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

@@ -192,11 +192,8 @@ think_move()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run search.py
-```
+Open `search.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: A greedy capture, a back-rank mate found, negamax against alpha-beta node counts, and three `info depth` lines.
 

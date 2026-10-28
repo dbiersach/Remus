@@ -9,7 +9,7 @@ By the end of this period, each pair can:
 
 ## The files
 
-The demo is `demo_practice_positions.py` in `student/`, with the answers in `demo_practice_positions_instructor.py` in `instructor/`. Run it with `uv run demo_practice_positions.py`.
+The demo is `demo_practice_positions.py` in `student/`, with the answers in `demo_practice_positions_instructor.py` in `instructor/`. Open `demo_practice_positions.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
 Files that grow this period:
 
@@ -23,10 +23,10 @@ The pairs fill in the blanks of `demo_practice_positions.py`. Each `#` line in t
 
 Part #2 puts a rook check on the White king, and Part #3 adds a knight on e2 that blocks the check but cannot move: it is pinned. The loop at the end counts only the moves that start on e2, the same check as `test_pinned_knight_has_no_moves()`.
 
-Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
+Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit in the demo
 
 Open `demo_practice_positions.py`. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
-Lines to type in all: 14. Check the work with `uv run demo_practice_positions.py` and compare each printed result with the expected value beside it.
+Lines to type in all: 14. Check the work by running `demo_practice_positions.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

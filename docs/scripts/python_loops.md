@@ -33,11 +33,8 @@ The pair types 14 lines.
 
 ## Try it
 
-From inside `student/Day 03 - Generate piece moves/period1`, run:
-
-```bash
-uv run python_loops.py
-```
+Open `python_loops.py` in `student/Day 03 - Generate piece moves/period1` in VS Code, and click the Run Python File button (the
+triangle at the top right of the editor).
 
 You should see: step 0, 1, 2; the steps -1 and 1; and the squares e5 f6 g7, where the Black pawn on g7 stops the walk.
 

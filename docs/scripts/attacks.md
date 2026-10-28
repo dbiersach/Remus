@@ -92,11 +92,8 @@ in_check()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run attacks.py
-```
+Open `attacks.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: Which side attacks f3 at the start, and `Versions 1 and 2 agree on 96 of 96 squares`.
 

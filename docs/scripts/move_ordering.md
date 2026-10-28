@@ -58,11 +58,8 @@ order_moves()
 
 ## Try it
 
-From inside a period folder that has the file, run:
-
-```bash
-uv run move_ordering.py
-```
+Open `move_ordering.py` from a period folder that has the file in VS Code, and click the Run Python File
+button (the triangle at the top right of the editor).
 
 You should see: The first two moves of a test position: pawn takes queen, then queen takes rook.
 

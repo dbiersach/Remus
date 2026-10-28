@@ -219,8 +219,8 @@ def lab_section(name: str, count: int) -> str:
         ),
         "",
         (
-            f"Lines to type in all: {count}. Check the work with `uv run {name}.py` "
-            "and compare each printed result with the expected value beside it."
+            f"Lines to type in all: {count}. Check the work by running `{name}.py` "
+            "with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it."
         ),
     ]
     return "\n".join(lines) + "\n"
@@ -232,7 +232,7 @@ def bug_hunt_section(count: int) -> str:
         "## What you edit in the bug hunt",
         "",
         (
-            "Open the `bug_hunt` folder and run `uv run hunt.py` there. Each root move "
+            "Open the `bug_hunt` folder and run `hunt.py` there in VS Code. Each root move "
             "it prints points at a planted bug in one of the Remus files of that "
             "folder. Fix each bug by changing the line that breaks the rule, and run "
             "the hunt again until every count agrees. The files outside `bug_hunt` "
