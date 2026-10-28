@@ -253,7 +253,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
   `version_match.py` in `instructor/Remus` and `student/Remus` for the Day 10
   tournament, and `play_match.py`, `estimate_elo.py`, and the tests inside their
-  period and version folders. Put a new teacher tool in `scripts/`.
+  period and version folders. Put a new teacher tool in `scripts/`, and list every
+  script there in `scripts/README.md` with what it does (David, 2026-10-28).
 - `period4` holds the finished code of the day, and it is the only period folder to
   edit by hand. `make_period_folders.py` builds `period1` to `period3` from it: its
   `ARRIVALS` table says in which period each file takes its finished form, and its

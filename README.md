@@ -13,7 +13,8 @@ and the timed activities of its four periods. The `instructor/` folder holds
 only finished, working reference code. `student/` mirrors it, with the functions
 students write left as stubs for them to fill in. `scripts/` holds the teacher's
 tools outside the engine: the builders that write the period, version, and student
-folders, the test runner, and the league and rating scripts. Start with
+folders, the test runner, and the league and rating scripts, each listed in
+[`scripts/README.md`](scripts/README.md). Start with
 [`docs/code/remus_program_overview.md`](docs/code/remus_program_overview.md); the course plan is
 in [`docs/course/remus_course_plan.md`](docs/course/remus_course_plan.md).
 
