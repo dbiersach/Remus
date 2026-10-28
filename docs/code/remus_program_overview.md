@@ -88,8 +88,9 @@ uv run scripts/run_all_tests.py
 ```
 
 `scripts/run_all_tests.py` runs every period folder in `instructor/` in turn, then the
-reference-tool tests in `tests/`. The `scripts/` folder holds every teacher tool that
-is not part of an engine: the builders that write the period, version, and student
+reference-tool tests in `scripts/test_reference_tools.py`. The `scripts/` folder holds
+every teacher tool that is not part of an engine: the builders that write the period,
+version, and student
 folders, `period_guides.py` with the README text, the test runner, the league and
 Stockfish rating scripts, and the Niram benchmark. Students never open it.
 `station_match.py` stays in the `Remus` folders, because every pair runs it there in

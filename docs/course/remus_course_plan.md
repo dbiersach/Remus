@@ -115,7 +115,7 @@ and nothing leaves the classroom except on the USB drives at the end.
 | Start a period | Pair | `git fetch instructor --tags`, then `git switch -c d3-p3 d3-p3-start`. One branch per period keeps each period's work separate and easy to find |
 | Catch up after falling behind | Pair | `git switch -c d3-p3-catchup d3-p3-end` |
 | Hand in a picked function | Pair and teacher | The teacher copies the function from the pair's screen or from a file the pair saves to the class USB stick, then commits it with a `CONTRIBUTORS.md` line |
-| Take it home | Pair | `git clone --no-hardlinks . <usb>/remus` copies the source and full history but not the `.venv` folder, which only works on the laptop that built it. At home: install `uv`, run `uv sync`, install the free Lucas Chess (Windows or Linux) from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). A student with a Mac or Linux computer at home uses `remus.sh` instead; Lucas Chess has no Mac version, so a Mac needs another UCI chess app |
+| Take it home | Pair | `git clone --no-hardlinks . <usb>/remus` copies the source and full history but not the `.venv` folder, which only works on the laptop that built it. At home: install `uv`, run `uv sync`, install the free Lucas Chess from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). Remus runs on Windows only |
 
 School Wi-Fi sometimes blocks laptops from reaching each other. Test `git fetch
 instructor` from one class laptop in the room before Day 1. If the network
@@ -562,8 +562,8 @@ Outside the Day folders:
 | Path | Holds |
 | --- | --- |
 | `tests/mate_puzzles.epd` | The ten mate puzzles as FEN |
-| `tests/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
-| `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `station_league.py`, `station_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
+| `scripts/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
+| `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `station_league.py`, `station_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
 | `scripts/run_all_tests.py` | Runs pytest on each instructor period folder in turn |
 | `scripts/make_period_folders.py` | Builds `period1` to `period3` of each instructor Day folder from `period4` |
 | `scripts/make_station_folders.py` | Builds the version folders in `instructor/Remus` from the Day 9 and Day 10 code |
@@ -587,10 +587,7 @@ engine, and the engine never imports it.
 
 1. **GUI play through UCI.** Lucas Chess starts a launcher and talks to Remus over stdin and
    stdout. `remus.bat` changes to its own folder and runs `uv run python
-   uci_engine.py`. For students who take Remus home to a Mac or Linux computer,
-   `remus.sh` does the same; it must be marked executable with `chmod +x remus.sh`, and
-   it calls `uv` by its full path (usually `~/.local/bin/uv`) because a desktop app
-   does not read the shell's `PATH`.
+   uci_engine.py`.
 2. **Matches and the tournament.** `play_match.py` and `station_match.py` use
    `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes and play them
    on a `chess.Board`, and `station_match.py` saves every game as PGN with `chess.pgn`.

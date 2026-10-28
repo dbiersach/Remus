@@ -2,7 +2,7 @@
 """run_all_tests.py
 
 Run the tests of every period folder and every station folder in instructor/, one
-folder at a time, and the reference-tool tests in tests/. Each folder is a complete
+folder at a time, and the reference-tool tests in scripts/. Each folder is a complete
 copy of Remus with the same module names (board.py, search.py, ...), so each folder
 gets its own pytest run.
 """
@@ -20,7 +20,7 @@ def main():
         if list(folder.glob("test_*.py")):
             folders.append(folder)  # Periods before any Remus code have no tests
     folders += sorted((ROOT / "instructor" / "Remus").glob("* - *"))
-    folders.append(ROOT / "tests")
+    folders.append(ROOT / "scripts")  # test_reference_tools.py
     failed = []
     for folder in folders:
         print(f"Testing {folder}", flush=True)
