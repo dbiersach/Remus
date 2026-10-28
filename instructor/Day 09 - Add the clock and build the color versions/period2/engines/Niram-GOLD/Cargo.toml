@@ -1,0 +1,17 @@
+# Niram-GOLD: Remus-GOLD rewritten in Rust.
+#
+# rules/ holds the board, the rules of chess, FEN, SAN, the opening book, the
+# evaluation terms, move ordering, the transposition table, the search helpers, the
+# UCI loop, and the benchmark. gold/ holds the engine: its evaluate(), its search,
+# and its think(), like the Remus-GOLD folder.
+[workspace]
+resolver = "3"
+members = ["rules", "gold"]
+
+[workspace.package]
+version = "0.2.0"
+edition = "2024"
+license = "BSD-3-Clause"
+
+[profile.release]
+debug = false

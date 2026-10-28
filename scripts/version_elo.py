@@ -22,12 +22,11 @@ Usage:
     uv run scripts/version_elo.py --workers 16         all 12 versions, 360 games
     uv run scripts/version_elo.py --colors WHITE GOLD  only some versions
     uv run scripts/version_elo.py --report-only        only the ratings, saved games
-    uv run scripts/version_elo.py --niram              the same for Niram, in Rust
+    uv run scripts/version_elo.py --niram              the saved Niram games, rated
 
-With --niram the games use Niram, the Rust copies of the same 12 versions in the
-Niram folder, which choose the same moves as Remus about 50 times faster. Build
-them first with "cargo build --release" inside Niram. Niram games are rated apart
-from Remus games.
+Niram games, played by Rust copies of the same 12 versions, stay in the games file
+and are rated apart from Remus games. Only Niram-GOLD is kept, so --niram only
+rates the saved games.
 
 A game already in the games file is not played twice, so a run that stops
 partway, such as when the computer restarts, picks up where it stopped.
@@ -49,8 +48,9 @@ import chess
 import chess.engine
 import chess.pgn
 
-# version_match.py lives beside the Remus versions in instructor/Remus
-sys.path.insert(0, str(Path(__file__).parent.parent / "instructor" / "Remus"))
+# version_match.py lives beside the color versions in Day 9, period2/engines
+INSTRUCTOR = Path(__file__).parent.parent / "instructor"
+sys.path.insert(0, str(next(INSTRUCTOR.glob("Day 09 - *")) / "period2" / "engines"))
 
 from version_match import Player, all_players, engine_command
 
@@ -89,7 +89,9 @@ def freeze(players: list[Player]) -> list[Player]:
             shutil.copy2(program, copy)
         else:
             shutil.copytree(
-                program, copy, ignore=shutil.ignore_patterns("__pycache__", "*.pgn")
+                program,
+                copy,
+                ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "engines"),
             )
         frozen.append((name, copy))
     print(f"Frozen copies of {len(frozen)} versions in {frozen_root}")
@@ -364,12 +366,12 @@ def main():
     parser.add_argument("--stockfish", default=None, help="path to Stockfish")
     parser.add_argument("--report-only", action="store_true", help="skip the games")
     parser.add_argument(
-        "--niram", action="store_true", help="play the Rust versions in Niram/"
+        "--niram", action="store_true", help="rate the saved Niram games"
     )
     options = parser.parse_args()
     start = time.perf_counter()
     engine = "Niram" if options.niram else "Remus"
-    players = all_players(engine)
+    players = all_players()
     if options.colors:
         wanted = []
         for color in options.colors:
@@ -379,7 +381,7 @@ def main():
             if player[0] in wanted:
                 chosen.append(player)
         players = chosen
-    if not options.report_only:
+    if not options.report_only and not options.niram:
         stockfish_path = options.stockfish or find_stockfish()
         print(f"Stockfish: {stockfish_path}")
         play_all(players, stockfish_path, options.workers)

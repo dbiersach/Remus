@@ -1,6 +1,6 @@
 # Day 9, Period 4: Color battles
 
-The battles run in the `Remus` folder next to the Day folders. Each pair copies its own color folder onto a USB stick. On the host laptop, the visitors copy that folder over the folder of the same color in `Remus`, and the host opens `play_battle.py` in its own color folder, presses Run Python File, and types the visitor's color. Remus plays two 10-minute games, one with each color, side by side.
+The battles run in `period2/engines`. Each pair copies its own color folder onto a USB stick. On the host laptop, the visitors copy that folder over the folder of the same color in `period2/engines`, and the host opens `play_battle.py` in its own color folder, presses Run Python File, and types the visitor's color. Remus plays two 10-minute games, one with each color, side by side.
 
 ## Learning objectives
 
@@ -11,6 +11,4 @@ By the end of this period, each pair can:
 
 ## The files
 
-The code here is the same as at the end of the period before.
-
-Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+This folder holds no engine code. Each pair works in its own color version folder in `period2/engines`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is the `period1` folder.

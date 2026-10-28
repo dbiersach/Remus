@@ -44,14 +44,16 @@ target-version = "py314"
 # Each period folder is a complete copy of Remus, so module names repeat from folder
 # to folder. Run one folder at a time, such as
 # uv run pytest "instructor/Day 06 - Count positions and read FEN/period2", or
-# scripts/run_all_tests.py for all.
+# scripts/run_all_tests.py for all. The color versions sit inside Day 9 period2, in
+# engines/, so pytest leaves that folder out and tests each color version on its own.
 [tool.pytest.ini_options]
 testpaths = ["scripts"]
+norecursedirs = [".*", "__pycache__", "engines", "target", "venv"]
 addopts = "-q"
 
 # version_league.py and version_elo.py in scripts/ import version_match.py from
-# instructor/Remus, where every pair runs it in the Day 10 tournament.
+# the Day 9 period2/engines folder, where every pair runs it for the battles.
 [tool.pyright]
 executionEnvironments = [
-    { root = "scripts", extraPaths = ["instructor/Remus"] },
+    { root = "scripts", extraPaths = ["instructor/Day 09 - Add the clock and build the color versions/period2/engines"] },
 ]

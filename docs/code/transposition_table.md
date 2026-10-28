@@ -1,6 +1,6 @@
 # transposition_table.py: Remember positions already searched
 
-*Lives in Remus-GOLD, `instructor/Remus/11 GOLD - All enhancements`, the engine of Day 10.*
+*Lives in Remus-GOLD, in the teacher's `instructor/Day 09 - Add the clock and build the color versions/period2/engines/Remus-GOLD`, the engine of Day 10.*
 
 ## The big picture
 
@@ -68,7 +68,7 @@ best_stored_move()
 
 ## Try it
 
-Open `transposition_table.py` from a period folder that has the file in VS Code, and click the Run Python File
+Open `transposition_table.py` from the Remus-GOLD folder in VS Code, and click the Run Python File
 button (the triangle at the top right of the editor).
 
 You should see: A saved score found at depth 3, and `None` when the search asks for depth 4.

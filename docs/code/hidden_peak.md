@@ -1,6 +1,6 @@
 # hidden_peak.py: Science AI: find the hidden peak
 
-*First appears in `instructor/Day 10 - Aim Remus at a science problem/period1`.*
+*First appears in `instructor/Day 10 - Solve a science problem using chess AI/period1`.*
 
 ## The big picture
 

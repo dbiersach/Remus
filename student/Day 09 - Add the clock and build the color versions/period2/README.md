@@ -1,6 +1,6 @@
 # Day 9, Period 2: Python lab 12 and the color versions
 
-Each pair builds one color version in the `Remus` folder next to the Day folders, such as `10 RED - Transposition table`. The code in this Day folder is Remus-WHITE, the starting point of every color version.
+Each pair builds one color version in the `engines` folder inside this one, such as `engines/10 RED - Transposition table`. Each color folder is a complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.
 
 ## Learning objectives
 
@@ -13,7 +13,7 @@ By the end of this period, each pair can:
 
 The lab is `python_caches.py` in `student/`, with the answers in `python_caches_instructor.py` in `instructor/`. Open `python_caches.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-The code here is the same as at the end of the period before.
+This folder holds no engine code. Each pair works in its own color version folder in `period2/engines`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is the `period1` folder.
 
 ## The changes and why
 
@@ -22,8 +22,6 @@ The pairs fill in the blanks of `python_caches.py`. Each `#` line in the student
 Part #1: `remembered_perft()` stores each answer in a dict under the tuple key `(name, depth)`. The second call finds the answer and returns at once. The RED color version's transposition table remembers search results the same way.
 
 Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 to g7, which the CYAN color version needs, and `random.seed()`, which makes a random choice repeat on every run.
-
-Check the work with the tests: open a terminal in VS Code inside this folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
 
 ## What you edit in the lab
 

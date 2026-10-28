@@ -116,7 +116,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 9.16 | The tournament plan | Each color plays Remus-WHITE twice on Day 10, once with each color, at 10 minutes a side, all ten laptops at once; then Remus-GOLD against everyone from the teacher's league |
 | 9.17 | Color battles | The two rounds of pairings, how to copy a color folder from the USB stick over the host's folder, `play_battle.py`, and the class score table that the league table answers at the end |
 
-## Day 10: Aim Remus at a science problem
+## Day 10: Solve a science problem using chess AI
 
 | Slide | Title | What it shows |
 | --- | --- | --- |

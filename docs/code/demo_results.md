@@ -1,6 +1,6 @@
 # demo_results.py: Read a match result
 
-*Day 10, period 4. The demo file is `student/Day 10 - Aim Remus at a science problem/period4/demo_results.py`, and the answers are in `instructor/Day 10 - Aim Remus at a science problem/period4/demo_results_instructor.py`.*
+*Day 10, period 4. The demo file is `student/Day 10 - Solve a science problem using chess AI/period4/demo_results.py`, and the answers are in `instructor/Day 10 - Solve a science problem using chess AI/period4/demo_results_instructor.py`.*
 
 ## The big picture
 
@@ -33,7 +33,7 @@ The pair types 13 lines.
 
 ## Try it
 
-Open `demo_results.py` in `student/Day 10 - Aim Remus at a science problem/period4` in VS Code, and click the Run Python File button (the
+Open `demo_results.py` in `student/Day 10 - Solve a science problem using chess AI/period4` in VS Code, and click the Run Python File button (the
 triangle at the top right of the editor).
 
 You should see: 11.0 points of 20, a gap of +35 between -121 and +208, and "more games are needed".

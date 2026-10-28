@@ -1,8 +1,8 @@
 #!/usr/bin/env -S uv run
 """remus_benchmark.py
 
-Time one Remus version on the ten positions of compare_search.py, so its speed can
-be compared with the Niram engine of the same color, the Rust copy of that version.
+Time one Remus version on the ten positions of compare_search.py. For Remus-GOLD,
+the speed can be compared with Niram-GOLD, the Rust copy of that version.
 Each position gets that version's own think(), one depth at a time up to the depth
 asked for, with no clock, so both engines visit exactly the same positions.
 
@@ -11,17 +11,20 @@ Run it from the repository folder:
     uv run scripts/remus_benchmark.py GOLD        Remus-GOLD, depth 4
     uv run scripts/remus_benchmark.py WHITE 5     Remus-WHITE, depth 5
 
-and the matching Rust benchmark from inside Niram/:
+and the matching Rust benchmark from inside Niram-GOLD/:
 
     cargo run --release -p niram-gold -- bench
-    cargo run --release -p niram-white -- bench 5
 """
 
 import sys
 import time
 from pathlib import Path
 
-REMUS_FOLDER = Path(__file__).parent.parent / "instructor" / "Remus"
+ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
+DAY_9 = next((ROOT / "instructor").glob("Day 09 - *"))
+WHITE_FOLDER = DAY_9 / "period1"  # Remus-WHITE, the finished Day 9 Remus
+ENGINES_FOLDER = DAY_9 / "period2" / "engines"  # The color versions and Remus-GOLD
+GOLD_FOLDER = ENGINES_FOLDER / "Remus-GOLD"  # All ten enhancements
 DEPTH = 4  # The deepest iteration, the same for both engines
 POSITIONS = [  # The ten positions of compare_search.py
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -40,7 +43,11 @@ MATE_SCORE = 100_000  # The same as search.py
 
 def find_folder(color: str) -> Path:
     """Return the version folder of a color: "RED" finds "10 RED - Transposition table"."""
-    for folder in sorted(REMUS_FOLDER.iterdir()):
+    if color.upper() == "WHITE":
+        return WHITE_FOLDER
+    if color.upper() == "GOLD":
+        return GOLD_FOLDER
+    for folder in sorted(ENGINES_FOLDER.iterdir()):
         if folder.is_dir() and " - " in folder.name:
             words = folder.name.split(" - ")[0].split()
             if words[len(words) - 1] == color.upper():
@@ -79,7 +86,7 @@ def main():
             searches.append(self)
 
     search.SearchInfo = RecordingInfo
-    name = "Remus-" + folder.name.split(" - ")[0]
+    name = "Remus-" + color.upper()
     print(f"{name} (Python), iterative deepening to depth {max_depth}")
     total_nodes = 0
     total_seconds = 0.0

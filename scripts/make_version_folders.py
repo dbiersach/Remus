@@ -1,16 +1,17 @@
 #!/usr/bin/env -S uv run
 """make_version_folders.py
 
-Build one folder per color version in instructor/Remus.
+Build one folder per color version in instructor/Day 09 .../period2/engines.
 
-Remus-WHITE is the Day 9 Remus at the end of period 1 (instructor/Day 09 .../period1),
-with none of the ten enhancements. Its engine is complete before the pairs start their
-color versions in period 2. Each other version folder is Remus-WHITE plus one enhancement,
+Remus-WHITE is the Day 9 Remus at the end of period 1, with none of the ten
+enhancements: the period1 and period2 folders of Day 9 hold its engine. Its engine is
+complete before the pairs start their color versions in period 2. Each color version
+folder is Remus-WHITE plus one enhancement,
 named by a color so that no color version sounds better than another. A pair builds its
 color version, then its Remus plays Remus-WHITE to measure how much Elo the one
 enhancement adds. Remus-GOLD, the finished Remus of Day 10, holds every
-enhancement at once. Its folder, instructor/Remus/11 GOLD - All enhancements, is
-written by hand, and this script only rewrites its README.md.
+enhancement at once. Its folder, engines/Remus-GOLD, is written by hand, and this
+script only rewrites its README.md. engines/Niram-GOLD holds the same engine in Rust.
 
 The script copies the Day 9 files, adds the color version's files from the GOLD folder,
 and applies the color version's edits. Each search enhancement gets a new search function
@@ -33,9 +34,9 @@ from period_guides import (
 
 ROOT = Path(__file__).parent.parent  # The top Remus folder, above scripts/
 INSTRUCTOR = ROOT / "instructor"
-REMUS_FOLDER = INSTRUCTOR / "Remus"
 BASE = next(INSTRUCTOR.glob("Day 09 - *")) / "period1"  # Remus-WHITE
-FINAL = REMUS_FOLDER / "11 GOLD - All enhancements"  # Written by hand
+REMUS_FOLDER = BASE.parent / "period2" / "engines"  # The color versions and GOLD
+FINAL = REMUS_FOLDER / "Remus-GOLD"  # Written by hand
 
 
 def function_text(file_path: Path, name: str) -> str:
@@ -519,21 +520,12 @@ from search import MATE_SCORE, SearchInfo, alpha_beta_with_quiescence, {names}
 # and the functions the pair writes
 VERSIONS_TABLE = [
     {
-        "folder": "11 GOLD - All enhancements",
+        "folder": "Remus-GOLD",
         "idea": "Remus-GOLD is the finished Remus of Day 10, with all ten "
-        "enhancements at once. It stays out of the color matches; estimate_elo.py measures its "
-        "rating against Stockfish.",
+        "enhancements at once. It lives only in the teacher's folders; "
+        "estimate_elo.py measures its rating against Stockfish, and Niram-GOLD, "
+        "beside it, is the same engine in Rust.",
         "source": FINAL,
-        "copies": [],
-        "edits": [],
-        "tests": "",
-        "students": [],
-    },
-    {
-        "folder": "00 WHITE - No enhancements",
-        "idea": "Remus-WHITE is the finished Day 9 Remus with none of the ten "
-        "enhancements. Every color version starts from it, and every version match "
-        "measures against it.",
         "copies": [],
         "edits": [],
         "tests": "",
@@ -945,8 +937,11 @@ def measured_table(color: str) -> str:
 
 def readme_text(version: dict) -> str:
     """Return the README.md that explains one version folder."""
-    number_and_color, name = version["folder"].split(" - ")
-    color = number_and_color.split(" ")[1]  # "00 WHITE" gives "WHITE"
+    if version["folder"] == FINAL.name:
+        color, name = "GOLD", "All enhancements"
+    else:
+        number_and_color, name = version["folder"].split(" - ")
+        color = number_and_color.split(" ")[1]  # "10 RED" gives "RED"
     guide = VERSION_GUIDES[color]
     sections = [
         f"# Remus-{color}: {name}\n\n{version['idea']}",
@@ -976,12 +971,6 @@ def readme_text(version: dict) -> str:
             '`uv run scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD` '
             "shows its score against every other version in the teacher's league."
         )
-    elif not version["students"]:
-        sections.append(
-            "## Check it\n\nCheck it from inside this folder with `uv run pytest`. "
-            "From the `Remus` folder above this one, "
-            f"`uv run version_match.py {color} RED` plays it against a color version."
-        )
     else:
         written = ", ".join(
             f"`{function}()` in `{file}`" for file, function in version["students"]
@@ -993,7 +982,8 @@ def readme_text(version: dict) -> str:
         sections += [
             f"## Where your code fits\n\n{guide['fits']}",
             (
-                "## The files\n\nThis folder is Remus-WHITE, the finished Day 9 Remus, "
+                "## The files\n\nThis folder is Remus-WHITE, the finished Day 9 Remus in the "
+                "`period2` folder above, "
                 f"plus this one enhancement. The pair writes {written}."
             ),
             f"## The changes and why\n\n{changes}",
@@ -1002,13 +992,13 @@ def readme_text(version: dict) -> str:
                 "`uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: "
                 f"Remus-{color} plays one 2-minute game against Remus-WHITE, which "
                 "shows that the engine plays legal moves to the end of a game. In the "
-                "Day 9 battles, copy the visiting pair's color folder into the `Remus` "
+                "Day 9 battles, copy the visiting pair's color folder into the `engines` "
                 "folder, open `play_battle.py`, press Run, and type the visitor's "
                 f"color: Remus-{color} plays it twice at 10 minutes a side, once with "
                 "each color. In the Day 10 tournament, open `play_tournament.py` and press Run: "
                 f"Remus-{color} plays Remus-WHITE twice, once with each color, at 10 "
                 "minutes a side, and both games go into games/remus_games.pgn. Each "
-                "script runs `version_match.py` from the `Remus` folder above this one."
+                "script runs `version_match.py` from the `engines` folder above this one."
             ),
         ]
     return "\n\n".join(sections) + "\n"
@@ -1037,7 +1027,7 @@ RUN_SCRIPTS = {
     "play_battle.py": (
         (
             "The Day 9 battle for this color version. Copy the visiting pair's color "
-            "folder into\nthe Remus folder on this laptop, press Run in VS Code, and "
+            "folder into\nthe engines folder on this laptop, press Run in VS Code, and "
             "type the visitor's\ncolor. Remus-{color} plays two 10-minute games "
             "against it from the same opening,\nWhite in game 1 and Black in game 2. "
             "The two games take about 20 minutes."
@@ -1086,7 +1076,7 @@ def run_script_text(name: str, color: str) -> str:
 
 
 def main():
-    REMUS_FOLDER.mkdir(exist_ok=True)
+    REMUS_FOLDER.mkdir(parents=True, exist_ok=True)
     built = []
     for version in VERSIONS_TABLE:
         folder = REMUS_FOLDER / version["folder"]
@@ -1117,7 +1107,7 @@ def main():
                 (folder / name).chmod(0o755)  # The shebang runs it on Mac and Linux
         built.append(folder)
     tidy(built)
-    print(f"Built {len(built)} version folders in {REMUS_FOLDER}  (expected 11)")
+    print(f"Built {len(built)} color version folders in {REMUS_FOLDER}  (expected 10)")
     print(f"Kept the hand-written {FINAL.name} and rewrote its README.md")
 
 

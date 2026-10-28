@@ -83,7 +83,7 @@
 | P3 | Color versions: test and measure | None | None | Their color version's functions, in the table below |
 | P4 | Color battles | None | None | Nothing: a demo or teacher code |
 
-## Day 10 - Aim Remus at a science problem
+## Day 10 - Solve a science problem using chess AI
 
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
@@ -94,12 +94,10 @@
 
 ## Color versions (Day 9, periods 2 and 3)
 
-Each pair writes the functions of one color version in `student/Remus`.
+Each pair writes the functions of one color version in `period2/engines`.
 
 | Color version | Pairs write |
 | --- | --- |
-| 11 GOLD - All enhancements | Nothing: a finished engine |
-| 00 WHITE - No enhancements | Nothing: a finished engine |
 | 10 RED - Transposition table | `store()` in `transposition_table.py` (3 lines); `probe()` in `transposition_table.py` (11 lines); `test_transposition_table_bounds()` in `test_upgrades.py` (13 lines) |
 | 08 GREEN - Opening book | `load_book()` in `opening_book.py` (24 lines); `book_move()` in `opening_book.py` (2 lines) |
 | 09 BLUE - Killer moves | `remember_killer()` in `search.py` (6 lines); `order_moves()` in `move_ordering.py` (16 lines); `test_killers_keep_two_quiet_moves()` in `test_upgrades.py` (5 lines) |

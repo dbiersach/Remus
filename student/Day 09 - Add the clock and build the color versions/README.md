@@ -41,7 +41,7 @@ By 4:30, each pair can:
 | --- | --- |
 | 10:30 to 10:50 | Pairs work through `python_caches.py`: a dict remembers answers, `math.dist()`, and `random.seed()`. |
 | 10:50 to 11:00 | Slides: the ten color versions. Each is Remus-WHITE plus one enhancement, such as RED (transposition table) or BLUE (killer moves). Colors name the color versions so that no color version sounds better than another. |
-| 11:00 to 12:00 | Each pair opens its color version in the `Remus` folder next to the Day folders, reads the version README, and writes the color version's stubbed code. |
+| 11:00 to 12:00 | Each pair opens its color version in `period2/engines`, reads the version README, and writes the color version's stubbed code. |
 
 [`period2/README.md`](period2/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
 
@@ -59,8 +59,8 @@ By 4:30, each pair can:
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:10 | Slides: how a battle works. Each pair copies its own color folder from `Remus` onto its USB stick. The teacher posts the pairings for two rounds; in each round five pairs host and five visit. |
-| 3:10 to 3:40 | Round 1. The visiting pair copies its color folder over the folder of the same color in the host laptop's `Remus` folder. The host opens `play_battle.py` in its own color folder, presses Run in VS Code, and types the visitor's color. Two 10-minute games run side by side, one with each color. Each pair writes the score on the board. |
+| 3:00 to 3:10 | Slides: how a battle works. Each pair copies its own color folder from `period2/engines` onto its USB stick. The teacher posts the pairings for two rounds; in each round five pairs host and five visit. |
+| 3:10 to 3:40 | Round 1. The visiting pair copies its color folder over the folder of the same color in the host laptop's `engines` folder. The host opens `play_battle.py` in its own color folder, presses Run in VS Code, and types the visitor's color. Two 10-minute games run side by side, one with each color. Each pair writes the score on the board. |
 | 3:40 to 4:10 | Round 2: the pairs that visited now host, against new opponents. |
 | 4:10 to 4:25 | The class reads the board: which colors won, and why two games prove little. The teacher shows the league table, 110 games for each color, and compares. |
 | 4:25 to 4:30 | Each host restores the visitor's folder with `git restore` so its own repository holds only its own color. |

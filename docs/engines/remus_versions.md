@@ -14,18 +14,21 @@ better than another before the games are played.
 
 ## Where the color versions live
 
-`instructor/Remus` holds `00 WHITE - No enhancements` and one folder per color version,
-such as `10 RED - Transposition table`. The number in front of each name ranks the
-color version by its rating over Remus-WHITE in the teacher's 10-minute league (below), so
-the folders list from 00 WHITE to 11 GOLD. The WHITE folder is a complete, runnable copy of
-the Day 9 Remus at the end of period 1 (`instructor/Day 09 .../period1`), when its engine
-is finished and before the pairs start their color versions, and each version folder is
-that copy plus one enhancement. `student/Remus`
-holds the same folders with the pair's functions stubbed.
+Remus-WHITE is the Day 9 `period1` folder: the Day 9 Remus at the end of period 1,
+when its engine is finished and before the pairs start their color versions. The
+Day 9 `period2` folder holds an `engines` folder with one folder per color version,
+such as `10 RED - Transposition table`, each a complete copy of Remus-WHITE plus one
+enhancement. From period 2 to the end of the day, each pair works only in its color
+folder, so periods 2, 3, and 4 of Day 9 hold no engine code of their own. The number
+in front of each name ranks the color version by its rating over Remus-WHITE in the
+teacher's 10-minute league (below), from 01 GRAY to 10 RED. The student
+`period2/engines` holds the same ten folders with the pair's functions stubbed.
 
-`make_version_folders.py` builds the folders from the Day 9 code and the GOLD folder.
-`11 GOLD - All enhancements` holds Remus-GOLD, the finished Remus of Day 10, with
-all ten enhancements at once.
+The teacher's `period2/engines` also holds `Remus-GOLD`, the finished Remus of Day
+10 with all ten enhancements at once, and `Niram-GOLD`, the same engine rewritten in
+Rust. No pair writes GOLD, so the student folders leave both out.
+`make_version_folders.py` builds the ten color folders from the Day 9 `period1` code
+and Remus-GOLD.
 
 ## The ten color versions
 
@@ -74,7 +77,7 @@ both `uci_engine.py` and `console_game.py`.
 
 ## The Day 10 tournament: version_match.py
 
-`instructor/Remus/version_match.py` plays a color version's Remus against Remus-WHITE,
+`version_match.py`, in `period2/engines`, plays a color version's Remus against Remus-WHITE,
 or against another color version, at 10 minutes a side. It adds every game to
 `games/remus_games.pgn` and prints the score.
 
@@ -95,7 +98,7 @@ Pairs never type these commands. Every color folder holds three short scripts th
 | `play_tournament.py` | Day 10, period 4 | The tournament: two 10-minute games against Remus-WHITE, one with each color |
 
 In the Day 9 battles a visiting pair brings its color folder on a USB drive and
-copies it over the folder of the same color in the host's `Remus` folder, which
+copies it over the folder of the same color in the host's `period2/engines`, which
 holds that color with its functions still stubbed. The
 host presses Run on `play_battle.py` in its own color folder and types the visitor's
 color, such as `RED`. The two colors play twice from the same opening, once with each
@@ -158,13 +161,13 @@ GREEN or GOLD starts from the starting position instead. Their book picks among 
 moves at random, so their games still differ from each other, while the other pairs
 keep the openings. Rate such a league with `--book-start` as well.
 
-`--niram` plays the same league with Niram, the Rust copies of all 12 versions in
-the `Niram` folder (see [`Niram/README.md`](../../Niram/README.md)). Niram picks the
-same moves as Remus about 50 times faster ([`engine_parity.md`](engine_parity.md) shows
-the check), so a 10-minute Niram game searches about
-as many positions as an 8-hour Remus game. Niram games are rated apart from Remus
-games, with Niram-WHITE pinned at 0, and `version_match.py` and `version_elo.py`
-take `--niram` too.
+The teacher's league ran on Niram, Rust copies of all 12 versions that picked the
+same moves as Remus about 50 times faster, so a 10-minute Niram game searched about
+as many positions as an 8-hour Remus game. Only Niram-GOLD is kept, beside
+Remus-GOLD ([`engine_parity.md`](engine_parity.md) shows that the two match), but
+the league's games stay in the games file. `--niram --rate-only` rates them apart
+from Remus games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` does
+the same for the saved Stockfish games.
 
 Without `--at-once`, the league plays one game per processor thread. Give it the
 number of cores or fewer, because each game needs a whole core to itself to use its
