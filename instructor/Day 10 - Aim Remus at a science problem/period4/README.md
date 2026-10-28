@@ -7,7 +7,7 @@
 By the end of this period, each pair can:
 
 - Read an experiment's results and their error margins. **Measured by:** `demo_results.py` turns the pair's own match result into an Elo gap and margin, and the pair says whether the gap is larger than the margin.
-- Explain one decision your engine made. **Measured by:** Each pair presents one move with its score and principal variation, from Part #3 of `demo_results.py` or its own position, and one choice its beam time agent made.
+- Explain one decision your engine made. **Measured by:** Each pair presents one move with its score and principal variation, from Part #3 of `demo_results.py` or its own position, and one powder its phase hunt named.
 - Take the code home. **Measured by:** Each student's USB copy opens and runs `uv run pytest`.
 
 ## The files

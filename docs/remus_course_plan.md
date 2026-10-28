@@ -50,7 +50,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 7 | A whole game, and judging a position | `random`, a loop that keeps the best so far, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
 | 8 | Searching ahead, then smarter | Recursion review, keeping a list in order with `insert` | Minimax, negamax, alpha-beta, quiescence, move ordering |
 | 9 | The clock and the stations | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhancement station per pair; station matches; a mate solver |
-| 10 | Science AI at the beamline | `math.dist`, `math.sqrt`, `random.seed` | A measurement AI that finds a hidden peak; a beam time agent for a beamline problem; results and tournament |
+| 10 | Science AI at the beamline | `math.dist`, `random.seed`, `append` and `pop` as make and undo | A measurement AI that finds a hidden peak; a phase hunt that names the crystals in an X-ray pattern; results and tournament |
 
 Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special move
 in place, and Week 2 opens with recursion and perft. Perft on Monday gives every pair a
@@ -74,7 +74,7 @@ of Day 7), then it plays **good** moves (Days 7 to 10).
 | Notation | UCI text (D2) | FEN (D6) | SAN out (D7) | SAN in, by matching legal moves (D7) |
 | Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering (D8), iterative deepening (D9), the ten enhancement stations (D9) |
 | Evaluation | Material count (D7) | Piece-square tables (D7) | Mate scores that prefer the faster mate (D8) | Pawn structure, mating bonus, and king safety stations (D9) |
-| Science AI | Paper hidden-peak game and greedy measurement choice (D10 P1) | Explore and exploit weight tuned on a benchmark (D10 P1) | Beam time: estimates and the chance of a wrong call (D10 P2) | Look ahead with pretend readings, and verify predictions against results (D10 P3) |
+| Science AI | Paper hidden-peak game and greedy measurement choice (D10 P1) | Explore and exploit weight tuned on a benchmark (D10 P1) | Phase hunt: score a guess about a powder, and a greedy agent (D10 P2) | Search every set of phases with make and undo, keep every tie, and verify on known powders (D10 P3) |
 | Interface | Console printout and a board picture (D1) | Move arrows (D3) and random Remus in Lucas Chess (D5) | Console game in SAN and full UCI (D7) | `info` lines, time control, `stop` (D9) |
 
 ## How students write real Remus code
@@ -170,7 +170,7 @@ replaces: students learn the idea by doing it instead of by listening to it. The
 | D8 P1 | **Paper minimax.** A printed two-ply tree with scores on the bottom row. Pairs back up max and min level by level and circle the best move; the class compares answers before `minimax()` runs on the same tree | Minimax | Tree worksheet |
 | D8 P2 | **Fewest flips.** The same tree as a row of face-down index cards. Pairs turn a card only when the answer could still change; the pair with the fewest flips and the right move wins | Alpha-beta pruning | Deck of score cards |
 | D10 P1 | **Find the hidden peak.** A 10x10 grid hides a hot spot. With five "measurements" (the teacher reads the value at a square), each pair chooses where to measure next and marks its guess | How the NSLS-II AI agent chooses the next measurement, the Science AI link | Grid worksheet |
-| D10 P2 | **Spend the beam time.** Eight cards, each with a sample's readings so far and its noise level. Each pair has five more shots and chooses where to spend them; the teacher reveals the true signals | Why a close call needs more shots than a clear one | Sample cards |
+| D10 P2 | **Name the powder.** Five printed peak fingerprints (strips of paper with marks at their angles) and one printed mystery pattern. Pairs lay strips over the pattern to find which two phases made it, and count the peaks each guess leaves over or misses | Scoring a guess, and why a fingerprint that fits half the peaks is a trap | Fingerprint strips, pattern sheet |
 
 For the minimax warm-up, the teacher can also run a seven-student "human tree" at the
 front of the room: one root, two "min" players, and four leaves holding score cards,
@@ -521,29 +521,37 @@ against Stockfish with `estimate_elo.py`.
   and `choose_next_measurement(readings, explore_weight)`. Pairs tune
   `explore_weight` and post their benchmark average on the board, next to random
   guessing.
-- **P2. The beamline problem: represent and evaluate.** A scientist visit (or the
-  teacher) shows an NSLS-II beamline and the question it answers. `beam_time.py` is
-  the problem on paper: eight samples on a holder, one yes-or-no question for each
-  (is its signal above 50, which means a new crystal phase is there?), noisy one-minute
-  shots, and only 40 shots for all eight. Unplugged warm-up: pairs get eight cards with
-  noisy readings and choose where to spend five more shots. The teacher writes
-  `make_samples()`, `take_reading()`, `chance_wrong()`, and the random and
-  equal-time agents. **Students write:** `estimate(readings, noise)` (the average and
-  its error, noise divided by the square root of the number of readings) and
-  `expected_wrong_calls(readings, noises)`, the evaluation. Random sample makes about
-  0.94 wrong calls per holder, equal time about 0.83.
-- **P3. The beamline problem: look ahead and verify.** The teacher draws the
-  look-ahead next to Remus's make and undo: the next reading may land one noise step
-  low, on the average, or one step high, with chances 1/4, 1/2, and 1/4. **Students
-  write:** `gain(sample_readings, noise)`, which tries the three pretend readings and
-  returns how much the chance of a wrong call drops, and
-  `choose_next_sample(readings, noises)`. The largest-gain agent makes about 0.65 wrong
-  calls per holder. Then the class verifies: the number of wrong calls each agent
-  expects lands close to the number it really makes, the science version of perft
-  against python-chess. The teacher closes with the real NSLS-II agent, which runs the
-  same loop with a statistical model (a Gaussian process) in place of the hand-built
-  one. When Brookhaven shares a real beamline problem for the course, it replaces the
-  sample holder in this period, and the agent's loop stays the same.
+- **P2. The phase hunt: score a guess, and the greedy agent.** A scientist visit (or
+  the teacher) shows the NSLS-II PDF beamline and the question it answers every day:
+  which crystal phases are in this powder? Each phase makes its own fingerprint of
+  X-ray peaks, so a powder that mixes phases shows all their peaks at once.
+  `phase_hunt.py` holds a library of ten real phases, each with its four strongest
+  peaks, computed with Bragg's law from published lattice sizes. Unplugged warm-up:
+  pairs lay paper fingerprint strips over a printed mystery pattern. The teacher
+  writes `matches()`, `predicted_peaks()`, `make_pattern(seed)` (a mixture of one to
+  three phases with missing and shifted peaks), and the benchmark. **Students
+  write:** `score(phases, measured)`, the evaluation: a point for each explained
+  peak, and a point lost for each peak left over, each predicted peak missing, and
+  each phase used; then `greedy_phases(measured)`, which adds the best phase again
+  and again with append and pop, like `greedy_move()`. Greedy names 166 of 200
+  powders right and 34 wrong. It names gold for a powder that holds silver, because
+  gold and silver have almost the same peaks.
+- **P3. The phase hunt: search every set, and verify.** The teacher draws the tree of
+  phase sets next to Remus's game tree: a set is a position, adding a phase is a
+  move, and taking it back is the undo. Quartz then rutile is the same set as rutile
+  then quartz, so the search adds phases in library order only, which cuts the tree
+  from 821 sets to 176, the way move ordering lets alpha-beta skip work. **Students
+  write:** `search(phases, measured, depth, start, hunt)`, which scores every set of
+  up to three phases with append and pop and keeps every set that ties for the best
+  score. Then the class verifies on 200 known powders, the science version of perft
+  against python-chess: the search names 139 right, says "can't tell" for 52 (most of
+  them gold or silver), and is wrong on 9, against greedy's 34 wrong. Pairs change
+  `PHASE_COST` and `MISSING` and watch the verdicts move. The teacher closes with the
+  published programs that search the same tree on real synchrotron data,
+  CrystalShift (SSRL and CHESS) and Dara (Berkeley Lab), and with Brookhaven's
+  Crystallography Companion Agent, which answers the same question live at the PDF
+  beamline. A "can't tell" sends the scientist back for a second measurement, such as
+  X-ray fluorescence, which tells gold from silver at once.
 - **P4. Results, tournament, take-home, and wrap-up.** The station results go on the
   projector: each color's Elo gap against Remus-WHITE, the showcase results, and
   Remus-GOLD's Stockfish rating (about 1520). `tournament.py` runs the round robin of the
@@ -552,12 +560,12 @@ against Stockfish with `estimate_elo.py`.
   `demo_results.py` each pair turns its color's match result into an Elo gap with a
   margin of error and lets Remus explain one move. Each pair then
   explains one move its engine chose, with the score and principal variation, and one
-  choice its beam time agent made. Close with what comes next: bitboards, Zobrist
+  powder its phase hunt named. Close with what comes next: bitboards, Zobrist
   hashing, endgame tablebases, and a stronger "Manishtushu" engine.
 
 **Checkpoint `d10-p4-end`:** every pair's `choose_next_measurement()` beats random
-guessing on the 100-grid benchmark, every pair's `choose_next_sample()` beats equal
-time on the 200-holder benchmark, and the station matches finished with no illegal
+guessing on the 100-grid benchmark, every pair's `search()` makes fewer wrong calls
+than greedy on the 200-powder benchmark, and the station matches finished with no illegal
 moves, crashes, or lost synchronization.
 
 ## Code breakdown by day
@@ -582,7 +590,7 @@ The full description of each script is in `docs/scripts/`.
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
 | `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thread, `stop`), `console_game.py` (uses `think`); the station folders live in `Stations/` |
-| `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `beam_time.py`, `tournament.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_beam_time.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
+| `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `phase_hunt.py`, `tournament.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_phase_hunt.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
 
 Outside the Day folders:
 

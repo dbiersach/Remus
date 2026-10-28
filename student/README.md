@@ -76,10 +76,9 @@ written yet.
 | 10 | 1 | `hidden_peak.py` | `candidate_squares` |
 | 10 | 1 | `hidden_peak.py` | `score_candidate` |
 | 10 | 1 | `hidden_peak.py` | `choose_next_measurement` |
-| 10 | 2 | `beam_time.py` | `estimate` |
-| 10 | 2 | `beam_time.py` | `expected_wrong_calls` |
-| 10 | 3 | `beam_time.py` | `gain` |
-| 10 | 3 | `beam_time.py` | `choose_next_sample` |
+| 10 | 2 | `phase_hunt.py` | `score` |
+| 10 | 2 | `phase_hunt.py` | `greedy_phases` |
+| 10 | 3 | `phase_hunt.py` | `search` |
 
 On Day 9, periods 2 and 3, each pair also writes the functions of its color station in `Stations/`, listed in `docs/stations.md`.
 

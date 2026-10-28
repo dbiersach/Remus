@@ -1,35 +1,30 @@
-# Day 10, Period 3: The beamline problem: look ahead and verify
+# Day 10, Period 3: The phase hunt: search every set, and verify
 
 ## Learning objectives
 
 By the end of this period, each pair can:
 
-- Look ahead with pretend readings, the way Remus looks ahead with moves. **Measured by:** The `gain` test passes: a close call (52) gains more from a shot than a clear one (90).
-- Verify a model by comparing its predictions with results. **Measured by:** `uv run beam_time.py` shows largest gain beating equal time, and the pair compares each expected count with the real count.
+- Search every set of phases with make and undo, as Remus searches moves. **Measured by:** The `search` tests pass: the phases list comes back unchanged, and the search scores 176 sets, one for each set of up to three phases.
+- Verify a method against known answers, and say when the data cannot decide. **Measured by:** `uv run phase_hunt.py` shows the search making fewer wrong calls than greedy, and the pair names the extra measurement that would tell gold from silver.
 
 ## The files
 
 Files that grow this period:
 
-- `beam_time.py`
-- `test_beam_time.py`
+- `phase_hunt.py`
+- `test_phase_hunt.py`
 
 Functions the pairs write this period:
 
-- `gain()` in `beam_time.py`
-- `choose_next_sample()` in `beam_time.py`
+- `search()` in `phase_hunt.py`
 
 In `student/` these functions raise `NotImplementedError` until a pair writes them. In `instructor/` they are finished.
 
 ## The changes and why
 
-### `gain()` in `beam_time.py`
+### `search()` in `phase_hunt.py`
 
-Looks one shot ahead: tries three pretend readings (one noise step low, on the average, one step high), averages the chance of a wrong call after each, and returns how much the chance drops. Pretend readings are like the moves Remus makes and undoes while it searches.
-
-### `choose_next_sample()` in `beam_time.py`
-
-Returns the sample whose next shot has the largest gain. With it, the agent spends beam time where a call is still close, and makes fewer wrong calls than giving every sample equal time.
+Scores the set of phases it is given, keeps every set that ties for the best score, and calls itself on each set one phase larger, adding a phase with append and taking it back with pop. Phases go in library order only, so each set is scored once instead of once for every order, 176 sets instead of 821. Keeping every tied set lets the search say gold or silver when the pattern cannot tell them apart, as CrystalShift and Dara report every likely answer.
 
 Check the work from inside this folder with `uv run pytest`, and run any file on its own, such as `uv run board.py`.
 
@@ -39,7 +34,6 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `beam_time.py` | `gain()` | 133 | 8 | `test_beam_time.py::test_gain_favors_a_close_call_over_a_safe_one` |
-| `beam_time.py` | `choose_next_sample()` | 161 | 5 | `test_beam_time.py::test_the_agent_measures_every_sample_once_first`, `test_beam_time.py::test_largest_gain_beats_equal_time` |
+| `phase_hunt.py` | `search()` | 187 | 13 | `test_phase_hunt.py::test_search_leaves_the_phases_as_it_found_them` |
 
 Lines to type in all: 13. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
