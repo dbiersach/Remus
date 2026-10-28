@@ -36,7 +36,7 @@ all ten enhancements at once. Remus-GOLD stays out of the color matches;
 | YELLOW | Draw sense | Score a repeated position, or one at the fifty-move limit, as 0 inside the search | `is_draw_in_search()` in `search.py`, plus 3 tests in `test_upgrades.py` | 16 |
 | PURPLE | Pawn structure | Penalize doubled and isolated pawns, reward passed pawns | `pawn_structure()` in `evaluation.py` | 30 |
 | CYAN | Mating bonus | With a big lead, drive the losing king to the edge | `mating_bonus()` in `evaluation.py` | 24 |
-| ORANGE | Null-move pruning | If passing the turn still wins in a shallow search, a real move will too | `make_null_move()` in `search.py` and `undo_null_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 23 |
+| ORANGE | Null-move pruning | Let the opponent move twice; if Remus is still too far ahead, the opponent would never allow this position, so stop searching it | `make_null_move()` in `search.py` and `undo_null_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 23 |
 | BROWN | Late move reductions | Search late, quiet moves one ply shallower, and in full only if they surprise | `reduction()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
 | GRAY | King safety | Reward pawns that shelter the king while the enemy queen is on the board | `king_safety()` in `evaluation.py` | 20 |
 
@@ -70,23 +70,36 @@ The evaluation stations (PURPLE, CYAN, GRAY) add one term to `evaluate()` and on
 line to `explain_evaluation()`. The GREEN station asks the book before searching, in
 both `uci_engine.py` and `console_game.py`.
 
-## Measure the gain: station_match.py
+## The Day 10 tournament: station_match.py
 
 `instructor/Stations/station_match.py` plays a station's Remus against Remus-WHITE,
-or against another station, at 1 minute plus 0.6 seconds a move. It adds
-every game to `games/remus_games.pgn` and prints the score and the Elo gap.
+or against another station, at 10 minutes a side. It adds every game to
+`games/remus_games.pgn` and prints the score.
 
 ```bash
-uv run station_match.py RED            # Remus-RED against Remus-WHITE, 20 games
+uv run station_match.py RED            # Remus-RED against Remus-WHITE, 2 games
 uv run station_match.py RED BLUE       # Remus-RED against Remus-BLUE
+uv run station_match.py RED --games 1 --minutes 2
+                                       # the Day 9 smoke test: one short game
 ```
 
-Twenty games take about 20 to 30 minutes with two games at once: each game lasts
-about two minutes, because each side has 1 minute plus 0.6 seconds a move. Nobody needs to watch, so
-every laptop runs its own color against Remus-WHITE at the same time. Remus-WHITE
-also plays in the color-on-color matches, to show how far each station climbs above
-its starting point. In the games file every player is named `Remus-<COLOR>`, such as
-`Remus-WHITE`, so a player name never reads like the side to move.
+In the Day 10 tournament every pair runs `uv run station_match.py <COLOR>` on its own
+laptop, all ten at once. Its color plays two games against Remus-WHITE from the same
+opening: White in game 1 and Black in game 2. The two games run side by side and take
+about 20 minutes, 30 with setup. Each pair writes its two results on the board. Two
+games cannot show whether an enhancement helps, so the script prints no Elo gap for
+fewer than 10 games. The teacher then shows Remus-GOLD's score against every color
+and Remus-WHITE from the teacher's league:
+
+```bash
+uv run station_league.py --rate-only --player GOLD
+```
+
+The Day 9 smoke test plays one game on a short clock only to prove that the station's
+engine plays legal moves to the end; nobody reads its result.
+
+In the games file every player is named `Remus-<COLOR>`, such as `Remus-WHITE`, so a
+player name never reads like the side to move.
 
 ### Why the games start from openings
 
@@ -103,16 +116,21 @@ takes White once. The games file stores the opening in a `StartMoves` header.
 396 games in all. Then it fits one Elo rating to every version from every station
 game in the games file, the games of `station_match.py` included, with Remus-WHITE
 pinned at 0. Each rating is that version's gain over Remus-WHITE. The league plays
-at 1 minute plus 0.6 seconds a move unless `--minutes` and `--increment` name another
-clock, and it rates the games of each clock apart from the others, since a version
-that searches deeper can gain more with more time to think.
+at 10 minutes a side with no increment, because Remus in Python searches too slowly
+for shorter games to show what an enhancement adds. `--minutes` and `--increment`
+name another clock, and the script rates the games of each clock apart from the
+others, since a version that searches deeper can gain more with more time to think.
 
 ```bash
-uv run station_league.py                # the round robin, then the ratings
+uv run station_league.py --at-once 16   # the round robin, 16 games at a time
 uv run station_league.py --rate-only    # only the ratings, from the saved games
-uv run station_league.py --minutes 10 --increment 0 --at-once 16
-                                        # 10-minute games, 16 at a time
+uv run station_league.py --at-once 16 --event "Station league 2"
+                                        # a new league, rated apart from the others
 ```
+
+Without `--at-once`, the league plays one game per processor thread. Give it the
+number of cores or fewer, because each game needs a whole core to itself to use its
+clock fairly.
 
 The fit works like `estimate_elo.py`: it moves each rating until the points the Elo
 formula expects for a version equal the points it really scored. One pretend draw
@@ -126,42 +144,41 @@ of the league. Anything an engine prints to stderr, such as the traceback of a
 crash, is saved with the game's names and opening in `games/engine_errors.log`.
 
 The league can stop partway, such as when a laptop restarts. Run it again and it
-plays only the games that are not in the games file yet. With one game per processor
-core, a 4-core computer plays about 2 games a minute, so the whole league takes
-about 3 hours and 20 minutes.
+plays only the games that are not in the games file yet. A 10-minute game lasts
+about 16 minutes on average. The teacher's 24-core computer, playing 16 games at a
+time, finished about one game a minute, so the whole league took about 7 hours. A
+4-core laptop playing 4 games at a time needs about a day.
 
-### The teacher's league runs
+### The teacher's league run
 
-The teacher ran all 396 games twice in October 2026: once at 1 minute plus 0.6
-seconds a move, and once at 10 minutes a game. These are the ratings:
+The teacher ran all 396 games in October 2026 at 10 minutes a game. These are the
+ratings:
 
-| Version | 1 minute: score | 1 minute: Elo vs WHITE | 10 minutes: score | 10 minutes: Elo vs WHITE |
-| --- | --- | --- | --- | --- |
-| Remus-GOLD | 65.2% | +99 +/- 87 | 72.7% | +175 +/- 93 |
-| Remus-YELLOW | 53.8% | +24 +/- 84 | 52.3% | +35 +/- 84 |
-| Remus-ORANGE | 51.5% | +10 +/- 84 | 50.8% | +26 +/- 84 |
-| Remus-BROWN | 47.7% | -14 +/- 84 | 50.8% | +26 +/- 84 |
-| Remus-BLUE | 49.2% | -5 +/- 84 | 48.5% | +11 +/- 84 |
-| Remus-PINK | 44.7% | -34 +/- 84 | 47.7% | +6 +/- 84 |
-| Remus-RED | 50.0% | +0 +/- 84 | 47.7% | +6 +/- 84 |
-| Remus-PURPLE | 55.3% | +34 +/- 84 | 47.7% | +6 +/- 84 |
-| Remus-GRAY | 44.7% | -34 +/- 84 | 47.0% | +1 +/- 84 |
-| Remus-WHITE | 50.0% | 0 (pinned) | 46.2% | 0 (pinned) |
-| Remus-CYAN | 43.9% | -39 +/- 84 | 44.7% | -13 +/- 84 |
-| Remus-GREEN | 43.9% | -39 +/- 84 | 43.9% | -18 +/- 84 |
+| Rank | Version | Score | Elo vs WHITE |
+| --- | --- | --- | --- |
+| 1 | Remus-GOLD | 72.7% | +175 +/- 93 |
+| 2 | Remus-YELLOW | 52.3% | +35 +/- 84 |
+| 3 | Remus-ORANGE | 50.8% | +26 +/- 84 |
+| 4 | Remus-BROWN | 50.8% | +26 +/- 84 |
+| 5 | Remus-BLUE | 48.5% | +11 +/- 84 |
+| 6 | Remus-PINK | 47.7% | +6 +/- 84 |
+| 7 | Remus-RED | 47.7% | +6 +/- 84 |
+| 8 | Remus-PURPLE | 47.7% | +6 +/- 84 |
+| 9 | Remus-GRAY | 47.0% | +1 +/- 84 |
+| 10 | Remus-WHITE | 46.2% | 0 (pinned) |
+| 11 | Remus-CYAN | 44.7% | -13 +/- 84 |
+| 12 | Remus-GREEN | 43.9% | -18 +/- 84 |
 
-The rows follow the 10-minute ratings. Only Remus-GOLD, with all ten enhancements,
-has a range that stays above 0. At 1 minute a game its +99 plus or minus 87 runs
-from +12 to +186; at 10 minutes its +175 plus or minus 93 runs from +82 to +268.
-More time helps Remus-GOLD most, because null move and late move reductions save
-work only at depth 3 and deeper, and Remus reaches those depths only with time to
-think. Every single station's range includes 0 at both clocks, so one enhancement
-alone changes Remus by less than 66 games can measure.
+Only Remus-GOLD, with all ten enhancements, has a range that stays above 0: its +175
+plus or minus 93 runs from +82 to +268. Null move and late move reductions save work
+only at depth 3 and deeper, and Remus reaches those depths only with time to think.
+Every single station's range includes 0, so one enhancement alone changes Remus by
+less than 66 games can measure.
 
-The 10-minute run played its first 266 games before `thinking_time` kept a
-3-second reserve on the clock, and its last 130 games with the reserve. 3 games
-ended on time, all of them Remus-GOLD losses from the first part, so Remus-GOLD's
-true 10-minute gain is likely a little higher than +175.
+The run played its first 266 games before `thinking_time` kept a 3-second reserve
+on the clock, and its last 130 games with the reserve. 3 games ended on time, all
+in the first part and all with Remus-GOLD playing White: Remus-GOLD lost two of them
+on time, against Remus-PINK and Remus-YELLOW, and Remus-WHITE lost the third.
 
 ## How big is each version?
 

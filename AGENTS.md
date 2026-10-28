@@ -159,7 +159,8 @@ The engine must run without Lucas Chess or `python-chess` installed.
 11. Transposition table (plain dict), opening list, tablebase probing at the boundary
 12. UCI loop and play in Lucas Chess
 13. Science AI: aim the same generate, score, and choose loop at a hidden-peak
-    measurement problem (`science/hidden_peak.py`)
+    measurement problem (`hidden_peak.py`), then the full tree search at X-ray phase
+    identification (`phase_hunt.py`)
 
 Each lesson has a "Ready to move on when" gate in the workshop file. Don't skip a gate.
 
@@ -207,8 +208,15 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - **The changes and why**: one paragraph for every function or lab part the pair
     writes, saying what the code does, why it is written that way, and how it fits
     the whole engine.
+  Every station README (David, 2026-10-28) also explains its enhancement in enough
+  detail for a pair to work from it alone: a worked example, why it makes Remus
+  stronger, what it costs, a table of positions per depth and positions per second
+  measured against Remus-WHITE, what to expect in games, and where the pair's code
+  is called from.
   The text lives in `period_guides.py` (`OBJECTIVES`, `CHANGE_NOTES`, `LAB_NOTES`,
-  `STATION_OBJECTIVES`); the builders write it into the READMEs, so edit it there.
+  `STATION_OBJECTIVES`, `STATION_GUIDES`, `STATION_MEASURES`); the builders write it
+  into the READMEs, so edit it there. Measure `STATION_MEASURES` again after any
+  change to a station's search or evaluation.
   Each student README adds a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it, and
   `docs/student_edit_plan.md` lists the same plan for the whole course.
@@ -258,7 +266,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   positions). A change to Remus-GOLD's rules, evaluation, or search needs the same
   change in Niram. The Python style rules above do not apply to the Rust code, which
   follows `cargo fmt` and `cargo clippy`.
-- Every game any script plays (`play_match.py`, `tournament.py`, `estimate_elo.py`,
+- Every game any script plays (`play_match.py`, `estimate_elo.py`,
   `station_match.py`, `station_league.py`, `station_elo.py`) is added to `games/remus_games.pgn` at the top of the
   repository, which git ignores so each computer keeps its own games.
 - A module keeps one file name from the day it appears to Day 10. When a later lesson
@@ -267,7 +275,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `upgraded_search`), and the older function stays. Never add version numbers to file
   names.
 - The Science AI lessons are `hidden_peak.py` (Day 10, `period1` on) and
-  `beam_time.py`, the beamline problem (Day 10, `period2` on). Both use the standard
+  `phase_hunt.py`, X-ray phase identification by tree search (Day 10, `period2`
+  on). Both use the standard
   library only and do not import the engine: they reuse the engine's ideas, not its
   code.
 - Tests sit next to the modules in each period folder. The module names repeat from

@@ -23,7 +23,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-from period_guides import CHANGE_NOTES, STATION_OBJECTIVES
+from period_guides import (
+    CHANGE_NOTES,
+    STATION_GUIDES,
+    STATION_MEASURES,
+    STATION_OBJECTIVES,
+)
 
 ROOT = Path(__file__).parent
 INSTRUCTOR = ROOT / "instructor"
@@ -273,9 +278,11 @@ ORANGE_HELPERS = (
 
 ORANGE_SEARCH = station_search(
     "null_move_search",
-    """    The ORANGE station search: the Day 9 search plus null-move pruning. If the
-    side to move could pass and still score at least beta in a shallower search,
-    a real move will too, so the position is cut off early.""",
+    """    The ORANGE station search: the Day 9 search plus null-move pruning. The side
+    to move passes, so the opponent moves twice, and runs a shallower search. If
+    the side to move still scores at least beta, the opponent would never allow
+    this position, because a real move almost always beats a pass, so the
+    position is cut off early.""",
     [
         (
             """    first: Move | None = None,
@@ -805,8 +812,9 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
     },
     {
         "folder": "ORANGE - Null-move pruning",
-        "idea": "Pass the turn in a shallow search: if passing still wins, a real "
-        "move will too, so stop early.",
+        "idea": "Let the opponent move twice in a shallow search. If Remus is still "
+        "too far ahead, the opponent would never allow this position, so stop "
+        "searching it.",
         "copies": [],
         "edits": search_station(
             "ORANGE",
@@ -904,46 +912,94 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
 ]
 
 
+def measured_table(color: str) -> str:
+    """Return the Markdown table that compares a version's search with Remus-WHITE."""
+    rows = ["WHITE"] if color == "WHITE" else ["WHITE", color]
+    white = STATION_MEASURES["WHITE"]
+    lines = [
+        (
+            "| Version | Positions to finish depth 4 | Share of Remus-WHITE's | "
+            "Positions per second | Average depth in 5 seconds |"
+        ),
+        "| --- | ---: | ---: | ---: | ---: |",
+    ]
+    for name in rows:
+        measure = STATION_MEASURES[name]
+        share = 100 * measure["nodes"] / white["nodes"]
+        speed = measure["nodes"] / measure["seconds"]
+        lines.append(
+            f"| Remus-{name} | {measure['nodes']:,} | {share:.0f}% | {speed:,.0f} | "
+            f"{measure['depth']:.1f} |"
+        )
+    return (
+        "Each version searched the ten positions of `compare_search.py`, one depth at "
+        "a time up to depth 4, on one computer. Fewer positions for the same depth "
+        "means a smaller search tree. Positions per second shows what each position "
+        "costs. The last column gave each position 5 seconds, the way a game does, "
+        "and averages the deepest search that finished.\n\n" + "\n".join(lines)
+    )
+
+
 def readme_text(station: dict) -> str:
     """Return the README.md that explains one station folder."""
     color, name = station["folder"].split(" - ")
+    guide = STATION_GUIDES[color]
+    sections = [
+        f"# Remus-{color}: {name}\n\n{station['idea']}",
+    ]
+    if station["students"]:
+        objectives = "\n".join(
+            f"- {objective} **Measured by:** {measure}"
+            for objective, measure in STATION_OBJECTIVES
+        )
+        sections.append(
+            "## Learning objectives\n\n"
+            f"By the end of the station, each pair can:\n\n{objectives}"
+        )
+    sections += [
+        f"## The idea, with an example\n\n{guide['example']}",
+        f"## {guide.get('why_title', 'Why it makes Remus stronger')}\n\n{guide['why']}",
+        f"## What it costs\n\n{guide['cost']}",
+        f"## Measured against Remus-WHITE\n\n{measured_table(color)}",
+        f"## What to expect\n\n{guide['expect']}",
+    ]
     if color == "GOLD":
-        return (
-            f"# Remus-{color}: {name}\n\n{station['idea']}\n\n"
-            "Check it from inside this folder with `uv run pytest`, and rate it with "
-            "`uv run estimate_elo.py`.\n"
+        sections.append(
+            "## Check it\n\nCheck it from inside this folder with `uv run pytest`, "
+            "and rate it against Stockfish with `uv run estimate_elo.py`. From the "
+            "Stations folder, `uv run station_league.py --rate-only --player GOLD` "
+            "shows its score against every other version in the teacher's league."
         )
-    if not station["students"]:
-        return (
-            f"# Remus-{color}: {name}\n\n{station['idea']}\n\n"
-            "Check it from inside this folder with `uv run pytest`. From the Stations "
-            f"folder, `uv run station_match.py {color} RED` plays it against a station.\n"
+    elif not station["students"]:
+        sections.append(
+            "## Check it\n\nCheck it from inside this folder with `uv run pytest`. "
+            f"From the Stations folder, `uv run station_match.py {color} RED` plays "
+            "it against a station."
         )
-    written = ", ".join(
-        f"`{function}()` in `{file}`" for file, function in station["students"]
-    )
-    objectives = "\n".join(
-        f"- {objective} **Measured by:** {measure}"
-        for objective, measure in STATION_OBJECTIVES
-    )
-    changes = "\n\n".join(
-        f"### `{function}()` in `{file}`\n\n{CHANGE_NOTES[(file, function)]}"
-        for file, function in station["students"]
-    )
-    return (
-        f"# Remus-{color}: {name}\n\n"
-        f"{station['idea']}\n\n"
-        "## Learning objectives\n\n"
-        f"By the end of the station, each pair can:\n\n{objectives}\n\n"
-        "## The files\n\n"
-        "This folder is Remus-WHITE, the finished Day 9 Remus, plus this one "
-        f"enhancement. The pair writes {written}.\n\n"
-        f"## The changes and why\n\n{changes}\n\n"
-        "Check the work from inside this folder with `uv run pytest`. Then measure "
-        "the gain from the Stations folder with "
-        f"`uv run station_match.py {color}`, which plays Remus-{color} against "
-        "Remus-WHITE and adds every game to games/remus_games.pgn.\n"
-    )
+    else:
+        written = ", ".join(
+            f"`{function}()` in `{file}`" for file, function in station["students"]
+        )
+        changes = "\n\n".join(
+            f"### `{function}()` in `{file}`\n\n{CHANGE_NOTES[(file, function)]}"
+            for file, function in station["students"]
+        )
+        sections += [
+            f"## Where your code fits\n\n{guide['fits']}",
+            (
+                "## The files\n\nThis folder is Remus-WHITE, the finished Day 9 Remus, "
+                f"plus this one enhancement. The pair writes {written}."
+            ),
+            f"## The changes and why\n\n{changes}",
+            (
+                "## Check it\n\nCheck the work from inside this folder with "
+                "`uv run pytest`. In the Day 10 tournament, "
+                f"`uv run station_match.py {color}` in the Stations folder plays "
+                f"Remus-{color} against Remus-WHITE twice, once with each color, at "
+                "10 minutes a side, and adds both games to games/remus_games.pgn."
+            ),
+        ]
+    return "\n\n".join(sections) + "\n"
 
 
 def tidy(folders: list[Path]) -> None:

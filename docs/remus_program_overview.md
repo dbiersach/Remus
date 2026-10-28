@@ -23,7 +23,7 @@ holds four period folders, `period1` to `period4`, one for each class period:
 | `Day 07 - Play full games and score positions` | Adds game endings, SAN, two simple brains, the UCI link to the GUI, and the evaluation |
 | `Day 08 - Search ahead with alpha-beta` | Looks ahead with minimax and negamax, then prunes with alpha-beta, searches captures to quiet positions, and orders moves |
 | `Day 09 - Add the clock and build the stations` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten enhancement stations, and adds a mate solver |
-| `Day 10 - Aim Remus at a science problem` | Holds all ten enhancements, the hidden-peak and beam time Science AI, and the tournament |
+| `Day 10 - Aim Remus at a science problem` | Holds all ten enhancements and the hidden-peak and phase-hunt Science AI |
 
 The Day folders live inside the root `instructor/` folder. `instructor/` holds only
 finished reference code that runs as it is, with no blanks to fill in, so the solution
@@ -151,13 +151,12 @@ The pages, in the order the class builds them:
 | [`transposition_table.py`](scripts/transposition_table.md) | Remember positions already searched |
 | [`opening_book.py`](scripts/opening_book.md) | Play known openings without thinking |
 | [`mate_solver.py`](scripts/mate_solver.md) | Solve mate-in-two puzzles |
-| [`tournament.py`](scripts/tournament.md) | The class round robin |
 | [`estimate_elo.py`](scripts/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
 | [`demo_results.py`](scripts/demo_results.md) | Day 10 demo: read a match result and explain a move |
-| [`station_match.py`](stations.md) | Measures one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements |
+| [`station_match.py`](stations.md) | Plays one enhancement station against Remus-WHITE, the Day 9 Remus with no enhancements: the Day 10 tournament |
 | [`station_league.py`](stations.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](scripts/hidden_peak.md) | Science AI: find the hidden peak |
-| [`beam_time.py`](scripts/beam_time.md) | Science AI: plan the beam time |
+| [`phase_hunt.py`](scripts/phase_hunt.md) | Science AI: name the crystals in a powder |
 | [The test files](scripts/tests.md) | Checking that Remus works |
 
 ## The four boundaries
@@ -167,7 +166,7 @@ The pages, in the order the class builds them:
 | Native Python engine | `board.py` to `search.py` | Board, rules, legal moves, state, search, evaluation, move choice |
 | Console driver | `console_game.py` | Prints the board and reads SAN moves typed in the terminal |
 | UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with Lucas Chess on standard input and output |
-| Teacher tools | `play_match.py`, `compare_search.py`, `tournament.py`, `estimate_elo.py`, `Stations/station_match.py`, `Stations/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
+| Teacher tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `Stations/station_match.py`, `Stations/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
 
 ## The core data structures
 
@@ -261,9 +260,10 @@ choose the best" to choose where to measure next on a 10x10 sample. A greedy AI 
 exploration term finds the hidden peak in about 9 measurements, against about 54 for
 random guessing. See [`scripts/hidden_peak.md`](scripts/hidden_peak.md).
 
-`beam_time.py` aims the same loop at a beamline problem: 40 one-minute shots of
-X-rays for 8 samples, where each sample needs a yes-or-no call. The agent looks one
-shot ahead with three pretend readings and measures the sample whose next shot lowers
-the chance of a wrong call the most. Over 200 sample holders it makes about 0.65 wrong
-calls per holder, against 0.83 for equal time and 0.94 for random samples. See
-[`scripts/beam_time.md`](scripts/beam_time.md).
+`phase_hunt.py` aims the full tree search at X-ray phase identification: which
+crystal phases, from a library of ten, made the peaks in a powder pattern? The search
+scores every set of up to three phases with append and pop as make and undo, and adds
+phases in library order so each set is scored once, 176 sets instead of 821. It keeps
+every set that ties for the best score. Over 200 known powders a greedy agent is wrong
+on 34; the search is wrong on 9 and says "can't tell" on 52, mostly gold against
+silver, whose peaks overlap. See [`scripts/phase_hunt.md`](scripts/phase_hunt.md).

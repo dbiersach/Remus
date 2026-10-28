@@ -140,9 +140,8 @@ ARRIVALS = {
         "opening_book.txt": 1,
         "test_upgrades.py": 1,
         "hidden_peak.py": 1,
-        "beam_time.py": 2,
-        "test_beam_time.py": 2,
-        "tournament.py": 4,
+        "phase_hunt.py": 2,
+        "test_phase_hunt.py": 2,
         "remus.sh": 4,
         "estimate_elo.py": 4,
     },
@@ -231,16 +230,16 @@ TEST_PERFT_HELPER = '''def state_from_python_chess(board: chess.Board) -> dict:
 
 def python_chess_perft('''
 
-# The main() of beam_time.py before the pairs write the look-ahead in period 3
-BEAM_TIME_MAIN = """def main():
-    print(f"Beam time: {SHOTS} shots for {SAMPLES} samples, on {TRIALS} holders")
-    for name, strategy in [("Random sample", random_sample), ("Equal time", equal_time)]:
-        expected, real = benchmark(strategy)
-        print(
-            f"  {name:13}: {real:.2f} wrong calls per holder "
-            f"(the agent expected {expected:.2f})"
-        )
-    print("  (expected: equal time makes fewer wrong calls than random samples)")
+# The main() of phase_hunt.py before the pairs write the tree search in period 3
+PHASE_HUNT_MAIN = """def main():
+    measured, truth = make_pattern(SILVER_POWDER)
+    print(f"Powder {SILVER_POWDER} shows {len(measured)} peaks: {measured}")
+    print(f"  True phases:  {truth}")
+    print(f"  Greedy says:  {greedy_phases(measured)}")
+    print("  (expected: greedy names gold, but the powder holds silver)")
+    print(f"Benchmark: {TRIALS} powders of 1 to {MAX_PHASES} phases")
+    show_benchmark("Greedy", benchmark(greedy_answer))
+    print("  (expected: greedy names most powders right and about 1 in 6 wrong)")
 """
 
 # What the earlier periods leave out of a file that grows during the day:
@@ -530,18 +529,65 @@ captures stop.""",
         The score for the side to move.""",
         ),
     ],
-    (10, 2, "beam_time.py"): [
-        ("drop", ["NEXT_READINGS", "gain", "choose_next_sample"]),
-        ("main", BEAM_TIME_MAIN),
+    (10, 2, "phase_hunt.py"): [
+        (
+            "replace",
+            "import random\nfrom dataclasses import dataclass, field\n",
+            "import random\n",
+        ),
+        (
+            "drop",
+            ["Hunt", "search", "run_search", "search_answer", "sets_every_order"],
+        ),
+        ("main", PHASE_HUNT_MAIN),
     ],
-    (10, 2, "test_beam_time.py"): [
+    (10, 2, "test_phase_hunt.py"): [
         (
             "replace",
             (
-                "the estimate, the evaluation, the look-ahead, and\nthe benchmark "
-                "against random and equal-time agents."
+                "the evaluation, the greedy agent, the tree search, and the\n"
+                "benchmark against known powders."
             ),
-            "the estimate, the evaluation, and the random and\nequal-time agents.",
+            "the evaluation and the greedy agent.",
+        ),
+        (
+            "replace",
+            (
+                "from phase_hunt import (\n"
+                "    LIBRARY,\n"
+                "    MAX_PHASES,\n"
+                "    SILVER_POWDER,\n"
+                "    Hunt,\n"
+                "    benchmark,\n"
+                "    greedy_answer,\n"
+                "    greedy_phases,\n"
+                "    make_pattern,\n"
+                "    matches,\n"
+                "    run_search,\n"
+                "    score,\n"
+                "    search,\n"
+                "    search_answer,\n"
+                ")\n"
+            ),
+            (
+                "from phase_hunt import (\n"
+                "    LIBRARY,\n"
+                "    SILVER_POWDER,\n"
+                "    greedy_phases,\n"
+                "    make_pattern,\n"
+                "    matches,\n"
+                "    score,\n"
+                ")\n"
+            ),
+        ),
+        (
+            "drop",
+            [
+                "test_search_leaves_the_phases_as_it_found_them",
+                "test_search_scores_each_set_once",
+                "test_search_finds_both_look_alikes",
+                "test_search_makes_fewer_wrong_calls_than_greedy",
+            ],
         ),
     ],
 }
@@ -583,10 +629,10 @@ PERIOD_TITLES = {
     (9, 1): "Iterative deepening, the clock, and UCI info",
     (9, 2): "Python lab 12 and the enhancement stations",
     (9, 3): "Enhancement stations: test and measure",
-    (9, 4): "Launch the station matches, and the mate solver",
+    (9, 4): "The mate solver",
     (10, 1): "Science AI: hidden_peak.py",
-    (10, 2): "The beamline problem: represent and evaluate",
-    (10, 3): "The beamline problem: look ahead and verify",
+    (10, 2): "The phase hunt: score a guess, and the greedy agent",
+    (10, 3): "The phase hunt: search every set, and verify",
     (10, 4): "Results, tournament, take-home, and wrap-up",
 }
 
@@ -605,14 +651,13 @@ PERIOD_NOTES = {
     (9, 2): "Each pair builds one color station in the `Stations` folder, such as "
     "`RED - Transposition table`. The code in this Day folder is Remus-WHITE, the "
     "starting point of every station.",
-    (9, 4): "Each pair starts `uv run station_match.py <COLOR>` in the `Stations` "
-    "folder, which plays its station against Remus-WHITE with nobody watching. "
-    "Meanwhile the pairs write the mate solver.",
-    (10, 2): "`uv run beam_time.py` spends 40 shots of beam time on 8 samples and "
-    "counts the wrong calls over 200 sample holders.",
-    (10, 4): "`uv run tournament.py` plays the class round robin, and "
-    "`uv run estimate_elo.py` measures the Elo rating of Remus against Stockfish. "
-    "Both add every game to games/remus_games.pgn at the top of the Remus folder.",
+    (10, 2): "`uv run phase_hunt.py` names the crystal phases in an X-ray powder "
+    "pattern and counts the right and wrong calls over 200 powders.",
+    (10, 4): "The tournament: each pair runs `uv run station_match.py <COLOR>` in "
+    "the `Stations` folder, two 10-minute games of its color against Remus-WHITE, one "
+    "with each color, all pairs at once. `uv run estimate_elo.py` measures the Elo "
+    "rating of Remus against Stockfish. Both add every game to games/remus_games.pgn "
+    "at the top of the Remus folder.",
 }
 
 # Every Python module name that appears in any Day folder

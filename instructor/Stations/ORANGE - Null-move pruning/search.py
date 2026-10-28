@@ -445,9 +445,11 @@ def null_move_search(
     allow_null: bool = True,
 ) -> tuple[int, list[Move]]:
     """
-    The ORANGE station search: the Day 9 search plus null-move pruning. If the
-    side to move could pass and still score at least beta in a shallower search,
-    a real move will too, so the position is cut off early.
+    The ORANGE station search: the Day 9 search plus null-move pruning. The side
+    to move passes, so the opponent moves twice, and runs a shallower search. If
+    the side to move still scores at least beta, the opponent would never allow
+    this position, because a real move almost always beats a pass, so the
+    position is cut off early.
 
     Parameters
     ----------

@@ -107,13 +107,13 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 9.7 | Exact, lower, upper | Three number lines showing what a stored bound proves for a new `(alpha, beta)` window |
 | 9.8 | Killer moves | Two slots per ply; a quiet move that caused a cutoff jumps the queue in sibling positions |
 | 9.9 | Principal variation search | The first move gets the full window; the rest get a null window `(alpha, alpha + 1)` and a re-search only on a surprise |
-| 9.10 | Null-move pruning | Remus passes the turn and searches 2 plies shallower; if the score still beats beta, the real moves are skipped |
+| 9.10 | Null-move pruning | Remus passes, so the opponent moves twice, and searches 2 plies shallower; if Remus still scores at least beta, the opponent would never allow the position, so its real moves are skipped |
 | 9.11 | Late move reductions | A move list with the first three moves at full depth and the late, quiet moves one ply shallower, with a re-search on a surprise |
 | 9.12 | Pawn structure | Doubled, isolated, and passed pawns on one diagram with their points |
 | 9.13 | King safety | A castled king with its three shield pawns, 15 points each while the enemy queen is on the board |
 | 9.14 | Finishing a won endgame | The `mating_bonus` heat map: the losing king pushed to the edge, the winning king closing in |
 | 9.15 | The opening book | Book lines in SAN turned into a dict from `position_key` to moves, drawn as a small tree |
-| 9.16 | The match plan | Each color against Remus-WHITE, plus the planned color-on-color showcase matches, all running with nobody watching |
+| 9.16 | The tournament plan | Each color plays Remus-WHITE twice on Day 10, once with each color, at 10 minutes a side, all ten laptops at once; then Remus-GOLD against everyone from the teacher's league |
 | 9.17 | The mate solver | An AND/OR tree: the attacker needs one move that works, the defender's every reply must fail. MATE.008 solved in about 6 seconds |
 
 ## Day 10: Aim Remus at a science problem
@@ -124,9 +124,9 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 10.2 | The hidden peak | A 10x10 grid with readings so far, the predicted values, and the square the AI chooses next |
 | 10.3 | Explore against exploit | Three runs with explore weight 0, 8, and 40 and their average measurements |
 | 10.4 | The benchmark | A bar chart: random guessing about 54 measurements, greedy AI about 9 |
-| 10.5 | Beam time | A sample holder with eight samples, each with its readings and error bar against the line at 50; 40 shots to share |
-| 10.6 | The chance of a wrong call | A bell curve around a sample's average; the tail on the far side of the line at 50 is the chance the call is wrong |
-| 10.7 | Look ahead with pretend readings | Three pretend readings (one noise step low, on the average, one step high) with chances 1/4, 1/2, 1/4, beside Remus making and undoing a move |
-| 10.8 | Verify | A bar chart of wrong calls per holder (random 0.94, equal time 0.83, largest gain 0.65), each beside the count the agent expected |
-| 10.9 | The real thing | The NSLS-II autonomous agent runs the same loop with a Gaussian process instead of the hand-built model |
+| 10.5 | Fingerprints | Four phases' peak strips over an X-ray pattern; a powder of quartz and rutile shows the peaks of both |
+| 10.6 | Score a guess | One pattern with three guesses: explained peaks in green, left-over peaks in orange, missing peaks in red, and each guess's score |
+| 10.7 | The tree of phase sets | The empty set at the root, one phase per branch, beside Remus's game tree; crossed-out branches that repeat a set in another order (821 sets down to 176) |
+| 10.8 | Verify | A bar chart over 200 known powders: greedy 166 right and 34 wrong; search 139 right, 52 can't tell, 9 wrong; the gold and silver peaks side by side |
+| 10.9 | The real thing | CrystalShift and Dara search the same tree on real synchrotron data; Brookhaven's Crystallography Companion Agent names phases live at the NSLS-II PDF beamline; the gpCAM agent at the CMS beamline chooses where to measure next |
 | 10.10 | The round robin | The circle method for 10 entrants: one fixed, the rest rotate; 9 rounds, 45 games |
