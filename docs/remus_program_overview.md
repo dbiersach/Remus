@@ -243,22 +243,6 @@ picks the same moves, about 50 times faster: some 200,000 positions a second aga
 about 4,000. The station scripts play Niram with `--niram`, so a league of 10-minute
 games searches as deep as a Remus league of 8-hour games. See [`niram/README.md`](../niram/README.md).
 
-## Where the ideas come from
-
-Remus borrows its approach from Turbo GameWorks Chess 4.0 (Borland, 1987) without
-copying its code:
-
-| GameWorks idea | Remus |
-| --- | --- |
-| Piece values 256, 768, 768, 1216, 2304 | Centipawns 100, 300, 300, 500, 900 (`evaluation.py`) |
-| `Attacks` asks each piece about a square | `is_attacked_by_scanning` (`attacks.py`) |
-| `KillingMove` | `remember_killer` and `KILLER_SCORE` |
-| `PawnStrVal`, `PassPawnRank` | `pawn_structure` |
-| `Mating` mode and `DistAn` | `mating_bonus` and `CENTER_DISTANCE` |
-| Zero-window search | Principal variation search in `upgraded_search` |
-| `OPENING.LIB` | `opening_book.txt`, written in SAN |
-| `MATE.001` to `MATE.010` | `tests/mate_puzzles.epd` and `mate_solver.py` |
-
 ## Science AI
 
 `hidden_peak.py` reuses the engine's loop of "list the candidates, score each one,

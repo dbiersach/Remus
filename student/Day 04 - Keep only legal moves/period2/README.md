@@ -44,8 +44,8 @@ Every other function in this folder is finished. Change only these, and only bel
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `attacks.py` | `piece_at_offsets()` | 62 | 6 | `uv run pytest` |
-| `attacks.py` | `attacked_by_pawn()` | 101 | 3 | `uv run pytest` |
-| `attacks.py` | `attacked_by_king()` | 95 | 2 | `uv run pytest` |
+| `attacks.py` | `piece_at_offsets()` | 64 | 6 | `uv run pytest` |
+| `attacks.py` | `attacked_by_pawn()` | 103 | 3 | `uv run pytest` |
+| `attacks.py` | `attacked_by_king()` | 97 | 2 | `uv run pytest` |
 
 Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

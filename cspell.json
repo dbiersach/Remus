@@ -7,8 +7,7 @@
     // files and folders the spell checker skips
     "ignorePaths": [
         ".venv/**",
-        "uv.lock",
-        "Turbo Pascal Toolbox 4.0 - GameWorks/**"
+        "uv.lock"
     ],
     // words - list of words to be always considered correct
     "words": [
@@ -25,7 +24,6 @@
         "bitboards",
         "Blackburne",
         "Bogo",
-        "Borland",
         "Brookhaven",
         "btime",
         "Caro",
@@ -34,7 +32,6 @@
         "charliermarsh",
         "Countergambit",
         "cschlosser",
-        "Danielsen",
         "Dara",
         "dataclass",
         "dataclasses",
@@ -50,11 +47,9 @@
         "Englund",
         "errorlens",
         "esbenp",
-        "EVALU",
         "expectimax",
         "extensionpack",
         "fullmove",
-        "GameWorks",
         "Giuoco",
         "Grunfeld",
         "halfmove",

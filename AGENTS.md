@@ -313,16 +313,6 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   the slide plan, the course plan, the roadmap, the Lucas Chess guide (with its
   screenshots in `docs/images/lucas_chess/`), and the two briefing PDFs.
 
-## Licensed local files
-
-The `Turbo Pascal Toolbox 4.0 - GameWorks/` folder holds the original Borland disks
-and archive as a historical reference for the workshop. It is copyrighted software,
-excluded from git by `.gitignore`. Never stage, commit, or push anything in it, and
-never edit `.gitignore` in a way that would let it through. Never quote large parts of
-its source into the repository; describe the ideas and write Remus's own code. The one
-approved exception (David, 2026-10-26) is the ten `MATE.00x` puzzle positions, stored
-as FEN in `tests/mate_puzzles.epd`.
-
 # Part 2: Python style
 
 ## General principles

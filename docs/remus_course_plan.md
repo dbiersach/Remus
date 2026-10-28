@@ -6,10 +6,9 @@ two-week course for students about 13 years old: 10 days, four 90-minute periods
 labs, and then they write real sections of Remus: small functions that go into the
 class engine and stay there.
 
-The plan also maps the ideas in Borland's Turbo GameWorks Chess 4.0 (Kaare Danielsen,
-1985 to 1987) onto the modules Remus grows, and shows where Remus connects to
-`python-chess` and a desktop GUI so the class never has to build one. The standing rules
-in [`AGENTS.md`](../AGENTS.md) apply to everything below.
+The plan also shows where Remus connects to `python-chess` and a desktop GUI so the
+class never has to build one. The standing rules in [`AGENTS.md`](../AGENTS.md) apply
+to everything below.
 
 ## Decisions this plan is built on
 
@@ -31,7 +30,7 @@ in [`AGENTS.md`](../AGENTS.md) apply to everything below.
 | First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Matches | Day 10: each pair's color station plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the teacher's league |
-| Mate puzzles | The ten GameWorks `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
+| Mate puzzles | The ten `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 | Documentation | `docs/remus_program_overview.md` for the whole program, one page per major script in `docs/scripts/`, and `docs/slide_plan.md` for the PowerPoint slides |
 
 ## The shape of the two weeks
@@ -66,7 +65,7 @@ of Day 7), then it plays **good** moves (Days 7 to 10).
 
 | Area | Version 1 | Version 2 | Version 3 | Version 4 and later |
 | --- | --- | --- | --- | --- |
-| Board | 8x8 list of lists, printed (D1) | Square names (D1) | FEN in and out (D6) | GameWorks's 0x88 board as a "how 1987 did it" sidebar talk (D10 optional, no code) |
+| Board | 8x8 list of lists, printed (D1) | Square names (D1) | FEN in and out (D6) | No further changes |
 | Make and undo | Quiet moves and captures (D2) | Castling, en passant, promotion (D5) | Clocks, history, repetition keys (D7) | Undo inside search with `try/finally` (D8) |
 | Move generation | King and knight jumps (D3) | Sliders and pawns (D3) | Legal filter: make, test the king, undo (D4) | Captures first, MVV-LVA, killers (D8, D9) |
 | Attacks | Loop over enemy pieces (D4) | Look outward from the square (D4) | Castling and legality use it (D5) | Check extension in the search (D8) |
@@ -215,7 +214,7 @@ refresher with a demonstration board comes right before the code that needs each
    tree for Day 8.
 5. **Collect test positions as FEN:** the ten verification exercises in the workshop
    file, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
-   GameWorks mate puzzles, and a horizon-effect position.
+   mate puzzles in `tests/mate_puzzles.epd`, and a horizon-effect position.
 6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
    both partners take the code home, plus one class stick for bundles. Give the assistant
    the Day 1 checklist. With preconfigured laptops, Day 1 Period 1 needs only a quick
@@ -290,7 +289,7 @@ refresher with a demonstration board comes right before the code that needs each
 
 - **P1. Python lab 6, `python_modules.py`:** modules, imports, `__main__`, git.
 - **P2. Attacks.** Refresher on check, pins, and discovered check. `attacks.py`
-  version 1 loops over the enemy pieces, as GameWorks `Attacks` does. Version 2 stands
+  `is_attacked_by_scanning()` loops over the enemy pieces. `is_square_attacked()` stands
   on the square and looks outward like a "super piece."
   **Students write:** `piece_at_offsets()`, the one loop that looks for a knight, a
   king, or a pawn a fixed step away, then `attacked_by_pawn()` and `attacked_by_king()`
@@ -414,8 +413,8 @@ moves" milestone.
   slides each move into place behind every higher score, and the check extension.
   Pairs measure node counts before and after.
 
-**Checkpoint `d8-p4-end`:** Remus finds every mate in 1 and every GameWorks mate in 2,
-and alpha-beta returns the same score as negamax with fewer nodes.
+**Checkpoint `d8-p4-end`:** Remus finds every mate in 1 and every mate in 2 of
+`tests/mate_puzzles.epd`, and alpha-beta returns the same score as negamax with fewer nodes.
 
 ### Day 9: The clock, and the enhancement stations
 
@@ -435,25 +434,25 @@ and alpha-beta returns the same score as negamax with fewer nodes.
   most 30 typed lines). Colors replace numbers so no station sounds better than
   another. The stations are described in [stations.md](stations.md).
 
-| Color | Station | GameWorks idea it echoes |
-| --- | --- | --- |
-| RED | Transposition table: a dict from `position_key` to depth, score, bound, and best move | (not in GameWorks) |
-| GREEN | Opening book: SAN lines checked with `legal_moves()` | `OPENING.LIB` |
-| BLUE | Killer moves: two quiet moves per ply that caused a cutoff | `KillingMove` |
-| PINK | Principal variation search: null window on every move after the first | `ZeroWindow` in `SEARCH.CH` |
-| YELLOW | Draw sense: a repeated position scores 0 inside the search | `DrawGame` |
-| PURPLE | Pawn structure: doubled, isolated, and passed pawns | `PawnStrVal`, `PassPawnRank` |
-| CYAN | Mating bonus: push the losing king to the edge | `Mating` mode in `CalcPVTable` |
-| ORANGE | Null-move pruning: give the opponent two moves in a row; if Remus is still too far ahead, stop searching | (not in GameWorks) |
-| BROWN | Late move reductions: search late, quiet moves one ply shallower | (not in GameWorks) |
-| GRAY | King safety: reward the pawn shield while queens are on | (not in GameWorks) |
+| Color | Station |
+| --- | --- |
+| RED | Transposition table: a dict from `position_key` to depth, score, bound, and best move |
+| GREEN | Opening book: SAN lines checked with `legal_moves()` |
+| BLUE | Killer moves: two quiet moves per ply that caused a cutoff |
+| PINK | Principal variation search: null window on every move after the first |
+| YELLOW | Draw sense: a repeated position scores 0 inside the search |
+| PURPLE | Pawn structure: doubled, isolated, and passed pawns |
+| CYAN | Mating bonus: push the losing king to the edge |
+| ORANGE | Null-move pruning: give the opponent two moves in a row; if Remus is still too far ahead, stop searching |
+| BROWN | Late move reductions: search late, quiet moves one ply shallower |
+| GRAY | King safety: reward the pawn shield while queens are on |
 
 - **P3. Enhancement stations: test and measure.** Each pair finishes its station,
   passes its tests, and plays one short smoke-test game against Remus-WHITE with
   `uv run station_match.py <COLOR> --games 1 --minutes 2`, which only checks that the
   engine plays legal moves to the end. Each pair writes one sentence on the board:
   what its enhancement should change, and how the class will see it.
-- **P4. The mate solver.** The class meets the ten GameWorks mate puzzles.
+- **P4. The mate solver.** The class meets the ten mate puzzles.
   **Students write:** `mating_move(state, moves_left)` in `mate_solver.py`, the
   yes-or-no search that solves all ten, including the mate in 3 (`MATE.008`).
 
@@ -562,7 +561,7 @@ Outside the Day folders:
 
 | Path | Holds |
 | --- | --- |
-| `tests/mate_puzzles.epd` | The ten GameWorks mate puzzles as FEN |
+| `tests/mate_puzzles.epd` | The ten mate puzzles as FEN |
 | `tests/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
 | `run_all_tests.py` | Runs pytest on each instructor period folder in turn |
 | `make_period_folders.py` | Builds `period1` to `period3` of each instructor Day folder from `period4` |
@@ -578,23 +577,6 @@ the older function stays beside it in the same file: `is_attacked_by_scanning` n
 `is_square_attacked`, `minimax` and `negamax` next to `alpha_beta`, and
 `alpha_beta_with_quiescence` next to `upgraded_search`, so pairs can print node counts
 side by side and every import keeps working.
-
-## GameWorks to Remus map
-
-| GameWorks file | What it does | Remus home | Remus differs because |
-| --- | --- | --- | --- |
-| `CHESS.PAS` | Includes every module; constants `MaxPly = 23`, `Back = -104` | `uci_engine.py`, `console_game.py` | Separate modules instead of one program built from include files |
-| `BOARD.CH` | 0x88 board (`a1 = 0`, `h8 = $77`), `PieceTab` piece list, `MoveType`, `Perform` for make and take back | `board.py`, `moves.py`, `make_move.py` | 8x8 list with row 0 at rank 8; the undo record holds castling rights, en passant, and clocks, not only pieces |
-| `MOVGEN.CH` | Direction tables, `AttackTab`, `Attacks`, castling from history, `FiftyMoveCnt`, `Repetition`, `KillMovGen`, captures-first generator | `move_generation.py`, `attacks.py`, `game_end.py`, `move_ordering.py` | Rights and en passant live in state; repetition counts position keys |
-| `SMALL.CH` | `MakeMove`, `TakeBackMove`, `IllegalMove`, game comments (mate, stalemate, 50-move, repetition, resign), time allocation, move input | `make_move.py`, `game_end.py`, `notation.py`, `search.py` | Adds insufficient material; SAN input matches legal moves the same way `MoveCheck` does |
-| `EVALU.CH` | Material (pawn 256), piece-square tables built before each search, pawn structure from file sets, mating evaluation, incremental `StateValu` | `evaluation.py` | Centipawns; a full recount each time, with incremental scoring as a sidebar |
-| `SEARCH.CH` | Iterative deepening, aspiration window, alpha-beta, PVS, killers, capture search, check and seventh-rank extensions, draw scoring, mate search | `search.py`, `move_ordering.py`, `transposition_table.py` | Structured loops and `try/finally` replace `goto`; one idea per period |
-| `TALK.CH` | Main loop, menus, opening library, hint, thinking on the opponent's time, board editor, `MATE` file loader | `uci_engine.py`, `opening_book.py`, `fen.py` | The GUI replaces menus; the book is readable text; positions load from FEN |
-| `DISPLAY.CH`, `INPUT.CH`, `TIMELIB.CH` | DOS screen, keyboard, and clock | `print_board()`, `time.perf_counter()` | The GUI draws the board |
-
-GameWorks has no transposition table, no FEN, and no insufficient-material rule. Remus
-adds all three. Thinking on the opponent's time ("pondering") stays out of the core
-course; a fast pair can try it after Day 10.
 
 ## Connecting Remus to python-chess and a GUI
 

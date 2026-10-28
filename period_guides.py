@@ -586,7 +586,7 @@ OBJECTIVES = {
     (9, 4): [
         (
             "Solve mate puzzles with a yes-or-no search.",
-            "The mate-solver tests pass on all ten GameWorks puzzles.",
+            "The mate-solver tests pass on all ten mate puzzles.",
         ),
     ],
     (10, 1): [
