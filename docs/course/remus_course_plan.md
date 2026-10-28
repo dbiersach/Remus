@@ -432,7 +432,7 @@ moves" milestone.
   stays within the limit). Then each of the 10 pairs takes one color version from
   `Remus/`: Remus-WHITE plus one enhancement, with the pair's function stubbed (at
   most 30 typed lines). Colors replace numbers so no color version sounds better than
-  another. The color versions are described in [remus_versions.md](../versions/remus_versions.md).
+  another. The color versions are described in [remus_versions.md](../engines/remus_versions.md).
 
 | Color | Color version |
 | --- | --- |
@@ -520,7 +520,7 @@ test, and the mate solver solves all ten puzzles.
   teacher shows Remus-GOLD's results against every color and Remus-WHITE from the
   teacher's 10-minute league (`uv run scripts/version_league.py --rate-only --player GOLD`),
   and Remus-GOLD's Stockfish rating (about 1960 at 10 minutes a game, from
-  [`remus_elo.md`](../versions/remus_elo.md)), as a class discussion: two games cannot tell
+  [`remus_elo.md`](../engines/remus_elo.md)), as a class discussion: two games cannot tell
   one enhancement from another, and 66 games barely can. In `demo_results.py` each
   pair turns its two games, and then its color's 66 league games, into an Elo gap with
   a margin of error and lets Remus explain one move. Each pair then
