@@ -430,7 +430,7 @@ moves" milestone.
 - **P2. Python lab 12 and the enhancement stations.** The lab, `python_caches.py`,
   covers dicts as caches and tuples as keys (7 typed lines, so a station of 30 lines
   stays within the limit). Then each of the 10 pairs takes one color station from
-  `Stations/`: Remus-WHITE plus one enhancement, with the pair's function stubbed (at
+  `Remus/`: Remus-WHITE plus one enhancement, with the pair's function stubbed (at
   most 30 typed lines). Colors replace numbers so no station sounds better than
   another. The stations are described in [stations.md](stations.md).
 
@@ -511,8 +511,8 @@ test, and the mate solver solves all ten puzzles.
   beamline. A "can't tell" sends the scientist back for a second measurement, such as
   X-ray fluorescence, which tells gold from silver at once.
 - **P4. Results, tournament, take-home, and wrap-up.** The tournament comes first.
-  Every pair runs `uv run station_match.py <COLOR>` in the `Stations` folder on its
-  own laptop, all ten at once: its color plays two 10-minute games against
+  Every pair runs `uv run station_match.py <COLOR>` in the `Remus` folder next to
+  the Day folders on its own laptop, all ten at once: its color plays two 10-minute games against
   Remus-WHITE from the same opening, with White in game 1 and Black in game 2. The two
   games run side by side and take about 20 to 30 minutes, while each student copies
   the pair's repository to their own USB drive with `git clone --no-hardlinks` and
@@ -554,7 +554,7 @@ The full description of each script is in `docs/scripts/`.
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the station folders live in `Stations/` |
+| `Day 09 - Add the clock and build the stations` | `mate_solver.py` | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the station folders live in `Remus/` |
 | `Day 10 - Aim Remus at a science problem` | `transposition_table.py`, `opening_book.py`, `opening_book.txt`, `hidden_peak.py`, `phase_hunt.py`, `remus.sh`, `estimate_elo.py`, `test_upgrades.py`, `test_phase_hunt.py` | `evaluation.py` (pawns, mating, king safety), `move_ordering.py` (killers), `search.py` (`upgraded_search`), `uci_engine.py` (book) |
 
 Outside the Day folders:

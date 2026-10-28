@@ -170,7 +170,7 @@ The pages, in the order the class builds them:
 | Native Python engine | `board.py` to `search.py` | Board, rules, legal moves, state, search, evaluation, move choice |
 | Console driver | `console_game.py` | Prints the board and reads SAN moves typed in the terminal |
 | UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with Lucas Chess on standard input and output |
-| Teacher tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `Stations/station_match.py`, `Stations/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
+| Teacher tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `Remus/station_match.py`, `Remus/station_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
 
 ## The core data structures
 
@@ -236,12 +236,12 @@ The search makes and undoes moves on the one live state. A `try/finally` around 
 
 ## Niram, the Rust copy
 
-`niram/` holds Niram, all 12 Remus versions (WHITE, the ten stations, and GOLD)
+`Niram/` holds Niram, all 12 Remus versions (WHITE, the ten stations, and GOLD)
 rewritten in Rust with the same rules, evaluation, and search. On the same positions
 and depth each Niram version visits exactly as many positions as its Remus twin and
 picks the same moves, about 50 times faster: some 200,000 positions a second against
 about 4,000. The station scripts play Niram with `--niram`, so a league of 10-minute
-games searches as deep as a Remus league of 8-hour games. See [`niram/README.md`](../niram/README.md).
+games searches as deep as a Remus league of 8-hour games. See [`Niram/README.md`](../Niram/README.md).
 
 ## Science AI
 

@@ -3257,8 +3257,8 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Each pair opens its color station in the `Stations` folder, "
-                        "reads the station README, and writes the station's stubbed "
+                        "Each pair opens its color station in the `Remus` folder "
+                        "next to the Day folders, reads the station README, and writes the station's stubbed "
                         "code."
                     ),
                 ),
@@ -3456,7 +3456,7 @@ DAY_GUIDES = {
                     0,
                     (
                         "The tournament: every pair runs `uv run station_match.py "
-                        "<COLOR>` in the `Stations` folder, all ten laptops at once. "
+                        "<COLOR>` in the `Remus` folder, all ten laptops at once. "
                         "Its color plays two 10-minute games against Remus-WHITE, one "
                         "with each color."
                     ),

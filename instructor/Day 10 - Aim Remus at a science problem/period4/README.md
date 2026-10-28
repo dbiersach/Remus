@@ -1,6 +1,6 @@
 # Day 10, Period 4: Results, tournament, take-home, and wrap-up
 
-The tournament: each pair runs `uv run station_match.py <COLOR>` in the `Stations` folder, two 10-minute games of its color against Remus-WHITE, one with each color, all pairs at once. Running `estimate_elo.py` measures the Elo rating of Remus against Stockfish. Both add every game to games/remus_games.pgn at the top of the Remus folder.
+The tournament: each pair runs `uv run station_match.py <COLOR>` in the `Remus` folder next to the Day folders, two 10-minute games of its color against Remus-WHITE, one with each color, all pairs at once. Running `estimate_elo.py` measures the Elo rating of Remus against Stockfish. Both add every game to games/remus_games.pgn at the top of the repository.
 
 ## Learning objectives
 

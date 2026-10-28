@@ -61,7 +61,7 @@ By 4:30, each pair can:
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:05 | The tournament: every pair runs `uv run station_match.py <COLOR>` in the `Stations` folder, all ten laptops at once. Its color plays two 10-minute games against Remus-WHITE, one with each color. |
+| 3:00 to 3:05 | The tournament: every pair runs `uv run station_match.py <COLOR>` in the `Remus` folder, all ten laptops at once. Its color plays two 10-minute games against Remus-WHITE, one with each color. |
 | 3:05 to 3:35 | While the games run, each student copies the pair's repository to a USB drive with `git clone --no-hardlinks` and checks that the copy opens. |
 | 3:35 to 3:50 | Each pair writes its two results on the board. The teacher shows Remus-GOLD's results from the 10-minute league and its Stockfish rating. |
 | 3:50 to 4:10 | In `demo_results.py` each pair turns its games into an Elo gap with a margin of error and lets Remus explain one move. |

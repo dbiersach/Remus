@@ -14,12 +14,12 @@ better than another before the games are played.
 
 ## Where the stations live
 
-`instructor/Stations` holds `00 WHITE - No enhancements` and one folder per station,
+`instructor/Remus` holds `00 WHITE - No enhancements` and one folder per station,
 such as `06 RED - Transposition table`. The number in front of each name ranks the
 station by its rating over Remus-WHITE in the teacher's 10-minute league (below), so
 the folders list from 00 WHITE to 11 GOLD. The WHITE folder is a complete, runnable copy of
 the finished Day 9 Remus (`instructor/Day 09 .../period4`), and each station folder is
-that copy plus one enhancement. `student/Stations`
+that copy plus one enhancement. `student/Remus`
 holds the same folders with the pair's functions stubbed.
 
 `make_station_folders.py` builds the folders from the Day 9 and Day 10 code.
@@ -74,7 +74,7 @@ both `uci_engine.py` and `console_game.py`.
 
 ## The Day 10 tournament: station_match.py
 
-`instructor/Stations/station_match.py` plays a station's Remus against Remus-WHITE,
+`instructor/Remus/station_match.py` plays a station's Remus against Remus-WHITE,
 or against another station, at 10 minutes a side. It adds every game to
 `games/remus_games.pgn` and prints the score.
 
@@ -113,7 +113,7 @@ takes White once. The games file stores the opening in a `StartMoves` header.
 
 ## Rank every version: station_league.py
 
-`instructor/Stations/station_league.py` plays a round robin: each of the 12 versions
+`instructor/Remus/station_league.py` plays a round robin: each of the 12 versions
 (Remus-WHITE, the ten stations, and Remus-GOLD) plays each other version 6 times,
 396 games in all. Then it fits one Elo rating to every version from every station
 game in the games file, the games of `station_match.py` included, with Remus-WHITE
@@ -131,7 +131,7 @@ uv run station_league.py --at-once 16 --event "Station league 2"
 ```
 
 `--niram` plays the same league with Niram, the Rust copies of all 12 versions in
-the `niram` folder (see [`niram/README.md`](../niram/README.md)). Niram picks the
+the `Niram` folder (see [`Niram/README.md`](../Niram/README.md)). Niram picks the
 same moves as Remus about 50 times faster, so a 10-minute Niram game searches about
 as many positions as an 8-hour Remus game. Niram games are rated apart from Remus
 games, with Niram-WHITE pinned at 0, and `station_match.py` and `station_elo.py`

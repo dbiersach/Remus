@@ -41,7 +41,7 @@ By 4:30, each pair can:
 | --- | --- |
 | 10:30 to 10:50 | Pairs work through `python_caches.py`: a dict remembers answers, `math.dist()`, and `random.seed()`. |
 | 10:50 to 11:00 | Slides: the ten color stations. Each is Remus-WHITE plus one enhancement, such as RED (transposition table) or BLUE (killer moves). Colors name the stations so that no station sounds better than another. |
-| 11:00 to 12:00 | Each pair opens its color station in the `Stations` folder, reads the station README, and writes the station's stubbed code. |
+| 11:00 to 12:00 | Each pair opens its color station in the `Remus` folder next to the Day folders, reads the station README, and writes the station's stubbed code. |
 
 [`period2/README.md`](period2/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
 

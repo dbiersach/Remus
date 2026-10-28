@@ -35,7 +35,7 @@ You do this once for each `remus.bat` you want to use.
 
 **Step 1.** Copy the full path of `remus.bat`. In VS Code, right-click `remus.bat` in
 the file list on the left and choose **Copy Path**. The path looks like
-`C:\...\instructor\Stations\00 WHITE - No enhancements\remus.bat`.
+`C:\...\instructor\Remus\00 WHITE - No enhancements\remus.bat`.
 
 **Step 2.** In Lucas Chess, click **Engines**, then **External engines**.
 
