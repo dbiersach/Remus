@@ -20,6 +20,8 @@ Usage:
     uv run scripts/version_league.py --event "Station league 2"
                                                  a second league, rated apart
     uv run scripts/version_league.py --niram     the same league for Niram, in Rust
+    uv run scripts/version_league.py --book-start
+                                                 GREEN's and GOLD's games from move 1
 
 League games last 10 minutes a side. Remus searches only a few thousand positions a
 second, so a shorter clock stops every version after 2 to 4 plies, too shallow for
@@ -31,6 +33,14 @@ the Niram folder. Niram chooses the same moves as Remus about 50 times faster, s
 a 10 minute Niram game searches as deep as a Remus game of many hours. Niram
 games are rated apart from Remus games, with Niram-WHITE pinned at 0. Build the
 Niram programs first with "cargo build --release" inside Niram.
+
+Every game starts from one of the OPENINGS of version_match.py, three moves for each
+side, because a version with no book plays the same game again from the starting
+position. Those six moves also hand every version a short opening book, which hides
+most of what the book of Remus-GREEN and Remus-GOLD is worth. With --book-start, every
+game with GREEN or GOLD starts from the starting position instead: their book picks
+among its moves at random, so their games still differ. The other pairs keep the
+OPENINGS. Rate such a league with --book-start too.
 
 This is a teacher tool, like version_match.py: the engine never imports python-chess.
 """
@@ -66,12 +76,21 @@ PRIOR_DRAWS = 1  # Pretend draws against Remus-WHITE, so a perfect score stays f
 SCALE = 400 / math.log(10)  # Elo points per unit of the natural logarithm
 # Only one engine of a game thinks at a time, so each game needs one processor core
 GAMES_AT_ONCE = os.cpu_count() or 2
+BOOK_COLORS = ["GREEN", "GOLD"]  # The versions that play from the opening book
 
 Result = tuple[str, str, float]  # (White, Black, White's points)
 
 
+def uses_book(name: str) -> bool:
+    """Return True if the player, such as "Niram-GREEN", plays from the book."""
+    return name.split("-")[-1] in BOOK_COLORS
+
+
 def read_results(
-    clock: str, event: str = LEAGUE_EVENT, engine: str = "Remus"
+    clock: str,
+    event: str = LEAGUE_EVENT,
+    engine: str = "Remus",
+    book_start: bool = False,
 ) -> list[Result]:
     """
     Return (White, Black, White's points) for every version game at one clock.
@@ -79,6 +98,9 @@ def read_results(
     Only games that start from one of the OPENINGS count. Remus plays the same
     move in the same position, so games from the starting position replay one
     game again and again, and counting them would count one game many times.
+    With book_start, a game with Remus-GREEN or Remus-GOLD counts only when it
+    starts from the starting position: their book picks among its moves at
+    random, so those games differ from each other.
 
     Parameters
     ----------
@@ -91,6 +113,8 @@ def read_results(
     engine : str
         "Remus" or "Niram": only games between two versions of that engine count,
         so Remus and Niram get separate ratings.
+    book_start : bool
+        True to rate the games of GREEN and GOLD from the starting position.
 
     Returns
     -------
@@ -109,7 +133,11 @@ def read_results(
                     continue
             elif headers.get("Event") != event:
                 continue
-            if headers.get("Result") not in points or "StartMoves" not in headers:
+            if headers.get("Result") not in points:
+                continue
+            from_start = "StartMoves" not in headers
+            book_game = uses_book(headers["White"]) or uses_book(headers["Black"])
+            if from_start != (book_start and book_game):
                 continue
             if headers.get("TimeControl") != clock:
                 continue
@@ -203,12 +231,15 @@ def play_league(
     games_at_once: int,
     event: str,
     engine: str,
+    book_start: bool = False,
 ) -> None:
     """
     Play every pair of players games_per_pair times, adding each game to the file.
 
     A league game already in the file is not played twice, so a league that
     stops partway, such as when the computer restarts, picks up where it stopped.
+    With book_start, every game with GREEN or GOLD starts from the starting
+    position, so their opening book plays from the first move.
     """
     players = all_players(engine)
     jobs = []
@@ -220,7 +251,10 @@ def play_league(
                 opening = OPENINGS[opening_number % len(OPENINGS)]
                 opening_number += 1
             white, black = (first, second) if number % 2 == 0 else (second, first)
-            jobs.append((white, black, opening))
+            if book_start and (uses_book(first[0]) or uses_book(second[0])):
+                jobs.append((white, black, ""))
+            else:
+                jobs.append((white, black, opening))
     played = played_league_games(time_control(minutes, increment), event)
     waiting = []
     for white, black, opening in jobs:
@@ -327,6 +361,11 @@ def main():
     parser.add_argument(
         "--niram", action="store_true", help="play the Rust versions in Niram/"
     )
+    parser.add_argument(
+        "--book-start",
+        action="store_true",
+        help="start GREEN's and GOLD's games from the starting position",
+    )
     options = parser.parse_args()
     engine = "Niram" if options.niram else "Remus"
     anchor = f"{engine}-{YARDSTICK}"
@@ -340,8 +379,9 @@ def main():
             options.at_once,
             options.event,
             engine,
+            options.book_start,
         )
-    results = read_results(clock, options.event, engine)
+    results = read_results(clock, options.event, engine, options.book_start)
     print_ratings(results, clock, anchor)
     if options.player:
         print_head_to_head(results, f"{engine}-{options.player.upper()}")
