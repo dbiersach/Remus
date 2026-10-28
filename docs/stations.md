@@ -103,16 +103,21 @@ takes White once. The games file stores the opening in a `StartMoves` header.
 396 games in all. Then it fits one Elo rating to every version from every station
 game in the games file, the games of `station_match.py` included, with Remus-WHITE
 pinned at 0. Each rating is that version's gain over Remus-WHITE. The league plays
-at 1 minute plus 0.6 seconds a move unless `--minutes` and `--increment` name another
-clock, and it rates the games of each clock apart from the others, since a version
-that searches deeper can gain more with more time to think.
+at 10 minutes a side with no increment, because Remus in Python searches too slowly
+for shorter games to show what an enhancement adds. `--minutes` and `--increment`
+name another clock, and the script rates the games of each clock apart from the
+others, since a version that searches deeper can gain more with more time to think.
 
 ```bash
-uv run station_league.py                # the round robin, then the ratings
+uv run station_league.py --at-once 16   # the round robin, 16 games at a time
 uv run station_league.py --rate-only    # only the ratings, from the saved games
-uv run station_league.py --minutes 10 --increment 0 --at-once 16
-                                        # 10-minute games, 16 at a time
+uv run station_league.py --at-once 16 --event "Station league 2"
+                                        # a new league, rated apart from the others
 ```
+
+Without `--at-once`, the league plays one game per processor thread. Give it the
+number of cores or fewer, because each game needs a whole core to itself to use its
+clock fairly.
 
 The fit works like `estimate_elo.py`: it moves each rating until the points the Elo
 formula expects for a version equal the points it really scored. One pretend draw
@@ -126,9 +131,10 @@ of the league. Anything an engine prints to stderr, such as the traceback of a
 crash, is saved with the game's names and opening in `games/engine_errors.log`.
 
 The league can stop partway, such as when a laptop restarts. Run it again and it
-plays only the games that are not in the games file yet. At 10 minutes a game, the
-teacher's 24-core computer, playing 16 games at a time, finished about one game a
-minute, so the whole league takes about 6 to 7 hours.
+plays only the games that are not in the games file yet. A 10-minute game lasts
+about 16 minutes on average. The teacher's 24-core computer, playing 16 games at a
+time, finished about one game a minute, so the whole league took about 7 hours. A
+4-core laptop playing 4 games at a time needs about a day.
 
 ### The teacher's league run
 
