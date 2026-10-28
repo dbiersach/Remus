@@ -66,9 +66,56 @@ the Python file of the same name, with the same function names:
 enhancements`, read by Niram-GREEN and Niram-GOLD. The teaching steps that `think` never calls (random, greedy, minimax,
 negamax, plain alpha-beta, and the scanning attack test) stay in Python only.
 
+## Install Rust on Windows
+
+Niram needs the Rust compiler (`rustc`) and Cargo, Rust's build tool. Both come
+from rustup, the official Rust installer. Niram uses the 2024 edition of Rust, so
+it needs Rust 1.85 or newer; rustup installs the latest version.
+
+1. **Install the C++ build tools.** On Windows, Rust uses Microsoft's linker,
+   which comes with the Visual Studio Build Tools. If Visual Studio with the
+   "Desktop development with C++" workload is already installed, skip this step.
+   Otherwise the rustup installer in step 2 offers to install the build tools for
+   you: answer `1` ("Quick install via the Visual Studio Community installer") and
+   accept the defaults. To install them yourself, download the Build Tools from
+   [visualstudio.microsoft.com/downloads](https://visualstudio.microsoft.com/downloads/)
+   and tick "Desktop development with C++" (it includes the MSVC compiler and the
+   Windows SDK).
+2. **Install rustup.** Download `rustup-init.exe` (64-bit) from
+   [rustup.rs](https://rustup.rs) and run it. At its menu, press Enter to take
+   the default installation (`1) Proceed with standard installation`). It puts
+   `rustc`, `cargo`, and `rustup` in `%USERPROFILE%\.cargo\bin` and adds that
+   folder to the PATH. In PowerShell, `winget install Rustlang.Rustup` installs
+   the same thing.
+3. **Check the install.** Close every terminal, including the one inside VS Code,
+   so the new PATH takes effect. Then open a new PowerShell and run:
+
+   ```powershell
+   rustc --version    # rustc 1.85.0 or newer
+   cargo --version    # cargo 1.85.0 or newer
+   ```
+
+   If Windows reports that `cargo` is not recognized, the terminal started before
+   the install: open a new one, or sign out and back in.
+4. **Build Niram.** In PowerShell, from the repository folder:
+
+   ```powershell
+   cd Niram
+   cargo build --release
+   cargo test --release
+   ```
+
+   The first build downloads nothing (Niram uses only Rust's standard library)
+   and takes under a minute. A linker error such as `link.exe not found` means
+   the C++ build tools from step 1 are missing.
+
+`rustup update` installs each new Rust release. The VS Code extension
+`rust-lang.rust-analyzer` adds Rust highlighting and error checking, but Niram
+builds without it.
+
 ## Run it
 
-Rust and Cargo come from [rustup](https://rustup.rs). From inside `Niram/`:
+From inside `Niram/`:
 
 ```bash
 cargo build --release                       # All 12 programs, in target/release
