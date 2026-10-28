@@ -75,7 +75,8 @@ def all_players() -> list[Player]:
     players = []
     for folder in sorted(STATIONS.iterdir()):
         if folder.is_dir() and " - " in folder.name:
-            name = f"Remus-{folder.name.split(' - ')[0]}"
+            # A folder name such as "06 RED - Transposition table" holds the color
+            name = f"Remus-{folder.name.split(' - ')[0].split(' ')[1]}"
             if name == "Remus-WHITE":
                 players.insert(0, (name, folder))
             else:

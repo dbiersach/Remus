@@ -22,8 +22,8 @@ Each side gets 10 minutes, because Remus searches only a few thousand positions 
 second and a shorter clock stops every version too shallow for most enhancements
 to help. The two games run at once, so the match takes about 20 minutes.
 
-Colors match the start of a station folder name, so "RED" finds
-"RED - Transposition table".
+A color names a station folder, so "RED" finds "06 RED - Transposition table".
+The number in front ranks the stations by the teacher's league, WHITE first.
 """
 
 import argparse
@@ -94,9 +94,12 @@ OPENINGS = [
 def find_player(color: str) -> tuple[str, Path]:
     """Return a player's name, such as "Remus-RED", and its station folder."""
     for folder in sorted(STATIONS.iterdir()):
-        if folder.is_dir() and folder.name.upper().startswith(color.upper() + " "):
-            return f"Remus-{folder.name.split(' - ')[0]}", folder
-    sys.exit(f"No station folder starts with {color!r}")
+        if folder.is_dir() and " - " in folder.name:
+            # A folder name such as "06 RED - Transposition table" holds the color
+            folder_color = folder.name.split(" - ")[0].split(" ")[1]
+            if folder_color == color.upper():
+                return f"Remus-{folder_color}", folder
+    sys.exit(f"No station folder has the color {color!r}")
 
 
 def elo_gap(points: float, games: int) -> float:

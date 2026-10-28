@@ -63,7 +63,8 @@ def all_colors() -> list[str]:
     colors = []
     for folder in sorted(STATIONS.iterdir()):
         if folder.is_dir() and " - " in folder.name:
-            colors.append(folder.name.split(" - ")[0])
+            # A folder name such as "06 RED - Transposition table" holds the color
+            colors.append(folder.name.split(" - ")[0].split(" ")[1])
     return colors
 
 
