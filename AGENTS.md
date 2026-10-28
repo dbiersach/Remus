@@ -50,8 +50,8 @@ that are specific to Claude Code. The Python style follows David's course reposi
   and checkpoints that follow that plan period by period.
 - 20 students work in **10 pairs** (driver and navigator, swapping every period). Each
   pair gets an identical, preconfigured **Windows 11** class laptop with git, `uv`,
-  VS Code, and Lucas Chess. Classroom instructions target Windows; `remus.sh` exists
-  only for students who take Remus home to a Mac or Linux computer.
+  VS Code, and Lucas Chess. Remus targets Windows only (David, 2026-10-28): the
+  repository holds no Mac or Linux launchers or setup scripts.
 - Python skills labs come before the engine code that needs each skill. Students
   **write real Remus code**: small functions with a teacher-written signature,
   docstring, and failing tests. The class picks one pair's version to merge, and
@@ -246,8 +246,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   folder (David, 2026-10-28): the builders `make_period_folders.py`,
   `make_station_folders.py`, `make_student_folders.py`, and
   `make_phase_hunt_figures.py`, the README text in `period_guides.py`,
-  `run_all_tests.py`, `station_league.py`, `station_elo.py`,
-  `remus_benchmark.py`, and `engine_parity.py`. Each one finds the top Remus folder from its own path, so it
+  `run_all_tests.py`, `test_reference_tools.py`, `station_league.py`,
+  `station_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
+  top Remus folder from its own path, so it
   runs from the top folder with `uv run scripts/<name>.py`. Students never open
   `scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
   `station_match.py` in `instructor/Remus` and `student/Remus` for the Day 10
@@ -321,8 +322,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Tests sit next to the modules in each period folder. The module names repeat from
   folder to folder, so pytest runs one folder at a time
   (`uv run pytest "instructor/Day 04 - Keep only legal moves/period3"`);
-  `uv run scripts/run_all_tests.py` runs them all. `tests/` holds the reference-tool
-  tests and `mate_puzzles.epd`. A test
+  `uv run scripts/run_all_tests.py` runs them all, and `uv run pytest` from the top
+  folder runs `scripts/test_reference_tools.py`. The ten mate puzzles,
+  `mate_puzzles.epd`, sit beside `mate_solver.py` and `test_search.py` in every Day 8
+  and Day 9 period folder and every version folder that reads them. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
 - Every `.py` file a student modifies or reads has a page in `docs/code/`, the

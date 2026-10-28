@@ -30,7 +30,7 @@ to everything below.
 | First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Matches | Day 10: each pair's color version plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the teacher's league |
-| Mate puzzles | The ten `MATE.00x` positions live in `tests/mate_puzzles.epd`: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
+| Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 | Documentation | `docs/code/remus_program_overview.md` for the whole program, one page per script in `docs/code/`, and `docs/course/slide_plan.md` for the PowerPoint slides |
 
 ## The shape of the two weeks
@@ -115,7 +115,7 @@ and nothing leaves the classroom except on the USB drives at the end.
 | Start a period | Pair | `git fetch instructor --tags`, then `git switch -c d3-p3 d3-p3-start`. One branch per period keeps each period's work separate and easy to find |
 | Catch up after falling behind | Pair | `git switch -c d3-p3-catchup d3-p3-end` |
 | Hand in a picked function | Pair and teacher | The teacher copies the function from the pair's screen or from a file the pair saves to the class USB stick, then commits it with a `CONTRIBUTORS.md` line |
-| Take it home | Pair | `git clone --no-hardlinks . <usb>/remus` copies the source and full history but not the `.venv` folder, which only works on the laptop that built it. At home: install `uv`, run `uv sync`, install the free Lucas Chess (Windows or Linux) from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). A student with a Mac or Linux computer at home uses `remus.sh` instead; Lucas Chess has no Mac version, so a Mac needs another UCI chess app |
+| Take it home | Pair | `git clone --no-hardlinks . <usb>/remus` copies the source and full history but not the `.venv` folder, which only works on the laptop that built it. At home: install `uv`, run `uv sync`, install the free Lucas Chess from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). Remus runs on Windows only |
 
 School Wi-Fi sometimes blocks laptops from reaching each other. Test `git fetch
 instructor` from one class laptop in the room before Day 1. If the network
@@ -214,7 +214,7 @@ refresher with a demonstration board comes right before the code that needs each
    tree for Day 8.
 5. **Collect test positions as FEN:** the ten verification exercises in the workshop
    file, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
-   mate puzzles in `tests/mate_puzzles.epd`, and a horizon-effect position.
+   mate puzzles in `mate_puzzles.epd`, and a horizon-effect position.
 6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
    both partners take the code home, plus one class stick for bundles. Give the assistant
    the Day 1 checklist. With preconfigured laptops, Day 1 Period 1 needs only a quick
@@ -414,7 +414,7 @@ moves" milestone.
   Pairs measure node counts before and after.
 
 **Checkpoint `d8-p4-end`:** Remus finds every mate in 1 and every mate in 2 of
-`tests/mate_puzzles.epd`, and alpha-beta returns the same score as negamax with fewer nodes.
+`mate_puzzles.epd`, and alpha-beta returns the same score as negamax with fewer nodes.
 
 ### Day 9: The clock, and the color versions
 
@@ -561,9 +561,8 @@ Outside the Day folders:
 
 | Path | Holds |
 | --- | --- |
-| `tests/mate_puzzles.epd` | The ten mate puzzles as FEN |
-| `tests/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
-| `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `station_league.py`, `station_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
+| `scripts/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
+| `scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `station_league.py`, `station_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
 | `scripts/run_all_tests.py` | Runs pytest on each instructor period folder in turn |
 | `scripts/make_period_folders.py` | Builds `period1` to `period3` of each instructor Day folder from `period4` |
 | `scripts/make_station_folders.py` | Builds the version folders in `instructor/Remus` from the Day 9 and Day 10 code |
@@ -587,10 +586,7 @@ engine, and the engine never imports it.
 
 1. **GUI play through UCI.** Lucas Chess starts a launcher and talks to Remus over stdin and
    stdout. `remus.bat` changes to its own folder and runs `uv run python
-   uci_engine.py`. For students who take Remus home to a Mac or Linux computer,
-   `remus.sh` does the same; it must be marked executable with `chmod +x remus.sh`, and
-   it calls `uv` by its full path (usually `~/.local/bin/uv`) because a desktop app
-   does not read the shell's `PATH`.
+   uci_engine.py`.
 2. **Matches and the tournament.** `play_match.py` and `station_match.py` use
    `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes and play them
    on a `chess.Board`, and `station_match.py` saves every game as PGN with `chess.pgn`.

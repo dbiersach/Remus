@@ -157,13 +157,12 @@ To end a game early, click **Cancel** and answer **Yes**.
 Lucas Chess is free. To use it on your own computer at home, download the installer
 from the official site, [lucaschess.pythonanywhere.com/downloads](https://lucaschess.pythonanywhere.com/downloads),
 and run it. It installs like any other Windows program, and it comes with Stockfish,
-so Part 3 works the same way at home. Lucas Chess runs on Windows and Linux, but not
-on a Mac.
+so Part 3 works the same way at home. Remus and its `remus.bat` launcher run on
+Windows only.
 
 To play your own Remus at home, you also need the Remus folder from your USB drive and
-`uv` (see "Take it home" in the course plan). Then add your `remus.bat` as in Part 2.
-On Linux, add `remus.sh` instead of `remus.bat`. On a Mac, Remus still runs through
-`remus.sh` in any chess app that hosts UCI engines.
+`uv` (see "Take it home" in the course plan) on a Windows computer. Then add your
+`remus.bat` as in Part 2.
 
 ## When something goes wrong
 

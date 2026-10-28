@@ -70,7 +70,7 @@
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Minimax, negamax, and mates | None | `console_game.py`, `search.py`, `test_search.py`, `uci_engine.py` | `negamax()` in `search.py` (17 lines) |
-| P2 | Python lab 11 and alpha-beta | `compare_search.py`, `python_sorting_instructor.py` | `search.py`, `test_search.py` | `alpha_beta()` in `search.py` (16 lines); the lab `python_sorting.py` (19 lines) |
+| P2 | Python lab 11 and alpha-beta | `compare_search.py`, `mate_puzzles.epd`, `python_sorting_instructor.py` | `search.py`, `test_search.py` | `alpha_beta()` in `search.py` (16 lines); the lab `python_sorting.py` (19 lines) |
 | P3 | The horizon effect and quiescence | None | `search.py`, `test_search.py` | `quiescence()` in `search.py` (15 lines) |
 | P4 | Move ordering | `move_ordering.py` | `search.py`, `test_search.py` | `mvv_lva_score()` in `move_ordering.py` (8 lines) |
 
