@@ -10,7 +10,7 @@ Niram-GOLD, the Rust copy of Remus-GOLD. Two yardsticks measure them:
    that people outside the class know. It measures the size of a rating well, but it
    cannot sort versions that sit only 30 or 40 Elo apart.
 
-[`engine_parity.md`](engine_parity.md) shows that Niram-GOLD picks exactly the same
+[`remus-niram parity.md`](remus-niram%20parity.md) shows that Niram-GOLD picks exactly the same
 moves as Remus-GOLD, so the two differ only in speed.
 
 ## The league: every version against the others

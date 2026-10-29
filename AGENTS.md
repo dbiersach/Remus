@@ -315,7 +315,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `uv run misc/scripts/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).
   `uv run misc/scripts/engine_parity.py` checks the pair on 49 positions: evaluation,
   legal moves, book moves, and every depth's score, node count, and principal
-  variation must match, and the results go to `misc/docs/engines/engine_parity.md`. A
+  variation must match, and the results go to `misc/docs/engines/remus-niram parity.md`. A
   change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
   change in Niram-GOLD and a clean `engine_parity.py` run. The Rust copies of WHITE
   and the ten colors were deleted (David, 2026-10-28) after Niram league 1, whose
@@ -362,7 +362,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
     `board.md`).
   - `misc/docs/engines/`: the Remus versions and Niram-GOLD: `remus_versions.md`,
     the ten color versions and Remus-GOLD; `engines_elo.md`, the league and Stockfish
-    ratings; and `engine_parity.md`, which `engine_parity.py` writes.
+    ratings; and `remus-niram parity.md`, which `engine_parity.py` writes.
   Pictures live in `misc/docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `misc/docs/`.
 - Remus-WHITE, the ten color versions (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
