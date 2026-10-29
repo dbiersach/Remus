@@ -22,14 +22,14 @@ later Remus file starts with imports like these.
 - **module:** a Python file that other files import.
 - **import:** runs another file once and hands over its names, such as `new_board`.
 - **__name__:** `"__main__"` in the file that VS Code runs, and the file's own name when it is imported.
-- **git branch:** a separate line of commits, so an experiment never breaks the class code.
+- **import map:** a drawing of the files in a folder, with an arrow from each file to every file it imports.
 
 ## How it works
 
 1. Type the four import lines at the top of the file.
 2. Part #1: print `__name__` for this file and for `board.py`.
 3. Part #2: build the start board and list the knight moves from g1.
-4. Parts #3 and #4 happen in the terminal: run `board.py` on its own, then make a branch, a commit, and read the log.
+4. Part #3 happens in VS Code: open `board.py` and press Run. This time `board.py` is `__main__`, so its `main()` runs and prints the board.
 
 The pair types 11 lines.
 
@@ -38,7 +38,7 @@ The pair types 11 lines.
 Open `python_modules.py` in `Day 04 - Keep only legal moves/period1/student` in VS Code, and click the Run Python File button (the
 triangle at the top right of the editor).
 
-You should see: `__main__`, then `board`, then the knight moves g1f3 and g1h3, then the commands for the terminal.
+You should see: `__main__`, then `board`, then the knight moves g1f3 and g1h3, then the line that tells you to run `board.py` on its own.
 
 ## Puzzle questions
 

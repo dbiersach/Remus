@@ -23,7 +23,7 @@ Part #2: `ord()` turns a letter into its code number. Subtracting `ord("a")` mak
 
 Part #3: `chr()` goes the other way, so file number 6 becomes "g". Joining it with the rank gives "g7", the job of `square_name()`.
 
-Part #4: `upper()` turns Black's pieces into White's, and `isupper()` tells the colors apart. Remus's `is_white()` on Day 2 is this one call.
+Part #4: `upper()` turns Black's pieces into White's, and `isupper()` tells the piece colors apart. Remus's `is_white()` on Day 2 is this one call.
 
 ## The period step by step
 

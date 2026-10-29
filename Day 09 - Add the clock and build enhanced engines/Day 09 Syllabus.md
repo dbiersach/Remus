@@ -1,6 +1,6 @@
 # Day 9: The clock and the enhanced engines
 
-Day 9 gives Remus a clock, then splits the class into ten enhancement color versions. Each pair adds one idea to the same engine, Remus-WHITE, and tests it. In period 4 the pairs carry their colors to each other's laptops on USB sticks and battle. By 4:30 every color version passes its tests and has played two battles.
+Day 9 gives Remus a clock, then splits the class into ten enhancement color versions. Each pair adds one idea to the same engine, Remus-WHITE, and tests it. In period 4 the pairs carry their color versions to each other's laptops on USB sticks and battle. By 4:30 every color version passes its tests and has played two battles.
 
 ## Objectives for the day
 
@@ -60,16 +60,16 @@ By 4:30, each pair can:
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:10 | Slides: how a battle works. Each pair copies its own color folder from `period2/student/engines` onto its USB stick. The teacher posts the pairings for two rounds; in each round five pairs host and five visit. |
-| 3:10 to 3:40 | Round 1. The visiting pair copies its color folder over the folder of the same color in the host laptop's `engines` folder. The host opens `play_battle.py` in its own color folder, presses Run in VS Code, and types the visitor's color. Two 10-minute games run side by side, one with each color. Each pair writes the score on the board. |
+| 3:10 to 3:40 | Round 1. The visiting pair copies its color folder over the folder of the same engine color in the host laptop's `engines` folder. The host opens `play_battle.py` in its own color folder, presses Run in VS Code, and types the visitor's engine color. Two 10-minute games run side by side, one with each piece color. Each pair writes the score on the board. |
 | 3:40 to 3:45 | Round 2: the pairs that visited now host, against new opponents. |
-| 3:45 to 4:10 | While the round 2 games run, each pair turns its round 1 result into an Elo gap with a margin of error in `demo_results.py`, then tries its color's league games. |
-| 4:10 to 4:25 | The class reads the board: which colors won, and why two games prove little. The teacher shows the league table, 110 games for each color, and compares. |
-| 4:25 to 4:30 | Each host restores the visitor's folder with `git restore` so its own repository holds only its own color. |
+| 3:45 to 4:10 | While the round 2 games run, each pair turns its round 1 result into an Elo gap with a margin of error in `demo_results.py`, then tries its engine color's league games. |
+| 4:10 to 4:25 | The class reads the board: which engine colors won, and why two games prove little. The teacher shows the league table, 110 games for each engine color, and compares. |
+| 4:25 to 4:30 | Each visiting pair takes its USB stick back. The visitor's folder stays on the host laptop in place of an engine color the host pair never writes, so the host's own color folder is untouched. |
 
 [`Day 09 Period 04 Goals.md`](<period4/Day 09 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## By the end of the day
 
-**Checkpoint:** Every color version passes its tests and its one-game test match, and has played two battles against other colors.
+**Checkpoint:** Every color version passes its tests and its one-game test match, and has played two battles against other engine colors.
 
 Each period folder starts from working code, so a pair that falls behind opens the next period's folder with the rest of the class.

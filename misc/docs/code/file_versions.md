@@ -16,7 +16,7 @@ Day 5, Period 2.
 | --- | --- | --- |
 | `board.py` | D1 P4: the 8x8 board, printing, square names | D2 P3: adds `set_piece()` to write a square |
 | `show_board.py` | D1 P4: draws the board as a picture in the browser | D3 P2: draws an arrow for each move with `show_moves()` |
-| `game_state.py` | D2 P3: the state dict, colors | D7 P1: adds `position_key()` and the position history |
+| `game_state.py` | D2 P3: the state dict, piece colors | D7 P1: adds `position_key()` and the position history |
 | `moves.py` | D2 P3: the `Move` record and UCI text | No changes |
 | `make_move.py` | D2 P4: make and undo quiet moves and captures | D5 P2: castling and castling rights. D5 P3: en passant. D5 P4: promotion. D7 P1: records each position in `history` and removes it on undo |
 | `move_generation.py` | D3 P2: knight and king jumps | D3 P3: sliding pieces. D3 P4: pawns, promotion choices, `pseudo_legal_moves()`. D5 P3: en passant captures |

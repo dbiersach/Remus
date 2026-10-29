@@ -30,7 +30,7 @@ Stands on the square and looks at each offset for one piece, such as an enemy kn
 
 ### `attacked_by_pawn()` in `attacks.py`
 
-Looks diagonally for an enemy pawn on the row behind the square, from the attacker's point of view. A pawn captures diagonally even though it moves straight, so its two offsets differ from its push, and they depend on its color.
+Looks diagonally for an enemy pawn on the row behind the square, from the attacker's point of view. A pawn captures diagonally even though it moves straight, so its two offsets differ from its push, and they depend on its piece color.
 
 ### `attacked_by_king()` in `attacks.py`
 

@@ -7,9 +7,9 @@ searches with alpha-beta, quiescence, move ordering, iterative deepening, and a
 clock. Ten ideas can make it stronger. On Day 9, in periods 2 and 3, each pair builds
 one of them, so the class can measure which idea adds the most strength. In period 4
 the pairs carry their color versions to each other's laptops and play battles to find
-out which color is strongest.
+out which engine color is strongest.
 
-Each color version has a color instead of a number or a letter, so no color version sounds
+Each color version has an engine color instead of a number or a letter, so no color version sounds
 better than another before the games are played.
 
 ## Where the color versions live
@@ -18,10 +18,10 @@ Remus-WHITE is the Day 9 `period1` folder: the Day 9 Remus at the end of period 
 when its engine is finished and before the pairs start their color versions. The
 Day 9 `period2` folder holds an `engines` folder with one folder per color version,
 such as `10 RED - Transposition table`, each a complete copy of Remus-WHITE plus one
-enhancement. From period 2 to the end of the day, each pair works only in its color
-folder, so periods 2, 3, and 4 of Day 9 hold no engine code of their own. The number
+enhancement. From period 2 to the end of the day, each pair works only in its engine
+color folder, so periods 2, 3, and 4 of Day 9 hold no engine code of their own. The number
 in front of each name ranks the color version by its rating over Remus-WHITE in the
-teacher's 10-minute league (below), from 01 GRAY to 10 RED. The
+designer's 10-minute league (below), from 01 GRAY to 10 RED. The
 `period2/student/engines` folder holds the same ten folders with the pair's functions stubbed.
 
 The teacher's `period2/instructor/engines` also holds `Remus-GOLD`, the finished Remus of Day
@@ -62,7 +62,7 @@ Each search color version adds one new function to `search.py` beside
 `alpha_beta_with_quiescence`, and `think()` calls the new function. The new function
 is the Day 9 search with one change, so a pair can compare the two side by side:
 
-| Color | New search function | What changes |
+| Engine color | New search function | What changes |
 | --- | --- | --- |
 | RED | `table_search` | Look up the position before searching; store the result after |
 | BLUE | `killer_search` | Pass this ply's killers to `order_moves()`; remember a quiet move that cuts off |
@@ -82,35 +82,35 @@ or against another color version, at 10 minutes a side. It adds every game to
 `misc/games/remus_games.pgn` and prints the score.
 
 Nobody types a command to run it. Every color folder holds two short scripts that
-run `version_match.py` for its own color, so a pair (or the teacher) opens one in VS
+run `version_match.py` for its own engine color, so a pair (or the teacher) opens one in VS
 Code and presses the Run Python File button:
 
 | Script | When | What it plays |
 | --- | --- | --- |
 | `smoke_test.py` | Day 9, period 3 | One 2-minute game against Remus-WHITE, to show the engine plays legal moves to the end |
-| `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting color version, one with each color |
+| `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting color version, one with each piece color |
 
 In the Day 9 battles a visiting pair brings its color folder on a USB drive and
-copies it over the folder of the same color in the host's `period2/student/engines`, which
-holds that color with its functions still stubbed. The
+copies it over the folder of the same engine color in the host's `period2/student/engines`, which
+holds that engine color with its functions still stubbed. The
 host presses Run on `play_battle.py` in its own color folder and types the visitor's
-color, such as `RED`. The two colors play twice from the same opening, once with each
-color, about 20 minutes for both games. Each battle goes on the board as a row of the
-class table, and the period has room for two rounds. At the end of the period each
-host runs `git restore` on the visitor's folder, which puts the stubs back, so the
-laptop holds only its own pair's code. Two games cannot show which enhancement is
+engine color, such as `RED`. The two engine colors play twice from the same opening, once with each
+piece color, about 20 minutes for both games. Each battle goes on the board as a row of the
+class table, and the period has room for two rounds. The visitor's folder stays on the
+host laptop when the visitor leaves: it replaces only the stubs of an engine color the host
+pair never writes, and the host's own color folder is untouched. Two games cannot show which enhancement is
 stronger, so the script prints no Elo gap for fewer than 10 games; while round 2
 runs, each pair puts its round 1 score into `demo_results.py` and sees how wide the
 margin of error is. The teacher then shows the league table in
-[`engines_elo.md`](engines_elo.md), which rates every color from 110 games, along with
-Remus-GOLD's score against every color and Remus-WHITE. Nothing needs to run: the
+[`engines_elo.md`](engines_elo.md), which rates every engine color from 110 games, along with
+Remus-GOLD's score against every engine color and Remus-WHITE. Nothing needs to run: the
 table is already written.
 
 The Day 9 smoke test plays one game on a short clock only to prove that the color version's
 engine plays legal moves to the end; nobody reads its result.
 
-In the games file every player is named `Remus-<COLOR>`, such as `Remus-WHITE`, so a
-player name never reads like the side to move.
+In the games file every player is named `Remus-` and its engine color, such as `Remus-WHITE`, so
+the name of a player never reads like the piece color it plays.
 
 ### Why the games start from openings
 
@@ -179,7 +179,7 @@ time, finished about one game a minute, so the whole league took about 7 hours. 
 ### The designer's league run
 
 The course designer ran a league of 660 games: every version played every
-other version 10 times, 5 times with each color, at 10 minutes a side. The league
+other version 10 times, 5 times with each piece color, at 10 minutes a side. The league
 ran on Niram, the Rust twins of the 12 versions, which choose the same moves as
 Remus about 50 times faster. A 10-minute Niram game therefore searches about as deep
 as a Remus game of 8 hours, so the table shows what each enhancement adds with

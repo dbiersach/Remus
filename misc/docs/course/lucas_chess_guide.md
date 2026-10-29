@@ -160,9 +160,10 @@ and run it. It installs like any other Windows program, and it comes with Stockf
 so Part 3 works the same way at home. Remus and its `remus.bat` launcher run on
 Windows only.
 
-To play your own Remus at home, you also need the Remus folder from your USB drive and
-`uv` (see "Take it home" in the course plan) on a Windows computer. Then add your
-`remus.bat` as in Part 2.
+To play your own Remus at home, copy the Remus folder from your USB drive to a Windows
+computer, install `uv`, and run `uv sync` once in the Remus folder, the same setup as
+on Day 1 (see "Take it home" in the course plan). Then add your `remus.bat` as in
+Part 2.
 
 ## When something goes wrong
 

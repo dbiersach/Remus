@@ -79,11 +79,8 @@ File button (the triangle at the top right of the editor).
 
 Every script prints its own check, with the expected answer beside it. Tests sit next
 to the modules. Because each period folder repeats the same module names, pytest runs
-one folder at a time:
-
-```bash
-uv run pytest "Day 04 - Keep only legal moves/period3/instructor"
-```
+one folder at a time: open `run_tests.py` in the folder, such as
+`Day 04 - Keep only legal moves/period3/instructor`, and press Run.
 
 The course designer's `misc/scripts/run_all_tests.py` runs every period's `instructor/` folder in turn, then the
 reference-tool tests in `misc/scripts/test_reference_tools.py`. The `misc/scripts/` folder holds

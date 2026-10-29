@@ -31,7 +31,7 @@ In the `student` folder these functions raise `NotImplementedError` until a pair
 
 ### `insufficient_material()` in `game_end.py`
 
-Returns True when neither side can ever checkmate: kings alone, a king with one bishop or knight, or bishops that all stand on squares of one color. The bishops' square colors come from (row + col) % 2.
+Returns True when neither side can ever checkmate: kings alone, a king with one bishop or knight, or bishops that all stand on light squares, or all on dark squares. A square is light or dark by (row + col) % 2.
 
 ### `game_result()` in `game_end.py`
 
