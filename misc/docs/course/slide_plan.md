@@ -113,7 +113,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 9.13 | King safety | A castled king with its three shield pawns, 15 points each while the enemy queen is on the board |
 | 9.14 | Finishing a won endgame | The `mating_bonus` heat map: the losing king pushed to the edge, the winning king closing in |
 | 9.15 | The opening book | Book lines in SAN turned into a dict from `position_key` to moves, drawn as a small tree |
-| 9.16 | Reading a battle result | Two games, an Elo gap, and its margin of error from `demo_results.py`, beside the same color's 110 league games and their much narrower margin |
+| 9.16 | Reading a battle result | Two games, an Elo gap, and its margin of error from `demo_results.py`, beside the same engine color's 110 league games and their much narrower margin |
 | 9.17 | Color battles | The two rounds of pairings, how to copy a color folder from the USB stick over the host's folder, `play_battle.py`, and the class score table that the league table answers at the end |
 
 ## Day 10: Solve a science problem using chess AI

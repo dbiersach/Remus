@@ -16,7 +16,7 @@ moves as Remus-GOLD, so the two differ only in speed.
 ## The league: every version against the others
 
 The designer's league holds 660 games at 10 minutes a side, every
-version against every other version 10 times, 5 with each color. It ran on Niram,
+version against every other version 10 times, 5 with each piece color. It ran on Niram,
 the Rust twins of the 12 versions, which pick the same moves as Remus about 50 times
 faster. The 450 games between versions without a book started from 32 openings; the
 210 games with Remus-GREEN or Remus-GOLD started from the starting position, so
@@ -220,5 +220,5 @@ uv run misc/scripts/version_elo.py --workers 20 --niram-gold
 A run that stops partway picks up from the games already in
 `misc/games/remus_games.pgn`. `uv run misc/scripts/version_elo.py --report-only`
 prints the tables from the saved games without playing any, and `--colors WHITE GOLD`
-plays only some versions. Keep `--workers` at or below the number of physical cores,
+plays only the versions of those engine colors. Keep `--workers` at or below the number of physical cores,
 because pure-Python Remus plays weaker when it shares a core.

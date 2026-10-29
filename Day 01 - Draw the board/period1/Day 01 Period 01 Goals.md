@@ -28,11 +28,12 @@ Part #3: you store White's back rank as one string and print the letter at index
 
 | Time | Activity |
 | --- | --- |
-| 8:30 to 8:45 | Welcome. The finished Remus plays a game in Lucas Chess on the projector. |
-| 8:45 to 8:55 | The story of the name: Sargon, the 1978 chess program, and Rimush, the first son of Sargon of Akkad. Remus is a son of Sargon. |
-| 8:55 to 9:10 | Form the ten pairs. The driver types and the navigator reads and checks; the two swap roles every period. Each pair picks a team name for `CONTRIBUTORS.md`. |
-| 9:10 to 9:25 | Notation on the demonstration board: square names, SAN for people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs (`g1f3`). |
-| 9:25 to 9:50 | Pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop runs a file with the Run button and opens Lucas Chess. |
+| 8:30 to 8:40 | Welcome. The finished Remus plays a game in Lucas Chess on the projector. |
+| 8:40 to 8:50 | The story of the name: Sargon, the 1978 chess program, and Rimush, the first son of Sargon of Akkad. Remus is a son of Sargon. |
+| 8:50 to 9:00 | Form the ten pairs. The driver types and the navigator reads and checks; the two swap roles every period. Each pair picks a team name for `CONTRIBUTORS.md`. |
+| 9:00 to 9:20 | Setup, the only git and uv commands of the workshop. The course designer shows each pair how to install git and uv, clone the Remus repository, and run `uv sync` once to build the `.venv` folder. From here on every step runs from VS Code's Run button. |
+| 9:20 to 9:30 | Notation on the demonstration board: square names, SAN for people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs (`g1f3`). |
+| 9:30 to 9:50 | Pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop runs a file with the Run button and opens Lucas Chess. |
 | 9:50 to 10:00 | Exit ticket: each student lists three of the five parts of a chess engine (board, moves, rules, search, evaluation) and one job of each. |
 
 ## What you edit in the lab

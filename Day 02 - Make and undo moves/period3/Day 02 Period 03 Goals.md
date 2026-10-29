@@ -4,7 +4,7 @@
 
 By the end of this period, each pair can:
 
-- Tell the color of a piece, and handle an empty square. **Measured by:** The `is_white` and `color_of` tests in `test_make_move.py` pass, including `None` for `.`.
+- Tell the piece color of a piece, and handle an empty square. **Measured by:** The `is_white` and `color_of` tests in `test_make_move.py` pass, including `None` for `.`.
 - Write a move as UCI text and read it back. **Measured by:** `move_to_uci` and `move_from_uci` round-trip `e2e4` and `e7e8q`.
 - Name the fields of a game state. **Measured by:** Exit ticket: list the six fields of the state dict and what each holds.
 
@@ -33,7 +33,7 @@ In the `student` folder these functions raise `NotImplementedError` until a pair
 
 ### `is_white()` in `game_state.py`
 
-Returns True for an uppercase letter. Remus follows FEN, where uppercase is White and lowercase is Black, so one call to `isupper()` tells the colors apart.
+Returns True for an uppercase letter. Remus follows FEN, where uppercase is White and lowercase is Black, so one call to `isupper()` tells the piece colors apart.
 
 ### `color_of()` in `game_state.py`
 
@@ -45,7 +45,7 @@ Writes a move as text such as e2e4, adding a lowercase piece letter for a promot
 
 ### `move_from_uci()` in `moves.py`
 
-Reads text such as e7e8q back into a Move. The promotion letter becomes uppercase for White and lowercase for Black, so the new piece gets the right color on the board.
+Reads text such as e7e8q back into a Move. The promotion letter becomes uppercase for White and lowercase for Black, so the new piece gets the right piece color on the board.
 
 Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 

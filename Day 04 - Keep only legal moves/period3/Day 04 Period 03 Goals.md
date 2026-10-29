@@ -29,7 +29,7 @@ In the `student` folder these functions raise `NotImplementedError` until a pair
 
 ### `in_check()` in `attacks.py`
 
-Finds the king of one color and asks whether the other color attacks its square. Check decides which moves are legal, whether a game is over, and later how deep the search looks.
+Finds the king of one piece color and asks whether the other piece color attacks its square. Check decides which moves are legal, whether a game is over, and later how deep the search looks.
 
 ### `legal_moves()` in `legal_moves.py`
 

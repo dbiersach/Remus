@@ -37,8 +37,10 @@ in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.
 
 Remus runs on Windows 11 with [Git](https://git-scm.com/),
 [uv](https://docs.astral.sh/uv/), [VS Code](https://code.visualstudio.com/), and Lucas
-Chess. The class laptops come with all four installed and Remus already cloned. The steps
-below set up a new computer, such as the teacher's laptop or a computer at home.
+Chess. On Day 1 the course designer walks each pair through steps 1 to 4 once. After
+that setup no student or teacher types a git or uv command: every step of the workshop
+runs from VS Code's Run button. The same steps set up any other computer, such as the
+teacher's laptop or a computer at home.
 
 1. Open **PowerShell** from the Start menu and install Git and VS Code with winget:
 
@@ -62,8 +64,8 @@ below set up a new computer, such as the teacher's laptop or a computer at home.
    cd Remus
    ```
 
-   A pair in class has no GitHub account and fetches from the teacher's laptop
-   instead, or copies the repository from a USB stick.
+   Cloning a public repository needs no GitHub account, so the students, who are
+   minors, never create one.
 
 4. Install Python 3.14 and the development tools (`python-chess`, `pytest`, and
    `ruff`) into the project:

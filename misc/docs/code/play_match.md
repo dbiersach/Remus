@@ -20,7 +20,7 @@ play_match.py starts uci_engine.py twice. It uses python-chess, which only the r
 ## Words to know
 
 - **referee:** a program that checks every move is legal.
-- **match:** several games between the same two players, swapping colors.
+- **match:** several games between the same two players, swapping piece colors.
 - **PGN:** a text file format for saving chess games.
 
 ## What it stores
@@ -32,7 +32,7 @@ On Day 10, `think` beat `greedy` 4 to 0.
 1. `start_engine()` starts one copy of Remus with a chosen brain.
 2. `play_game()` asks each side for a move until the game ends.
 3. `save_game()` adds the game to misc/games/remus_games.pgn.
-4. `main()` swaps colors each game and keeps the score.
+4. `main()` swaps piece colors each game and keeps the score.
 
 ## Call tree
 
@@ -63,7 +63,7 @@ You should see: Each game's result, then the final score.
 
 ## Puzzle questions
 
-1. Why swap colors every game?
+1. Why swap piece colors every game?
 2. Set `FIRST_BRAIN` and `SECOND_BRAIN` to `"think"` and `GAMES` to `4` near the top of the file, then press Run. Why can Remus win against itself?
 
 ## Slides

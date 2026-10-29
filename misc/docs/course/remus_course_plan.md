@@ -18,10 +18,10 @@ to everything below.
 | Daily schedule | 8:30 to 10:00 Period 1; 10:00 to 10:30 break; 10:30 to 12:00 Period 2; 12:00 to 1:00 lunch; 1:00 to 2:30 Period 3; 2:30 to 3:00 break; 3:00 to 4:30 Period 4 |
 | Students | 20 students in 10 pairs: a driver types, a navigator reads and checks; they swap every period. Ten pairs keep each adult to about five pairs during labs |
 | Staff | The teacher plus at least one assistant |
-| Laptops | 10 identical Windows 11 laptops, one per pair, preconfigured with git, `uv`, VS Code, and Lucas Chess |
+| Laptops | 10 identical Windows 11 laptops, one per pair, preconfigured with VS Code and Lucas Chess |
 | GUI | Lucas Chess on every laptop |
-| Repositories | The teacher's laptop holds the main class repository. Each pair has its own local repository and pulls from the teacher over the classroom network. No GitHub accounts: the students are minors |
-| Take-home | On the last day each pair copies its repository, with its full history, onto a USB drive |
+| Setup | On Day 1, period 1, the course designer shows the class how to install git and `uv`, clone the Remus repository, and run `uv sync` once to build the `.venv` folder. After that one setup, no student or teacher uses git or `uv`: every step of the workshop runs from VS Code's Run button. No GitHub accounts: the students are minors, and cloning a public repository needs none |
+| Take-home | On the last day each student copies the pair's Remus folder onto a USB drive in File Explorer |
 | Folder layout | The code lives in one folder per day, such as `Day 04 - Keep only legal moves`, with four period folders inside, `period1` to `period4`, and an `instructor/` and a `student/` folder inside each period. Each `instructor/` folder holds a complete, runnable copy of Remus at the end of that period, with its tests beside the modules, and a goals file for the period, such as `Day 04 Period 03 Goals.md`, sits beside `instructor/` and `student/`. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
 | Squares | `(row, col)` tuples inside the engine, row 0 is rank 8 and column 0 is file a |
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
@@ -43,7 +43,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 1 | Setup and the board | Running scripts, strings, `ord` and `chr`, lists, nested lists | Print the board; convert `e2` to `(6, 4)` and back |
 | 2 | Functions and records | Functions, type hints, tuples, `assert`, pytest, dicts, dataclasses, copying | Hold a game state; make and undo a quiet move or capture |
 | 3 | Loops that walk the board | `while`, `break`, direction tuples, building lists | Generate king, knight, slider, and pawn moves |
-| 4 | Legal moves | Modules, imports, `__main__`, git | Detect attacks and check; keep only legal moves |
+| 4 | Legal moves | Modules, imports, `__main__` | Detect attacks and check; keep only legal moves |
 | 5 | Special moves | Sets and dict lookups | Castling, en passant, promotion and underpromotion, with exact undo; play random Remus in Lucas Chess |
 | 6 | Counting the tree, and FEN | Recursion; `split`, exceptions | Perft matches the reference counts; FEN in and out |
 | 7 | A whole game, and judging a position | `random`, a loop that keeps the best so far, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
@@ -55,7 +55,7 @@ Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special
 in place, and Week 2 opens with recursion and perft. Perft on Monday gives every pair a
 verified checkpoint after the weekend. Week 2 moves fast so that Day 9 can hold the
 color versions and Day 10 the science problem, so a pair that falls behind
-rejoins from the period's end tag instead of a catch-up period.
+rejoins in the next period's `student/` folder, which starts from working code, instead of a catch-up period.
 
 ### Progressive elaboration
 
@@ -88,8 +88,8 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
    the module's own self-check prints the expected answer.
 3. **Show and choose.** Two or three pairs show their version on the projector. With 10
    pairs and about 40 functions, the teacher rotates who presents so every pair ships
-   three or four functions over the course. The class picks one for clarity, not cleverness, and the teacher commits it to the main
-   class repository. `CONTRIBUTORS.md` records which pair wrote which function, by a
+   three or four functions over the course. The class picks one for clarity, not cleverness, and the teacher adds a line for it to
+   `CONTRIBUTORS.md`, which records which pair wrote which function, by a
    team name the pair chooses rather than full names, since the code goes home with
    every student.
 4. **Everyone moves on together.** Each period's `student/` folder mirrors the
@@ -98,30 +98,24 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
    builds from the instructor code. Each period opens with its slides; then pairs
    read the period's goals file, open its `student/` folder, and write or fix the stubbed
    functions in the files it names. Pairs work only inside the current period
-   folder, so earlier periods stay as a record of how Remus grew. The `instructor/` folder beside it holds the matching finished code, which runs as it is. At the start of the next period each pair fetches
-   from the teacher and starts a new branch from that period's start tag, so the whole
-   room builds the same engine. The pair's own branches stay in its repository, so a
-   pair whose version was not picked keeps its own code too.
+   folder, so earlier periods stay as a record of how Remus grew. The `instructor/` folder beside it holds the matching finished code, which runs as it is. At the start of the next period every pair opens the next
+   period's `student/` folder, which already holds the finished code of the periods
+   before, so the whole room builds the same engine without copying any code. The
+   pair's own code stays in the earlier period folders, so a pair whose version was
+   not picked keeps its own code too.
 
 ## Sharing code without GitHub
 
-The teacher's laptop holds the main class repository. Students never create accounts,
-and nothing leaves the classroom except on the USB drives at the end.
+Students never create accounts, and nothing leaves the classroom except on the USB
+drives at the end. Git and `uv` appear once, on Day 1, and never again.
 
 | Step | Who | How |
 | --- | --- | --- |
-| Share the class repository | Teacher | Run a read-only `git daemon` on the teacher's laptop for the classroom network: `git daemon --export-all --base-path=<parent folder> --reuseaddr`. Git for Windows includes it |
-| First copy, before Day 1 | Teacher | Clone the class repository onto every laptop and add the remote `instructor` (`git remote add instructor git://<teacher-laptop>/remus`) |
-| Start a period | Pair | `git fetch instructor --tags`, then `git switch -c d3-p3 d3-p3-start`. One branch per period keeps each period's work separate and easy to find |
-| Catch up after falling behind | Pair | `git switch -c d3-p3-catchup d3-p3-end` |
-| Hand in a picked function | Pair and teacher | The teacher copies the function from the pair's screen or from a file the pair saves to the class USB stick, then commits it with a `CONTRIBUTORS.md` line |
-| Take it home | Pair | `git clone --no-hardlinks . <usb>/remus` copies the source and full history but not the `.venv` folder, which only works on the laptop that built it. At home: install `uv`, run `uv sync`, install the free Lucas Chess from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). Remus runs on Windows only |
-
-School Wi-Fi sometimes blocks laptops from reaching each other. Test `git fetch
-instructor` from one class laptop in the room before Day 1. If the network
-blocks it, the same steps work through the USB stick: the teacher writes
-`git bundle create class.bundle --all` at the end of each period, and pairs run
-`git fetch <usb>/class.bundle "refs/tags/*:refs/tags/*"`.
+| Set up the laptop, Day 1 | Pair, with the course designer | Install git and `uv`, clone the Remus repository (`git clone https://github.com/dbiersach/Remus.git`), and run `uv sync` once to build `.venv`, as the [README](../../../README.md) shows. These are the only git and `uv` commands of the workshop |
+| Start a period | Pair | Open the period's `student/` folder in VS Code. It already holds the finished code of every period before, so no code moves between laptops |
+| Catch up after falling behind | Pair | Move on to the next period's `student/` folder with the class. The `instructor/` folder beside each `student/` folder holds the finished code of that period, ready to read and run |
+| Hand in a picked function | Pair and teacher | The teacher reads the function from the pair's screen and adds the pair's team name to `CONTRIBUTORS.md` |
+| Take it home | Each student | In File Explorer, copy the Remus folder onto a USB drive, leaving out the `.venv` folder, which works only on the laptop that built it. At home: install `uv`, run `uv sync` once, install the free Lucas Chess from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). Remus runs on Windows only |
 
 The "Students write" lines in each day below list these functions. The teacher writes
 the parts whose difficulty is in the chess rules rather than the Python, such as SAN
@@ -139,7 +133,7 @@ every drill uses chess data so the skill is fresh when the engine needs it.
 | 3 | D2 P1 | Functions, parameters, `return`, type hints, docstrings, tuples and unpacking, `assert`, pytest | `is_white("N")`, `on_board(row, col)` with tests |
 | 4 | D2 P2 | Dicts, `dataclass`, `None`, mutation, aliasing, `copy` and `deepcopy`, `==` on lists | Show `b2 = board` changing both boards; fix it with a copy |
 | 5 | D3 P1 | `while`, `break`, `continue`, lists of direction tuples, `append` | Walk from `d4` toward the edge in one direction, stopping at a piece |
-| 6 | D4 P1 | Modules, `import`, `if __name__ == "__main__"`, git `fetch`, `switch -c`, `commit`, `log` | Import yesterday's `board.py` and `move_generation.py` and list the knight moves from `g1` |
+| 6 | D4 P1 | Modules, `import`, `if __name__ == "__main__"`, an import map on paper | Import yesterday's `board.py` and `move_generation.py` and list the knight moves from `g1` |
 | 7 | D5 P1 | Sets, membership with `in`, dict lookups, string replacement | Castling rights as the string `"KQkq"`: remove `"K"` when the h1 rook moves |
 | 8 | D6 P1 | Recursion: base case, recursive case, call stack | Count down; count the leaves of a small tree; count paths of a knight |
 | 9 | D6 P4 | `split`, `int()`, exceptions with `try` and `ValueError` | Read a FEN string and print its six fields |
@@ -195,14 +189,14 @@ refresher with a demonstration board comes right before the code that needs each
 ## Teacher preparation
 
 1. **Build the reference engine first.** The teacher's Remus is complete before the
-   course, with a scaffold tag and a solution tag for every period (`d3-p2-start`,
-   `d3-p2-end`). The start tag holds the stubs and failing tests; the end tag holds
-   the teacher's answer, which a pair can check out if it falls behind.
-2. **Finish the laptop image.** The 10 Windows 11 laptops arrive with git, `uv`, VS Code,
-   and Lucas Chess. Check that the image also has Python 3.14 cached by `uv` and the
-   VS Code extensions from `install_vscode_extensions.ps1`. Clone the class repository as
-   described in "Sharing code without GitHub", then run `uv sync` once and press Run on a
-   `run_tests.py` on every laptop before Day 1, so no laptop needs the internet on Day 1.
+   course. Every period has a `student/` folder with the stubs and failing tests and an
+   `instructor/` folder beside it with the teacher's answer, which a pair reads if it
+   falls behind.
+2. **Finish the laptop image.** The 10 Windows 11 laptops arrive with VS Code and Lucas
+   Chess. Check that the image also has the VS Code extensions from
+   `install_vscode_extensions.ps1`, and that every laptop reaches the internet in the
+   classroom: on Day 1 each pair installs git and `uv`, clones Remus, and runs `uv sync`
+   with the course designer, as described in "Sharing code without GitHub".
 3. **Register Remus in Lucas Chess.** Add the reference Remus as an external engine
    through `remus.bat`, following [`lucas_chess_guide.md`](lucas_chess_guide.md), and play
    one full game on one laptop. Start Lucas Chess from the Start menu or its desktop
@@ -216,7 +210,7 @@ refresher with a demonstration board comes right before the code that needs each
    file, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
    mate puzzles in `mate_puzzles.epd`, and a horizon-effect position.
 6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
-   both partners take the code home, plus one class stick for bundles. Give the assistant
+   both partners take the code home, plus one class stick for the Day 9 battles. Give the assistant
    the Day 1 checklist. With preconfigured laptops, Day 1 Period 1 needs only a quick
    check that every laptop runs a file with the Run button and opens Lucas Chess.
 7. **Prepare unplugged materials:** for each pair, a printed board, sticky-note
@@ -233,7 +227,9 @@ refresher with a demonstration board comes right before the code that needs each
 ### Day 1: Setup and the board
 
 - **P1. Welcome and setup.** Watch the finished reference Remus play in the GUI. Tell
-  the Sargon and Rimush story from `AGENTS.md`. Form pairs, check every laptop runs a
+  the Sargon and Rimush story from `AGENTS.md`. Form pairs. The course designer shows
+  each pair how to install git and `uv`, clone Remus, and run `uv sync`, the only git
+  and `uv` commands of the workshop. Check every laptop runs a
   file with the Run button, and review SAN and UCI notation on the demonstration board. Each
   pair runs `python_setup.py`, which checks the laptop and prints the team's first
   greeting (6 typed lines).
@@ -248,7 +244,7 @@ refresher with a demonstration board comes right before the code that needs each
   **Students write:** `print_board()`, `square_name(row, col)`,
   `parse_square(name)` (which rejects `"i9"`), `piece_at(board, square)`.
 
-**Checkpoint `d1-p4-end`:** running `board.py` prints the start board and
+**Checkpoint (4:30):** running `board.py` prints the start board and
 "b1 holds N, expected N".
 
 ### Day 2: Functions and records
@@ -265,7 +261,7 @@ refresher with a demonstration board comes right before the code that needs each
   an undo record of everything the move destroys, and `undo_move()`, which uses that
   record to take back quiet moves and captures.
 
-**Checkpoint `d2-p4-end`:** ten moves made and undone return the exact start state.
+**Checkpoint (4:30):** ten moves made and undone return the exact start state.
 
 ### Day 3: Loops that walk the board
 
@@ -283,11 +279,11 @@ refresher with a demonstration board comes right before the code that needs each
   the start rank). The teacher writes pawn captures and the four promotion choices.
   Exercise: `pseudo_legal_moves()` from the start returns 20.
 
-**Checkpoint `d3-p4-end`:** 20 pseudo-legal moves from the start position.
+**Checkpoint (4:30):** 20 pseudo-legal moves from the start position.
 
 ### Day 4: Legal moves
 
-- **P1. Python lab 6, `python_modules.py`:** modules, imports, `__main__`, git.
+- **P1. Python lab 6, `python_modules.py`:** modules, imports, `__main__`, and an import map on paper.
 - **P2. Attacks.** Refresher on check, pins, and discovered check. `attacks.py`
   `is_attacked_by_scanning()` loops over the enemy pieces. `is_square_attacked()` stands
   on the square and looks outward like a "super piece."
@@ -303,7 +299,7 @@ refresher with a demonstration board comes right before the code that needs each
   In `demo_practice_positions.py` each pair types the three positions and a
   prediction for each, then lets Remus count the legal moves.
 
-**Checkpoint `d4-p4-end`:** a pinned knight has zero legal moves; a king in check has
+**Checkpoint (4:30):** a pinned knight has zero legal moves; a king in check has
 only escapes.
 
 ### Day 5: Special moves
@@ -328,14 +324,15 @@ only escapes.
   random legal move; [`lucas_chess_guide.md`](lucas_chess_guide.md) shows each click.
   Nobody reads the UCI code yet; Day 7 explains it.
 
-**Checkpoint `d5-p4-end`:** every special-move test passes, every special move
+**Checkpoint (4:30):** every special-move test passes, every special move
 undoes exactly, and Remus plays random legal moves in Lucas Chess.
 
 ## Week 2: A game, a GUI, and a thinking engine
 
 Week 2 is tight by design. Days 6 to 8 move faster than Week 1, so that Day 9 can hold
 the color versions and Day 10 can hold the science problem. There is no spare
-catch-up period: a pair that falls behind checks out the period's end tag and rejoins.
+catch-up period: a pair that falls behind rejoins in the next period's `student/` folder,
+which starts from working code.
 
 ### Day 6: Counting the tree, and FEN
 
@@ -356,7 +353,7 @@ catch-up period: a pair that falls behind checks out the period's end tag and re
   first space) and `board_from_placement(text)`. The teacher writes the other five FEN
   fields, and `test_perft.py` switches to Remus's own FEN reader.
 
-**Checkpoint `d6-p4-end`:** perft matches the reference at depth 3 for the start and
+**Checkpoint (4:30):** perft matches the reference at depth 3 for the start and
 the standard positions, and every test position loads from FEN. Rule 6 of `AGENTS.md`
 is now met.
 
@@ -386,7 +383,7 @@ is now met.
   say why it prefers a position. Each pair proposes one change to one table, and the
   class votes.
 
-**Checkpoint `d7-p4-end`:** a full game in the GUI ends with the correct result and
+**Checkpoint (4:30):** a full game in the GUI ends with the correct result and
 reason, and `explain_evaluation()` gives 0 for the start position. This is the "legal
 moves" milestone.
 
@@ -413,7 +410,7 @@ moves" milestone.
   slides each move into place behind every higher score, and the check extension.
   Pairs measure node counts before and after.
 
-**Checkpoint `d8-p4-end`:** Remus finds every mate in 1 and every mate in 2 of
+**Checkpoint (4:30):** Remus finds every mate in 1 and every mate in 2 of
 `mate_puzzles.epd`, and alpha-beta returns the same score as negamax with fewer nodes.
 
 ### Day 9: The clock, and the color versions
@@ -454,19 +451,19 @@ moves" milestone.
   what its enhancement should change, and how the class will see it.
 - **P4. Color battles.** Each pair copies its color folder onto its USB stick. In
   each of two rounds five pairs host and five visit: the visitors copy their folder
-  over the folder of the same color in the host laptop's `period2/student/engines` folder, and the host
+  over the folder of the same engine color in the host laptop's `period2/student/engines` folder, and the host
   opens `play_battle.py` in its own color folder, presses Run, and types the
-  visitor's color. The two colors play twice at 10 minutes a side, once with each
-  color, and each pair writes the score on the board. The class reads the board and
+  visitor's engine color. The two engine colors play twice at 10 minutes a side, once
+  with each piece color, and each pair writes the score on the board. The class reads the board and
   asks why two games prove little; the teacher then shows the league table from
-  `misc/docs/engines/remus_versions.md`, 110 games for each color. While round 2 runs, each
+  `misc/docs/engines/remus_versions.md`, 110 games for each engine color. While round 2 runs, each
   pair puts its round 1 score into the demo `demo_results.py`, which turns it into an
-  Elo gap with a margin of error, then tries its color's 110 league games and sees the
-  margin shrink. Each host runs `git restore` on the visitor's folder before the end
-  of the period.
+  Elo gap with a margin of error, then tries its engine color's 110 league games and sees the
+  margin shrink. The visitor's folder stays on the host laptop, in place of an engine color
+  the host pair never writes.
 
-**Checkpoint `d9-p4-end`:** every color version passes its tests and its one-game smoke
-test, and has played two battles against other colors.
+**Checkpoint (4:30):** every color version passes its tests and its one-game smoke
+test, and has played two battles against other engine colors.
 
 ### Day 10: Solve a science problem using chess AI
 
@@ -521,8 +518,8 @@ test, and has played two battles against other colors.
   X-ray fluorescence, which tells gold from silver at once.
 - **P4. Science results, take-home, and wrap-up.** Day 10 stays on the science; the
   chess matches end with the Day 9 battles. First each student copies the pair's
-  repository to a USB drive with `git clone --no-hardlinks` and checks that the copy
-  opens and passes `run_tests.py`. Then each pair runs `hidden_peak.py` and
+  Remus folder to a USB drive in File Explorer, leaving out the `.venv` folder, and
+  checks that the copy opens in VS Code. Then each pair runs `hidden_peak.py` and
   `phase_hunt.py` once more and fills in a results table: how many measurements its
   `choose_next_measurement()` needs against random guessing, and the right, wrong, and
   can't-tell counts of greedy and search on the 200 powders. The class collects every
@@ -532,7 +529,7 @@ test, and has played two battles against other colors.
   minutes. Close with what comes next: AI agents that steer real experiments at light
   sources such as NSLS-II.
 
-**Checkpoint `d10-p4-end`:** every pair's `choose_next_measurement()` beats random
+**Checkpoint (4:30):** every pair's `choose_next_measurement()` beats random
 guessing on the 100-grid benchmark, every pair's `search()` makes fewer wrong calls
 than greedy on the 200-powder benchmark, and every pair has reported its results and
 taken its code home.
@@ -590,7 +587,7 @@ engine, and the engine never imports it.
 
 1. **GUI play through UCI.** Lucas Chess starts a launcher and talks to Remus over stdin and
    stdout. `remus.bat` changes to its own folder and runs `uv run python
-   uci_engine.py`.
+   uci_engine.py`. Lucas Chess starts `remus.bat`, so nobody types the command.
 2. **Matches and the battles.** `play_match.py` and `version_match.py` use
    `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes and play them
    on a `chess.Board`, and `version_match.py` saves every game as PGN with `chess.pgn`.

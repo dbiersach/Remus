@@ -1,13 +1,13 @@
 # Day 4: Legal moves
 
-Day 4 teaches modules and git, then the rule that makes a move legal: the mover's own king must be safe after it. By 4:30 Remus finds attacks and check, and keeps only the legal moves, so a pinned knight has no moves and a king in check has only escapes.
+Day 4 teaches modules and imports, then the rule that makes a move legal: the mover's own king must be safe after it. By 4:30 Remus finds attacks and check, and keeps only the legal moves, so a pinned knight has no moves and a king in check has only escapes.
 
 ## Objectives for the day
 
 By 4:30, each pair can:
 
 - Import functions from another file, and explain why every Remus file keeps its prints inside `main()`.
-- Save work with git: fetch, switch to a new branch, commit, and read the log.
+- Draw a map of which Remus files import which, and name the file that runs.
 - Decide whether a square is attacked by looking outward from the square.
 - Keep only legal moves: make each move, test the king, and undo it.
 - Predict the legal moves of a position, then check the prediction with Remus.
@@ -16,7 +16,7 @@ By 4:30, each pair can:
 
 | Period | Time | Title | Pairs write |
 | --- | --- | --- | --- |
-| P1 | 8:30 to 10:00 | Python lab 6: modules, imports, __main__, git | The lab `python_modules.py` (11 lines) |
+| P1 | 8:30 to 10:00 | Python lab 6: modules, imports, __main__ | The lab `python_modules.py` (11 lines) |
 | | 10:00 to 10:30 | Break | |
 | P2 | 10:30 to 12:00 | Attacks | `piece_at_offsets()` in `attacks.py` (6 lines); `attacked_by_pawn()` in `attacks.py` (3 lines); `attacked_by_king()` in `attacks.py` (2 lines) |
 | | 12:00 to 1:00 | Lunch | |
@@ -24,15 +24,15 @@ By 4:30, each pair can:
 | | 2:30 to 3:00 | Break | |
 | P4 | 3:00 to 4:30 | Practice positions | The demo `demo_practice_positions.py` (14 lines) |
 
-## Period 1, 8:30 to 10:00: Python lab 6: modules, imports, __main__, git
+## Period 1, 8:30 to 10:00: Python lab 6: modules, imports, __main__
 
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Slides: a module is a file, `import` reads it, and `if __name__ == "__main__"` keeps a file quiet when another file imports it. |
 | 8:45 to 9:20 | Pairs work through Parts #1 to #3 of `python_modules.py`: every file has a `__name__`, use yesterday's `board.py` and `move_generation.py`, and list the knight moves from g1. |
-| 9:20 to 9:30 | Slides: git. The teacher shows `fetch`, `switch -c`, `commit`, and `log` on the projector. |
-| 9:30 to 9:50 | Pairs finish Part #4 and save the lab with their first commit. |
-| 9:50 to 10:00 | Every pair shows its `git log` to the teacher or the assistant. |
+| 9:20 to 9:35 | Unplugged: the import map. On paper, each pair writes the name of every `.py` file in the folder and draws an arrow from each file to every file it imports, then circles the file that runs as `__main__`. |
+| 9:35 to 9:50 | Two pairs show their maps on the projector. The teacher shows that every arrow stays inside the folder: each period folder holds a complete Remus, so its files import only each other. |
+| 9:50 to 10:00 | Every pair shows its map to the teacher or the assistant. |
 
 [`Day 04 Period 01 Goals.md`](<period1/Day 04 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 

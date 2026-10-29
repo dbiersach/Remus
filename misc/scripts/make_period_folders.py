@@ -634,7 +634,7 @@ PERIOD_TITLES = {
     (3, 2): "Jumping pieces: knights and kings",
     (3, 3): "Sliding pieces: rooks, bishops, and queens",
     (3, 4): "Pawns",
-    (4, 1): "Python lab 6: modules, imports, __main__, git",
+    (4, 1): "Python lab 6: modules, imports, __main__",
     (4, 2): "Attacks",
     (4, 3): "Check and the legal filter",
     (4, 4): "Practice positions",
@@ -676,9 +676,10 @@ PERIOD_NOTES = {
         4,
     ): "The battles run in `period2/student/engines`. Each pair copies its own color "
     "folder onto a USB stick. On the host laptop, the visitors copy that folder over "
-    "the folder of the same color in `period2/student/engines`, and the host "
+    "the folder of the same engine color in `period2/student/engines`, and the host "
     "opens `play_battle.py` in its own color folder, presses Run Python File, and "
-    "types the visitor's color. Remus plays two 10-minute games, one with each color, "
+    "types the visitor's engine color. Remus plays two 10-minute games, one with each "
+    "piece color, "
     "side by side.",
     (
         5,

@@ -1,11 +1,11 @@
-# Day 4, Period 1: Python lab 6: modules, imports, __main__, git
+# Day 4, Period 1: Python lab 6: modules, imports, __main__
 
 ## Learning objectives
 
 By the end of this period, each pair can:
 
 - Split code into modules and import one from another. **Measured by:** The lab's two files run together, and running the imported file alone with the Run button prints its own self-check only through `main()`.
-- Save work with git: switch to a branch, commit, and read the log. **Measured by:** `git log --oneline` shows the pair's commit on its own branch.
+- Draw which Remus files import which, and name the file that runs. **Measured by:** The pair's paper import map draws arrows from `move_generation.py` to `board.py`, `game_state.py`, and `moves.py`, and marks the lab as the file named `__main__`.
 
 ## The files
 
@@ -21,7 +21,7 @@ The lab imports `board.py`, `game_state.py`, `move_generation.py`, and `moves.py
 
 Part #1 prints `__name__`: the file that VS Code runs is `__main__`, and an imported file keeps its own name. That is why `board.py` prints its board when VS Code runs `board.py` and stays silent when the lab imports it, and why every Remus print sits inside `main()`.
 
-Part #2 calls `new_board()` and `knight_moves()` from the imported files and lists the two knight moves from g1. Part #3 runs `board.py` on its own in VS Code, and Part #4 makes a git branch, a commit, and the log in the terminal.
+Part #2 calls `new_board()` and `knight_moves()` from the imported files and lists the two knight moves from g1. Part #3 runs `board.py` on its own in VS Code and shows its board, because there `board.py` is the file named `__main__`.
 
 Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
@@ -31,9 +31,9 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 8:30 to 8:45 | Slides: a module is a file, `import` reads it, and `if __name__ == "__main__"` keeps a file quiet when another file imports it. |
 | 8:45 to 9:20 | Pairs work through Parts #1 to #3 of `python_modules.py`: every file has a `__name__`, use yesterday's `board.py` and `move_generation.py`, and list the knight moves from g1. |
-| 9:20 to 9:30 | Slides: git. The teacher shows `fetch`, `switch -c`, `commit`, and `log` on the projector. |
-| 9:30 to 9:50 | Pairs finish Part #4 and save the lab with their first commit. |
-| 9:50 to 10:00 | Every pair shows its `git log` to the teacher or the assistant. |
+| 9:20 to 9:35 | Unplugged: the import map. On paper, each pair writes the name of every `.py` file in the folder and draws an arrow from each file to every file it imports, then circles the file that runs as `__main__`. |
+| 9:35 to 9:50 | Two pairs show their maps on the projector. The teacher shows that every arrow stays inside the folder: each period folder holds a complete Remus, so its files import only each other. |
+| 9:50 to 10:00 | Every pair shows its map to the teacher or the assistant. |
 
 ## What you edit in the lab
 

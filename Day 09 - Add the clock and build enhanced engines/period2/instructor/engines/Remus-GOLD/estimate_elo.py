@@ -8,7 +8,9 @@ finished game is added at once to the class games file, misc/games/remus_games.p
 the top of the Remus folder, so no game is ever lost.
 This is a referee outside the engine: the engine itself never imports python-chess.
 
-Usage: uv run estimate_elo.py [--games 10] [--levels 1320 1500 1700] [--stockfish PATH]
+Press the Run button in VS Code to play the default levels. The course designer may
+also pass options from a terminal:
+    uv run estimate_elo.py [--games 10] [--levels 1320 1500 1700] [--stockfish PATH]
 
 Stockfish calibrates UCI_Elo at 60 seconds plus 0.6 seconds a move, anchored to the
 CCRL 40/4 rating list, so the games use that clock by default. Without --stockfish,

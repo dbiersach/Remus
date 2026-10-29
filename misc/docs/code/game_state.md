@@ -40,7 +40,7 @@ state = {
 ## How it works
 
 1. `new_game()` builds the state for the start of a game.
-2. `color_of()`, `is_white()`, and `opponent()` answer small questions about colors.
+2. `color_of()`, `is_white()`, and `opponent()` answer small questions about piece colors.
 3. `position_key()` writes the position as one line of text. Two equal keys mean the same position.
 
 ## Call tree
@@ -66,7 +66,7 @@ opponent()
 | `new_game` | Makes the state for a brand new game. | Day 2, period 3 |
 | `is_white` | Says True if a piece letter is uppercase (White). | Day 2, period 3 |
 | `color_of` | Says "w", "b", or None for an empty square. | Day 2, period 3 |
-| `opponent` | Gives the other side's color. | Day 2, period 3 |
+| `opponent` | Gives the other side's piece color. | Day 2, period 3 |
 | `position_key` | Writes the position as text, so Remus can tell when a position repeats. | Day 7, period 1 |
 
 ## How the file grows
@@ -79,7 +79,7 @@ opponent()
 Open `game_state.py` from a period folder that has the file in VS Code, and click the Run Python File
 button (the triangle at the top right of the editor).
 
-You should see: The start board, `Side to move: w`, and the colors of a few pieces.
+You should see: The start board, `Side to move: w`, and the piece colors of a few pieces.
 
 ## Puzzle questions
 

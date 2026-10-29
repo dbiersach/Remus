@@ -993,8 +993,8 @@ def readme_text(version: dict) -> str:
                 "shows that the engine plays legal moves to the end of a game. In the "
                 "Day 9 battles, copy the visiting pair's color folder into the `engines` "
                 "folder, open `play_battle.py`, press Run, and type the visitor's "
-                f"color: Remus-{color} plays it twice at 10 minutes a side, once with "
-                "each color, and both games go into misc/games/remus_games.pgn. Each "
+                f"engine color: Remus-{color} plays it twice at 10 minutes a side, "
+                "once with each piece color, and both games go into misc/games/remus_games.pgn. Each "
                 "script runs `version_match.py` from the `engines` folder above this one."
             ),
         ]
@@ -1017,7 +1017,7 @@ RUN_SCRIPTS = {
         (
             "The Day 9 battle for this color version. Copy the visiting pair's color "
             "folder into\nthe engines folder on this laptop, press Run in VS Code, and "
-            "type the visitor's\ncolor. Remus-{color} plays two 10-minute games "
+            "type the visitor's\nengine color. Remus-{color} plays two 10-minute games "
             "against it from the same opening,\nWhite in game 1 and Black in game 2. "
             "The two games take about 20 minutes."
         ),
@@ -1042,9 +1042,9 @@ def run_script_text(name: str, color: str) -> str:
     for word in [color, *extra]:
         if word == "OPPONENT":
             arguments += ", opponent"
-            # The visitor types its color, such as RED, in the VS Code terminal
+            # The visitor types its engine color, such as RED, in the VS Code terminal
             ask = (
-                '    opponent = input("The visiting color, such as RED: ")'
+                '    opponent = input("The visiting engine color, such as RED: ")'
                 ".strip().upper()\n"
             )
         else:

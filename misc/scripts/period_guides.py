@@ -172,7 +172,7 @@ OBJECTIVES = {
     ],
     (2, 3): [
         (
-            "Tell the color of a piece, and handle an empty square.",
+            "Tell the piece color of a piece, and handle an empty square.",
             (
                 "The `is_white` and `color_of` tests in `test_make_move.py` pass, "
                 "including `None` for `.`."
@@ -262,8 +262,12 @@ OBJECTIVES = {
             ),
         ),
         (
-            "Save work with git: switch to a branch, commit, and read the log.",
-            "`git log --oneline` shows the pair's commit on its own branch.",
+            "Draw which Remus files import which, and name the file that runs.",
+            (
+                "The pair's paper import map draws arrows from `move_generation.py` "
+                "to `board.py`, `game_state.py`, and `moves.py`, and marks the lab "
+                "as the file named `__main__`."
+            ),
         ),
     ],
     (4, 2): [
@@ -590,7 +594,8 @@ OBJECTIVES = {
             "Run a fair match between two color versions.",
             (
                 "The pair copies its color folder to another pair's laptop, plays two "
-                "games against that pair's color, one with each color, and writes the "
+                "games against that pair's engine color, one with each piece color, and "
+                "writes the "
                 "result on the board."
             ),
         ),
@@ -598,7 +603,7 @@ OBJECTIVES = {
             "Read a match result with its margin of error.",
             (
                 "`demo_results.py` turns the pair's two battle games, and then its "
-                "color's league games, into an Elo gap and margin, and the pair says "
+                "engine color's league games, into an Elo gap and margin, and the pair says "
                 "which gap is larger than its margin and why two games cannot show "
                 "which enhancement is stronger."
             ),
@@ -674,7 +679,10 @@ OBJECTIVES = {
         ),
         (
             "Take the code home.",
-            "Each student's USB copy opens and passes `run_tests.py`.",
+            (
+                "Each student's USB drive holds the pair's Remus folder, every Day "
+                "folder included, and the copy opens in VS Code."
+            ),
         ),
     ],
 }
@@ -690,7 +698,7 @@ VERSION_OBJECTIVES = [
         "`run_tests.py` passes in the version folder.",
     ),
     (
-        "Run a fair experiment: same opening, both colors.",
+        "Run a fair experiment: same opening, both piece colors.",
         (
             "In the Day 9 battles, `play_battle.py` in the version folder plays both "
             "10-minute games with no illegal moves or crashes when the pair presses "
@@ -722,7 +730,7 @@ VERSION_GUIDES = {
         "why": (
             "Every color version is Remus-WHITE plus exactly one change. Playing each "
             "color version against Remus-WHITE is a fair experiment: same openings, both "
-            "colors, and only one thing different."
+            "piece colors, and only one thing different."
         ),
         "cost": (
             "Remus-WHITE is pure Python, so it searches only a few thousand positions "
@@ -1356,7 +1364,7 @@ CHANGE_NOTES = {
     "so this tiny function is the one they all call.",
     ("game_state.py", "is_white"): "Returns True for an uppercase letter. Remus "
     "follows FEN, where uppercase is White and lowercase is Black, so one call to "
-    "`isupper()` tells the colors apart.",
+    "`isupper()` tells the piece colors apart.",
     ("game_state.py", "color_of"): 'Returns "w", "b", or None for an empty '
     "square. Move generation asks this about every square a piece might land on: a "
     "friend blocks the move, an enemy can be captured, and None means the square is "
@@ -1366,7 +1374,7 @@ CHANGE_NOTES = {
     "Chess speaks, so this is how Remus tells the GUI which move it chose.",
     ("moves.py", "move_from_uci"): "Reads text such as e7e8q back into a Move. The "
     "promotion letter becomes uppercase for White and lowercase for Black, so the "
-    "new piece gets the right color on the board.",
+    "new piece gets the right piece color on the board.",
     ("make_move.py", "undo_move"): "Puts back everything a move changed, using the "
     "undo record that `make_move()` saved: the moved piece, the captured piece, the "
     "side to move, and the clocks and rights. The search will make and undo millions "
@@ -1399,13 +1407,13 @@ CHANGE_NOTES = {
     ("attacks.py", "attacked_by_pawn"): "Looks diagonally for an enemy pawn on the "
     "row behind the square, from the attacker's point of view. A pawn captures "
     "diagonally even though it moves straight, so its two offsets differ from its "
-    "push, and they depend on its color.",
+    "push, and they depend on its piece color.",
     ("attacks.py", "attacked_by_king"): "Looks one step away in all eight directions "
     "for the enemy king, with the same `KING_STEPS` the king moves by. Kings can "
     "never stand next to each other, and this check is what stops a king from "
     "walking up to the other king.",
-    ("attacks.py", "in_check"): "Finds the king of one color and asks whether the "
-    "other color attacks its square. Check decides which moves are legal, whether "
+    ("attacks.py", "in_check"): "Finds the king of one piece color and asks whether "
+    "the other piece color attacks its square. Check decides which moves are legal, whether "
     "a game is over, and later how deep the search looks.",
     ("legal_moves.py", "legal_moves"): "Tries every pseudo-legal move: makes it, "
     "keeps it if the mover's king is not in check, and undoes it. Testing after the "
@@ -1430,7 +1438,8 @@ CHANGE_NOTES = {
     "not describe exactly 8 squares. From now on every test position starts as FEN.",
     ("game_end.py", "insufficient_material"): "Returns True when neither side can "
     "ever checkmate: kings alone, a king with one bishop or knight, or bishops that "
-    "all stand on squares of one color. The bishops' square colors come from "
+    "all stand on light squares, or all on dark squares. A square is light or "
+    "dark by "
     "(row + col) % 2.",
     ("game_end.py", "game_result"): "Checks every way a game ends, in order: no legal "
     "moves (checkmate or stalemate), insufficient material, threefold repetition, and "
@@ -1642,7 +1651,7 @@ LAB_NOTES = {
         ),
         (
             "Part #4: `upper()` turns Black's pieces into White's, and `isupper()` tells "
-            "the colors apart. Remus's `is_white()` on Day 2 is this one call."
+            "the piece colors apart. Remus's `is_white()` on Day 2 is this one call."
         ),
     ],
     (1, 3): [
@@ -1742,8 +1751,8 @@ LAB_NOTES = {
         (
             "Part #2 calls `new_board()` and `knight_moves()` from the imported files "
             "and lists the two knight moves from g1. Part #3 runs "
-            "`board.py` on its own in VS Code, and Part #4 makes a git branch, a "
-            "commit, and the log in the terminal."
+            "`board.py` on its own in VS Code and shows its board, because there "
+            "`board.py` is the file named `__main__`."
         ),
     ],
     (4, 4): [
@@ -1862,7 +1871,7 @@ LAB_NOTES = {
             "an Elo gap, then into a range that holds the true gap 95 times out of "
             "100. When the range includes 0, the match has not shown that the "
             "enhancement helped, and more games are needed. Each pair puts in its own "
-            "two battle games, then its color's league games from the teacher's "
+            "two battle games, then its engine color's league games from the designer's "
             "table, and compares the two ranges."
         ),
     ],
@@ -1876,7 +1885,7 @@ DAY_GUIDES = {
     1: {
         "theme": "Setup and the board",
         "summary": (
-            "Day 1 forms the pairs, checks the laptops, and teaches the first Python: "
+            "Day 1 forms the pairs, sets up the laptops, and teaches the first Python: "
             "strings and lists. In the last period each pair writes its first Remus "
             "code. By 4:30 Remus prints its own board, converts a square name such as "
             "e2 into a (row, col) pair and back, and draws the board as a picture."
@@ -1907,7 +1916,7 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    15,
+                    10,
                     (
                         "The story of the name: Sargon, the 1978 chess program, and "
                         "Rimush, the first son of Sargon of Akkad. Remus is a son of "
@@ -1915,7 +1924,7 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    25,
+                    20,
                     (
                         "Form the ten pairs. The driver types and the navigator reads "
                         "and checks; the two swap roles every period. Each pair picks "
@@ -1923,7 +1932,17 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    40,
+                    30,
+                    (
+                        "Setup, the only git and uv commands of the workshop. The "
+                        "course designer shows each pair how to install git and uv, "
+                        "clone the Remus repository, and run `uv sync` once to build "
+                        "the `.venv` folder. From here on every step runs from VS "
+                        "Code's Run button."
+                    ),
+                ),
+                (
+                    50,
                     (
                         "Notation on the demonstration board: square names, SAN for "
                         "people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs "
@@ -1931,7 +1950,7 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    55,
+                    60,
                     (
                         "Pairs type the 6 lines of `python_setup.py` and run it. It "
                         "checks the laptop, greets the team, and prints a first chess "
@@ -2383,7 +2402,7 @@ DAY_GUIDES = {
     4: {
         "theme": "Legal moves",
         "summary": (
-            "Day 4 teaches modules and git, then the rule that makes a move legal: the"
+            "Day 4 teaches modules and imports, then the rule that makes a move legal: the"
             " mover's own king must be safe after it. By 4:30 Remus finds attacks and "
             "check, and keeps only the legal moves, so a pinned knight has no moves "
             "and a king in check has only escapes."
@@ -2394,8 +2413,8 @@ DAY_GUIDES = {
                 "keeps its prints inside `main()`."
             ),
             (
-                "Save work with git: fetch, switch to a new branch, commit, and read "
-                "the log."
+                "Draw a map of which Remus files import which, and name the file "
+                "that runs."
             ),
             ("Decide whether a square is attacked by looking outward from the square."),
             "Keep only legal moves: make each move, test the king, and undo it.",
@@ -2425,17 +2444,24 @@ DAY_GUIDES = {
                 (
                     50,
                     (
-                        "Slides: git. The teacher shows `fetch`, `switch -c`, "
-                        "`commit`, and `log` on the projector."
+                        "Unplugged: the import map. On paper, each pair writes the "
+                        "name of every `.py` file in the folder and draws an arrow "
+                        "from each file to every file it imports, then circles the "
+                        "file that runs as `__main__`."
                     ),
                 ),
                 (
-                    60,
-                    ("Pairs finish Part #4 and save the lab with their first commit."),
+                    65,
+                    (
+                        "Two pairs show their maps on the projector. The teacher "
+                        "shows that every arrow stays inside the folder: each period "
+                        "folder holds a complete Remus, so its files import only "
+                        "each other."
+                    ),
                 ),
                 (
                     80,
-                    ("Every pair shows its `git log` to the teacher or the assistant."),
+                    ("Every pair shows its map to the teacher or the assistant."),
                 ),
             ],
             2: [
@@ -3195,7 +3221,7 @@ DAY_GUIDES = {
         "summary": (
             "Day 9 gives Remus a clock, then splits the class into ten enhancement "
             "color versions. Each pair adds one idea to the same engine, Remus-WHITE, and "
-            "tests it. In period 4 the pairs carry their colors to each other's laptops "
+            "tests it. In period 4 the pairs carry their color versions to each other's laptops "
             "on USB sticks and battle. By 4:30 every color version passes its tests and "
             "has played two battles."
         ),
@@ -3315,11 +3341,11 @@ DAY_GUIDES = {
                     10,
                     (
                         "Round 1. The visiting pair copies its color folder over the "
-                        "folder of the same color in the host laptop's `engines` "
+                        "folder of the same engine color in the host laptop's `engines` "
                         "folder. The host opens `play_battle.py` in its own color "
                         "folder, presses Run in VS Code, and types the visitor's "
-                        "color. Two 10-minute games run side by side, one with each "
-                        "color. Each pair writes the score on the board."
+                        "engine color. Two 10-minute games run side by side, one with "
+                        "each piece color. Each pair writes the score on the board."
                     ),
                 ),
                 (
@@ -3331,29 +3357,31 @@ DAY_GUIDES = {
                     (
                         "While the round 2 games run, each pair turns its round 1 "
                         "result into an Elo gap with a margin of error in "
-                        "`demo_results.py`, then tries its color's league games."
+                        "`demo_results.py`, then tries its engine color's league games."
                     ),
                 ),
                 (
                     70,
                     (
-                        "The class reads the board: which colors won, and why two "
+                        "The class reads the board: which engine colors won, and why two "
                         "games prove little. The teacher shows the league table, 110 "
-                        "games for each color, and compares."
+                        "games for each engine color, and compares."
                     ),
                 ),
                 (
                     85,
                     (
-                        "Each host restores the visitor's folder with `git restore` so "
-                        "its own repository holds only its own color."
+                        "Each visiting pair takes its USB stick back. The visitor's "
+                        "folder stays on the host laptop in place of an engine color the host "
+                        "pair never writes, so the host's own color folder is "
+                        "untouched."
                     ),
                 ),
             ],
         },
         "checkpoint": (
             "Every color version passes its tests and its one-game test match, and "
-            "has played two battles against other colors."
+            "has played two battles against other engine colors."
         ),
     },
     10: {
@@ -3492,9 +3520,9 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Each student copies the pair's repository to a USB drive "
-                        "with `git clone --no-hardlinks` and checks that the copy "
-                        "opens and passes `run_tests.py`."
+                        "Each student copies the pair's Remus folder to a USB drive "
+                        "in File Explorer, leaving out the `.venv` folder, and checks "
+                        "that the copy opens in VS Code."
                     ),
                 ),
                 (
