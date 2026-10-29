@@ -23,6 +23,8 @@ from the top Remus folder:
     uv run misc/scripts/version_match.py RED --games 1 --minutes 2
                                                       one short game, to check it runs
     uv run misc/scripts/version_match.py RED GOLD     Remus-RED against Remus-GOLD
+    uv run misc/scripts/version_match.py GOLD --games 20 --at-once 20
+                                                      20 games at once on a big computer
 
 Each side gets 10 minutes, because Remus searches only a few thousand positions a
 second and a shorter clock stops every version too shallow for most enhancements
@@ -349,6 +351,9 @@ def main():
     parser.add_argument(
         "--engines", type=Path, default=None, help="the folder of engine folders"
     )
+    parser.add_argument(
+        "--at-once", type=int, default=GAMES_AT_ONCE, help="games played at once"
+    )
     options = parser.parse_args()
     if options.engines is not None:
         global ENGINES_FOLDER
@@ -373,7 +378,7 @@ def main():
             pairings.append((second, first))
     points = 0.0
     start = time.perf_counter()
-    with ThreadPoolExecutor(GAMES_AT_ONCE) as pool:
+    with ThreadPoolExecutor(options.at_once) as pool:
         jobs = []
         for number in range(len(pairings)):
             white, black = pairings[number]
