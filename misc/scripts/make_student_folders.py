@@ -10,7 +10,7 @@ stay, and the body raises NotImplementedError. The tests stay complete, so they
 fail until the pair writes each function. Functions from earlier periods are
 complete, so every student folder starts from working code.
 
-It also writes misc/docs/course/student_edit_plan.md and the overview README.md at the top of
+It also writes misc/docs/course/student_edit_plan.md and the syllabus, "Day NN Syllabus.md", at the top of
 every Day folder, from DAY_GUIDES in period_guides.py.
 
 Run this script again whenever the instructor code changes, after
@@ -308,7 +308,7 @@ def clock(minutes: int) -> str:
 
 
 def day_readme(day: int, rows: dict) -> str:
-    """Return the README.md at the top of one Day folder: the day's overview."""
+    """Return the syllabus at the top of one Day folder: the day's overview."""
     from make_period_folders import PERIOD_TITLES  # Imported here: it imports this file
 
     guide = DAY_GUIDES[day]
@@ -372,13 +372,14 @@ def day_readme(day: int, rows: dict) -> str:
 
 
 def write_day_readmes(rows: dict) -> None:
-    """Write the overview README.md at the top of every Day folder."""
+    """Write the syllabus, "Day NN Syllabus.md", at the top of every Day folder."""
     count = 0
     for folder in sorted(ROOT.glob("Day *")):
         day = int(folder.name[4:6])
-        (folder / "README.md").write_text(day_readme(day, rows))
+        (folder / "README.md").unlink(missing_ok=True)
+        (folder / f"Day {day:02} Syllabus.md").write_text(day_readme(day, rows))
         count += 1
-    print(f"Wrote the overview README.md of {count} Day folders  (expected 10)")
+    print(f"Wrote the syllabus of {count} Day folders  (expected 10)")
 
 
 def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
