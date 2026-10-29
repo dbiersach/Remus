@@ -111,3 +111,5 @@ The number at the left of each line is its line number once the code is typed. W
 227 |
 228 | def run_search(measured: list[float]) -> Hunt:
 ```
+
+**How it works:** Each call scores the current set of phases. A new best score starts a fresh list of best sets, and a tie joins the list; `list(phases)` saves a copy, because `phases` keeps changing. At depth 0 the search stops. Otherwise it tries each phase from `start` on: append it (make), search one level deeper with the next index, and pop it (undo). Starting at `index + 1` means each set is tried once, never in two orders.

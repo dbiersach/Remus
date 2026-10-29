@@ -59,6 +59,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 24 |
 ```
 
+**How it works:** A recursive function calls itself on a smaller problem. The base case comes first: at 0 the function prints Go! and returns, so the calls stop. Otherwise it prints its number and calls `countdown(number - 1)`, which does the rest.
+
 ### `count_leaves()`
 
 ```text
@@ -73,3 +75,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 45 |
 46 |
 ```
+
+**How it works:** A leaf is a string, and it counts as 1. Any other tree is a list of branches, so the function adds up `count_leaves` of each branch. Each branch is a smaller tree, so every call gets closer to the leaves.

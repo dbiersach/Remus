@@ -48,7 +48,7 @@ def main():
     print(f"board[0][0] is {board[0][0]}  (expected ., the original stays the same)")
     print(f"b3[0][0] is {b3[0][0]}  (expected r)")
     print(f"Same board? {b3 is board}  (expected False)")
-    print(f"Equal boards? {b3 == board}  (expected False, a1 differs)")
+    print(f"Equal boards? {b3 == board}  (expected False, a8 differs)")
 
     print("Part #4 - A Dataclass Describes a Move")
     move = Move("e2", "e4")

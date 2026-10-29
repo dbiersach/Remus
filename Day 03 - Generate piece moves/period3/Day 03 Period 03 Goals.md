@@ -80,3 +80,5 @@ The number at the left of each line is its line number once the code is typed. W
 106 |
 107 | def slider_moves(
 ```
+
+**How it works:** The function unpacks the start square and the direction, then takes its first step. The `while` loop runs while the square is on the board. An empty square is a move, and the walk goes on. A square with a piece ends the walk: an enemy piece is one last move, a capture, and a friendly piece is not a move at all. The last line of the loop takes the next step.

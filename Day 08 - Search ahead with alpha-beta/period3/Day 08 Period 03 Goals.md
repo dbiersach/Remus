@@ -82,3 +82,5 @@ The number at the left of each line is its line number once the code is typed. W
 312 |
 313 | def main():
 ```
+
+**How it works:** Quiescence keeps searching captures after the main search ends, so Remus never stops in the middle of a trade. The side to move may stand pat, keeping the score it has without capturing. If that score already reaches `beta`, the opponent avoids this position, so the function returns at once. Otherwise each capture is made, searched with the window flipped, and undone, with the same cutoff as alpha-beta.

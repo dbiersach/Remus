@@ -77,3 +77,5 @@ The number at the left of each line is its line number once the code is typed. W
 160 |
 161 | def pawn_captures(board: Board, square: Square, color: str) -> list[Move]:
 ```
+
+**How it works:** White pawns move toward row 0 (rank 8), so `forward` is -1 for White and 1 for Black, and each side's pawns start on their own row. A pawn may step one square ahead only onto an empty square. `pawn_moves_to` turns a step onto the last rank into four promotions. Only when the first square is empty, and the pawn still stands on its starting row, may it also step two squares to another empty square.

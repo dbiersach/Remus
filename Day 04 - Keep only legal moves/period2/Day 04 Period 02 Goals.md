@@ -86,6 +86,8 @@ The number at the left of each line is its line number once the code is typed. W
 94 | def attacked_by_knight(board: Board, square: Square, by_color: str) -> bool:
 ```
 
+**How it works:** The function adds each offset, such as (2, 1), to the square to reach a target square. If the target is on the board and holds the exact piece asked for, such as a White knight `N`, the square is attacked and the function returns True at once. After trying every offset with no match it returns False.
+
 ### `attacked_by_pawn()` in `attacks.py`
 
 **Where:** lines 113 to 115 of `attacks.py`, inside `attacked_by_pawn()`, in place of the stub below the docstring. It is called by `is_square_attacked()` in `attacks.py`.
@@ -103,6 +105,8 @@ The number at the left of each line is its line number once the code is typed. W
 118 | def first_piece(board: Board, square: Square, direction: Direction) -> str:
 ```
 
+**How it works:** A pawn attacks one step diagonally forward. To ask whether a White pawn attacks a square, look one row toward rank 1 from that square, at (row + 1, col - 1) and (row + 1, col + 1), because White pawns move toward row 0. For a Black pawn, look the other way, at row - 1. `piece_at_offsets` does the looking.
+
 ### `attacked_by_king()` in `attacks.py`
 
 **Where:** lines 102 to 103 of `attacks.py`, inside `attacked_by_king()`, in place of the stub below the docstring. It is called by `is_square_attacked()` in `attacks.py`.
@@ -116,3 +120,5 @@ The number at the left of each line is its line number once the code is typed. W
 105 |
 106 | def attacked_by_pawn(board: Board, square: Square, by_color: str) -> bool:
 ```
+
+**How it works:** The function picks the king letter of the attacking side, `K` for White and `k` for Black, and asks `piece_at_offsets` whether that king stands on any of the eight squares around the target.

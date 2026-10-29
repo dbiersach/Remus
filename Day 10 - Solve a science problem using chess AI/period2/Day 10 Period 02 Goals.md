@@ -218,6 +218,8 @@ The number at the left of each line is its line number once the code is typed. W
 142 | def greedy_phases(measured: list[float]) -> Phases:
 ```
 
+**How it works:** `predicted_peaks` lists every peak the chosen phases would make. The score starts with a cost for each phase, so a simpler answer wins a tie. Each measured peak that a predicted peak matches adds a point, and each one nothing explains costs a point. Each predicted peak that the measurement does not show also costs a point.
+
 ### `greedy_phases()` in `phase_hunt.py`
 
 **Where:** lines 158 to 174 of `phase_hunt.py`, inside `greedy_phases()`, in place of the stub below the docstring. It is called by `greedy_answer()` in `phase_hunt.py`.
@@ -248,3 +250,5 @@ The number at the left of each line is its line number once the code is typed. W
 176 |
 177 | def greedy_answer(measured: list[float]) -> list[Phases]:
 ```
+
+**How it works:** The loop adds one phase at a time, up to `MAX_PHASES`. In each round it tries every phase not chosen yet: append it, score the set, and pop it back off, like making and undoing a move. The phase with the best score that beats the current set is kept. When no phase helps, `break` ends the search.

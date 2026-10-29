@@ -87,6 +87,8 @@ The number at the left of each line is its line number once the code is typed. W
 107 | def score_candidate(
 ```
 
+**How it works:** The two loops visit every square of the grid, row by row, and keep each one that has no reading yet. Like `legal_moves` in Remus, this lists the choices at the current step.
+
 ### `score_candidate()` in `hidden_peak.py`
 
 **Where:** lines 130 to 133 of `hidden_peak.py`, inside `score_candidate()`, in place of the stub below the docstring. It is called by `expectimax_choice()` in `hidden_peak.py`.
@@ -104,6 +106,8 @@ The number at the left of each line is its line number once the code is typed. W
 135 |
 136 | def choose_next_measurement(
 ```
+
+**How it works:** `nearest` starts at infinity, and the loop lowers it to the distance from the square to the closest square already measured. The score adds two parts: `predicted_value`, how hot the square looks from the readings nearby (exploit), and `explore_weight` times that distance, a reward for trying somewhere new (explore).
 
 ### `choose_next_measurement()` in `hidden_peak.py`
 
@@ -127,3 +131,5 @@ The number at the left of each line is its line number once the code is typed. W
 150 |
 151 | def random_strategy(readings: dict[tuple[int, int], int]) -> tuple[int, int]:
 ```
+
+**How it works:** This is `greedy_move` again, aimed at a science problem. The function lists the unmeasured squares, scores each one, and keeps the best so far in a loop. The square with the highest score is the next one to measure.

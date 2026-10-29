@@ -58,6 +58,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 15 |
 ```
 
+**How it works:** `isupper()` returns True when a letter is uppercase. In Remus uppercase letters are White pieces, so this one line answers the question in the function's name.
+
 ### `on_board()`
 
 ```text
@@ -66,6 +68,14 @@ Each block below shows the code to type with a few lines around it, so you can f
 32 +     return 0 <= row <= 7 and 0 <= col <= 7
 33 |
 34 |
+```
+
+**How it works:** `0 <= row <= 7` is True only when the row is 0, 1, ..., or 7, and the same test checks the column. `and` makes the whole answer True only when both are inside the board.
+
+### `is_black()`
+
+```text
+34 |
 35 | # Write a whole function yourself: its def line, its docstring, and its body
 36 + def is_black(piece: str) -> bool:
 37 +     """Return True if the piece is Black. Black pieces are lowercase letters."""
@@ -73,6 +83,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 39 |
 40 |
 ```
+
+**How it works:** This function you write from nothing: the `def` line names it and lists its input with a type hint, the docstring says what it does, and the body returns the answer. `islower()` is True for a lowercase letter, a Black piece.
 
 ### `test_is_white()`
 
@@ -85,6 +97,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 46 |
 ```
 
+**How it works:** A test is a function whose name starts with `test_`. Each `assert` checks one fact: a White knight `N` is White, and a Black knight `n` is not. If a fact is False, the assert stops the program and names the line.
+
 ### `test_on_board()`
 
 ```text
@@ -96,6 +110,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 53 |
 ```
 
+**How it works:** The first assert checks a square in the corner, a1 (row 7, col 0). The second checks row 8, which is one row past the edge, so `on_board` must answer False.
+
 ### Part #2 - Your Own Function
 
 ```text
@@ -106,6 +122,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 64 |
 65 |     print("Part #3 - A Square Is a Tuple")
 ```
+
+**How it works:** Each line calls your `is_black` inside an f-string and prints the answer next to the expected one. The single quotes around the f-string let the code use double quotes inside it.
 
 ### Part #3 - A Square Is a Tuple
 
@@ -119,6 +137,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 73 |     print("Part #4 - Check the Functions with assert")
 ```
 
+**How it works:** A square is a tuple of two numbers. `row, col = square` unpacks it, giving the first number the name `row` and the second the name `col`. The last line passes both names to `on_board`.
+
 ### Part #4 - Check the Functions with assert
 
 ```text
@@ -129,3 +149,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 77 |     print("Every assert passed  (expected this line)")
 78 |     print("Now run the same tests with pytest: press Run on run_tests.py")
 ```
+
+**How it works:** Calling the two test functions runs their asserts. If every assert is True, nothing happens and the program goes on to print its success line.

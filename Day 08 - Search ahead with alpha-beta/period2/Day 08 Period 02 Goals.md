@@ -99,15 +99,7 @@ The number at the left of each line is its line number once the code is typed. W
 244 | def main():
 ```
 
-## What you edit in the lab
-
-Open `python_sorting.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
-
-Lines to type in all: 19. Check the work by running `python_sorting.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
-
-## The code you type
-
-Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+**How it works:** The body is negamax with a window. `alpha` is the best score this side is already sure of, and `beta` is the most the opponent will allow. Each child is searched with the window flipped, `-beta` and `-alpha`. A score at or above `beta` is a cutoff: the opponent will never let the game reach this position, so the remaining moves are skipped. Otherwise a better score raises `alpha`, and the function returns `alpha`.
 
 ### Part #1 - insert() Puts the Biggest Victim First
 
@@ -126,6 +118,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 37 |     print("Part #2 - Start the Best at Minus Infinity")
 ```
 
+**How it works:** The list `ordered` starts empty. For each victim the `while` loop steps past every piece worth at least as much, and `insert(place, piece)` puts the new piece there. The list stays sorted from the most valuable down after each insert.
+
 ### Part #2 - Start the Best at Minus Infinity
 
 ```text
@@ -142,6 +136,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 47 |     print("Part #3 - Time a perft Run")
 ```
 
+**How it works:** `-float("inf")` is minus infinity, a number smaller than any real value. Starting the best there means the first victim always replaces it, so no special case is needed.
+
 ### Part #3 - Time a perft Run
 
 ```text
@@ -155,3 +151,11 @@ Each block below shows the code to type with a few lines around it, so you can f
 53 |
 54 |
 ```
+
+**How it works:** `time.perf_counter()` reads a precise clock. Reading it before and after `perft` and subtracting gives the seconds the count took.
+
+## What you edit in the lab
+
+Open `python_sorting.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
+
+Lines to type in all: 19. Check the work by running `python_sorting.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

@@ -75,3 +75,5 @@ The number at the left of each line is its line number once the code is typed. W
 46 |
 47 | def castling_rook_move(move: Move) -> tuple[Square, Square]:
 ```
+
+**How it works:** A move can touch two home squares, the one it leaves and the one it lands on, so the loop checks both. `CASTLING_SQUARES.get(square, "")` gives the rights that square guards, or an empty string for any other square. Each guarded letter is removed with `replace`. Moving the h1 rook removes K, and capturing the rook on h1 removes K too.

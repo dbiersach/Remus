@@ -101,6 +101,8 @@ The number at the left of each line is its line number once the code is typed. W
 56 | def board_from_placement(text: str) -> Board:
 ```
 
+**How it works:** FEN writes each rank from the a-file to the h-file, and a run of empty squares becomes one digit. For each row the code counts empty squares in `empty_count`. When a piece appears, the count, if any, is written first, then the piece letter. At the end of the row a final count is written. A slash goes between ranks, so the starting row 0 gives "rnbqkbnr" and an empty rank gives "8".
+
 ### `board_from_placement()` in `fen.py`
 
 **Where:** lines 70 to 83 of `fen.py`, inside `board_from_placement()`, in place of the stub below the docstring. It is called by `state_from_fen()` in `fen.py`.
@@ -129,15 +131,7 @@ The number at the left of each line is its line number once the code is typed. W
 86 | def state_from_fen(fen: str) -> dict:
 ```
 
-## What you edit in the lab
-
-Open `python_fen_fields.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
-
-Lines to type in all: 8. Check the work by running `python_fen_fields.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
-
-## The code you type
-
-Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+**How it works:** `split("/")` cuts the placement into eight ranks, rank 8 first. In each rank a digit adds that many empty squares and a letter adds one piece. A rank that does not add up to 8 squares, or a placement without 8 ranks, raises `ValueError`, so a typing mistake in a FEN stops at once.
 
 ### Part #1 - split() Cuts Text at Every Space
 
@@ -150,6 +144,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 27 |     print("Part #2 - Name the Six Fields")
 ```
 
+**How it works:** `split()` with no argument cuts text at every run of spaces and returns a list of the pieces. A FEN has six fields, so the list holds 6 items.
+
 ### Part #2 - Name the Six Fields
 
 ```text
@@ -160,6 +156,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 30 |     print("  (expected the placement, w, KQkq, -, 0, and 1)")
 31 |
 ```
+
+**How it works:** The loop counts i from 0 to 5 and prints the name of field i next to its value, so each field is labeled.
 
 ### Part #3 - int() and ValueError
 
@@ -173,3 +171,11 @@ Each block below shows the code to type with a few lines around it, so you can f
 39 |     print("  (expected x is not a number)")
 40 |
 ```
+
+**How it works:** `try` runs a line that may fail. `int("x")` cannot make a number from x, so Python raises `ValueError`, and the `except ValueError` lines run instead of stopping the program. Change `text` to "12" to see the other path.
+
+## What you edit in the lab
+
+Open `python_fen_fields.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
+
+Lines to type in all: 8. Check the work by running `python_fen_fields.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

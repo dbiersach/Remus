@@ -59,6 +59,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 25 |     print("Part #3 - Your First Chess Line")
 ```
 
+**How it works:** The first line stores text in a variable named `team_name`; the quotes mark where the text starts and stops. An f-string, the `f` before the quotes, fills each `{...}` with the value inside, so the greeting prints your team name. `len()` counts the characters of a string, and spaces count too.
+
 ### Part #3 - Your First Chess Line
 
 ```text
@@ -70,3 +72,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 30 |
 31 |
 ```
+
+**How it works:** `back_rank` holds White's eight back-rank pieces as one string, from the a-file to the h-file. `back_rank[4]` reads the character at index 4. Python counts from 0, so index 4 is the fifth letter, the king on the e-file.

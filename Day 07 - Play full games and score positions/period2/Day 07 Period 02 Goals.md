@@ -85,15 +85,7 @@ The number at the left of each line is its line number once the code is typed. W
 119 | def main():
 ```
 
-## What you edit in the lab
-
-Open `python_input_output.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
-
-Lines to type in all: 16. Check the work by running `python_input_output.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
-
-## The code you type
-
-Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+**How it works:** `strip()` removes spaces, `rstrip("+#!?")` removes check, mate, and comment marks from the end, and `replace("0", "O")` accepts castling typed with zeros. Then the function writes every legal move in SAN with `move_to_san` and returns the one whose text matches. Nothing matching means the text is not a legal move here, so it raises `ValueError`.
 
 ### Part #1 - random.choice() Picks One Item
 
@@ -105,6 +97,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 28 |
 29 |     print("Part #2 - A Loop Keeps the Best Item So Far")
 ```
+
+**How it works:** `random.choice` picks one item from a list. The seed above it makes the pick the same on every run.
 
 ### Part #2 - A Loop Keeps the Best Item So Far
 
@@ -120,6 +114,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 38 |     print("Part #3 - Notes Go to stderr")
 ```
 
+**How it works:** The loop remembers the best item so far. It starts with the first victim, and every piece worth more takes its place. After the loop, `best` holds the most valuable piece, the queen.
+
 ### Part #3 - Notes Go to stderr
 
 ```text
@@ -129,6 +125,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 41 |
 42 |     print("Part #4 - Read Commands from stdin and Answer")
 ```
+
+**How it works:** `file=sys.stderr` sends the text to the error stream instead of the normal output. Lucas Chess reads only the normal output, so notes for people go to stderr and never confuse the GUI.
 
 ### Part #4 - Read Commands from stdin and Answer
 
@@ -147,3 +145,11 @@ Each block below shows the code to type with a few lines around it, so you can f
 53 |     print("  (expected readyok, then echo hello)")
 54 |
 ```
+
+**How it works:** `for line in sys.stdin` reads one line each time you press Enter. `strip()` removes the newline. "quit" ends the loop; "isready" gets "readyok", the answer a UCI engine gives; anything else is echoed back. `flush=True` sends each answer at once, as the UCI conversation needs.
+
+## What you edit in the lab
+
+Open `python_input_output.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
+
+Lines to type in all: 16. Check the work by running `python_input_output.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

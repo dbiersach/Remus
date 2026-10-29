@@ -47,7 +47,7 @@ Lines to type in all: 18. Check the work by running `python_dicts.py` with the R
 
 Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
 
-### 
+### The `Move` class
 
 ```text
 16 |
@@ -59,6 +59,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 22 |
 23 |
 ```
+
+**How it works:** `@dataclass` turns a short class into a record type. Each line inside names one field and its type. Python then writes the code that builds a Move from two values and prints it neatly.
 
 ### Part #1 - A Dict Holds Named Facts
 
@@ -73,6 +75,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 33 |
 ```
 
+**How it works:** A dict stores values under keys. `state['turn']` reads the value stored under the key "turn". Inside an f-string that already uses double quotes, the key needs single quotes. `state["turn"] = "b"` replaces the value: Black is to move.
+
 ### Part #2 - Two Names for One Board
 
 ```text
@@ -86,6 +90,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 44 |     print("Part #3 - A Copy Is a New Board")
 ```
 
+**How it works:** `b2 = board` makes no copy. It gives the same board a second name, so writing a pawn through `b2` changes `board` too. `is` asks whether two names point to the very same object, and here the answer is True.
+
 ### Part #3 - A Copy Is a New Board
 
 ```text
@@ -96,10 +102,12 @@ Each block below shows the code to type with a few lines around it, so you can f
 48 |     print(f"board[0][0] is {board[0][0]}  (expected ., the original stays the same)")
 49 +     print(f"b3[0][0] is {b3[0][0]}  (expected r)")
 50 +     print(f"Same board? {b3 is board}  (expected False)")
-51 +     print(f"Equal boards? {b3 == board}  (expected False, a1 differs)")
+51 +     print(f"Equal boards? {b3 == board}  (expected False, a8 differs)")
 52 |
 53 |     print("Part #4 - A Dataclass Describes a Move")
 ```
+
+**How it works:** `deepcopy` builds a new board, a new outer list holding new copies of every row. Changing `b3` leaves `board` alone. `is` is now False, because these are two objects, and `==` compares their contents, which differ on a8.
 
 ### Part #4 - A Dataclass Describes a Move
 
@@ -112,3 +120,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 57 |     print("  (expected Move(from_square='e2', to_square='e4'))")
 58 |
 ```
+
+**How it works:** `Move("e2", "e4")` builds a record, filling the fields in the order the class lists them. `move.to_square` reads one field by name, and `print(move)` shows all of them.

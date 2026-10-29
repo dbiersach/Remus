@@ -57,6 +57,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 19 |
 ```
 
+**How it works:** A string is a row of characters, and `[ ]` reads one of them by its index. `square[0]` is the first character, the file letter e, and `square[1]` is the second, the rank digit 2. The f-string prints both.
+
 ### Part #2 - Letters Are Numbers: ord() and chr()
 
 ```text
@@ -69,6 +71,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 29 |
 ```
 
+**How it works:** `ord()` turns a letter into its number in the computer's character table, and the letters a to h have numbers in a row. Subtracting `ord("a")` gives 0 for a, 1 for b, and 4 for e: a file number. `int()` turns the text "2" into the number 2, so Python can do arithmetic with it.
+
 ### Part #3 - Numbers Back to a Square Name
 
 ```text
@@ -80,6 +84,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 35 |
 36 |     print("Part #4 - Upper and Lower Case")
 ```
+
+**How it works:** `chr()` goes the other way, from a number back to a letter. Adding 6 to the number of "a" lands on "g". The f-string then glues the letter and the rank 7 into the square name g7.
 
 ### Part #4 - Upper and Lower Case
 
@@ -94,3 +100,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 44 |
 45 |
 ```
+
+**How it works:** `upper()` returns a new string with every letter in uppercase, which turns Black's back rank into White's. Remus uses the same rule as FEN: uppercase is White and lowercase is Black. `"N".isupper()` asks whether a letter is uppercase and gives True or False.
