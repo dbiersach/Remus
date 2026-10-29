@@ -26,7 +26,7 @@ uv run misc/scripts/make_student_folders.py
 | --- | --- |
 | `make_period_folders.py` | Builds the `instructor/` folders of `period1` to `period3` of every Day from `period4`, and on Day 9 writes periods 2 to 4 with no engine code, keeping `period2/instructor/engines`. Its `ARRIVALS` table says in which period each file arrives, and its `CHANGES` table says what the earlier periods leave out. It also writes every period README and plants the three bugs in Day 6, period 3 `bug_hunt/`. |
 | `make_version_folders.py` | Builds the ten color versions in the Day 9 `period2/instructor/engines` folder from the Day 9 `period1` code (Remus-WHITE) and the hand-written `Remus-GOLD` beside them, and writes every version README. |
-| `make_student_folders.py` | Builds each period's `student/` folder from its `instructor/` folder, with each period's student functions as stubs. It also writes the Day overview READMEs and `misc/docs/course/student_edit_plan.md`, and prints the most lines a pair types in one period. |
+| `make_student_folders.py` | Builds each period's `student/` folder from its `instructor/` folder, with each period's student functions as stubs. It also writes the syllabus at the top of each Day folder (`Day NN Syllabus.md`) and `misc/docs/course/student_edit_plan.md`, and prints the most lines a pair types in one period. |
 | `period_guides.py` | Holds the text the builders write into the READMEs: learning objectives, how each is measured, a paragraph for every change, the version guides, and the Day overviews. Edit README text here, not in the READMEs. |
 | `make_phase_hunt_figures.py` | Draws the pictures in `misc/docs/images/phase_hunt/` for the Day 10 phase hunt README. It installs matplotlib for itself alone. |
 

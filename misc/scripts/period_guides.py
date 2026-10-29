@@ -1866,7 +1866,7 @@ LAB_NOTES = {
     ],
 }
 
-# The README.md at the top of each Day folder: what the day is about, its
+# The syllabus at the top of each Day folder ("Day NN Syllabus.md"): what the day is about, its
 # objectives, the timed steps of each period, and the checkpoint at 4:30.
 # Each step is (minutes after the period starts, what happens), and a step lasts
 # until the next one starts.

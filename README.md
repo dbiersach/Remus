@@ -21,7 +21,7 @@ The code grows one class period at a time. The top folder holds one folder per d
 `Day 01 - ...` to `Day 10 - ...`, and each Day folder holds `period1` to `period4`.
 Inside every period folder, `instructor/` is a complete, runnable copy of Remus at the
 end of that period, and `student/` is the same code with the functions the pairs write
-left as stubs for them to fill in. Each Day folder's own `README.md` gives the day's
+left as stubs for them to fill in. Each Day folder's syllabus, such as `Day 04 Syllabus.md`, gives the day's
 objectives and the timed activities of its four periods. Everything else sits in
 `misc/`: the course and code documents in `misc/docs/`, the games every script plays in
 `misc/games/`, and the teacher's tools in `misc/scripts/`, which hold the builders
