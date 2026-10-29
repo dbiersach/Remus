@@ -41,11 +41,11 @@ folder.
 | ---: | --- | --- | --- | ---: | ---: |
 | 1 | Remus-GOLD | [11 GOLD](../../../engines/instructor/11%20GOLD%20-%20All%20enhancements) | 79-30-1 | 85.5% | +339 +/- 91 |
 | 2 | Remus-RED | [10 RED](../../../engines/instructor/10%20RED%20-%20Transposition%20table) | 27-71-12 | 56.8% | +101 +/- 67 |
-| 3 | Remus-BLUE | [09 BLUE](../../../engines/instructor/09%20BLUE%20-%20Killer%20moves) | 20-74-16 | 51.8% | +67 +/- 67 |
+| 3 | Remus-BLUE | [09 BLUE](../../../engines/instructor/09%20BLUE%20-%20Killer%20moves) | 20-74-16 | 51.8% | +67 +/- 66 |
 | 4 | Remus-GREEN | [08 GREEN](../../../engines/instructor/08%20GREEN%20-%20Opening%20book) | 22-67-21 | 50.5% | +58 +/- 66 |
 | 5 | Remus-PURPLE | [07 PURPLE](../../../engines/instructor/07%20PURPLE%20-%20Pawn%20structure) | 16-76-18 | 49.1% | +49 +/- 66 |
 | 6 | Remus-BROWN | [06 BROWN](../../../engines/instructor/06%20BROWN%20-%20Late%20move%20reductions) | 6-89-15 | 45.9% | +28 +/- 66 |
-| 7 | Remus-ORANGE | [05 ORANGE](../../../engines/instructor/05%20ORANGE%20-%20Null-move%20pruning) | 8-84-18 | 45.5% | +25 +/- 67 |
+| 7 | Remus-ORANGE | [05 ORANGE](../../../engines/instructor/05%20ORANGE%20-%20Null-move%20pruning) | 8-84-18 | 45.5% | +25 +/- 66 |
 | 8 | Remus-PINK | [04 PINK](../../../engines/instructor/04%20PINK%20-%20Principal%20variation%20search) | 10-79-21 | 45.0% | +22 +/- 67 |
 | 9 | Remus-CYAN | [03 CYAN](../../../engines/instructor/03%20CYAN%20-%20Mating%20bonus) | 12-74-24 | 44.5% | +19 +/- 67 |
 | 10 | Remus-YELLOW | [02 YELLOW](../../../engines/instructor/02%20YELLOW%20-%20Draw%20sense) | 14-65-31 | 42.3% | +4 +/- 67 |
