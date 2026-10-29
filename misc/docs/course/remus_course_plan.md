@@ -585,8 +585,9 @@ side by side and every import keeps working.
 engine, and the engine never imports it.
 
 1. **GUI play through UCI.** Lucas Chess starts a launcher and talks to Remus over stdin and
-   stdout. `remus.bat` changes to its own folder and runs `uv run python
-   uci_engine.py`. Lucas Chess starts `remus.bat`, so nobody types the command.
+   stdout. `remus.bat` changes to its own folder, finds the `.venv` folder that `uv sync`
+   built at setup, and runs `uci_engine.py` with the Python inside it. Lucas Chess
+   starts `remus.bat`, so nobody types the command.
 2. **Matches and the battles.** `play_match.py` and `version_match.py` use
    `chess.engine.SimpleEngine.popen_uci()` to start two Remus processes and play them
    on a `chess.Board`, and `version_match.py` saves every game as PGN with `chess.pgn`.
