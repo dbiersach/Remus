@@ -1,6 +1,6 @@
 # Day 9, Period 4: Color battles
 
-The battles run in `period2/student/engines`. Each student pair copies its own engine folder onto a USB stick. On the host laptop, the visitors drag that folder into `period2/student/engines` and replace the folder of the same name. The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the visitor's engine color, and presses Run Python File. The steps are numbered at the top of `play_battle.py`. Remus plays two 10-minute games, one with each piece color, side by side.
+The battles run in `engines/student` at the top of the Remus folder. Each student pair copies its finished engine folder from `engines/student` onto a USB stick. On the host laptop, the visitors paste it into the same path, `engines/student`, and replace the folder of the same name. The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the visitor's engine color, and presses Run Python File. The steps are numbered at the top of `play_battle.py`. Remus plays two 10-minute games, one with each piece color, side by side.
 
 ## Learning objectives
 
@@ -13,7 +13,7 @@ By the end of this period, each student pair can:
 
 The demo is `demo_results.py` in the `student` folder, with the answers in `demo_results_instructor.py` in the `instructor` folder beside it. Open `demo_results.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-This folder holds no engine code. Each student pair works in its own engine folder in `period2/student/engines`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder.
+This folder holds no engine code. Each student pair works in its own engine folder in `engines/student`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder.
 
 ## The changes and why
 
@@ -25,8 +25,8 @@ Parts #1 and #2 of `demo_results.py` turn a match result into a score and an Elo
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:10 | Slides: how a battle works. Each student pair copies its own color folder from `period2/student/engines` onto its USB stick. The teacher posts the pairings for two rounds; in each round five student pairs host and five visit. |
-| 3:10 to 3:40 | Round 1. The visiting student pair drags its engine folder from the USB stick into the host laptop's `period2/student/engines` folder and replaces the folder of the same name. The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the visitor's engine color, and presses Run in VS Code. Two 10-minute games run side by side, one with each piece color. Each student pair writes the score on the board. |
+| 3:00 to 3:10 | Slides: how a battle works. Each student pair copies its finished engine folder, such as `engines/student/10 RED - Transposition table`, onto its USB stick. The teacher posts the pairings for two rounds; in each round five student pairs host and five visit. |
+| 3:10 to 3:40 | Round 1. The visiting student pair pastes its engine folder into the same path on the host laptop, `engines/student`, and replaces the folder of the same name. The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the visitor's engine color, and presses Run in VS Code. Two 10-minute games run side by side, one with each piece color. Each student pair writes the score on the board. |
 | 3:40 to 3:45 | Round 2: the student pairs that visited now host, against new opponents. |
 | 3:45 to 4:10 | While the round 2 games run, each student pair turns its round 1 result into an Elo gap with a margin of error in `demo_results.py`, then tries its engine color's league games. |
 | 4:10 to 4:25 | The class reads the board: which engine colors won, and why two games prove little. The teacher shows the league table, 110 games for each engine color, and compares. |

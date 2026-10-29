@@ -9,7 +9,7 @@ By the end of this period, each student pair can:
 
 ## The files
 
-The engine for Day 10 is Remus-GOLD, the finished Remus with all ten enhancements, in the teacher's `Day 09 .../period2/instructor/engines/Remus-GOLD` folder. Lucas Chess runs its `remus.bat`, and its `estimate_elo.py` rates it against Stockfish. This folder holds only the science files, which never import the engine.
+The engine for Day 10 is Remus-GOLD, the finished Remus with all ten enhancements, in the teacher's `engines/instructor/11 GOLD - All enhancements` folder. Lucas Chess runs its `remus.bat`, and its `estimate_elo.py` rates it against Stockfish. This folder holds only the science files, which never import the engine.
 
 New files this period:
 

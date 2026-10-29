@@ -28,5 +28,5 @@ board.svg
 # games he plays and analyzes in the chess apps
 /Remus.pgn
 
-# Niram-GOLD build output (cargo build writes it inside Niram-GOLD/, in Day 9 period2/engines)
-**/Niram-GOLD/target/
+# Niram build output (cargo build writes it inside engines/Niram/)
+engines/Niram/target/

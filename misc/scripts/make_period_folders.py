@@ -163,7 +163,7 @@ ARRIVALS = {
         "uci_engine.py": 1,
         "test_game.py": 1,
     },
-    # Day 10 holds only the science files; its engine is Remus-GOLD in Day 9 period2/instructor/engines
+    # Day 10 holds only the science files; its engine is Remus-GOLD in engines/instructor
     10: {
         "hidden_peak.py": 1,
         "test_hidden_peak.py": 1,
@@ -671,9 +671,10 @@ PERIOD_NOTES = {
     (
         9,
         4,
-    ): "The battles run in `period2/student/engines`. Each student pair copies its "
-    "own engine folder onto a USB stick. On the host laptop, the visitors drag that "
-    "folder into `period2/student/engines` and replace the folder of the same name. "
+    ): "The battles run in `engines/student` at the top of the Remus folder. Each "
+    "student pair copies its finished engine folder from `engines/student` onto a USB "
+    "stick. On the host laptop, the visitors paste it into the same path, "
+    "`engines/student`, and replace the folder of the same name. "
     "The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` "
     "to the visitor's engine color, and presses Run Python File. The steps are "
     "numbered at the top of `play_battle.py`. Remus plays two 10-minute games, one "
@@ -690,20 +691,21 @@ PERIOD_NOTES = {
         3,
     ): "Register `remus.bat` from the `student` folder in Lucas Chess again: Remus now "
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
-    (9, 2): "Each student pair builds one color version in the `engines` folder inside "
-    "`student`, such as `engines/10 RED - Transposition table`. Each engine folder is a "
-    "complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.",
+    (9, 2): "Each student pair builds one color version in `engines/student` at the "
+    "top of the Remus folder, such as `engines/student/10 RED - Transposition table`. "
+    "Each engine folder is a complete copy of Remus-WHITE, the `period1` engine, plus "
+    "one enhancement.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
     (10, 4): "Each student pair reports its science results: the hidden-peak benchmark "
     "and the phase hunt's right, wrong, and can't-tell counts. Then each student "
-    "takes the student pair's repository home on a USB drive.",
+    "copies the student pair's Remus folder to a USB drive to take home.",
 }
 
 # The period whose folder holds a Day's hand-edited code, when it is not period4.
 # Day 9's engine, Remus-WHITE, is finished in period 1. From period 2 on, each student pair
-# works in its color version folder in period2/engines, so periods 2 to 4 hold no
-# engine code.
+# works in its engine folder in engines/student, so periods 2 to 4 hold no engine
+# code.
 SOURCE_PERIOD = {9: 1}
 
 # Every Python module name that appears in any Day folder
@@ -717,15 +719,15 @@ def day_folder(day: int) -> Path:
 
 def engine_folder_table(day: int, period: int) -> str:
     """Return a reminder to run each engine folder's tests, with a link to each."""
-    engines = goals_path(day, period).parent.parent / "period2" / "student" / "engines"
+    engines = ROOT / "engines" / "student"
     rows = ""
     for folder in sorted(engines.iterdir()):
-        if folder.is_dir() and folder.name[:2].isdigit():
-            link = "../period2/student/engines/" + quote(folder.name)
+        if folder.is_dir() and folder.name[:2].isdigit() and folder.name[:2] != "00":
+            link = "../../engines/student/" + quote(folder.name)
             rows += f"| [{folder.name}]({link}) | [`run_tests.py`]({link}/run_tests.py) |\n"
     return (
         "Before the smoke test, check your engine: open `run_tests.py` in your "
-        "student pair's engine folder from period 2 and press Run. Every test must "
+        "student pair's engine folder in `engines/student` and press Run. Every test must "
         "pass. Click your engine folder below to find it.\n\n"
         "| Engine folder | Tests |\n| --- | --- |\n" + rows.rstrip("\n")
     )
@@ -986,8 +988,8 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     if day == 10:
         sections.append(
             "The engine for Day 10 is Remus-GOLD, the finished Remus with all ten "
-            "enhancements, in the teacher's `Day 09 .../period2/instructor/engines/Remus-GOLD` "
-            "folder. Lucas Chess runs its `remus.bat`, and its "
+            "enhancements, in the teacher's `engines/instructor/11 GOLD - All "
+            "enhancements` folder. Lucas Chess runs its `remus.bat`, and its "
             "`estimate_elo.py` rates it against Stockfish. This folder holds only "
             "the science files, which never import the engine."
         )
@@ -1006,7 +1008,7 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     if not files and day in SOURCE_PERIOD:
         sections.append(
             "This folder holds no engine code. Each student pair works in its own "
-            "engine folder in `period2/student/engines`, a complete copy of "
+            "engine folder in `engines/student`, a complete copy of "
             "Remus-WHITE plus one enhancement. Remus-WHITE itself is in the "
             "`period1` folder."
         )
@@ -1137,8 +1139,6 @@ def write_folder(folder: Path, files: dict[str, str], day_end_folder: Path) -> N
     """Write a period folder, copying file permissions from the period4 copy."""
     folder.mkdir(exist_ok=True)
     for path in folder.iterdir():
-        if path.name == "engines":
-            continue  # make_version_folders.py builds the color versions in Day 9
         if path.is_dir():
             shutil.rmtree(path)
         else:

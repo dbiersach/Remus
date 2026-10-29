@@ -459,7 +459,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
     out += [
         "## Color versions (Day 9, periods 2 and 3)",
         "",
-        "Each student pair writes the functions of one color version in `period2/student/engines`.",
+        "Each student pair writes the functions of one color version in `engines/student`.",
         "",
         "| Color version | Student pairs write |",
         "| --- | --- |",
@@ -543,13 +543,21 @@ def main():
             rows.setdefault((day, period), []).append(row)
             sections.append(bug_hunt_section(count))
         write_goals(day, period, sections)
-    # Each color version folder stubs the functions its student pair writes on Day 9. The
-    # student engines folder holds the ten color versions and version_match.py, but
-    # not Remus-GOLD or Niram-GOLD, which stay in the teacher's folders.
-    period_2 = next(ROOT.glob("Day 09 - *")) / "period2"
-    engines = period_2 / "instructor" / "engines"
-    student_engines = period_2 / "student" / "engines"
-    shutil.rmtree(student_engines / "Niram-GOLD", ignore_errors=True)
+    # Each color version folder stubs the functions its student pair writes on Day 9.
+    # engines/student holds Remus-WHITE, the ten color versions, and
+    # version_match.py, but not Remus-GOLD, which stays in engines/instructor.
+    engines = ROOT / "engines" / "instructor"
+    student_engines = ROOT / "engines" / "student"
+    white = "00 WHITE - No enhancements"
+    if (student_engines / white).exists():
+        shutil.rmtree(student_engines / white)
+    # The student Remus-WHITE is the Day 9 period1 student folder, stubs and all
+    shutil.copytree(
+        next(ROOT.glob("Day 09 - *")) / "period1" / "student",
+        student_engines / white,
+        ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg"),
+    )
+    shutil.copy2(engines / white / "README.md", student_engines / white / "README.md")
     for version in VERSIONS_TABLE:
         folder = engines / version["folder"]
         target = student_engines / version["folder"]

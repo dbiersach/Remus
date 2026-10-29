@@ -23,7 +23,7 @@ holds four period folders, `period1` to `period4`, one for each class period:
 | `Day 07 - Play full games and score positions` | Adds game endings, SAN, two simple brains, the UCI link to the GUI, and the evaluation |
 | `Day 08 - Search ahead with alpha-beta` | Looks ahead with minimax and negamax, then prunes with alpha-beta, searches captures to quiet positions, and orders moves |
 | `Day 09 - Add the clock and build enhanced engines` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten color versions, and ends with battles between the colors |
-| `Day 10 - Solve a science problem using chess AI` | Holds only the hidden-peak and phase-hunt Science AI; the Day 10 engine is Remus-GOLD in Day 9 `period2/instructor/engines/Remus-GOLD`, with all ten enhancements |
+| `Day 10 - Solve a science problem using chess AI` | Holds only the hidden-peak and phase-hunt Science AI; the Day 10 engine is Remus-GOLD in `engines/instructor/11 GOLD - All enhancements`, with all ten enhancements |
 
 Every period folder holds two folders. `instructor/` holds only finished reference
 code that runs as it is, with no blanks to fill in, and `student/` holds the code
@@ -88,8 +88,8 @@ every course designer tool that is not part of an engine: the builders that writ
 version, and student
 folders, `period_guides.py` with the README text, the test runner, the league and
 Stockfish rating scripts, and the Niram benchmark. Students never open it.
-`version_match.py` stays in the Day 9 `period2/instructor/engines` and `period2/student/engines` folders, because every student pair
-runs it there in the Day 9 battles.
+`version_match.py` stays in `engines/instructor` and `engines/student`, beside the
+engine folders, because every student pair runs it there in the Day 9 battles.
 
 ## The puzzle box and its pieces
 
@@ -236,13 +236,13 @@ The search makes and undoes moves on the one live state. A `try/finally` around 
 
 ## Niram, the Rust copy
 
-`Niram-GOLD`, beside Remus-GOLD in the teacher's Day 9 `period2/instructor/engines` folder, holds
+`engines/Niram`, beside `engines/instructor` and `engines/student`, holds
 Remus-GOLD rewritten in Rust with the same rules, evaluation, and search. On the same
 positions and depth it visits exactly as many positions as Remus-GOLD and picks the
 same moves, about 50 times faster: some 200,000 positions a second against about
 4,000. The designer's league ran on Rust copies of all 12 versions, so its 10-minute
 games searched as deep as a Remus league of 8-hour games. See
-[its README](<../../../Day 09 - Add the clock and build enhanced engines/period2/instructor/engines/Niram-GOLD/README.md>).
+[its README](<../../../engines/Niram/README.md>).
 
 ## Science AI
 

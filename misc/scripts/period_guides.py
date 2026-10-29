@@ -3299,7 +3299,7 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Each student pair opens its color version in `period2/student/engines`, "
+                        "Each student pair opens its color version in `engines/student`, "
                         "reads the version README, and writes the color version's stubbed "
                         "code."
                     ),
@@ -3309,9 +3309,9 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Student pairs finish their color version code, then open "
+                        "Student pairs finish their engine enhancement, then open "
                         "`run_tests.py` in their engine folder in "
-                        "`period2/student/engines` and press Run until every test "
+                        "`engines/student` and press Run until every test "
                         "passes. The table above links each engine folder."
                     ),
                 ),
@@ -3336,8 +3336,9 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Slides: how a battle works. Each student pair copies its own color "
-                        "folder from `period2/student/engines` onto its USB stick. The teacher posts the "
+                        "Slides: how a battle works. Each student pair copies its "
+                        "finished engine folder, such as `engines/student/10 RED - "
+                        "Transposition table`, onto its USB stick. The teacher posts the "
                         "pairings for two rounds; in each round five student pairs host and "
                         "five visit."
                     ),
@@ -3345,10 +3346,9 @@ DAY_GUIDES = {
                 (
                     10,
                     (
-                        "Round 1. The visiting student pair drags its engine folder "
-                        "from the USB stick into the host laptop's "
-                        "`period2/student/engines` folder and replaces the folder of "
-                        "the same name. The host opens `play_battle.py` in its own "
+                        "Round 1. The visiting student pair pastes its engine folder "
+                        "into the same path on the host laptop, `engines/student`, "
+                        "and replaces the folder of the same name. The host opens `play_battle.py` in its own "
                         "engine folder, sets `VISITING_ENGINE` to the visitor's engine "
                         "color, and presses Run in VS Code. Two 10-minute games run side by side, one with "
                         "each piece color. Each student pair writes the score on the board."

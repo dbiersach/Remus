@@ -31,7 +31,7 @@ clock.
 
 The designer's league ran on Niram, Rust copies of the same 12 versions that chose
 the same moves as Remus about 50 times faster, so a 10 minute Niram game searched
-as deep as a Remus game of many hours. Only Niram-GOLD is kept, in the Niram-GOLD
+as deep as a Remus game of many hours. Only Niram is kept, in the Niram
 folder, but the Niram games stay in the games file: --niram with --rate-only rates
 them apart from Remus games, with Niram-WHITE pinned at 0.
 
@@ -40,7 +40,7 @@ side, because a version with no book plays the same game again from the starting
 position. Those six moves also hand every version a short opening book, which hides
 most of what the book of Remus-GREEN and Remus-GOLD is worth. With --book-start, every
 game with GREEN or GOLD starts from the starting position instead: their book picks
-among its moves at random, so their games still differ. The other student pairs keep the
+among its moves at random, so their games still differ. The other pairings keep the
 OPENINGS. Rate such a league with --book-start too.
 
 This is a course designer tool: the engine never imports python-chess.
@@ -57,9 +57,9 @@ from pathlib import Path
 
 import chess.pgn
 
-# version_match.py lives beside the color versions in Day 9, period2/instructor/engines
-DAY_9 = next(Path(__file__).parent.parent.parent.glob("Day 09 - *"))
-sys.path.insert(0, str(DAY_9 / "period2" / "instructor" / "engines"))
+# version_match.py lives beside the Remus versions in engines/instructor
+ENGINES = Path(__file__).parent.parent.parent / "engines"
+sys.path.insert(0, str(ENGINES / "instructor"))
 
 from version_match import (
     GAMES_PATH,
@@ -346,7 +346,7 @@ def print_head_to_head(results: list[Result], player: str) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description="Rank every Remus version.")
-    parser.add_argument("--games", type=int, default=6, help="games for each student pair")
+    parser.add_argument("--games", type=int, default=6, help="games for each pair of versions")
     parser.add_argument("--rate-only", action="store_true", help="skip the games")
     parser.add_argument("--minutes", type=float, default=MINUTES, help="each clock")
     parser.add_argument(
@@ -373,7 +373,7 @@ def main():
     clock = time_control(options.minutes, options.increment)
     start = time.perf_counter()
     if options.niram and not options.rate_only:
-        sys.exit("Only Niram-GOLD is kept, so --niram works only with --rate-only")
+        sys.exit("Only Niram is kept, so --niram works only with --rate-only")
     if not options.rate_only:
         play_league(
             options.games,

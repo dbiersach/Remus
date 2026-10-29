@@ -14,21 +14,28 @@ better than another before the games are played.
 
 ## Where the color versions live
 
-Remus-WHITE is the Day 9 `period1` folder: the Day 9 Remus at the end of period 1,
-when its engine is finished and before the student pairs start their color versions. The
-Day 9 `period2` folder holds an `engines` folder with one folder per color version,
-such as `10 RED - Transposition table`, each a complete copy of Remus-WHITE plus one
-enhancement. From period 2 to the end of the day, each student pair works only in its engine
-engine folder, so periods 2, 3, and 4 of Day 9 hold no engine code of their own. The number
-in front of each name ranks the color version by its rating over Remus-WHITE in the
-designer's 10-minute league (below), from 01 GRAY to 10 RED. The
-`period2/student/engines` folder holds the same ten folders with the student pair's functions stubbed.
+The Remus versions live in the `engines` folder at the top of the Remus folder, which
+holds three folders:
 
-The teacher's `period2/instructor/engines` also holds `Remus-GOLD`, the finished Remus of Day
-10 with all ten enhancements at once, and `Niram-GOLD`, the same engine rewritten in
-Rust. No student pair writes GOLD, so the student folders leave both out.
-`make_version_folders.py` builds the ten engine folders from the Day 9 `period1` code
-and Remus-GOLD.
+| Folder | Holds |
+| --- | --- |
+| `engines/instructor` | `00 WHITE - No enhancements` to `11 GOLD - All enhancements`, the finished engines, and `version_match.py` |
+| `engines/student` | `00 WHITE - No enhancements` to `10 RED - Transposition table`, with the functions each student pair writes stubbed, and `version_match.py` |
+| `engines/Niram` | Niram, Remus-GOLD rewritten in Rust, a course designer's tool |
+
+`00 WHITE - No enhancements` is Remus-WHITE, an exact copy of the Day 9 `period1`
+folder: the Day 9 Remus at the end of period 1, when its engine is finished and before
+the student pairs start their color versions. Each engine folder from `01 GRAY` to
+`10 RED`, such as `10 RED - Transposition table`, is a complete copy of Remus-WHITE plus
+one enhancement. From period 2 to the end of the day, each student pair works only in
+its engine folder in `engines/student`, so periods 2, 3, and 4 of Day 9 hold no engine
+code of their own. The number in front of each color version ranks it by its rating
+over Remus-WHITE in the designer's 10-minute league (below), from 01 GRAY to 10 RED.
+
+`11 GOLD - All enhancements` is Remus-GOLD, the finished Remus of Day 10 with all ten
+enhancements at once. No student pair writes GOLD, so only `engines/instructor` holds
+it. `make_version_folders.py` copies Remus-WHITE and builds the ten color versions from
+the Day 9 `period1` code and Remus-GOLD.
 
 ## Remus Engine Enhancements
 
@@ -77,7 +84,7 @@ both `uci_engine.py` and `console_game.py`.
 
 ## The Day 9 battles: version_match.py
 
-`version_match.py`, in `period2/student/engines` and `period2/instructor/engines`, plays a color version's Remus against Remus-WHITE,
+`version_match.py`, in `engines/student` and `engines/instructor`, plays a color version's Remus against Remus-WHITE,
 or against another color version, at 10 minutes a side. It adds every game to
 `misc/games/remus_games.pgn` and prints the score.
 
@@ -91,7 +98,7 @@ Code and presses the Run Python File button:
 | `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting color version, one with each piece color |
 
 In the Day 9 battles a visiting student pair brings its engine folder on a USB drive and
-copies it over the folder of the same engine color in the host's `period2/student/engines`, which
+copies it over the folder of the same engine color in the host's `engines/student`, which
 holds that engine color with its functions still stubbed. The
 host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the
 visitor's engine color, such as `"RED"`, and presses Run. The numbered steps at the top
@@ -145,12 +152,12 @@ uv run misc/scripts/version_league.py --book-start   # GREEN's and GOLD's games 
 The six opening moves hand every version a short book, so they hide most of what the
 book of Remus-GREEN and Remus-GOLD is worth. With `--book-start`, every game with
 GREEN or GOLD starts from the starting position instead. Their book picks among its
-moves at random, so their games still differ from each other, while the other student pairs
+moves at random, so their games still differ from each other, while the other pairings
 keep the openings. Rate such a league with `--book-start` as well.
 
 The designer's league ran on Niram, Rust copies of all 12 versions that picked the
 same moves as Remus about 50 times faster, so a 10-minute Niram game searched about
-as many positions as an 8-hour Remus game. Only Niram-GOLD is kept, beside
+as many positions as an 8-hour Remus game. Only Niram is kept, beside
 Remus-GOLD ([`remus-niram parity.md`](remus-niram%20parity.md) shows that the two match), but
 the league's games stay in the games file. `--niram --rate-only` rates them apart
 from Remus games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` does

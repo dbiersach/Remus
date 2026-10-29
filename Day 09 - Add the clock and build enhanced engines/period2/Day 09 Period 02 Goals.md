@@ -1,6 +1,6 @@
 # Day 9, Period 2: Python lab 12 and the color versions
 
-Each student pair builds one color version in the `engines` folder inside `student`, such as `engines/10 RED - Transposition table`. Each engine folder is a complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.
+Each student pair builds one color version in `engines/student` at the top of the Remus folder, such as `engines/student/10 RED - Transposition table`. Each engine folder is a complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.
 
 ## Learning objectives
 
@@ -13,7 +13,7 @@ By the end of this period, each student pair can:
 
 The lab is `python_caches.py` in the `student` folder, with the answers in `python_caches_instructor.py` in the `instructor` folder beside it. Open `python_caches.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-This folder holds no engine code. Each student pair works in its own engine folder in `period2/student/engines`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder.
+This folder holds no engine code. Each student pair works in its own engine folder in `engines/student`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder.
 
 ## The changes and why
 
@@ -29,7 +29,7 @@ Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 to g7, 
 | --- | --- |
 | 10:30 to 10:50 | Student pairs work through `python_caches.py`: a dict remembers answers, `math.dist()`, and `random.seed()`. |
 | 10:50 to 11:00 | Slides: the ten color versions. Each is Remus-WHITE plus one enhancement, such as RED (transposition table) or BLUE (killer moves). Colors name the color versions so that no color version sounds better than another. |
-| 11:00 to 12:00 | Each student pair opens its color version in `period2/student/engines`, reads the version README, and writes the color version's stubbed code. |
+| 11:00 to 12:00 | Each student pair opens its color version in `engines/student`, reads the version README, and writes the color version's stubbed code. |
 
 ## What you edit in the lab
 

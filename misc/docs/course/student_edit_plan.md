@@ -94,7 +94,7 @@
 
 ## Color versions (Day 9, periods 2 and 3)
 
-Each student pair writes the functions of one color version in `period2/student/engines`.
+Each student pair writes the functions of one color version in `engines/student`.
 
 | Color version | Student pairs write |
 | --- | --- |
