@@ -4,11 +4,18 @@
 Rate every Remus version against Stockfish: Remus-WHITE, the ten color versions,
 and Remus-GOLD.
 
-Each version plays Stockfish at five strengths (UCI_Elo), from Stockfish's weakest
-setting, 1320, up to 2500. At every strength a version plays 6 games, 3 as White
-and 3 as Black, on a 10 minute clock. The script then finds each version's Elo
-rating the way estimate_elo.py does, adds every game to misc/games/remus_games.pgn, and
-writes the table of ratings to misc/docs/engines/remus_elo.md.
+Each version plays Stockfish at four strengths (UCI_Elo) near the strength where
+Remus scores about half the points, because a game against a Stockfish that
+always wins, or always loses, says almost nothing about a rating: 1650, 1800,
+1950, and 2100. At every strength a version plays 12 games, 6 as White and 6 as
+Black, on a 10 minute clock. The script then finds each version's Elo rating the
+way estimate_elo.py does, adds every game to misc/games/remus_games.pgn, and
+prints the table that misc/docs/engines/engines_elo.md reports.
+
+With --niram-gold, Niram-GOLD, the Rust copy of Remus-GOLD that chooses the same
+moves about 50 times faster, plays too, at 2000, 2200, 2400, and 2600. Build it
+first with "cargo build --release" inside its folder. Its games are rated apart
+from the Remus games.
 
 Before the first game, the script copies every version folder into a temporary
 folder and runs the engines from that copy. A change to the color version code during
@@ -19,14 +26,12 @@ game needs about one core, because only one engine of a game thinks at a time:
 keep --workers at or below the number of physical cores.
 
 Usage:
-    uv run misc/scripts/version_elo.py --workers 16         all 12 versions, 360 games
+    uv run misc/scripts/version_elo.py --workers 20         all 12 versions, 576 games
+    uv run misc/scripts/version_elo.py --niram-gold         Niram-GOLD too, 48 more
     uv run misc/scripts/version_elo.py --colors WHITE GOLD  only some versions
+    uv run misc/scripts/version_elo.py --levels 1800 2000   other Stockfish strengths
+    uv run misc/scripts/version_elo.py --games 2            fewer games per strength
     uv run misc/scripts/version_elo.py --report-only        only the ratings, saved games
-    uv run misc/scripts/version_elo.py --niram              the saved Niram games, rated
-
-Niram games, played by Rust copies of the same 12 versions, stay in the games file
-and are rated apart from Remus games. Only Niram-GOLD is kept, so --niram only
-rates the saved games.
 
 A game already in the games file is not played twice, so a run that stops
 partway, such as when the computer restarts, picks up where it stopped.
@@ -52,7 +57,7 @@ import chess.pgn
 DAY_9 = next(Path(__file__).parent.parent.parent.glob("Day 09 - *"))
 sys.path.insert(0, str(DAY_9 / "period2" / "instructor" / "engines"))
 
-from version_match import Player, all_players, engine_command
+from version_match import Player, all_players
 
 # The top Remus folder is the nearest folder above this one with pyproject.toml
 REPOSITORY = Path(__file__).parent
@@ -62,14 +67,18 @@ for folder in Path(__file__).parents:
         break
 # Every game any script plays goes into one file
 GAMES_PATH = REPOSITORY / "misc" / "games" / "remus_games.pgn"
-# The table of ratings goes into the engines docs
-REPORT_PATH = REPOSITORY / "misc" / "docs" / "engines" / "remus_elo.md"
+# Niram-GOLD's program, which cargo builds inside its folder
+NIRAM_GOLD = DAY_9 / "period2" / "instructor" / "engines" / "Niram-GOLD"
+NIRAM_GOLD_PROGRAM = NIRAM_GOLD / "target" / "release" / "niram-gold"
+if sys.platform == "win32":
+    NIRAM_GOLD_PROGRAM = NIRAM_GOLD_PROGRAM.with_suffix(".exe")
 LUCAS_CHESS_ENGINES = (
     Path.home() / "AppData" / "Local" / "Programs" / "LucasChessR" / "bin" / "OS"
 )  # Where Lucas Chess keeps the Stockfish it installs on Windows
-EVENT = "Station Elo test"  # The Event header of every game this script plays
-LEVELS = [1320, 1615, 1910, 2205, 2500]  # Stockfish strengths; 1320 is its weakest
-GAMES_PER_LEVEL = 6  # Half with Remus as White, half with Remus as Black
+EVENT = "Engine Elo test"  # The Event header of every game this script plays
+# Stockfish strengths for each engine, close to where each engine scores half
+LEVELS = {"Remus": [1650, 1800, 1950, 2100], "Niram": [2000, 2200, 2400, 2600]}
+GAMES_PER_LEVEL = 12  # Half with the version as White, half as Black
 MINUTES = 10.0  # Each side's clock
 INCREMENT = 0.0  # Seconds added after each move
 # Milliseconds Stockfish keeps in reserve on every move. The referee times each move
@@ -131,6 +140,9 @@ def estimate_rating(results: list[tuple[int, float]]) -> tuple[float, float]:
         The rating whose expected total score equals the real total score, and
         the half-width of its 95 percent confidence interval. A perfect score
         counts as half a point short of perfect, so the rating stays a bound.
+        The interval comes from how far each game's real score landed from its
+        expected score, so a version that draws often gets a narrower interval
+        than one that only wins and loses.
     """
     points = 0.0
     for _, score in results:
@@ -148,12 +160,17 @@ def estimate_rating(results: list[tuple[int, float]]) -> tuple[float, float]:
         else:
             high = middle
     rating = (low + high) / 2
-    # A game tells us the most when its result was hard to predict (p near 0.5)
-    information = 0.0
-    for elo, _ in results:
+    # A game tells us the most when its result was hard to predict (p near 0.5):
+    # the expected total score then changes fastest as the rating changes
+    slope = 0.0
+    spread = 0.0
+    for elo, score in results:
         chance = expected_score(rating, elo)
-        information += chance * (1 - chance)
-    margin = 1.96 * ELO_SCALE / math.sqrt(information) if information > 0 else 0.0
+        slope += chance * (1 - chance) / ELO_SCALE
+        spread += (score - chance) ** 2
+    if slope == 0 or spread == 0:
+        return rating, 0.0
+    margin = 1.96 * math.sqrt(spread) / slope
     return rating, margin
 
 
@@ -179,7 +196,11 @@ def play_game(player: Player, stockfish_path: str, elo: int, number: int):
     """
     name, program = player
     remus_white = number % 2 == 1
-    command, folder = engine_command(program)
+    # Niram-GOLD is one program file; a Remus version is a folder of Python
+    if program.is_file():
+        command, folder = [str(program)], program.parent
+    else:
+        command, folder = [sys.executable, str(program / "uci_engine.py")], program
     remus = chess.engine.SimpleEngine.popen_uci(command, cwd=folder)
     stockfish = chess.engine.SimpleEngine.popen_uci(stockfish_path)
     stockfish.configure(
@@ -279,18 +300,26 @@ def played_games() -> set[tuple[str, str]]:
     return played
 
 
-def play_all(players: list[Player], stockfish_path: str, workers: int) -> None:
+def engine_of(name: str) -> str:
+    """Return "Remus" or "Niram", the engine part of a name like "Niram-GOLD"."""
+    return name.split("-")[0]
+
+
+def play_all(
+    players: list[Player], games_per_level: int, stockfish_path: str, workers: int
+) -> None:
     """Play every game not yet in the games file, workers games at a time."""
     played = played_games()
     # Game 1 of every version and level first, then game 2, and so on, so the
     # results stay balanced if the run stops partway
     jobs: list[Job] = []
-    for number in range(1, GAMES_PER_LEVEL + 1):
-        for elo in LEVELS:
-            for player in players:
+    total = 0
+    for number in range(1, games_per_level + 1):
+        for player in players:
+            for elo in LEVELS[engine_of(player[0])]:
+                total += 1
                 if (player[0], game_round(elo, number)) not in played:
                     jobs.append((player, elo, number))
-    total = len(players) * len(LEVELS) * GAMES_PER_LEVEL
     print(
         f"{total} games at {MINUTES:g} min + {INCREMENT:g} s, "
         f"{total - len(jobs)} already played, {workers} at a time"
@@ -320,6 +349,12 @@ def play_all(players: list[Player], stockfish_path: str, workers: int) -> None:
 
 def write_report(results: dict[str, dict[int, list[float]]]) -> str:
     """Return the Markdown table of every version's rating and score at each level."""
+    levels = []
+    for by_level in results.values():
+        for elo in by_level:
+            if elo not in levels:
+                levels.append(elo)
+    levels.sort()
     rated = []
     for name, by_level in results.items():
         games = []
@@ -331,7 +366,7 @@ def write_report(results: dict[str, dict[int, list[float]]]) -> str:
     rated.sort(reverse=True)
     head = "| Rank | Version | Elo | 95% margin | Score |"
     rule = "| ---: | --- | ---: | ---: | ---: |"
-    for elo in LEVELS:
+    for elo in levels:
         head += f" SF {elo} |"
         rule += " :---: |"
     report = head + "\n" + rule + "\n"
@@ -340,7 +375,7 @@ def write_report(results: dict[str, dict[int, list[float]]]) -> str:
         for _, score in games:
             points += score
         cells = ""
-        for elo in LEVELS:
+        for elo in levels:
             scores = by_level.get(elo, [])
             if scores:
                 cells += f" {sum(scores):g}/{len(scores)} |"
@@ -367,28 +402,47 @@ def main():
     )
     parser.add_argument("--stockfish", default=None, help="path to Stockfish")
     parser.add_argument("--report-only", action="store_true", help="skip the games")
+    parser.add_argument("--niram-gold", action="store_true", help="play Niram-GOLD too")
     parser.add_argument(
-        "--niram", action="store_true", help="rate the saved Niram games"
+        "--levels", type=int, nargs="+", help="Stockfish strengths, like 1800 2000"
+    )
+    parser.add_argument(
+        "--games", type=int, default=GAMES_PER_LEVEL, help="games per strength"
     )
     options = parser.parse_args()
     start = time.perf_counter()
-    engine = "Niram" if options.niram else "Remus"
-    players = all_players()
-    if options.colors:
-        wanted = []
-        for color in options.colors:
-            wanted.append(f"{engine}-{color.upper()}")
-        chosen = []
-        for player in players:
-            if player[0] in wanted:
-                chosen.append(player)
-        players = chosen
-    if not options.report_only and not options.niram:
+    if options.levels:
+        LEVELS["Remus"] = options.levels
+        LEVELS["Niram"] = options.levels
+    wanted = []
+    for color in options.colors or []:
+        wanted.append(color.upper())
+    players = []
+    for player in all_players():
+        if not wanted or player[0].split("-")[1] in wanted:
+            players.append(player)
+    if options.niram_gold:
+        if not options.report_only and not NIRAM_GOLD_PROGRAM.exists():
+            sys.exit(f"No {NIRAM_GOLD_PROGRAM}: run 'cargo build --release' first")
+        players.append(("Niram-GOLD", NIRAM_GOLD_PROGRAM))
+    if not options.report_only:
         stockfish_path = options.stockfish or find_stockfish()
         print(f"Stockfish: {stockfish_path}")
-        play_all(players, stockfish_path, options.workers)
-    table = write_report(read_results(engine))
-    print(table)
+        play_all(players, options.games, stockfish_path, options.workers)
+    for engine in ["Remus", "Niram"]:
+        results = read_results(engine)
+        if not results:
+            continue
+        print(f"{engine} versions against Stockfish")
+        print(write_report(results))
+        # Every game of the engine's versions, rated as if one player played them
+        pooled = []
+        for by_level in results.values():
+            for elo in by_level:
+                for points in by_level[elo]:
+                    pooled.append((elo, points))
+        rating, margin = estimate_rating(pooled)
+        print(f"All {len(pooled)} {engine} games: {rating:.0f} +/- {margin:.0f}")
     print(f"Total run time (sec): {time.perf_counter() - start:.3f}")
 
 
