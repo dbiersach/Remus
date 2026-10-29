@@ -2,7 +2,7 @@
 """python_setup_instructor.py
 
 Day 1, period 1: check that the laptop is ready for the workshop, and say hello.
-The student file python_setup.py leaves one # line for each line the pair types.
+The student file python_setup.py leaves one # line for each line the student pair types.
 """
 
 import importlib.util

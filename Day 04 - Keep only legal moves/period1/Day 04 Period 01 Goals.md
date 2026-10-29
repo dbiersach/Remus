@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Split code into modules and import one from another. **Measured by:** The lab's two files run together, and running the imported file alone with the Run button prints its own self-check only through `main()`.
-- Draw which Remus files import which, and name the file that runs. **Measured by:** The pair's paper import map draws arrows from `move_generation.py` to `board.py`, `game_state.py`, and `moves.py`, and marks the lab as the file named `__main__`.
+- Draw which Remus files import which, and name the file that runs. **Measured by:** The student pair's paper import map draws arrows from `move_generation.py` to `board.py`, `game_state.py`, and `moves.py`, and marks the lab as the file named `__main__`.
 
 ## The files
 
@@ -15,7 +15,7 @@ The code here is the same as at the end of the period before.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_modules.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_modules_instructor.py`.
+The student pairs fill in the blanks of `python_modules.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_modules_instructor.py`.
 
 The lab imports `board.py`, `game_state.py`, `move_generation.py`, and `moves.py` from the same folder. An import runs the other file once and hands over its functions, so no code is copied.
 
@@ -30,10 +30,10 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Slides: a module is a file, `import` reads it, and `if __name__ == "__main__"` keeps a file quiet when another file imports it. |
-| 8:45 to 9:20 | Pairs work through Parts #1 to #3 of `python_modules.py`: every file has a `__name__`, use yesterday's `board.py` and `move_generation.py`, and list the knight moves from g1. |
-| 9:20 to 9:35 | Unplugged: the import map. On paper, each pair writes the name of every `.py` file in the folder and draws an arrow from each file to every file it imports, then circles the file that runs as `__main__`. |
-| 9:35 to 9:50 | Two pairs show their maps on the projector. The teacher shows that every arrow stays inside the folder: each period folder holds a complete Remus, so its files import only each other. |
-| 9:50 to 10:00 | Every pair shows its map to the teacher or the assistant. |
+| 8:45 to 9:20 | Student pairs work through Parts #1 to #3 of `python_modules.py`: every file has a `__name__`, use yesterday's `board.py` and `move_generation.py`, and list the knight moves from g1. |
+| 9:20 to 9:35 | Unplugged: the import map. On paper, each student pair writes the name of every `.py` file in the folder and draws an arrow from each file to every file it imports, then circles the file that runs as `__main__`. |
+| 9:35 to 9:50 | Two student pairs show their maps on the projector. The teacher shows that every arrow stays inside the folder: each period folder holds a complete Remus, so its files import only each other. |
+| 9:50 to 10:00 | Every student pair shows its map to the teacher or the assistant. |
 
 ## What you edit in the lab
 

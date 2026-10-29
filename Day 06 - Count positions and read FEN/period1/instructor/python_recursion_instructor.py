@@ -5,7 +5,7 @@ Day 6, period 1, Python lab 8: recursion, a function that calls itself.
 The chess drill counts down, counts the leaves of a small tree of moves, and
 counts the paths of a knight: three counts with the same shape as perft() in
 perft.py on Day 6, period 2.
-The student file python_recursion.py leaves one # line for each line the pair types.
+The student file python_recursion.py leaves one # line for each line the student pair types.
 """
 
 KNIGHT_JUMPS = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]

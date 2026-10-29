@@ -5,7 +5,7 @@ Day 3, period 1, Python lab 5: while, break, and direction tuples.
 The chess drill walks from d4 toward the edge of the board, one square at a time,
 and stops at the first piece in the way: the same walk a bishop, rook, or queen
 makes in move_generation.py on Day 3, period 3.
-The student file python_loops.py leaves one # line for each line the pair types.
+The student file python_loops.py leaves one # line for each line the student pair types.
 """
 
 BOARD_FILES = "abcdefgh"  # File letters, indexed by column: column 0 is file a

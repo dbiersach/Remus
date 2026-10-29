@@ -31,7 +31,7 @@ later Remus file starts with imports like these.
 3. Part #2: build the start board and list the knight moves from g1.
 4. Part #3 happens in VS Code: open `board.py` and press Run. This time `board.py` is `__main__`, so its `main()` runs and prints the board.
 
-The pair types 11 lines.
+The student pair types 11 lines.
 
 ## Try it
 

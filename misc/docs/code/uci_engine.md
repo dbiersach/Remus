@@ -13,7 +13,7 @@ This file reads Lucas Chess's commands and sends back Remus's answers.
 
 uci_engine.py sits at the top of the puzzle. It uses fen.py, make_move.py, legal_moves.py, search.py, and opening_book.py. remus.bat starts it.
 
-A first, small version arrives on Day 5, period 4. It follows games from the starting position and plays a random legal move, so pairs can play their own Remus in Lucas Chess before the week ends. The teacher hands it out ready to run. On Day 7 the class reads every command, and the full version reads FEN and calls the brains in search.py.
+A first, small version arrives on Day 5, period 4. It follows games from the starting position and plays a random legal move, so student pairs can play their own Remus in Lucas Chess before the week ends. The teacher hands it out ready to run. On Day 7 the class reads every command, and the full version reads FEN and calls the brains in search.py.
 
 - **Uses:** [`fen.py`](fen.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md), [`opening_book.py`](opening_book.md), [`search.py`](search.md)
 - **Used by:** no other Remus file

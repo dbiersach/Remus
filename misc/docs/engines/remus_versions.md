@@ -4,9 +4,9 @@
 
 Remus-WHITE is the finished Day 9 Remus with none of the enhancements. It already
 searches with alpha-beta, quiescence, move ordering, iterative deepening, and a
-clock. Ten ideas can make it stronger. On Day 9, in periods 2 and 3, each pair builds
+clock. Ten ideas can make it stronger. On Day 9, in periods 2 and 3, each student pair builds
 one of them, so the class can measure which idea adds the most strength. In period 4
-the pairs carry their color versions to each other's laptops and play battles to find
+the student pairs carry their color versions to each other's laptops and play battles to find
 out which engine color is strongest.
 
 Each color version has an engine color instead of a number or a letter, so no color version sounds
@@ -15,24 +15,24 @@ better than another before the games are played.
 ## Where the color versions live
 
 Remus-WHITE is the Day 9 `period1` folder: the Day 9 Remus at the end of period 1,
-when its engine is finished and before the pairs start their color versions. The
+when its engine is finished and before the student pairs start their color versions. The
 Day 9 `period2` folder holds an `engines` folder with one folder per color version,
 such as `10 RED - Transposition table`, each a complete copy of Remus-WHITE plus one
-enhancement. From period 2 to the end of the day, each pair works only in its engine
-color folder, so periods 2, 3, and 4 of Day 9 hold no engine code of their own. The number
+enhancement. From period 2 to the end of the day, each student pair works only in its engine
+engine folder, so periods 2, 3, and 4 of Day 9 hold no engine code of their own. The number
 in front of each name ranks the color version by its rating over Remus-WHITE in the
 designer's 10-minute league (below), from 01 GRAY to 10 RED. The
-`period2/student/engines` folder holds the same ten folders with the pair's functions stubbed.
+`period2/student/engines` folder holds the same ten folders with the student pair's functions stubbed.
 
 The teacher's `period2/instructor/engines` also holds `Remus-GOLD`, the finished Remus of Day
 10 with all ten enhancements at once, and `Niram-GOLD`, the same engine rewritten in
-Rust. No pair writes GOLD, so the student folders leave both out.
-`make_version_folders.py` builds the ten color folders from the Day 9 `period1` code
+Rust. No student pair writes GOLD, so the student folders leave both out.
+`make_version_folders.py` builds the ten engine folders from the Day 9 `period1` code
 and Remus-GOLD.
 
 ## Remus Engine Enhancements
 
-| Folder | Enhancement | The idea in one line | The pair writes | Lines to type |
+| Folder | Enhancement | The idea in one line | The student pair writes | Lines to type |
 | --- | --- | --- | --- | --- |
 | 01 GRAY | King safety | Reward pawns that shelter the king while the enemy queen is on the board | `king_safety()` in `evaluation.py` | 20 |
 | 02 YELLOW | Draw sense | Score a repeated position, or one at the fifty-move limit, as 0 inside the search | `is_draw_in_search()` in `search.py`, plus 3 tests in `test_upgrades.py` | 16 |
@@ -45,7 +45,7 @@ and Remus-GOLD.
 | 09 BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` and `order_moves()` in `move_ordering.py`, plus 1 test in `test_upgrades.py` | 27 |
 | 10 RED | Transposition table | Remember positions already searched, so one position reached in two move orders is scored once | `store()` in `transposition_table.py` and `probe()` in `transposition_table.py`, plus 1 test in `test_upgrades.py` | 27 |
 
-Every color version asks for 16 to 30 typed lines, under the 40-line limit for one period. Where the enhancement itself is short, the pair also writes the tests that prove it works, such as the test that a null window answers only "better or not?", so every pair spends both periods thinking about its idea rather than waiting.
+Every color version asks for 16 to 30 typed lines, under the 40-line limit for one period. Where the enhancement itself is short, the student pair also writes the tests that prove it works, such as the test that a null window answers only "better or not?", so every student pair spends both periods thinking about its idea rather than waiting.
 
 ## Words to know
 
@@ -60,7 +60,7 @@ Every color version asks for 16 to 30 typed lines, under the 40-line limit for o
 
 Each search color version adds one new function to `search.py` beside
 `alpha_beta_with_quiescence`, and `think()` calls the new function. The new function
-is the Day 9 search with one change, so a pair can compare the two side by side:
+is the Day 9 search with one change, so a student pair can compare the two side by side:
 
 | Engine color | New search function | What changes |
 | --- | --- | --- |
@@ -81,8 +81,8 @@ both `uci_engine.py` and `console_game.py`.
 or against another color version, at 10 minutes a side. It adds every game to
 `misc/games/remus_games.pgn` and prints the score.
 
-Nobody types a command to run it. Every color folder holds two short scripts that
-run `version_match.py` for its own engine color, so a pair (or the teacher) opens one in VS
+Nobody types a command to run it. Every engine folder holds two short scripts that
+run `version_match.py` for its own engine color, so a student pair (or the teacher) opens one in VS
 Code and presses the Run Python File button:
 
 | Script | When | What it plays |
@@ -90,17 +90,18 @@ Code and presses the Run Python File button:
 | `smoke_test.py` | Day 9, period 3 | One 2-minute game against Remus-WHITE, to show the engine plays legal moves to the end |
 | `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting color version, one with each piece color |
 
-In the Day 9 battles a visiting pair brings its color folder on a USB drive and
+In the Day 9 battles a visiting student pair brings its engine folder on a USB drive and
 copies it over the folder of the same engine color in the host's `period2/student/engines`, which
 holds that engine color with its functions still stubbed. The
-host presses Run on `play_battle.py` in its own color folder and types the visitor's
-engine color, such as `RED`. The two engine colors play twice from the same opening, once with each
+host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the
+visitor's engine color, such as `"RED"`, and presses Run. The numbered steps at the top
+of `play_battle.py` walk through the whole battle. The two engine colors play twice from the same opening, once with each
 piece color, about 20 minutes for both games. Each battle goes on the board as a row of the
 class table, and the period has room for two rounds. The visitor's folder stays on the
 host laptop when the visitor leaves: it replaces only the stubs of an engine color the host
-pair never writes, and the host's own color folder is untouched. Two games cannot show which enhancement is
+student pair never writes, and the host's own engine folder is untouched. Two games cannot show which enhancement is
 stronger, so the script prints no Elo gap for fewer than 10 games; while round 2
-runs, each pair puts its round 1 score into `demo_results.py` and sees how wide the
+runs, each student pair puts its round 1 score into `demo_results.py` and sees how wide the
 margin of error is. The teacher then shows the league table in
 [`engines_elo.md`](engines_elo.md), which rates every engine color from 110 games, along with
 Remus-GOLD's score against every engine color and Remus-WHITE. Nothing needs to run: the
@@ -144,7 +145,7 @@ uv run misc/scripts/version_league.py --book-start   # GREEN's and GOLD's games 
 The six opening moves hand every version a short book, so they hide most of what the
 book of Remus-GREEN and Remus-GOLD is worth. With `--book-start`, every game with
 GREEN or GOLD starts from the starting position instead. Their book picks among its
-moves at random, so their games still differ from each other, while the other pairs
+moves at random, so their games still differ from each other, while the other student pairs
 keep the openings. Rate such a league with `--book-start` as well.
 
 The designer's league ran on Niram, Rust copies of all 12 versions that picked the

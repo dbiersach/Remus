@@ -33,7 +33,7 @@ reads `sys.stdin` and answers with `flush=True` as Part #4 does.
 3. Part #3: print a note to `sys.stderr`.
 4. Part #4: read lines from `sys.stdin` until `quit`, answering `isready` and echoing the rest.
 
-The pair types 16 lines.
+The student pair types 16 lines.
 
 ## Try it
 

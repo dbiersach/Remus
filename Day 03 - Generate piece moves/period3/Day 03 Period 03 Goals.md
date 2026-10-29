@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Slide a rook, bishop, or queen until a piece or the edge stops it. **Measured by:** The slider tests pass: a rook on d4 of an empty board has 14 moves.
-- Explain why a slider may land on an enemy piece but not on a friend. **Measured by:** The pair traces `slide()` by hand on a board with one friend and one enemy.
+- Explain why a slider may land on an enemy piece but not on a friend. **Measured by:** The student pair traces `slide()` by hand on a board with one friend and one enemy.
 
 ## The files
 
@@ -14,11 +14,11 @@ Files that grow this period:
 - `move_generation.py`
 - `test_move_generation.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `slide()` in `move_generation.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -33,8 +33,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Slides: a sliding piece walks one direction until the edge or the first piece, and captures that piece only if it is an enemy. |
-| 1:15 to 2:00 | Pairs write `slide()` in `move_generation.py`. The teacher's `slider_moves()` calls it with the rook, bishop, and queen directions. |
-| 2:00 to 2:15 | Exercise: a rook on an empty board has 14 moves. Pairs check it with the tests and the arrow picture. |
+| 1:15 to 2:00 | Student pairs write `slide()` in `move_generation.py`. The teacher's `slider_moves()` calls it with the rook, bishop, and queen directions. |
+| 2:00 to 2:15 | Exercise: a rook on an empty board has 14 moves. Student pairs check it with the tests and the arrow picture. |
 | 2:15 to 2:30 | Show and choose for `slide()`. |
 
 ## What you edit this period

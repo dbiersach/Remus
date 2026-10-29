@@ -34,7 +34,7 @@ move on the 64 squares.
 3. Part #3: unpack the square `(4, 4)` into `row` and `col`.
 4. Part #4: call the two test functions, then run them again with pytest and break one on purpose.
 
-The pair types 16 lines.
+The student pair types 16 lines.
 
 ## Try it
 

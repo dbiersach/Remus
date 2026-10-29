@@ -4,11 +4,11 @@ Penalize doubled and isolated pawns and reward passed pawns.
 
 ## Learning objectives
 
-By the end of Day 9, each pair can:
+By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
+- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
-- Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the pair presses Run in VS Code, and the pair says why two games cannot show which enhancement is stronger.
+- Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
 ## The idea, with an example
 
@@ -37,11 +37,11 @@ Better pawn moves: Remus-PURPLE avoids doubling its own pawns, attacks isolated 
 
 ## Where your code fits
 
-`white_score()` in `evaluation.py` adds `pawn_structure(board)` to material and placement, and `explain_evaluation()` prints it as its own line, so a pair can see the term in any position.
+`white_score()` in `evaluation.py` adds `pawn_structure(board)` to material and placement, and `explain_evaluation()` prints it as its own line, so a student pair can see the term in any position.
 
 ## The files
 
-This folder is Remus-WHITE, the finished Day 9 Remus in `period1`, plus this one enhancement. The pair writes `pawn_structure()` in `evaluation.py`.
+This folder is Remus-WHITE, the finished Day 9 Remus in `period1`, plus this one enhancement. The student pair writes `pawn_structure()` in `evaluation.py`.
 
 ## The changes and why
 
@@ -51,4 +51,4 @@ Counts doubled and isolated pawns as weaknesses and passed pawns as strengths, m
 
 ## Check it
 
-Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: Remus-PURPLE plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, copy the visiting pair's color folder into the `engines` folder, open `play_battle.py`, press Run, and type the visitor's engine color: Remus-PURPLE plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `version_match.py` from the `engines` folder above this one.
+Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: Remus-PURPLE plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into the `engines` folder, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-PURPLE plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `version_match.py` from the `engines` folder above this one.

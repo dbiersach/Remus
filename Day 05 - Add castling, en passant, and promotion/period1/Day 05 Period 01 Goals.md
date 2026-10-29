@@ -2,7 +2,7 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Use sets and `in` to test membership, and change strings with `replace()`. **Measured by:** The lab removes `"K"` from `"KQkq"` when the h1 rook moves.
 
@@ -14,7 +14,7 @@ The code here is the same as at the end of the period before.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_sets.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_sets_instructor.py`.
+The student pairs fill in the blanks of `python_sets.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_sets_instructor.py`.
 
 Part #1 adds squares to a set. A set holds each item once, so adding h1 a second time changes nothing.
 
@@ -29,7 +29,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Slides: a set holds each item once, `in` asks a yes-or-no question, and a dict looks up a value by its key. |
-| 8:45 to 9:35 | Pairs work through the four parts of `python_sets.py`, ending with `replace()` removing "K" from "KQkq" when the h1 rook moves. |
+| 8:45 to 9:35 | Student pairs work through the four parts of `python_sets.py`, ending with `replace()` removing "K" from "KQkq" when the h1 rook moves. |
 | 9:35 to 9:50 | The class lists, on the board, every move that removes a castling right. |
 | 9:50 to 10:00 | Wrap-up and a preview of castling. |
 

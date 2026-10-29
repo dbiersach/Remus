@@ -4,10 +4,10 @@ Register `remus.bat` from the `student` folder in Lucas Chess again: Remus now p
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Choose a random move and a greedy move. **Measured by:** The brain tests pass: greedy Remus takes a hanging queen.
-- Explain what the UCI commands do. **Measured by:** The pair explains `position`, `go`, and `bestmove` from a printed conversation.
+- Explain what the UCI commands do. **Measured by:** The student pair explains `position`, `go`, and `bestmove` from a printed conversation.
 - Measure one brain against another. **Measured by:** Running `play_match.py` shows greedy Remus scoring more than random Remus.
 
 ## The files
@@ -23,12 +23,12 @@ Files that grow this period:
 - `test_game.py`
 - `uci_engine.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `random_move()` in `search.py`
 - `greedy_move()` in `search.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -47,10 +47,10 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:10 | Slides: a brain is a function that picks a move. Random picks any legal move, and greedy takes the most valuable capture. |
-| 1:10 to 1:40 | Pairs write `random_move()` and `greedy_move()`. |
+| 1:10 to 1:40 | Student pairs write `random_move()` and `greedy_move()`. |
 | 1:40 to 2:00 | The class reads the Day 5 `uci_engine.py` line by line. The teacher extends it with FEN positions and a choice of brains. |
-| 2:00 to 2:15 | Pairs register `remus.bat` from the `student` folder in Lucas Chess again and play greedy Remus. |
-| 2:15 to 2:30 | Pairs run `play_match.py`: random Remus against greedy Remus for 20 games, with the score at the end. |
+| 2:00 to 2:15 | Student pairs register `remus.bat` from the `student` folder in Lucas Chess again and play greedy Remus. |
+| 2:15 to 2:30 | Student pairs run `play_match.py`: random Remus against greedy Remus for 20 games, with the score at the end. |
 
 ## What you edit this period
 

@@ -30,7 +30,7 @@ adds to `make_move.py` in this period, together with `legal_moves()` and `in_che
 2. Part #1: for each of Q, R, B, and N, make the promotion, count Black's replies, name the result, and undo the move.
 3. Part #2: compare the state with a snapshot taken before Part #1.
 
-The pair types 12 lines.
+The student pair types 12 lines.
 
 ## Try it
 

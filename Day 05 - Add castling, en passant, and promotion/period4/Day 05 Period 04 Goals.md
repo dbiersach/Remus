@@ -4,11 +4,11 @@ Register `remus.bat` from the `student` folder as an engine in Lucas Chess and p
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Promote a pawn to any of four pieces. **Measured by:** The promotion tests pass for queen, rook, bishop, and knight.
-- Explain why a player sometimes promotes to a knight. **Measured by:** Running `demo_promotion.py` prints stalemate for b8=Q, b8=R, and b8=B and checkmate for b8=N, and the pair says why the queen only draws.
-- Play Remus in Lucas Chess. **Measured by:** The pair registers `remus.bat`, plays one game, and sees a random legal reply to every move, special moves included.
+- Explain why a player sometimes promotes to a knight. **Measured by:** Running `demo_promotion.py` prints stalemate for b8=Q, b8=R, and b8=B and checkmate for b8=N, and the student pair says why the queen only draws.
+- Play Remus in Lucas Chess. **Measured by:** The student pair registers `remus.bat`, plays one game, and sees a random legal reply to every move, special moves included.
 
 ## The files
 
@@ -26,9 +26,9 @@ Files that grow this period:
 
 ## The changes and why
 
-The pairs fill in the blanks of `demo_promotion.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `demo_promotion_instructor.py`.
+The student pairs fill in the blanks of `demo_promotion.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `demo_promotion_instructor.py`.
 
-`demo_promotion.py` sets up a puzzle: White's pawn on b7 promotes on b8 next to the Black king on a6. The pair writes the loop that tries all four promotion pieces, counts Black's legal replies, and names the result.
+`demo_promotion.py` sets up a puzzle: White's pawn on b7 promotes on b8 next to the Black king on a6. The student pair writes the loop that tries all four promotion pieces, counts Black's legal replies, and names the result.
 
 With no legal reply, `in_check()` decides between checkmate and stalemate. A queen, a rook, or a bishop takes away every square without giving check, so the game is a draw; only the knight on b8 gives check, and the king has nowhere to go. Every promotion is undone, and the snapshot at the end proves that the puzzle position comes back exactly.
 
@@ -39,9 +39,9 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:15 | Puzzle on the demonstration board: promoting to a knight wins, and promoting to a queen stalemates. The teacher shows promotion in `make_move()` and `undo_move()`. |
-| 3:15 to 3:45 | In `demo_promotion.py` pairs write the loop that tries all four promotions and prints stalemate or checkmate for each. |
-| 3:45 to 4:00 | The teacher hands out `uci_engine.py` and `remus.bat`. Pairs register `remus.bat` from the period's `student` folder in Lucas Chess, following the [Lucas Chess guide](../../misc/docs/course/lucas_chess_guide.md). |
-| 4:00 to 4:25 | Pairs play their own Remus, which answers with random legal moves. Every special move works on a real board. |
+| 3:15 to 3:45 | In `demo_promotion.py` student pairs write the loop that tries all four promotions and prints stalemate or checkmate for each. |
+| 3:45 to 4:00 | The teacher hands out `uci_engine.py` and `remus.bat`. Student pairs register `remus.bat` from the period's `student` folder in Lucas Chess, following the [Lucas Chess guide](../../misc/docs/course/lucas_chess_guide.md). |
+| 4:00 to 4:25 | Student pairs play their own Remus, which answers with random legal moves. Every special move works on a real board. |
 | 4:25 to 4:30 | Checkpoint: every special-move test passes. |
 
 ## What you edit in the demo

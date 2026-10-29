@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Repeat steps with `while` and stop early with `break`. **Measured by:** The lab's walk from d4 toward the edge stops at the first piece in its way.
-- Describe a direction as a (row change, col change) tuple. **Measured by:** The pair writes the tuple for "up and to the right" (-1, 1) and explains the minus sign.
+- Describe a direction as a (row change, col change) tuple. **Measured by:** The student pair writes the tuple for "up and to the right" (-1, 1) and explains the minus sign.
 
 ## The files
 
@@ -15,7 +15,7 @@ The code here is the same as at the end of the period before.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_loops.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_loops_instructor.py`.
+The student pairs fill in the blanks of `python_loops.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_loops_instructor.py`.
 
 Part #1 counts to 3 with `while`, the loop that repeats as long as its test is true.
 
@@ -30,7 +30,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Slides: `while`, `break`, `continue`, and a list of direction tuples. |
-| 8:45 to 9:35 | Pairs work through the four parts of `python_loops.py`: repeat with `while`, store a direction, walk from d4 until the edge or a piece, and try another direction. |
+| 8:45 to 9:35 | Student pairs work through the four parts of `python_loops.py`: repeat with `while`, store a direction, walk from d4 until the edge or a piece, and try another direction. |
 | 9:35 to 9:50 | The teacher runs the walk on the projector with a piece in the way and the class predicts where it stops. |
 | 9:50 to 10:00 | Wrap-up: which loop stops at the edge, and which line stops it at a piece? |
 

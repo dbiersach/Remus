@@ -5,7 +5,7 @@ Day 4, period 1, Python lab 6: modules, import, and __name__.
 The lab sits in the Day 4, period 1 folder next to the Remus code from Day 3. It
 imports board.py and move_generation.py instead of copying their code, and shows
 why a file's main() runs only when VS Code runs that file itself.
-The student file python_modules.py leaves one # line for each line the pair types.
+The student file python_modules.py leaves one # line for each line the student pair types.
 """
 
 # Each import line reads another file of this folder by its name, without the .py

@@ -30,7 +30,7 @@ after every move.
 2. Part #2: `count_leaves()` counts 1 for a move name and adds up the counts of a list's branches.
 3. Part #3: read `knight_paths()`, predict its counts from a1, and run it.
 
-The pair types 11 lines.
+The student pair types 11 lines.
 
 ## Try it
 

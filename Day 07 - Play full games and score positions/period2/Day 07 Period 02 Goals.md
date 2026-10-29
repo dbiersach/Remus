@@ -2,7 +2,7 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Read a move typed in SAN, such as Nf3 or O-O. **Measured by:** The `parse_san` tests pass, and a typo raises `ValueError`.
 - Play a whole game in the console. **Measured by:** Two students play `console_game.py` to a finish and the program prints the right result.
@@ -21,15 +21,15 @@ Files that grow this period:
 
 - `test_game.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `parse_san()` in `notation.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_input_output.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_input_output_instructor.py`.
+The student pairs fill in the blanks of `python_input_output.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_input_output_instructor.py`.
 
 Parts #1 and #2 pick moves the way the first brains in period 3 do: `random.choice()` takes any item, and a loop that keeps the best piece so far takes the item with the largest value.
 
@@ -46,9 +46,9 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Slides: SAN. The teacher walks through `move_to_san()`, including `Nbd2` and the `+` and `#` endings. |
-| 10:45 to 11:05 | Pairs write `parse_san()`: build the SAN of every legal move and return the one that matches. |
-| 11:05 to 11:20 | Pairs play each other with `console_game.py`, typing moves in SAN. |
-| 11:20 to 12:00 | Pairs work through `python_input_output.py`: `random.choice()`, a loop that keeps the best so far, stderr, and a tiny program that answers `isready` with `readyok`. |
+| 10:45 to 11:05 | Student pairs write `parse_san()`: build the SAN of every legal move and return the one that matches. |
+| 11:05 to 11:20 | Student pairs play each other with `console_game.py`, typing moves in SAN. |
+| 11:20 to 12:00 | Student pairs work through `python_input_output.py`: `random.choice()`, a loop that keeps the best so far, stderr, and a tiny program that answers `isready` with `readyok`. |
 
 ## What you edit this period
 

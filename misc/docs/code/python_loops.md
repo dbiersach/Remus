@@ -29,7 +29,7 @@ is the same walk, and it collects moves instead of square names.
 3. Part #3: step from d4 until the walk leaves the board or lands on a piece, and list each square.
 4. Part #4: change the direction and run again.
 
-The pair types 14 lines.
+The student pair types 14 lines.
 
 ## Try it
 

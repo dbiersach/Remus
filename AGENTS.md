@@ -48,30 +48,30 @@ that are specific to Claude Code. The Python style follows David's course reposi
   10:30 to 12:00, 1:00 to 2:30, 3:00 to 4:30). The day-by-day plan lives in
   [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md), and the code is split into modules
   and checkpoints that follow that plan period by period.
-- 20 students work in **10 pairs** (driver and navigator, swapping every period). Each
-  pair gets an identical, preconfigured **Windows 11** class laptop with VS Code and
+- 20 students work in **10 student pairs** (driver and navigator, swapping every period). Each
+  student pair gets an identical, preconfigured **Windows 11** class laptop with VS Code and
   Lucas Chess. Remus targets Windows only (David, 2026-10-28): the
   repository holds no Mac or Linux launchers or setup scripts.
 - Python skills labs come before the engine code that needs each skill. Students
   **write real Remus code**: small functions with a teacher-written signature,
-  docstring, and failing tests. The class picks one pair's version to merge, and
-  `CONTRIBUTORS.md` records who wrote it. Keep student functions short enough for a pair
+  docstring, and failing tests. The class picks one student pair's version to merge, and
+  `CONTRIBUTORS.md` records who wrote it. Keep student functions short enough for a student pair
   to finish in 20 to 40 minutes.
-- **Pairs write the most important and most enlightening code, never plumbing**
+- **Student pairs write the most important and most enlightening code, never plumbing**
   (David, 2026-10-27). Each student function holds a central idea of the lesson, such
   as making a move and recording its undo, negamax's sign flip, an alpha-beta cutoff,
-  or quiescence standing pat, in code simple enough that a pair can explain every line
+  or quiescence standing pat, in code simple enough that a student pair can explain every line
   it types. Text formatting, protocol strings, and helpers that only move data around
   stay teacher code. A lab must never become a typing exercise.
-- **No hands-on lab asks a pair to type more than about 30 to 40 lines of code** in
+- **No hands-on lab asks a student pair to type more than about 30 to 40 lines of code** in
   one period, counted across every function and lab blank of that period (David,
   2026-10-27). Many 13-year-olds cannot touch-type, so a longer lab spends class time
   on typing instead of thinking. When an idea needs more code, the teacher writes the
-  rest beforehand and the pair writes the core. `make_student_folders.py` prints the
+  rest beforehand and the student pair writes the core. `make_student_folders.py` prints the
   largest count per period and flags any period above `MAX_TYPED_LINES = 40`.
 - Short unplugged warm-ups (paper, cards, and a printed board at the desk) come before
   the hardest ideas. They replace part of the teacher's explanation, never the time a
-  pair spends typing code.
+  student pair spends typing code.
 - Students know how the pieces move. Lessons remind them of the rarer rules right before
   the code that needs each one: castling conditions, en passant, promotion and
   underpromotion, stalemate, threefold and fivefold repetition, the fifty and 75-move
@@ -81,7 +81,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
   version, then gains completeness, then power, then efficiency in later blocks. The
   whole engine also gets two passes: first it plays legal moves, then it plays good moves.
 - Every day ends with an engine that runs (on Day 10, Remus-GOLD). Each period's
-  `student/` folder starts from the finished code of the periods before, so a pair
+  `student/` folder starts from the finished code of the periods before, so a student pair
   that falls behind rejoins by opening the next period's folder.
 - Write code, comments, and lesson text for a 13-year-old reading the idea for the first
   time: short functions, concrete names, and one small example position per idea.
@@ -92,20 +92,20 @@ that are specific to Claude Code. The Python style follows David's course reposi
   `python-chess` runs matches and checks results from outside the engine.
 - **No GitHub for students.** They are minors, so they create no online accounts.
   Cloning the public repository needs none.
-- **git and `uv` only at setup** (David, 2026-10-29). On Day 1, period 1, the course
-  designer shows each pair how to install git and `uv`, clone the repository, and run
-  `uv sync` once to build `.venv`. After that setup no student or teacher uses git or
+- **git and `uv` only at setup** (David, 2026-10-29). On Day 1, period 1, the teacher
+  walks each student through installing git and `uv`, cloning the repository, and
+  running `uv sync` once to build `.venv`. After that setup no student or teacher uses git or
   `uv` at any point in the workshop: no fetch, branch, commit, restore, or clone, and
   no `uv run`. Code never moves between laptops through git: each period's `student/`
-  folder already holds the code it needs, the Day 9 battles copy a color folder on a
+  folder already holds the code it needs, the Day 9 battles copy an engine folder on a
   USB stick in File Explorer, and on Day 10 each student copies the Remus folder,
   without `.venv`, to a USB drive in File Explorer to take home. Never plan a step that
   needs a student account, pushes student code online, or asks a student or teacher
   to type a git or `uv` command after setup.
-- `CONTRIBUTORS.md` credits pairs by a team name they choose, not by full names.
+- `CONTRIBUTORS.md` credits student pairs by a team name they choose, not by full names.
 - **Three people use the repository** (David, 2026-10-29), and every document names
   the right one:
-  - **Students**, the pairs, who write Remus in the `student/` folders.
+  - **Students**, the student pairs, who write Remus in the `student/` folders.
   - **Teachers**, who run the class. A teacher does everything in VS Code: open a
     file and press the Run Python File button (`run_tests.py`, `play_match.py`,
     `play_battle.py`, `estimate_elo.py`, a lab, a demo) or open a Markdown page. No
@@ -228,22 +228,22 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   below). Beside `instructor/` and `student/` sits one goals file for the period,
   such as `Day 03 Period 02 Goals.md` (David, 2026-10-29), which replaces separate
   instructor and student READMEs. It names the period, its new and growing files,
-  and the functions pairs write. Every period goals file and color version README
+  and the functions student pairs write. Every period goals file and color version README
   also holds (David, 2026-10-27):
   - **Learning objectives** as a bulleted list, each with a **Measured by** line that
-    says how the teacher sees a pair has learned it: a named test that passes, a
-    printed result, or something the pair explains without running code.
-  - **The changes and why**: one paragraph for every function or lab part the pair
+    says how the teacher sees a student pair has learned it: a named test that passes, a
+    printed result, or something the student pair explains without running code.
+  - **The changes and why**: one paragraph for every function or lab part the student pair
     writes, saying what the code does, why it is written that way, and how it fits
     the whole engine.
   Every color version README (David, 2026-10-28) also explains its enhancement in enough
-  detail for a pair to work from it alone: a worked example, why it makes Remus
+  detail for a student pair to work from it alone: a worked example, why it makes Remus
   stronger, what it costs, a table of positions per depth and positions per second
-  measured against Remus-WHITE, what to expect in games, and where the pair's code
+  measured against Remus-WHITE, what to expect in games, and where the student pair's code
   is called from.
   Each Day folder also has one syllabus at its top, `Day NN Syllabus.md` (David,
   2026-10-28), that paints the whole day: what the day is about, its
-  objectives, a table of the four periods with what the pairs write in each, a timed
+  objectives, a table of the four periods with what the student pairs write in each, a timed
   sequence of activities for every period, and the checkpoint at 4:30.
   The text lives in `period_guides.py` (`OBJECTIVES`, `CHANGE_NOTES`, `LAB_NOTES`,
   `VERSION_OBJECTIVES`, `VERSION_GUIDES`, `VERSION_MEASURES`, `PERIOD_GUIDES`
@@ -263,8 +263,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   instructor one. `period_guides.LABS` names the period of each. Both files are
   written by hand, and the builders read them before a rebuild and write them back,
   so edit a lab in place. Every period that has no Remus
-  function for the pairs holds a lab or a short demo (`demo_*.py`) with blanks,
-  except Day 10, period 4 (David, 2026-10-28), where the pairs report their science
+  function for the student pairs holds a lab or a short demo (`demo_*.py`) with blanks,
+  except Day 10, period 4 (David, 2026-10-28), where the student pairs report their science
   results and take their code home. Day 10 is about the science only; the chess
   matches end with the Day 9 battles.
   Demos that use the engine run only inside their period folder. Day 6, period 3
@@ -281,7 +281,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `version_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
   top Remus folder from its own path, so it
   runs from the top folder with `uv run misc/scripts/<name>.py`. Students never open
-  `misc/scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
+  `misc/scripts/`. Files a student pair opens or runs in class stay beside the code they belong to:
   `version_match.py` in the Day 9 `period2/instructor/engines` and
   `period2/student/engines` folders for the battles, and `play_match.py`, `estimate_elo.py`, and the tests inside their
   period and version folders. Put a new course designer tool in `misc/scripts/`, and list every
@@ -297,7 +297,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Each period's `student/` folder mirrors the `instructor/` folder beside it. In each
   student folder, the functions the students write in that period are stubs: the
   signature and docstring stay and the body raises `NotImplementedError`, so the
-  tests fail until a pair writes the function. `make_student_folders.py` builds
+  tests fail until a student pair writes the function. `make_student_folders.py` builds
   every `student/` folder from its `instructor/` sibling and lists every student function by day and period;
   run it after `make_period_folders.py`, and never edit a student stub by hand.
 - The Remus versions live in `Day 09 - Add the clock and build enhanced
@@ -313,17 +313,17 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   (`hidden_peak.py`, `phase_hunt.py`, their tests, and the results demo), and their
   READMEs point to Remus-GOLD for the engine, Lucas Chess, and `estimate_elo.py`.
   Remus-GOLD is written by hand, like a `period4/instructor` folder; edit the finished engine
-  there. `make_version_folders.py` builds the ten color folders from the Day 9
+  there. `make_version_folders.py` builds the ten engine folders from the Day 9
   `period1/instructor` code and Remus-GOLD and rewrites only the GOLD README.
   `make_student_folders.py` stubs each color version's functions in the
   `period2/student/engines` folder, which holds only the ten color versions and `version_match.py`: no
-  pair ever writes GOLD. Engine colors name the color versions so that no color version
+  student pair ever writes GOLD. Engine colors name the color versions so that no color version
   sounds better than another. A two-digit prefix (David, 2026-10-28) orders the
   folders by each version's Elo over WHITE in the designer's league (Niram league 1,
   660 games at 10 minutes a side, with GREEN's and GOLD's games started from move 1
   so their book plays): 01 GRAY, 02 YELLOW, 03 CYAN, 04 PINK, 05 ORANGE, 06 BROWN,
   07 PURPLE, 08 GREEN, 09 BLUE, 10 RED. `version_match.py` plays a color version
-  against Remus-WHITE or another engine color, and `play_battle.py` in each color folder
+  against Remus-WHITE or another engine color, and `play_battle.py` in each engine folder
   runs it for the Day 9 battles. `version_league.py` plays a round robin of all 12
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
   with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions, and
@@ -337,7 +337,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   the same name, and Niram-GOLD must visit exactly the same number of positions as
   Remus-GOLD at each depth (`cargo test --release` inside `Niram-GOLD`;
   `uv run misc/scripts/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).
-  `uv run misc/scripts/engine_parity.py` checks the pair on 49 positions: evaluation,
+  `uv run misc/scripts/engine_parity.py` checks the student pair on 49 positions: evaluation,
   legal moves, book moves, and every depth's score, node count, and principal
   variation must match, and the results go to `misc/docs/engines/remus-niram parity.md`. A
   change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
@@ -400,9 +400,15 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Black), and so does each Remus version (WHITE, GRAY, ..., RED, GOLD). Every
   Markdown file, and every text the builders write into one, qualifies a bare
   "color" as **piece color** or **engine color**: "5 games with each piece color",
-  "the visitor's engine color, such as `RED`". The compound names "color version",
-  "color folder", and "color battle" always mean the engine color and need no
-  qualifier. Code identifiers such as `color_of()` and `--colors` keep their names.
+  "the visitor's engine color, such as `RED`". The compound names "color version" and
+  "color battle" always mean the engine color and need no qualifier. A Remus
+  version's folder, such as `10 RED - Transposition table`, is its **engine
+  folder**, never a "color folder". Code identifiers such as `color_of()` and
+  `--colors` keep their names.
+- **Say "student pairs"** (David, 2026-10-29). The students work in pairs, and every
+  document, comment, and builder text names them "student pairs" or "the student
+  pair", never a bare "pairs": "the functions the student pairs write". A pair of
+  games or a `(row, col)` pair keeps its plain word.
 
 # Part 2: Python style
 

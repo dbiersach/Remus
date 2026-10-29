@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
-- Explain the horizon effect. **Measured by:** The pair explains why depth 2 takes a defended pawn with the queen.
-- List the moves quiescence searches. **Measured by:** The `quiescence` tests pass, and the pair explains what "stand pat" means with the defended-pawn position.
+- Explain the horizon effect. **Measured by:** The student pair explains why depth 2 takes a defended pawn with the queen.
+- List the moves quiescence searches. **Measured by:** The `quiescence` tests pass, and the student pair explains what "stand pat" means with the defended-pawn position.
 
 ## The files
 
@@ -14,11 +14,11 @@ Files that grow this period:
 - `search.py`
 - `test_search.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `quiescence()` in `search.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -34,8 +34,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 1:00 to 1:15 | Puzzle: at depth 2 Remus takes a defended pawn with its queen. Why? The class names the horizon effect. |
 | 1:15 to 1:30 | Slides: quiescence keeps searching captures until the position is quiet. The teacher writes `capture_moves()`. |
-| 1:30 to 2:10 | Pairs write `quiescence()`, which may stand pat with the evaluation or try a capture that does better. |
-| 2:10 to 2:20 | Pairs run the puzzle again: Remus keeps its queen. |
+| 1:30 to 2:10 | Student pairs write `quiescence()`, which may stand pat with the evaluation or try a capture that does better. |
+| 2:10 to 2:20 | Student pairs run the puzzle again: Remus keeps its queen. |
 | 2:20 to 2:30 | Show and choose for `quiescence()`. |
 
 ## What you edit this period

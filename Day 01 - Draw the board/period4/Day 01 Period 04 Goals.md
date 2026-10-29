@@ -4,11 +4,11 @@ Running `show_board.py` draws the board as a picture in the web browser.
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Print the board with rank numbers and file letters. **Measured by:** Running `board.py` prints the start board with 8 at the top and a to h below it.
 - Convert between square names and (row, col) in both directions. **Measured by:** `test_board.py` passes, including e2 to (6, 4) and back.
-- Reject text that is not a square. **Measured by:** `parse_square("i9")` raises `ValueError`, and the pair explains which check catches it.
+- Reject text that is not a square. **Measured by:** `parse_square("i9")` raises `ValueError`, and the student pair explains which check catches it.
 
 ## The files
 
@@ -18,14 +18,14 @@ New files this period:
 - `show_board.py`
 - `test_board.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `print_board()` in `board.py`
 - `square_name()` in `board.py`
 - `parse_square()` in `board.py`
 - `piece_at()` in `board.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -52,9 +52,9 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:15 | Slides: the Remus board is an 8x8 list of one-character strings. Uppercase is White, lowercase is Black, and `.` is empty. The teacher walks through `new_board()`. |
-| 3:15 to 4:00 | Pairs write `print_board()`, `square_name()`, `parse_square()`, and `piece_at()` in `board.py` and run `run_tests.py` after each one. |
-| 4:00 to 4:10 | Pairs run `show_board.py`, which draws their board as a picture in the web browser. |
-| 4:10 to 4:25 | Show and choose: two or three pairs show their `parse_square()` on the projector, the class picks one for clarity, and the teacher adds it to the class repository with the pair's team name in `CONTRIBUTORS.md`. |
+| 3:15 to 4:00 | Student pairs write `print_board()`, `square_name()`, `parse_square()`, and `piece_at()` in `board.py` and run `run_tests.py` after each one. |
+| 4:00 to 4:10 | Student pairs run `show_board.py`, which draws their board as a picture in the web browser. |
+| 4:10 to 4:25 | Show and choose: two or three student pairs show their `parse_square()` on the projector, the class picks one for clarity, and the teacher adds it to the class repository with the student pair's team name in `CONTRIBUTORS.md`. |
 | 4:25 to 4:30 | Checkpoint: running `board.py` prints the start board and "b1 holds N, expected N". |
 
 ## What you edit this period

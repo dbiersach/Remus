@@ -5,7 +5,7 @@ Day 5, period 1, Python lab 7: sets, membership with in, dict lookups, and
 replace(). The chess drill keeps the castling rights as the string "KQkq" and
 removes a letter when a king or rook leaves its home square, the job of
 update_castling_rights() in make_move.py on Day 5, period 2.
-The student file python_sets.py leaves one # line for each line the pair types.
+The student file python_sets.py leaves one # line for each line the student pair types.
 """
 
 

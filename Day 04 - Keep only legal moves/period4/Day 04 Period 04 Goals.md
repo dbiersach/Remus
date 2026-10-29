@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Check the move generator on practice positions. **Measured by:** Every practice-position test in `test_legal_moves.py` passes.
-- Predict a legal-move count before running the code. **Measured by:** In `demo_practice_positions.py` the pair types its prediction for each position first, then runs the file and compares.
+- Predict a legal-move count before running the code. **Measured by:** In `demo_practice_positions.py` the student pair types its prediction for each position first, then runs the file and compares.
 
 ## The files
 
@@ -17,9 +17,9 @@ Files that grow this period:
 
 ## The changes and why
 
-The pairs fill in the blanks of `demo_practice_positions.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `demo_practice_positions_instructor.py`.
+The student pairs fill in the blanks of `demo_practice_positions.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `demo_practice_positions_instructor.py`.
 
-`demo_practice_positions.py` builds three positions from a dict of {square: piece} and prints each board with Remus's legal-move count. The pair types each position and its prediction before running the file, so every count is a test of the pair's own reasoning as well as of the code.
+`demo_practice_positions.py` builds three positions from a dict of {square: piece} and prints each board with Remus's legal-move count. The student pair types each position and its prediction before running the file, so every count is a test of the student pair's own reasoning as well as of the code.
 
 Part #2 puts a rook check on the White king, and Part #3 adds a knight on e2 that blocks the check but cannot move: it is pinned. The loop at the end counts only the moves that start on e2, the same check as `test_pinned_knight_has_no_moves()`.
 
@@ -30,8 +30,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:10 | Slides: the workshop's first three verification positions: the start, a king in check, and a pinned knight. |
-| 3:10 to 3:50 | In `demo_practice_positions.py` pairs type each position and write their prediction of its legal move count before Remus counts. |
-| 3:50 to 4:15 | Part #4: each pair builds a position of its own and trades it with the next pair, who predict before they run it. |
+| 3:10 to 3:50 | In `demo_practice_positions.py` student pairs type each position and write their prediction of its legal move count before Remus counts. |
+| 3:50 to 4:15 | Part #4: each student pair builds a position of its own and trades it with the next student pair, who predict before they run it. |
 | 4:15 to 4:30 | Checkpoint: a pinned knight has zero legal moves, and a king in check has only escapes. |
 
 ## What you edit in the demo

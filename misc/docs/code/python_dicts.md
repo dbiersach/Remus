@@ -32,7 +32,7 @@ the one in Part #4.
 3. Part #3: make a real copy with `deepcopy()`, change a1 on the copy, and compare.
 4. Part #4: write the `Move` dataclass, make the move e2 to e4, and print it.
 
-The pair types 18 lines.
+The student pair types 18 lines.
 
 ## Try it
 

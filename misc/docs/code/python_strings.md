@@ -31,7 +31,7 @@ The lab does not import Remus. On Day 1, period 4, `parse_square()` and
 3. Part #3: `chr(ord("a") + 6)` gives `"g"`, and joining it with 7 gives `"g7"`.
 4. Part #4: `upper()` turns `"rnbqkbnr"` into White's pieces, and `isupper()` tells them apart.
 
-The pair types 13 lines.
+The student pair types 13 lines.
 
 ## Try it
 

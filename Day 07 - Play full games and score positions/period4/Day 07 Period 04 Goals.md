@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Count material in centipawns. **Measured by:** The evaluation tests pass, and running `evaluation.py` prints -200 for a knight against a rook.
-- Explain a piece-square table. **Measured by:** The pair says why a knight scores more on d4 than on a1, using the number of squares it attacks (8 and 2).
+- Explain a piece-square table. **Measured by:** The student pair says why a knight scores more on d4 than on a1, using the number of squares it attacks (8 and 2).
 
 ## The files
 
@@ -14,11 +14,11 @@ New files this period:
 - `evaluation.py`
 - `test_search.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `material()` in `evaluation.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -32,11 +32,11 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:15 | Pairs rank three printed positions and write one reason for each. The reasons become the evaluation terms. |
+| 3:00 to 3:15 | Student pairs rank three printed positions and write one reason for each. The reasons become the evaluation terms. |
 | 3:15 to 3:25 | Chess refresher: piece values (pawn 1, knight 3, bishop 3, rook 5, queen 9) and the fork, pin, and skewer. |
-| 3:25 to 3:50 | Pairs write `material()` in centipawns, scored for White. |
+| 3:25 to 3:50 | Student pairs write `material()` in centipawns, scored for White. |
 | 3:50 to 4:05 | The teacher shows the piece-square tables and `explain_evaluation()`, which prints every term. A knight on d4 attacks eight squares; on a1 it attacks two. |
-| 4:05 to 4:25 | Each pair proposes one change to one table, and the class votes. |
+| 4:05 to 4:25 | Each student pair proposes one change to one table, and the class votes. |
 | 4:25 to 4:30 | Checkpoint: `explain_evaluation()` gives 0 for the start. |
 
 ## What you edit this period

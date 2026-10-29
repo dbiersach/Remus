@@ -30,7 +30,7 @@ The lab does not import Remus. On Day 5, period 2, `update_castling_rights()` in
 3. Part #3: look up the rights a home square guards in a dict.
 4. Part #4: remove letters from `"KQkq"` with `replace()`, one at a time.
 
-The pair types 14 lines.
+The student pair types 14 lines.
 
 ## Try it
 

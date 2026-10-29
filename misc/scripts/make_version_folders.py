@@ -5,9 +5,9 @@ Build one folder per color version in Day 09 .../period2/instructor/engines.
 
 Remus-WHITE is the Day 9 Remus at the end of period 1, with none of the ten
 enhancements: the period1 and period2 folders of Day 9 hold its engine. Its engine is
-complete before the pairs start their color versions in period 2. Each color version
+complete before the student pairs start their color versions in period 2. Each color version
 folder is Remus-WHITE plus one enhancement,
-named by a color so that no color version sounds better than another. A pair builds its
+named by a color so that no color version sounds better than another. A student pair builds its
 color version, then its Remus plays Remus-WHITE to measure how much Elo the one
 enhancement adds. Remus-GOLD, the finished Remus of Day 10, holds every
 enhancement at once. Its folder, engines/Remus-GOLD, is written by hand, and this
@@ -517,7 +517,7 @@ from search import MATE_SCORE, SearchInfo, alpha_beta_with_quiescence, {names}
 
 # For each color version: the folder name, the idea in one line, the files it copies
 # from the GOLD folder, its edits as (file, old text, new text), its test file,
-# and the functions the pair writes
+# and the functions the student pair writes
 VERSIONS_TABLE = [
     {
         "folder": "Remus-GOLD",
@@ -953,7 +953,7 @@ def readme_text(version: dict) -> str:
         )
         sections.append(
             "## Learning objectives\n\n"
-            f"By the end of Day 9, each pair can:\n\n{objectives}"
+            f"By the end of Day 9, each student pair can:\n\n{objectives}"
         )
     sections += [
         f"## The idea, with an example\n\n{guide['example']}",
@@ -983,7 +983,7 @@ def readme_text(version: dict) -> str:
             (
                 "## The files\n\nThis folder is Remus-WHITE, the finished Day 9 Remus in "
                 "`period1`, "
-                f"plus this one enhancement. The pair writes {written}."
+                f"plus this one enhancement. The student pair writes {written}."
             ),
             f"## The changes and why\n\n{changes}",
             (
@@ -991,9 +991,10 @@ def readme_text(version: dict) -> str:
                 "folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: "
                 f"Remus-{color} plays one 2-minute game against Remus-WHITE, which "
                 "shows that the engine plays legal moves to the end of a game. In the "
-                "Day 9 battles, copy the visiting pair's color folder into the `engines` "
-                "folder, open `play_battle.py`, press Run, and type the visitor's "
-                f"engine color: Remus-{color} plays it twice at 10 minutes a side, "
+                "Day 9 battles, follow the numbered steps at the top of `play_battle.py`: "
+                "copy the visiting student pair's engine folder into the `engines` "
+                "folder, set `VISITING_ENGINE` to the visitor's engine color, and press "
+                f"Run. Remus-{color} plays it twice at 10 minutes a side, "
                 "once with each piece color, and both games go into misc/games/remus_games.pgn. Each "
                 "script runs `version_match.py` from the `engines` folder above this one."
             ),
@@ -1015,11 +1016,31 @@ def tidy(folders: list[Path]) -> None:
 RUN_SCRIPTS = {
     "play_battle.py": (
         (
-            "The Day 9 battle for this color version. Copy the visiting pair's color "
-            "folder into\nthe engines folder on this laptop, press Run in VS Code, and "
-            "type the visitor's\nengine color. Remus-{color} plays two 10-minute games "
-            "against it from the same opening,\nWhite in game 1 and Black in game 2. "
-            "The two games take about 20 minutes."
+            "The Day 9 battle: Remus-{color} on this laptop plays the engine of a "
+            "visiting student pair.\n"
+            "\n"
+            "1. The visiting student pair brings its engine folder on a USB stick, "
+            "such as\n"
+            "   {example_folder}, copied from period2 > student > engines "
+            "on its own laptop.\n"
+            "2. On this laptop, open File Explorer and go to the Remus folder, then\n"
+            "   Day 09 - Add the clock and build enhanced engines > period2 > student > "
+            "engines.\n"
+            "3. Drag the visitor's engine folder from the USB stick into that engines "
+            "folder.\n"
+            "   When Windows asks, choose Replace the files in the destination. The "
+            "folder it\n"
+            "   replaces holds only stubs, because no student pair on this laptop "
+            "writes that engine.\n"
+            "4. In VS Code, open this file, play_battle.py, in the {color} engine "
+            "folder.\n"
+            "5. Set VISITING_ENGINE below to the visitor's engine color, such as "
+            '"{example}", and save.\n'
+            "6. Press the Run Python File button. Remus-{color} plays two 10-minute "
+            "games against\n"
+            "   the visitor from the same opening, with the White pieces in game 1 "
+            "and the Black\n"
+            "   pieces in game 2. The two games take about 20 minutes."
         ),
         ["OPPONENT"],
     ),
@@ -1037,24 +1058,35 @@ RUN_SCRIPTS = {
 def run_script_text(name: str, color: str) -> str:
     """Return a script that runs version_match.py for one color from the Run button."""
     about, extra = RUN_SCRIPTS[name]
+    # The example visitor is always another engine than this one
+    example, example_folder = "BLUE", "09 BLUE - Killer moves"
+    if color == "BLUE":
+        example, example_folder = "PURPLE", "07 PURPLE - Pawn structure"
     arguments = ""
     ask = ""
+    setting = "\n"
     for word in [color, *extra]:
         if word == "OPPONENT":
-            arguments += ", opponent"
-            # The visitor types its engine color, such as RED, in the VS Code terminal
+            arguments += ", VISITING_ENGINE.upper()"
             ask = (
-                '    opponent = input("The visiting engine color, such as RED: ")'
-                ".strip().upper()\n"
+                '    if VISITING_ENGINE == "":\n'
+                '        print("Set VISITING_ENGINE at the top of this file, then '
+                'press Run again.")\n'
+                "        return\n"
+            )
+            setting = (
+                f"# The visitor's engine color, such as \"{example}\" (step 5 above)\n"
+                'VISITING_ENGINE = ""\n\n\n'
             )
         else:
             arguments += f', "{word}"'
     return (
-        f'#!/usr/bin/env -S uv run\n"""{name}\n\n{about.format(color=color)}\n'
+        f'#!/usr/bin/env -S uv run\n"""{name}\n\n{about.format(color=color, example=example, example_folder=example_folder)}\n'
         "version_match.py, in the engines folder above this one, plays the games and "
         'adds\nthem to misc/games/remus_games.pgn.\n"""\n\n'
-        "import subprocess\nimport sys\nfrom pathlib import Path\n\n\n"
-        "def main():\n"
+        "import subprocess\nimport sys\nfrom pathlib import Path\n\n"
+        + setting
+        + "def main():\n"
         + ask
         + '    match_path = Path(__file__).parent.parent / "version_match.py"\n'
         '    print(f"Running {match_path}")\n'

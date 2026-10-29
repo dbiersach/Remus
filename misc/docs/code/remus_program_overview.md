@@ -29,20 +29,20 @@ Every period folder holds two folders. `instructor/` holds only finished referen
 code that runs as it is, with no blanks to fill in, and `student/` holds the code
 students write and change. Every `instructor/` folder is a complete, runnable copy of Remus as it stands at the end of that period. Beside the two folders sits the
 period's goals file, such as `Day 06 Period 02 Goals.md`, which names the period, its learning objectives with how each is measured, the
-files that are new or growing, the functions the pairs write, and a paragraph on each
+files that are new or growing, the functions the student pairs write, and a paragraph on each
 change and why (the text comes from `period_guides.py`), then the timed steps of the
-period and the pairs' exact tasks. `period4/instructor` holds the finished code of the day. `make_period_folders.py`
+period and the student pairs' exact tasks. `period4/instructor` holds the finished code of the day. `make_period_folders.py`
 builds the instructor folders of `period1` to `period3` from it, so a file that grows during the day, such as
 `make_move.py` on Day 5, gains castling in `period2`, en passant in `period3`, and
 promotion in `period4`. Above the period folders, each Day folder's syllabus, such as `Day 05 Syllabus.md`, gives
-the whole day at a glance: its objectives, what the pairs write in each period, a
+the whole day at a glance: its objectives, what the student pairs write in each period, a
 timed sequence of activities for all four periods, and the checkpoint at 4:30.
 `make_student_folders.py` writes it from `DAY_GUIDES` in `period_guides.py` into the
 top of each Day folder.
 
 Each `student/` folder mirrors the `instructor/` folder beside it. In each student
 folder, the functions the class writes in that period are stubs that raise
-`NotImplementedError`, and the tests fail until a pair writes them.
+`NotImplementedError`, and the tests fail until a student pair writes them.
 `make_student_folders.py` builds every `student/` folder and lists every student
 function; the [student guide](../course/student_guide.md) shows the same list. A
 student who opens `Day 06 - Count positions and read FEN/period2/student` finds every file from Days 1 to 5, some of
@@ -88,7 +88,7 @@ every course designer tool that is not part of an engine: the builders that writ
 version, and student
 folders, `period_guides.py` with the README text, the test runner, the league and
 Stockfish rating scripts, and the Niram benchmark. Students never open it.
-`version_match.py` stays in the Day 9 `period2/instructor/engines` and `period2/student/engines` folders, because every pair
+`version_match.py` stays in the Day 9 `period2/instructor/engines` and `period2/student/engines` folders, because every student pair
 runs it there in the Day 9 battles.
 
 ## The puzzle box and its pieces

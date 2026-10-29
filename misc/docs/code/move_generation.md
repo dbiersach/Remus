@@ -20,7 +20,7 @@ move_generation.py uses board.py, game_state.py, and moves.py. attacks.py and le
 
 - **pseudo-legal:** follows how the pieces move, but might leave your own king in check.
 - **direction:** a step written as (row change, column change). Up the board is (-1, 0).
-  The file names this kind of pair `Direction`, so a reader can tell it from a `Square`.
+  The file names this kind of student pair `Direction`, so a reader can tell it from a `Square`.
 - **slider:** a rook, bishop, or queen. It slides until something blocks it.
 - **jumper:** a knight or a king. It moves by fixed steps.
 

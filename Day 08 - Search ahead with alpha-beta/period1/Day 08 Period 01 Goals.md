@@ -2,9 +2,9 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
-- Back up scores through a tree with minimax. **Measured by:** Paper minimax: the pair's best move matches `minimax()` on the same tree.
+- Back up scores through a tree with minimax. **Measured by:** Paper minimax: the student pair's best move matches `minimax()` on the same tree.
 - Score checkmate so that a faster mate wins. **Measured by:** The negamax tests pass: `negamax()` finds every mate in 1, and the root state is unchanged after each search.
 
 ## The files
@@ -16,11 +16,11 @@ Files that grow this period:
 - `test_search.py`
 - `uci_engine.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `negamax()` in `search.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -34,10 +34,10 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 
 | Time | Activity |
 | --- | --- |
-| 8:30 to 8:45 | Unplugged warm-up, "Paper minimax": pairs back up max and min on a printed two-ply tree and circle the best move. A seven-student human tree can act it out at the front of the room. |
-| 8:45 to 9:00 | The teacher writes `minimax()` to depth 2 with a node counter, and pairs compare its answer with their worksheets. |
+| 8:30 to 8:45 | Unplugged warm-up, "Paper minimax": student pairs back up max and min on a printed two-ply tree and circle the best move. A seven-student human tree can act it out at the front of the room. |
+| 8:45 to 9:00 | The teacher writes `minimax()` to depth 2 with a node counter, and student pairs compare its answer with their worksheets. |
 | 9:00 to 9:10 | Slides: negamax, the same search in one function: flip the sign, wrap make and undo in `try/finally`, and score checkmate as `-(MATE_SCORE - ply)`. |
-| 9:10 to 9:50 | Pairs write `negamax()` until the tests show it agrees with minimax and leaves the root state unchanged. |
+| 9:10 to 9:50 | Student pairs write `negamax()` until the tests show it agrees with minimax and leaves the root state unchanged. |
 | 9:50 to 10:00 | Show and choose for `negamax()`. |
 
 ## What you edit this period

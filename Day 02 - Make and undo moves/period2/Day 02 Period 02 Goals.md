@@ -2,11 +2,11 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Store named facts in a dict and read them back. **Measured by:** The lab's state dict answers whose turn it is and the castling rights.
-- Explain aliasing: two names for one list. **Measured by:** The pair predicts, then shows, that `b2 = board` changes both boards, and that a copy does not.
-- Describe a record with a `dataclass`. **Measured by:** The pair makes a small `dataclass` and prints one of its fields.
+- Explain aliasing: two names for one list. **Measured by:** The student pair predicts, then shows, that `b2 = board` changes both boards, and that a copy does not.
+- Describe a record with a `dataclass`. **Measured by:** The student pair makes a small `dataclass` and prints one of its fields.
 
 ## The files
 
@@ -16,7 +16,7 @@ The code here is the same as at the end of the period before.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_dicts.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_dicts_instructor.py`.
+The student pairs fill in the blanks of `python_dicts.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_dicts_instructor.py`.
 
 Part #1 keeps the facts of a game in a dict and reads them by key, the way `new_game()` in `game_state.py` holds the board, the side to move, and the castling rights.
 
@@ -33,8 +33,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Slides: a dict holds named facts, and a dataclass describes a record with fixed fields. |
-| 10:45 to 11:15 | Pairs work through Parts #1 and #2 of `python_dicts.py` and watch `b2 = board` change both boards. |
-| 11:15 to 11:50 | The teacher explains aliasing on the whiteboard: two names, one list. Then pairs write Parts #3 and #4: a real copy, and a dataclass that describes a move. |
+| 10:45 to 11:15 | Student pairs work through Parts #1 and #2 of `python_dicts.py` and watch `b2 = board` change both boards. |
+| 11:15 to 11:50 | The teacher explains aliasing on the whiteboard: two names, one list. Then student pairs write Parts #3 and #4: a real copy, and a dataclass that describes a move. |
 | 11:50 to 12:00 | Wrap-up: why would a chess engine break if it changed a board it meant to copy? |
 
 ## What you edit in the lab

@@ -4,7 +4,7 @@ Day 2 teaches functions, tests, dicts, and dataclasses, then uses them for the h
 
 ## Objectives for the day
 
-By 4:30, each pair can:
+By 4:30, each student pair can:
 
 - Write a function with type hints and a docstring, and check it with `assert` and pytest.
 - Store named facts in a dict and a dataclass, and show why `b2 = board` gives one board two names instead of making a copy.
@@ -14,7 +14,7 @@ By 4:30, each pair can:
 
 ## The day at a glance
 
-| Period | Time | Title | Pairs write |
+| Period | Time | Title | Student pairs write |
 | --- | --- | --- | --- |
 | P1 | 8:30 to 10:00 | Python lab 3: functions, type hints, tuples, assert, pytest | The lab `python_functions.py` (16 lines) |
 | | 10:00 to 10:30 | Break | |
@@ -29,34 +29,34 @@ By 4:30, each pair can:
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Slides: functions, parameters, `return`, type hints, and docstrings. |
-| 8:45 to 9:25 | Pairs work through Parts #1 to #3 of `python_functions.py`: call a function, write their own, and unpack a square tuple such as `row, col = (6, 4)`. |
+| 8:45 to 9:25 | Student pairs work through Parts #1 to #3 of `python_functions.py`: call a function, write their own, and unpack a square tuple such as `row, col = (6, 4)`. |
 | 9:25 to 9:35 | Slides: `assert` and pytest. The teacher breaks a function on purpose and the class reads the failing test together. |
-| 9:35 to 9:50 | Pairs finish Part #4, which checks their functions with `assert`. |
-| 9:50 to 10:00 | Wrap-up: each pair says what a failing test tells them and where to look first. |
+| 9:35 to 9:50 | Student pairs finish Part #4, which checks their functions with `assert`. |
+| 9:50 to 10:00 | Wrap-up: each student pair says what a failing test tells them and where to look first. |
 
-[`Day 02 Period 01 Goals.md`](<period1/Day 02 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
+[`Day 02 Period 01 Goals.md`](<period1/Day 02 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Python lab 4: dicts, dataclasses, aliasing, copying
 
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Slides: a dict holds named facts, and a dataclass describes a record with fixed fields. |
-| 10:45 to 11:15 | Pairs work through Parts #1 and #2 of `python_dicts.py` and watch `b2 = board` change both boards. |
-| 11:15 to 11:50 | The teacher explains aliasing on the whiteboard: two names, one list. Then pairs write Parts #3 and #4: a real copy, and a dataclass that describes a move. |
+| 10:45 to 11:15 | Student pairs work through Parts #1 and #2 of `python_dicts.py` and watch `b2 = board` change both boards. |
+| 11:15 to 11:50 | The teacher explains aliasing on the whiteboard: two names, one list. Then student pairs write Parts #3 and #4: a real copy, and a dataclass that describes a move. |
 | 11:50 to 12:00 | Wrap-up: why would a chess engine break if it changed a board it meant to copy? |
 
-[`Day 02 Period 02 Goals.md`](<period2/Day 02 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
+[`Day 02 Period 02 Goals.md`](<period2/Day 02 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: game_state.py and moves.py: a game state and a move record
 
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Slides: the game state dict in `new_game()` and the `Move` dataclass with `from_square`, `to_square`, and `promotion`. |
-| 1:15 to 2:05 | Pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, running `run_tests.py` after each. |
-| 2:05 to 2:15 | Pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
+| 1:15 to 2:05 | Student pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, running `run_tests.py` after each. |
+| 2:05 to 2:15 | Student pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
 | 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()` for the class repository. |
 
-[`Day 02 Period 03 Goals.md`](<period3/Day 02 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
+[`Day 02 Period 03 Goals.md`](<period3/Day 02 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: make_move.py: make and undo ordinary moves
 
@@ -64,13 +64,13 @@ By 4:30, each pair can:
 | --- | --- |
 | 3:00 to 3:15 | Unplugged warm-up, "Undo from the card": one partner makes three moves with sticky-note pieces and writes an undo card for each. The other partner restores the start position from the cards alone. |
 | 3:15 to 3:25 | Slides: what a move destroys (the captured piece, the clocks, the side to move) and the undo record that saves it. The teacher shows `state_snapshot()` and the "make ten, undo ten, compare" test. |
-| 3:25 to 4:15 | Pairs write `make_move()` and `undo_move()` in `make_move.py` until the tests pass. |
+| 3:25 to 4:15 | Student pairs write `make_move()` and `undo_move()` in `make_move.py` until the tests pass. |
 | 4:15 to 4:30 | Show and choose for `make_move()`, then the checkpoint: ten moves made and undone give back the exact start state. |
 
-[`Day 02 Period 04 Goals.md`](<period4/Day 02 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
+[`Day 02 Period 04 Goals.md`](<period4/Day 02 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## By the end of the day
 
 **Checkpoint:** Ten moves made and undone return the exact start state, and `test_make_move.py` passes.
 
-Each period folder starts from working code, so a pair that falls behind opens the next period's folder with the rest of the class.
+Each period folder starts from working code, so a student pair that falls behind opens the next period's folder with the rest of the class.

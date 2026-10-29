@@ -40,7 +40,7 @@ side, because a version with no book plays the same game again from the starting
 position. Those six moves also hand every version a short opening book, which hides
 most of what the book of Remus-GREEN and Remus-GOLD is worth. With --book-start, every
 game with GREEN or GOLD starts from the starting position instead: their book picks
-among its moves at random, so their games still differ. The other pairs keep the
+among its moves at random, so their games still differ. The other student pairs keep the
 OPENINGS. Rate such a league with --book-start too.
 
 This is a course designer tool: the engine never imports python-chess.
@@ -346,7 +346,7 @@ def print_head_to_head(results: list[Result], player: str) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description="Rank every Remus version.")
-    parser.add_argument("--games", type=int, default=6, help="games for each pair")
+    parser.add_argument("--games", type=int, default=6, help="games for each student pair")
     parser.add_argument("--rate-only", action="store_true", help="skip the games")
     parser.add_argument("--minutes", type=float, default=MINUTES, help="each clock")
     parser.add_argument(

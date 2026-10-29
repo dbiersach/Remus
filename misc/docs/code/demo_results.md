@@ -6,7 +6,7 @@
 
 A match ends with a score, but luck plays a part, and luck plays a larger part the
 fewer games there are. This demo turns wins, draws, and losses into an Elo gap and a
-margin of error, and says whether the result shows a real difference. A pair puts in
+margin of error, and says whether the result shows a real difference. A student pair puts in
 its two battle games first, then its engine color's games from the designer's league,
 and sees the margin shrink as the games add up.
 
@@ -16,7 +16,7 @@ The demo runs in the Day 9, period 4 folder, during the second round of battles,
 `estimate_elo.py` and `version_league.py` fit ratings with the same Elo formula.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; each pair uses it to read its battle and its engine color's league result
+- **Used by:** nothing; each student pair uses it to read its battle and its engine color's league result
 
 ## Words to know
 
@@ -29,7 +29,7 @@ The demo runs in the Day 9, period 4 folder, during the second round of battles,
 1. Part #1: count the games and points, and turn the score into an Elo gap.
 2. Part #2: work out the margin, the lowest and highest gap it allows, and whether the range includes 0.
 
-The pair types 13 lines.
+The student pair types 13 lines.
 
 ## Try it
 

@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Search every set of phases with make and undo, as Remus searches moves. **Measured by:** The `search` tests pass: the phases list comes back unchanged, and the search scores 176 sets, one for each set of up to three phases.
-- Verify a method against known answers, and say when the data cannot decide. **Measured by:** Running `phase_hunt.py` shows the search making fewer wrong calls than greedy, and the pair names the extra measurement that would tell gold from silver.
+- Verify a method against known answers, and say when the data cannot decide. **Measured by:** Running `phase_hunt.py` shows the search making fewer wrong calls than greedy, and the student pair names the extra measurement that would tell gold from silver.
 
 ## The tree you search
 
@@ -46,11 +46,11 @@ Files that grow this period:
 - `phase_hunt.py`
 - `test_phase_hunt.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `search()` in `phase_hunt.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -65,8 +65,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | The teacher draws the tree of phase sets next to Remus's game tree: a set is a position, adding a phase is a move, and taking it back is the undo. |
-| 1:15 to 1:50 | Pairs write `search()`, which scores every set of up to three phases and keeps every set that ties for the best score. |
-| 1:50 to 2:15 | The class verifies on 200 known powders: 139 right, 52 "can't tell", and 9 wrong, against greedy's 34 wrong. Pairs change `PHASE_COST` and `MISSING` and watch the verdicts move. |
+| 1:15 to 1:50 | Student pairs write `search()`, which scores every set of up to three phases and keeps every set that ties for the best score. |
+| 1:50 to 2:15 | The class verifies on 200 known powders: 139 right, 52 "can't tell", and 9 wrong, against greedy's 34 wrong. Student pairs change `PHASE_COST` and `MISSING` and watch the verdicts move. |
 | 2:15 to 2:30 | The teacher closes with the programs that search the same tree on real synchrotron data, and the beamline agent at Brookhaven. |
 
 ## What you edit this period

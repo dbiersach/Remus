@@ -2,11 +2,11 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Write a function with parameters, a return value, type hints, and a docstring. **Measured by:** The lab's `is_white()` and `on_board()` return the right answers for every example on the worksheet.
 - Check a function with `assert` and with pytest. **Measured by:** `run_tests.py` shows the lab's tests passing, and one deliberately wrong `assert` fails with a clear report.
-- Pack two numbers into a tuple and unpack them. **Measured by:** The pair writes `row, col = square` and explains what each name holds.
+- Pack two numbers into a tuple and unpack them. **Measured by:** The student pair writes `row, col = square` and explains what each name holds.
 
 ## The files
 
@@ -16,7 +16,7 @@ The code here is the same as at the end of the period before.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_functions.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_functions_instructor.py`.
+The student pairs fill in the blanks of `python_functions.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_functions_instructor.py`.
 
 Part #1 calls the finished `is_white()` and `on_board()`. You type the one line under each docstring: `is_white()` asks `isupper()`, and `on_board()` checks that the row and the column both lie between 0 and 7. Remus asks these two questions in nearly every function from Day 2 on.
 
@@ -33,10 +33,10 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Slides: functions, parameters, `return`, type hints, and docstrings. |
-| 8:45 to 9:25 | Pairs work through Parts #1 to #3 of `python_functions.py`: call a function, write their own, and unpack a square tuple such as `row, col = (6, 4)`. |
+| 8:45 to 9:25 | Student pairs work through Parts #1 to #3 of `python_functions.py`: call a function, write their own, and unpack a square tuple such as `row, col = (6, 4)`. |
 | 9:25 to 9:35 | Slides: `assert` and pytest. The teacher breaks a function on purpose and the class reads the failing test together. |
-| 9:35 to 9:50 | Pairs finish Part #4, which checks their functions with `assert`. |
-| 9:50 to 10:00 | Wrap-up: each pair says what a failing test tells them and where to look first. |
+| 9:35 to 9:50 | Student pairs finish Part #4, which checks their functions with `assert`. |
+| 9:50 to 10:00 | Wrap-up: each student pair says what a failing test tells them and where to look first. |
 
 ## What you edit in the lab
 

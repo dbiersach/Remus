@@ -1,10 +1,10 @@
 # Day 9, Period 2: Python lab 12 and the color versions
 
-Each pair builds one color version in the `engines` folder inside `student`, such as `engines/10 RED - Transposition table`. Each color folder is a complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.
+Each student pair builds one color version in the `engines` folder inside `student`, such as `engines/10 RED - Transposition table`. Each engine folder is a complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Use a dict as a cache with tuples as keys. **Measured by:** The lab remembers perft counts already computed and prints the time saved.
 - Add one enhancement to Remus-WHITE. **Measured by:** The color version's own tests pass in its folder.
@@ -13,11 +13,11 @@ By the end of this period, each pair can:
 
 The lab is `python_caches.py` in the `student` folder, with the answers in `python_caches_instructor.py` in the `instructor` folder beside it. Open `python_caches.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-This folder holds no engine code. Each pair works in its own color version folder in `period2/student/engines`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder.
+This folder holds no engine code. Each student pair works in its own engine folder in `period2/student/engines`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_caches.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_caches_instructor.py`.
+The student pairs fill in the blanks of `python_caches.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_caches_instructor.py`.
 
 Part #1: `remembered_perft()` stores each answer in a dict under the tuple key `(name, depth)`. The second call finds the answer and returns at once. The RED color version's transposition table remembers search results the same way.
 
@@ -27,9 +27,9 @@ Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 to g7, 
 
 | Time | Activity |
 | --- | --- |
-| 10:30 to 10:50 | Pairs work through `python_caches.py`: a dict remembers answers, `math.dist()`, and `random.seed()`. |
+| 10:30 to 10:50 | Student pairs work through `python_caches.py`: a dict remembers answers, `math.dist()`, and `random.seed()`. |
 | 10:50 to 11:00 | Slides: the ten color versions. Each is Remus-WHITE plus one enhancement, such as RED (transposition table) or BLUE (killer moves). Colors name the color versions so that no color version sounds better than another. |
-| 11:00 to 12:00 | Each pair opens its color version in `period2/student/engines`, reads the version README, and writes the color version's stubbed code. |
+| 11:00 to 12:00 | Each student pair opens its color version in `period2/student/engines`, reads the version README, and writes the color version's stubbed code. |
 
 ## What you edit in the lab
 

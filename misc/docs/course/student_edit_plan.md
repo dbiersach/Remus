@@ -1,10 +1,10 @@
 # Student Edit Plan: Who Writes What, Period by Period
 
-`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which the teacher writes, and the functions the pairs write, which are stubs in each `student` folder and finished in the `instructor` folder beside it. Each period's goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check each function.
+`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which the teacher writes, and the functions the student pairs write, which are stubs in each `student` folder and finished in the `instructor` folder beside it. Each period's goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check each function.
 
 ## Day 01 - Draw the board
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Welcome and setup | `python_setup_instructor.py` | None | The lab `python_setup.py` (6 lines) |
 | P2 | Python lab 1: scripts, strings, ord and chr, f-strings | `python_strings_instructor.py` | None | The lab `python_strings.py` (13 lines) |
@@ -13,16 +13,16 @@
 
 ## Day 02 - Make and undo moves
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
-| P1 | Python lab 3: functions, type hints, tuples, assert, pytest | `python_functions_instructor.py` | None | The lab `python_functions.py` (16 lines) |
-| P2 | Python lab 4: dicts, dataclasses, aliasing, copying | `python_dicts_instructor.py` | None | The lab `python_dicts.py` (18 lines) |
+| P1 | Python lab 3: functions, type hints, tuples, assert, pytest | `python_functions_instructor.py` | `run_tests.py` | The lab `python_functions.py` (16 lines) |
+| P2 | Python lab 4: dicts, dataclasses, aliasing, copying | `python_dicts_instructor.py` | `run_tests.py` | The lab `python_dicts.py` (18 lines) |
 | P3 | game_state.py and moves.py: a game state and a move record | `game_state.py`, `moves.py`, `test_make_move.py` | `board.py` | `is_white()` in `game_state.py` (1 line); `color_of()` in `game_state.py` (5 lines); `move_to_uci()` in `moves.py` (4 lines); `move_from_uci()` in `moves.py` (6 lines) |
 | P4 | make_move.py: make and undo ordinary moves | `make_move.py` | `test_make_move.py` | `make_move()` in `make_move.py` (23 lines); `undo_move()` in `make_move.py` (9 lines) |
 
 ## Day 03 - Generate piece moves
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Python lab 5: while, break, direction tuples | `python_loops_instructor.py` | None | The lab `python_loops.py` (14 lines) |
 | P2 | Jumping pieces: knights and kings | `move_generation.py`, `test_move_generation.py` | `show_board.py` | `king_moves()` in `move_generation.py` (1 line) |
@@ -31,7 +31,7 @@
 
 ## Day 04 - Keep only legal moves
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Python lab 6: modules, imports, __main__ | `python_modules_instructor.py` | None | The lab `python_modules.py` (11 lines) |
 | P2 | Attacks | `attacks.py`, `test_legal_moves.py` | None | `piece_at_offsets()` in `attacks.py` (6 lines); `attacked_by_pawn()` in `attacks.py` (3 lines); `attacked_by_king()` in `attacks.py` (2 lines) |
@@ -40,7 +40,7 @@
 
 ## Day 05 - Add castling, en passant, and promotion
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Python lab 7: sets, in, string replacement | `python_sets_instructor.py` | None | The lab `python_sets.py` (14 lines) |
 | P2 | Castling | `test_special_moves.py` | `legal_moves.py`, `make_move.py` | `update_castling_rights()` in `make_move.py` (4 lines) |
@@ -49,7 +49,7 @@
 
 ## Day 06 - Count positions and read FEN
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Python lab 8: recursion | `python_recursion_instructor.py` | None | The lab `python_recursion.py` (11 lines) |
 | P2 | Perft | `perft.py` | None | `perft()` in `perft.py` (8 lines) |
@@ -58,7 +58,7 @@
 
 ## Day 07 - Play full games and score positions
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Ending the game | `game_end.py` | `fen.py`, `game_state.py`, `make_move.py`, `test_game.py` | `insufficient_material()` in `game_end.py` (18 lines); `game_result()` in `game_end.py` (12 lines) |
 | P2 | SAN and the console game | `console_game.py`, `notation.py`, `python_input_output_instructor.py` | `test_game.py` | `parse_san()` in `notation.py` (5 lines); the lab `python_input_output.py` (16 lines) |
@@ -67,7 +67,7 @@
 
 ## Day 08 - Search ahead with alpha-beta
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Minimax, negamax, and mates | None | `console_game.py`, `search.py`, `test_search.py`, `uci_engine.py` | `negamax()` in `search.py` (17 lines) |
 | P2 | Python lab 11 and alpha-beta | `compare_search.py`, `mate_puzzles.epd`, `python_sorting_instructor.py` | `search.py`, `test_search.py` | `alpha_beta()` in `search.py` (16 lines); the lab `python_sorting.py` (19 lines) |
@@ -76,7 +76,7 @@
 
 ## Day 09 - Add the clock and build enhanced engines
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Iterative deepening, the clock, and UCI info | None | `console_game.py`, `search.py`, `test_game.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
 | P2 | Python lab 12 and the color versions | `python_caches_instructor.py` | None | The lab `python_caches.py` (7 lines); their color version's functions, in the table below |
@@ -85,7 +85,7 @@
 
 ## Day 10 - Solve a science problem using chess AI
 
-| Period | Title | New files | Files that grow | Pairs write |
+| Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Science AI: hidden_peak.py | `hidden_peak.py`, `run_tests.py`, `test_hidden_peak.py` | None | `candidate_squares()` in `hidden_peak.py` (6 lines); `score_candidate()` in `hidden_peak.py` (4 lines); `choose_next_measurement()` in `hidden_peak.py` (9 lines) |
 | P2 | The phase hunt: score a guess, and the greedy agent | `phase_hunt.py`, `test_phase_hunt.py` | None | `score()` in `phase_hunt.py` (11 lines); `greedy_phases()` in `phase_hunt.py` (17 lines) |
@@ -94,9 +94,9 @@
 
 ## Color versions (Day 9, periods 2 and 3)
 
-Each pair writes the functions of one color version in `period2/student/engines`.
+Each student pair writes the functions of one color version in `period2/student/engines`.
 
-| Color version | Pairs write |
+| Color version | Student pairs write |
 | --- | --- |
 | 10 RED - Transposition table | `store()` in `transposition_table.py` (3 lines); `probe()` in `transposition_table.py` (11 lines); `test_transposition_table_bounds()` in `test_upgrades.py` (13 lines) |
 | 08 GREEN - Opening book | `load_book()` in `opening_book.py` (24 lines); `book_move()` in `opening_book.py` (2 lines) |
