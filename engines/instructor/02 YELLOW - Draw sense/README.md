@@ -12,7 +12,13 @@ By the end of Day 9, each student pair can:
 
 ## The idea, with an example
 
-Remus-WHITE is a rook behind, and the opponent's king can be checked forever. Inside its search, Remus-WHITE scores the position after the third repetition as a rook behind, because nothing in its search knows that the game ends there as a draw. So it avoids the checks and loses slowly. Remus-YELLOW scores any position that already appeared in the game or in the search line as 0, a draw, and so does a position after 100 half moves with no capture or pawn move (the fifty-move rule). It sees that the checks save half a point and plays them.
+Remus-WHITE is a rook behind, and the opponent's king can be checked forever.
+
+![White is a rook behind and checks forever with Qg5 and Qf6](../../../misc/docs/images/boards/yellow_perpetual.svg)
+
+*White, to move, is a rook behind. Qg5+ (the red arrow) drives the king to h8, Qf6+ drives it back to g8, and Qg5+ starts again. The red squares are the queen's two checking squares and the blue squares are the king's only two squares.*
+
+Inside its search,Remus-WHITE scores the position after the third repetition as a rook behind, because nothing in its search knows that the game ends there as a draw. So it avoids the checks and loses slowly. Remus-YELLOW scores any position that already appeared in the game or in the search line as 0, a draw, and so does a position after 100 half moves with no capture or pawn move (the fifty-move rule). It sees that the checks save half a point and plays them.
 
 ## Why it makes Remus stronger
 
