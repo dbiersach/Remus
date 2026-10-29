@@ -120,7 +120,7 @@ depth's score, node count, and principal variation, and the best move. The
 program's `parity` command picks the deepest search that stays within a node
 budget, and Remus repeats that search on every CPU core. `book` prints Niram's
 whole opening book for the same comparison. The latest results are in
-[misc/docs/engines/remus-niram parity.md](../../misc/docs/engines/remus-niram%20parity.md).
+[misc/docs/engines/remus-niram same algorithms.md](../../misc/docs/engines/remus-niram%20same%20algorithms.md).
 
 ```bash
 uv run misc/scripts/engine_parity.py                  # 25,000 nodes a search

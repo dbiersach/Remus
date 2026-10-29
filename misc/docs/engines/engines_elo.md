@@ -11,8 +11,9 @@ plus Niram, the Rust copy of Remus-GOLD. Two yardsticks measure them:
    Niram on an Elo scale that people outside the class know. It measures the size of
    a rating well, but it cannot sort versions that sit only 30 or 40 Elo apart.
 
-[`remus-niram parity.md`](remus-niram%20parity.md) shows that Niram picks exactly the same
-moves as Remus-GOLD, so the two differ only in speed.
+[`remus-niram same algorithms.md`](remus-niram%20same%20algorithms.md) shows that Niram
+runs the same algorithms as Remus-GOLD and picks the same moves at the same depth. The
+two engines differ in speed, and the speed gap makes Niram far stronger with a clock.
 
 ## The league: every version against the others
 
@@ -110,7 +111,7 @@ Each engine's score at each Stockfish level it met:
 ### What the bracket shows
 
 **Niram rates about 620 Elo above Remus-GOLD.** The two engines pick the same move in
-every position ([`remus-niram parity.md`](remus-niram%20parity.md)), and both scored
+every position ([`remus-niram same algorithms.md`](remus-niram%20same%20algorithms.md)), and both scored
 31 of 64. Niram scored its 31 points against Stockfish set about 600 Elo higher. The
 whole gap comes from speed: Niram searches about 50 times as many positions in the
 same 10 minutes, deep enough for null-move pruning, late move reductions, and the
