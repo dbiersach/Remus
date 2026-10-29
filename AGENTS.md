@@ -252,9 +252,11 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
   in `misc/docs/images/phase_hunt/`, drawn by `uv run misc/scripts/make_phase_hunt_figures.py`,
   which installs matplotlib for itself alone. The chess board diagrams in the color
-  version READMEs live in `misc/docs/images/boards/`, drawn with python-chess's
-  `chess.svg` by `uv run misc/scripts/make_board_diagrams.py`, and `board_image()` in
-  `period_guides.py` links each one into the README text. Measure `VERSION_MEASURES` again after any
+  version READMEs, the goals files, and the `misc/docs/code/` pages live in
+  `misc/docs/images/boards/`, drawn with python-chess's `chess.svg` by
+  `uv run misc/scripts/make_board_diagrams.py`. `board_image()` and
+  `goals_board_image()` in `period_guides.py` link a diagram into the README and
+  goals text; the code pages link theirs by hand. Measure `VERSION_MEASURES` again after any
   change to a color version's search or evaluation.
   Each goals file also lists the timed steps of its period (from `DAY_GUIDES`) and
   a "What you edit this period" table with the line where

@@ -37,6 +37,15 @@ Directions are pairs of numbers:
 Rooks use the four straight directions. Bishops use the four diagonals. The queen
 uses all eight. A knight on a1 has only two jumps that stay on the board.
 
+![A knight on d4 and its 8 squares](../images/boards/jump_knight_d4.svg) ![A knight on a1 and its 2 squares](../images/boards/jump_knight_a1.svg)
+
+*Green squares are jumps that stay on the board: 8 from d4, but only 2 from a1.*
+
+![A rook on d4 with a White pawn on d6 and a Black knight on f4](../images/boards/slide_rook.svg)
+
+*A slider walks each direction until something stops it. Up, the rook stops on d5,
+below its own pawn. Right, it stops on f4 and may capture the knight.*
+
 ## How it works
 
 1. `pseudo_legal_moves()` visits all 64 squares.

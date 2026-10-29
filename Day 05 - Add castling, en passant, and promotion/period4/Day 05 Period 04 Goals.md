@@ -30,6 +30,10 @@ The student pairs fill in the blanks of `demo_promotion.py`. Each `#` line in th
 
 `demo_promotion.py` sets up a puzzle: White's pawn on b7 promotes on b8 next to the Black king on a6. The student pair writes the loop that tries all four promotion pieces, counts Black's legal replies, and names the result.
 
+![White king c6, bishop b6, and pawn b7 against the Black king on a6](../../misc/docs/images/boards/promotion_puzzle.svg)
+
+*The puzzle: White's king on c6, bishop on b6, and pawn on b7 against Black's king on a6. The pawn promotes on b8 (the green arrow).*
+
 With no legal reply, `in_check()` decides between checkmate and stalemate. A queen, a rook, or a bishop takes away every square without giving check, so the game is a draw; only the knight on b8 gives check, and the king has nowhere to go. Every promotion is undone, and the snapshot at the end proves that the puzzle position comes back exactly.
 
 Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.

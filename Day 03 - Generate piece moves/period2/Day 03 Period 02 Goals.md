@@ -32,6 +32,10 @@ In the `student` folder these functions raise `NotImplementedError` until a stud
 
 Hands the king's eight one-step jumps to `jump_moves()`, which the knight uses too. Two pieces share one helper because both jump to fixed squares; only their list of jumps differs.
 
+![A knight on d4 and its 8 squares](../../misc/docs/images/boards/jump_knight_d4.svg) ![A knight on a1 and its 2 squares](../../misc/docs/images/boards/jump_knight_a1.svg) ![A king on a1 and its 3 squares](../../misc/docs/images/boards/jump_king_a1.svg)
+
+*Each green square is a jump that stays on the board. A knight on d4 has all 8. On a1 the knight keeps 2 of its 8 jumps and the king keeps 3 of its 8 steps, because the others land off the edge.*
+
 Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step

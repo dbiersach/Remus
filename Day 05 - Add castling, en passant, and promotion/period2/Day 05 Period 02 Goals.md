@@ -30,6 +30,10 @@ In the `student` folder these functions raise `NotImplementedError` until a stud
 
 Removes castling rights when a king or rook leaves its square, or when a rook is captured on its square. Rights only ever disappear, so `replace()` deletes letters from a string such as "KQkq".
 
+![The six home squares of the kings and rooks](../../misc/docs/images/boards/castling_rights.svg)
+
+*The six home squares hold the castling rights: e1 holds K and Q, h1 holds K, a1 holds Q, and for Black e8 holds k and q, h8 holds k, and a8 holds q. When the rook leaves h1 (the green arrow), White loses K, and "KQkq" becomes "Qkq".*
+
 Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step

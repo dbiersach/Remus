@@ -31,6 +31,11 @@ in `test_legal_moves.py`.
 4. Part #3: add a White knight on e2 and count only the moves that start on e2.
 5. Part #4: change the pieces and predict again.
 
+![A Black rook on e8 checks the White king on e1](../images/boards/pin_check.svg) ![A White knight on e2 blocks the check and is pinned](../images/boards/pin_knight.svg)
+
+*Left, Part #2: the rook on e8 checks the king on e1 down the e-file. Right, Part #3:
+the knight on e2 blocks the check, so it is pinned.*
+
 The student pair types 14 lines.
 
 ## Try it
