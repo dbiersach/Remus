@@ -48,6 +48,13 @@ Two strings help with names. `BOARD_FILES` is `"abcdefgh"`, one letter per colum
 `BOARD_RANKS` is `"87654321"`, one digit per row. So square `(6, 4)` is
 `BOARD_FILES[4] + BOARD_RANKS[6]`, which is `"e2"`.
 
+![The start position with Remus's row and column numbers on the edges](../images/boards/board_row_col.svg)
+
+*The letters a to h along the bottom and the ranks 1 to 8 down the left are the names
+people use. The yellow numbers along the top are Remus's columns, and the yellow
+numbers down the right are its rows. The yellow square, e2, is column 4 of row 6:
+`(6, 4)`.*
+
 ## How it works
 
 1. `new_board()` copies the starting rows into a fresh grid.

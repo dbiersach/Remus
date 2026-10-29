@@ -26,6 +26,10 @@ In the `student` folder these functions raise `NotImplementedError` until a stud
 
 Walks one direction from a square, adding a move for each empty square, and stops at the edge or at the first piece. An enemy piece can be captured, so its square is added before the walk stops; a friendly piece is not. Rooks, bishops, and queens all use this walk with different directions.
 
+![A rook on d4 with a White pawn on d6 and a Black knight on f4](../../misc/docs/images/boards/slide_rook.svg)
+
+*The rook on d4 walks four ways. Up, it stops on d5, because its own pawn stands on d6. Down and left, it walks to the edge. Right, it stops on f4 and may capture the Black knight there (the red arrow).*
+
 Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step

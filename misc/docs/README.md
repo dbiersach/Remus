@@ -9,7 +9,7 @@ The pages fall into three folders. Pick the folder by the question you have.
 | [`engines/`](engines/) | The twelve Remus engines (Remus-WHITE, the ten enhanced engines, and Remus-GOLD), how strong each one plays, and whether each Niram twin matches it | [`remus_versions.md`](engines/remus_versions.md), [`engines_elo.md`](engines/engines_elo.md), [`remus-niram parity.md`](engines/remus-niram%20parity.md) |
 
 The pictures for these pages live in [`images/`](images/): the chess board
-diagrams of the enhanced engine READMEs in `images/boards/`, the Lucas Chess
+diagrams of the enhanced engine READMEs, goals files, and code pages in `images/boards/`, the Lucas Chess
 screenshots in `images/lucas_chess/`, and the phase hunt figures in
 `images/phase_hunt/`.
 

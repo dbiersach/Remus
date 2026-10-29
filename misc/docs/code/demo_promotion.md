@@ -9,6 +9,10 @@ knight. Nearly always the queen is best, but not here: White's pawn on b7 promot
 b8, and a queen, a rook, or a bishop leaves Black's king with no move and no check.
 That is stalemate, a draw. Only the knight gives check, and it is checkmate.
 
+![White king c6, bishop b6, and pawn b7 against the Black king on a6](../images/boards/promotion_puzzle.svg)
+
+*The puzzle position, White to move. The green arrow is the promotion on b8.*
+
 ## Where this piece fits
 
 The demo runs in the Day 5, period 4 folder and uses the promotion code the teacher

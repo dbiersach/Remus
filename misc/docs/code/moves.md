@@ -31,6 +31,12 @@ Move(from_square=(6, 4), to_square=(4, 4), promotion=None)   # e2 to e4
 Move(from_square=(1, 4), to_square=(0, 4), promotion="Q")    # e7 to e8, becomes a queen
 ```
 
+![The move e2 to e4 on a board with Remus's row and column numbers](../images/boards/moves_e2e4.svg)
+
+*The arrow is the first move above. Read the yellow numbers: the pawn starts in row 6,
+column 4, and lands in row 4, column 4. The numbers go down as White moves up the
+board, because row 0 is rank 8.*
+
 A `Move` is frozen. Once made, it cannot change. Two moves with the same three facts
 are equal.
 

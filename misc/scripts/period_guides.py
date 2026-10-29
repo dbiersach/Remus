@@ -712,11 +712,18 @@ VERSION_OBJECTIVES = [
 # engines/instructor/<engine folder>/ or engines/student/<engine folder>/.
 # make_board_diagrams.py draws them.
 BOARD_IMAGES = "../../../misc/docs/images/boards"
+# The same folder seen from a period goals file in Day NN - .../periodK/
+GOALS_BOARD_IMAGES = "../../misc/docs/images/boards"
 
 
-def board_image(name: str, words: str) -> str:
+def board_image(name: str, words: str, folder: str = BOARD_IMAGES) -> str:
     """Return the Markdown that shows one board diagram, with words for a screen reader."""
-    return f"![{words}]({BOARD_IMAGES}/{name}.svg)"
+    return f"![{words}]({folder}/{name}.svg)"
+
+
+def goals_board_image(name: str, words: str) -> str:
+    """Return the Markdown that shows one board diagram in a period goals file."""
+    return board_image(name, words, GOALS_BOARD_IMAGES)
 
 
 # The long explanation in each version README, by color. Each section is Markdown:
@@ -2263,12 +2270,26 @@ CHANGE_NOTES = {
     "of moves for every move it plays.",
     ("move_generation.py", "king_moves"): "Hands the king's eight one-step jumps to "
     "`jump_moves()`, which the knight uses too. Two pieces share one helper because "
-    "both jump to fixed squares; only their list of jumps differs.",
+    "both jump to fixed squares; only their list of jumps differs.\n\n"
+    + goals_board_image("jump_knight_d4", "A knight on d4 and its 8 squares")
+    + " "
+    + goals_board_image("jump_knight_a1", "A knight on a1 and its 2 squares")
+    + " "
+    + goals_board_image("jump_king_a1", "A king on a1 and its 3 squares")
+    + "\n\n*Each green square is a jump that stays on the board. A knight on d4 has "
+    "all 8. On a1 the knight keeps 2 of its 8 jumps and the king keeps 3 of its 8 "
+    "steps, because the others land off the edge.*",
     ("move_generation.py", "slide"): "Walks one direction from a square, adding a "
     "move for each empty square, and stops at the edge or at the first piece. An "
     "enemy piece can be captured, so its square is added before the walk stops; a "
     "friendly piece is not. Rooks, bishops, and queens all use this walk with "
-    "different directions.",
+    "different directions.\n\n"
+    + goals_board_image(
+        "slide_rook", "A rook on d4 with a White pawn on d6 and a Black knight on f4"
+    )
+    + "\n\n*The rook on d4 walks four ways. Up, it stops on d5, because its own pawn "
+    "stands on d6. Down and left, it walks to the edge. Right, it stops on f4 and "
+    "may capture the Black knight there (the red arrow).*",
     ("move_generation.py", "pawn_pushes"): "Moves a pawn one square forward if it is "
     "empty, and two squares from its starting row if both are empty. White pawns "
     "move toward row 0, because row 0 is rank 8. Pawns are the only pieces that "
@@ -2278,11 +2299,20 @@ CHANGE_NOTES = {
     "of asking where every enemy piece can go, the test looks out from the square. "
     "A knight attacks e5 from exactly the squares a knight on e5 could jump to, so "
     "the knight, the king, and the pawn all share this one loop, the way "
-    "`jump_moves()` serves both the knight and the king.",
+    "`jump_moves()` serves both the knight and the king.\n\n"
+    + goals_board_image("attack_knight_e5", "Is e5 attacked by a Black knight?")
+    + "\n\n*To test e5 (yellow), the code looks at the eight knight squares around it "
+    "(gray). It finds a Black knight on f3, so e5 is attacked (the red arrow).*",
     ("attacks.py", "attacked_by_pawn"): "Looks diagonally for an enemy pawn on the "
     "row behind the square, from the attacker's point of view. A pawn captures "
     "diagonally even though it moves straight, so its two offsets differ from its "
-    "push, and they depend on its piece color.",
+    "push, and they depend on its piece color.\n\n"
+    + goals_board_image(
+        "attack_pawn", "A White pawn on e4 moves to e5 but attacks d5 and f5"
+    )
+    + "\n\n*The White pawn on e4 moves straight to e5 (green) but attacks d5 and f5 "
+    "(red). So the test for d5 looks one row down and one column to each side for a "
+    "White pawn.*",
     ("attacks.py", "attacked_by_king"): "Looks one step away in all eight directions "
     "for the enemy king, with the same `KING_STEPS` the king moves by. Kings can "
     "never stand next to each other, and this check is what stops a king from "
@@ -2296,10 +2326,22 @@ CHANGE_NOTES = {
     "the code is so short.",
     ("make_move.py", "update_castling_rights"): "Removes castling rights when a king "
     "or rook leaves its square, or when a rook is captured on its square. Rights only "
-    'ever disappear, so `replace()` deletes letters from a string such as "KQkq".',
+    'ever disappear, so `replace()` deletes letters from a string such as "KQkq".\n\n'
+    + goals_board_image(
+        "castling_rights", "The six home squares of the kings and rooks"
+    )
+    + "\n\n*The six home squares hold the castling rights: e1 holds K and Q, h1 holds K, "
+    "a1 holds Q, and for Black e8 holds k and q, h8 holds k, and a8 holds q. When the rook "
+    'leaves h1 (the green arrow), White loses K, and "KQkq" becomes "Qkq".*',
     ("make_move.py", "en_passant_victim_square"): "Returns the square of the pawn that "
     "an en passant capture removes: the capturer's starting row and the landing "
-    "column. It is the only capture where the victim is not on the landing square.",
+    "column. It is the only capture where the victim is not on the landing square.\n\n"
+    + goals_board_image(
+        "en_passant", "White captures en passant from e5 to d6, removing the pawn on d5"
+    )
+    + "\n\n*Black has just pushed d7 to d5. The White pawn on e5 captures en passant: it "
+    "lands on d6 (yellow), and the Black pawn it removes stands on d5 (red), on the "
+    "capturer's starting row, rank 5, in the landing column, d.*",
     ("perft.py", "perft"): "Counts every position reached after exactly `depth` "
     "moves, by making each legal move, counting below it, and undoing it. The counts "
     "from the start (20, 400, 8,902) are published, so a match proves the rules right "
@@ -2643,6 +2685,18 @@ LAB_NOTES = {
             "end counts only the moves that start on e2, the same check as "
             "`test_pinned_knight_has_no_moves()`."
         ),
+        (
+            goals_board_image(
+                "pin_check", "A Black rook on e8 checks the White king on e1"
+            )
+            + " "
+            + goals_board_image(
+                "pin_knight", "A White knight on e2 blocks the check and is pinned"
+            )
+            + "\n\n*Left, Part #2: the rook on e8 checks the king on e1 down the e-file. "
+            "Right, Part #3: the knight on e2 blocks the check, so it is pinned to its "
+            "king.*"
+        ),
     ],
     (5, 1): [
         (
@@ -2665,6 +2719,14 @@ LAB_NOTES = {
             "`demo_promotion.py` sets up a puzzle: White's pawn on b7 promotes on b8 next "
             "to the Black king on a6. The student pair writes the loop that tries all four "
             "promotion pieces, counts Black's legal replies, and names the result."
+        ),
+        (
+            goals_board_image(
+                "promotion_puzzle",
+                "White king c6, bishop b6, and pawn b7 against the Black king on a6",
+            )
+            + "\n\n*The puzzle: White's king on c6, bishop on b6, and pawn on b7 against "
+            "Black's king on a6. The pawn promotes on b8 (the green arrow).*"
         ),
         (
             "With no legal reply, `in_check()` decides between checkmate and stalemate. "

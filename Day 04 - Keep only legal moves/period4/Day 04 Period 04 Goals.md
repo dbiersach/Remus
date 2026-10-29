@@ -23,6 +23,10 @@ The student pairs fill in the blanks of `demo_practice_positions.py`. Each `#` l
 
 Part #2 puts a rook check on the White king, and Part #3 adds a knight on e2 that blocks the check but cannot move: it is pinned. The loop at the end counts only the moves that start on e2, the same check as `test_pinned_knight_has_no_moves()`.
 
+![A Black rook on e8 checks the White king on e1](../../misc/docs/images/boards/pin_check.svg) ![A White knight on e2 blocks the check and is pinned](../../misc/docs/images/boards/pin_knight.svg)
+
+*Left, Part #2: the rook on e8 checks the king on e1 down the e-file. Right, Part #3: the knight on e2 blocks the check, so it is pinned to its king.*
+
 Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step

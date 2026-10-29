@@ -27,6 +27,10 @@ In the `student` folder these functions raise `NotImplementedError` until a stud
 
 Returns the square of the pawn that an en passant capture removes: the capturer's starting row and the landing column. It is the only capture where the victim is not on the landing square.
 
+![White captures en passant from e5 to d6, removing the pawn on d5](../../misc/docs/images/boards/en_passant.svg)
+
+*Black has just pushed d7 to d5. The White pawn on e5 captures en passant: it lands on d6 (yellow), and the Black pawn it removes stands on d5 (red), on the capturer's starting row, rank 5, in the landing column, d.*
+
 Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
