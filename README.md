@@ -24,11 +24,12 @@ end of that period, and `student/` is the same code with the functions the stude
 left as stubs for them to fill in. Beside them sits the period's goals file, such as
 `Day 04 Period 03 Goals.md`: the objectives, the timed steps, and the exact tasks.
 Each Day folder's syllabus, such as `Day 04 Syllabus.md`, gives the day's
-objectives and the timed activities of its four periods. Everything else sits in
-`misc/`: the course and code documents in `misc/docs/`, the games every script plays in
-`misc/games/`, and the course designer's tools in `misc/scripts/`, which hold the builders
-that write the period, version, and student folders, the test runner, and the league
-and rating scripts, each listed in
+objectives and the timed activities of its four periods.
+
+Everything else sits in `misc/`: the course and code documents in `misc/docs/`,
+the games every script plays in `misc/games/`, and the course designer's tools in `misc/scripts/`,
+which hold the builders that write the period, version, and student folders, the test runner,
+and the league and rating scripts, each listed in
 [`misc/scripts/README.md`](misc/scripts/README.md). Start with
 [`misc/docs/code/remus_program_overview.md`](misc/docs/code/remus_program_overview.md); the course plan is
 in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md).
@@ -109,10 +110,10 @@ The engine uses only the Python standard library. The development group adds
 `python-chess`, which the tests use as an outside reference for move counts,
 along with `pytest` and `ruff`. Lucas Chess talks to Remus over UCI.
 
-Niram-GOLD, beside Remus-GOLD in the Day 9 `period2/instructor/engines` folder, is Remus-GOLD
+Niram, in the top `engines/Niram` folder beside the Remus versions, is Remus-GOLD
 rewritten in Rust. It searches the same trees about 50 times faster. It is a
 course designer's experiment, outside the course; see
-[its README](<Day 09 - Add the clock and build enhanced engines/period2/instructor/engines/Niram-GOLD/README.md>).
+[its README](<engines/Niram/README.md>).
 
 ## License
 
