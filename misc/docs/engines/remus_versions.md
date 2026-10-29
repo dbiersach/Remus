@@ -96,7 +96,7 @@ Code and presses the Run Python File button:
 
 | Script | When | What it plays |
 | --- | --- | --- |
-| `smoke_test.py` | Day 9, period 3 | One 2-minute game against Remus-WHITE, to show the engine plays legal moves to the end |
+| `basic_test.py` | Day 9, period 3 | One 2-minute game against Remus-WHITE, to show the engine plays legal moves to the end |
 | `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting enhanced engine, one with each piece color |
 
 In the Day 9 battles a visiting student pair brings its engine folder on a USB drive and
@@ -115,7 +115,7 @@ margin of error is. The teacher then shows the league table in
 [`engines_elo.md`](engines_elo.md), which rates every Remus version from 110 games.
 Nothing needs to run: the table is already written.
 
-The Day 9 smoke test plays one game on a short clock only to prove that the enhanced engine's
+The Day 9 basic test plays one game on a short clock only to prove that the enhanced engine's
 engine plays legal moves to the end; nobody reads its result.
 
 In the games file every player is named `Remus-` and its engine color, such as `Remus-WHITE`, so

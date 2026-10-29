@@ -577,7 +577,7 @@ OBJECTIVES = {
         (
             "Test an enhancement before trusting it.",
             (
-                "The enhanced engine passes `run_tests.py` and a one-game smoke test against "
+                "The enhanced engine passes `run_tests.py` and a one-game basic test against "
                 "Remus-WHITE with no illegal moves."
             ),
         ),
@@ -4258,7 +4258,7 @@ DAY_GUIDES = {
                 (
                     40,
                     (
-                        "Each student pair opens `smoke_test.py` in its engine folder and "
+                        "Each student pair opens `basic_test.py` in its engine folder and "
                         "presses Run in VS Code: one 2-minute game against "
                         "Remus-WHITE, which checks only that the engine plays legal "
                         "moves to the end."

@@ -10,7 +10,7 @@ uv run misc/scripts/run_all_tests.py
 ```
 
 `version_match.py` plays the Day 9 battles. Student pairs never open it: the
-`smoke_test.py` and `play_battle.py` in each engine folder run it with the Run
+`basic_test.py` and `play_battle.py` in each engine folder run it with the Run
 button and pass `--engines` with the folder that holds their engine folder.
 
 ## Build the folders
@@ -47,7 +47,7 @@ those saved games and plays none.
 
 | Script | What it does |
 | --- | --- |
-| `version_match.py` | Plays one enhanced engine against Remus-WHITE or another engine, 2 games at 10 minutes a side, and prints the Elo gap. `play_battle.py` and `smoke_test.py` in each engine folder run it with `--engines`; by hand it plays the engines in `engines/instructor`. |
+| `version_match.py` | Plays one enhanced engine against Remus-WHITE or another engine, 2 games at 10 minutes a side, and prints the Elo gap. `play_battle.py` and `basic_test.py` in each engine folder run it with `--engines`; by hand it plays the engines in `engines/instructor`. |
 | `version_league.py` | Plays a round robin of all 12 versions on a 10-minute clock and fits one Elo rating each, with Remus-WHITE pinned at 0. `--rate-only` prints the ratings from saved games. |
 | `version_elo.py` | Rates all 12 versions, and Niram with `--niram`, against Stockfish at four strengths near an even score. `--bracket` instead sets each round's Stockfish strength to the engine's rating so far, the run that `misc/docs/engines/engines_elo.md` reports. `--report-only` prints the tables from saved games. |
 

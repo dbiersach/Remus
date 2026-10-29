@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
-"""smoke_test.py
+"""basic_test.py
 
-The Day 9 smoke test for this enhanced engine. Press Run in VS Code: Remus-BLUE plays
+The Day 9 basic test for this enhanced engine. Press Run in VS Code: Remus-BROWN plays
 one 2-minute game against Remus-WHITE, which shows that the engine plays legal
 moves to the end of a game. Nobody reads the result.
 version_match.py, in the misc/scripts folder, plays the games and adds
@@ -31,7 +31,7 @@ def main():
             str(match_path),
             "--engines",
             str(engines),
-            "BLUE",
+            "BROWN",
             "--games",
             "1",
             "--minutes",

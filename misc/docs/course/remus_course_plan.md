@@ -444,8 +444,8 @@ moves" milestone.
 | GRAY | King safety: reward the pawn shield while queens are on |
 
 - **P3. Engine enhancements: test and measure.** Each student pair finishes its enhanced engine,
-  passes its tests, and plays one short smoke-test game against Remus-WHITE: it opens
-  `smoke_test.py` in its version folder and presses Run in VS Code. The 2-minute game
+  passes its tests, and plays one short basic test game against Remus-WHITE: it opens
+  `basic_test.py` in its version folder and presses Run in VS Code. The 2-minute game
   only checks that the engine plays legal moves to the end. Each student pair writes one sentence on the board:
   what its enhancement should change, and how the class will see it.
 - **P4. Engine battles.** Each student pair copies its engine folder onto its USB stick. In
@@ -461,7 +461,7 @@ moves" milestone.
   margin shrink. The visitor's folder stays on the host laptop, in place of an engine
   the host student pair never writes.
 
-**Checkpoint (4:30):** every enhanced engine passes its tests and its one-game smoke
+**Checkpoint (4:30):** every enhanced engine passes its tests and its one-game basic
 test, and has played two battles against other enhanced engines.
 
 ### Day 10: Solve a science problem using chess AI

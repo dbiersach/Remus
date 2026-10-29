@@ -50,7 +50,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:40 | Student pairs finish their engine enhancement, then open `run_tests.py` in their engine folder in `engines/student` and press Run until every test passes. The table above links each engine folder. |
-| 1:40 to 2:10 | Each student pair opens `smoke_test.py` in its engine folder and presses Run in VS Code: one 2-minute game against Remus-WHITE, which checks only that the engine plays legal moves to the end. |
+| 1:40 to 2:10 | Each student pair opens `basic_test.py` in its engine folder and presses Run in VS Code: one 2-minute game against Remus-WHITE, which checks only that the engine plays legal moves to the end. |
 | 2:10 to 2:30 | Each student pair writes one sentence on the board: what its enhancement should change, and how the class will see it. |
 
 [`Day 09 Period 03 Goals.md`](<period3/Day 09 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.

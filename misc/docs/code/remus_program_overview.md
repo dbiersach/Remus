@@ -89,7 +89,7 @@ version, and student
 folders, `period_guides.py` with the README text, the test runner, the league and
 Stockfish rating scripts, and the Niram benchmark. Students never open it.
 `version_match.py`, which plays the Day 9 battles, is there too. Student pairs never
-open it: `play_battle.py` and `smoke_test.py` in their engine folder run it.
+open it: `play_battle.py` and `basic_test.py` in their engine folder run it.
 
 ## The puzzle box and its pieces
 

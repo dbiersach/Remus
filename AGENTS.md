@@ -293,7 +293,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   top Remus folder from its own path, so it
   runs from the top folder with `uv run misc/scripts/<name>.py`. Students never open
   `misc/scripts/`. Files a student pair opens or runs in class stay beside the code they belong to:
-  `play_battle.py` and `smoke_test.py` in each engine folder for the battles
+  `play_battle.py` and `basic_test.py` in each engine folder for the battles
   (they run `misc/scripts/version_match.py`, David, 2026-10-29), and `play_match.py`, `estimate_elo.py`, and the tests inside their
   period and version folders. Put a new course designer tool in `misc/scripts/`, and list every
   script there in `misc/scripts/README.md` with what it does (David, 2026-10-28).
