@@ -1,24 +1,31 @@
-# Engine parity: Remus and Niram
+# Remus-GOLD and Niram: the same algorithms at two speeds
 
-`misc/scripts/engine_parity.py` checks that Niram thinks exactly like Remus-GOLD. For every position below, both engines report the position key, the version's evaluation, the legal moves in generation order and in search order, the book moves, and a search with no clock: each depth's score, node count, and principal variation, and the best move. Niram picks the depth, the deepest search that visits at most 500,000 positions, and Remus repeats that search. Any difference in any field counts as a mismatch.
+Niram is Remus-GOLD rewritten in Rust. The two engines run the same algorithms: the same move generator, evaluation, search, and opening book. Given the same position and the same depth, they pick the same move. They differ greatly in speed, and so in playing strength: with a clock running, Niram searches far more positions and reaches deeper. Against Stockfish, [`engines_elo.md`](engines_elo.md) rates Niram about 2354 and Remus-GOLD about 1731.
 
-Last run: 2026-10-29, Remus-GOLD and Niram, 49 positions, 49 searches, 0 mismatches, 8.6 minutes on 4 cores.
+`misc/scripts/engine_parity.py` checks that the algorithms match. It gives both engines the same positions with no clock, so time never decides how deep a search goes. For each position, both engines report the position key, the evaluation, the legal moves in generation order and in search order, the book moves, every depth's score, node count, and principal variation, and the best move. Niram picks the depth, the deepest search that visits at most 500,000 positions, and Remus-GOLD repeats that search. Any difference in any field counts as a mismatch.
 
-Run it again with `uv run misc/scripts/engine_parity.py --nodes 500000` from the repository folder.
+## Result
 
-## Versions
+49 of 49 positions match, with 0 mismatches. The searches visited 10,640,155 positions in all, up to depth 12. The whole check took 5.8 minutes on 4 cores.
 
-| Version | Positions matched | Positions searched | Deepest search | Remus time (s) |
-| --- | ---: | ---: | ---: | ---: |
-| GOLD | 49 of 49 | 10,640,155 | 12 | 1,548 |
+## Speed
+
+Both engines ran the same searches. Niram ran them one after another on one core. Remus-GOLD ran one search per core, and its time below adds up the time of every search.
+
+| Engine | Time for all searches (s) | Positions a second |
+| --- | ---: | ---: |
+| Niram | 74.4 | 143,101 |
+| Remus-GOLD | 1,081 | 9,846 |
+
+Niram ran the same searches 15 times as fast.
 
 ## Opening book
 
-Niram reads `engines/Niram/opening_book.txt`; the check compares every position and move of its book, in order, with the book Remus-GOLD loads.
+Niram reads `engines/Niram/opening_book.txt`. The check compares every position and move of that book, in order, with the book Remus-GOLD loads.
 
-| Version | Positions | Moves | Same as Niram's book | Same file |
+| Engine | Positions | Moves | Same as Niram's book | Same file |
 | --- | ---: | ---: | --- | --- |
-| GOLD | 285 | 328 | yes | yes |
+| Remus-GOLD | 285 | 328 | yes | yes |
 
 ## Positions
 
@@ -75,3 +82,7 @@ Each row gives the depth the search reached and the positions it visited. A sear
 | knight-only | Insufficient material | 12 | 238,987 |
 | checkmated | Checkmate on the board | 0 | 0 |
 | stalemated | Stalemate on the board | 0 | 0 |
+
+## Run it again
+
+The course designer runs `uv run misc/scripts/engine_parity.py --nodes 500000` from the top Remus folder. The script builds Niram with `cargo build --release` first and rewrites this page.

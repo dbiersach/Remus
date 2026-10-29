@@ -159,7 +159,7 @@ keep the openings. Rate such a league with `--book-start` as well.
 The designer's league ran on Niram, Rust copies of all 12 versions that picked the
 same moves as Remus about 50 times faster, so a 10-minute Niram game searched about
 as many positions as an 8-hour Remus game. Only Niram is kept, in
-`engines/Niram` ([`remus-niram parity.md`](remus-niram%20parity.md) shows that the two match), but
+`engines/Niram` ([`remus-niram same algorithms.md`](remus-niram%20same%20algorithms.md) shows that the two match), but
 the league's games stay in the games file. `--niram --rate-only` rates them apart
 from Remus games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays
 Niram against Stockfish ([`engines_elo.md`](engines_elo.md) gives its rating).
