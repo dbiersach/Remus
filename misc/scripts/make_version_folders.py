@@ -967,7 +967,7 @@ def readme_text(version: dict) -> str:
             "## Check it\n\nCheck it by opening `run_tests.py` in this folder and "
             "clicking Run Python File, and rate it against Stockfish the same way with "
             "`estimate_elo.py`. "
-            "[`remus_elo.md`](../../../../../misc/docs/engines/remus_elo.md) shows its "
+            "[`engines_elo.md`](../../../../../misc/docs/engines/engines_elo.md) shows its "
             "score against every other version in the teacher's league."
         )
     else:

@@ -102,7 +102,7 @@ laptop holds only its own pair's code. Two games cannot show which enhancement i
 stronger, so the script prints no Elo gap for fewer than 10 games; while round 2
 runs, each pair puts its round 1 score into `demo_results.py` and sees how wide the
 margin of error is. The teacher then shows the league table in
-[`remus_elo.md`](remus_elo.md), which rates every color from 110 games, along with
+[`engines_elo.md`](engines_elo.md), which rates every color from 110 games, along with
 Remus-GOLD's score against every color and Remus-WHITE. Nothing needs to run: the
 table is already written.
 

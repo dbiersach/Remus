@@ -29,4 +29,4 @@ In the teacher's league, where every version searched about as deep as Remus doe
 
 ## Check it
 
-Check it by opening `run_tests.py` in this folder and clicking Run Python File, and rate it against Stockfish the same way with `estimate_elo.py`. [`remus_elo.md`](../../../../../misc/docs/engines/remus_elo.md) shows its score against every other version in the teacher's league.
+Check it by opening `run_tests.py` in this folder and clicking Run Python File, and rate it against Stockfish the same way with `estimate_elo.py`. [`engines_elo.md`](../../../../../misc/docs/engines/engines_elo.md) shows its score against every other version in the teacher's league.
