@@ -1,10 +1,17 @@
-# Rating every Remus version
+# How strong each Remus engine plays
 
-Twelve versions of Remus played Stockfish 19 on David's PC on 2026-10-27: Remus-WHITE
-(the finished Day 9 Remus with no enhancements), the ten color versions, and
-Remus-GOLD (all ten enhancements). `misc/scripts/version_elo.py` ran the
-games and fit the ratings, and every game is in `misc/games/remus_games.pgn` under the
-Event "Station Elo test".
+This page rates the twelve Remus versions, Remus-WHITE (the finished Day 9 Remus with
+no enhancements), the ten color versions, and Remus-GOLD (all ten enhancements), plus
+Niram-GOLD, the Rust copy of Remus-GOLD. Two yardsticks measure them:
+
+1. **The league** plays the versions against each other. It measures the gaps between
+   versions well, because every game pits two Remus versions of nearly equal strength.
+2. **Stockfish** at a limited strength (`UCI_Elo`) puts each version on an Elo scale
+   that people outside the class know. It measures the size of a rating well, but it
+   cannot sort versions that sit only 30 or 40 Elo apart.
+
+[`engine_parity.md`](engine_parity.md) shows that Niram-GOLD picks exactly the same
+moves as Remus-GOLD, so the two differ only in speed.
 
 ## The league: every version against the others
 
@@ -39,10 +46,66 @@ Remus-GRAY both scored 46.5 points, and Remus-YELLOW ranks above because it beat
 Remus-GRAY 5.5 to 4.5. [`remus_versions.md`](remus_versions.md) explains the league
 and each enhancement.
 
-The Stockfish ratings below come from the earlier run of 2026-10-27, Remus in
-Python against Stockfish 19. A new Stockfish run is under way and will replace them.
+## The Stockfish rating plan
 
-## How the games were played
+`misc/scripts/version_elo.py` plays every Remus version against Stockfish 19 at 10
+minutes a side, from frozen copies of the version folders, and adds every game to
+`misc/games/remus_games.pgn` under the Event "Engine Elo test". The plan below has
+not been played yet, so this page has no results from it.
+
+| Setting | Value |
+| --- | --- |
+| Opponent | Stockfish 19 from Lucas Chess, 1 thread, `UCI_LimitStrength` on, 1 second of `Move Overhead` |
+| Remus levels (UCI_Elo) | 1650, 1800, 1950, 2100 |
+| Niram-GOLD levels (UCI_Elo) | 2000, 2200, 2400, 2600 |
+| Games per version and level | 12: the version takes White in 6 and Black in 6 |
+| Clock | 10 minutes a side, no increment |
+| Games in all | 12 Remus versions x 48 + Niram-GOLD x 48 = 624 |
+| Games at once | 20 on an i9-13900F (24 cores) |
+| Expected run time | about 9 hours, at about 17 minutes a game |
+
+**Why these levels.** A game teaches the most about a rating when its result is
+hardest to predict, at a 50 percent expected score. A game Remus is sure to win tells
+almost nothing: in the 2026-10-27 run below, 10 of the 12 versions scored at least 5
+of 6 against Stockfish 1320. All 360 games of that run pooled into one player give
+1841, so the four Remus levels sit 150 Elo apart on both sides of 1850. Niram-GOLD
+searches about 50 times as many positions in the same time, so its levels sit higher.
+Every Remus version plays the same four levels, so an error in how Stockfish sets one
+level shifts every version alike and leaves their order untouched.
+
+**How tight the ratings get.** One game at an even score carries a standard
+deviation of 0.5 points, and a rating's 95 percent margin shrinks with the square root
+of the games played. With 48 games near an even score, each version's margin comes to
+about +/- 100 Elo, about half the +/- 185 of the 2026-10-27 run. Draws narrow it
+further: the script measures each margin from how far every real score landed from
+its expected score, so a version that draws often earns a narrower margin. The 576
+Remus games pooled together pin the scale for the whole family to about +/- 30.
+
+**What the run can and cannot show.** Two margins of +/- 100 combine to about
++/- 140 on a difference, so the run separates two versions 140 Elo or more apart,
+such as Remus-GOLD and Remus-WHITE, which stand 339 Elo apart in the league above. It
+cannot sort the nine color versions that sit within 70 Elo of Remus-WHITE in the
+league: a gap of 35 Elo would take about 800 games per version. The league stays the
+measure of those small gaps, and the Stockfish run places the whole group on a
+familiar scale. A run that stops partway resumes from the
+saved games, and running it again with `--games 24` adds a second 48 games per
+version and brings each margin to about +/- 70.
+
+**The scale runs high at 10 minutes.** Stockfish calibrates `UCI_Elo` at 60 seconds
+plus 0.6 seconds a move. A limited Stockfish picks its move from a shallow search
+plus a random choice among its best few moves, so a longer clock barely helps it,
+while Remus searches several plies deeper at 10 minutes than at 1 minute. A 10-minute
+rating therefore measures Remus at a long clock on a scale set at a short one, and it
+reads higher than a rating from short games: an earlier `estimate_elo.py` run of
+Remus-GOLD at 1 minute plus 0.6 seconds rated it about 1520 +/- 136.
+
+## The first Stockfish run, 2026-10-27
+
+Twelve versions of Remus played Stockfish 19 on David's PC on 2026-10-27, with the
+games under the Event "Station Elo test". The new run uses its own Event, so these
+360 games stay out of its ratings.
+
+### How the games were played
 
 | Setting | Value |
 | --- | --- |
@@ -59,7 +122,7 @@ code during the run could not change a version partway through its games. Every 
 started from the normal starting position. Stockfish at a limited strength picks among
 several moves at random, so no two games repeated.
 
-## The ratings
+### The ratings
 
 A version's rating is the Elo whose expected total score against the five Stockfish
 levels equals the version's real total score, the same method `estimate_elo.py` uses.
@@ -83,7 +146,7 @@ points Remus scored out of 6 at that level (a win is 1, a draw is 1/2).
 
 All 360 games pooled into one player give **1841 +/- 53**.
 
-## Seven games Stockfish lost on time
+### Seven games Stockfish lost on time
 
 Remus never lost on time and never played an illegal move, and no engine crashed.
 Stockfish lost 7 games on time. The referee charges each side the wall-clock time
@@ -105,7 +168,7 @@ owed 2 of its 12 points to these games. `version_elo.py` gives Stockfish one sec
 of `Move Overhead` on every move, so a later run keeps time in reserve for the
 referee's waiting.
 
-## How the games ended
+### How the games ended
 
 | Stockfish level | Remus mated | Remus was mated | Draw by repetition | Stockfish lost on time |
 | ---: | ---: | ---: | ---: | ---: |
@@ -119,7 +182,7 @@ referee's waiting.
 Every decided game ended in checkmate, and every draw came by threefold repetition.
 No game reached the fifty-move rule, stalemate, or insufficient material.
 
-## Reading the numbers with care
+### Reading the numbers with care
 
 **The versions are mostly tied.** Every margin is about +/- 185 Elo, because 30 games
 cannot pin a rating more tightly. Two versions differ clearly only when their
@@ -127,11 +190,7 @@ intervals do not overlap, and only Remus-GREEN at the top and Remus-BROWN at the
 bottom come close to that. Remus-GREEN, the opening-book color version, rated highest, but
 with margins this wide its lead over Remus-GOLD and Remus-WHITE can be chance.
 
-**The ratings run high.** An earlier run of Remus-GOLD with `estimate_elo.py`, at 1 minute plus
-0.6 seconds a move, rated it about 1520 +/- 136. Stockfish calibrates `UCI_Elo` at that short
-clock. At 10 minutes Remus searches far deeper than at 1 minute, while Stockfish at a
-limited strength still makes its built-in random mistakes. The 10-minute ratings
-therefore measure Remus at a long clock on a scale set at a short clock.
+**The ratings run high,** for the reason the plan above gives.
 
 **Remus beats the 2500 setting by catching its blunders.** Full-strength Stockfish
 (depth 16) replayed two of Remus's checkmate wins over Stockfish 2500:
@@ -149,13 +208,15 @@ scored mostly by punishing a rare gross blunder from the weakened Stockfish, and
 
 ## Run it again
 
-From the top Remus folder on a computer with at least 16 physical cores:
+From the top Remus folder on a computer with at least 20 physical cores, after
+`cargo build --release` inside `Niram-GOLD`:
 
 ```
-uv run misc/scripts/version_elo.py --workers 16
+uv run misc/scripts/version_elo.py --workers 20 --niram-gold
 ```
 
-A run that stops partway picks up from the games already in `misc/games/remus_games.pgn`.
-`uv run misc/scripts/version_elo.py --report-only` prints the table from the saved games without
-playing any. Keep `--workers` at or below the number of physical cores, because
-pure-Python Remus plays weaker when it shares a core.
+A run that stops partway picks up from the games already in
+`misc/games/remus_games.pgn`. `uv run misc/scripts/version_elo.py --report-only`
+prints the tables from the saved games without playing any, and `--colors WHITE GOLD`
+plays only some versions. Keep `--workers` at or below the number of physical cores,
+because pure-Python Remus plays weaker when it shares a core.
