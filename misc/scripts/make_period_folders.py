@@ -41,6 +41,40 @@ from period_guides import CHANGE_NOTES, LAB_NOTES, LABS, OBJECTIVES, PERIOD_GUID
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/scripts/
 SAVED_OUTPUT_SUFFIXES = {".pgn", ".svg"}  # Games and board pictures that scripts save
 BUG_HUNT_PERIOD = (6, 3)  # The period whose folder holds bug_hunt/
+
+# Every instructor folder with tests gets this file, so a pair runs the tests with
+# the Run button in VS Code instead of typing a command
+RUN_TESTS = (
+    "#!/usr/bin/env -S uv run\n"
+    '"""run_tests.py\n'
+    "\n"
+    "Run every test in this folder. Open this file in VS Code and click the Run Python\n"
+    "File button (the triangle at the top right of the editor). pytest prints a dot for\n"
+    "each test that passes and an F for each test that fails, with a report below.\n"
+    '"""\n'
+    "\n"
+    "from pathlib import Path\n"
+    "\n"
+    "import pytest\n"
+    "\n"
+    "# A lab whose tests sit in the lab file itself, not in a test_ file\n"
+    'LAB_TEST_FILES = ["python_functions.py", "python_functions_instructor.py"]\n'
+    "\n"
+    "\n"
+    "def main():\n"
+    "    folder = Path(__file__).parent\n"
+    '    print(f"Testing {folder}")\n'
+    "    targets = [str(folder)]\n"
+    "    for name in LAB_TEST_FILES:\n"
+    "        if (folder / name).exists():\n"
+    "            targets.append(str(folder / name))\n"
+    "    # -q keeps the report short; no cache folder is left behind in this folder\n"
+    '    pytest.main([*targets, "-q", "-p", "no:cacheprovider"])\n'
+    "\n"
+    "\n"
+    'if __name__ == "__main__":\n'
+    "    main()\n"
+)
 BUG_HUNT_FILES = [  # The Remus files that bug_hunt/ copies, so that perft runs there
     "attacks.py",
     "board.py",
@@ -632,7 +666,7 @@ PERIOD_TITLES = {
 # A few periods need a sentence more than the title and the file list give
 PERIOD_NOTES = {
     (1, 1): "Watch the finished Remus play in Lucas Chess, form pairs, and check that "
-    "every laptop runs `uv run pytest`.",
+    "every laptop opens Remus in VS Code and runs a file with the Run button.",
     (1, 4): "Running `show_board.py` draws the board as a picture in the web browser.",
     (3, 2): "Running `show_board.py` draws an arrow for every move a generator "
     "returns.",
@@ -991,13 +1025,18 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     if any(name.startswith("test_") for name in files):
         example = "board.py"
         if example not in files:
-            scripts = [n for n in files if n.endswith(".py") and "test_" not in n]
+            scripts = [
+                n
+                for n in files
+                if n.endswith(".py") and "test_" not in n and n != "run_tests.py"
+            ]
             example = min(scripts)
         sections.append(
-            "Check the work with the tests: open a terminal in VS Code inside the "
-            "`student` folder and type `uv run pytest`. To run one file on its own, such as "
-            f"`{example}`, open it in VS Code and click the Run Python File button "
-            "(the triangle at the top right of the editor)."
+            "Check the work with the tests: open `run_tests.py` in the `student` "
+            "folder in VS Code and click the Run Python File button (the triangle at "
+            "the top right of the editor). It runs every test in the folder. To run "
+            f"one file on its own, such as `{example}`, open it and click the same "
+            "button."
         )
     return "\n\n".join(sections) + "\n"
 
@@ -1094,6 +1133,19 @@ def write_folder(folder: Path, files: dict[str, str], day_end_folder: Path) -> N
             shutil.copymode(source, file_path)
 
 
+def write_run_tests(folder: Path) -> None:
+    """Give a folder run_tests.py when it holds tests, and take it away when not."""
+    has_tests = (folder / "python_functions_instructor.py").exists()
+    for path in folder.glob("test_*.py"):
+        has_tests = True
+    run_tests = folder / "run_tests.py"
+    if has_tests:
+        run_tests.write_text(RUN_TESTS)
+        run_tests.chmod(0o755)  # Each script runs on its own
+    else:
+        run_tests.unlink(missing_ok=True)
+
+
 def tidy(folders: list[Path]) -> None:
     """Remove unused imports and format the code with ruff."""
     paths = [str(folder) for folder in folders]
@@ -1113,6 +1165,7 @@ def main():
         end_folder = period_folder(day, source)
         day_end = read_folder(end_folder)
         day_end.pop("README.md", None)
+        day_end.pop("run_tests.py", None)  # write_run_tests() adds it to each folder
         for name in lab_answer_files(day):
             day_end.pop(name, None)  # A lab's answer file belongs to its own period
         files_before = day_before
@@ -1138,6 +1191,9 @@ def main():
             goals_path(day, period).write_text(readme)
             files_before = files
         day_before = day_end
+    for day in range(1, 11):
+        for period in range(1, 5):
+            write_run_tests(period_folder(day, period))
     tidy(built)
     print(f"Built {len(built)} period folders  (expected 30)")
 

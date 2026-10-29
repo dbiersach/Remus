@@ -58,7 +58,7 @@ In the `student` folder these functions raise `NotImplementedError` until a pair
 
 Scores the set of phases it is given, keeps every set that ties for the best score, and calls itself on each set one phase larger, adding a phase with append and taking it back with pop. Phases go in library order only, so each set is scored once instead of once for every order, 176 sets instead of 821. Keeping every tied set lets the search say gold or silver when the pattern cannot tell them apart, as CrystalShift and Dara report every likely answer.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `hidden_peak.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `hidden_peak.py`, open it and click the same button.
 
 ## The period step by step
 

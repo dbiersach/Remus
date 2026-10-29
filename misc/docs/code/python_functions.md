@@ -40,11 +40,8 @@ The pair types 16 lines.
 
 Open `python_functions.py` in `Day 02 - Make and undo moves/period1/student` in VS Code,
 and click the Run Python File button (the triangle at the top right of the editor).
-Then open a terminal in VS Code inside that folder and type:
-
-```bash
-uv run pytest python_functions.py
-```
+Then open `run_tests.py` in the same folder and click the same button. It runs the
+two test functions in `python_functions.py` with pytest.
 
 You should see: True and False answers next to the expected ones, "Every assert passed", and then `2 passed` from pytest.
 

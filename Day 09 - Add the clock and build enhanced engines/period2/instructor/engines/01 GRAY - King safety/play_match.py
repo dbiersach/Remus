@@ -6,9 +6,10 @@ python-chess rejects any illegal move, so every match is also a rules test. Ever
 game is added to the class games file, misc/games/remus_games.pgn at the top of the Remus
 folder. This is a teacher tool: the engine itself never imports python-chess.
 
-Usage: uv run play_match.py random greedy 20
-
-Both players may use the same brain, such as "think think", for Remus against itself.
+Open this file in VS Code and click the Run Python File button to play the match
+that FIRST_BRAIN, SECOND_BRAIN, and GAMES name below. Change them to play another
+match. Both players may use the same brain, such as "think" for both, for Remus
+against itself.
 """
 
 import sys
@@ -28,6 +29,9 @@ for folder in Path(__file__).parents:
         break
 # Every game any script plays goes into one file
 GAMES_PATH = REPOSITORY / "misc" / "games" / "remus_games.pgn"
+FIRST_BRAIN = "random"  # White in game 1: random, greedy, or a smarter brain
+SECOND_BRAIN = "greedy"  # White in game 2
+GAMES = 20  # Games in the match, half with each color
 
 
 def start_engine(brain: str) -> chess.engine.SimpleEngine:
@@ -66,9 +70,10 @@ def save_game(board: chess.Board, white: str, black: str) -> str:
 
 
 def main():
-    first = sys.argv[1] if len(sys.argv) > 1 else "random"
-    second = sys.argv[2] if len(sys.argv) > 2 else "greedy"
-    games = int(sys.argv[3]) if len(sys.argv) > 3 else 20
+    # A command line may name other brains: play_match.py random greedy 20
+    first = sys.argv[1] if len(sys.argv) > 1 else FIRST_BRAIN
+    second = sys.argv[2] if len(sys.argv) > 2 else SECOND_BRAIN
+    games = int(sys.argv[3]) if len(sys.argv) > 3 else GAMES
     # Player 0 uses the first brain and player 1 the second, even when they match
     brains = [first, second]
     engines = [start_engine(first), start_engine(second)]

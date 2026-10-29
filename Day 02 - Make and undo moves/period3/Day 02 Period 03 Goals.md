@@ -47,14 +47,14 @@ Writes a move as text such as e2e4, adding a lowercase piece letter for a promot
 
 Reads text such as e7e8q back into a Move. The promotion letter becomes uppercase for White and lowercase for Black, so the new piece gets the right color on the board.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Slides: the game state dict in `new_game()` and the `Move` dataclass with `from_square`, `to_square`, and `promotion`. |
-| 1:15 to 2:05 | Pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, with `uv run pytest` after each. |
+| 1:15 to 2:05 | Pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, running `run_tests.py` after each. |
 | 2:05 to 2:15 | Pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
 | 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()` for the class repository. |
 
@@ -64,7 +64,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `game_state.py` | `is_white()` | 38 | 1 | `uv run pytest` |
+| `game_state.py` | `is_white()` | 38 | 1 | `run_tests.py` |
 | `game_state.py` | `color_of()` | 45 | 5 | `test_make_move.py::test_colors` |
 | `moves.py` | `move_to_uci()` | 28 | 4 | `test_make_move.py::test_uci_round_trip` |
 | `moves.py` | `move_from_uci()` | 47 | 6 | `test_make_move.py::test_uci_round_trip`, `test_make_move.py::test_move_record_holds_squares` |

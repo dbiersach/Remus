@@ -64,7 +64,7 @@ You should see: Each game's result, then the final score.
 ## Puzzle questions
 
 1. Why swap colors every game?
-2. Run `uv run play_match.py think think 4`. Why can Remus win against itself?
+2. Set `FIRST_BRAIN` and `SECOND_BRAIN` to `"think"` and `GAMES` to `4` near the top of the file, then press Run. Why can Remus win against itself?
 
 ## Slides
 

@@ -27,18 +27,18 @@ games.
 
 | Rank | Version | Folder | Wins-draws-losses | Score | Elo vs WHITE |
 | ---: | --- | --- | --- | ---: | ---: |
-| 1 | Remus-GOLD | Remus-GOLD | 79-30-1 | 85.5% | +339 +/- 91 |
-| 2 | Remus-RED | 10 RED | 27-71-12 | 56.8% | +101 +/- 67 |
-| 3 | Remus-BLUE | 09 BLUE | 20-74-16 | 51.8% | +67 +/- 67 |
-| 4 | Remus-GREEN | 08 GREEN | 22-67-21 | 50.5% | +58 +/- 66 |
-| 5 | Remus-PURPLE | 07 PURPLE | 16-76-18 | 49.1% | +49 +/- 66 |
-| 6 | Remus-BROWN | 06 BROWN | 6-89-15 | 45.9% | +28 +/- 66 |
-| 7 | Remus-ORANGE | 05 ORANGE | 8-84-18 | 45.5% | +25 +/- 67 |
-| 8 | Remus-PINK | 04 PINK | 10-79-21 | 45.0% | +22 +/- 67 |
-| 9 | Remus-CYAN | 03 CYAN | 12-74-24 | 44.5% | +19 +/- 67 |
-| 10 | Remus-YELLOW | 02 YELLOW | 14-65-31 | 42.3% | +4 +/- 67 |
-| 11 | Remus-GRAY | 01 GRAY | 10-73-27 | 42.3% | +4 +/- 67 |
-| 12 | Remus-WHITE | Day 9 period 1 | 7-76-27 | 40.9% | 0 (pinned) |
+| 1 | Remus-GOLD | [Remus-GOLD](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/Remus-GOLD) | 79-30-1 | 85.5% | +339 +/- 91 |
+| 2 | Remus-RED | [10 RED](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/10%20RED%20-%20Transposition%20table) | 27-71-12 | 56.8% | +101 +/- 67 |
+| 3 | Remus-BLUE | [09 BLUE](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/09%20BLUE%20-%20Killer%20moves) | 20-74-16 | 51.8% | +67 +/- 67 |
+| 4 | Remus-GREEN | [08 GREEN](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/08%20GREEN%20-%20Opening%20book) | 22-67-21 | 50.5% | +58 +/- 66 |
+| 5 | Remus-PURPLE | [07 PURPLE](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/07%20PURPLE%20-%20Pawn%20structure) | 16-76-18 | 49.1% | +49 +/- 66 |
+| 6 | Remus-BROWN | [06 BROWN](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/06%20BROWN%20-%20Late%20move%20reductions) | 6-89-15 | 45.9% | +28 +/- 66 |
+| 7 | Remus-ORANGE | [05 ORANGE](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/05%20ORANGE%20-%20Null-move%20pruning) | 8-84-18 | 45.5% | +25 +/- 67 |
+| 8 | Remus-PINK | [04 PINK](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/04%20PINK%20-%20Principal%20variation%20search) | 10-79-21 | 45.0% | +22 +/- 67 |
+| 9 | Remus-CYAN | [03 CYAN](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/03%20CYAN%20-%20Mating%20bonus) | 12-74-24 | 44.5% | +19 +/- 67 |
+| 10 | Remus-YELLOW | [02 YELLOW](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/02%20YELLOW%20-%20Draw%20sense) | 14-65-31 | 42.3% | +4 +/- 67 |
+| 11 | Remus-GRAY | [01 GRAY](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period2/instructor/engines/01%20GRAY%20-%20King%20safety) | 10-73-27 | 42.3% | +4 +/- 67 |
+| 12 | Remus-WHITE | [Day 9 period1](../../../Day%2009%20-%20Add%20the%20clock%20and%20build%20enhanced%20engines/period1/instructor) | 7-76-27 | 40.9% | 0 (pinned) |
 
 Each version played 110 games. Remus-GOLD and Remus-RED are the only versions whose
 range stays above 0; every other color version's range includes 0. Remus-YELLOW and

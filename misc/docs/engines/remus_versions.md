@@ -101,13 +101,10 @@ host runs `git restore` on the visitor's folder, which puts the stubs back, so t
 laptop holds only its own pair's code. Two games cannot show which enhancement is
 stronger, so the script prints no Elo gap for fewer than 10 games; while round 2
 runs, each pair puts its round 1 score into `demo_results.py` and sees how wide the
-margin of error is. The teacher then shows the league table below, which rates every
-color from 110 games, and Remus-GOLD's score against every color and Remus-WHITE,
-run from the top Remus folder:
-
-```bash
-uv run misc/scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD
-```
+margin of error is. The teacher then shows the league table in
+[`engines_elo.md`](engines_elo.md), which rates every color from 110 games, along with
+Remus-GOLD's score against every color and Remus-WHITE. Nothing needs to run: the
+table is already written.
 
 The Day 9 smoke test plays one game on a short clock only to prove that the color version's
 engine plays legal moves to the end; nobody reads its result.

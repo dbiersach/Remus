@@ -964,12 +964,11 @@ def readme_text(version: dict) -> str:
     ]
     if color == "GOLD":
         sections.append(
-            "## Check it\n\nCheck it from inside this folder with `uv run pytest`, "
-            "and rate it against Stockfish by opening `estimate_elo.py` and clicking "
-            "Run Python File. From the "
-            "top Remus folder, "
-            '`uv run misc/scripts/version_league.py --niram --rate-only --event "Niram league 1" --book-start --player GOLD` '
-            "shows its score against every other version in the teacher's league."
+            "## Check it\n\nCheck it by opening `run_tests.py` in this folder and "
+            "clicking Run Python File, and rate it against Stockfish the same way with "
+            "`estimate_elo.py`. "
+            "[`engines_elo.md`](../../../../../misc/docs/engines/engines_elo.md) shows its "
+            "score against every other version in the teacher's league."
         )
     else:
         written = ", ".join(
@@ -988,8 +987,8 @@ def readme_text(version: dict) -> str:
             ),
             f"## The changes and why\n\n{changes}",
             (
-                "## Check it\n\nCheck the work from inside this folder with "
-                "`uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: "
+                "## Check it\n\nCheck the work by opening `run_tests.py` in this "
+                "folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: "
                 f"Remus-{color} plays one 2-minute game against Remus-WHITE, which "
                 "shows that the engine plays legal moves to the end of a game. In the "
                 "Day 9 battles, copy the visiting pair's color folder into the `engines` "

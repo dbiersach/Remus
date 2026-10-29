@@ -41,7 +41,7 @@ Writes the board as the first field of FEN: one rank at a time, with a digit for
 
 Reads that field back into an 8x8 board, turning each digit into that many empty squares, and refuses a rank that does not describe exactly 8 squares. From now on every test position starts as FEN.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 
@@ -58,8 +58,8 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `fen.py` | `fen_placement()` | 21 | 18 | `uv run pytest` |
-| `fen.py` | `board_from_placement()` | 41 | 14 | `uv run pytest` |
+| `fen.py` | `fen_placement()` | 21 | 18 | `run_tests.py` |
+| `fen.py` | `board_from_placement()` | 41 | 14 | `run_tests.py` |
 
 Lines to type in all: 32. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 

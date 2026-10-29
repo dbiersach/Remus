@@ -27,7 +27,7 @@ In the `student` folder these functions raise `NotImplementedError` until a pair
 
 Returns the square of the pawn that an en passant capture removes: the capturer's starting row and the landing column. It is the only capture where the victim is not on the landing square.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 
@@ -45,6 +45,6 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `make_move.py` | `en_passant_victim_square()` | 48 | 1 | `uv run pytest` |
+| `make_move.py` | `en_passant_victim_square()` | 48 | 1 | `run_tests.py` |
 
 Lines to type in all: 1. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

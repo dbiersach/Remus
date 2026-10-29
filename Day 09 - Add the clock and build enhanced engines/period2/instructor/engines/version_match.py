@@ -12,7 +12,8 @@ Remus picks the same move every time it sees the same position, so two games fro
 the starting position would be the same game twice. Each pair of games therefore
 starts from one of the OPENINGS, three moves deep, and each player takes White once.
 
-Usage:
+Pairs never type a command: smoke_test.py and play_battle.py in each color folder
+run this file with the Run button. The course designer may also run it by hand:
     uv run version_match.py RED            Remus-RED against Remus-WHITE, 2 games
     uv run version_match.py RED BLUE       Remus-RED against Remus-BLUE
     uv run version_match.py RED --games 1 --minutes 2

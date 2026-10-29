@@ -52,7 +52,7 @@ By 4:30, each pair can:
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Slides: the game state dict in `new_game()` and the `Move` dataclass with `from_square`, `to_square`, and `promotion`. |
-| 1:15 to 2:05 | Pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, with `uv run pytest` after each. |
+| 1:15 to 2:05 | Pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, running `run_tests.py` after each. |
 | 2:05 to 2:15 | Pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
 | 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()` for the class repository. |
 

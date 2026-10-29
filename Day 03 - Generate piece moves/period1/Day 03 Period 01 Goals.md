@@ -23,7 +23,7 @@ Part #2 writes the direction up and to the right as the tuple `(-1, 1)`. The row
 
 Part #3 walks from d4 one square at a time with `while True` and leaves the loop with `break` at the edge of the board or at the first piece. The walk reaches e5, f6, and g7, where a Black pawn stops it. `slide()` on Day 3, period 3 is this same loop, and it returns moves instead of square names.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 

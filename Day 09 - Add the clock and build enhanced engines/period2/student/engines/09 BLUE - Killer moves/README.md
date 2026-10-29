@@ -7,7 +7,7 @@ Try quiet moves that caused a cutoff at the same depth right after the captures.
 By the end of Day 9, each pair can:
 
 - Explain the idea of the color version's enhancement in two sentences. **Measured by:** The pair explains the idea to another pair, who can restate it.
-- Add the enhancement without breaking the rules. **Measured by:** `uv run pytest` passes in the version folder.
+- Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the pair presses Run in VS Code, and the pair says why two games cannot show which enhancement is stronger.
 
 ## The idea, with an example
@@ -59,7 +59,7 @@ Feeds three cutoff moves to `remember_killer()` and checks that only the two new
 
 ## Check it
 
-Check the work from inside this folder with `uv run pytest`. Then open `smoke_test.py` in VS Code and press Run: Remus-BLUE plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, copy the visiting pair's color folder into the `engines` folder, open `play_battle.py`, press Run, and type the visitor's color: Remus-BLUE plays it twice at 10 minutes a side, once with each color, and both games go into misc/games/remus_games.pgn. Each script runs `version_match.py` from the `engines` folder above this one.
+Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: Remus-BLUE plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, copy the visiting pair's color folder into the `engines` folder, open `play_battle.py`, press Run, and type the visitor's color: Remus-BLUE plays it twice at 10 minutes a side, once with each color, and both games go into misc/games/remus_games.pgn. Each script runs `version_match.py` from the `engines` folder above this one.
 
 ## What you edit this period
 
@@ -69,6 +69,6 @@ Every other function is finished. Change only these, and only below each docstri
 | --- | --- | --- | --- | --- |
 | `search.py` | `remember_killer()` | 397 | 6 | `test_upgrades.py::test_killers_keep_two_quiet_moves` |
 | `move_ordering.py` | `order_moves()` | 52 | 16 | `test_search.py::test_capture_moves_and_mvv_lva` |
-| `test_upgrades.py` | `test_killers_keep_two_quiet_moves()` | 21 | 5 | `uv run pytest` |
+| `test_upgrades.py` | `test_killers_keep_two_quiet_moves()` | 21 | 5 | `run_tests.py` |
 
 Lines to type in all: 27. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

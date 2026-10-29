@@ -1,6 +1,6 @@
 # Day 1, Period 1: Welcome and setup
 
-Watch the finished Remus play in Lucas Chess, form pairs, and check that every laptop runs `uv run pytest`.
+Watch the finished Remus play in Lucas Chess, form pairs, and check that every laptop opens Remus in VS Code and runs a file with the Run button.
 
 ## Learning objectives
 
@@ -32,7 +32,7 @@ Part #3: you store White's back rank as one string and print the letter at index
 | 8:45 to 8:55 | The story of the name: Sargon, the 1978 chess program, and Rimush, the first son of Sargon of Akkad. Remus is a son of Sargon. |
 | 8:55 to 9:10 | Form the ten pairs. The driver types and the navigator reads and checks; the two swap roles every period. Each pair picks a team name for `CONTRIBUTORS.md`. |
 | 9:10 to 9:25 | Notation on the demonstration board: square names, SAN for people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs (`g1f3`). |
-| 9:25 to 9:50 | Pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop passes `uv run pytest` and opens Lucas Chess. |
+| 9:25 to 9:50 | Pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop runs a file with the Run button and opens Lucas Chess. |
 | 9:50 to 10:00 | Exit ticket: each student lists three of the five parts of a chess engine (board, moves, rules, search, evaluation) and one job of each. |
 
 ## What you edit in the lab
