@@ -341,7 +341,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
   with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions, and
   Niram with `--niram`, against Stockfish at four UCI_Elo levels near an
-  even score, from frozen copies of the versions, and prints the tables that
+  even score, from frozen copies of the versions. With `--bracket` it sets each
+  round's Stockfish level to the engine's rating so far; the bracket ratings of
+  Remus-WHITE, Remus-GOLD, and Niram are the ones
   `misc/docs/engines/engines_elo.md` reports beside the league table.
 - `engines/Niram` holds Niram, Remus-GOLD rewritten in Rust, named for
   Naram-Sin, Sargon's grandson: one Cargo package whose `src/` folder
