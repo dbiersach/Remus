@@ -693,8 +693,10 @@ PERIOD_NOTES = {
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
     (9, 2): "Each student pair builds one color version in `engines/student` at the "
     "top of the Remus folder, such as `engines/student/10 RED - Transposition table`. "
-    "Each engine folder is a complete copy of Remus-WHITE, the `period1` engine, plus "
-    "one enhancement.",
+    "That engine folder already holds the whole Remus engine from period 1, so the "
+    "student pair adds only its one enhancement there. Leave `00 WHITE - No "
+    "enhancements` as it is: it is plain Remus, kept so the class can measure "
+    "each enhancement against it.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
     (10, 4): "Each student pair reports its science results: the hidden-peak benchmark "
@@ -1019,10 +1021,13 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         )
     if not files and day in SOURCE_PERIOD:
         sections.append(
-            "This folder holds no engine code. Each student pair works in its own "
-            "engine folder in `engines/student`, a complete copy of "
-            "Remus-WHITE plus one enhancement. Remus-WHITE itself is in the "
-            "`period1` folder. The `README.md` in each engine folder explains its "
+            "This folder holds no engine code. Your student pair works in one "
+            "folder only: your own engine folder in `engines/student`, such as "
+            "`10 RED - Transposition table`. That folder already holds the whole "
+            "Remus engine you finished in period 1, so you add only your one "
+            "enhancement there. Do not change `00 WHITE - No enhancements`: it is "
+            "plain Remus with no enhancement, and it stays as it is so the class can "
+            "measure every enhancement against it. The `README.md` in each engine folder explains its "
             "enhancement, and its section \"The code you type\" shows every line "
             "the student pair types, with line numbers, the lines around it, and how "
             "the code works."

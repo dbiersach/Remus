@@ -4087,8 +4087,8 @@ DAY_GUIDES = {
                 (
                     20,
                     (
-                        "Slides: the ten color versions. Each is Remus-WHITE plus one "
-                        "enhancement, such as RED (transposition table) or BLUE "
+                        "Slides: the ten color versions. Each one is the period 1 "
+                        "Remus with one enhancement added, such as RED (transposition table) or BLUE "
                         "(killer moves). Colors name the color versions so that no color version "
                         "sounds better than another."
                     ),

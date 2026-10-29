@@ -427,7 +427,7 @@ moves" milestone.
 - **P2. Python lab 12 and the color versions.** The lab, `python_caches.py`,
   covers dicts as caches and tuples as keys (7 typed lines, so an enhancement of 30 lines
   stays within the limit). Then each of the 10 student pairs takes one color version from
-  `engines/student` at the top of the Remus folder: Remus-WHITE plus one enhancement, with the student pair's function stubbed (at
+  `engines/student` at the top of the Remus folder: the period 1 engine with one enhancement added, with the student pair's function stubbed (at
   most 30 typed lines). Colors replace numbers so no color version sounds better than
   another. The color versions are described in [remus_versions.md](../engines/remus_versions.md).
 

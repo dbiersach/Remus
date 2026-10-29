@@ -1098,8 +1098,10 @@ def white_readme() -> str:
         "Remus-WHITE is the finished Day 9 Remus: alpha-beta with quiescence, move "
         "ordering, iterative deepening, and a clock, with none of the ten "
         "enhancements. This folder is an exact copy of the Day 9 `period1` "
-        "instructor folder. Every color version beside it is Remus-WHITE plus one "
-        "enhancement, and each one measures its strength against Remus-WHITE.\n\n"
+        "instructor folder. Every color version beside it is this same engine with "
+        "one enhancement added, and each one measures its strength against "
+        "Remus-WHITE. No student pair edits this folder: it stays plain Remus so "
+        "there is always something to compare against.\n\n"
         "## Check it\n\nOpen `run_tests.py` in this folder and press Run.\n"
     )
 

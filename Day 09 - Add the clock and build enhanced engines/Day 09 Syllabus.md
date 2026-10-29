@@ -40,7 +40,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:50 | Student pairs work through `python_caches.py`: a dict remembers answers, `math.dist()`, and `random.seed()`. |
-| 10:50 to 11:00 | Slides: the ten color versions. Each is Remus-WHITE plus one enhancement, such as RED (transposition table) or BLUE (killer moves). Colors name the color versions so that no color version sounds better than another. |
+| 10:50 to 11:00 | Slides: the ten color versions. Each one is the period 1 Remus with one enhancement added, such as RED (transposition table) or BLUE (killer moves). Colors name the color versions so that no color version sounds better than another. |
 | 11:00 to 12:00 | Each student pair opens its color version in `engines/student`, reads the version README, and writes the color version's stubbed code. |
 
 [`Day 09 Period 02 Goals.md`](<period2/Day 09 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.

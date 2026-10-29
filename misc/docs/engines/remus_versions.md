@@ -26,10 +26,11 @@ holds three folders:
 `00 WHITE - No enhancements` is Remus-WHITE, an exact copy of the Day 9 `period1`
 folder: the Day 9 Remus at the end of period 1, when its engine is finished and before
 the student pairs start their color versions. Each engine folder from `01 GRAY` to
-`10 RED`, such as `10 RED - Transposition table`, is a complete copy of Remus-WHITE plus
-one enhancement. From period 2 to the end of the day, each student pair works only in
-its engine folder in `engines/student`, so periods 2, 3, and 4 of Day 9 hold no engine
-code of their own. The number in front of each color version ranks it by its rating
+`10 RED`, such as `10 RED - Transposition table`, starts as the same engine with one
+enhancement added. From period 2 to the end of the day, each student pair works only in
+its own engine folder in `engines/student`, so periods 2, 3, and 4 of Day 9 hold no
+engine code of their own. No student pair edits `00 WHITE` after period 1: it stays
+plain Remus so every enhancement has something to be measured against. The number in front of each color version ranks it by its rating
 over Remus-WHITE in the designer's 10-minute league (below), from 01 GRAY to 10 RED.
 
 `11 GOLD - All enhancements` is Remus-GOLD, the finished Remus of Day 10 with all ten
