@@ -12,7 +12,13 @@ By the end of Day 9, each student pair can:
 
 ## The idea, with an example
 
-1. Nf3 Nf6 2. d4 and 1. d4 Nf6 2. Nf3 reach the same position by two different move orders. Chess players call that a transposition. A search meets transpositions all the time: Remus playing Nf3 then d4 against ...Nf6 and ...e6 reaches one position four ways. Remus-WHITE searches that position four times. Remus-RED searches it once, writes the result in a dict (the transposition table), and looks it up the other three times.
+1. Nf3 Nf6 2. d4 and 1. d4 Nf6 2. Nf3 reach the same position by two different move orders. Chess players call that a transposition.
+
+![The position after 1. Nf3 Nf6 2. d4, Black to move](../../../misc/docs/images/boards/red_transposition.svg)
+
+*The green arrows are White's two moves, Nf3 and d4, and the blue arrow is Black's Nf6. Play them in either order and the board ends up the same.*
+
+A search meets transpositions all the time: Remus playing Nf3 then d4 against ...Nf6 and ...e6 reaches one position four ways. Remus-WHITE searches that position four times. Remus-RED searches it once, writes the result in a dict (the transposition table), and looks it up the other three times.
 
 Each entry, keyed by `position_key`, holds the depth searched, the score, the move that was best, and a bound that says how much the score can be trusted. Alpha-beta often stops early, so a score is not always exact:
 

@@ -562,7 +562,7 @@ Outside the Day folders:
 | Path | Holds |
 | --- | --- |
 | `misc/scripts/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
-| `misc/scripts/` | The course designer's tools, which no student or teacher needs in class: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`, `version_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
+| `misc/scripts/` | The course designer's tools, which no student or teacher needs in class: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`, `version_elo.py`, `remus_benchmark.py`, `engine_parity.py`, `make_phase_hunt_figures.py`, and `make_board_diagrams.py` |
 | `misc/scripts/run_all_tests.py` | Runs pytest on each period's `instructor/` folder in turn |
 | `misc/scripts/make_period_folders.py` | Builds the `instructor/` folders of `period1` to `period3` of each Day from `period4` |
 | `misc/scripts/make_version_folders.py` | Copies Remus-WHITE and builds the ten enhanced engine folders in `engines/instructor` from the Day 9 `period1` code and Remus-GOLD |

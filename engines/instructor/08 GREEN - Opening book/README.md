@@ -12,7 +12,13 @@ By the end of Day 9, each student pair can:
 
 ## The idea, with an example
 
-`opening_book.txt` holds 43 well-known openings, five moves for each side, written in SAN: `e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7` is the Ruy Lopez. `load_book()` plays every line on a board from the starting position and records, for each position it passes, which moves the book plays there. After 1. e4 the book holds seven replies: ...e5, ...c5, ...e6, ...c6, ...d5, ...d6, and ...Nf6. `book_move()` picks one of them at random, so Remus-GREEN does not play the same opening every game. Once the game leaves the book, Remus searches as usual.
+`opening_book.txt` holds 43 well-known openings, five moves for each side, written in SAN: `e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7` is the Ruy Lopez. `load_book()` plays every line on a board from the starting position and records, for each position it passes, which moves the book plays there. After 1. e4 the book holds seven replies: ...e5, ...c5, ...e6, ...c6, ...d5, ...d6, and ...Nf6.
+
+![The position after 1. e4, with the book's seven replies marked](../../../misc/docs/images/boards/green_book_replies.svg)
+
+*After 1. e4 (the green arrow), the yellow squares show where Black's seven book replies go: e5, c5, e6, c6, d5, d6, and the knight to f6.*
+
+`book_move()` picks one of them at random, so Remus-GREEN does not play the same opening every game. Once the game leaves the book, Remus searches as usual.
 
 ## Why it makes Remus stronger
 

@@ -12,7 +12,13 @@ By the end of Day 9, each student pair can:
 
 ## The idea, with an example
 
-White pawns on c2, c3, and e4, Black pawns on d6 and e5: White's c-pawns are doubled (two on one file), and the e4 pawn is isolated (no White pawn on the d- or f-file beside it). Remus-PURPLE scores each doubled pawn -8 and each isolated pawn -20. A passed pawn, with no enemy pawn in front of it on its own file or a neighboring file, earns a bonus that grows as it advances: 0, 10, 20, 40, 60, and then 70 one step from promotion. Remus-WHITE counts every pawn as 100 plus its square's placement value and sees none of this.
+White pawns on c2, c3, and e4, Black pawns on d6 and e5: White's c-pawns are doubled (two on one file), and the e4 pawn is isolated (no White pawn on the d- or f-file beside it).
+
+![White pawns on c2, c3, and e4 against Black pawns on d6 and e5](../../../misc/docs/images/boards/purple_pawns.svg)
+
+*The yellow squares are White's doubled pawns on the c-file. The red square is the isolated pawn on e4: no White pawn stands anywhere on the d-file or the f-file to protect it.*
+
+Remus-PURPLE scores each doubled pawn -8 and each isolated pawn -20. A passed pawn, with no enemy pawn in front of it on its own file or a neighboring file, earns a bonus that grows as it advances: 0, 10, 20, 40, 60, and then 70 one step from promotion. Remus-WHITE counts every pawn as 100 plus its square's placement value and sees none of this.
 
 ## Why it makes Remus stronger
 

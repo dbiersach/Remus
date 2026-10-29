@@ -251,7 +251,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `DAY_GUIDES` for the Day syllabi, which `make_student_folders.py` writes); the
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
   in `misc/docs/images/phase_hunt/`, drawn by `uv run misc/scripts/make_phase_hunt_figures.py`,
-  which installs matplotlib for itself alone. Measure `VERSION_MEASURES` again after any
+  which installs matplotlib for itself alone. The chess board diagrams in the enhanced
+  engine READMEs live in `misc/docs/images/boards/`, drawn with python-chess's
+  `chess.svg` by `uv run misc/scripts/make_board_diagrams.py`, and `board_image()` in
+  `period_guides.py` links each one into the README text. Measure `VERSION_MEASURES` again after any
   change to an enhanced engine's search or evaluation.
   Each goals file also lists the timed steps of its period (from `DAY_GUIDES`) and
   a "What you edit this period" table with the line where
@@ -281,8 +284,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   with the Run button.
 - Every course designer tool that is not part of an engine lives in `misc/scripts/`
   (David, 2026-10-28): the builders `make_period_folders.py`,
-  `make_version_folders.py`, `make_student_folders.py`, and
-  `make_phase_hunt_figures.py`, the README text in `period_guides.py`,
+  `make_version_folders.py`, `make_student_folders.py`,
+  `make_phase_hunt_figures.py`, and `make_board_diagrams.py`, the README text in `period_guides.py`,
   `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`,
   `version_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
   top Remus folder from its own path, so it
@@ -396,7 +399,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - `misc/docs/engines/`: the Remus versions and Niram: `remus_versions.md`,
     the ten enhanced engines and Remus-GOLD; `engines_elo.md`, the league and Stockfish
     ratings; and `remus-niram parity.md`, which `engine_parity.py` writes.
-  Pictures live in `misc/docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
+  Pictures live in `misc/docs/images/` (`boards/`, `lucas_chess/`, and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `misc/docs/`.
 - Remus-WHITE, the ten enhanced engines (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
   are the **Remus versions** (David, 2026-10-28). Call them Remus versions or enhanced

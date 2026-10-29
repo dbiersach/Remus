@@ -72,6 +72,8 @@ NIRAM_FOLDER = ENGINES / "Niram"
 NIRAM_PROGRAM = NIRAM_FOLDER / "target" / "release" / "niram"
 if sys.platform == "win32":
     NIRAM_PROGRAM = NIRAM_PROGRAM.with_suffix(".exe")
+# Where the course designer keeps the newest Stockfish from stockfishchess.org
+STOCKFISH_HOME = Path.home() / "stockfish"
 LUCAS_CHESS_ENGINES = (
     Path.home() / "AppData" / "Local" / "Programs" / "LucasChessR" / "bin" / "OS"
 )  # Where Lucas Chess keeps the Stockfish it installs on Windows
@@ -111,6 +113,9 @@ def freeze(players: list[Player]) -> list[Player]:
 
 def find_stockfish() -> str:
     """Return the path to a Stockfish program, or stop with a message."""
+    if STOCKFISH_HOME.exists():
+        for candidate in sorted(STOCKFISH_HOME.rglob("stockfish*.exe")):
+            return str(candidate)
     on_path = shutil.which("stockfish") or shutil.which("/usr/games/stockfish")
     if on_path:
         return on_path
@@ -436,6 +441,9 @@ def main():
     if not options.report_only:
         stockfish_path = options.stockfish or find_stockfish()
         print(f"Stockfish: {stockfish_path}")
+        stockfish = chess.engine.SimpleEngine.popen_uci(stockfish_path)
+        print(f"Stockfish names itself: {stockfish.id.get('name', 'unknown')}")
+        stockfish.quit()
         play_all(players, options.games, stockfish_path, options.workers)
     for engine in ["Remus", "Niram"]:
         results = read_results(engine)

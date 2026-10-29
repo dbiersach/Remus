@@ -55,7 +55,7 @@ not been played yet, so this page has no results from it.
 
 | Setting | Value |
 | --- | --- |
-| Opponent | Stockfish 19 from Lucas Chess, 1 thread, `UCI_LimitStrength` on, 1 second of `Move Overhead` |
+| Opponent | Stockfish 19 from [stockfishchess.org](https://stockfishchess.org/), the universal Windows build in `~/stockfish` (the same build Lucas Chess installs), 1 thread, `UCI_LimitStrength` on, 1 second of `Move Overhead` |
 | Remus levels (UCI_Elo) | 1650, 1800, 1950, 2100 |
 | Niram levels (UCI_Elo) | 2000, 2200, 2400, 2600 |
 | Games per version and level | 12: the version takes White in 6 and Black in 6 |

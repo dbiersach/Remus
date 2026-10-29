@@ -8,8 +8,9 @@ The pages fall into three folders. Pick the folder by the question you have.
 | [`code/`](code/) | How the program fits together, and what each `.py` file does | [`remus_program_overview.md`](code/remus_program_overview.md), [`file_versions.md`](code/file_versions.md), and one page per file, such as [`board.md`](code/board.md) for `board.py` |
 | [`engines/`](engines/) | The twelve Remus engines (Remus-WHITE, the ten enhanced engines, and Remus-GOLD), how strong each one plays, and whether each Niram twin matches it | [`remus_versions.md`](engines/remus_versions.md), [`engines_elo.md`](engines/engines_elo.md), [`remus-niram parity.md`](engines/remus-niram%20parity.md) |
 
-The pictures for these pages live in [`images/`](images/): the Lucas Chess
-screenshots in `images/lucas_chess/` and the phase hunt figures in
+The pictures for these pages live in [`images/`](images/): the chess board
+diagrams of the enhanced engine READMEs in `images/boards/`, the Lucas Chess
+screenshots in `images/lucas_chess/`, and the phase hunt figures in
 `images/phase_hunt/`.
 
 Two pages come from scripts, so edit the script, not the page.

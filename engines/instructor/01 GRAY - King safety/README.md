@@ -12,7 +12,13 @@ By the end of Day 9, each student pair can:
 
 ## The idea, with an example
 
-White has castled kingside: king on g1, pawns on f2, g2, and h2. Each of the king's three files has a White pawn one or two squares in front, so Remus-GRAY adds 3 x 15 = 45 points. Push the h-pawn to h4, and the h-file no longer shelters the king: 30 points. The bonus counts only while the enemy queen is on the board, because the queen is the piece that makes an open king dangerous. Once the queens come off, the king should walk toward the center, and the term is 0.
+White has castled kingside: king on g1, pawns on f2, g2, and h2. Each of the king's three files has a White pawn one or two squares in front, so Remus-GRAY adds 3 x 15 = 45 points. Push the h-pawn to h4, and the h-file no longer shelters the king: 30 points.
+
+![White king on g1 behind pawns on f2, g2, and h2](../../../misc/docs/images/boards/gray_shield_full.svg) ![The same position after the h-pawn moves to h4](../../../misc/docs/images/boards/gray_shield_broken.svg)
+
+*Left: the three green pawns on f2, g2, and h2 shield the king on g1, 45 points. Right: after h2 to h4, no White pawn stands on h2 or h3 (the red squares), so only f2 and g2 count, 30 points. Black's queen is still on d8, so the bonus counts in both.*
+
+The bonus counts only while the enemy queen is on the board, because the queen is the piece that makes an open king dangerous. Once the queens come off, the king should walk toward the center, and the term is 0.
 
 ## Why it makes Remus stronger
 
