@@ -239,9 +239,9 @@ The search makes and undoes moves on the one live state. A `try/finally` around 
 `engines/Niram`, beside `engines/instructor` and `engines/student`, holds
 Remus-GOLD rewritten in Rust with the same rules, evaluation, and search. On the same
 positions and depth it visits exactly as many positions as Remus-GOLD and picks the
-same moves, about 50 times faster: some 200,000 positions a second against about
-4,000. The designer's league ran on Rust copies of all 12 versions, so its 10-minute
-games searched as deep as a Remus league of 8-hour games. See
+same moves, about 15 times faster: some 143,000 positions a second against about
+9,800. The designer's league ran on Rust copies of all 12 versions, so its 10-minute
+games searched as deep as a Remus league of 2.5-hour games. See
 [its README](<../../../engines/Niram/README.md>).
 
 ## Science AI

@@ -126,7 +126,7 @@ The engine uses only the Python standard library. The development group adds
 along with `pytest` and `ruff`. Lucas Chess talks to Remus over UCI.
 
 Niram, in the top `engines/Niram` folder beside the Remus versions, is Remus-GOLD
-rewritten in Rust. It searches the same trees about 50 times faster. It is a
+rewritten in Rust. It searches the same trees about 15 times faster. It is a
 course designer's experiment, outside the course; see
 [its README](<engines/Niram/README.md>).
 

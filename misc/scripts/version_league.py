@@ -30,8 +30,8 @@ most enhancements to help. Games at one clock are rated apart from games at anot
 clock.
 
 The designer's league ran on Niram, Rust copies of the same 12 versions that chose
-the same moves as Remus about 50 times faster, so a 10 minute Niram game searched
-as deep as a Remus game of many hours. Only Niram is kept, in the Niram
+the same moves as Remus about 15 times faster, so a 10 minute Niram game searched
+as deep as a Remus game of about 2.5 hours. Only Niram is kept, in the Niram
 folder, but the Niram games stay in the games file: --niram with --rate-only rates
 them apart from Remus games, with Niram-WHITE pinned at 0.
 

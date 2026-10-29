@@ -127,7 +127,7 @@ Each engine's score at each Stockfish level it met:
 **Niram rates about 620 Elo above Remus-GOLD.** The two engines pick the same move in
 every position ([`remus-niram same algorithms.md`](remus-niram%20same%20algorithms.md)), and both scored
 31 of 64. Niram scored its 31 points against Stockfish set about 600 Elo higher. The
-whole gap comes from speed: Niram searches about 50 times as many positions in the
+whole gap comes from speed: Niram searches about 15 times as many positions in the
 same 10 minutes, deep enough for null-move pruning, late move reductions, and the
 transposition table to pay off.
 

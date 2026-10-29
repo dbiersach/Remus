@@ -7,7 +7,7 @@ Niram keeps the exact rules, evaluation, and search of Remus-GOLD, in the
 folder beside this one: the same board of 64 characters, the same move order, and
 the same evaluation terms and search function. Given the same position and depth,
 both engines visit the same number of positions and choose the same move with the
-same score. Only the language changes, so Niram thinks about 50 times faster.
+same score. Only the language changes, so Niram searches about 15 times faster.
 
 Niram is the course designer's experiment, not part of the course. Students write Remus in
 Python, and the student folders leave Niram out.
