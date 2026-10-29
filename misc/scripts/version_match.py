@@ -13,7 +13,7 @@ Remus picks the same move every time it sees the same position, so two games fro
 the starting position would be the same game twice. Each pair of games therefore
 starts from one of the OPENINGS, three moves deep, and each player takes White once.
 
-Student pairs never type a command: smoke_test.py and play_battle.py in each engine folder
+Student pairs never type a command: basic_test.py and play_battle.py in each engine folder
 run this file with the Run button, and pass --engines with the folder that holds
 their engine folder, such as engines/student. Without --engines the script plays
 the engines in engines/instructor. The course designer may also run it by hand

@@ -1000,7 +1000,7 @@ def readme_text(version: dict) -> str:
             f"## The changes and why\n\n{changes}",
             (
                 "## Check it\n\nCheck the work by opening `run_tests.py` in this "
-                "folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: "
+                "folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: "
                 f"Remus-{color} plays one 2-minute game against Remus-WHITE, which "
                 "shows that the engine plays legal moves to the end of a game. In the "
                 "Day 9 battles, follow the numbered steps at the top of `play_battle.py`: "
@@ -1051,9 +1051,9 @@ RUN_SCRIPTS = {
         ),
         ["OPPONENT"],
     ),
-    "smoke_test.py": (
+    "basic_test.py": (
         (
-            "The Day 9 smoke test for this enhanced engine. Press Run in VS Code: Remus-{color} "
+            "The Day 9 basic test for this enhanced engine. Press Run in VS Code: Remus-{color} "
             "plays\none 2-minute game against Remus-WHITE, which shows that the engine "
             "plays legal\nmoves to the end of a game. Nobody reads the result."
         ),

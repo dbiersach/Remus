@@ -4,14 +4,14 @@
 
 By the end of this period, each student pair can:
 
-- Test an enhancement before trusting it. **Measured by:** The enhanced engine passes `run_tests.py` and a one-game smoke test against Remus-WHITE with no illegal moves.
+- Test an enhancement before trusting it. **Measured by:** The enhanced engine passes `run_tests.py` and a one-game basic test against Remus-WHITE with no illegal moves.
 - Predict what the enhancement changes. **Measured by:** Each student pair writes one sentence on the board: what should change, and how the class will see it in the match results.
 
 ## The files
 
 This folder holds no engine code. Your student pair works in one folder only: your own engine folder in `engines/student`, such as `10 RED - Transposition table`. That folder already holds the whole Remus engine you finished in period 1, so you add only your one enhancement there. Do not change `00 WHITE - No enhancements`: it is plain Remus with no enhancement, and it stays as it is so the class can measure every enhancement against it. The `README.md` in each engine folder explains its enhancement, and its section "The code you type" shows every line the student pair types, with line numbers, the lines around it, and how the code works.
 
-Before the smoke test, check your engine: open `run_tests.py` in your student pair's engine folder in `engines/student` and press Run. Every test must pass. Click your engine folder below to find it.
+Before the basic test, check your engine: open `run_tests.py` in your student pair's engine folder in `engines/student` and press Run. Every test must pass. Click your engine folder below to find it.
 
 | Engine folder | The code you type | Tests |
 | --- | --- | --- |
@@ -31,5 +31,5 @@ Before the smoke test, check your engine: open `run_tests.py` in your student pa
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:40 | Student pairs finish their engine enhancement, then open `run_tests.py` in their engine folder in `engines/student` and press Run until every test passes. The table above links each engine folder. |
-| 1:40 to 2:10 | Each student pair opens `smoke_test.py` in its engine folder and presses Run in VS Code: one 2-minute game against Remus-WHITE, which checks only that the engine plays legal moves to the end. |
+| 1:40 to 2:10 | Each student pair opens `basic_test.py` in its engine folder and presses Run in VS Code: one 2-minute game against Remus-WHITE, which checks only that the engine plays legal moves to the end. |
 | 2:10 to 2:30 | Each student pair writes one sentence on the board: what its enhancement should change, and how the class will see it. |

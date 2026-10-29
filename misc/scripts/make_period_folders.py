@@ -737,7 +737,7 @@ def engine_folder_table(day: int, period: int) -> str:
         )
     else:
         intro = (
-            "Before the smoke test, check your engine: open `run_tests.py` in your "
+            "Before the basic test, check your engine: open `run_tests.py` in your "
             "student pair's engine folder in `engines/student` and press Run. Every "
             "test must pass. Click your engine folder below to find it."
         )
