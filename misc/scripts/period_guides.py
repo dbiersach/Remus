@@ -760,7 +760,7 @@ VERSION_GUIDES = {
             "that time back by visiting far fewer positions for each depth."
         ),
         "expect": (
-            "In the teacher's league, where every version searched about as deep "
+            "In the designer's league, where every version searched about as deep "
             "as Remus does in a game of several hours, Remus-GOLD scored 85 "
             "percent and rated +339 plus or minus 91 over Remus-WHITE, far ahead "
             "of every single color version. It gains more the longer the clock, "
@@ -808,7 +808,7 @@ VERSION_GUIDES = {
         ),
         "expect": (
             "Remus-RED is the only single color version that rated clearly above "
-            "Remus-WHITE in the teacher's league: +101 plus or minus 67. "
+            "Remus-WHITE in the designer's league: +101 plus or minus 67. "
             "Fewer positions for the same depth, and the biggest savings in endgames, "
             "where a few pieces shuffle between the same squares and nearly every "
             "position is reached many ways. Positions per second stay close to "
@@ -854,7 +854,7 @@ VERSION_GUIDES = {
             "starts from one of 32 openings three moves deep, and 24 of those "
             "positions are in the book, so Remus-GREEN usually gets two more instant "
             "moves before it searches. The book saves the most time in games that "
-            "start from the first move. In the teacher's league, Remus-GREEN rated "
+            "start from the first move. In the designer's league, Remus-GREEN rated "
             "+7 over Remus-WHITE when its games started three moves deep, and +58 "
             "when they started from the first move. The benchmark below never asks "
             "the book, so its numbers match Remus-WHITE's exactly."

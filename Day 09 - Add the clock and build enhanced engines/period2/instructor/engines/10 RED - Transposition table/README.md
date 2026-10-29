@@ -41,7 +41,7 @@ Each version searched the ten positions of `compare_search.py`, one depth at a t
 
 ## What to expect
 
-Remus-RED is the only single color version that rated clearly above Remus-WHITE in the teacher's league: +101 plus or minus 67. Fewer positions for the same depth, and the biggest savings in endgames, where a few pieces shuffle between the same squares and nearly every position is reached many ways. Positions per second stay close to Remus-WHITE's.
+Remus-RED is the only single color version that rated clearly above Remus-WHITE in the designer's league: +101 plus or minus 67. Fewer positions for the same depth, and the biggest savings in endgames, where a few pieces shuffle between the same squares and nearly every position is reached many ways. Positions per second stay close to Remus-WHITE's.
 
 ## Where your code fits
 

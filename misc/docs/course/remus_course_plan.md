@@ -29,7 +29,7 @@ to everything below.
 | First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
 | First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
-| Matches | Day 10: each pair's color version plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the teacher's league |
+| Matches | Day 10: each pair's color version plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the designer's league |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 | Documentation | `misc/docs/code/remus_program_overview.md` for the whole program, one page per script in `misc/docs/code/`, and `misc/docs/course/slide_plan.md` for the PowerPoint slides |
 
@@ -566,7 +566,7 @@ Outside the Day folders:
 | Path | Holds |
 | --- | --- |
 | `misc/scripts/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
-| `misc/scripts/` | The teacher's tools, which no student opens: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`, `version_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
+| `misc/scripts/` | The course designer's tools, which no student or teacher needs in class: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`, `version_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
 | `misc/scripts/run_all_tests.py` | Runs pytest on each period's `instructor/` folder in turn |
 | `misc/scripts/make_period_folders.py` | Builds the `instructor/` folders of `period1` to `period3` of each Day from `period4` |
 | `misc/scripts/make_version_folders.py` | Builds the ten color version folders in Day 9 `period2/instructor/engines` from the Day 9 `period1` code and Remus-GOLD |

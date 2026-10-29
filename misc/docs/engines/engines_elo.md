@@ -15,7 +15,7 @@ moves as Remus-GOLD, so the two differ only in speed.
 
 ## The league: every version against the others
 
-The teacher's league finished on 2026-10-28: 660 games at 10 minutes a side, every
+The designer's league holds 660 games at 10 minutes a side, every
 version against every other version 10 times, 5 with each color. It ran on Niram,
 the Rust twins of the 12 versions, which pick the same moves as Remus about 50 times
 faster. The 450 games between versions without a book started from 32 openings; the
@@ -66,7 +66,7 @@ not been played yet, so this page has no results from it.
 
 **Why these levels.** A game teaches the most about a rating when its result is
 hardest to predict, at a 50 percent expected score. A game Remus is sure to win tells
-almost nothing: in the 2026-10-27 run below, 10 of the 12 versions scored at least 5
+almost nothing: in the first Stockfish run below, 10 of the 12 versions scored at least 5
 of 6 against Stockfish 1320. All 360 games of that run pooled into one player give
 1841, so the four Remus levels sit 150 Elo apart on both sides of 1850. Niram-GOLD
 searches about 50 times as many positions in the same time, so its levels sit higher.
@@ -76,7 +76,7 @@ level shifts every version alike and leaves their order untouched.
 **How tight the ratings get.** One game at an even score carries a standard
 deviation of 0.5 points, and a rating's 95 percent margin shrinks with the square root
 of the games played. With 48 games near an even score, each version's margin comes to
-about +/- 100 Elo, about half the +/- 185 of the 2026-10-27 run. Draws narrow it
+about +/- 100 Elo, about half the +/- 185 of the first Stockfish run. Draws narrow it
 further: the script measures each margin from how far every real score landed from
 its expected score, so a version that draws often earns a narrower margin. The 576
 Remus games pooled together pin the scale for the whole family to about +/- 30.
@@ -99,9 +99,10 @@ rating therefore measures Remus at a long clock on a scale set at a short one, a
 reads higher than a rating from short games: an earlier `estimate_elo.py` run of
 Remus-GOLD at 1 minute plus 0.6 seconds rated it about 1520 +/- 136.
 
-## The first Stockfish run, 2026-10-27
+## The first Stockfish run
 
-Twelve versions of Remus played Stockfish 19 on David's PC on 2026-10-27, with the
+In the first Stockfish run, twelve versions of Remus played Stockfish 19 on the course
+designer's PC, with the
 games under the Event "Station Elo test". The new run uses its own Event, so these
 360 games stay out of its ratings.
 
@@ -208,7 +209,8 @@ scored mostly by punishing a rare gross blunder from the weakened Stockfish, and
 
 ## Run it again
 
-From the top Remus folder on a computer with at least 20 physical cores, after
+The course designer runs these commands; no student or teacher needs them in
+class. From the top Remus folder on a computer with at least 20 physical cores, after
 `cargo build --release` inside `Niram-GOLD`:
 
 ```

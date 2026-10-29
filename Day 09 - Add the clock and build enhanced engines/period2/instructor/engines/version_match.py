@@ -5,7 +5,7 @@ Measure how much one color version adds. A color version's Remus plays a match
 against Remus-WHITE (the finished Day 9 Remus with no enhancements, in the period1
 folder of Day 9, on the same instructor or student side as this file), or against another color version, with python-chess as the referee. Every game is added to the class
 games file, misc/games/remus_games.pgn at the top of the Remus folder, and the script
-turns the score into an Elo gap. This is a teacher tool: the engine itself never
+turns the score into an Elo gap. This is a referee outside the engine: the engine itself never
 imports python-chess.
 
 Remus picks the same move every time it sees the same position, so two games from
@@ -25,7 +25,7 @@ second and a shorter clock stops every version too shallow for most enhancements
 to help. The two games run at once, so the match takes about 20 minutes.
 
 A color names a version folder, so "RED" finds "10 RED - Transposition table".
-The number in front ranks the color versions by the teacher's league. "WHITE"
+The number in front ranks the color versions by the designer's league. "WHITE"
 finds the period1 folder of Day 9, and "GOLD" finds the Remus-GOLD folder
 beside this file.
 """

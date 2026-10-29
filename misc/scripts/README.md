@@ -1,7 +1,8 @@
-# Teacher scripts
+# Course designer scripts
 
-This folder holds every teacher tool that is not part of a chess engine. Students
-never open it. Each script finds the top Remus folder from its own path, so run
+This folder holds every course designer tool that is not part of a chess engine.
+Students and teachers never need it in class: everything they run during the
+workshop runs with the Run button in VS Code. Each script finds the top Remus folder from its own path, so run
 each one from the top Remus folder:
 
 ```bash
@@ -39,7 +40,7 @@ uv run misc/scripts/make_student_folders.py
 
 ## Play and rate the Remus versions
 
-Every game these scripts play goes into `misc/games/remus_games.pgn`. The teacher's league
+Every game these scripts play goes into `misc/games/remus_games.pgn`. The designer's league
 ran on Rust copies of the 12 versions; only Niram-GOLD is kept, so `--niram` rates
 those saved games and plays none.
 

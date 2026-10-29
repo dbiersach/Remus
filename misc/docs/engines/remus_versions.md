@@ -122,7 +122,8 @@ takes White once. The games file stores the opening in a `StartMoves` header.
 
 ## Rank every version: version_league.py
 
-`misc/scripts/version_league.py`, run from the top Remus folder, plays a round robin: each of the 12 versions
+`misc/scripts/version_league.py` is a course designer tool: no student or teacher
+runs it in class. Run from the top Remus folder, it plays a round robin: each of the 12 versions
 (Remus-WHITE, the ten color versions, and Remus-GOLD) plays each other version 6 times,
 396 games in all, or as many times as `--games` asks. Then it fits one Elo rating to every version from every color version
 game in the games file, the games of `version_match.py` included, with Remus-WHITE
@@ -146,7 +147,7 @@ GREEN or GOLD starts from the starting position instead. Their book picks among 
 moves at random, so their games still differ from each other, while the other pairs
 keep the openings. Rate such a league with `--book-start` as well.
 
-The teacher's league ran on Niram, Rust copies of all 12 versions that picked the
+The designer's league ran on Niram, Rust copies of all 12 versions that picked the
 same moves as Remus about 50 times faster, so a 10-minute Niram game searched about
 as many positions as an 8-hour Remus game. Only Niram-GOLD is kept, beside
 Remus-GOLD ([`remus-niram parity.md`](remus-niram%20parity.md) shows that the two match), but
@@ -171,13 +172,13 @@ crash, is saved with the game's names and opening in `misc/games/engine_errors.l
 
 The league can stop partway, such as when a laptop restarts. Run it again and it
 plays only the games that are not in the games file yet. A 10-minute game lasts
-about 16 minutes on average. The teacher's 24-core computer, playing 16 games at a
+about 16 minutes on average. The course designer's 24-core computer, playing 16 games at a
 time, finished about one game a minute, so the whole league took about 7 hours. A
 4-core laptop playing 4 games at a time needs about a day.
 
-### The teacher's league run
+### The designer's league run
 
-The teacher ran a league of 660 games in October 2026: every version played every
+The course designer ran a league of 660 games: every version played every
 other version 10 times, 5 times with each color, at 10 minutes a side. The league
 ran on Niram, the Rust twins of the 12 versions, which choose the same moves as
 Remus about 50 times faster. A 10-minute Niram game therefore searches about as deep
@@ -256,7 +257,7 @@ because its book reads moves in SAN and so loads `notation.py` as well.
 2. The YELLOW color version's whole enhancement is a 2-line function. Why can such a small change still win games?
 3. Which color versions change the score Remus finds at a fixed depth, and which only find
    the same score faster?
-4. In the teacher's league, only Remus-RED among the single color versions measured
+4. In the designer's league, only Remus-RED among the single color versions measured
    clearly stronger than Remus-WHITE, but Remus-GOLD gained far more. How can ten
    small gains that each hide inside the error bar add up to one gain that shows?
 5. Remus-GREEN rated +7 when every game started three moves deep, and +58 when its

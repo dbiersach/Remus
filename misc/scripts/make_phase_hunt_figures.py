@@ -7,7 +7,7 @@
 
 Draw the pictures in the Day 10 READMEs that explain phase_hunt.py.
 
-A teacher tool, like the other make_*.py scripts. It reads the phase library and the
+A course designer tool, like the other make_*.py scripts. It reads the phase library and the
 benchmark from the finished Day 10 phase_hunt.py and saves PNG files in
 misc/docs/images/phase_hunt/. The inline script block above names matplotlib, so
 `uv run misc/scripts/make_phase_hunt_figures.py` installs it for this script alone; Remus itself

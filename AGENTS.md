@@ -95,6 +95,22 @@ that are specific to Claude Code. The Python style follows David's course reposi
   on a USB stick). At the end of the course each pair takes its repository home on a USB
   drive. Never plan a step that needs a student account or pushes student code online.
 - `CONTRIBUTORS.md` credits pairs by a team name they choose, not by full names.
+- **Three people use the repository** (David, 2026-10-29), and every document names
+  the right one:
+  - **Students**, the pairs, who write Remus in the `student/` folders.
+  - **Teachers**, who run the class. A teacher does everything in VS Code: open a
+    file and press the Run Python File button (`run_tests.py`, `play_match.py`,
+    `play_battle.py`, `estimate_elo.py`, a lab, a demo) or open a Markdown page. No
+    step of the two-week workshop asks a student or a teacher to type a command.
+  - **The course designer** (David), who builds the course. The tools in
+    `misc/scripts/` (the builders, `run_all_tests.py`, the league, the Stockfish
+    ratings, the benchmark, and the parity check) are designer tools, and only they
+    may need `uv run` in a terminal. Write "the designer's league", never "the
+    teacher's league".
+- Documents describe the course as it stands, with no dates of past events ("the
+  league finished on 2026-10-28", "a survey from October 2026"), the same rule as
+  for code comments. The David dates in this file record when a rule was set and
+  stay here only.
 
 ## Hard rules for the engine code
 
@@ -249,7 +265,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Nothing in a period folder imports from another folder. Modules import each other
   by name (`from board import new_board`), so any module runs from inside its folder
   with `uv run perft.py`.
-- Every teacher tool that is not part of an engine lives in `misc/scripts/`
+- Every course designer tool that is not part of an engine lives in `misc/scripts/`
   (David, 2026-10-28): the builders `make_period_folders.py`,
   `make_version_folders.py`, `make_student_folders.py`, and
   `make_phase_hunt_figures.py`, the README text in `period_guides.py`,
@@ -260,7 +276,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `misc/scripts/`. Files a pair opens or runs in class stay beside the code they belong to:
   `version_match.py` in the Day 9 `period2/instructor/engines` and
   `period2/student/engines` folders for the battles, and `play_match.py`, `estimate_elo.py`, and the tests inside their
-  period and version folders. Put a new teacher tool in `misc/scripts/`, and list every
+  period and version folders. Put a new course designer tool in `misc/scripts/`, and list every
   script there in `misc/scripts/README.md` with what it does (David, 2026-10-28).
 - `period4/instructor` holds the finished code of the day, and it is the only period
   folder to edit by hand. Day 9 is the exception (David, 2026-10-28): its engine, Remus-WHITE,
@@ -295,7 +311,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `period2/student/engines` folder, which holds only the ten colors and `version_match.py`: no
   pair ever writes GOLD. Colors name the color versions so that no color version
   sounds better than another. A two-digit prefix (David, 2026-10-28) orders the
-  folders by each version's Elo over WHITE in the teacher's league (Niram league 1,
+  folders by each version's Elo over WHITE in the designer's league (Niram league 1,
   660 games at 10 minutes a side, with GREEN's and GOLD's games started from move 1
   so their book plays): 01 GRAY, 02 YELLOW, 03 CYAN, 04 PINK, 05 ORANGE, 06 BROWN,
   07 PURPLE, 08 GREEN, 09 BLUE, 10 RED. `version_match.py` plays a color version
@@ -308,7 +324,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `misc/docs/engines/engines_elo.md` reports beside the league table.
 - `Niram-GOLD` (in `period2/instructor/engines`) holds Remus-GOLD rewritten in Rust, named for
   Naram-Sin, Sargon's grandson: a Cargo workspace with the shared rules in `rules/`
-  and the engine in `gold/`. It is a teacher's tool that runs the same engine about
+  and the engine in `gold/`. It is a course designer's tool that runs the same engine about
   50 times faster; students never edit it. Each `.rs` file matches the Python file of
   the same name, and Niram-GOLD must visit exactly the same number of positions as
   Remus-GOLD at each depth (`cargo test --release` inside `Niram-GOLD`;
@@ -501,7 +517,7 @@ Short helper functions may use a one-line docstring:
     with `any()` or `all()` over a generator expression.
   - `min()` and `max()` of two numbers, and `sum()` of a list, are fine.
   - The build scripts (`make_*.py`, `period_guides.py`, `run_all_tests.py`) are
-    teacher tools that no student reads, so they may keep the compact forms.
+    course designer tools that no student reads, so they may keep the compact forms.
 
 ## Comments
 

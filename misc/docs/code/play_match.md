@@ -12,7 +12,7 @@ misc/games/remus_games.pgn, so no game is lost.
 
 ## Where this piece fits
 
-play_match.py starts uci_engine.py twice. It uses python-chess, which only teacher tools may use.
+play_match.py starts uci_engine.py twice. It uses python-chess, which only the referees and tests outside the engine may use.
 
 - **Uses:** no other Remus file
 - **Used by:** no other Remus file

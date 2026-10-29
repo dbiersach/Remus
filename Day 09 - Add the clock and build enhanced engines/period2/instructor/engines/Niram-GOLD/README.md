@@ -9,7 +9,7 @@ the same evaluation terms and search function. Given the same position and depth
 both engines visit the same number of positions and choose the same move with the
 same score. Only the language changes, so Niram-GOLD thinks about 50 times faster.
 
-Niram is a teacher's experiment, not part of the course. Students write Remus in
+Niram is the course designer's experiment, not part of the course. Students write Remus in
 Python, and the student folders leave Niram-GOLD out.
 
 ## Folders
@@ -43,7 +43,7 @@ of the same name, with the same function names:
 `think` never calls (random, greedy, minimax, negamax, plain alpha-beta, and the
 scanning attack test) stay in Python only.
 
-The teacher's league ran on Rust copies of all 12 Remus versions, from Niram-WHITE
+The designer's league ran on Rust copies of all 12 Remus versions, from Niram-WHITE
 to Niram-GOLD. Only Niram-GOLD is kept. The league's games stay in
 `misc/games/remus_games.pgn`, and `uv run misc/scripts/version_league.py --niram --rate-only
 --event "Niram league 1"` rates them, with Niram-WHITE pinned at 0.

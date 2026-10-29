@@ -968,7 +968,7 @@ def readme_text(version: dict) -> str:
             "clicking Run Python File, and rate it against Stockfish the same way with "
             "`estimate_elo.py`. "
             "[`engines_elo.md`](../../../../../misc/docs/engines/engines_elo.md) shows its "
-            "score against every other version in the teacher's league."
+            "score against every other version in the designer's league."
         )
     else:
         written = ", ".join(
