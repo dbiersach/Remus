@@ -708,6 +708,17 @@ VERSION_OBJECTIVES = [
     ),
 ]
 
+# Where the board diagrams live, seen from a version README in
+# engines/instructor/<engine folder>/ or engines/student/<engine folder>/.
+# make_board_diagrams.py draws them.
+BOARD_IMAGES = "../../../misc/docs/images/boards"
+
+
+def board_image(name: str, words: str) -> str:
+    """Return the Markdown that shows one board diagram, with words for a screen reader."""
+    return f"![{words}]({BOARD_IMAGES}/{name}.svg)"
+
+
 # The long explanation in each version README, by color. Each section is Markdown:
 # "example" walks through one concrete case, "why" says how the idea makes Remus
 # stronger, "cost" says what it spends (positions per second, memory, re-searches),
@@ -779,7 +790,16 @@ VERSION_GUIDES = {
     "RED": {
         "example": (
             "1. Nf3 Nf6 2. d4 and 1. d4 Nf6 2. Nf3 reach the same position by two "
-            "different move orders. Chess players call that a transposition. A "
+            "different move orders. Chess players call that a transposition.\n\n"
+            + board_image(
+                "red_transposition",
+                "The position after 1. Nf3 Nf6 2. d4, Black to move",
+            )
+            + "\n\n"
+            "*The green arrows are White's two moves, Nf3 and d4, and the blue arrow is "
+            "Black's Nf6. Play them in either order and the board ends up the same.*"
+            "\n\n"
+            "A "
             "search meets transpositions all the time: Remus playing Nf3 then d4 "
             "against ...Nf6 and ...e6 reaches one position four ways. Remus-WHITE "
             "searches that position four times. Remus-RED searches it once, writes "
@@ -838,7 +858,15 @@ VERSION_GUIDES = {
             "Lopez. `load_book()` plays every line on a board from the starting "
             "position and records, for each position it passes, which moves the "
             "book plays there. After 1. e4 the book holds seven replies: ...e5, "
-            "...c5, ...e6, ...c6, ...d5, ...d6, and ...Nf6. `book_move()` picks one of them at random, so Remus-GREEN does "
+            "...c5, ...e6, ...c6, ...d5, ...d6, and ...Nf6.\n\n"
+            + board_image(
+                "green_book_replies",
+                "The position after 1. e4, with the book's seven replies marked",
+            )
+            + "\n\n"
+            "*After 1. e4 (the green arrow), the yellow squares show where Black's "
+            "seven book replies go: e5, c5, e6, c6, d5, d6, and the knight to f6.*\n\n"
+            "`book_move()` picks one of them at random, so Remus-GREEN does "
             "not play the same opening every game. Once the game leaves the book, "
             "Remus searches as usual."
         ),
@@ -876,7 +904,16 @@ VERSION_GUIDES = {
     "BLUE": {
         "example": (
             "Black has just made a weak move, and White's quiet move Qh5 threatens "
-            "mate on f7. Deep in the search, the same Qh5 refutes many different "
+            "mate on f7.\n\n"
+            + board_image(
+                "blue_killer_qh5",
+                "After 1. e4 e5 2. Bc4 Nc6 3. Qh5, White threatens Qxf7 mate",
+            )
+            + "\n\n"
+            "*After 1. e4 e5 2. Bc4 Nc6 3. Qh5, the queen and the bishop both aim at "
+            "f7 (the red arrows). Only Black's king guards f7, so Qxf7 would be mate.*"
+            "\n\n"
+            "Deep in the search, the same Qh5 refutes many different "
             "Black moves at the same ply: almost any Black move that does not defend "
             "f7 loses to it. Remus-WHITE tries the captures first, then the quiet "
             "moves in the order the generator found them, so it may try 20 quiet "
@@ -950,7 +987,17 @@ VERSION_GUIDES = {
     "YELLOW": {
         "example": (
             "Remus-WHITE is a rook behind, and the opponent's king can be checked "
-            "forever. Inside its search, Remus-WHITE scores the position after the "
+            "forever.\n\n"
+            + board_image(
+                "yellow_perpetual",
+                "White is a rook behind and checks forever with Qg5 and Qf6",
+            )
+            + "\n\n"
+            "*White, to move, is a rook behind. Qg5+ (the red arrow) drives the king to "
+            "h8, Qf6+ drives it back to g8, and Qg5+ starts again. The red squares are "
+            "the queen's two checking squares and the blue squares are the king's only "
+            "two squares.*\n\n"
+            "Inside its search,Remus-WHITE scores the position after the "
             "third repetition as a rook behind, because nothing in its search knows "
             "that the game ends there as a draw. So it avoids the checks and loses "
             "slowly. Remus-YELLOW scores any position that already appeared in the "
@@ -987,7 +1034,16 @@ VERSION_GUIDES = {
         "example": (
             "White pawns on c2, c3, and e4, Black pawns on d6 and e5: White's c-pawns "
             "are doubled (two on one file), and the e4 pawn is isolated (no White "
-            "pawn on the d- or f-file beside it). Remus-PURPLE scores each doubled "
+            "pawn on the d- or f-file beside it).\n\n"
+            + board_image(
+                "purple_pawns",
+                "White pawns on c2, c3, and e4 against Black pawns on d6 and e5",
+            )
+            + "\n\n"
+            "*The yellow squares are White's doubled pawns on the c-file. The red square "
+            "is the isolated pawn on e4: no White pawn stands anywhere on the d-file or "
+            "the f-file to protect it.*\n\n"
+            "Remus-PURPLE scores each doubled "
             "pawn -8 and each isolated pawn -20. A passed pawn, with no enemy pawn in "
             "front of it on its own file or a neighboring file, earns a bonus that "
             "grows as it advances: 0, 10, 20, 40, 60, and then 70 one step from "
@@ -1027,7 +1083,19 @@ VERSION_GUIDES = {
             "every rook move the same, +500, so it shuffles. Remus-CYAN adds a bonus "
             "once one side leads by at least 200 and the losing side has at most 600 "
             "left: 10 points for each step the losing king stands from the center, "
-            "and 4 points for each step the winning king has closed in. Now every "
+            "and 4 points for each step the winning king has closed in.\n\n"
+            + board_image("cyan_king_center", "The Black king on e5, in the center")
+            + " "
+            + board_image(
+                "cyan_king_edge", "The Black king on e8, with the White king on e6"
+            )
+            + "\n\n"
+            "*The yellow squares are the center. Left: the Black king stands on e5, 0 "
+            "steps from the center, and the White king on c2 is 3 steps away, so the "
+            "bonus is 4 x (7 - 3) = 16. Right: the Black king on e8 is 3 steps from "
+            "the center and the White king on e6 is 2 steps away, so the bonus is "
+            "10 x 3 + 4 x (7 - 2) = 50.*\n\n"
+            "Now every "
             "move that squeezes the king toward the edge scores higher, and the "
             "search walks it into a mating net."
         ),
@@ -1131,7 +1199,20 @@ VERSION_GUIDES = {
             "White has castled kingside: king on g1, pawns on f2, g2, and h2. Each of "
             "the king's three files has a White pawn one or two squares in front, so "
             "Remus-GRAY adds 3 x 15 = 45 points. Push the h-pawn to h4, and the h-file "
-            "no longer shelters the king: 30 points. The bonus counts only while "
+            "no longer shelters the king: 30 points.\n\n"
+            + board_image(
+                "gray_shield_full", "White king on g1 behind pawns on f2, g2, and h2"
+            )
+            + " "
+            + board_image(
+                "gray_shield_broken", "The same position after the h-pawn moves to h4"
+            )
+            + "\n\n"
+            "*Left: the three green pawns on f2, g2, and h2 shield the king on g1, "
+            "45 points. Right: after h2 to h4, no White pawn stands on h2 or h3 (the "
+            "red squares), so only f2 and g2 count, 30 points. Black's queen is still "
+            "on d8, so the bonus counts in both.*\n\n"
+            "The bonus counts only while "
             "the enemy queen is on the board, because the queen is the piece that "
             "makes an open king dangerous. Once the queens come off, the king should "
             "walk toward the center, and the term is 0."

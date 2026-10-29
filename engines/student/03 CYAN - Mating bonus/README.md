@@ -12,7 +12,13 @@ By the end of Day 9, each student pair can:
 
 ## The idea, with an example
 
-White has king and rook, Black has only a king. Mate needs the Black king on the edge, and it takes far more than 4 plies of good moves to drive it there. Remus-WHITE sees no mate within its depth and scores every rook move the same, +500, so it shuffles. Remus-CYAN adds a bonus once one side leads by at least 200 and the losing side has at most 600 left: 10 points for each step the losing king stands from the center, and 4 points for each step the winning king has closed in. Now every move that squeezes the king toward the edge scores higher, and the search walks it into a mating net.
+White has king and rook, Black has only a king. Mate needs the Black king on the edge, and it takes far more than 4 plies of good moves to drive it there. Remus-WHITE sees no mate within its depth and scores every rook move the same, +500, so it shuffles. Remus-CYAN adds a bonus once one side leads by at least 200 and the losing side has at most 600 left: 10 points for each step the losing king stands from the center, and 4 points for each step the winning king has closed in.
+
+![The Black king on e5, in the center](../../../misc/docs/images/boards/cyan_king_center.svg) ![The Black king on e8, with the White king on e6](../../../misc/docs/images/boards/cyan_king_edge.svg)
+
+*The yellow squares are the center. Left: the Black king stands on e5, 0 steps from the center, and the White king on c2 is 3 steps away, so the bonus is 4 x (7 - 3) = 16. Right: the Black king on e8 is 3 steps from the center and the White king on e6 is 2 steps away, so the bonus is 10 x 3 + 4 x (7 - 2) = 50.*
+
+Now every move that squeezes the king toward the edge scores higher, and the search walks it into a mating net.
 
 ## Why it makes Remus stronger
 

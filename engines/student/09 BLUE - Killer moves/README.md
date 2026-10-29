@@ -12,7 +12,13 @@ By the end of Day 9, each student pair can:
 
 ## The idea, with an example
 
-Black has just made a weak move, and White's quiet move Qh5 threatens mate on f7. Deep in the search, the same Qh5 refutes many different Black moves at the same ply: almost any Black move that does not defend f7 loses to it. Remus-WHITE tries the captures first, then the quiet moves in the order the generator found them, so it may try 20 quiet moves before Qh5 each time. Remus-BLUE remembers Qh5 as a killer move for that ply, because it caused a cutoff there, and tries it right after the captures in every other position at the same ply.
+Black has just made a weak move, and White's quiet move Qh5 threatens mate on f7.
+
+![After 1. e4 e5 2. Bc4 Nc6 3. Qh5, White threatens Qxf7 mate](../../../misc/docs/images/boards/blue_killer_qh5.svg)
+
+*After 1. e4 e5 2. Bc4 Nc6 3. Qh5, the queen and the bishop both aim at f7 (the red arrows). Only Black's king guards f7, so Qxf7 would be mate.*
+
+Deep in the search, the same Qh5 refutes many different Black moves at the same ply: almost any Black move that does not defend f7 loses to it. Remus-WHITE tries the captures first, then the quiet moves in the order the generator found them, so it may try 20 quiet moves before Qh5 each time. Remus-BLUE remembers Qh5 as a killer move for that ply, because it caused a cutoff there, and tries it right after the captures in every other position at the same ply.
 
 ## Why it makes Remus stronger
 
