@@ -3,7 +3,7 @@
 
 Day 9, period 4 demo: read a battle result. Part 1 turns wins, draws, and losses
 into an Elo gap, and Part 2 adds a 95 percent margin, the way the class reads its
-battles and the teacher's league.
+battles and the designer's league.
 The student file demo_results.py leaves one # line for each line the pair types.
 """
 

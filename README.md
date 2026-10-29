@@ -26,7 +26,7 @@ left as stubs for them to fill in. Beside them sits the period's goals file, suc
 Each Day folder's syllabus, such as `Day 04 Syllabus.md`, gives the day's
 objectives and the timed activities of its four periods. Everything else sits in
 `misc/`: the course and code documents in `misc/docs/`, the games every script plays in
-`misc/games/`, and the teacher's tools in `misc/scripts/`, which hold the builders
+`misc/games/`, and the course designer's tools in `misc/scripts/`, which hold the builders
 that write the period, version, and student folders, the test runner, and the league
 and rating scripts, each listed in
 [`misc/scripts/README.md`](misc/scripts/README.md). Start with
@@ -98,7 +98,7 @@ below set up a new computer, such as the teacher's laptop or a computer at home.
 From here on, every file runs inside VS Code. Open a file, such as `perft.py` in
 `Day 06 - Count positions and read FEN/period4/instructor`, and click the Run Python
 File button (the triangle at the top right of the editor). Each file prints its own
-check, with the expected answer beside it. The teacher's tools in `misc/scripts/`, such as
+check, with the expected answer beside it. The course designer's tools in `misc/scripts/`, such as
 the test runner and the league, are listed with their commands in
 [`misc/scripts/README.md`](misc/scripts/README.md).
 
@@ -108,7 +108,7 @@ along with `pytest` and `ruff`. Lucas Chess talks to Remus over UCI.
 
 Niram-GOLD, beside Remus-GOLD in the Day 9 `period2/instructor/engines` folder, is Remus-GOLD
 rewritten in Rust. It searches the same trees about 50 times faster. It is a
-teacher's experiment, outside the course; see
+course designer's experiment, outside the course; see
 [its README](<Day 09 - Add the clock and build enhanced engines/period2/instructor/engines/Niram-GOLD/README.md>).
 
 ## License

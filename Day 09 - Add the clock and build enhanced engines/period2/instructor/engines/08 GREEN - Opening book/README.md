@@ -33,7 +33,7 @@ Each version searched the ten positions of `compare_search.py`, one depth at a t
 
 ## What to expect
 
-The time saved goes to later moves. Remus thinks about one thirtieth of its remaining clock per move, so five instant book moves leave roughly a minute and a half more for the middlegame. Every version match game starts from one of 32 openings three moves deep, and 24 of those positions are in the book, so Remus-GREEN usually gets two more instant moves before it searches. The book saves the most time in games that start from the first move. In the teacher's league, Remus-GREEN rated +7 over Remus-WHITE when its games started three moves deep, and +58 when they started from the first move. The benchmark below never asks the book, so its numbers match Remus-WHITE's exactly.
+The time saved goes to later moves. Remus thinks about one thirtieth of its remaining clock per move, so five instant book moves leave roughly a minute and a half more for the middlegame. Every version match game starts from one of 32 openings three moves deep, and 24 of those positions are in the book, so Remus-GREEN usually gets two more instant moves before it searches. The book saves the most time in games that start from the first move. In the designer's league, Remus-GREEN rated +7 over Remus-WHITE when its games started three moves deep, and +58 when they started from the first move. The benchmark below never asks the book, so its numbers match Remus-WHITE's exactly.
 
 ## Where your code fits
 

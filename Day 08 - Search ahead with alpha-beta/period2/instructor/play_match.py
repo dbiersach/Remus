@@ -4,7 +4,7 @@
 Play a match between two Remus brains through UCI, with python-chess as the referee.
 python-chess rejects any illegal move, so every match is also a rules test. Every
 game is added to the class games file, misc/games/remus_games.pgn at the top of the Remus
-folder. This is a teacher tool: the engine itself never imports python-chess.
+folder. This is a referee outside the engine: the engine itself never imports python-chess.
 
 Open this file in VS Code and click the Run Python File button to play the match
 that FIRST_BRAIN, SECOND_BRAIN, and GAMES name below. Change them to play another

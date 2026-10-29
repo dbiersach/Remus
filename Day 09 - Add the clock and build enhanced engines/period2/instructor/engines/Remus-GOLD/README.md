@@ -25,8 +25,8 @@ Each version searched the ten positions of `compare_search.py`, one depth at a t
 
 ## What to expect
 
-In the teacher's league, where every version searched about as deep as Remus does in a game of several hours, Remus-GOLD scored 85 percent and rated +339 plus or minus 91 over Remus-WHITE, far ahead of every single color version. It gains more the longer the clock, because null moves and late move reductions save work only at depth 3 and deeper.
+In the designer's league, where every version searched about as deep as Remus does in a game of several hours, Remus-GOLD scored 85 percent and rated +339 plus or minus 91 over Remus-WHITE, far ahead of every single color version. It gains more the longer the clock, because null moves and late move reductions save work only at depth 3 and deeper.
 
 ## Check it
 
-Check it by opening `run_tests.py` in this folder and clicking Run Python File, and rate it against Stockfish the same way with `estimate_elo.py`. [`engines_elo.md`](../../../../../misc/docs/engines/engines_elo.md) shows its score against every other version in the teacher's league.
+Check it by opening `run_tests.py` in this folder and clicking Run Python File, and rate it against Stockfish the same way with `estimate_elo.py`. [`engines_elo.md`](../../../../../misc/docs/engines/engines_elo.md) shows its score against every other version in the designer's league.

@@ -63,8 +63,8 @@ and check that the last line shows your `remus.bat`. Click **Accept**.
 
 ![Remus-WHITE in the list of external engines](../images/lucas_chess/06_engine_added.jpg)
 
-If Lucas shows an error in Step 5, Remus did not start. Open a terminal in the folder
-of `remus.bat`, open `run_tests.py` there and press Run, and fix any failing test first.
+If Lucas shows an error in Step 5, Remus did not start. In the folder of `remus.bat`,
+open `run_tests.py` in VS Code and press Run, and fix any failing test first.
 
 ## Part 3: Watch Remus play Stockfish 1500
 
@@ -169,6 +169,6 @@ To play your own Remus at home, you also need the Remus folder from your USB dri
 | What you see | What to check |
 | --- | --- |
 | Lucas shows an error when you add Remus | Open `run_tests.py` in the folder of `remus.bat` and press Run. A module that fails to import stops Remus before it can say `uciok`. |
-| Remus never moves | In a terminal, run `remus.bat`, type `uci`, and press Enter. Remus must print `uciok`. Then type `position startpos` and `go`, and Remus must print a `bestmove` line. |
+| Remus never moves | Open `uci_engine.py` in the folder of `remus.bat` in VS Code and press Run. In the panel that opens, type `uci` and press Enter. Remus must print `uciok`. Then type `position startpos` and `go`, and Remus must print a `bestmove` line. |
 | **Launch workers** does nothing | Quit Lucas Chess and start it again from the Start menu or the desktop icon. |
 | Remus plays an old version of your code | Each `remus.bat` runs the code in its own folder. Add the `remus.bat` from the folder you are working in, or select the engine in **External engines** and click **Modify**. |

@@ -85,9 +85,9 @@ one folder at a time:
 uv run pytest "Day 04 - Keep only legal moves/period3/instructor"
 ```
 
-The teacher's `misc/scripts/run_all_tests.py` runs every period's `instructor/` folder in turn, then the
+The course designer's `misc/scripts/run_all_tests.py` runs every period's `instructor/` folder in turn, then the
 reference-tool tests in `misc/scripts/test_reference_tools.py`. The `misc/scripts/` folder holds
-every teacher tool that is not part of an engine: the builders that write the period,
+every course designer tool that is not part of an engine: the builders that write the period,
 version, and student
 folders, `period_guides.py` with the README text, the test runner, the league and
 Stockfish rating scripts, and the Niram benchmark. Students never open it.
@@ -173,7 +173,7 @@ The pages, in the order the class builds them:
 | Native Python engine | `board.py` to `search.py` | Board, rules, legal moves, state, search, evaluation, move choice |
 | Console driver | `console_game.py` | Prints the board and reads SAN moves typed in the terminal |
 | UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with Lucas Chess on standard input and output |
-| Teacher tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `version_match.py`, `misc/scripts/version_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
+| Referees and designer tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `version_match.py`, `misc/scripts/version_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
 
 ## The core data structures
 
@@ -243,7 +243,7 @@ The search makes and undoes moves on the one live state. A `try/finally` around 
 Remus-GOLD rewritten in Rust with the same rules, evaluation, and search. On the same
 positions and depth it visits exactly as many positions as Remus-GOLD and picks the
 same moves, about 50 times faster: some 200,000 positions a second against about
-4,000. The teacher's league ran on Rust copies of all 12 versions, so its 10-minute
+4,000. The designer's league ran on Rust copies of all 12 versions, so its 10-minute
 games searched as deep as a Remus league of 8-hour games. See
 [its README](<../../../Day 09 - Add the clock and build enhanced engines/period2/instructor/engines/Niram-GOLD/README.md>).
 

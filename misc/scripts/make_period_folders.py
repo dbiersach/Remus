@@ -6,7 +6,7 @@ Build the instructor folders of period1, period2, and period3 of every Day from 
 Each Day folder holds four period folders, and each period folder holds an
 instructor folder and a student folder. Each instructor folder is a complete,
 runnable copy of Remus as it stands at the end of that period. period4/instructor
-is the finished code of the day, and the teacher edits only that folder. This script
+is the finished code of the day, and the course designer edits only that folder. This script
 rebuilds the three earlier periods from it:
 
 1. A file that arrives or grows during the day keeps its form from the end of the

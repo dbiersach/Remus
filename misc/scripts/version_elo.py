@@ -35,7 +35,7 @@ Usage:
 
 A game already in the games file is not played twice, so a run that stops
 partway, such as when the computer restarts, picks up where it stopped.
-This is a teacher tool: the engine itself never imports python-chess.
+This is a course designer tool: the engine itself never imports python-chess.
 """
 
 import argparse

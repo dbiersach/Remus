@@ -29,7 +29,7 @@ second, so a shorter clock stops every version after 2 to 4 plies, too shallow f
 most enhancements to help. Games at one clock are rated apart from games at another
 clock.
 
-The teacher's league ran on Niram, Rust copies of the same 12 versions that chose
+The designer's league ran on Niram, Rust copies of the same 12 versions that chose
 the same moves as Remus about 50 times faster, so a 10 minute Niram game searched
 as deep as a Remus game of many hours. Only Niram-GOLD is kept, in the Niram-GOLD
 folder, but the Niram games stay in the games file: --niram with --rate-only rates
@@ -43,7 +43,7 @@ game with GREEN or GOLD starts from the starting position instead: their book pi
 among its moves at random, so their games still differ. The other pairs keep the
 OPENINGS. Rate such a league with --book-start too.
 
-This is a teacher tool, like version_match.py: the engine never imports python-chess.
+This is a course designer tool: the engine never imports python-chess.
 """
 
 import argparse

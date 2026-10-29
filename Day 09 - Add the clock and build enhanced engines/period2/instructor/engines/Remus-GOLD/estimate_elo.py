@@ -6,7 +6,7 @@ strength (UCI_Elo), level after level, and the script turns the results into an
 estimated Elo rating. python-chess is the referee, as in play_match.py, and every
 finished game is added at once to the class games file, misc/games/remus_games.pgn at
 the top of the Remus folder, so no game is ever lost.
-This is a teacher tool: the engine itself never imports python-chess.
+This is a referee outside the engine: the engine itself never imports python-chess.
 
 Usage: uv run estimate_elo.py [--games 10] [--levels 1320 1500 1700] [--stockfish PATH]
 

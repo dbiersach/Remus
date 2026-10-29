@@ -2,7 +2,7 @@
 
 A survey of published science problems that use the same ideas as Remus (generate
 moves, make and undo, evaluate, search a tree, prune), written to choose a real
-problem for the Day 10 Science AI capstone. Survey date: 2026-10-27.
+problem for the Day 10 Science AI capstone.
 
 ## The short answer
 
@@ -29,7 +29,7 @@ real gpCAM papers from the CMS beamline. If David prefers to keep `beam_time.py`
 too, re-anchor it on the published NSLS-II BadSeed problem (stay on a sample or move
 on), which it already resembles.
 
-**Decision (David, 2026-10-28):** build `phase_hunt.py` and retire `beam_time.py`.
+**Decision (David):** build `phase_hunt.py` and retire `beam_time.py`.
 The built lab and its benchmark are described under Recommendation 1.
 
 ## How the candidates were judged
@@ -233,7 +233,7 @@ peaks, look a few phases deeper, take the phase back, and keep the best set.
 
 ### What the benchmark shows
 
-David chose Recommendation 1 on 2026-10-28, and `phase_hunt.py` replaces
+David chose Recommendation 1, and `phase_hunt.py` replaces
 `beam_time.py` in Day 10, periods 2 and 3. The library holds ten real phases, each
 with its four strongest peaks, computed with Bragg's law from published lattice sizes
 for copper X-rays (1.5406 angstrom). Two of them, gold and silver, have lattice
