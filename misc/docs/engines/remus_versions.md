@@ -219,9 +219,10 @@ numbers follow this table, from `01 GRAY` to `10 RED`.
 
 Remus-GOLD, with all ten enhancements, wins most of its games: its +339 plus or minus
 91 runs from +248 to +430, and it scored at least 6.5 of 10 against every other
-version. Remus-RED, the transposition table, is the only engine with one enhancement whose
-range stays above 0, from +34 to +168. Every other enhanced engine's range includes 0,
-so one of those enhancements alone changes Remus by less than 110 games can measure.
+version. Remus-RED, the transposition table, is the clearest gain from one enhancement,
+with a range from +34 to +168. Remus-BLUE, the killer moves, clears 0 only just: its
+range runs from +0.6 to +133.6. Every other enhanced engine's range includes 0, so one
+of those enhancements alone changes Remus by less than 110 games can measure.
 Most games end in a draw (the versions share one evaluation and one search), so each
 game moves a rating by little.
 
@@ -266,8 +267,8 @@ because its book reads moves in SAN and so loads `notation.py` as well.
 2. Remus-YELLOW's whole enhancement is a 2-line function. Why can such a small change still win games?
 3. Which enhanced engines change the score Remus finds at a fixed depth, and which only find
    the same score faster?
-4. In the designer's league, only Remus-RED among the engines with one enhancement measured
-   clearly stronger than Remus-WHITE, but Remus-GOLD gained far more. How can ten
+4. In the designer's league, only Remus-RED and, just barely, Remus-BLUE among the engines
+   with one enhancement measured stronger than Remus-WHITE, but Remus-GOLD gained far more. How can ten
    small gains that each hide inside the error bar add up to one gain that shows?
 5. Remus-GREEN rated +7 when every game started three moves deep, and +58 when its
    games started from move 1. Why does the start of a game matter so much more to
