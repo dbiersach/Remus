@@ -1,9 +1,0 @@
-[package]
-name = "niram_rules"
-description = "The parts every Niram engine shares: board, rules, evaluation terms, search helpers, UCI, benchmark"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-
-# Niram uses the Rust standard library only, the way Remus uses Python's.
-[dependencies]

@@ -30,11 +30,9 @@ use crate::notation::parse_san;
 
 pub type Book = HashMap<String, Vec<Move>>;
 
-/// Return the path of opening_book.txt, in the Niram folder above rules/.
+/// Return the path of opening_book.txt, in the Niram folder.
 pub fn book_path() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("..")
-        .join("opening_book.txt")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("opening_book.txt")
 }
 
 /// Split a book line into its defender ('w', 'b', or None for both sides) and its moves.

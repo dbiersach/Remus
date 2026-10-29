@@ -12,14 +12,11 @@ same score. Only the language changes, so Niram thinks about 50 times faster.
 Niram is the course designer's experiment, not part of the course. Students write Remus in
 Python, and the student folders leave Niram out.
 
-## Folders
+## Files
 
-`gold/` holds the engine, the program `niram`: `evaluation.rs` with its
-`evaluate`, `search.rs` with `upgraded_search`, `quiescence`, and `think`, and
-`main.rs`. It asks the opening book first, then searches.
-
-`rules/` holds the shared code, and each of its Rust files matches the Python file
-of the same name, with the same function names:
+`src/` holds every Rust file. Each one matches the Remus-GOLD Python file of the
+same name, with the same function names. `main.rs` starts the program `niram`,
+which asks the opening book first, then searches:
 
 | Rust file | Remus file | What it does |
 | --- | --- | --- |
@@ -30,9 +27,10 @@ of the same name, with the same function names:
 | `move_generation.rs` | `move_generation.py` | Pseudo-legal moves |
 | `attacks.rs` | `attacks.py` | Attacked squares and check |
 | `legal_moves.rs` | `legal_moves.py` | Castling and the legal-move filter |
-| `evaluation.rs` | `evaluation.py` | Material, placement, pawns, mating, king safety |
+| `evaluation.rs` | `evaluation.py` | Material, placement, pawns, mating, king safety, and `evaluate` |
 | `move_ordering.rs` | `move_ordering.py` | MVV-LVA and killer moves |
 | `transposition_table.rs` | `transposition_table.py` | The table of searched positions |
+| `search.rs` | `search.py` | `upgraded_search`, `quiescence`, and `think` |
 | `search_tools.rs` | `search.py` | The pieces every search shares: the node count, the clock, null moves, reductions |
 | `fen.rs`, `notation.rs` | `fen.py`, `notation.py` | FEN and SAN |
 | `opening_book.rs` | `opening_book.py` | Book moves from `opening_book.txt`, defend-only trap lines included |
@@ -102,9 +100,9 @@ From inside this folder:
 ```bash
 cargo build --release                        # The program, in target/release
 cargo test --release                         # perft, the book, and the node count
-cargo run --release -p niram -- bench   # Time Niram on ten positions, depth 4
-cargo run --release -p niram -- bench 6
-cargo run --release -p niram -- perft 5 # 4,865,609 from the start position
+cargo run --release -- bench            # Time Niram on ten positions, depth 4
+cargo run --release -- bench 6
+cargo run --release -- perft 5          # 4,865,609 from the start position
 ```
 
 The matching Python benchmark runs from the repository folder:
@@ -130,6 +128,6 @@ uv run misc/scripts/engine_parity.py --nodes 100000   # Deeper searches (Remus t
 ```
 
 To play Niram in Lucas Chess, run `cargo build --release` and add
-`target/release/niram-gold.exe` as a UCI engine, the same way the
+`target/release/niram.exe` as a UCI engine, the same way the
 [Lucas Chess guide](../../misc/docs/course/lucas_chess_guide.md) adds Remus. It needs no
 batch file.

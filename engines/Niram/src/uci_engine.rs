@@ -78,7 +78,7 @@ fn thinking_time(words: &[&str], white_to_move: bool) -> f64 {
 }
 
 /// Read UCI commands until "quit" or the end of input. `name` is the engine's name,
-/// such as "Niram-RED", `think` is its search, and `use_book` says whether it plays
+/// such as "Niram", `think` is its search, and `use_book` says whether it plays
 /// from the opening book.
 pub fn run(name: &str, think: ThinkFn, use_book: bool) {
     let mut state = state_from_fen(START_FEN).expect("START_FEN is valid");

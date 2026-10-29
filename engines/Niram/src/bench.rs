@@ -1,14 +1,14 @@
 //! bench.rs
 //!
-//! The command line every Niram engine shares. With no argument, an engine talks
+//! Niram's command line. With no argument, an engine talks
 //! UCI. Two other commands check and time it:
 //!
 //! ```text
-//! niram-red bench [depth]        Time the search on ten positions
-//! niram-red perft [depth] [fen]  Count the leaf positions of the legal move tree
-//! niram-red parity FILE NODES    Print what the engine sees and chooses in each
+//! niram     bench [depth]        Time the search on ten positions
+//! niram     perft [depth] [fen]  Count the leaf positions of the legal move tree
+//! niram     parity FILE NODES    Print what the engine sees and chooses in each
 //!                                position of FILE, for misc/scripts/engine_parity.py
-//! niram-red book                 Print every position and move of the opening book
+//! niram     book                 Print every position and move of the opening book
 //! ```
 
 use std::time::Instant;
@@ -68,6 +68,7 @@ pub fn bench_position(fen: &str, think: ThinkFn, max_depth: i32) -> BenchLine {
 }
 
 /// Return the total positions visited on all ten bench positions at one depth.
+#[cfg(test)]
 pub fn bench_nodes(think: ThinkFn, max_depth: i32) -> u64 {
     let mut total_nodes = 0;
     for fen in BENCH_POSITIONS {

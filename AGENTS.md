@@ -333,8 +333,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   even score, from frozen copies of the versions, and prints the tables that
   `misc/docs/engines/engines_elo.md` reports beside the league table.
 - `engines/Niram` holds Niram, Remus-GOLD rewritten in Rust, named for
-  Naram-Sin, Sargon's grandson: a Cargo workspace with the shared rules in `rules/`
-  and the engine in `gold/`. It is a course designer's tool that runs the same engine about
+  Naram-Sin, Sargon's grandson: one Cargo package whose `src/` folder
+  holds every Rust file. It is a course designer's tool that runs the same engine about
   50 times faster; students never edit it. Each `.rs` file matches the Python file of
   the same name, and Niram must visit exactly the same number of positions as
   Remus-GOLD at each depth (`cargo test --release` inside `engines/Niram`;

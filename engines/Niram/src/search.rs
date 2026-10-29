@@ -8,17 +8,17 @@
 
 use std::time::Instant;
 
-use niram_rules::attacks::in_check;
-use niram_rules::game_state::State;
-use niram_rules::legal_moves::legal_moves;
-use niram_rules::make_move::{make_move, undo_move};
-use niram_rules::move_ordering::order_moves;
-use niram_rules::moves::Move;
-use niram_rules::search_tools::{
+use crate::attacks::in_check;
+use crate::game_state::State;
+use crate::legal_moves::legal_moves;
+use crate::make_move::{make_move, undo_move};
+use crate::move_ordering::order_moves;
+use crate::moves::Move;
+use crate::search_tools::{
     MATE_SCORE, NULL_MOVE_REDUCTION, SearchInfo, SearchResult, SearchTimeout, capture_moves, check_time, format_info,
     has_pieces, is_draw_in_search, make_null_move, new_search_info, reduction, remember_killer, undo_null_move,
 };
-use niram_rules::transposition_table::{Bound, best_stored_move, probe, store};
+use crate::transposition_table::{Bound, best_stored_move, probe, store};
 
 use crate::evaluation::evaluate;
 
