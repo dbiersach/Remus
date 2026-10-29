@@ -19,7 +19,7 @@ This folder holds no engine code. Each student pair works in its own engine fold
 
 The student pairs fill in the blanks of `python_caches.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_caches_instructor.py`.
 
-Part #1: `remembered_perft()` stores each answer in a dict under the tuple key `(name, depth)`. The second call finds the answer and returns at once. The RED color version's transposition table remembers search results the same way.
+Part #1: `remembered_perft()` stores each knight path count in a dict under the tuple key `(square, depth)`. The second call finds the answer and returns at once. The RED color version's transposition table remembers search results the same way.
 
 Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 to g7, which the CYAN color version needs, and `random.seed()`, which makes a random choice repeat on every run.
 
