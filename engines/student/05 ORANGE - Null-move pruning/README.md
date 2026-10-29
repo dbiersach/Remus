@@ -6,7 +6,7 @@ Let the opponent move twice in a shallow search. If Remus is still too far ahead
 
 By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
+- Explain the idea of this enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
@@ -88,8 +88,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 413 to 417 of `search.py`, inside `make_null_move()`, in place of the stub below the docstring. It is called by `null_move_search()` in `search.py`.
 
-```text
+```python
 398 | def make_null_move(state: dict) -> Square | None:
+399 |     """
       ...
 411 |         The en passant target before the null move, which undo_null_move restores.
 412 |     """
@@ -109,7 +110,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 422 to 424 of `search.py`, inside `undo_null_move()`, in place of the stub below the docstring. It is called by `null_move_search()` in `search.py`.
 
-```text
+```python
 420 | def undo_null_move(state: dict, en_passant: Square | None) -> None:
 421 |     """Take back a null move, restoring the side to move and the en passant target."""
 422 +     state["history"].pop()
@@ -126,7 +127,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 23 to 28 of `test_upgrades.py`, inside `test_null_move_and_undo_restore_the_state()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 21 | def test_null_move_and_undo_restore_the_state() -> None:
 22 |     """Expected: a pass gives Black the turn, and its undo restores the exact state."""
 23 +     state = state_from_fen(ITALIAN)
@@ -146,7 +147,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 33 to 41 of `test_upgrades.py`, inside `test_null_move_search_saves_work_and_keeps_the_state()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 31 | def test_null_move_search_saves_work_and_keeps_the_state() -> None:
 32 |     """The upgraded search visits fewer positions than plain alpha-beta at depth 4."""
 33 +     state = state_from_fen(ITALIAN)

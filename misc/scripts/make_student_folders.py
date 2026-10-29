@@ -231,7 +231,7 @@ CODE_NUMBERS = (
 def snippet_block(numbered: list[tuple[int, str, str]]) -> str:
     """Return a Markdown code block from (line number, mark, text); number 0 is a gap."""
     width = len(str(numbered[-1][0]))
-    out = "```text\n"
+    out = "```python\n"
     for number, mark, text in numbered:
         if number == 0:
             out += " " * width + "   " + text + "\n"  # Lines left out, such as "..."
@@ -278,8 +278,12 @@ def function_code(student: Path, answer: Path, row: EditRow) -> str:
     def_number, docstring_end, first, last = body_span(answer.read_text(), name)
     numbered = [(def_number, "|", lines[def_number - 1])]
     context_start = max(def_number + 1, docstring_end - 1)
-    if context_start > def_number + 1:
+    if context_start > def_number + 2:
+        # Show the line that opens the docstring, so the highlighter sees a string
+        numbered.append((def_number + 1, "|", lines[def_number]))
         numbered.append((0, "", "..."))  # The middle of a long docstring
+    elif context_start > def_number + 1:
+        context_start = def_number + 1
     for number in range(context_start, docstring_end + 1):
         numbered.append((number, "|", lines[number - 1]))
     for number in range(first, last + 1):
@@ -467,7 +471,7 @@ def pairs_write(day: int, period: int, rows: dict, version_note: str) -> str:
         else:
             parts.append(f"the lab `{row['file']}` ({count})")
     if (day, period) in [(9, 2), (9, 3)]:
-        parts.append(f"their color version's functions, {version_note}")
+        parts.append(f"their enhanced engine's functions, {version_note}")
     writes = "; ".join(parts)
     return writes[:1].upper() + writes[1:]
 
@@ -634,11 +638,11 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
             out.append("")
         before = folder
     out += [
-        "## Color versions (Day 9, periods 2 and 3)",
+        "## Enhanced engines (Day 9, periods 2 and 3)",
         "",
-        "Each student pair writes the functions of one color version in `engines/student`.",
+        "Each student pair writes the functions of one enhanced engine in `engines/student`.",
         "",
-        "| Color version | Student pairs write |",
+        "| Enhanced engine | Student pairs write |",
         "| --- | --- |",
     ]
     for version in VERSIONS_TABLE:
@@ -730,8 +734,8 @@ def main():
             rows.setdefault((day, period), []).append(row)
             sections.append(bug_hunt_section(count))
         write_goals(day, period, sections)
-    # Each color version folder stubs the functions its student pair writes on Day 9.
-    # engines/student holds Remus-WHITE, the ten color versions, and
+    # Each engine folder stubs the functions its student pair writes on Day 9.
+    # engines/student holds Remus-WHITE, the ten enhanced engines, and
     # version_match.py, but not Remus-GOLD, which stays in engines/instructor.
     engines = ROOT / "engines" / "instructor"
     student_engines = ROOT / "engines" / "student"
@@ -775,9 +779,9 @@ def main():
                 written = rows[("version", version["folder"])]
                 file.write("\n" + edit_section(written))
                 file.write("\n" + code_section(target, folder, written))
-        print(f"{color} color version: {count} lines to type")
+        print(f"Remus-{color}: {count} lines to type")
         if count > MAX_TYPED_LINES:
-            print(f"  Too long: the {color} color version asks for {count} lines")
+            print(f"  Too long: Remus-{color} asks for {count} lines")
     print("Wrote every student folder")
     write_edit_plan(rows)
     write_day_readmes(rows)

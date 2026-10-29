@@ -1,9 +1,9 @@
 #!/usr/bin/env -S uv run
 """version_match.py
 
-Measure how much one color version adds. A color version's Remus plays a match
+Measure how much one enhanced engine adds. An enhanced engine's Remus plays a match
 against Remus-WHITE (the finished Day 9 Remus with no enhancements, in the
-00 WHITE engine folder beside this file), or against another color version, with
+00 WHITE engine folder beside this file), or against another enhanced engine, with
 python-chess as the referee. Every game is added to the class
 games file, misc/games/remus_games.pgn at the top of the Remus folder, and the script
 turns the score into an Elo gap. This is a referee outside the engine: the engine itself never
@@ -28,7 +28,7 @@ to help. The two games run at once, so the match takes about 20 minutes.
 An engine color names an engine folder beside this file, so "RED" finds
 "10 RED - Transposition table", "WHITE" finds "00 WHITE - No enhancements", and
 "GOLD" finds "11 GOLD - All enhancements", which only engines/instructor holds.
-The numbers 01 to 10 rank the color versions by the designer's league.
+The numbers 01 to 10 rank the enhanced engines by the designer's league.
 """
 
 import argparse
@@ -54,7 +54,7 @@ for folder in Path(__file__).parents:
         break
 # Every game any script plays
 GAMES_PATH = REPOSITORY / "misc" / "games" / "remus_games.pgn"
-YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every color version
+YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every enhanced engine
 MINUTES = 10.0  # Each side's clock
 INCREMENT = 0.0  # Seconds added after each move
 GAMES_AT_ONCE = 2  # Each game runs two engine processes
@@ -334,7 +334,7 @@ def play_game(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Measure a color version.")
+    parser = argparse.ArgumentParser(description="Measure an enhanced engine.")
     parser.add_argument("first", help='a color, such as "RED"')
     parser.add_argument("second", nargs="?", default=YARDSTICK)
     parser.add_argument("--games", type=int, default=2, help="games in the match")

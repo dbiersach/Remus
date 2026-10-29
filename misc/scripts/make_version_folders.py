@@ -6,17 +6,17 @@ Build one engine folder per Remus version in engines/instructor.
 Remus-WHITE is the Day 9 Remus at the end of period 1, with none of the ten
 enhancements. Its engine folder, engines/instructor/00 WHITE - No enhancements, is an
 exact copy of the Day 9 period1 instructor folder, and its engine is complete before
-the student pairs start their color versions in period 2. Each color version
+the student pairs start their enhanced engines in period 2. Each enhanced engine
 folder is Remus-WHITE plus one enhancement,
-named by a color so that no color version sounds better than another. A student pair builds its
-color version, then its Remus plays Remus-WHITE to measure how much Elo the one
+named by a color so that no engine sounds better than another. A student pair builds its
+enhanced engine, then its Remus plays Remus-WHITE to measure how much Elo the one
 enhancement adds. Remus-GOLD, the finished Remus of Day 10, holds every
 enhancement at once. Its folder, engines/instructor/11 GOLD - All enhancements, is
 written by hand, and this script only rewrites its README.md. engines/Niram holds
 the same engine in Rust.
 
-The script copies the Day 9 files, adds the color version's files from the GOLD folder,
-and applies the color version's edits. Each search enhancement gets a new search function
+The script copies the Day 9 files, adds the enhanced engine's files from the GOLD folder,
+and applies the enhanced engine's edits. Each search enhancement gets a new search function
 built from alpha_beta_with_quiescence, so the one idea it adds stands out. Run it
 after any change to the Day 9 or GOLD code, then run make_student_folders.py.
 """
@@ -79,7 +79,7 @@ EXPLAIN_LAST = '    print(f"  Score for the side to move'
 
 
 def version_search(name: str, summary: str, edits: list[tuple[str, str]]) -> str:
-    """Return alpha_beta_with_quiescence renamed to `name`, with the color version's edits."""
+    """Return alpha_beta_with_quiescence renamed to `name`, with the enhanced engine's edits."""
     text = BASE_SEARCH.replace("alpha_beta_with_quiescence(", f"{name}(")
     text = replace_once(text, BASE_SUMMARY, summary, name)
     for old, new in edits:
@@ -392,7 +392,7 @@ def search_version(
             "one move deeper at a time until the clock runs out.\n",
             (
                 "one move deeper at a time until the clock runs out.\n\n"
-                f"The {color} color version adds {function}, and think uses it.\n"
+                f"Remus-{color} adds {function}, and think uses it.\n"
             ),
         ),
     ]
@@ -449,14 +449,14 @@ def evaluation_version(color: str, term: str, constants: list[str], label: str):
             "the table upside down, so its row 7 uses the table's row 0.\n",
             (
                 "the table upside down, so its row 7 uses the table's row 0.\n\n"
-                f"The {color} color version adds a third term, {term}.\n"
+                f"Remus-{color} adds a third term, {term}.\n"
             ),
         ),
     ]
 
 
 def test_text(header: str, imports: str, tests: list[str], extra: str = "") -> str:
-    """Return a color version's test_upgrades.py: its own tests plus tests from GOLD."""
+    """Return an enhanced engine's test_upgrades.py: its own tests plus tests from GOLD."""
     final_tests = FINAL / "test_upgrades.py"
     bodies = "".join(function_text(final_tests, name) + "\n\n" for name in tests)
     return (
@@ -470,7 +470,7 @@ def test_text(header: str, imports: str, tests: list[str], extra: str = "") -> s
 def agreement_test(function: str) -> str:
     """Return a test that a version search finds the plain search's score."""
     return f'''def test_{function}_agrees_with_alpha_beta() -> None:
-    """The color version saves work but finds the same score at the same depth."""
+    """The enhanced engine saves work but finds the same score at the same depth."""
     state = state_from_fen(ITALIAN)
     before = state_snapshot(state)
     plain_score, _ = alpha_beta_with_quiescence(state, 3, 0, *WIDE, SearchInfo())
@@ -518,7 +518,7 @@ from make_move import state_snapshot
 from search import MATE_SCORE, SearchInfo, alpha_beta_with_quiescence, {names}
 """
 
-# For each color version: the folder name, the idea in one line, the files it copies
+# For each enhanced engine: the folder name, the idea in one line, the files it copies
 # from the GOLD folder, its edits as (file, old text, new text), its test file,
 # and the functions the student pair writes
 VERSIONS_TABLE = [
@@ -566,7 +566,7 @@ VERSIONS_TABLE = [
             [],
         ),
         "tests": test_text(
-            "Tests for the RED color version: the transposition table and table_search.",
+            "Tests for Remus-RED: the transposition table and table_search.",
             SEARCH_TEST_IMPORTS.format(names="table_search")
             + "from fen import START_FEN\nfrom game_state import position_key\n"
             "from make_move import make_move\nfrom moves import Move, move_from_uci\n"
@@ -648,7 +648,7 @@ VERSIONS_TABLE = [
             ),
         ],
         "tests": test_text(
-            "Tests for the GREEN color version: the opening book.",
+            "Tests for Remus-GREEN: the opening book.",
             "from fen import START_FEN, state_from_fen\nfrom make_move import "
             "make_move\nfrom moves import move_to_uci\nfrom notation import parse_san\n"
             "from opening_book import BOOK_PATH, book_move, load_book\n"
@@ -695,7 +695,7 @@ VERSIONS_TABLE = [
             [],
         ),
         "tests": test_text(
-            "Tests for the BLUE color version: killer moves and killer_search.",
+            "Tests for Remus-BLUE: killer moves and killer_search.",
             SEARCH_TEST_IMPORTS.format(names="killer_search, remember_killer")
             + "from fen import START_FEN\nfrom moves import move_from_uci, "
             "move_to_uci\n",
@@ -717,7 +717,7 @@ VERSIONS_TABLE = [
             "PINK", "pvs_search", PINK_LATER_MOVE, PINK_SEARCH, [], []
         ),
         "tests": test_text(
-            "Tests for the PINK color version: principal variation search.",
+            "Tests for Remus-PINK: principal variation search.",
             SEARCH_TEST_IMPORTS.format(names="pvs_search"),
             [],
             agreement_test("pvs_search") + PINK_NULL_WINDOW_TEST,
@@ -737,7 +737,7 @@ VERSIONS_TABLE = [
             "YELLOW", "draw_sense_search", YELLOW_DRAW, YELLOW_SEARCH, [], []
         ),
         "tests": test_text(
-            "Tests for the YELLOW color version: draw sense.",
+            "Tests for Remus-YELLOW: draw sense.",
             SEARCH_TEST_IMPORTS.format(names="draw_sense_search, is_draw_in_search")
             + "from fen import START_FEN\nfrom make_move import make_move\n"
             "from moves import move_from_uci\n",
@@ -778,7 +778,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
             "Pawns:",
         ),
         "tests": test_text(
-            "Tests for the PURPLE color version: pawn structure.",
+            "Tests for Remus-PURPLE: pawn structure.",
             "from evaluation import pawn_structure\nfrom fen import START_FEN, "
             "state_from_fen\nfrom search import MATE_SCORE\n",
             [
@@ -801,7 +801,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
             "Mating:",
         ),
         "tests": test_text(
-            "Tests for the CYAN color version: the mating bonus.",
+            "Tests for Remus-CYAN: the mating bonus.",
             "from evaluation import mating_bonus\nfrom fen import state_from_fen\n"
             "from search import MATE_SCORE\n",
             ["test_mating_bonus_prefers_the_losing_king_in_the_corner"],
@@ -842,7 +842,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
             [],
         ),
         "tests": test_text(
-            "Tests for the ORANGE color version: null-move pruning.",
+            "Tests for Remus-ORANGE: null-move pruning.",
             SEARCH_TEST_IMPORTS.format(
                 names="make_null_move, null_move_search, undo_null_move"
             ),
@@ -881,7 +881,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
             [],
         ),
         "tests": test_text(
-            "Tests for the BROWN color version: late move reductions.",
+            "Tests for Remus-BROWN: late move reductions.",
             SEARCH_TEST_IMPORTS.format(names="reduced_search, reduction")
             + "from board import EMPTY\nfrom moves import Move\n",
             ["test_only_late_quiet_moves_are_reduced"],
@@ -900,7 +900,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         "copies": [],
         "edits": evaluation_version("GRAY", "king_safety", ["SHIELD_PAWN"], "King:"),
         "tests": test_text(
-            "Tests for the GRAY color version: king safety.",
+            "Tests for Remus-GRAY: king safety.",
             "from evaluation import king_safety\nfrom fen import START_FEN, "
             "state_from_fen\nfrom search import MATE_SCORE\n",
             ["test_king_safety_rewards_the_pawn_shield"],
@@ -1041,7 +1041,7 @@ RUN_SCRIPTS = {
     ),
     "smoke_test.py": (
         (
-            "The Day 9 smoke test for this color version. Press Run in VS Code: Remus-{color} "
+            "The Day 9 smoke test for this enhanced engine. Press Run in VS Code: Remus-{color} "
             "plays\none 2-minute game against Remus-WHITE, which shows that the engine "
             "plays legal\nmoves to the end of a game. Nobody reads the result."
         ),
@@ -1098,8 +1098,10 @@ def white_readme() -> str:
         "Remus-WHITE is the finished Day 9 Remus: alpha-beta with quiescence, move "
         "ordering, iterative deepening, and a clock, with none of the ten "
         "enhancements. This folder is an exact copy of the Day 9 `period1` "
-        "instructor folder. Every color version beside it is Remus-WHITE plus one "
-        "enhancement, and each one measures its strength against Remus-WHITE.\n\n"
+        "instructor folder. Every enhanced engine beside it is this same engine with "
+        "one enhancement added, and each one measures its strength against "
+        "Remus-WHITE. No student pair edits this folder: it stays plain Remus so "
+        "there is always something to compare against.\n\n"
         "## Check it\n\nOpen `run_tests.py` in this folder and press Run.\n"
     )
 
@@ -1143,7 +1145,7 @@ def main():
         built.append(folder)
     tidy(built)
     print(f"Copied Remus-WHITE from {BASE} to {WHITE}")
-    print(f"Built {len(built)} color version folders in {REMUS_FOLDER}  (expected 10)")
+    print(f"Built {len(built)} enhanced engine folders in {REMUS_FOLDER}  (expected 10)")
     print(f"Kept the hand-written {FINAL.name} and rewrote its README.md")
 
 

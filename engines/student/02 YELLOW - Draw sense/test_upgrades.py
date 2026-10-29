@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the YELLOW color version: draw sense.
+Tests for Remus-YELLOW: draw sense.
 """
 
 from fen import START_FEN, state_from_fen
@@ -19,7 +19,7 @@ WIDE = (-MATE_SCORE - 1, MATE_SCORE + 1)  # A window that every score fits insid
 
 
 def test_draw_sense_search_agrees_with_alpha_beta() -> None:
-    """The color version saves work but finds the same score at the same depth."""
+    """The enhanced engine saves work but finds the same score at the same depth."""
     # Day 9, period 2: write this function.
     # The docstring above says what this test must check.
     raise NotImplementedError(

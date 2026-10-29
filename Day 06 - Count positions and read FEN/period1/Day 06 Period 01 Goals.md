@@ -46,7 +46,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### `countdown()`
 
-```text
+```python
 15 |     """Print number, number - 1, ..., 1, and then Go!"""
 16 |     # Base case: at 0 the function stops calling itself
 17 +     if number == 0:
@@ -63,7 +63,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### `count_leaves()`
 
-```text
+```python
 37 |         The number of leaves in the whole tree.
 38 |     """
 39 +     if isinstance(tree, str):

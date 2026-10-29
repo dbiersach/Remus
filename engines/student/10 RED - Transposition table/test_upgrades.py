@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the RED color version: the transposition table and table_search.
+Tests for Remus-RED: the transposition table and table_search.
 """
 
 from fen import START_FEN, state_from_fen
@@ -33,7 +33,7 @@ def test_two_move_orders_reach_one_position_key() -> None:
 
 
 def test_table_search_agrees_with_alpha_beta() -> None:
-    """The color version saves work but finds the same score at the same depth."""
+    """The enhanced engine saves work but finds the same score at the same depth."""
     state = state_from_fen(ITALIAN)
     before = state_snapshot(state)
     plain_score, _ = alpha_beta_with_quiescence(state, 3, 0, *WIDE, SearchInfo())

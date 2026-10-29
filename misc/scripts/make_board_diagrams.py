@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """make_board_diagrams.py
 
-Draw the chess board diagrams that the color version READMEs show beside their examples.
+Draw the chess board diagrams that the enhanced engine READMEs show beside their examples.
 
 A course designer tool, like the other make_*.py scripts. Each diagram in DIAGRAMS
 names a position in FEN, the arrows to draw, and the squares to color. The script

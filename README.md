@@ -99,6 +99,21 @@ teacher's laptop or a computer at home.
    [Lucas Chess guide](misc/docs/course/lucas_chess_guide.md) shows, with screenshots, how
    to add Remus through its `remus.bat` and watch it play.
 
+### Stockfish
+
+Stockfish is the strongest free chess engine in the world, and like Remus it speaks
+UCI. Remus plays it in class at a reduced strength, such as 1500 Elo, to see how good
+Remus really is. Lucas Chess installs its own copy of Stockfish, so the class laptops
+need nothing more.
+
+To get the newest Stockfish at home, download it free from
+[stockfishchess.org](https://stockfishchess.org/). On Windows, pick the file
+`stockfish-windows-x86-64-universal.exe`. This "universal" build checks which
+processor the computer has when it starts and uses that processor's fastest
+instructions, such as AVX2, so there is no need to choose among the other builds.
+Stockfish has no board of its own: add the `.exe` to Lucas Chess as an external
+engine, the same way the Lucas Chess guide adds Remus.
+
 From here on, every file runs inside VS Code. Open a file, such as `perft.py` in
 `Day 06 - Count positions and read FEN/period4/instructor`, and click the Run Python
 File button (the triangle at the top right of the editor). Each file prints its own

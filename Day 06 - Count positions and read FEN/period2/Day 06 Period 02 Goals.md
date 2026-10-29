@@ -57,8 +57,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 41 to 48 of `perft.py`, inside `perft()`, in place of the stub below the docstring. It is called by `divide()` in `perft.py`.
 
-```text
+```python
 25 | def perft(state: dict, depth: int) -> int:
+26 |     """
      ...
 39 |         The number of leaf positions. At depth 0 the position itself counts as 1.
 40 |     """

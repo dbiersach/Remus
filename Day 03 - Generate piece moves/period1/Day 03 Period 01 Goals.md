@@ -46,7 +46,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #1 - Repeat with while
 
-```text
+```python
 21 |     print("Part #1 - Repeat with while")
 22 |     # A while loop repeats as long as its test is True
 23 +     count = 0
@@ -61,7 +61,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - A Direction Is a Tuple
 
-```text
+```python
 30 |     # Row 0 is rank 8, so a step toward rank 8 makes the row smaller: -1
 31 |     up_right = (-1, 1)
 32 +     row_step, col_step = up_right
@@ -74,7 +74,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - Walk Until the Edge or a Piece
 
-```text
+```python
 41 |     row, col = 4, 3
 42 |     squares = ""
 43 +     while True:

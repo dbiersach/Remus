@@ -64,7 +64,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** line 64 of `move_generation.py`, inside `king_moves()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 62 | def king_moves(board: Board, square: Square, color: str) -> list[Move]:
 63 |     """Return the one-step moves of a king on the square (castling comes later)."""
 64 +     return jump_moves(board, square, color, KING_STEPS)

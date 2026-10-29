@@ -6,7 +6,7 @@ Score a repeated position, or one at the fifty-move limit, as a draw inside the 
 
 By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
+- Explain the idea of this enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
@@ -94,8 +94,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 413 to 414 of `search.py`, inside `is_draw_in_search()`, in place of the stub below the docstring. It is called by `draw_sense_search()` in `search.py`.
 
-```text
+```python
 396 | def is_draw_in_search(state: dict) -> bool:
+397 |     """
       ...
 411 |         the search scores it 0 instead of chasing a win that cannot happen.
 412 |     """
@@ -112,9 +113,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 23 to 29 of `test_upgrades.py`, inside `test_draw_sense_search_agrees_with_alpha_beta()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 21 | def test_draw_sense_search_agrees_with_alpha_beta() -> None:
-22 |     """The color version saves work but finds the same score at the same depth."""
+22 |     """The enhanced engine saves work but finds the same score at the same depth."""
 23 +     state = state_from_fen(ITALIAN)
 24 +     before = state_snapshot(state)
 25 +     plain_score, _ = alpha_beta_with_quiescence(state, 3, 0, *WIDE, SearchInfo())
@@ -127,13 +128,13 @@ The number at the left of each line is its line number once the code is typed. W
 32 | def test_a_repeated_position_is_a_draw() -> None:
 ```
 
-**How it works:** The test sets up the Italian opening from its FEN and takes a snapshot of the whole state. It runs the plain search, `alpha_beta_with_quiescence`, to depth 3 with the wide window, then the color version's `draw_sense_search` on the same position. The three asserts check that both searches give the same score, that the new search returns a line of moves (a non-empty principal variation), and that the snapshot is unchanged, which proves every `make_move` was undone. `*WIDE` unpacks the pair of numbers into the two arguments `alpha` and `beta`.
+**How it works:** The test sets up the Italian opening from its FEN and takes a snapshot of the whole state. It runs the plain search, `alpha_beta_with_quiescence`, to depth 3 with the wide window, then the enhanced engine's `draw_sense_search` on the same position. The three asserts check that both searches give the same score, that the new search returns a line of moves (a non-empty principal variation), and that the snapshot is unchanged, which proves every `make_move` was undone. `*WIDE` unpacks the pair of numbers into the two arguments `alpha` and `beta`.
 
 ### `test_a_repeated_position_is_a_draw()` in `test_upgrades.py`
 
 **Where:** lines 34 to 38 of `test_upgrades.py`, inside `test_a_repeated_position_is_a_draw()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 32 | def test_a_repeated_position_is_a_draw() -> None:
 33 |     """After Nf3 Nf6 Ng1 Ng8 the starting position appears for the second time."""
 34 +     state = state_from_fen(START_FEN)
@@ -152,7 +153,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 43 to 44 of `test_upgrades.py`, inside `test_the_fifty_move_limit_is_a_draw()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 41 | def test_the_fifty_move_limit_is_a_draw() -> None:
 42 |     """A halfmove clock of 100 is 50 moves by each side with no capture or pawn move."""
 43 +     state = state_from_fen("4k3/8/8/8/8/8/8/R3K3 w - - 100 80")

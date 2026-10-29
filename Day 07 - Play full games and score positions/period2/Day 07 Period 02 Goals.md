@@ -70,8 +70,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 112 to 116 of `notation.py`, inside `parse_san()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`.
 
-```text
+```python
  90 | def parse_san(state: dict, text: str) -> Move:
+ 91 |     """
       ...
 110 |         If no legal move matches.
 111 |     """
@@ -89,7 +90,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #1 - random.choice() Picks One Item
 
-```text
+```python
 24 |     random.seed(2016)  # The same seed gives the same pick on every run
 25 |     moves = ["e2e4", "d2d4", "g1f3", "c2c4"]
 26 +     pick = random.choice(moves)
@@ -102,7 +103,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #2 - A Loop Keeps the Best Item So Far
 
-```text
+```python
 30 |     # Start with the first piece, then swap in any piece worth more
 31 |     victims = ["p", "q", "n"]
 32 +     best = victims[0]
@@ -118,7 +119,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #3 - Notes Go to stderr
 
-```text
+```python
 38 |     print("Part #3 - Notes Go to stderr")
 39 |     # A GUI reads stdout, so notes for people go to stderr where the GUI ignores them
 40 +     print("This note goes to stderr", file=sys.stderr)
@@ -130,7 +131,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #4 - Read Commands from stdin and Answer
 
-```text
+```python
 42 |     print("Part #4 - Read Commands from stdin and Answer")
 43 |     print("Type isready, then hello, then quit, pressing Enter after each")
 44 +     for line in sys.stdin:

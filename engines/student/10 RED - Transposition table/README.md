@@ -6,7 +6,7 @@ Remember positions already searched, so the same position reached in two move or
 
 By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
+- Explain the idea of this enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
@@ -47,7 +47,7 @@ Each version searched the ten positions of `compare_search.py`, one depth at a t
 
 ## What to expect
 
-Remus-RED is the only single color version that rated clearly above Remus-WHITE in the designer's league: +101 plus or minus 67. Fewer positions for the same depth, and the biggest savings in endgames, where a few pieces shuffle between the same squares and nearly every position is reached many ways. Positions per second stay close to Remus-WHITE's.
+Remus-RED is the only single enhancement that rated clearly above Remus-WHITE in the designer's league: +101 plus or minus 67. Fewer positions for the same depth, and the biggest savings in endgames, where a few pieces shuffle between the same squares and nearly every position is reached many ways. Positions per second stay close to Remus-WHITE's.
 
 ## Where your code fits
 
@@ -97,9 +97,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 29 to 31 of `transposition_table.py`, inside `store()`, in place of the stub below the docstring. It is called by `table_search()` in `search.py`.
 
-```text
+```python
 25 | def store(
-     ...
+26 |     table: dict, key: str, depth: int, score: int, bound: str, best: Move | None
 27 | ) -> None:
 28 |     """Save a search result for a position, keeping the deeper of two results."""
 29 +     old = table.get(key)
@@ -116,8 +116,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 56 to 66 of `transposition_table.py`, inside `probe()`, in place of the stub below the docstring. It is called by `table_search()` in `search.py`.
 
-```text
+```python
 34 | def probe(table: dict, key: str, depth: int, alpha: int, beta: int) -> int | None:
+35 |     """
      ...
 54 |         or an upper bound at or below alpha (no improvement). Otherwise None.
 55 |     """
@@ -143,7 +144,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 20 to 32 of `test_upgrades.py`, inside `test_transposition_table_bounds()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 17 | def test_transposition_table_bounds() -> None:
 18 |     """Expected: an exact entry answers at its depth; a bound answers only when it
 19 |     settles the window."""

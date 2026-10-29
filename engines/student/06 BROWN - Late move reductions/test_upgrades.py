@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the BROWN color version: late move reductions.
+Tests for Remus-BROWN: late move reductions.
 """
 
 from board import EMPTY

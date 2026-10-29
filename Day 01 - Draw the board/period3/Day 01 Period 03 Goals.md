@@ -46,7 +46,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #1 - A List of Pieces
 
-```text
+```python
 12 |     print("Part #1 - A List of Pieces")
 13 |     back_rank = ["r", "n", "b", "q", "k", "b", "n", "r"]
 14 +     print(f"Pieces on Black's back rank: {len(back_rank)}  (expected 8)")
@@ -60,7 +60,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - Visit Every Square with for and range
 
-```text
+```python
 18 |     print("Part #2 - Visit Every Square with for and range")
 19 |     # range(8) counts 0, 1, 2, ..., 7: one number for each file
 20 +     for col in range(8):
@@ -74,7 +74,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - A Board Is a List of Rows
 
-```text
+```python
 25 |     print("Part #3 - A Board Is a List of Rows")
 26 |     # Each row is a fresh list of 8 dots, so changing one row leaves the others alone
 27 +     board = []
@@ -98,7 +98,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #4 - Count the Pawns in a Row
 
-```text
+```python
 42 |     print("Part #4 - Count the Pawns in a Row")
 43 |     # Play 1. e4: the pawn leaves e2 (row 6, col 4) and lands on e4 (row 4, col 4)
 44 +     board[6][4] = "."

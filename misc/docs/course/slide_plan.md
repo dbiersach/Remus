@@ -102,7 +102,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 9.2 | Stopping safely | `SearchTimeout` unwinding the recursion; each `finally` undoes its move, so the root position is intact |
 | 9.3 | One command at a time | The UCI loop reads `go`, the search runs until the clock says stop, and `bestmove` goes out before the next command is read |
 | 9.4 | The principal variation | An `info depth 4 score cp 35 pv ...` line drawn as moves on the board |
-| 9.5 | The color versions | The ten color versions with the idea each one adds, and Remus-WHITE, the Day 9 Remus with no enhancements, which they all play |
+| 9.5 | The enhanced engines | The ten enhanced engines with the idea each one adds, and Remus-WHITE, the Day 9 Remus with no enhancements, which they all play |
 | 9.6 | Transpositions | 1. Nf3 Nf6 2. Nc3 and 1. Nc3 Nf6 2. Nf3 reach one position. A table entry: depth, score, bound, best move |
 | 9.7 | Exact, lower, upper | Three number lines showing what a stored bound proves for a new `(alpha, beta)` window |
 | 9.8 | Killer moves | Two slots per ply; a quiet move that caused a cutoff jumps the queue in sibling positions |
@@ -113,8 +113,8 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 | 9.13 | King safety | A castled king with its three shield pawns, 15 points each while the enemy queen is on the board |
 | 9.14 | Finishing a won endgame | The `mating_bonus` heat map: the losing king pushed to the edge, the winning king closing in |
 | 9.15 | The opening book | Book lines in SAN turned into a dict from `position_key` to moves, drawn as a small tree |
-| 9.16 | Reading a battle result | Two games, an Elo gap, and its margin of error from `demo_results.py`, beside the same engine color's 110 league games and their much narrower margin |
-| 9.17 | Color battles | The two rounds of pairings, how to copy an engine folder from the USB stick over the host's folder, `play_battle.py`, and the class score table that the league table answers at the end |
+| 9.16 | Reading a battle result | Two games, an Elo gap, and its margin of error from `demo_results.py`, beside the same engine's 110 league games and their much narrower margin |
+| 9.17 | Engine battles | The two rounds of pairings, how to copy an engine folder from the USB stick over the host's folder, `play_battle.py`, and the class score table that the league table answers at the end |
 
 ## Day 10: Solve a science problem using chess AI
 

@@ -15,7 +15,7 @@ The lab runs in the Day 9, period 2 folder. Remus-RED's transposition table
 caches search results the same way, and Remus-CYAN measures king distances.
 
 - **Uses:** nothing outside the standard library; `knight_perft()` sits in the lab file itself
-- **Used by:** nothing; it is practice for the color versions in [`transposition_table.py`](transposition_table.md) and [`evaluation.py`](evaluation.md)
+- **Used by:** nothing; it is practice for the enhanced engines in [`transposition_table.py`](transposition_table.md) and [`evaluation.py`](evaluation.md)
 
 ## Words to know
 

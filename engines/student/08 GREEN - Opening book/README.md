@@ -6,7 +6,7 @@ Play the first moves of well-known openings from a book instead of searching.
 
 By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
+- Explain the idea of this enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
@@ -84,8 +84,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 74 to 98 of `opening_book.py`, inside `load_book()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`, `main()` in `uci_engine.py`.
 
-```text
+```python
  58 | def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
+ 59 |     """
       ...
  72 |         The dict is empty if the file does not exist.
  73 |     """
@@ -125,7 +126,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 103 to 104 of `opening_book.py`, inside `book_move()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`, `main()` in `uci_engine.py`.
 
-```text
+```python
 101 | def book_move(book: dict[str, list[Move]], state: dict) -> Move | None:
 102 |     """Return a random book move for this position, or None when out of book."""
 103 +     choices = book.get(position_key(state))
