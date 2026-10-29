@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """version_elo.py
 
-Rate every Remus version against Stockfish: Remus-WHITE, the ten color versions,
+Rate every Remus version against Stockfish: Remus-WHITE, the ten enhanced engines,
 and Remus-GOLD.
 
 Each version plays Stockfish at four strengths (UCI_Elo) near the strength where
@@ -18,7 +18,7 @@ first with "cargo build --release" inside its folder. Its games are rated apart
 from the Remus games.
 
 Before the first game, the script copies every version folder into a temporary
-folder and runs the engines from that copy. A change to the color version code during
+folder and runs the engines from that copy. A change to the enhanced engine code during
 the hours the games take then cannot change a version halfway through its games.
 
 Remus is pure Python, so it plays weaker when it shares a processor core. Each

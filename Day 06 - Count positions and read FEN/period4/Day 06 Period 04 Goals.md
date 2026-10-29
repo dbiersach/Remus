@@ -73,8 +73,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 36 to 53 of `fen.py`, inside `fen_placement()`, in place of the stub below the docstring. It is called by `state_to_fen()` in `fen.py`.
 
-```text
+```python
 21 | def fen_placement(board: Board) -> str:
+22 |     """
      ...
 34 |         empty squares in a row, so an empty rank is "8".
 35 |     """
@@ -107,8 +108,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 70 to 83 of `fen.py`, inside `board_from_placement()`, in place of the stub below the docstring. It is called by `state_from_fen()` in `fen.py`.
 
-```text
+```python
 56 | def board_from_placement(text: str) -> Board:
+57 |     """
      ...
 68 |         The board, row 0 (rank 8) first.
 69 |     """
@@ -135,7 +137,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #1 - split() Cuts Text at Every Space
 
-```text
+```python
 22 |     print("Part #1 - split() Cuts Text at Every Space")
 23 |     # split("/") cuts at every slash instead, the way fen.py cuts the placement into rows
 24 +     fields = START_FEN.split()
@@ -148,7 +150,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #2 - Name the Six Fields
 
-```text
+```python
 26 |
 27 |     print("Part #2 - Name the Six Fields")
 28 +     for i in range(6):
@@ -161,7 +163,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #3 - int() and ValueError
 
-```text
+```python
 33 |     # Try "12" here too: int() turns digits into a number and raises ValueError otherwise
 34 |     text = "x"
 35 +     try:

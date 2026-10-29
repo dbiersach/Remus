@@ -68,8 +68,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 195 to 196 of `attacks.py`, inside `in_check()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 179 | def in_check(state: dict, color: str) -> bool:
+180 |     """
       ...
 193 |         True if that king stands on a square the other side attacks.
 194 |     """
@@ -86,8 +87,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 30 to 37 of `legal_moves.py`, inside `legal_moves()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 16 | def legal_moves(state: dict) -> list[Move]:
+17 |     """
      ...
 28 |         The pseudo-legal moves that do not leave the mover's king in check.
 29 |     """

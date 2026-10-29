@@ -1,4 +1,4 @@
-# Color versions: one color, one idea
+# Enhanced engines: one idea each
 
 ## The big picture
 
@@ -6,13 +6,14 @@ Remus-WHITE is the finished Day 9 Remus with none of the enhancements. It alread
 searches with alpha-beta, quiescence, move ordering, iterative deepening, and a
 clock. Ten ideas can make it stronger. On Day 9, in periods 2 and 3, each student pair builds
 one of them, so the class can measure which idea adds the most strength. In period 4
-the student pairs carry their color versions to each other's laptops and play battles to find
-out which engine color is strongest.
+the student pairs carry their enhanced engines to each other's laptops and play battles to find
+out which enhanced engine is strongest.
 
-Each color version has an engine color instead of a number or a letter, so no color version sounds
+Each engine folder carries a color in its name, such as `10 RED`, instead of a number or
+a letter. The color is only a label that tells the folders apart, so no engine sounds
 better than another before the games are played.
 
-## Where the color versions live
+## Where the enhanced engines live
 
 The Remus versions live in the `engines` folder at the top of the Remus folder, which
 holds three folders:
@@ -25,17 +26,17 @@ holds three folders:
 
 `00 WHITE - No enhancements` is Remus-WHITE, an exact copy of the Day 9 `period1`
 folder: the Day 9 Remus at the end of period 1, when its engine is finished and before
-the student pairs start their color versions. Each engine folder from `01 GRAY` to
+the student pairs start their enhanced engines. Each engine folder from `01 GRAY` to
 `10 RED`, such as `10 RED - Transposition table`, starts as the same engine with one
 enhancement added. From period 2 to the end of the day, each student pair works only in
 its own engine folder in `engines/student`, so periods 2, 3, and 4 of Day 9 hold no
 engine code of their own. No student pair edits `00 WHITE` after period 1: it stays
-plain Remus so every enhancement has something to be measured against. The number in front of each color version ranks it by its rating
+plain Remus so every enhancement has something to be measured against. The number in front of each enhanced engine ranks it by its rating
 over Remus-WHITE in the designer's 10-minute league (below), from 01 GRAY to 10 RED.
 
 `11 GOLD - All enhancements` is Remus-GOLD, the finished Remus of Day 10 with all ten
 enhancements at once. No student pair writes GOLD, so only `engines/instructor` holds
-it. `make_version_folders.py` copies Remus-WHITE and builds the ten color versions from
+it. `make_version_folders.py` copies Remus-WHITE and builds the ten enhanced engines from
 the Day 9 `period1` code and Remus-GOLD.
 
 ## Remus Engine Enhancements
@@ -53,20 +54,20 @@ the Day 9 `period1` code and Remus-GOLD.
 | 09 BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` and `order_moves()` in `move_ordering.py`, plus 1 test in `test_upgrades.py` | 27 |
 | 10 RED | Transposition table | Remember positions already searched, so one position reached in two move orders is scored once | `store()` in `transposition_table.py` and `probe()` in `transposition_table.py`, plus 1 test in `test_upgrades.py` | 27 |
 
-Every color version asks for 16 to 30 typed lines, under the 40-line limit for one period. Where the enhancement itself is short, the student pair also writes the tests that prove it works, such as the test that a null window answers only "better or not?", so every student pair spends both periods thinking about its idea rather than waiting.
+Every enhanced engine asks for 16 to 30 typed lines, under the 40-line limit for one period. Where the enhancement itself is short, the student pair also writes the tests that prove it works, such as the test that a null window answers only "better or not?", so every student pair spends both periods thinking about its idea rather than waiting.
 
 ## Words to know
 
 - **Elo gap:** the rating difference that a match score suggests. A 75 percent
   score means a gap of about +191.
-- **yardstick:** Remus-WHITE. Every color version plays the same opponent, so
+- **yardstick:** Remus-WHITE. Every enhanced engine plays the same opponent, so
   the gaps compare fairly.
 - **null window:** a search window one point wide, (alpha, alpha + 1). It answers
   only "better or not?", which takes far less work than an exact score.
 
-## How a color version search works
+## How an enhanced engine search works
 
-Each search color version adds one new function to `search.py` beside
+Each search enhancement adds one new function to `search.py` beside
 `alpha_beta_with_quiescence`, and `think()` calls the new function. The new function
 is the Day 9 search with one change, so a student pair can compare the two side by side:
 
@@ -79,31 +80,31 @@ is the Day 9 search with one change, so a student pair can compare the two side 
 | ORANGE | `null_move_search` | Before the moves, try a pass with a search 2 plies shallower |
 | BROWN | `reduced_search` | Cut one ply from late, quiet moves; search again in full on a surprise |
 
-The evaluation color versions (PURPLE, CYAN, GRAY) add one term to `evaluate()` and one
-line to `explain_evaluation()`. The GREEN color version asks the book before searching, in
+The evaluation enhancements (PURPLE, CYAN, GRAY) add one term to `evaluate()` and one
+line to `explain_evaluation()`. Remus-GREEN asks the book before searching, in
 both `uci_engine.py` and `console_game.py`.
 
 ## The Day 9 battles: version_match.py
 
-`version_match.py`, in `engines/student` and `engines/instructor`, plays a color version's Remus against Remus-WHITE,
-or against another color version, at 10 minutes a side. It adds every game to
+`version_match.py`, in `engines/student` and `engines/instructor`, plays an enhanced engine's Remus against Remus-WHITE,
+or against another enhanced engine, at 10 minutes a side. It adds every game to
 `misc/games/remus_games.pgn` and prints the score.
 
 Nobody types a command to run it. Every engine folder holds two short scripts that
-run `version_match.py` for its own engine color, so a student pair (or the teacher) opens one in VS
+run `version_match.py` for its own engine, so a student pair (or the teacher) opens one in VS
 Code and presses the Run Python File button:
 
 | Script | When | What it plays |
 | --- | --- | --- |
 | `smoke_test.py` | Day 9, period 3 | One 2-minute game against Remus-WHITE, to show the engine plays legal moves to the end |
-| `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting color version, one with each piece color |
+| `play_battle.py` | Day 9, period 4 | A battle: two 10-minute games against a visiting enhanced engine, one with each piece color |
 
 In the Day 9 battles a visiting student pair brings its engine folder on a USB drive and
 copies it over the folder of the same engine color in the host's `engines/student`, which
-holds that engine color with its functions still stubbed. The
+holds that engine with its functions still stubbed. The
 host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the
 visitor's engine color, such as `"RED"`, and presses Run. The numbered steps at the top
-of `play_battle.py` walk through the whole battle. The two engine colors play twice from the same opening, once with each
+of `play_battle.py` walk through the whole battle. The two engines play twice from the same opening, once with each
 piece color, about 20 minutes for both games. Each battle goes on the board as a row of the
 class table, and the period has room for two rounds. The visitor's folder stays on the
 host laptop when the visitor leaves: it replaces only the stubs of an engine color the host
@@ -111,11 +112,11 @@ student pair never writes, and the host's own engine folder is untouched. Two ga
 stronger, so the script prints no Elo gap for fewer than 10 games; while round 2
 runs, each student pair puts its round 1 score into `demo_results.py` and sees how wide the
 margin of error is. The teacher then shows the league table in
-[`engines_elo.md`](engines_elo.md), which rates every engine color from 110 games, along with
-Remus-GOLD's score against every engine color and Remus-WHITE. Nothing needs to run: the
+[`engines_elo.md`](engines_elo.md), which rates every enhanced engine from 110 games, along with
+Remus-GOLD's score against every enhanced engine and Remus-WHITE. Nothing needs to run: the
 table is already written.
 
-The Day 9 smoke test plays one game on a short clock only to prove that the color version's
+The Day 9 smoke test plays one game on a short clock only to prove that the enhanced engine's
 engine plays legal moves to the end; nobody reads its result.
 
 In the games file every player is named `Remus-` and its engine color, such as `Remus-WHITE`, so
@@ -133,8 +134,8 @@ takes White once. The games file stores the opening in a `StartMoves` header.
 
 `misc/scripts/version_league.py` is a course designer tool: no student or teacher
 runs it in class. Run from the top Remus folder, it plays a round robin: each of the 12 versions
-(Remus-WHITE, the ten color versions, and Remus-GOLD) plays each other version 6 times,
-396 games in all, or as many times as `--games` asks. Then it fits one Elo rating to every version from every color version
+(Remus-WHITE, the ten enhanced engines, and Remus-GOLD) plays each other version 6 times,
+396 games in all, or as many times as `--games` asks. Then it fits one Elo rating to every version from every enhanced engine
 game in the games file, the games of `version_match.py` included, with Remus-WHITE
 pinned at 0. Each rating is that version's gain over Remus-WHITE. The league plays
 at 10 minutes a side with no increment, because Remus in Python searches too slowly
@@ -220,14 +221,14 @@ numbers follow this table, from `01 GRAY` to `10 RED`.
 Remus-GOLD, with all ten enhancements, wins most of its games: its +339 plus or minus
 91 runs from +248 to +430, and it scored at least 6.5 of 10 against every other
 version. Remus-RED, the transposition table, is the only single enhancement whose
-range stays above 0, from +34 to +168. Every other color version's range includes 0,
+range stays above 0, from +34 to +168. Every other enhanced engine's range includes 0,
 so one of those enhancements alone changes Remus by less than 110 games can measure.
 Most games end in a draw (the versions share one evaluation and one search), so each
 game moves a rating by little.
 
 The book changes Remus-GREEN's result. In the same league with every game started
 from the 32 openings, Remus-GREEN scored 47 of 110 points and rated +7, last among
-the color versions. From the starting position it scored 55.5 points and rated +58.
+the enhanced engines. From the starting position it scored 55.5 points and rated +58.
 Both ranges overlap, so the gain is likely but not proven. With the openings,
 Remus-RED rated +132 and Remus-GOLD +340.
 
@@ -254,19 +255,19 @@ as `perft.py`, `play_match.py`, and `show_board.py` do not count.
 | Remus-GRAY | King safety | 12 | 1,070 | +30 |
 | Remus-GOLD | All enhancements | 15 | 1,463 | +423 |
 
-Remus-GOLD holds 423 more code lines than Remus-WHITE. The ten color versions add 589
-lines when each one is counted on its own, so GOLD needs 166 fewer. Most color versions
+Remus-GOLD holds 423 more code lines than Remus-WHITE. The ten enhanced engines add 589
+lines when each one is counted on its own, so GOLD needs 166 fewer. Most enhanced engines
 change the same search loop in `search.py`, and GOLD holds one copy of that loop
-with all ten ideas inside it. GREEN adds the most lines of any single color version, 132,
+with all ten ideas inside it. GREEN adds the most lines of any single enhancement, 132,
 because its book reads moves in SAN and so loads `notation.py` as well.
 
 ## Puzzle questions
 
-1. Why does every color version play the same opponent instead of each other?
-2. The YELLOW color version's whole enhancement is a 2-line function. Why can such a small change still win games?
-3. Which color versions change the score Remus finds at a fixed depth, and which only find
+1. Why does every enhanced engine play the same opponent instead of each other?
+2. Remus-YELLOW's whole enhancement is a 2-line function. Why can such a small change still win games?
+3. Which enhanced engines change the score Remus finds at a fixed depth, and which only find
    the same score faster?
-4. In the designer's league, only Remus-RED among the single color versions measured
+4. In the designer's league, only Remus-RED among the single enhancements measured
    clearly stronger than Remus-WHITE, but Remus-GOLD gained far more. How can ten
    small gains that each hide inside the error bar add up to one gain that shows?
 5. Remus-GREEN rated +7 when every game started three moves deep, and +58 when its

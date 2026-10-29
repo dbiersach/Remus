@@ -6,7 +6,7 @@ Search late, quiet moves one ply shallower, and in full only if they surprise.
 
 By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
+- Explain the idea of this enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
@@ -83,8 +83,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 423 to 425 of `search.py`, inside `reduction()`, in place of the stub below the docstring. It is called by `reduced_search()` in `search.py`.
 
-```text
+```python
 397 | def reduction(
+398 |     depth: int, index: int, move: Move, captured: str, gives_check: bool
       ...
 421 |         quiet move rarely turns out best. Otherwise 0.
 422 |     """
@@ -102,7 +103,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 24 to 29 of `test_upgrades.py`, inside `test_only_late_quiet_moves_are_reduced()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 22 | def test_only_late_quiet_moves_are_reduced() -> None:
 23 |     """Expected: only a late, quiet move with no check and 3 plies to go loses 1 ply."""
 24 +     quiet = Move((6, 0), (5, 0))
@@ -122,7 +123,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 34 to 42 of `test_upgrades.py`, inside `test_reduced_search_saves_work_and_keeps_the_state()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 32 | def test_reduced_search_saves_work_and_keeps_the_state() -> None:
 33 |     """The upgraded search visits fewer positions than plain alpha-beta at depth 4."""
 34 +     state = state_from_fen(ITALIAN)

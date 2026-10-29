@@ -1,13 +1,13 @@
-# Day 9, Period 2: Python lab 12 and the color versions
+# Day 9, Period 2: Python lab 12 and the engine enhancements
 
-Each student pair builds one color version in `engines/student` at the top of the Remus folder, such as `engines/student/10 RED - Transposition table`. That engine folder already holds the whole Remus engine from period 1, so the student pair adds only its one enhancement there. Leave `00 WHITE - No enhancements` as it is: it is plain Remus, kept so the class can measure each enhancement against it.
+Each student pair builds one enhanced engine in `engines/student` at the top of the Remus folder, such as `engines/student/10 RED - Transposition table`. That engine folder already holds the whole Remus engine from period 1, so the student pair adds only its one enhancement there. Leave `00 WHITE - No enhancements` as it is: it is plain Remus, kept so the class can measure each enhancement against it.
 
 ## Learning objectives
 
 By the end of this period, each student pair can:
 
 - Use a dict as a cache with tuples as keys. **Measured by:** The lab remembers perft counts already computed and prints the time saved.
-- Add one enhancement to Remus-WHITE. **Measured by:** The color version's own tests pass in its folder.
+- Add one enhancement to Remus-WHITE. **Measured by:** The enhanced engine's own tests pass in its folder.
 
 ## The files
 
@@ -34,17 +34,17 @@ Click your student pair's engine folder below. Its `README.md` shows the code to
 
 The student pairs fill in the blanks of `python_caches.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_caches_instructor.py`.
 
-Part #1: `remembered_perft()` stores each knight path count in a dict under the tuple key `(square, depth)`. The second call finds the answer and returns at once. The RED color version's transposition table remembers search results the same way.
+Part #1: `remembered_perft()` stores each knight path count in a dict under the tuple key `(square, depth)`. The second call finds the answer and returns at once. Remus-RED's transposition table remembers search results the same way.
 
-Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 to g7, which the CYAN color version needs, and `random.seed()`, which makes a random choice repeat on every run.
+Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 to g7, which Remus-CYAN needs, and `random.seed()`, which makes a random choice repeat on every run.
 
 ## The period step by step
 
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:50 | Student pairs work through `python_caches.py`: a dict remembers answers, `math.dist()`, and `random.seed()`. |
-| 10:50 to 11:00 | Slides: the ten color versions. Each one is the period 1 Remus with one enhancement added, such as RED (transposition table) or BLUE (killer moves). Colors name the color versions so that no color version sounds better than another. |
-| 11:00 to 12:00 | Each student pair opens its color version in `engines/student`, reads the version README, and writes the color version's stubbed code. |
+| 10:50 to 11:00 | Slides: the ten enhanced engines. Each one is the period 1 Remus with one enhancement added, such as RED (transposition table) or BLUE (killer moves). The folder names use colors so that no engine sounds better than another. |
+| 11:00 to 12:00 | Each student pair opens its enhanced engine in `engines/student`, reads the version README, and writes the enhanced engine's stubbed code. |
 
 ## What you edit in the lab
 
@@ -58,7 +58,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### `remembered_perft()`
 
-```text
+```python
 34 |     """Return knight_perft from a square, computing each (square, depth) only once."""
 35 |     # A tuple can be a dict key, so one key holds both the square and the depth
 36 +     key = (square, depth)
@@ -73,7 +73,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - math.dist() Measures a Straight Line
 
-```text
+```python
 56 |     print("Part #2 - math.dist() Measures a Straight Line")
 57 |     # d4 is (row 4, col 3) and g7 is (row 1, col 6): three squares across, three up
 58 +     distance = math.dist((4, 3), (1, 6))
@@ -86,7 +86,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - random.seed() Repeats the Same Random Numbers
 
-```text
+```python
 60 |
 61 |     print("Part #3 - random.seed() Repeats the Same Random Numbers")
 62 +     random.seed(2016)

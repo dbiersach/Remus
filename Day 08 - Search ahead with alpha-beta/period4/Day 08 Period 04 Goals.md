@@ -62,8 +62,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 36 to 43 of `move_ordering.py`, inside `mvv_lva_score()`, in place of the stub below the docstring. It is called by `order_moves()` in `move_ordering.py`.
 
-```text
+```python
 18 | def mvv_lva_score(move: Move, board: Board) -> int:
+19 |     """
      ...
 34 |         A promotion counts like capturing the new piece.
 35 |     """

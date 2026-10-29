@@ -29,7 +29,7 @@ to everything below.
 | First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
 | First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
-| Matches | Day 10: each student pair's color version plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the designer's league |
+| Matches | Day 10: each student pair's enhanced engine plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the designer's league |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 | Documentation | `misc/docs/code/remus_program_overview.md` for the whole program, one page per script in `misc/docs/code/`, and `misc/docs/course/slide_plan.md` for the PowerPoint slides |
 
@@ -48,13 +48,13 @@ plugs it into a GUI, and teaches Remus to think.
 | 6 | Counting the tree, and FEN | Recursion; `split`, exceptions | Perft matches the reference counts; FEN in and out |
 | 7 | A whole game, and judging a position | `random`, a loop that keeps the best so far, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
 | 8 | Searching ahead, then smarter | Recursion review, keeping a list in order with `insert` | Minimax, negamax, alpha-beta, quiescence, move ordering |
-| 9 | The clock and the color versions | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one color version per student pair; battles between the colors |
+| 9 | The clock and the engine enhancements | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhanced engine per student pair; battles between the colors |
 | 10 | Solve a science problem using chess AI | `math.dist`, `random.seed`, `append` and `pop` as make and undo | A measurement AI that finds a hidden peak; a phase hunt that names the crystals in an X-ray pattern; each student pair reports its science results |
 
 Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special move
 in place, and Week 2 opens with recursion and perft. Perft on Monday gives every student pair a
 verified checkpoint after the weekend. Week 2 moves fast so that Day 9 can hold the
-color versions and Day 10 the science problem, so a student pair that falls behind
+enhanced engines and Day 10 the science problem, so a student pair that falls behind
 rejoins in the next period's `student/` folder, which starts from working code, instead of a catch-up period.
 
 ### Progressive elaboration
@@ -71,8 +71,8 @@ of Day 7), then it plays **good** moves (Days 7 to 10).
 | Attacks | Loop over enemy pieces (D4) | Look outward from the square (D4) | Castling and legality use it (D5) | Check extension in the search (D8) |
 | Game end | Checkmate and stalemate (D7) | Fifty-move rule (D7) | Threefold repetition (D7) | Insufficient material (D7) |
 | Notation | UCI text (D2) | FEN (D6) | SAN out (D7) | SAN in, by matching legal moves (D7) |
-| Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering (D8), iterative deepening (D9), the ten color versions (D9) |
-| Evaluation | Material count (D7) | Piece-square tables (D7) | Mate scores that prefer the faster mate (D8) | Pawn structure, mating bonus, and king safety color versions (D9) |
+| Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering (D8), iterative deepening (D9), the ten enhanced engines (D9) |
+| Evaluation | Material count (D7) | Piece-square tables (D7) | Mate scores that prefer the faster mate (D8) | Pawn structure, mating bonus, and king safety enhanced engines (D9) |
 | Science AI | Paper hidden-peak game and greedy measurement choice (D10 P1) | Explore and exploit weight tuned on a benchmark (D10 P1) | Phase hunt: score a guess about a powder, and a greedy agent (D10 P2) | Search every set of phases with make and undo, keep every tie, and verify on known powders (D10 P3) |
 | Interface | Console printout and a board picture (D1) | Move arrows (D3) and random Remus in Lucas Chess (D5) | Console game in SAN and full UCI (D7) | `info` lines, time control, `stop` (D9) |
 
@@ -330,7 +330,7 @@ undoes exactly, and Remus plays random legal moves in Lucas Chess.
 ## Week 2: A game, a GUI, and a thinking engine
 
 Week 2 is tight by design. Days 6 to 8 move faster than Week 1, so that Day 9 can hold
-the color versions and Day 10 can hold the science problem. There is no spare
+the enhanced engines and Day 10 can hold the science problem. There is no spare
 catch-up period: a student pair that falls behind rejoins in the next period's `student/` folder,
 which starts from working code.
 
@@ -413,7 +413,7 @@ moves" milestone.
 **Checkpoint (4:30):** Remus finds every mate in 1 and every mate in 2 of
 `mate_puzzles.epd`, and alpha-beta returns the same score as negamax with fewer nodes.
 
-### Day 9: The clock, and the color versions
+### Day 9: The clock, and the engine enhancements
 
 - **P1. Iterative deepening, the clock, and UCI info.** The teacher reads `go
   movetime`, `wtime`, `btime`, `winc`, and `binc`, turns the clock into a thinking
@@ -424,14 +424,13 @@ moves" milestone.
   none of the enhancements. The period ends with the class watching Remus-WHITE play
   a full 5-minute game against Stockfish at 1500 Elo in Lucas Chess, set up as in
   [`lucas_chess_guide.md`](lucas_chess_guide.md), Part 3.
-- **P2. Python lab 12 and the color versions.** The lab, `python_caches.py`,
+- **P2. Python lab 12 and the engine enhancements.** The lab, `python_caches.py`,
   covers dicts as caches and tuples as keys (7 typed lines, so an enhancement of 30 lines
-  stays within the limit). Then each of the 10 student pairs takes one color version from
+  stays within the limit). Then each of the 10 student pairs takes one enhanced engine from
   `engines/student` at the top of the Remus folder: the period 1 engine with one enhancement added, with the student pair's function stubbed (at
-  most 30 typed lines). Colors replace numbers so no color version sounds better than
-  another. The color versions are described in [remus_versions.md](../engines/remus_versions.md).
+  most 30 typed lines). The folder names use colors so no engine sounds better than another. The enhanced engines are described in [remus_versions.md](../engines/remus_versions.md).
 
-| Color | Color version |
+| Color | Enhanced engine |
 | --- | --- |
 | RED | Transposition table: a dict from `position_key` to depth, score, bound, and best move |
 | GREEN | Opening book: SAN lines checked with `legal_moves()` |
@@ -444,26 +443,26 @@ moves" milestone.
 | BROWN | Late move reductions: search late, quiet moves one ply shallower |
 | GRAY | King safety: reward the pawn shield while queens are on |
 
-- **P3. Color versions: test and measure.** Each student pair finishes its color version,
+- **P3. Engine enhancements: test and measure.** Each student pair finishes its enhanced engine,
   passes its tests, and plays one short smoke-test game against Remus-WHITE: it opens
   `smoke_test.py` in its version folder and presses Run in VS Code. The 2-minute game
   only checks that the engine plays legal moves to the end. Each student pair writes one sentence on the board:
   what its enhancement should change, and how the class will see it.
-- **P4. Color battles.** Each student pair copies its engine folder onto its USB stick. In
+- **P4. Engine battles.** Each student pair copies its engine folder onto its USB stick. In
   each of two rounds five student pairs host and five visit: the visitors copy their folder
   over the folder of the same engine color in the host laptop's `engines/student` folder, and the host
   opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the
-  visitor's engine color, and presses Run. The two engine colors play twice at 10 minutes a side, once
+  visitor's engine color, and presses Run. The two engines play twice at 10 minutes a side, once
   with each piece color, and each student pair writes the score on the board. The class reads the board and
   asks why two games prove little; the teacher then shows the league table from
-  `misc/docs/engines/remus_versions.md`, 110 games for each engine color. While round 2 runs, each
+  `misc/docs/engines/remus_versions.md`, 110 games for each engine. While round 2 runs, each
   student pair puts its round 1 score into the demo `demo_results.py`, which turns it into an
-  Elo gap with a margin of error, then tries its engine color's 110 league games and sees the
-  margin shrink. The visitor's folder stays on the host laptop, in place of an engine color
+  Elo gap with a margin of error, then tries its engine's 110 league games and sees the
+  margin shrink. The visitor's folder stays on the host laptop, in place of an engine
   the host student pair never writes.
 
-**Checkpoint (4:30):** every color version passes its tests and its one-game smoke
-test, and has played two battles against other engine colors.
+**Checkpoint (4:30):** every enhanced engine passes its tests and its one-game smoke
+test, and has played two battles against other enhanced engines.
 
 ### Day 10: Solve a science problem using chess AI
 
@@ -555,7 +554,7 @@ The full description of each script is in `misc/docs/code/`.
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build enhanced engines` | `play_battle.py` in each color version folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the color versions live in the top `engines/` folder |
+| `Day 09 - Add the clock and build enhanced engines` | `play_battle.py` in each engine folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the enhanced engines live in the top `engines/` folder |
 | `Day 10 - Solve a science problem using chess AI` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`. The Day 10 engine is Remus-GOLD in the teacher's `engines/instructor/11 GOLD - All enhancements`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
 
 Outside the Day folders:
@@ -566,7 +565,7 @@ Outside the Day folders:
 | `misc/scripts/` | The course designer's tools, which no student or teacher needs in class: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`, `version_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
 | `misc/scripts/run_all_tests.py` | Runs pytest on each period's `instructor/` folder in turn |
 | `misc/scripts/make_period_folders.py` | Builds the `instructor/` folders of `period1` to `period3` of each Day from `period4` |
-| `misc/scripts/make_version_folders.py` | Copies Remus-WHITE and builds the ten color version folders in `engines/instructor` from the Day 9 `period1` code and Remus-GOLD |
+| `misc/scripts/make_version_folders.py` | Copies Remus-WHITE and builds the ten enhanced engine folders in `engines/instructor` from the Day 9 `period1` code and Remus-GOLD |
 | `student/` in each period, `misc/scripts/make_student_folders.py` | The student copy of every period, with that period's student functions as stubs, and the script that builds it |
 | `misc/docs/` | `course/` (this plan, the roadmap, the slide plan, the Lucas Chess guide, and the two briefing PDFs), `code/` (the program overview and the script pages), and `engines/` (the Remus versions and their ratings) |
 | `<skill>.py` in the student period folder, `<skill>_instructor.py` in the instructor one | Python skills labs: student file with blanks, instructor file with answers, in the period of their lab (`period_guides.LABS` lists the 16 lab and demo periods) |

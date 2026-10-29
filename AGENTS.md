@@ -228,7 +228,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   below). Beside `instructor/` and `student/` sits one goals file for the period,
   such as `Day 03 Period 02 Goals.md` (David, 2026-10-29), which replaces separate
   instructor and student READMEs. It names the period, its new and growing files,
-  and the functions student pairs write. Every period goals file and color version README
+  and the functions student pairs write. Every period goals file and enhanced engine README
   also holds (David, 2026-10-27):
   - **Learning objectives** as a bulleted list, each with a **Measured by** line that
     says how the teacher sees a student pair has learned it: a named test that passes, a
@@ -236,7 +236,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - **The changes and why**: one paragraph for every function or lab part the student pair
     writes, saying what the code does, why it is written that way, and how it fits
     the whole engine.
-  Every color version README (David, 2026-10-28) also explains its enhancement in enough
+  Every enhanced engine README (David, 2026-10-28) also explains its enhancement in enough
   detail for a student pair to work from it alone: a worked example, why it makes Remus
   stronger, what it costs, a table of positions per depth and positions per second
   measured against Remus-WHITE, what to expect in games, and where the student pair's code
@@ -252,11 +252,11 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
   in `misc/docs/images/phase_hunt/`, drawn by `uv run misc/scripts/make_phase_hunt_figures.py`,
   which installs matplotlib for itself alone. Measure `VERSION_MEASURES` again after any
-  change to a color version's search or evaluation.
+  change to an enhanced engine's search or evaluation.
   Each goals file also lists the timed steps of its period (from `DAY_GUIDES`) and
   a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it. Every goals
-  file and color version README then has "The code you type" (David, 2026-10-29):
+  file and enhanced engine README then has "The code you type" (David, 2026-10-29):
   for each function and lab part, the lines to type marked `+`, with the lines
   around them and their line numbers, where the code sits and what calls it, and
   how it works, from `CODE_NOTES` in `period_guides.py`.
@@ -313,7 +313,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   the finished Day 9 Remus with none of the ten enhancements (named by David on
   2026-10-27): an exact copy of the Day 9 `period1/instructor` folder in `instructor`
   and of `period1/student` in `student`. `01 GRAY - King safety` to `10 RED -
-  Transposition table` are the ten color versions, each Remus-WHITE plus one
+  Transposition table` are the ten enhanced engines, each Remus-WHITE plus one
   enhancement. `11 GOLD - All enhancements` is Remus-GOLD, the finished Remus with
   all ten (David, 2026-10-27), and only `engines/instructor` holds it. `engines/Niram`
   holds Niram, the same engine in Rust. Remus-GOLD is the engine of Day 10 (David,
@@ -321,17 +321,17 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   (`hidden_peak.py`, `phase_hunt.py`, their tests, and the results demo), and their
   READMEs point to Remus-GOLD for the engine, Lucas Chess, and `estimate_elo.py`.
   Remus-GOLD is written by hand, like a `period4/instructor` folder; edit the finished engine
-  there. `make_version_folders.py` copies Remus-WHITE and builds the ten color
-  versions in `engines/instructor` from the Day 9 `period1/instructor` code and
+  there. `make_version_folders.py` copies Remus-WHITE and builds the ten enhanced
+  engines in `engines/instructor` from the Day 9 `period1/instructor` code and
   Remus-GOLD, and rewrites only the GOLD README. `make_student_folders.py` copies the
   Day 9 `period1/student` folder to `engines/student` as Remus-WHITE and stubs each
-  color version's functions there; no student pair ever writes GOLD. Engine colors name the color versions so that no color version
-  sounds better than another. A two-digit prefix (David, 2026-10-28) orders the
+  enhanced engine's functions there; no student pair ever writes GOLD. The folder names use colors only so that no
+  engine sounds better than another. A two-digit prefix (David, 2026-10-28) orders the
   folders by each version's Elo over WHITE in the designer's league (Niram league 1,
   660 games at 10 minutes a side, with GREEN's and GOLD's games started from move 1
   so their book plays): 01 GRAY, 02 YELLOW, 03 CYAN, 04 PINK, 05 ORANGE, 06 BROWN,
-  07 PURPLE, 08 GREEN, 09 BLUE, 10 RED. `version_match.py` plays a color version
-  against Remus-WHITE or another engine color, and `play_battle.py` in each engine folder
+  07 PURPLE, 08 GREEN, 09 BLUE, 10 RED. `version_match.py` plays an enhanced engine
+  against Remus-WHITE or another enhanced engine, and `play_battle.py` in each engine folder
   runs it for the Day 9 battles. `version_league.py` plays a round robin of all 12
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
   with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions, and
@@ -350,7 +350,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   variation must match, and the results go to `misc/docs/engines/remus-niram parity.md`. A
   change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
   change in Niram and a clean `engine_parity.py` run. The Rust copies of WHITE
-  and the ten color versions were deleted (David, 2026-10-28) after Niram league 1, whose
+  and the ten enhanced engines were deleted (David, 2026-10-28) after Niram league 1, whose
   games stay in the games file: `version_league.py --niram --rate-only` rates those
   saved games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays Niram
   against Stockfish beside the Remus versions. The
@@ -394,13 +394,13 @@ learners extend it, and save open questions. Never drop in a complete optimized 
     `.py` file a student modifies or reads, named after that file (`board.py` has
     `board.md`).
   - `misc/docs/engines/`: the Remus versions and Niram: `remus_versions.md`,
-    the ten color versions and Remus-GOLD; `engines_elo.md`, the league and Stockfish
+    the ten enhanced engines and Remus-GOLD; `engines_elo.md`, the league and Stockfish
     ratings; and `remus-niram parity.md`, which `engine_parity.py` writes.
   Pictures live in `misc/docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `misc/docs/`.
-- Remus-WHITE, the ten color versions (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
-  are the **Remus versions** (David, 2026-10-28). Call them Remus versions or color
-  versions, never "stations", in file names, code, and prose. Game records keep the
+- Remus-WHITE, the ten enhanced engines (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
+  are the **Remus versions** (David, 2026-10-28). Call them Remus versions or enhanced
+  engines, never "stations", in file names, code, and prose. Game records keep the
   Event names `Station match`, `Station league`, and `Station Elo test`, so the
   games already in `misc/games/remus_games.pgn` still count toward the ratings.
   `version_elo.py` plays a new test under the Event `Engine Elo test`, which keeps
@@ -409,11 +409,18 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Black), and so does each Remus version (WHITE, GRAY, ..., RED, GOLD). Every
   Markdown file, and every text the builders write into one, qualifies a bare
   "color" as **piece color** or **engine color**: "5 games with each piece color",
-  "the visitor's engine color, such as `RED`". The compound names "color version" and
-  "color battle" always mean the engine color and need no qualifier. A Remus
+  "the visitor's engine color, such as `RED`". A Remus
   version's folder, such as `10 RED - Transposition table`, is its **engine
   folder**, never a "color folder". Code identifiers such as `color_of()` and
   `--colors` keep their names.
+- **Color is a folder label, not an identity** (David, 2026-10-29). The engine color
+  only tells the engine folders apart. Name a Remus version by its enhancement
+  ("the transposition table engine", "this enhancement") or by its engine name
+  (Remus-RED), and call the ten of them the **enhanced engines** or the **engine
+  enhancements**, never "color versions". Write "Engine enhancements: test and
+  measure" and "engine battles", not "Color versions" or "color battles". Use
+  "engine color" only where the text means the color word in a folder name, such as
+  the `VISITING_ENGINE` setting.
 - **Say "student pairs"** (David, 2026-10-29). The students work in pairs, and every
   document, comment, and builder text names them "student pairs" or "the student
   pair", never a bare "pairs": "the functions the student pairs write". A pair of

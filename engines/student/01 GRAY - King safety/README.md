@@ -6,7 +6,7 @@ While the enemy queen is on the board, reward pawns that shelter the king.
 
 By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
+- Explain the idea of this enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
@@ -73,8 +73,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 143 to 167 of `evaluation.py`, inside `king_safety()`, in place of the stub below the docstring. It is called by `evaluate()` in `evaluation.py`, `explain_evaluation()` in `evaluation.py`.
 
-```text
+```python
 126 | def king_safety(board: Board) -> int:
+127 |     """
       ...
 141 |         queens are gone the king is safe enough to walk forward, so the term is 0.
 142 |     """

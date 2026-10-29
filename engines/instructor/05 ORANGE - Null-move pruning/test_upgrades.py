@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the ORANGE color version: null-move pruning.
+Tests for Remus-ORANGE: null-move pruning.
 """
 
 from fen import state_from_fen

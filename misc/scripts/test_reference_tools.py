@@ -59,7 +59,7 @@ def code_blocks(markdown: str) -> list[tuple[str, list[tuple[int, str, str]]]]:
             break
         if line.startswith("### "):
             heading = line[4:]
-        elif line == "```text":
+        elif line == "```python":
             inside = True
             blocks.append((heading, []))
         elif line == "```":

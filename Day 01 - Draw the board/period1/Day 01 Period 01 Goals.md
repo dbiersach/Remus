@@ -48,7 +48,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - Say Hello
 
-```text
+```python
 18 |     print("Part #2 - Say Hello")
 19 |     # Store your team name, then print a greeting that uses it
 20 +     team_name = "Knight Riders"
@@ -63,7 +63,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - Your First Chess Line
 
-```text
+```python
 25 |     print("Part #3 - Your First Chess Line")
 26 |     # White's back rank, from the a-file to the h-file, as one string
 27 +     back_rank = "RNBQKBNR"

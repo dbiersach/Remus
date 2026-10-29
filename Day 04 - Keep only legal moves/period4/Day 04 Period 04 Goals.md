@@ -46,7 +46,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #1 - The Start Position
 
-```text
+```python
 36 |     print("Part #1 - The Start Position")
 37 |     # Write your prediction first, then run the file
 38 +     prediction = 20
@@ -59,7 +59,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - A King in Check
 
-```text
+```python
 41 |     print("Part #2 - A King in Check")
 42 |     # White: king on e1. Black: rook on e8 and king on a8. The rook checks down the e-file.
 43 +     state = position({"e1": "K", "e8": "r", "a8": "k"})
@@ -74,7 +74,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - A Pinned Knight
 
-```text
+```python
 48 |     print("Part #3 - A Pinned Knight")
 49 |     # Put a White knight on e2, between the king and the rook
 50 +     state = position({"e1": "K", "e2": "N", "e8": "r", "a8": "k"})

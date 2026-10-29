@@ -1,7 +1,7 @@
 # How strong each Remus engine plays
 
 This page rates the twelve Remus versions, Remus-WHITE (the finished Day 9 Remus with
-no enhancements), the ten color versions, and Remus-GOLD (all ten enhancements), plus
+no enhancements), the ten enhanced engines, and Remus-GOLD (all ten enhancements), plus
 Niram, the Rust copy of Remus-GOLD. Two yardsticks measure them:
 
 1. **The league** plays the versions against each other. It measures the gaps between
@@ -41,7 +41,7 @@ games.
 | 12 | Remus-WHITE | [00 WHITE](../../../engines/instructor/00%20WHITE%20-%20No%20enhancements) | 7-76-27 | 40.9% | 0 (pinned) |
 
 Each version played 110 games. Remus-GOLD and Remus-RED are the only versions whose
-range stays above 0; every other color version's range includes 0. Remus-YELLOW and
+range stays above 0; every other enhanced engine's range includes 0. Remus-YELLOW and
 Remus-GRAY both scored 46.5 points, and Remus-YELLOW ranks above because it beat
 Remus-GRAY 5.5 to 4.5. [`remus_versions.md`](remus_versions.md) explains the league
 and each enhancement.
@@ -84,7 +84,7 @@ Remus games pooled together pin the scale for the whole family to about +/- 30.
 **What the run can and cannot show.** Two margins of +/- 100 combine to about
 +/- 140 on a difference, so the run separates two versions 140 Elo or more apart,
 such as Remus-GOLD and Remus-WHITE, which stand 339 Elo apart in the league above. It
-cannot sort the nine color versions that sit within 70 Elo of Remus-WHITE in the
+cannot sort the nine enhanced engines that sit within 70 Elo of Remus-WHITE in the
 league: a gap of 35 Elo would take about 800 games per version. The league stays the
 measure of those small gaps, and the Stockfish run places the whole group on a
 familiar scale. A run that stops partway resumes from the
@@ -118,7 +118,7 @@ games under the Event "Station Elo test". The new run uses its own Event, so the
 | Games at once | 16, one per core of an i9-13900F (24 cores) |
 | Run time | 22,676 seconds, about 6 hours 18 minutes |
 
-Each version ran from a frozen copy of its version folder, so a change to the color version
+Each version ran from a frozen copy of its version folder, so a change to the enhanced engine
 code during the run could not change a version partway through its games. Every game
 started from the normal starting position. Stockfish at a limited strength picks among
 several moves at random, so no two games repeated.
@@ -188,7 +188,7 @@ No game reached the fifty-move rule, stalemate, or insufficient material.
 **The versions are mostly tied.** Every margin is about +/- 185 Elo, because 30 games
 cannot pin a rating more tightly. Two versions differ clearly only when their
 intervals do not overlap, and only Remus-GREEN at the top and Remus-BROWN at the
-bottom come close to that. Remus-GREEN, the opening-book color version, rated highest, but
+bottom come close to that. Remus-GREEN, the opening-book enhanced engine, rated highest, but
 with margins this wide its lead over Remus-GOLD and Remus-WHITE can be chance.
 
 **The ratings run high,** for the reason the plan above gives.

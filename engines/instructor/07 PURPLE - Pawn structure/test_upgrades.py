@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the PURPLE color version: pawn structure.
+Tests for Remus-PURPLE: pawn structure.
 """
 
 from evaluation import pawn_structure

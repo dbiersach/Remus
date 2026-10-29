@@ -1,10 +1,10 @@
-# Day 9, Period 3: Color versions: test and measure
+# Day 9, Period 3: Engine enhancements: test and measure
 
 ## Learning objectives
 
 By the end of this period, each student pair can:
 
-- Test an enhancement before trusting it. **Measured by:** The color version passes `run_tests.py` and a one-game smoke test against Remus-WHITE with no illegal moves.
+- Test an enhancement before trusting it. **Measured by:** The enhanced engine passes `run_tests.py` and a one-game smoke test against Remus-WHITE with no illegal moves.
 - Predict what the enhancement changes. **Measured by:** Each student pair writes one sentence on the board: what should change, and how the class will see it in the match results.
 
 ## The files

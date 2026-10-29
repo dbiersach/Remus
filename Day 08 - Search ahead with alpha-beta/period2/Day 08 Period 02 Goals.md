@@ -73,8 +73,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 226 to 241 of `search.py`, inside `alpha_beta()`, in place of the stub below the docstring. It is called by `main()` in `compare_search.py`.
 
-```text
+```python
 197 | def alpha_beta(
+198 |     state: dict, depth: int, ply: int, alpha: int, beta: int, info: SearchInfo
       ...
 224 |         The same score negamax returns at this depth.
 225 |     """
@@ -103,7 +104,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #1 - insert() Puts the Biggest Victim First
 
-```text
+```python
 26 |     victims = ["p", "r", "q", "n"]
 27 |     # Step past every piece worth at least as much, then insert the new piece there
 28 +     ordered = []
@@ -122,7 +123,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #2 - Start the Best at Minus Infinity
 
-```text
+```python
 37 |     print("Part #2 - Start the Best at Minus Infinity")
 38 |     # Every real value beats minus infinity, so the first victim always becomes best
 39 +     best_value = -float("inf")
@@ -140,7 +141,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### Part #3 - Time a perft Run
 
-```text
+```python
 46 |
 47 |     print("Part #3 - Time a perft Run")
 48 +     start = time.perf_counter()

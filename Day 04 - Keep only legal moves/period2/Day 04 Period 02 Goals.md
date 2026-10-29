@@ -70,8 +70,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 86 to 91 of `attacks.py`, inside `piece_at_offsets()`, in place of the stub below the docstring. It is called by `attacked_by_knight()` in `attacks.py`.
 
-```text
+```python
 64 | def piece_at_offsets(
+65 |     board: Board, square: Square, piece: str, offsets: list[Direction]
      ...
 84 |         True if one of the squares the offsets reach holds the piece.
 85 |     """
@@ -92,8 +93,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 113 to 115 of `attacks.py`, inside `attacked_by_pawn()`, in place of the stub below the docstring. It is called by `is_square_attacked()` in `attacks.py`.
 
-```text
+```python
 106 | def attacked_by_pawn(board: Board, square: Square, by_color: str) -> bool:
+107 |     """
       ...
 111 |     stands one row below it, at (row + 1, col - 1) or (row + 1, col + 1).
 112 |     """
@@ -111,7 +113,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 102 to 103 of `attacks.py`, inside `attacked_by_king()`, in place of the stub below the docstring. It is called by `is_square_attacked()` in `attacks.py`.
 
-```text
+```python
 100 | def attacked_by_king(board: Board, square: Square, by_color: str) -> bool:
 101 |     """Return True if the king of by_color is one step away."""
 102 +     king = "K" if by_color == WHITE else "k"

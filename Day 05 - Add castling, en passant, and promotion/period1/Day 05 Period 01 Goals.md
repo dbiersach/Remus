@@ -45,7 +45,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #1 - A Set Holds Each Item Once
 
-```text
+```python
 13 |     print("Part #1 - A Set Holds Each Item Once")
 14 |     # The squares that pieces have moved away from, with no repeats
 15 +     moved = set()
@@ -61,7 +61,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - Ask a Question with in
 
-```text
+```python
 20 |
 21 |     print("Part #2 - Ask a Question with in")
 22 +     print(f"Has the h1 rook moved? {'h1' in moved}  (expected True)")
@@ -74,7 +74,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - Look Up a Right in a Dict
 
-```text
+```python
 26 |     # Each home square guards castling rights: K is White's king side, q Black's queen side
 27 |     rights_lost = {"e1": "KQ", "h1": "K", "a1": "Q", "e8": "kq", "h8": "k", "a8": "q"}
 28 +     print(f"A piece leaving h1 removes: {rights_lost['h1']}  (expected K)")
@@ -87,7 +87,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #4 - Remove Rights with replace()
 
-```text
+```python
 32 |     rights = "KQkq"
 33 |     # replace("K", "") gives back a new string with every K taken out
 34 +     rights = rights.replace("K", "")

@@ -84,7 +84,7 @@ written yet.
 | 10 | 2 | `phase_hunt.py` | `greedy_phases` |
 | 10 | 3 | `phase_hunt.py` | `search` |
 
-On Day 9, periods 2 and 3, each student pair also writes the functions of its color version
+On Day 9, periods 2 and 3, each student pair also writes the functions of its enhanced engine
 in the `engines/student` folder at the top of the Remus folder, listed in
 [`remus_versions.md`](../engines/remus_versions.md).
 

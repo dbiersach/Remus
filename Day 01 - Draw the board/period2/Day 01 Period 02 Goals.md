@@ -47,7 +47,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #1 - Strings and Indexing
 
-```text
+```python
 13 |     square = "e2"
 14 |     # Index 0 is the first character of a string, index 1 the second
 15 +     file_letter = square[0]
@@ -61,7 +61,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - Letters Are Numbers: ord() and chr()
 
-```text
+```python
 23 |     print(f"chr(98) is {chr(98)}  (expected b)")
 24 |     # Counting from file a = 0, file e is 4 letters after a
 25 +     file_number = ord(file_letter) - ord("a")
@@ -75,7 +75,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - Numbers Back to a Square Name
 
-```text
+```python
 30 |     print("Part #3 - Numbers Back to a Square Name")
 31 |     # File number 6 is the g-file: start at "a" and count 6 letters on
 32 +     letter = chr(ord("a") + 6)
@@ -89,7 +89,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #4 - Upper and Lower Case
 
-```text
+```python
 37 |     # In Remus, uppercase letters are White pieces and lowercase are Black
 38 |     black_back_rank = "rnbqkbnr"
 39 +     white_back_rank = black_back_rank.upper()

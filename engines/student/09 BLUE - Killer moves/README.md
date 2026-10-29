@@ -6,7 +6,7 @@ Try quiet moves that caused a cutoff at the same depth right after the captures.
 
 By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
+- Explain the idea of this enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
@@ -83,7 +83,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 399 to 404 of `search.py`, inside `remember_killer()`, in place of the stub below the docstring. It is called by `killer_search()` in `search.py`.
 
-```text
+```python
 397 | def remember_killer(info: SearchInfo, ply: int, move: Move, board: Board) -> None:
 398 |     """Keep a quiet move that caused a cutoff as one of two killers for this ply."""
 399 +     if piece_at(board, move.to_square) != EMPTY or move.promotion is not None:
@@ -103,8 +103,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 79 to 95 of `move_ordering.py`, inside `order_moves()`, in place of the stub below the docstring. It is called by `quiescence()` in `search.py`, `alpha_beta_with_quiescence()` in `search.py`, `killer_search()` in `search.py`, `think()` in `search.py`.
 
-```text
+```python
 52 | def order_moves(
+53 |     moves: list[Move],
      ...
 77 |         `first` at the front.
 78 |     """
@@ -136,7 +137,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 23 to 27 of `test_upgrades.py`, inside `test_killers_keep_two_quiet_moves()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 21 | def test_killers_keep_two_quiet_moves() -> None:
 22 |     """Expected: after three cutoffs at ply 2, the two newest moves stay, newest first."""
 23 +     info = SearchInfo()

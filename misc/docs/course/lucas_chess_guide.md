@@ -14,7 +14,7 @@ This guide shows four things:
 4. Play against Remus yourself.
 
 The pictures use Remus-WHITE, the finished Day 9 Remus with no enhancements. Every
-other Remus, from the random-move Remus of Day 5 to your own color version, goes in
+other Remus, from the random-move Remus of Day 5 to your own enhanced engine, goes in
 the same way: only the folder of `remus.bat` changes.
 
 ## Part 1: Start Lucas Chess

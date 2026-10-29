@@ -652,9 +652,9 @@ PERIOD_TITLES = {
     (8, 3): "The horizon effect and quiescence",
     (8, 4): "Move ordering",
     (9, 1): "Iterative deepening, the clock, and UCI info",
-    (9, 2): "Python lab 12 and the color versions",
-    (9, 3): "Color versions: test and measure",
-    (9, 4): "Color battles",
+    (9, 2): "Python lab 12 and the engine enhancements",
+    (9, 3): "Engine enhancements: test and measure",
+    (9, 4): "Engine battles",
     (10, 1): "Science AI: hidden_peak.py",
     (10, 2): "The phase hunt: score a guess, and the greedy agent",
     (10, 3): "The phase hunt: search every set, and verify",
@@ -691,7 +691,7 @@ PERIOD_NOTES = {
         3,
     ): "Register `remus.bat` from the `student` folder in Lucas Chess again: Remus now "
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
-    (9, 2): "Each student pair builds one color version in `engines/student` at the "
+    (9, 2): "Each student pair builds one enhanced engine in `engines/student` at the "
     "top of the Remus folder, such as `engines/student/10 RED - Transposition table`. "
     "That engine folder already holds the whole Remus engine from period 1, so the "
     "student pair adds only its one enhancement there. Leave `00 WHITE - No "

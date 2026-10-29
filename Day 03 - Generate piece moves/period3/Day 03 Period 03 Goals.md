@@ -57,8 +57,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 91 to 104 of `move_generation.py`, inside `slide()`, in place of the stub below the docstring. It is called by `slider_moves()` in `move_generation.py`.
 
-```text
+```python
  70 | def slide(board: Board, square: Square, direction: Direction, color: str) -> list[Move]:
+ 71 |     """
       ...
  89 |         that piece is an enemy, the capture is the last move in the list.
  90 |     """

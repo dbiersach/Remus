@@ -73,7 +73,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** line 27 of `search.py`, inside `random_move()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 25 | def random_move(state: dict) -> Move:
 26 |     """Return a random legal move."""
 27 +     return random.choice(legal_moves(state))
@@ -88,8 +88,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 53 to 62 of `search.py`, inside `greedy_move()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`.
 
-```text
+```python
 38 | def greedy_move(state: dict) -> Move:
+39 |     """
      ...
 51 |         a random legal move.
 52 |     """

@@ -570,14 +570,14 @@ OBJECTIVES = {
         ),
         (
             "Add one enhancement to Remus-WHITE.",
-            "The color version's own tests pass in its folder.",
+            "The enhanced engine's own tests pass in its folder.",
         ),
     ],
     (9, 3): [
         (
             "Test an enhancement before trusting it.",
             (
-                "The color version passes `run_tests.py` and a one-game smoke test against "
+                "The enhanced engine passes `run_tests.py` and a one-game smoke test against "
                 "Remus-WHITE with no illegal moves."
             ),
         ),
@@ -591,10 +591,10 @@ OBJECTIVES = {
     ],
     (9, 4): [
         (
-            "Run a fair match between two color versions.",
+            "Run a fair match between two enhanced engines.",
             (
                 "The student pair copies its engine folder to another student pair's laptop, plays two "
-                "games against that student pair's engine color, one with each piece color, and "
+                "games against that student pair's engine, one with each piece color, and "
                 "writes the "
                 "result on the board."
             ),
@@ -603,7 +603,7 @@ OBJECTIVES = {
             "Read a match result with its margin of error.",
             (
                 "`demo_results.py` turns the student pair's two battle games, and then its "
-                "engine color's league games, into an Elo gap and margin, and the student pair says "
+                "engine's league games, into an Elo gap and margin, and the student pair says "
                 "which gap is larger than its margin and why two games cannot show "
                 "which enhancement is stronger."
             ),
@@ -690,7 +690,7 @@ OBJECTIVES = {
 # Objectives for the version READMEs, the same for every color
 VERSION_OBJECTIVES = [
     (
-        "Explain the idea of the color version's enhancement in two sentences.",
+        "Explain the idea of this enhancement in two sentences.",
         "The student pair explains the idea to another student pair, who can restate it.",
     ),
     (
@@ -728,8 +728,8 @@ VERSION_GUIDES = {
             "best move of the last depth is tried before everything else."
         ),
         "why": (
-            "Every color version is Remus-WHITE plus exactly one change. Playing each "
-            "color version against Remus-WHITE is a fair experiment: same openings, both "
+            "Every enhanced engine is Remus-WHITE plus exactly one change. Playing each "
+            "enhanced engine against Remus-WHITE is a fair experiment: same openings, both "
             "piece colors, and only one thing different."
         ),
         "cost": (
@@ -771,7 +771,7 @@ VERSION_GUIDES = {
             "In the designer's league, where every version searched about as deep "
             "as Remus does in a game of several hours, Remus-GOLD scored 85 "
             "percent and rated +339 plus or minus 91 over Remus-WHITE, far ahead "
-            "of every single color version. It gains more the longer the clock, "
+            "of every single enhancement. It gains more the longer the clock, "
             "because null moves and late move reductions save work only at depth 3 "
             "and deeper."
         ),
@@ -815,7 +815,7 @@ VERSION_GUIDES = {
             "same position gets a different mate score at a different ply."
         ),
         "expect": (
-            "Remus-RED is the only single color version that rated clearly above "
+            "Remus-RED is the only single enhancement that rated clearly above "
             "Remus-WHITE in the designer's league: +101 plus or minus 67. "
             "Fewer positions for the same depth, and the biggest savings in endgames, "
             "where a few pieces shuffle between the same squares and nearly every "
@@ -1377,7 +1377,7 @@ CODE_NOTES: dict[tuple[str, str], str] = {
     ("test_upgrades.py", "test_draw_sense_search_agrees_with_alpha_beta"): (
         "The test sets up the Italian opening from its FEN and takes a snapshot of "
         "the whole state. It runs the plain search, `alpha_beta_with_quiescence`, "
-        "to depth 3 with the wide window, then the color version's "
+        "to depth 3 with the wide window, then the enhanced engine's "
         "`draw_sense_search` on the same position. The three asserts check that "
         "both searches give the same score, that the new search returns a line of "
         "moves (a non-empty principal variation), and that the snapshot is "
@@ -1422,7 +1422,7 @@ CODE_NOTES: dict[tuple[str, str], str] = {
     ),
     ("test_upgrades.py", "test_pvs_search_agrees_with_alpha_beta"): (
         "The test runs the plain search, `alpha_beta_with_quiescence`, and the "
-        "color version's `pvs_search` on the Italian opening at depth 3. The "
+        "enhanced engine's `pvs_search` on the Italian opening at depth 3. The "
         "asserts check that both find the same score, that PVS returns a line of "
         "moves, and that the state snapshot is unchanged, which proves the search "
         "undid every move it made. `*WIDE` unpacks the pair of numbers into `alpha` "
@@ -2652,11 +2652,11 @@ LAB_NOTES = {
             "Part #1: `remembered_perft()` stores each knight path count in a dict under "
             "the tuple key `(square, depth)`. The second call finds the answer and "
             "returns at once. "
-            "The RED color version's transposition table remembers search results the same way."
+            "Remus-RED's transposition table remembers search results the same way."
         ),
         (
             "Parts #2 and #3 use `math.dist()` for the straight-line distance from d4 "
-            "to g7, which the CYAN color version needs, and `random.seed()`, which makes a "
+            "to g7, which Remus-CYAN needs, and `random.seed()`, which makes a "
             "random choice repeat on every run."
         ),
     ],
@@ -2666,7 +2666,7 @@ LAB_NOTES = {
             "an Elo gap, then into a range that holds the true gap 95 times out of "
             "100. When the range includes 0, the match has not shown that the "
             "enhancement helped, and more games are needed. Each student pair puts in its own "
-            "two battle games, then its engine color's league games from the designer's "
+            "two battle games, then its engine's league games from the designer's "
             "table, and compares the two ranges."
         ),
     ],
@@ -4017,9 +4017,9 @@ DAY_GUIDES = {
         "theme": "The clock and the enhanced engines",
         "summary": (
             "Day 9 gives Remus a clock, then splits the class into ten enhancement "
-            "color versions. Each student pair adds one idea to the same engine, Remus-WHITE, and "
-            "tests it. In period 4 the student pairs carry their color versions to each other's laptops "
-            "on USB sticks and battle. By 4:30 every color version passes its tests and "
+            "enhanced engines. Each student pair adds one idea to the same engine, Remus-WHITE, and "
+            "tests it. In period 4 the student pairs carry their enhanced engines to each other's laptops "
+            "on USB sticks and battle. By 4:30 every enhanced engine passes its tests and "
             "has played two battles."
         ),
         "objectives": [
@@ -4037,7 +4037,7 @@ DAY_GUIDES = {
                 "change in a game."
             ),
             (
-                "Play two color versions against each other, and read the result "
+                "Play two enhanced engines against each other, and read the result "
                 "with its uncertainty."
             ),
         ],
@@ -4064,7 +4064,7 @@ DAY_GUIDES = {
                     (
                         "Show and choose for `think()`. The chosen code makes "
                         "Remus-WHITE, the Remus with none of the enhancements and the "
-                        "starting point of every color version."
+                        "starting point of every enhanced engine."
                     ),
                 ),
                 (
@@ -4087,17 +4087,17 @@ DAY_GUIDES = {
                 (
                     20,
                     (
-                        "Slides: the ten color versions. Each one is the period 1 "
+                        "Slides: the ten enhanced engines. Each one is the period 1 "
                         "Remus with one enhancement added, such as RED (transposition table) or BLUE "
-                        "(killer moves). Colors name the color versions so that no color version "
+                        "(killer moves). The folder names use colors so that no engine "
                         "sounds better than another."
                     ),
                 ),
                 (
                     30,
                     (
-                        "Each student pair opens its color version in `engines/student`, "
-                        "reads the version README, and writes the color version's stubbed "
+                        "Each student pair opens its enhanced engine in `engines/student`, "
+                        "reads the version README, and writes the enhanced engine's stubbed "
                         "code."
                     ),
                 ),
@@ -4160,22 +4160,22 @@ DAY_GUIDES = {
                     (
                         "While the round 2 games run, each student pair turns its round 1 "
                         "result into an Elo gap with a margin of error in "
-                        "`demo_results.py`, then tries its engine color's league games."
+                        "`demo_results.py`, then tries its engine's league games."
                     ),
                 ),
                 (
                     70,
                     (
-                        "The class reads the board: which engine colors won, and why two "
+                        "The class reads the board: which engines won, and why two "
                         "games prove little. The teacher shows the league table, 110 "
-                        "games for each engine color, and compares."
+                        "games for each engine, and compares."
                     ),
                 ),
                 (
                     85,
                     (
                         "Each visiting student pair takes its USB stick back. The visitor's "
-                        "folder stays on the host laptop in place of an engine color the host "
+                        "folder stays on the host laptop in place of an engine the host "
                         "student pair never writes, so the host's own engine folder is "
                         "untouched."
                     ),
@@ -4183,8 +4183,8 @@ DAY_GUIDES = {
             ],
         },
         "checkpoint": (
-            "Every color version passes its tests and its one-game test match, and "
-            "has played two battles against other engine colors."
+            "Every enhanced engine passes its tests and its one-game test match, and "
+            "has played two battles against other enhanced engines."
         ),
     },
     10: {

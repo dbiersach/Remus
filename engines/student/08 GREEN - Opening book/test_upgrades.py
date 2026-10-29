@@ -1,6 +1,6 @@
 """test_upgrades.py
 
-Tests for the GREEN color version: the opening book.
+Tests for Remus-GREEN: the opening book.
 """
 
 from fen import START_FEN, state_from_fen

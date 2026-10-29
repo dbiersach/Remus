@@ -66,8 +66,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 30 to 55 of `make_move.py`, inside `make_move()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 13 | def make_move(state: dict, move: Move) -> dict:
+14 |     """
      ...
 28 |         and the old values of every state field the move changes.
 29 |     """
@@ -108,8 +109,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 69 to 77 of `make_move.py`, inside `undo_move()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 58 | def undo_move(state: dict, undo: dict) -> None:
+59 |     """
      ...
 67 |         The record make_move returned for this move.
 68 |     """
