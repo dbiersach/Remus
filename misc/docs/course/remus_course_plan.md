@@ -22,7 +22,7 @@ to everything below.
 | GUI | Lucas Chess on every laptop |
 | Repositories | The teacher's laptop holds the main class repository. Each pair has its own local repository and pulls from the teacher over the classroom network. No GitHub accounts: the students are minors |
 | Take-home | On the last day each pair copies its repository, with its full history, onto a USB drive |
-| Folder layout | The code lives in one folder per day, such as `Day 04 - Keep only legal moves`, with four period folders inside, `period1` to `period4`, and an `instructor/` and a `student/` folder inside each period. Each `instructor/` folder holds a complete, runnable copy of Remus at the end of that period, with its tests beside the modules and a `README.md` for the period. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
+| Folder layout | The code lives in one folder per day, such as `Day 04 - Keep only legal moves`, with four period folders inside, `period1` to `period4`, and an `instructor/` and a `student/` folder inside each period. Each `instructor/` folder holds a complete, runnable copy of Remus at the end of that period, with its tests beside the modules, and a goals file for the period, such as `Day 04 Period 03 Goals.md`, sits beside `instructor/` and `student/`. A module keeps one file name all course; a smarter version is a new function beside the old one in the same file (`negamax`, then `alpha_beta`) |
 | Squares | `(row, col)` tuples inside the engine, row 0 is rank 8 and column 0 is file a |
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
 | GUI move text | UCI (`e2e4`, `e7e8q`), because that is what the GUI protocol uses |
@@ -96,7 +96,7 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
    `instructor/` folder beside it. Each `student/` folder holds the finished code of the
    periods before plus that period's scaffolds, which `make_student_folders.py`
    builds from the instructor code. Each period opens with its slides; then pairs
-   open the period's `student/` folder, read its `README.md`, and write or fix the stubbed
+   read the period's goals file, open its `student/` folder, and write or fix the stubbed
    functions in the files it names. Pairs work only inside the current period
    folder, so earlier periods stay as a record of how Remus grew. The `instructor/` folder beside it holds the matching finished code, which runs as it is. At the start of the next period each pair fetches
    from the teacher and starts a new branch from that period's start tag, so the whole
@@ -558,7 +558,7 @@ The full description of each script is in `misc/docs/code/`.
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build the color versions` | `play_battle.py` in each color version folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the color versions live in `period2/instructor/engines` |
+| `Day 09 - Add the clock and build enhanced engines` | `play_battle.py` in each color version folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the color versions live in `period2/instructor/engines` |
 | `Day 10 - Solve a science problem using chess AI` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`. The Day 10 engine is Remus-GOLD in the teacher's Day 9 `period2/instructor/engines/Remus-GOLD`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
 
 Outside the Day folders:
@@ -573,7 +573,7 @@ Outside the Day folders:
 | `student/` in each period, `misc/scripts/make_student_folders.py` | The student copy of every period, with that period's student functions as stubs, and the script that builds it |
 | `misc/docs/` | `course/` (this plan, the roadmap, the slide plan, the Lucas Chess guide, and the two briefing PDFs), `code/` (the program overview and the script pages), and `engines/` (the Remus versions and their ratings) |
 | `<skill>.py` in the student period folder, `<skill>_instructor.py` in the instructor one | Python skills labs: student file with blanks, instructor file with answers, in the period of their lab (`period_guides.LABS` lists the 16 lab and demo periods) |
-| `misc/scripts/period_guides.py` | The learning objectives, how each is measured, and the paragraph on every change, which the builders write into every period README; and `DAY_GUIDES`, the day overview with timed activities that `make_student_folders.py` writes into the syllabus at the top of each Day folder (`Day NN Syllabus.md`) |
+| `misc/scripts/period_guides.py` | The learning objectives, how each is measured, and the paragraph on every change, which the builders write into every period goals file; and `DAY_GUIDES`, the day overview with timed activities that `make_student_folders.py` writes into the syllabus at the top of each Day folder (`Day NN Syllabus.md`) |
 | `misc/docs/course/student_edit_plan.md` | Generated by `make_student_folders.py`: what the pairs write in every period, with line counts |
 | `CONTRIBUTORS.md` | Which pair wrote which function (starts on Day 1) |
 

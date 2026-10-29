@@ -1,10 +1,46 @@
-# Rating every Remus version against Stockfish
+# Rating every Remus version
 
 Twelve versions of Remus played Stockfish 19 on David's PC on 2026-10-27: Remus-WHITE
 (the finished Day 9 Remus with no enhancements), the ten color versions, and
 Remus-GOLD (all ten enhancements). `misc/scripts/version_elo.py` ran the
 games and fit the ratings, and every game is in `misc/games/remus_games.pgn` under the
 Event "Station Elo test".
+
+## The league: every version against the others
+
+The teacher's league finished on 2026-10-28: 660 games at 10 minutes a side, every
+version against every other version 10 times, 5 with each color. It ran on Niram,
+the Rust twins of the 12 versions, which pick the same moves as Remus about 50 times
+faster. The 450 games between versions without a book started from 32 openings; the
+210 games with Remus-GREEN or Remus-GOLD started from the starting position, so
+their book played from move 1. Each rating is the version's gain over Remus-WHITE,
+pinned at 0, with a 95 percent margin. `misc/scripts/version_league.py --niram
+--rate-only --event "Niram league 1" --book-start` rebuilds the table from the saved
+games.
+
+| Rank | Version | Folder | Wins-draws-losses | Score | Elo vs WHITE |
+| ---: | --- | --- | --- | ---: | ---: |
+| 1 | Remus-GOLD | Remus-GOLD | 79-30-1 | 85.5% | +339 +/- 91 |
+| 2 | Remus-RED | 10 RED | 27-71-12 | 56.8% | +101 +/- 67 |
+| 3 | Remus-BLUE | 09 BLUE | 20-74-16 | 51.8% | +67 +/- 67 |
+| 4 | Remus-GREEN | 08 GREEN | 22-67-21 | 50.5% | +58 +/- 66 |
+| 5 | Remus-PURPLE | 07 PURPLE | 16-76-18 | 49.1% | +49 +/- 66 |
+| 6 | Remus-BROWN | 06 BROWN | 6-89-15 | 45.9% | +28 +/- 66 |
+| 7 | Remus-ORANGE | 05 ORANGE | 8-84-18 | 45.5% | +25 +/- 67 |
+| 8 | Remus-PINK | 04 PINK | 10-79-21 | 45.0% | +22 +/- 67 |
+| 9 | Remus-CYAN | 03 CYAN | 12-74-24 | 44.5% | +19 +/- 67 |
+| 10 | Remus-YELLOW | 02 YELLOW | 14-65-31 | 42.3% | +4 +/- 67 |
+| 11 | Remus-GRAY | 01 GRAY | 10-73-27 | 42.3% | +4 +/- 67 |
+| 12 | Remus-WHITE | Day 9 period 1 | 7-76-27 | 40.9% | 0 (pinned) |
+
+Each version played 110 games. Remus-GOLD and Remus-RED are the only versions whose
+range stays above 0; every other color version's range includes 0. Remus-YELLOW and
+Remus-GRAY both scored 46.5 points, and Remus-YELLOW ranks above because it beat
+Remus-GRAY 5.5 to 4.5. [`remus_versions.md`](remus_versions.md) explains the league
+and each enhancement.
+
+The Stockfish ratings below come from the earlier run of 2026-10-27, Remus in
+Python against Stockfish 19. A new Stockfish run is under way and will replace them.
 
 ## How the games were played
 

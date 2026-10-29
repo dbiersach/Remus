@@ -1,6 +1,6 @@
 # python_caches.py: Remember answers in a dict
 
-*Day 9, period 2. The lab file is `Day 09 - Add the clock and build the color versions/period2/student/python_caches.py`, and the answers are in `Day 09 - Add the clock and build the color versions/period2/instructor/python_caches_instructor.py`.*
+*Day 9, period 2. The lab file is `Day 09 - Add the clock and build enhanced engines/period2/student/python_caches.py`, and the answers are in `Day 09 - Add the clock and build enhanced engines/period2/instructor/python_caches_instructor.py`.*
 
 ## The big picture
 
@@ -33,7 +33,7 @@ The pair types 7 lines.
 
 ## Try it
 
-Open `python_caches.py` in `Day 09 - Add the clock and build the color versions/period2/student` in VS Code, and click the Run Python File button (the
+Open `python_caches.py` in `Day 09 - Add the clock and build enhanced engines/period2/student` in VS Code, and click the Run Python File button (the
 triangle at the top right of the editor).
 
 You should see: 8,902 twice, the second at once; 4.243 squares; and True.

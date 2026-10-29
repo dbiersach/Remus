@@ -10,8 +10,10 @@ stay, and the body raises NotImplementedError. The tests stay complete, so they
 fail until the pair writes each function. Functions from earlier periods are
 complete, so every student folder starts from working code.
 
-It also writes misc/docs/course/student_edit_plan.md and the syllabus, "Day NN Syllabus.md", at the top of
-every Day folder, from DAY_GUIDES in period_guides.py.
+It adds the timed flow of the period and the pairs' exact tasks to each period's
+goals file, such as "Day 03 Period 02 Goals.md", and writes
+misc/docs/course/student_edit_plan.md and the syllabus, "Day NN Syllabus.md", at the
+top of every Day folder, from DAY_GUIDES in period_guides.py.
 
 Run this script again whenever the instructor code changes, after
 make_period_folders.py.
@@ -169,7 +171,7 @@ def checking_tests(folder: Path, name: str) -> list[str]:
 
 def edit_section(rows: list[EditRow]) -> str:
     """
-    Return the "What you edit" section of a student README.
+    Return the "What you edit" section of a goals file or version README.
 
     Parameters
     ----------
@@ -187,8 +189,8 @@ def edit_section(rows: list[EditRow]) -> str:
         "## What you edit this period",
         "",
         (
-            "Every other function in this folder is finished. Change only these, and "
-            "only below each docstring:"
+            "Every other function is finished. Change only these, and only below each "
+            "docstring:"
         ),
         "",
         "| File | Function | Starts at line | Lines to type | Tests that check it |",
@@ -212,14 +214,14 @@ def edit_section(rows: list[EditRow]) -> str:
 
 
 def lab_section(name: str, count: int) -> str:
-    """Return the "What you edit" section of a lab or demo period's student README."""
+    """Return the "What you edit" section of a lab or demo period's goals file."""
     lines = [
         "## What you edit in the lab"
         if name.startswith("python_")
         else "## What you edit in the demo",
         "",
         (
-            f"Open `{name}.py`. Under each `Part` heading, every line that holds only a "
+            f"Open `{name}.py` in the `student` folder. Under each `Part` heading, every line that holds only a "
             "`#` is one line of code to type. Replace the `#` with the code, keeping "
             "its indent. The printed text next to each step says what the line must "
             "produce."
@@ -239,7 +241,7 @@ def bug_hunt_section(count: int) -> str:
         "## What you edit in the bug hunt",
         "",
         (
-            "Open the `bug_hunt` folder and run `hunt.py` there in VS Code. Each root move "
+            "Open the `bug_hunt` folder inside `student` and run `hunt.py` there in VS Code. Each root move "
             "it prints points at a planted bug in one of the Remus files of that "
             "folder. Fix each bug by changing the line that breaks the rule, and run "
             "the hunt again until every count agrees. The files outside `bug_hunt` "
@@ -298,6 +300,9 @@ def pairs_write(day: int, period: int, rows: dict, version_note: str) -> str:
 # The clock time each period starts, in minutes after midnight, and the break after it
 PERIOD_STARTS = {1: 8 * 60 + 30, 2: 10 * 60 + 30, 3: 13 * 60, 4: 15 * 60}
 PERIOD_MINUTES = 90
+FLOW_HEADING = (
+    "## The period step by step"  # Starts the part of a goals file this script writes
+)
 BREAKS = {1: "Break", 2: "Lunch", 3: "Break"}
 
 
@@ -352,9 +357,10 @@ def day_readme(day: int, rows: dict) -> str:
         out += [
             "",
             (
-                f"[`period{period}/student/README.md`](period{period}/student/README.md) "
-                "lists the period's learning objectives, how each one is measured, and "
-                "every change the pairs make."
+                f"[`Day {day:02} Period {period:02} Goals.md`]"
+                f"(<period{period}/Day {day:02} Period {period:02} Goals.md>) "
+                "lists the period's learning objectives, how each one is measured, "
+                "every change the pairs make, and their exact tasks."
             ),
         ]
     out += [
@@ -369,6 +375,37 @@ def day_readme(day: int, rows: dict) -> str:
         ),
     ]
     return "\n".join(out) + "\n"
+
+
+def flow_section(day: int, period: int) -> str:
+    """Return the timed steps of one period, from DAY_GUIDES, as a Markdown table."""
+    start = PERIOD_STARTS[period]
+    lines = [FLOW_HEADING, "", "| Time | Activity |", "| --- | --- |"]
+    steps = DAY_GUIDES[day]["periods"][period]
+    for i, (offset, text) in enumerate(steps):
+        stop = steps[i + 1][0] if i + 1 < len(steps) else PERIOD_MINUTES
+        # A link in DAY_GUIDES starts from the Day folder, one level above the goals file
+        text = text.replace("](../", "](../../")
+        lines.append(f"| {clock(start + offset)} to {clock(start + stop)} | {text} |")
+    return "\n".join(lines) + "\n"
+
+
+def write_goals(day: int, period: int, sections: list[str]) -> None:
+    """
+    Add the flow of the period and the pairs' tasks to the period's goals file.
+
+    make_period_folders.py writes the first part of the file. Everything from
+    FLOW_HEADING on is rewritten here, so running this script twice gives the
+    same file.
+    """
+    from make_period_folders import goals_path  # Imported here: it imports this file
+
+    file_path = goals_path(day, period)
+    text = file_path.read_text()
+    text = text.split("\n" + FLOW_HEADING)[0].rstrip("\n") + "\n"
+    for section in [flow_section(day, period), *sections]:
+        text += "\n" + section
+    file_path.write_text(text)
 
 
 def write_day_readmes(rows: dict) -> None:
@@ -394,8 +431,8 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
             "the folders. For every period it names the files that arrive or grow, which "
             "the teacher writes, and the functions the pairs write, which are stubs in "
             "each `student` folder and finished in the `instructor` folder beside it. Each "
-            "student folder's "
-            "`README.md` has the same list with line numbers and the tests that check "
+            "period's "
+            "goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check "
             "each function."
         ),
         "",
@@ -499,10 +536,7 @@ def main():
             row = {"file": "bug_hunt/", "function": "", "typed": count}
             rows.setdefault((day, period), []).append(row)
             sections.append(bug_hunt_section(count))
-        if sections:
-            with (target / "README.md").open("a") as file:
-                for section in sections:
-                    file.write("\n" + section)
+        write_goals(day, period, sections)
     # Each color version folder stubs the functions its pair writes on Day 9. The
     # student engines folder holds the ten color versions and version_match.py, but
     # not Remus-GOLD or Niram-GOLD, which stay in the teacher's folders.

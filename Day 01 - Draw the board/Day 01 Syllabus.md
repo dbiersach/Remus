@@ -35,7 +35,7 @@ By 4:30, each pair can:
 | 9:25 to 9:50 | Pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop passes `uv run pytest` and opens Lucas Chess. |
 | 9:50 to 10:00 | Exit ticket: each student lists three of the five parts of a chess engine (board, moves, rules, search, evaluation) and one job of each. |
 
-[`period1/student/README.md`](period1/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 01 Period 01 Goals.md`](<period1/Day 01 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Python lab 1: scripts, strings, ord and chr, f-strings
 
@@ -47,7 +47,7 @@ By 4:30, each pair can:
 | 11:40 to 11:50 | Check together without running code: what is the file number of h4, and of a1? Why does file a count as 0? |
 | 11:50 to 12:00 | Pairs compare their printouts with the pair next to them. |
 
-[`period2/student/README.md`](period2/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 01 Period 02 Goals.md`](<period2/Day 01 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: Python lab 2: lists and nested lists
 
@@ -58,7 +58,7 @@ By 4:30, each pair can:
 | 1:30 to 2:15 | Pairs work through the four parts of `python_lists.py`: a list of pieces, a loop over every square, the board as a list of rows, and the pawns in a row. |
 | 2:15 to 2:30 | Without running code, each pair names `board[4][4]` (e4) and says why row 0 is rank 8. |
 
-[`period3/student/README.md`](period3/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 01 Period 03 Goals.md`](<period3/Day 01 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: board.py: the board and its square names
 
@@ -70,7 +70,7 @@ By 4:30, each pair can:
 | 4:10 to 4:25 | Show and choose: two or three pairs show their `parse_square()` on the projector, the class picks one for clarity, and the teacher adds it to the class repository with the pair's team name in `CONTRIBUTORS.md`. |
 | 4:25 to 4:30 | Checkpoint: running `board.py` prints the start board and "b1 holds N, expected N". |
 
-[`period4/student/README.md`](period4/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 01 Period 04 Goals.md`](<period4/Day 01 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## By the end of the day
 

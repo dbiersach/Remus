@@ -7,9 +7,10 @@ and an `instructor` folder with the finished code. The syllabus at the top of ea
 Day folder, such as `Day 01 Syllabus.md`, shows the whole day: what you will learn, and what happens in each
 period, from 8:30 to 4:30.
 
-Each `student` folder starts with working code from the periods before. Its
-`README.md` lists what you will learn and how you will show it, the files that are
-new or growing, a paragraph on every change you make and why, and a table of the
+Each `student` folder starts with working code from the periods before. The goals
+file beside it, such as `Day 03 Period 02 Goals.md`, lists what you will learn and how you will show it, the files that are
+new or growing, a paragraph on every change you make and why, the steps of the
+period with their times, and a table of the
 functions left for you to write, with the line where each one starts. Each of those
 functions keeps its name, its docstring, and its type hints. Its body is a stub:
 
@@ -27,7 +28,7 @@ of Remus with three planted bugs for you to find and fix.
 
 ## How to work on a function
 
-1. Read the period's `README.md`, then the page for the file in `misc/docs/code/`,
+1. Read the period's goals file, then the page for the file in `misc/docs/code/`,
    such as `misc/docs/code/board.md`.
 2. Read the function's docstring. It says what the function must do.
 3. Delete the two stub comments and the `raise` line, and write the body.

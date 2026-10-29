@@ -21,7 +21,9 @@ The code grows one class period at a time. The top folder holds one folder per d
 `Day 01 - ...` to `Day 10 - ...`, and each Day folder holds `period1` to `period4`.
 Inside every period folder, `instructor/` is a complete, runnable copy of Remus at the
 end of that period, and `student/` is the same code with the functions the pairs write
-left as stubs for them to fill in. Each Day folder's syllabus, such as `Day 04 Syllabus.md`, gives the day's
+left as stubs for them to fill in. Beside them sits the period's goals file, such as
+`Day 04 Period 03 Goals.md`: the objectives, the timed steps, and the exact tasks.
+Each Day folder's syllabus, such as `Day 04 Syllabus.md`, gives the day's
 objectives and the timed activities of its four periods. Everything else sits in
 `misc/`: the course and code documents in `misc/docs/`, the games every script plays in
 `misc/games/`, and the teacher's tools in `misc/scripts/`, which hold the builders
@@ -107,7 +109,7 @@ along with `pytest` and `ruff`. Lucas Chess talks to Remus over UCI.
 Niram-GOLD, beside Remus-GOLD in the Day 9 `period2/instructor/engines` folder, is Remus-GOLD
 rewritten in Rust. It searches the same trees about 50 times faster. It is a
 teacher's experiment, outside the course; see
-[its README](<Day 09 - Add the clock and build the color versions/period2/instructor/engines/Niram-GOLD/README.md>).
+[its README](<Day 09 - Add the clock and build enhanced engines/period2/instructor/engines/Niram-GOLD/README.md>).
 
 ## License
 

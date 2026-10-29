@@ -1,6 +1,6 @@
 # demo_results.py: Read a battle result
 
-*Day 9, period 4. The demo file is `Day 09 - Add the clock and build the color versions/period4/student/demo_results.py`, and the answers are in `Day 09 - Add the clock and build the color versions/period4/instructor/demo_results_instructor.py`.*
+*Day 9, period 4. The demo file is `Day 09 - Add the clock and build enhanced engines/period4/student/demo_results.py`, and the answers are in `Day 09 - Add the clock and build enhanced engines/period4/instructor/demo_results_instructor.py`.*
 
 ## The big picture
 
@@ -33,7 +33,7 @@ The pair types 13 lines.
 
 ## Try it
 
-Open `demo_results.py` in `Day 09 - Add the clock and build the color versions/period4/student` in VS Code, and click the Run Python File button (the
+Open `demo_results.py` in `Day 09 - Add the clock and build enhanced engines/period4/student` in VS Code, and click the Run Python File button (the
 triangle at the top right of the editor).
 
 You should see: 11.0 points of 20, a gap of +35 between -121 and +208, and "more games are needed".

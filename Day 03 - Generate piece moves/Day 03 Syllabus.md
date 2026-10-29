@@ -33,7 +33,7 @@ By 4:30, each pair can:
 | 9:35 to 9:50 | The teacher runs the walk on the projector with a piece in the way and the class predicts where it stops. |
 | 9:50 to 10:00 | Wrap-up: which loop stops at the edge, and which line stops it at a piece? |
 
-[`period1/student/README.md`](period1/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 03 Period 01 Goals.md`](<period1/Day 03 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Jumping pieces: knights and kings
 
@@ -45,7 +45,7 @@ By 4:30, each pair can:
 | 11:20 to 11:40 | Pairs run `show_board.py`, which draws an arrow for every move their generator returns, and count the arrows. |
 | 11:40 to 12:00 | Pairs try their own squares, such as a king in a corner, and predict the arrows before they run the file. |
 
-[`period2/student/README.md`](period2/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 03 Period 02 Goals.md`](<period2/Day 03 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: Sliding pieces: rooks, bishops, and queens
 
@@ -56,7 +56,7 @@ By 4:30, each pair can:
 | 2:00 to 2:15 | Exercise: a rook on an empty board has 14 moves. Pairs check it with the tests and the arrow picture. |
 | 2:15 to 2:30 | Show and choose for `slide()`. |
 
-[`period3/student/README.md`](period3/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 03 Period 03 Goals.md`](<period3/Day 03 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Pawns
 
@@ -67,7 +67,7 @@ By 4:30, each pair can:
 | 3:55 to 4:15 | Pairs run the tests and the arrow picture on the start position. |
 | 4:15 to 4:30 | Checkpoint: `pseudo_legal_moves()` finds 20 moves from the start. |
 
-[`period4/student/README.md`](period4/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 03 Period 04 Goals.md`](<period4/Day 03 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## By the end of the day
 

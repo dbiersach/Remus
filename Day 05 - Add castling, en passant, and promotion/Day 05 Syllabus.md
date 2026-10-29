@@ -33,7 +33,7 @@ By 4:30, each pair can:
 | 9:35 to 9:50 | The class lists, on the board, every move that removes a castling right. |
 | 9:50 to 10:00 | Wrap-up and a preview of castling. |
 
-[`period1/student/README.md`](period1/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 05 Period 01 Goals.md`](<period1/Day 05 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Castling
 
@@ -45,7 +45,7 @@ By 4:30, each pair can:
 | 11:20 to 11:50 | Pairs run the castling tests and build one castling position of their own to test. |
 | 11:50 to 12:00 | Show and choose for `update_castling_rights()`. |
 
-[`period2/student/README.md`](period2/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 05 Period 02 Goals.md`](<period2/Day 05 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: En passant and the double step
 
@@ -57,7 +57,7 @@ By 4:30, each pair can:
 | 1:55 to 2:20 | Pairs run the en passant tests, including the rare capture that exposes the king along the rank. |
 | 2:20 to 2:30 | Wrap-up: which square does the undo put the captured pawn back on? |
 
-[`period3/student/README.md`](period3/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 05 Period 03 Goals.md`](<period3/Day 05 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Promotion, and Remus plays in Lucas Chess
 
@@ -65,11 +65,11 @@ By 4:30, each pair can:
 | --- | --- |
 | 3:00 to 3:15 | Puzzle on the demonstration board: promoting to a knight wins, and promoting to a queen stalemates. The teacher shows promotion in `make_move()` and `undo_move()`. |
 | 3:15 to 3:45 | In `demo_promotion.py` pairs write the loop that tries all four promotions and prints stalemate or checkmate for each. |
-| 3:45 to 4:00 | The teacher hands out `uci_engine.py` and `remus.bat`. Pairs register `remus.bat` from this period folder in Lucas Chess, following the [Lucas Chess guide](../misc/docs/course/lucas_chess_guide.md). |
+| 3:45 to 4:00 | The teacher hands out `uci_engine.py` and `remus.bat`. Pairs register `remus.bat` from the period's `student` folder in Lucas Chess, following the [Lucas Chess guide](../misc/docs/course/lucas_chess_guide.md). |
 | 4:00 to 4:25 | Pairs play their own Remus, which answers with random legal moves. Every special move works on a real board. |
 | 4:25 to 4:30 | Checkpoint: every special-move test passes. |
 
-[`period4/student/README.md`](period4/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 05 Period 04 Goals.md`](<period4/Day 05 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## By the end of the day
 

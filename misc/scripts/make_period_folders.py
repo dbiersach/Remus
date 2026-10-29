@@ -16,9 +16,11 @@ rebuilds the three earlier periods from it:
 3. When a function is left out, every import of it is removed, and every function
    or test that uses it is left out too, until each file uses only what exists.
 
-Each period folder also gets a README.md that says what the period is about, its
-learning objectives and how each one is measured, which files changed, and one
-paragraph on every change the students make, all from period_guides.py. A Python
+Each period folder also gets one goals file at its top, beside instructor and
+student, such as "Day 03 Period 02 Goals.md". This script writes what the period is
+about, its learning objectives and how each one is measured, which files changed, and
+one paragraph on every change the students make, all from period_guides.py;
+make_student_folders.py then adds the timed flow of the period and the exact tasks. A Python
 lab or demo period keeps its answer file, <name>_instructor.py, which lives in
 that period folder and survives each rebuild, and Day 6, period 3 gets the bug_hunt
 folder: a copy of the period's code with three planted
@@ -643,14 +645,20 @@ PERIOD_NOTES = {
     "opens `play_battle.py` in its own color folder, presses Run Python File, and "
     "types the visitor's color. Remus plays two 10-minute games, one with each color, "
     "side by side.",
-    (5, 4): "Register `remus.bat` from this folder as an engine in Lucas Chess and "
+    (
+        5,
+        4,
+    ): "Register `remus.bat` from the `student` folder as an engine in Lucas Chess and "
     "play your own Remus. It plays random legal moves, and every special move works.",
     (6, 3): "The `bug_hunt` folder holds a copy of this period's Remus with three "
     "planted bugs. Running `hunt.py` inside it shows where the counts go wrong.",
-    (7, 3): "Register `remus.bat` from this folder in Lucas Chess again: Remus now "
+    (
+        7,
+        3,
+    ): "Register `remus.bat` from the `student` folder in Lucas Chess again: Remus now "
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
-    (9, 2): "Each pair builds one color version in the `engines` folder inside this "
-    "one, such as `engines/10 RED - Transposition table`. Each color folder is a "
+    (9, 2): "Each pair builds one color version in the `engines` folder inside "
+    "`student`, such as `engines/10 RED - Transposition table`. Each color folder is a "
     "complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
@@ -672,6 +680,15 @@ LOCAL_MODULES = {path.stem for path in ROOT.glob("Day */period4/instructor/*.py"
 def day_folder(day: int) -> Path:
     """Return the Day folder for a day number, such as Day 03."""
     return next(ROOT.glob(f"Day {day:02} - *"))
+
+
+def goals_path(day: int, period: int) -> Path:
+    """Return the goals file of one period, such as Day 03/period2/Day 03 Period 02 Goals.md."""
+    return (
+        day_folder(day)
+        / f"period{period}"
+        / f"Day {day:02} Period {period:02} Goals.md"
+    )
 
 
 def period_folder(day: int, period: int) -> Path:
@@ -897,7 +914,7 @@ def changes_section(day: int, period: int) -> str:
 
 
 def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
-    """Return the README.md that explains one period folder."""
+    """Return the goals file that explains one period: its first part, for the teacher and pairs."""
     title = PERIOD_TITLES[(day, period)]
     sections = [f"# Day {day}, Period {period}: {title}"]
     if (day, period) in PERIOD_NOTES:
@@ -977,8 +994,8 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
             scripts = [n for n in files if n.endswith(".py") and "test_" not in n]
             example = min(scripts)
         sections.append(
-            "Check the work with the tests: open a terminal in VS Code inside this "
-            "folder and type `uv run pytest`. To run one file on its own, such as "
+            "Check the work with the tests: open a terminal in VS Code inside the "
+            "`student` folder and type `uv run pytest`. To run one file on its own, such as "
             f"`{example}`, open it in VS Code and click the Run Python File button "
             "(the triangle at the top right of the editor)."
         )
@@ -1104,7 +1121,7 @@ def main():
                 files = day_end
             else:
                 if period > source:
-                    files = {}  # Only the README and a lab, written by hand
+                    files = {}  # Only a lab, written by hand
                 else:
                     files = build_period(day, period, day_end, day_before)
                 folder = period_folder(day, period)
@@ -1117,7 +1134,8 @@ def main():
                     (folder / name).chmod(0o755)  # Each script runs on its own
                 built.append(folder)
             readme = readme_text(day, period, files, files_before)
-            (period_folder(day, period) / "README.md").write_text(readme)
+            (period_folder(day, period) / "README.md").unlink(missing_ok=True)
+            goals_path(day, period).write_text(readme)
             files_before = files
         day_before = day_end
     tidy(built)

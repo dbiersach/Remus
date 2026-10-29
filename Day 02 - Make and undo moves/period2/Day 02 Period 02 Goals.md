@@ -1,0 +1,44 @@
+# Day 2, Period 2: Python lab 4: dicts, dataclasses, aliasing, copying
+
+## Learning objectives
+
+By the end of this period, each pair can:
+
+- Store named facts in a dict and read them back. **Measured by:** The lab's state dict answers whose turn it is and the castling rights.
+- Explain aliasing: two names for one list. **Measured by:** The pair predicts, then shows, that `b2 = board` changes both boards, and that a copy does not.
+- Describe a record with a `dataclass`. **Measured by:** The pair makes a small `dataclass` and prints one of its fields.
+
+## The files
+
+The lab is `python_dicts.py` in the `student` folder, with the answers in `python_dicts_instructor.py` in the `instructor` folder beside it. Open `python_dicts.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
+
+The code here is the same as at the end of the period before.
+
+## The changes and why
+
+The pairs fill in the blanks of `python_dicts.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_dicts_instructor.py`.
+
+Part #1 keeps the facts of a game in a dict and reads them by key, the way `new_game()` in `game_state.py` holds the board, the side to move, and the castling rights.
+
+Part #2 shows aliasing: `b2 = board` makes a second name for the same board, so a pawn put on e4 through `b2` shows up in `board` too. This is the most common surprise in a chess program that changes its board in place.
+
+Part #3 makes a real copy with `deepcopy()`, which copies every row. The copy changes alone, and `==` compares the two boards square by square.
+
+Part #4: you write a `dataclass` with two fields and print one of them. Remus's `Move` in `moves.py` is the same record with a third field for the promotion piece.
+
+Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 10:30 to 10:45 | Slides: a dict holds named facts, and a dataclass describes a record with fixed fields. |
+| 10:45 to 11:15 | Pairs work through Parts #1 and #2 of `python_dicts.py` and watch `b2 = board` change both boards. |
+| 11:15 to 11:50 | The teacher explains aliasing on the whiteboard: two names, one list. Then pairs write Parts #3 and #4: a real copy, and a dataclass that describes a move. |
+| 11:50 to 12:00 | Wrap-up: why would a chess engine break if it changed a board it meant to copy? |
+
+## What you edit in the lab
+
+Open `python_dicts.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
+
+Lines to type in all: 18. Check the work by running `python_dicts.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.

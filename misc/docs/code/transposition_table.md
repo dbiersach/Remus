@@ -1,6 +1,6 @@
 # transposition_table.py: Remember positions already searched
 
-*Lives in Remus-GOLD, in the teacher's `Day 09 - Add the clock and build the color versions/period2/instructor/engines/Remus-GOLD`, the engine of Day 10.*
+*Lives in Remus-GOLD, in the teacher's `Day 09 - Add the clock and build enhanced engines/period2/instructor/engines/Remus-GOLD`, the engine of Day 10.*
 
 ## The big picture
 
