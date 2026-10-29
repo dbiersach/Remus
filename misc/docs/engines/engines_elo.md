@@ -72,7 +72,7 @@ No engine crashed or lost on time.
 
 | Setting | Value |
 | --- | --- |
-| Opponent | Stockfish 19 from [stockfishchess.org](https://stockfishchess.org/), the universal Windows build in `~/stockfish` (the same build Lucas Chess installs), 1 thread, `UCI_LimitStrength` on, 1 second of `Move Overhead` |
+| Opponent | Stockfish 19 from [stockfishchess.org](https://stockfishchess.org/), the universal Windows build in `~/stockfish` (the same build Lucas Chess installs), 1 thread, `UCI_LimitStrength` on, `Move Overhead` 1000 ms (a 1-second safety cushion: Stockfish still has its full 10 minutes, but plans each move as if 1 second less were left, so the delay of passing moves between programs never makes it lose on time) |
 | Rounds | 8, with 8 games per engine in each round: 4 with White and 4 with Black |
 | Clock | 10 minutes a side, no increment |
 | Games in all | 3 engines x 64 = 192 |
