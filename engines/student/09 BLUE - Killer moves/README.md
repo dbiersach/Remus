@@ -73,7 +73,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `remember_killer()` | 397 | 6 | `test_upgrades.py::test_killers_keep_two_quiet_moves` |
+| `search.py` | `remember_killer()` | 399 | 6 | `test_upgrades.py::test_killers_keep_two_quiet_moves` |
 | `move_ordering.py` | `order_moves()` | 52 | 16 | `test_search.py::test_capture_moves_and_mvv_lva` |
 | `test_upgrades.py` | `test_killers_keep_two_quiet_moves()` | 21 | 5 | `run_tests.py` |
 
@@ -87,20 +87,20 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `remember_killer()` in `search.py`
 
-**Where:** lines 399 to 404 of `search.py`, inside `remember_killer()`, in place of the stub below the docstring. It is called by `killer_search()` in `search.py`.
+**Where:** lines 401 to 406 of `search.py`, inside `remember_killer()`, in place of the stub below the docstring. It is called by `killer_search()` in `search.py`.
 
 ```python
-397 | def remember_killer(info: SearchInfo, ply: int, move: Move, board: Board) -> None:
-398 |     """Keep a quiet move that caused a cutoff as one of two killers for this ply."""
-399 +     if piece_at(board, move.to_square) != EMPTY or move.promotion is not None:
-400 +         return  # Captures are already ordered first
-401 +     killers = info.killers.setdefault(ply, [])
-402 +     if move not in killers:
-403 +         killers.insert(0, move)
-404 +         del killers[2:]
-405 |
-406 |
-407 | def killer_search(
+399 | def remember_killer(info: SearchInfo, ply: int, move: Move, board: Board) -> None:
+400 |     """Keep a quiet move that caused a cutoff as one of two killers for this ply."""
+401 +     if piece_at(board, move.to_square) != EMPTY or move.promotion is not None:
+402 +         return  # Captures are already ordered first
+403 +     killers = info.killers.setdefault(ply, [])
+404 +     if move not in killers:
+405 +         killers.insert(0, move)
+406 +         del killers[2:]
+407 |
+408 |
+409 | def killer_search(
 ```
 
 **How it works:** A killer is a quiet move that caused a cutoff, so the first line returns at once for a capture or a promotion, which move ordering already puts first. `info.killers` maps each ply to its list of killers; `setdefault` makes an empty list the first time a ply appears. A new killer goes to the front of the list with `insert(0, move)`, and `del killers[2:]` cuts the list back to the two newest moves.

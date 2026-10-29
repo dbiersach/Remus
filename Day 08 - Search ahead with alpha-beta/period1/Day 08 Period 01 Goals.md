@@ -58,7 +58,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `negamax()` in `search.py`
 
-**Where:** lines 139 to 155 of `search.py`, inside `negamax()`, in place of the stub below the docstring. It is called by `best_move()` in `search.py`.
+**Where:** lines 139 to 156 of `search.py`, inside `negamax()`, in place of the stub below the docstring. It is called by `best_move()` in `search.py`.
 
 ```python
 114 | def negamax(state: dict, depth: int, ply: int, info: SearchInfo) -> int:
@@ -78,14 +78,15 @@ The number at the left of each line is its line number once the code is typed. W
 148 +     for move in moves:
 149 +         undo = make_move(state, move)
 150 +         try:
-151 +             score = -negamax(state, depth - 1, ply + 1, info)
-152 +         finally:
-153 +             undo_move(state, undo)
-154 +         best = max(best, score)
-155 +     return best
-156 |
+151 +             # Recursive call to itself
+152 +             score = -negamax(state, depth - 1, ply + 1, info)
+153 +         finally:
+154 +             undo_move(state, undo)
+155 +         best = max(best, score)
+156 +     return best
 157 |
-158 | def best_move(state: dict, depth: int) -> tuple[Move, int, SearchInfo]:
+158 |
+159 | def best_move(state: dict, depth: int) -> tuple[Move, int, SearchInfo]:
 ```
 
 **How it works:** Each call counts one node. At depth 0 the function stops looking ahead and returns `evaluate`. With no legal moves the game is over: a checkmated side gets a large negative score, worse the sooner the mate (`ply` counts how deep the search is), and stalemate is 0. Otherwise every move is made, searched one ply less deep, and undone; `try` and `finally` undo the move even if the search stops early. The minus sign turns the opponent's score into ours, and `best` keeps the highest.

@@ -84,7 +84,19 @@ def version_search(name: str, summary: str, edits: list[tuple[str, str]]) -> str
     text = replace_once(text, BASE_SUMMARY, summary, name)
     for old, new in edits:
         text = replace_once(text, old, new, name)
-    return text
+    # Mark each call the search makes to itself, as the Day 9 search does
+    marked = ""
+    for line in text.splitlines(keepends=True):
+        is_call = f"{name}(" in line and not line.lstrip().startswith("def ")
+        if is_call and "#" not in line:
+            line = line.rstrip("\n")
+            if len(line) + len("  # Recursive call to itself") <= 88:
+                line += "  # Recursive call to itself\n"
+            else:
+                indent = line[: len(line) - len(line.lstrip())]
+                line = indent + "# Recursive call to itself\n" + line + "\n"
+        marked += line
+    return marked
 
 
 # Lines of alpha_beta_with_quiescence that the search enhancements change
@@ -98,7 +110,7 @@ CUTOFF = """        if score >= beta:
 """
 FINAL_RETURN = """    return alpha, best_line
 """
-CHILD_SEARCH = """            score, line = {name}(
+CHILD_SEARCH = """            score, line = {name}(  # Recursive call to itself
                 state, depth - 1, ply + 1, -beta, -alpha, info
             )
             score = -score

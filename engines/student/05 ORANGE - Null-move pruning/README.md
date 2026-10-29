@@ -71,8 +71,8 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `make_null_move()` | 398 | 5 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
-| `search.py` | `undo_null_move()` | 420 | 3 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
+| `search.py` | `make_null_move()` | 400 | 5 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
+| `search.py` | `undo_null_move()` | 422 | 3 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
 | `test_upgrades.py` | `test_null_move_and_undo_restore_the_state()` | 21 | 6 | `run_tests.py` |
 | `test_upgrades.py` | `test_null_move_search_saves_work_and_keeps_the_state()` | 31 | 9 | `run_tests.py` |
 
@@ -86,39 +86,39 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `make_null_move()` in `search.py`
 
-**Where:** lines 413 to 417 of `search.py`, inside `make_null_move()`, in place of the stub below the docstring. It is called by `null_move_search()` in `search.py`.
+**Where:** lines 415 to 419 of `search.py`, inside `make_null_move()`, in place of the stub below the docstring. It is called by `null_move_search()` in `search.py`.
 
 ```python
-398 | def make_null_move(state: dict) -> Square | None:
-399 |     """
+400 | def make_null_move(state: dict) -> Square | None:
+401 |     """
       ...
-411 |         The en passant target before the null move, which undo_null_move restores.
-412 |     """
-413 +     en_passant = state["en_passant"]
-414 +     state["turn"] = opponent(state["turn"])
-415 +     state["en_passant"] = None
-416 +     state["history"].append(position_key(state))
-417 +     return en_passant
-418 |
-419 |
-420 | def undo_null_move(state: dict, en_passant: Square | None) -> None:
+413 |         The en passant target before the null move, which undo_null_move restores.
+414 |     """
+415 +     en_passant = state["en_passant"]
+416 +     state["turn"] = opponent(state["turn"])
+417 +     state["en_passant"] = None
+418 +     state["history"].append(position_key(state))
+419 +     return en_passant
+420 |
+421 |
+422 | def undo_null_move(state: dict, en_passant: Square | None) -> None:
 ```
 
 **How it works:** A null move is a pass: the side to move gives the turn away without moving a piece. The function saves the en passant target first, because the undo needs it back. `opponent` flips the turn from "w" to "b" or back. A pass cancels any en passant capture, so the target becomes None. The new position's key goes onto the history, so the repetition rules still see every position the search visits, and the saved target is returned for `undo_null_move`.
 
 ### `undo_null_move()` in `search.py`
 
-**Where:** lines 422 to 424 of `search.py`, inside `undo_null_move()`, in place of the stub below the docstring. It is called by `null_move_search()` in `search.py`.
+**Where:** lines 424 to 426 of `search.py`, inside `undo_null_move()`, in place of the stub below the docstring. It is called by `null_move_search()` in `search.py`.
 
 ```python
-420 | def undo_null_move(state: dict, en_passant: Square | None) -> None:
-421 |     """Take back a null move, restoring the side to move and the en passant target."""
-422 +     state["history"].pop()
-423 +     state["turn"] = opponent(state["turn"])
-424 +     state["en_passant"] = en_passant
-425 |
-426 |
-427 | def has_pieces(board: Board, color: str) -> bool:
+422 | def undo_null_move(state: dict, en_passant: Square | None) -> None:
+423 |     """Take back a null move, restoring the side to move and the en passant target."""
+424 +     state["history"].pop()
+425 +     state["turn"] = opponent(state["turn"])
+426 +     state["en_passant"] = en_passant
+427 |
+428 |
+429 | def has_pieces(board: Board, color: str) -> bool:
 ```
 
 **How it works:** The undo takes the three steps of `make_null_move` back in reverse order: it removes the last history key, flips the turn back, and puts back the en passant target that `make_null_move` returned.

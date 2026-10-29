@@ -109,7 +109,7 @@ def minimax(state: dict, depth: int, info: SearchInfo) -> int:
     for move in moves:
         undo = make_move(state, move)
         try:
-            scores.append(minimax(state, depth - 1, info))
+            scores.append(minimax(state, depth - 1, info))  # Recursive call to itself
         finally:
             undo_move(state, undo)
     return max(scores) if state["turn"] == "w" else min(scores)
@@ -152,6 +152,7 @@ def negamax(state: dict, depth: int, ply: int, info: SearchInfo) -> int:
     for move in moves:
         undo = make_move(state, move)
         try:
+            # Recursive call to itself
             score = -negamax(state, depth - 1, ply + 1, info)
         finally:
             undo_move(state, undo)
@@ -233,6 +234,7 @@ def alpha_beta(
     for move in moves:
         undo = make_move(state, move)
         try:
+            # Recursive call to itself
             score = -alpha_beta(state, depth - 1, ply + 1, -beta, -alpha, info)
         finally:
             undo_move(state, undo)
@@ -301,7 +303,7 @@ def quiescence(state: dict, alpha: int, beta: int, info: SearchInfo) -> int:
     for move in capture_moves(state):
         undo = make_move(state, move)
         try:
-            score = -quiescence(state, -beta, -alpha, info)
+            score = -quiescence(state, -beta, -alpha, info)  # Recursive call to itself
         finally:
             undo_move(state, undo)
         if score >= beta:

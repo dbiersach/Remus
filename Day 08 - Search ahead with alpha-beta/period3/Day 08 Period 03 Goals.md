@@ -44,7 +44,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `quiescence()` | 271 | 15 | `test_search.py::test_quiescence_stands_pat_or_takes_a_free_pawn` |
+| `search.py` | `quiescence()` | 273 | 15 | `test_search.py::test_quiescence_stands_pat_or_takes_a_free_pawn` |
 
 Lines to type in all: 15. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 
@@ -56,32 +56,32 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `quiescence()` in `search.py`
 
-**Where:** lines 296 to 310 of `search.py`, inside `quiescence()`, in place of the stub below the docstring. The tests call it directly.
+**Where:** lines 298 to 312 of `search.py`, inside `quiescence()`, in place of the stub below the docstring. The tests call it directly.
 
 ```python
-271 | def quiescence(state: dict, alpha: int, beta: int, info: SearchInfo) -> int:
-272 |     """
+273 | def quiescence(state: dict, alpha: int, beta: int, info: SearchInfo) -> int:
+274 |     """
       ...
-294 |         The score for the side to move.
-295 |     """
-296 +     info.nodes += 1
-297 +     stand_pat = evaluate(state)
-298 +     if stand_pat >= beta:
-299 +         return stand_pat
-300 +     alpha = max(alpha, stand_pat)
-301 +     for move in capture_moves(state):
-302 +         undo = make_move(state, move)
-303 +         try:
-304 +             score = -quiescence(state, -beta, -alpha, info)
-305 +         finally:
-306 +             undo_move(state, undo)
-307 +         if score >= beta:
-308 +             return score
-309 +         alpha = max(alpha, score)
-310 +     return alpha
-311 |
-312 |
-313 | def main():
+296 |         The score for the side to move.
+297 |     """
+298 +     info.nodes += 1
+299 +     stand_pat = evaluate(state)
+300 +     if stand_pat >= beta:
+301 +         return stand_pat
+302 +     alpha = max(alpha, stand_pat)
+303 +     for move in capture_moves(state):
+304 +         undo = make_move(state, move)
+305 +         try:
+306 +             score = -quiescence(state, -beta, -alpha, info)  # Recursive call to itself
+307 +         finally:
+308 +             undo_move(state, undo)
+309 +         if score >= beta:
+310 +             return score
+311 +         alpha = max(alpha, score)
+312 +     return alpha
+313 |
+314 |
+315 | def main():
 ```
 
 **How it works:** Quiescence keeps searching captures after the main search ends, so Remus never stops in the middle of a trade. The side to move may stand pat, keeping the score it has without capturing. If that score already reaches `beta`, the opponent avoids this position, so the function returns at once. Otherwise each capture is made, searched with the window flipped, and undone, with the same cutoff as alpha-beta.

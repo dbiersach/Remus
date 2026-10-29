@@ -59,7 +59,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `alpha_beta()` | 197 | 16 | `test_search.py::test_alpha_beta_matches_negamax_with_fewer_positions` |
+| `search.py` | `alpha_beta()` | 198 | 16 | `test_search.py::test_alpha_beta_matches_negamax_with_fewer_positions` |
 
 Lines to type in all: 16. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 
@@ -71,33 +71,34 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `alpha_beta()` in `search.py`
 
-**Where:** lines 226 to 241 of `search.py`, inside `alpha_beta()`, in place of the stub below the docstring. It is called by `main()` in `compare_search.py`.
+**Where:** lines 227 to 243 of `search.py`, inside `alpha_beta()`, in place of the stub below the docstring. It is called by `main()` in `compare_search.py`.
 
 ```python
-197 | def alpha_beta(
-198 |     state: dict, depth: int, ply: int, alpha: int, beta: int, info: SearchInfo
+198 | def alpha_beta(
+199 |     state: dict, depth: int, ply: int, alpha: int, beta: int, info: SearchInfo
       ...
-224 |         The same score negamax returns at this depth.
-225 |     """
-226 +     info.nodes += 1
-227 +     if depth == 0:
-228 +         return evaluate(state)
-229 +     moves = legal_moves(state)
-230 +     if not moves:
-231 +         return -(MATE_SCORE - ply) if in_check(state, state["turn"]) else 0
-232 +     for move in moves:
-233 +         undo = make_move(state, move)
-234 +         try:
-235 +             score = -alpha_beta(state, depth - 1, ply + 1, -beta, -alpha, info)
-236 +         finally:
-237 +             undo_move(state, undo)
-238 +         if score >= beta:
-239 +             return score  # Cutoff: the opponent will not allow this
-240 +         alpha = max(alpha, score)
-241 +     return alpha
-242 |
-243 |
-244 | def main():
+225 |         The same score negamax returns at this depth.
+226 |     """
+227 +     info.nodes += 1
+228 +     if depth == 0:
+229 +         return evaluate(state)
+230 +     moves = legal_moves(state)
+231 +     if not moves:
+232 +         return -(MATE_SCORE - ply) if in_check(state, state["turn"]) else 0
+233 +     for move in moves:
+234 +         undo = make_move(state, move)
+235 +         try:
+236 +             # Recursive call to itself
+237 +             score = -alpha_beta(state, depth - 1, ply + 1, -beta, -alpha, info)
+238 +         finally:
+239 +             undo_move(state, undo)
+240 +         if score >= beta:
+241 +             return score  # Cutoff: the opponent will not allow this
+242 +         alpha = max(alpha, score)
+243 +     return alpha
+244 |
+245 |
+246 | def main():
 ```
 
 **How it works:** The body is negamax with a window. `alpha` is the best score this side is already sure of, and `beta` is the most the opponent will allow. Each child is searched with the window flipped, `-beta` and `-alpha`. A score at or above `beta` is a cutoff: the opponent will never let the game reach this position, so the remaining moves are skipped. Otherwise a better score raises `alpha`, and the function returns `alpha`.

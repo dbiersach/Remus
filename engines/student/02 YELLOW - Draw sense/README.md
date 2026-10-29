@@ -77,7 +77,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `is_draw_in_search()` | 396 | 2 | `test_upgrades.py::test_a_repeated_position_is_a_draw`, `test_upgrades.py::test_the_fifty_move_limit_is_a_draw` |
+| `search.py` | `is_draw_in_search()` | 398 | 2 | `test_upgrades.py::test_a_repeated_position_is_a_draw`, `test_upgrades.py::test_the_fifty_move_limit_is_a_draw` |
 | `test_upgrades.py` | `test_draw_sense_search_agrees_with_alpha_beta()` | 21 | 7 | `run_tests.py` |
 | `test_upgrades.py` | `test_a_repeated_position_is_a_draw()` | 32 | 5 | `run_tests.py` |
 | `test_upgrades.py` | `test_the_fifty_move_limit_is_a_draw()` | 41 | 2 | `run_tests.py` |
@@ -92,19 +92,19 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `is_draw_in_search()` in `search.py`
 
-**Where:** lines 413 to 414 of `search.py`, inside `is_draw_in_search()`, in place of the stub below the docstring. It is called by `draw_sense_search()` in `search.py`.
+**Where:** lines 415 to 416 of `search.py`, inside `is_draw_in_search()`, in place of the stub below the docstring. It is called by `draw_sense_search()` in `search.py`.
 
 ```python
-396 | def is_draw_in_search(state: dict) -> bool:
-397 |     """
+398 | def is_draw_in_search(state: dict) -> bool:
+399 |     """
       ...
-411 |         the search scores it 0 instead of chasing a win that cannot happen.
-412 |     """
-413 +     key = state["history"][-1]
-414 +     return state["history"].count(key) >= 2 or state["halfmove_clock"] >= 100
-415 |
-416 |
-417 | def draw_sense_search(
+413 |         the search scores it 0 instead of chasing a win that cannot happen.
+414 |     """
+415 +     key = state["history"][-1]
+416 +     return state["history"].count(key) >= 2 or state["halfmove_clock"] >= 100
+417 |
+418 |
+419 | def draw_sense_search(
 ```
 
 **How it works:** `state["history"]` holds the key of every position of the game so far, with the current position last, so `key` is the position on the board right now. `count(key) >= 2` is True when that same position appeared before, the first step toward a threefold repetition. The search treats the first repeat as a draw: if the line can repeat once, the side that wants a draw can repeat it again. `halfmove_clock >= 100` catches the fifty-move rule: 100 half-moves, 50 by each side, with no capture and no pawn move. `or` makes the function return True when either rule applies.
