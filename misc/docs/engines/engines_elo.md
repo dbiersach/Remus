@@ -211,10 +211,10 @@ scored mostly by punishing a rare gross blunder from the weakened Stockfish, and
 
 The course designer runs these commands; no student or teacher needs them in
 class. From the top Remus folder on a computer with at least 20 physical cores, after
-`cargo build --release` inside `Niram`:
+`cargo build --release` inside `engines/Niram`:
 
 ```
-uv run misc/scripts/version_elo.py --workers 20 --niram-gold
+uv run misc/scripts/version_elo.py --workers 20 --niram
 ```
 
 A run that stops partway picks up from the games already in

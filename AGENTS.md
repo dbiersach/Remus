@@ -329,7 +329,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   runs it for the Day 9 battles. `version_league.py` plays a round robin of all 12
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
   with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions, and
-  Niram with `--niram-gold`, against Stockfish at four UCI_Elo levels near an
+  Niram with `--niram`, against Stockfish at four UCI_Elo levels near an
   even score, from frozen copies of the versions, and prints the tables that
   `misc/docs/engines/engines_elo.md` reports beside the league table.
 - `engines/Niram` holds Niram, Remus-GOLD rewritten in Rust, named for
@@ -345,8 +345,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
   change in Niram and a clean `engine_parity.py` run. The Rust copies of WHITE
   and the ten color versions were deleted (David, 2026-10-28) after Niram league 1, whose
-  games stay in the games file: `version_league.py --niram --rate-only` and
-  `version_elo.py --niram` rate those saved games, with Niram-WHITE pinned at 0. The
+  games stay in the games file: `version_league.py --niram --rate-only` rates those
+  saved games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays Niram
+  against Stockfish beside the Remus versions. The
   Python style rules above do not apply to the Rust code, which follows `cargo fmt`
   and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `estimate_elo.py`,
