@@ -2,11 +2,11 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Make a list, read one item by index, and count the items with `len()`. **Measured by:** Part #1 of `python_lists.py` prints 8 pieces and `q` on the d-file.
 - Visit every item with `for` and `range()`. **Measured by:** Part #2 prints the back rank `r n b q k b n r` on one line.
-- Build an 8x8 board as a list of rows and read `board[row][col]`. **Measured by:** Part #3 prints the starting position, and the pair names the square `board[4][4]` (e4) without running code.
+- Build an 8x8 board as a list of rows and read `board[row][col]`. **Measured by:** Part #3 prints the starting position, and the student pair names the square `board[4][4]` (e4) without running code.
 - Say where each rank lives: row 0 is rank 8. **Measured by:** Unplugged warm-up "Call the square": each student converts four squares on the printed board, such as e2 to (6, 4), with no mistakes.
 
 ## The files
@@ -15,7 +15,7 @@ This period comes before any Remus code. The lab is `python_lists.py` in the `st
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_lists.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_lists_instructor.py`.
+The student pairs fill in the blanks of `python_lists.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_lists_instructor.py`.
 
 Part #1: you count the pieces in a list with `len()` and read one by index. Index 3 is the d-file, where the queen starts.
 
@@ -31,8 +31,8 @@ Part #4: you play 1. e4 by changing two squares, then count the White pawns left
 | --- | --- |
 | 1:00 to 1:15 | Unplugged warm-up, "Call the square": the teacher calls (6, 4), the navigator puts a token on the printed board, and the driver names the square, e2. Then the partners swap. |
 | 1:15 to 1:30 | Slides: lists, `for` and `range()`, `len()`, and a list of lists. |
-| 1:30 to 2:15 | Pairs work through the four parts of `python_lists.py`: a list of pieces, a loop over every square, the board as a list of rows, and the pawns in a row. |
-| 2:15 to 2:30 | Without running code, each pair names `board[4][4]` (e4) and says why row 0 is rank 8. |
+| 1:30 to 2:15 | Student pairs work through the four parts of `python_lists.py`: a list of pieces, a loop over every square, the board as a list of rows, and the pawns in a row. |
+| 2:15 to 2:30 | Without running code, each student pair names `board[4][4]` (e4) and says why row 0 is rank 8. |
 
 ## What you edit in the lab
 

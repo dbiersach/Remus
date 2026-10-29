@@ -2,9 +2,9 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
-- Explain an alpha-beta cutoff. **Measured by:** "Fewest flips": the pair reaches the right move while turning fewer cards than the whole tree.
+- Explain an alpha-beta cutoff. **Measured by:** "Fewest flips": the student pair reaches the right move while turning fewer cards than the whole tree.
 - Show that alpha-beta keeps the answer and saves work. **Measured by:** The `alpha_beta` tests pass, and running `compare_search.py` prints the same scores as negamax with fewer nodes.
 - Keep a list in order with `insert()`, start a best value at minus infinity, and time code. **Measured by:** `python_sorting.py` puts the queen first, finds the best victim, and prints the run time of `perft(3)`.
 
@@ -22,15 +22,15 @@ Files that grow this period:
 - `search.py`
 - `test_search.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `alpha_beta()` in `search.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_sorting.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_sorting_instructor.py`.
+The student pairs fill in the blanks of `python_sorting.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_sorting_instructor.py`.
 
 Part #1 sorts captures by the value of the piece they take: each new piece steps past every piece worth at least as much and is inserted there. `order_moves()` in period 4 sorts moves the same way.
 
@@ -48,10 +48,10 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 
 | Time | Activity |
 | --- | --- |
-| 10:30 to 10:45 | Unplugged warm-up, "Fewest flips": the same tree as face-down cards. Pairs turn a card only when the answer could still change. |
+| 10:30 to 10:45 | Unplugged warm-up, "Fewest flips": the same tree as face-down cards. Student pairs turn a card only when the answer could still change. |
 | 10:45 to 10:55 | Slides: alpha and beta, and the cutoff. |
-| 10:55 to 11:25 | Pairs write `alpha_beta()` beside `negamax()` and run `compare_search.py`: the same score, fewer nodes. |
-| 11:25 to 12:00 | Pairs work through `python_sorting.py`: `insert()` puts the biggest victim first, `float("inf")`, and timing a perft run. |
+| 10:55 to 11:25 | Student pairs write `alpha_beta()` beside `negamax()` and run `compare_search.py`: the same score, fewer nodes. |
+| 11:25 to 12:00 | Student pairs work through `python_sorting.py`: `insert()` puts the biggest victim first, `float("inf")`, and timing a perft run. |
 
 ## What you edit this period
 

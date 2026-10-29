@@ -5,7 +5,7 @@ Day 7, period 2, Python lab 10: random.choice(), a best-so-far loop, sys.stdin,
 print(..., flush=True), and sys.stderr. The chess drill picks a random move, picks
 the most valuable capture, and answers "isready" with "readyok", the way the
 first brains and the UCI engine do in period 3.
-The student file python_input_output.py leaves one # line for each line the pair types.
+The student file python_input_output.py leaves one # line for each line the student pair types.
 """
 
 import random

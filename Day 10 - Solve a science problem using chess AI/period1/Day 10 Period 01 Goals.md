@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
-- Map the chess engine's loop onto a measurement problem. **Measured by:** The pair fills in the chess-to-science table: legal moves, evaluation, and greedy move each have a science partner.
-- Balance exploring and exploiting. **Measured by:** The pair's `choose_next_measurement()` beats random guessing on the 100-grid benchmark, and the pair names the explore weight it chose.
+- Map the chess engine's loop onto a measurement problem. **Measured by:** The student pair fills in the chess-to-science table: legal moves, evaluation, and greedy move each have a science partner.
+- Balance exploring and exploiting. **Measured by:** The student pair's `choose_next_measurement()` beats random guessing on the 100-grid benchmark, and the student pair names the explore weight it chose.
 
 ## The files
 
@@ -16,13 +16,13 @@ New files this period:
 - `hidden_peak.py`
 - `test_hidden_peak.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `candidate_squares()` in `hidden_peak.py`
 - `score_candidate()` in `hidden_peak.py`
 - `choose_next_measurement()` in `hidden_peak.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -44,10 +44,10 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 
 | Time | Activity |
 | --- | --- |
-| 8:30 to 8:45 | Unplugged warm-up, "Find the hidden peak": a 10x10 grid hides a hot spot, and each pair gets five measurements to find it. |
+| 8:30 to 8:45 | Unplugged warm-up, "Find the hidden peak": a 10x10 grid hides a hot spot, and each student pair gets five measurements to find it. |
 | 8:45 to 8:55 | Slides: the map from chess to science. Legal moves become squares not yet measured, and the evaluation becomes predicted value plus distance to the nearest reading. |
-| 8:55 to 9:35 | Pairs write `candidate_squares()`, `score_candidate()`, and `choose_next_measurement()` in `hidden_peak.py`. |
-| 9:35 to 10:00 | Pairs tune `explore_weight` and post their 100-grid benchmark average on the board, next to random guessing. |
+| 8:55 to 9:35 | Student pairs write `candidate_squares()`, `score_candidate()`, and `choose_next_measurement()` in `hidden_peak.py`. |
+| 9:35 to 10:00 | Student pairs tune `explore_weight` and post their 100-grid benchmark average on the board, next to random guessing. |
 
 ## What you edit this period
 

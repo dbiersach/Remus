@@ -24,7 +24,7 @@ make_student_folders.py then adds the timed flow of the period and the exact tas
 lab or demo period keeps its answer file, <name>_instructor.py, which lives in
 that period folder and survives each rebuild, and Day 6, period 3 gets the bug_hunt
 folder: a copy of the period's code with three planted
-bugs for the pairs to find with divide().
+bugs for the student pairs to find with divide().
 
 Run make_student_folders.py after this script.
 """
@@ -34,6 +34,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 from make_student_folders import STUDENT_FUNCTIONS
 from period_guides import CHANGE_NOTES, LAB_NOTES, LABS, OBJECTIVES, PERIOD_GUIDES
@@ -42,7 +43,7 @@ ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/s
 SAVED_OUTPUT_SUFFIXES = {".pgn", ".svg"}  # Games and board pictures that scripts save
 BUG_HUNT_PERIOD = (6, 3)  # The period whose folder holds bug_hunt/
 
-# Every instructor folder with tests gets this file, so a pair runs the tests with
+# Every instructor folder with tests gets this file, so a student pair runs the tests with
 # the Run button in VS Code instead of typing a command
 RUN_TESTS = (
     "#!/usr/bin/env -S uv run\n"
@@ -57,18 +58,14 @@ RUN_TESTS = (
     "from pathlib import Path\n"
     "\n"
     "import pytest\n"
-    "\n"
-    "# A lab whose tests sit in the lab file itself, not in a test_ file\n"
-    'LAB_TEST_FILES = ["python_functions.py", "python_functions_instructor.py"]\n'
+    "{lab}"
     "\n"
     "\n"
     "def main():\n"
     "    folder = Path(__file__).parent\n"
-    '    print(f"Testing {folder}")\n'
+    '    print(f"Testing {{folder}}")\n'
     "    targets = [str(folder)]\n"
-    "    for name in LAB_TEST_FILES:\n"
-    "        if (folder / name).exists():\n"
-    "            targets.append(str(folder / name))\n"
+    "{lab_target}"
     "    # No cache folder is left behind, and the exit code says if every test passed\n"
     '    sys.exit(pytest.main([*targets, "-p", "no:cacheprovider"]))\n'
     "\n"
@@ -258,7 +255,7 @@ TEST_PERFT_HELPER = '''def state_from_python_chess(board: chess.Board) -> dict:
 
 def python_chess_perft('''
 
-# The main() of phase_hunt.py before the pairs write the tree search in period 3
+# The main() of phase_hunt.py before the student pairs write the tree search in period 3
 PHASE_HUNT_MAIN = """def main():
     measured, truth = make_pattern(SILVER_POWDER)
     print(f"Powder {SILVER_POWDER} shows {len(measured)} peaks: {measured}")
@@ -666,7 +663,7 @@ PERIOD_TITLES = {
 
 # A few periods need a sentence more than the title and the file list give
 PERIOD_NOTES = {
-    (1, 1): "Watch the finished Remus play in Lucas Chess, form pairs, and check that "
+    (1, 1): "Watch the finished Remus play in Lucas Chess, form student pairs, and check that "
     "every laptop opens Remus in VS Code and runs a file with the Run button.",
     (1, 4): "Running `show_board.py` draws the board as a picture in the web browser.",
     (3, 2): "Running `show_board.py` draws an arrow for every move a generator "
@@ -674,13 +671,13 @@ PERIOD_NOTES = {
     (
         9,
         4,
-    ): "The battles run in `period2/student/engines`. Each pair copies its own color "
-    "folder onto a USB stick. On the host laptop, the visitors copy that folder over "
-    "the folder of the same engine color in `period2/student/engines`, and the host "
-    "opens `play_battle.py` in its own color folder, presses Run Python File, and "
-    "types the visitor's engine color. Remus plays two 10-minute games, one with each "
-    "piece color, "
-    "side by side.",
+    ): "The battles run in `period2/student/engines`. Each student pair copies its "
+    "own engine folder onto a USB stick. On the host laptop, the visitors drag that "
+    "folder into `period2/student/engines` and replace the folder of the same name. "
+    "The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` "
+    "to the visitor's engine color, and presses Run Python File. The steps are "
+    "numbered at the top of `play_battle.py`. Remus plays two 10-minute games, one "
+    "with each piece color, side by side.",
     (
         5,
         4,
@@ -693,18 +690,18 @@ PERIOD_NOTES = {
         3,
     ): "Register `remus.bat` from the `student` folder in Lucas Chess again: Remus now "
     "plays greedy moves. Running `play_match.py` plays random Remus against greedy Remus.",
-    (9, 2): "Each pair builds one color version in the `engines` folder inside "
-    "`student`, such as `engines/10 RED - Transposition table`. Each color folder is a "
+    (9, 2): "Each student pair builds one color version in the `engines` folder inside "
+    "`student`, such as `engines/10 RED - Transposition table`. Each engine folder is a "
     "complete copy of Remus-WHITE, the `period1` engine, plus one enhancement.",
     (10, 2): "Running `phase_hunt.py` names the crystal phases in an X-ray powder "
     "pattern and counts the right and wrong calls over 200 powders.",
-    (10, 4): "Each pair reports its science results: the hidden-peak benchmark "
+    (10, 4): "Each student pair reports its science results: the hidden-peak benchmark "
     "and the phase hunt's right, wrong, and can't-tell counts. Then each student "
-    "takes the pair's repository home on a USB drive.",
+    "takes the student pair's repository home on a USB drive.",
 }
 
 # The period whose folder holds a Day's hand-edited code, when it is not period4.
-# Day 9's engine, Remus-WHITE, is finished in period 1. From period 2 on, each pair
+# Day 9's engine, Remus-WHITE, is finished in period 1. From period 2 on, each student pair
 # works in its color version folder in period2/engines, so periods 2 to 4 hold no
 # engine code.
 SOURCE_PERIOD = {9: 1}
@@ -716,6 +713,22 @@ LOCAL_MODULES = {path.stem for path in ROOT.glob("Day */period4/instructor/*.py"
 def day_folder(day: int) -> Path:
     """Return the Day folder for a day number, such as Day 03."""
     return next(ROOT.glob(f"Day {day:02} - *"))
+
+
+def engine_folder_table(day: int, period: int) -> str:
+    """Return a reminder to run each engine folder's tests, with a link to each."""
+    engines = goals_path(day, period).parent.parent / "period2" / "student" / "engines"
+    rows = ""
+    for folder in sorted(engines.iterdir()):
+        if folder.is_dir() and folder.name[:2].isdigit():
+            link = "../period2/student/engines/" + quote(folder.name)
+            rows += f"| [{folder.name}]({link}) | [`run_tests.py`]({link}/run_tests.py) |\n"
+    return (
+        "Before the smoke test, check your engine: open `run_tests.py` in your "
+        "student pair's engine folder from period 2 and press Run. Every test must "
+        "pass. Click your engine folder below to find it.\n\n"
+        "| Engine folder | Tests |\n| --- | --- |\n" + rows.rstrip("\n")
+    )
 
 
 def goals_path(day: int, period: int) -> Path:
@@ -913,7 +926,7 @@ def objectives_section(day: int, period: int) -> str:
     lines = [
         "## Learning objectives",
         "",
-        "By the end of this period, each pair can:",
+        "By the end of this period, each student pair can:",
         "",
     ]
     for objective, measure in OBJECTIVES[(day, period)]:
@@ -922,14 +935,14 @@ def objectives_section(day: int, period: int) -> str:
 
 
 def changes_section(day: int, period: int) -> str:
-    """Return one paragraph for every change the pairs make this period."""
+    """Return one paragraph for every change the student pairs make this period."""
     lines = ["## The changes and why"]
     if (day, period) in LABS:
         name = LABS[(day, period)]
         lines += [
             "",
             (
-                f"The pairs fill in the blanks of `{name}.py`. Each `#` line in the "
+                f"The student pairs fill in the blanks of `{name}.py`. Each `#` line in the "
                 "student file stands for one line to type, and the answer sits on the "
                 f"same line of `{name}_instructor.py`."
             ),
@@ -950,7 +963,7 @@ def changes_section(day: int, period: int) -> str:
 
 
 def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
-    """Return the goals file that explains one period: its first part, for the teacher and pairs."""
+    """Return the goals file that explains one period: its first part, for the teacher and student pairs."""
     title = PERIOD_TITLES[(day, period)]
     sections = [f"# Day {day}, Period {period}: {title}"]
     if (day, period) in PERIOD_NOTES:
@@ -992,10 +1005,13 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         )
     if not files and day in SOURCE_PERIOD:
         sections.append(
-            "This folder holds no engine code. Each pair works in its own color "
-            "version folder in `period2/student/engines`, a complete copy of Remus-WHITE plus "
-            "one enhancement. Remus-WHITE itself is in the `period1` folder."
+            "This folder holds no engine code. Each student pair works in its own "
+            "engine folder in `period2/student/engines`, a complete copy of "
+            "Remus-WHITE plus one enhancement. Remus-WHITE itself is in the "
+            "`period1` folder."
         )
+        if (day, period) == (9, 3):
+            sections.append(engine_folder_table(day, period))
     elif not files:
         if (day, period) not in LABS:
             sections.append(
@@ -1015,11 +1031,11 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
         )
     if written:
         sections.append(
-            "Functions the pairs write this period:\n\n" + "\n".join(written)
+            "Functions the student pairs write this period:\n\n" + "\n".join(written)
         )
         sections.append(
             "In the `student` folder these functions raise `NotImplementedError` "
-            "until a pair writes them. In the `instructor` folder they are finished."
+            "until a student pair writes them. In the `instructor` folder they are finished."
         )
     changes = changes_section(day, period)
     if changes:
@@ -1135,14 +1151,35 @@ def write_folder(folder: Path, files: dict[str, str], day_end_folder: Path) -> N
             shutil.copymode(source, file_path)
 
 
+# Labs whose tests sit in the lab file itself, not in a test_ file
+LAB_TEST_FILES = ["python_functions.py", "python_functions_instructor.py"]
+
+
+def run_tests_text(folder: Path) -> str:
+    """Return run_tests.py for a folder, naming only the lab test files it holds."""
+    lab = ""
+    lab_target = ""
+    for name in LAB_TEST_FILES:
+        if (folder / name).exists():
+            lab = (
+                "\n# This lab keeps its tests in the lab file itself, not in a test_ file\n"
+                f'LAB_TEST_FILE = "{name}"\n'
+            )
+            lab_target = "    targets.append(str(folder / LAB_TEST_FILE))\n"
+    return RUN_TESTS.format(lab=lab, lab_target=lab_target)
+
+
 def write_run_tests(folder: Path) -> None:
     """Give a folder run_tests.py when it holds tests, and take it away when not."""
-    has_tests = (folder / "python_functions_instructor.py").exists()
+    has_tests = False
+    for name in LAB_TEST_FILES:
+        if (folder / name).exists():
+            has_tests = True
     for path in folder.glob("test_*.py"):
         has_tests = True
     run_tests = folder / "run_tests.py"
     if has_tests:
-        run_tests.write_text(RUN_TESTS)
+        run_tests.write_text(run_tests_text(folder))
         run_tests.chmod(0o755)  # Each script runs on its own
     else:
         run_tests.unlink(missing_ok=True)

@@ -5,7 +5,7 @@ Day 8, period 2, Python lab 11: insert() into a list in order, float("inf"), and
 time.perf_counter(). The chess drill sorts captures by the value of the piece
 they take, starts a search for the best value at minus infinity, and times a
 perft run: three tools that alpha-beta and move ordering use.
-The student file python_sorting.py leaves one # line for each line the pair types.
+The student file python_sorting.py leaves one # line for each line the student pair types.
 """
 
 import time

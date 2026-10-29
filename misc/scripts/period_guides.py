@@ -2,7 +2,7 @@
 """period_guides.py
 
 The teaching text of every period goals file: the learning objectives, each with a way
-to measure it, and one paragraph for every change the pairs make to the code. It
+to measure it, and one paragraph for every change the student pairs make to the code. It
 also holds the overview of every day, which goes into the syllabus at the top of
 each Day folder ("Day NN Syllabus.md").
 
@@ -41,13 +41,13 @@ OBJECTIVES = {
             "Start VS Code, open a Python file, and run it with the Run Python File button (the triangle at the top right of the editor).",
             (
                 "Running `python_setup.py` prints Python 3.14 or later and "
-                "`python-chess installed: True` on the pair's laptop."
+                "`python-chess installed: True` on the student pair's laptop."
             ),
         ),
         (
             "Store text in a variable and print it inside an f-string.",
             (
-                "Part #2 of `python_setup.py` greets the pair's own team name and counts "
+                "Part #2 of `python_setup.py` greets the student pair's own team name and counts "
                 "its characters correctly."
             ),
         ),
@@ -81,7 +81,7 @@ OBJECTIVES = {
         (
             "Explain why file a is number 0.",
             (
-                "Without running code, the pair says the file number of h4 (7) and of "
+                "Without running code, the student pair says the file number of h4 (7) and of "
                 "a1 (0), and why."
             ),
         ),
@@ -98,7 +98,7 @@ OBJECTIVES = {
         (
             "Build an 8x8 board as a list of rows and read `board[row][col]`.",
             (
-                "Part #3 prints the starting position, and the pair names the square "
+                "Part #3 prints the starting position, and the student pair names the square "
                 "`board[4][4]` (e4) without running code."
             ),
         ),
@@ -125,7 +125,7 @@ OBJECTIVES = {
         (
             "Reject text that is not a square.",
             (
-                '`parse_square("i9")` raises `ValueError`, and the pair explains which '
+                '`parse_square("i9")` raises `ValueError`, and the student pair explains which '
                 "check catches it."
             ),
         ),
@@ -150,7 +150,7 @@ OBJECTIVES = {
         ),
         (
             "Pack two numbers into a tuple and unpack them.",
-            "The pair writes `row, col = square` and explains what each name holds.",
+            "The student pair writes `row, col = square` and explains what each name holds.",
         ),
     ],
     (2, 2): [
@@ -161,13 +161,13 @@ OBJECTIVES = {
         (
             "Explain aliasing: two names for one list.",
             (
-                "The pair predicts, then shows, that `b2 = board` changes both boards, "
+                "The student pair predicts, then shows, that `b2 = board` changes both boards, "
                 "and that a copy does not."
             ),
         ),
         (
             "Describe a record with a `dataclass`.",
-            "The pair makes a small `dataclass` and prints one of its fields.",
+            "The student pair makes a small `dataclass` and prints one of its fields.",
         ),
     ],
     (2, 3): [
@@ -198,7 +198,7 @@ OBJECTIVES = {
         (
             "Explain why undo needs a record of what the move changed.",
             (
-                "The pair names what a capture destroys (the captured piece) and where "
+                "The student pair names what a capture destroys (the captured piece) and where "
                 "the undo record keeps it."
             ),
         ),
@@ -211,7 +211,7 @@ OBJECTIVES = {
         (
             "Describe a direction as a (row change, col change) tuple.",
             (
-                'The pair writes the tuple for "up and to the right" (-1, 1) and '
+                'The student pair writes the tuple for "up and to the right" (-1, 1) and '
                 "explains the minus sign."
             ),
         ),
@@ -227,7 +227,7 @@ OBJECTIVES = {
         (
             "See the moves a generator returns.",
             (
-                "Running `show_board.py` draws one arrow per king move, and the pair "
+                "Running `show_board.py` draws one arrow per king move, and the student pair "
                 "counts the arrows."
             ),
         ),
@@ -239,7 +239,7 @@ OBJECTIVES = {
         ),
         (
             "Explain why a slider may land on an enemy piece but not on a friend.",
-            "The pair traces `slide()` by hand on a board with one friend and one enemy.",
+            "The student pair traces `slide()` by hand on a board with one friend and one enemy.",
         ),
     ],
     (3, 4): [
@@ -264,7 +264,7 @@ OBJECTIVES = {
         (
             "Draw which Remus files import which, and name the file that runs.",
             (
-                "The pair's paper import map draws arrows from `move_generation.py` "
+                "The student pair's paper import map draws arrows from `move_generation.py` "
                 "to `board.py`, `game_state.py`, and `moves.py`, and marks the lab "
                 "as the file named `__main__`."
             ),
@@ -278,7 +278,7 @@ OBJECTIVES = {
         (
             "Explain that a pawn attacks diagonally but moves straight.",
             (
-                "The pair marks the two squares a White pawn on e4 attacks (d5, f5) on "
+                "The student pair marks the two squares a White pawn on e4 attacks (d5, f5) on "
                 "the printed board."
             ),
         ),
@@ -307,7 +307,7 @@ OBJECTIVES = {
         (
             "Predict a legal-move count before running the code.",
             (
-                "In `demo_practice_positions.py` the pair types its prediction for "
+                "In `demo_practice_positions.py` the student pair types its prediction for "
                 "each position first, then runs the file and compares."
             ),
         ),
@@ -324,7 +324,7 @@ OBJECTIVES = {
                 "State the castling rules: no earlier king or rook move, empty squares "
                 "between, and no check on the king's path."
             ),
-            "Six-position quiz on castling: each pair gets at least five right.",
+            "Six-position quiz on castling: each student pair gets at least five right.",
         ),
         (
             "Update the castling rights after any move.",
@@ -344,7 +344,7 @@ OBJECTIVES = {
         ),
         (
             "Find the square of the pawn an en passant capture removes.",
-            "The pair names the removed pawn's square for exd6 (d5) on the printed board.",
+            "The student pair names the removed pawn's square for exd6 (d5) on the printed board.",
         ),
     ],
     (5, 4): [
@@ -356,13 +356,13 @@ OBJECTIVES = {
             "Explain why a player sometimes promotes to a knight.",
             (
                 "Running `demo_promotion.py` prints stalemate for b8=Q, b8=R, and b8=B "
-                "and checkmate for b8=N, and the pair says why the queen only draws."
+                "and checkmate for b8=N, and the student pair says why the queen only draws."
             ),
         ),
         (
             "Play Remus in Lucas Chess.",
             (
-                "The pair registers `remus.bat`, plays one game, and sees a random legal "
+                "The student pair registers `remus.bat`, plays one game, and sees a random legal "
                 "reply to every move, special moves included."
             ),
         ),
@@ -374,7 +374,7 @@ OBJECTIVES = {
         ),
         (
             "Trace a call stack by hand.",
-            "The pair draws the calls of a depth-2 count and the value each one returns.",
+            "The student pair draws the calls of a depth-2 count and the value each one returns.",
         ),
     ],
     (6, 2): [
@@ -395,7 +395,7 @@ OBJECTIVES = {
         (
             "Find a planted bug with `divide()`.",
             (
-                "Running `hunt.py` in `bug_hunt/` points at three bugs; the pair fixes at "
+                "Running `hunt.py` in `bug_hunt/` points at three bugs; the student pair fixes at "
                 "least two of them and names the root move that showed each one."
             ),
         ),
@@ -412,7 +412,7 @@ OBJECTIVES = {
             "Name the six fields of a FEN string.",
             (
                 "`python_fen_fields.py` prints the six fields of the start FEN with "
-                "their names, and the pair labels them on the worksheet."
+                "their names, and the student pair labels them on the worksheet."
             ),
         ),
     ],
@@ -422,7 +422,7 @@ OBJECTIVES = {
                 "Name every way a game ends: checkmate, stalemate, insufficient "
                 "material, repetition, and the fifty-move rule."
             ),
-            "Six-position quiz: each pair gets at least five right.",
+            "Six-position quiz: each student pair gets at least five right.",
         ),
         (
             "Detect the end of a game in code.",
@@ -457,7 +457,7 @@ OBJECTIVES = {
         (
             "Explain what the UCI commands do.",
             (
-                "The pair explains `position`, `go`, and `bestmove` from a printed "
+                "The student pair explains `position`, `go`, and `bestmove` from a printed "
                 "conversation."
             ),
         ),
@@ -477,7 +477,7 @@ OBJECTIVES = {
         (
             "Explain a piece-square table.",
             (
-                "The pair says why a knight scores more on d4 than on a1, using the "
+                "The student pair says why a knight scores more on d4 than on a1, using the "
                 "number of squares it attacks (8 and 2)."
             ),
         ),
@@ -485,7 +485,7 @@ OBJECTIVES = {
     (8, 1): [
         (
             "Back up scores through a tree with minimax.",
-            "Paper minimax: the pair's best move matches `minimax()` on the same tree.",
+            "Paper minimax: the student pair's best move matches `minimax()` on the same tree.",
         ),
         (
             "Score checkmate so that a faster mate wins.",
@@ -499,7 +499,7 @@ OBJECTIVES = {
         (
             "Explain an alpha-beta cutoff.",
             (
-                '"Fewest flips": the pair reaches the right move while turning fewer '
+                '"Fewest flips": the student pair reaches the right move while turning fewer '
                 "cards than the whole tree."
             ),
         ),
@@ -524,12 +524,12 @@ OBJECTIVES = {
     (8, 3): [
         (
             "Explain the horizon effect.",
-            "The pair explains why depth 2 takes a defended pawn with the queen.",
+            "The student pair explains why depth 2 takes a defended pawn with the queen.",
         ),
         (
             "List the moves quiescence searches.",
             (
-                'The `quiescence` tests pass, and the pair explains what "stand pat" '
+                'The `quiescence` tests pass, and the student pair explains what "stand pat" '
                 "means with the defended-pawn position."
             ),
         ),
@@ -544,7 +544,7 @@ OBJECTIVES = {
         ),
         (
             "Measure what ordering saves.",
-            "The pair records node counts before and after ordering for one position.",
+            "The student pair records node counts before and after ordering for one position.",
         ),
     ],
     (9, 1): [
@@ -584,7 +584,7 @@ OBJECTIVES = {
         (
             "Predict what the enhancement changes.",
             (
-                "Each pair writes one sentence on the board: what should change, and how "
+                "Each student pair writes one sentence on the board: what should change, and how "
                 "the class will see it in the match results."
             ),
         ),
@@ -593,8 +593,8 @@ OBJECTIVES = {
         (
             "Run a fair match between two color versions.",
             (
-                "The pair copies its color folder to another pair's laptop, plays two "
-                "games against that pair's engine color, one with each piece color, and "
+                "The student pair copies its engine folder to another student pair's laptop, plays two "
+                "games against that student pair's engine color, one with each piece color, and "
                 "writes the "
                 "result on the board."
             ),
@@ -602,8 +602,8 @@ OBJECTIVES = {
         (
             "Read a match result with its margin of error.",
             (
-                "`demo_results.py` turns the pair's two battle games, and then its "
-                "engine color's league games, into an Elo gap and margin, and the pair says "
+                "`demo_results.py` turns the student pair's two battle games, and then its "
+                "engine color's league games, into an Elo gap and margin, and the student pair says "
                 "which gap is larger than its margin and why two games cannot show "
                 "which enhancement is stronger."
             ),
@@ -613,15 +613,15 @@ OBJECTIVES = {
         (
             "Map the chess engine's loop onto a measurement problem.",
             (
-                "The pair fills in the chess-to-science table: legal moves, evaluation, "
+                "The student pair fills in the chess-to-science table: legal moves, evaluation, "
                 "and greedy move each have a science partner."
             ),
         ),
         (
             "Balance exploring and exploiting.",
             (
-                "The pair's `choose_next_measurement()` beats random guessing on the "
-                "100-grid benchmark, and the pair names the explore weight it chose."
+                "The student pair's `choose_next_measurement()` beats random guessing on the "
+                "100-grid benchmark, and the student pair names the explore weight it chose."
             ),
         ),
     ],
@@ -629,14 +629,14 @@ OBJECTIVES = {
         (
             "Score a guess about what a powder holds.",
             (
-                "The `score` test passes, and the pair explains why an extra phase "
+                "The `score` test passes, and the student pair explains why an extra phase "
                 "costs a point even when every peak is explained."
             ),
         ),
         (
             "Build an answer greedily, one best step at a time.",
             (
-                "The `greedy_phases` tests pass, and the pair explains why greedy "
+                "The `greedy_phases` tests pass, and the student pair explains why greedy "
                 "names gold for a powder that holds silver."
             ),
         ),
@@ -656,7 +656,7 @@ OBJECTIVES = {
             ),
             (
                 "Running `phase_hunt.py` shows the search making fewer wrong calls "
-                "than greedy, and the pair names the extra measurement that would "
+                "than greedy, and the student pair names the extra measurement that would "
                 "tell gold from silver."
             ),
         ),
@@ -665,22 +665,22 @@ OBJECTIVES = {
         (
             "Report a science result the way a scientist does.",
             (
-                "The pair's results table gives the hidden-peak benchmark against "
+                "The student pair's results table gives the hidden-peak benchmark against "
                 "random guessing and the phase hunt's right, wrong, and can't-tell "
-                "counts for greedy and for search, from the pair's own runs."
+                "counts for greedy and for search, from the student pair's own runs."
             ),
         ),
         (
             "Explain one decision the science AI made.",
             (
-                "Each pair presents one powder its search named and one it answered "
+                "Each student pair presents one powder its search named and one it answered "
                 "with can't tell, and says which measurement would settle the second."
             ),
         ),
         (
             "Take the code home.",
             (
-                "Each student's USB drive holds the pair's Remus folder, every Day "
+                "Each student's USB drive holds the student pair's Remus folder, every Day "
                 "folder included, and the copy opens in VS Code."
             ),
         ),
@@ -691,7 +691,7 @@ OBJECTIVES = {
 VERSION_OBJECTIVES = [
     (
         "Explain the idea of the color version's enhancement in two sentences.",
-        "The pair explains the idea to another pair, who can restate it.",
+        "The student pair explains the idea to another student pair, who can restate it.",
     ),
     (
         "Add the enhancement without breaking the rules.",
@@ -701,8 +701,8 @@ VERSION_OBJECTIVES = [
         "Run a fair experiment: same opening, both piece colors.",
         (
             "In the Day 9 battles, `play_battle.py` in the version folder plays both "
-            "10-minute games with no illegal moves or crashes when the pair presses "
-            "Run in VS Code, and the pair says why two games cannot show which "
+            "10-minute games with no illegal moves or crashes when the student pair presses "
+            "Run in VS Code, and the student pair says why two games cannot show which "
             "enhancement is stronger."
         ),
     ),
@@ -711,8 +711,8 @@ VERSION_OBJECTIVES = [
 # The long explanation in each version README, by color. Each section is Markdown:
 # "example" walks through one concrete case, "why" says how the idea makes Remus
 # stronger, "cost" says what it spends (positions per second, memory, re-searches),
-# "expect" says what the pair should see in the numbers and in games, and "fits"
-# traces where the pair's code is called from.
+# "expect" says what the student pair should see in the numbers and in games, and "fits"
+# traces where the student pair's code is called from.
 VERSION_GUIDES = {
     "WHITE": {
         "why_title": "Why it matters",
@@ -1016,7 +1016,7 @@ VERSION_GUIDES = {
         "fits": (
             "`white_score()` in `evaluation.py` adds `pawn_structure(board)` to "
             "material and placement, and `explain_evaluation()` prints it as its own "
-            "line, so a pair can see the term in any position."
+            "line, so a student pair can see the term in any position."
         ),
     },
     "CYAN": {
@@ -1286,7 +1286,7 @@ Silver's peaks sit less than 0.3 degrees from gold's, so the peaks fit gold exac
 as well. Gold comes first in the library, so greedy says "anatase and gold" and
 sounds just as sure as when it is right.
 
-![Gold's and silver's four peaks side by side, each pair inside the 0.3 degree
+![Gold's and silver's four peaks side by side, each student pair inside the 0.3 degree
 tolerance]({PHASE_HUNT_IMAGES}/gold_and_silver.png)
 
 Run `phase_hunt.py` in VS Code when both functions pass their tests. Greedy names 166 of
@@ -1298,7 +1298,7 @@ tell", and a scientist knows to take a second measurement.
 ## Real scientists do this
 
 Naming the phases in a powder pattern is called **phase identification**, and
-beamline scientists do it every day. At the NSLS-II Pair Distribution Function (PDF)
+beamline scientists do it every day. At the NSLS-II Student pair Distribution Function (PDF)
 beamline, Brookhaven's Crystallography Companion Agent names phases while the data
 comes in. The CrystalShift program (Cornell, 2025) and the Dara program (Berkeley Lab,
 2025) search a tree of phase sets the way your code will in period 3, on real
@@ -1571,7 +1571,7 @@ CHANGE_NOTES = {
     ("test_upgrades.py", "test_killers_keep_two_quiet_moves"): (
         "Feeds three cutoff moves to `remember_killer()` and checks that only the "
         "two newest stay, newest first. Writing the expected list before running the "
-        "test is how a pair shows it understands the two slots."
+        "test is how a student pair shows it understands the two slots."
     ),
     ("test_upgrades.py", "test_pvs_search_agrees_with_alpha_beta"): (
         "PVS must be a faster way to the same answer, never a different answer. The "
@@ -1616,7 +1616,7 @@ CHANGE_NOTES = {
     ),
 }
 
-# (day, period) -> paragraphs about the lab file, one per part the pairs type
+# (day, period) -> paragraphs about the lab file, one per part the student pairs type
 LAB_NOTES = {
     (1, 1): [
         (
@@ -1759,8 +1759,8 @@ LAB_NOTES = {
         (
             "`demo_practice_positions.py` builds three positions from a dict of "
             "{square: piece} and prints each board with Remus's legal-move count. The "
-            "pair types each position and its prediction before running the file, so "
-            "every count is a test of the pair's own reasoning as well as of the code."
+            "student pair types each position and its prediction before running the file, so "
+            "every count is a test of the student pair's own reasoning as well as of the code."
         ),
         (
             "Part #2 puts a rook check on the White king, and Part #3 adds a knight "
@@ -1788,7 +1788,7 @@ LAB_NOTES = {
     (5, 4): [
         (
             "`demo_promotion.py` sets up a puzzle: White's pawn on b7 promotes on b8 next "
-            "to the Black king on a6. The pair writes the loop that tries all four "
+            "to the Black king on a6. The student pair writes the loop that tries all four "
             "promotion pieces, counts Black's legal replies, and names the result."
         ),
         (
@@ -1818,7 +1818,7 @@ LAB_NOTES = {
     (6, 4): [
         (
             "The lab cuts the start FEN into its six fields with `split()` and prints "
-            "each with its name, the map the pair needs before writing `fen.py`. Then "
+            "each with its name, the map the student pair needs before writing `fen.py`. Then "
             "`try` and `except ValueError` catch the error that `int()` raises on text "
             "that is not a number, which is how a FEN reader can reject a broken "
             "string instead of crashing."
@@ -1870,7 +1870,7 @@ LAB_NOTES = {
             "Parts #1 and #2 of `demo_results.py` turn a match result into a score and "
             "an Elo gap, then into a range that holds the true gap 95 times out of "
             "100. When the range includes 0, the match has not shown that the "
-            "enhancement helped, and more games are needed. Each pair puts in its own "
+            "enhancement helped, and more games are needed. Each student pair puts in its own "
             "two battle games, then its engine color's league games from the designer's "
             "table, and compares the two ranges."
         ),
@@ -1885,8 +1885,8 @@ DAY_GUIDES = {
     1: {
         "theme": "Setup and the board",
         "summary": (
-            "Day 1 forms the pairs, sets up the laptops, and teaches the first Python: "
-            "strings and lists. In the last period each pair writes its first Remus "
+            "Day 1 forms the student pairs, sets up the laptops, and teaches the first Python: "
+            "strings and lists. In the last period each student pair writes its first Remus "
             "code. By 4:30 Remus prints its own board, converts a square name such as "
             "e2 into a (row, col) pair and back, and draws the board as a picture."
         ),
@@ -1926,8 +1926,8 @@ DAY_GUIDES = {
                 (
                     20,
                     (
-                        "Form the ten pairs. The driver types and the navigator reads "
-                        "and checks; the two swap roles every period. Each pair picks "
+                        "Form the ten student pairs. The driver types and the navigator reads "
+                        "and checks; the two swap roles every period. Each student pair picks "
                         "a team name for `CONTRIBUTORS.md`."
                     ),
                 ),
@@ -1935,8 +1935,8 @@ DAY_GUIDES = {
                     30,
                     (
                         "Setup, the only git and uv commands of the workshop. The "
-                        "course designer shows each pair how to install git and uv, "
-                        "clone the Remus repository, and run `uv sync` once to build "
+                        "teacher walks each student through installing git and uv, "
+                        "cloning the Remus repository, and running `uv sync` once to build "
                         "the `.venv` folder. From here on every step runs from VS "
                         "Code's Run button."
                     ),
@@ -1952,7 +1952,7 @@ DAY_GUIDES = {
                 (
                     60,
                     (
-                        "Pairs type the 6 lines of `python_setup.py` and run it. It "
+                        "Student pairs type the 6 lines of `python_setup.py` and run it. It "
                         "checks the laptop, greets the team, and prints a first chess "
                         "line. The teacher and the assistant check that every laptop "
                         "runs a file with the Run button and opens Lucas Chess."
@@ -1985,7 +1985,7 @@ DAY_GUIDES = {
                 (
                     25,
                     (
-                        "Pairs work through the four parts of `python_strings.py`, "
+                        "Student pairs work through the four parts of `python_strings.py`, "
                         "running the file after each part."
                     ),
                 ),
@@ -1998,7 +1998,7 @@ DAY_GUIDES = {
                 ),
                 (
                     80,
-                    "Pairs compare their printouts with the pair next to them.",
+                    "Student pairs compare their printouts with the student pair next to them.",
                 ),
             ],
             3: [
@@ -2020,7 +2020,7 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Pairs work through the four parts of `python_lists.py`: a "
+                        "Student pairs work through the four parts of `python_lists.py`: a "
                         "list of pieces, a loop over every square, the board as a list"
                         " of rows, and the pawns in a row."
                     ),
@@ -2028,7 +2028,7 @@ DAY_GUIDES = {
                 (
                     75,
                     (
-                        "Without running code, each pair names `board[4][4]` (e4) and "
+                        "Without running code, each student pair names `board[4][4]` (e4) and "
                         "says why row 0 is rank 8."
                     ),
                 ),
@@ -2045,7 +2045,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs write `print_board()`, `square_name()`, "
+                        "Student pairs write `print_board()`, `square_name()`, "
                         "`parse_square()`, and `piece_at()` in `board.py` and run "
                         "`run_tests.py` after each one."
                     ),
@@ -2053,17 +2053,17 @@ DAY_GUIDES = {
                 (
                     60,
                     (
-                        "Pairs run `show_board.py`, which draws their board as a "
+                        "Student pairs run `show_board.py`, which draws their board as a "
                         "picture in the web browser."
                     ),
                 ),
                 (
                     70,
                     (
-                        "Show and choose: two or three pairs show their "
+                        "Show and choose: two or three student pairs show their "
                         "`parse_square()` on the projector, the class picks one for "
                         "clarity, and the teacher adds it to the class repository with"
-                        " the pair's team name in `CONTRIBUTORS.md`."
+                        " the student pair's team name in `CONTRIBUTORS.md`."
                     ),
                 ),
                 (
@@ -2116,7 +2116,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs work through Parts #1 to #3 of `python_functions.py`: "
+                        "Student pairs work through Parts #1 to #3 of `python_functions.py`: "
                         "call a function, write their own, and unpack a square tuple "
                         "such as `row, col = (6, 4)`."
                     ),
@@ -2131,14 +2131,14 @@ DAY_GUIDES = {
                 (
                     65,
                     (
-                        "Pairs finish Part #4, which checks their functions with "
+                        "Student pairs finish Part #4, which checks their functions with "
                         "`assert`."
                     ),
                 ),
                 (
                     80,
                     (
-                        "Wrap-up: each pair says what a failing test tells them and "
+                        "Wrap-up: each student pair says what a failing test tells them and "
                         "where to look first."
                     ),
                 ),
@@ -2154,7 +2154,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs work through Parts #1 and #2 of `python_dicts.py` and "
+                        "Student pairs work through Parts #1 and #2 of `python_dicts.py` and "
                         "watch `b2 = board` change both boards."
                     ),
                 ),
@@ -2162,7 +2162,7 @@ DAY_GUIDES = {
                     45,
                     (
                         "The teacher explains aliasing on the whiteboard: two names, "
-                        "one list. Then pairs write Parts #3 and #4: a real copy, and "
+                        "one list. Then student pairs write Parts #3 and #4: a real copy, and "
                         "a dataclass that describes a move."
                     ),
                 ),
@@ -2185,7 +2185,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs write `is_white()` and `color_of()` in `game_state.py`,"
+                        "Student pairs write `is_white()` and `color_of()` in `game_state.py`,"
                         " then `move_to_uci()` and `move_from_uci()` in `moves.py`, "
                         "running `run_tests.py` after each."
                     ),
@@ -2193,7 +2193,7 @@ DAY_GUIDES = {
                 (
                     65,
                     (
-                        "Pairs run `game_state.py` and `moves.py` and compare the "
+                        "Student pairs run `game_state.py` and `moves.py` and compare the "
                         "printouts with the expected answers."
                     ),
                 ),
@@ -2227,7 +2227,7 @@ DAY_GUIDES = {
                 (
                     25,
                     (
-                        "Pairs write `make_move()` and `undo_move()` in `make_move.py`"
+                        "Student pairs write `make_move()` and `undo_move()` in `make_move.py`"
                         " until the tests pass."
                     ),
                 ),
@@ -2251,7 +2251,7 @@ DAY_GUIDES = {
             "Day 3 teaches loops that walk across the board, then uses them to "
             "generate the moves of every piece. By 4:30 Remus finds the 20 moves of "
             "the start position, and `show_board.py` draws an arrow for every move the"
-            " pairs' code finds."
+            " student pairs' code finds."
         ),
         "objectives": [
             "Repeat steps with `while`, and stop early with `break`.",
@@ -2275,7 +2275,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs work through the four parts of `python_loops.py`: "
+                        "Student pairs work through the four parts of `python_loops.py`: "
                         "repeat with `while`, store a direction, walk from d4 until "
                         "the edge or a piece, and try another direction."
                     ),
@@ -2299,9 +2299,9 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        'Unplugged warm-up, "Shade the reach": pairs shade every '
+                        'Unplugged warm-up, "Shade the reach": student pairs shade every '
                         "square a knight on d4, a knight on a1, and a bishop on c1 can"
-                        " reach, and compare counts with the next pair (8, 2, and 7)."
+                        " reach, and compare counts with the next student pair (8, 2, and 7)."
                     ),
                 ),
                 (
@@ -2314,7 +2314,7 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Pairs write `king_moves()` the same way and "
+                        "Student pairs write `king_moves()` the same way and "
                         "pass the jumping-piece tests: a knight on a1 has 2 moves and "
                         "a king on a1 has 3."
                     ),
@@ -2322,14 +2322,14 @@ DAY_GUIDES = {
                 (
                     50,
                     (
-                        "Pairs run `show_board.py`, which draws an arrow for every "
+                        "Student pairs run `show_board.py`, which draws an arrow for every "
                         "move their generator returns, and count the arrows."
                     ),
                 ),
                 (
                     70,
                     (
-                        "Pairs try their own squares, such as a king in a corner, and "
+                        "Student pairs try their own squares, such as a king in a corner, and "
                         "predict the arrows before they run the file."
                     ),
                 ),
@@ -2346,7 +2346,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs write `slide()` in `move_generation.py`. The teacher's "
+                        "Student pairs write `slide()` in `move_generation.py`. The teacher's "
                         "`slider_moves()` calls it with the rook, bishop, and queen "
                         "directions."
                     ),
@@ -2354,7 +2354,7 @@ DAY_GUIDES = {
                 (
                     60,
                     (
-                        "Exercise: a rook on an empty board has 14 moves. Pairs check "
+                        "Exercise: a rook on an empty board has 14 moves. Student pairs check "
                         "it with the tests and the arrow picture."
                     ),
                 ),
@@ -2375,14 +2375,14 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs write `pawn_pushes()`: the single step and the double "
+                        "Student pairs write `pawn_pushes()`: the single step and the double "
                         "step from the start rank."
                     ),
                 ),
                 (
                     55,
                     (
-                        "Pairs run the tests and the arrow picture on the start "
+                        "Student pairs run the tests and the arrow picture on the start "
                         "position."
                     ),
                 ),
@@ -2436,7 +2436,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs work through Parts #1 to #3 of `python_modules.py`: "
+                        "Student pairs work through Parts #1 to #3 of `python_modules.py`: "
                         "every file has a `__name__`, use yesterday's `board.py` and "
                         "`move_generation.py`, and list the knight moves from g1."
                     ),
@@ -2444,7 +2444,7 @@ DAY_GUIDES = {
                 (
                     50,
                     (
-                        "Unplugged: the import map. On paper, each pair writes the "
+                        "Unplugged: the import map. On paper, each student pair writes the "
                         "name of every `.py` file in the folder and draws an arrow "
                         "from each file to every file it imports, then circles the "
                         "file that runs as `__main__`."
@@ -2453,7 +2453,7 @@ DAY_GUIDES = {
                 (
                     65,
                     (
-                        "Two pairs show their maps on the projector. The teacher "
+                        "Two student pairs show their maps on the projector. The teacher "
                         "shows that every arrow stays inside the folder: each period "
                         "folder holds a complete Remus, so its files import only "
                         "each other."
@@ -2461,7 +2461,7 @@ DAY_GUIDES = {
                 ),
                 (
                     80,
-                    ("Every pair shows its map to the teacher or the assistant."),
+                    ("Every student pair shows its map to the teacher or the assistant."),
                 ),
             ],
             2: [
@@ -2484,13 +2484,13 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Pairs write `piece_at_offsets()`, then `attacked_by_pawn()` "
+                        "Student pairs write `piece_at_offsets()`, then `attacked_by_pawn()` "
                         "and `attacked_by_king()` on top of it."
                     ),
                 ),
                 (
                     70,
-                    "Pairs run the attack tests and the file's self-check.",
+                    "Student pairs run the attack tests and the file's self-check.",
                 ),
                 (
                     80,
@@ -2502,7 +2502,7 @@ DAY_GUIDES = {
                     0,
                     (
                         'Unplugged warm-up, "Pin hunt": on four printed positions, '
-                        "pairs cross out every move that leaves the mover's king "
+                        "student pairs cross out every move that leaves the mover's king "
                         "attacked."
                     ),
                 ),
@@ -2516,13 +2516,13 @@ DAY_GUIDES = {
                 (
                     25,
                     (
-                        "Pairs write `in_check()` and `legal_moves()` until the tests "
+                        "Student pairs write `in_check()` and `legal_moves()` until the tests "
                         "pass."
                     ),
                 ),
                 (
                     65,
-                    "Pairs compare Remus's answers with their pin hunt worksheets.",
+                    "Student pairs compare Remus's answers with their pin hunt worksheets.",
                 ),
                 (
                     75,
@@ -2540,7 +2540,7 @@ DAY_GUIDES = {
                 (
                     10,
                     (
-                        "In `demo_practice_positions.py` pairs type each position and "
+                        "In `demo_practice_positions.py` student pairs type each position and "
                         "write their prediction of its legal move count before Remus "
                         "counts."
                     ),
@@ -2548,8 +2548,8 @@ DAY_GUIDES = {
                 (
                     50,
                     (
-                        "Part #4: each pair builds a position of its own and trades it"
-                        " with the next pair, who predict before they run it."
+                        "Part #4: each student pair builds a position of its own and trades it"
+                        " with the next student pair, who predict before they run it."
                     ),
                 ),
                 (
@@ -2571,7 +2571,7 @@ DAY_GUIDES = {
         "summary": (
             "Day 5 adds the rare rules: castling, en passant, the double step, and "
             "promotion and underpromotion, each with an exact undo. It closes the "
-            "first week with a payoff: by 4:30 every pair plays its own Remus in Lucas"
+            "first week with a payoff: by 4:30 every student pair plays its own Remus in Lucas"
             " Chess, where Remus answers with random legal moves."
         ),
         "objectives": [
@@ -2605,7 +2605,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs work through the four parts of `python_sets.py`, ending"
+                        "Student pairs work through the four parts of `python_sets.py`, ending"
                         ' with `replace()` removing "K" from "KQkq" when the h1 '
                         "rook moves."
                     ),
@@ -2641,14 +2641,14 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Pairs write `update_castling_rights()`, the table of which "
+                        "Student pairs write `update_castling_rights()`, the table of which "
                         "moves remove K, Q, k, or q."
                     ),
                 ),
                 (
                     50,
                     (
-                        "Pairs run the castling tests and build one castling position "
+                        "Student pairs run the castling tests and build one castling position "
                         "of their own to test."
                     ),
                 ),
@@ -2676,14 +2676,14 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Pairs write `en_passant_victim_square()`, "
+                        "Student pairs write `en_passant_victim_square()`, "
                         "then trace a capture and its undo on the printed board."
                     ),
                 ),
                 (
                     55,
                     (
-                        "Pairs run the en passant tests, including the rare capture "
+                        "Student pairs run the en passant tests, including the rare capture "
                         "that exposes the king along the rank."
                     ),
                 ),
@@ -2707,14 +2707,14 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "In `demo_promotion.py` pairs write the loop that tries all "
+                        "In `demo_promotion.py` student pairs write the loop that tries all "
                         "four promotions and prints stalemate or checkmate for each."
                     ),
                 ),
                 (
                     45,
                     (
-                        "The teacher hands out `uci_engine.py` and `remus.bat`. Pairs "
+                        "The teacher hands out `uci_engine.py` and `remus.bat`. Student pairs "
                         "register `remus.bat` from the period's `student` folder in Lucas Chess, "
                         "following the [Lucas Chess guide](../misc/docs/course/lucas_chess_guide.md)."
                     ),
@@ -2722,7 +2722,7 @@ DAY_GUIDES = {
                 (
                     60,
                     (
-                        "Pairs play their own Remus, which answers with random legal "
+                        "Student pairs play their own Remus, which answers with random legal "
                         "moves. Every special move works on a real board."
                     ),
                 ),
@@ -2773,7 +2773,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs work through the three parts of `python_recursion.py`: "
+                        "Student pairs work through the three parts of `python_recursion.py`: "
                         "count down, count the leaves of a small tree, and count the "
                         "paths of a knight."
                     ),
@@ -2795,7 +2795,7 @@ DAY_GUIDES = {
                     0,
                     (
                         'Unplugged warm-up, "Count by hand": in a king and pawn '
-                        "against king position, pairs list every move two plies deep "
+                        "against king position, student pairs list every move two plies deep "
                         "on index cards and count the leaves."
                     ),
                 ),
@@ -2806,14 +2806,14 @@ DAY_GUIDES = {
                 (
                     25,
                     (
-                        "Pairs write `perft()` and run it on the warm-up position to "
+                        "Student pairs write `perft()` and run it on the warm-up position to "
                         "check their cards."
                     ),
                 ),
                 (
                     55,
                     (
-                        "Pairs run `perft.py` from the start: 20, 400, and 8,902. The "
+                        "Student pairs run `perft.py` from the start: 20, 400, and 8,902. The "
                         "teacher shows `divide()`, which prints the count under each "
                         "root move."
                     ),
@@ -2835,13 +2835,13 @@ DAY_GUIDES = {
                     15,
                     (
                         "Bug hunt: the `bug_hunt` folder holds a copy of Remus with "
-                        "three planted bugs. Pairs run `hunt.py` there and race to "
+                        "three planted bugs. Student pairs run `hunt.py` there and race to "
                         "find each bug from the root moves whose counts disagree."
                     ),
                 ),
                 (
                     70,
-                    "Pairs explain each bug they found and the rule it broke.",
+                    "Student pairs explain each bug they found and the rule it broke.",
                 ),
                 (
                     85,
@@ -2861,12 +2861,12 @@ DAY_GUIDES = {
                 ),
                 (
                     10,
-                    "Pairs work through `python_fen_fields.py`.",
+                    "Student pairs work through `python_fen_fields.py`.",
                 ),
                 (
                     30,
                     (
-                        "Pairs write `fen_placement()` and `board_from_placement()` in"
+                        "Student pairs write `fen_placement()` and `board_from_placement()` in"
                         " `fen.py`. The teacher writes the other five fields."
                     ),
                 ),
@@ -2932,14 +2932,14 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Pairs write `insufficient_material()` and `game_result()` in "
+                        "Student pairs write `insufficient_material()` and `game_result()` in "
                         "`game_end.py`."
                     ),
                 ),
                 (
                     75,
                     (
-                        "Pairs check their answers on the quiz positions, then show "
+                        "Student pairs check their answers on the quiz positions, then show "
                         "and choose."
                     ),
                 ),
@@ -2955,21 +2955,21 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs write `parse_san()`: build the SAN of every legal move "
+                        "Student pairs write `parse_san()`: build the SAN of every legal move "
                         "and return the one that matches."
                     ),
                 ),
                 (
                     35,
                     (
-                        "Pairs play each other with `console_game.py`, typing moves in"
+                        "Student pairs play each other with `console_game.py`, typing moves in"
                         " SAN."
                     ),
                 ),
                 (
                     50,
                     (
-                        "Pairs work through `python_input_output.py`: "
+                        "Student pairs work through `python_input_output.py`: "
                         "`random.choice()`, a loop that keeps the best so far, stderr,"
                         " and a tiny program that answers `isready` with `readyok`."
                     ),
@@ -2985,7 +2985,7 @@ DAY_GUIDES = {
                 ),
                 (
                     10,
-                    "Pairs write `random_move()` and `greedy_move()`.",
+                    "Student pairs write `random_move()` and `greedy_move()`.",
                 ),
                 (
                     40,
@@ -2997,14 +2997,14 @@ DAY_GUIDES = {
                 (
                     60,
                     (
-                        "Pairs register `remus.bat` from the `student` folder in Lucas Chess "
+                        "Student pairs register `remus.bat` from the `student` folder in Lucas Chess "
                         "again and play greedy Remus."
                     ),
                 ),
                 (
                     75,
                     (
-                        "Pairs run `play_match.py`: random Remus against greedy Remus "
+                        "Student pairs run `play_match.py`: random Remus against greedy Remus "
                         "for 20 games, with the score at the end."
                     ),
                 ),
@@ -3013,7 +3013,7 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Pairs rank three printed positions and write one reason for "
+                        "Student pairs rank three printed positions and write one reason for "
                         "each. The reasons become the evaluation terms."
                     ),
                 ),
@@ -3026,7 +3026,7 @@ DAY_GUIDES = {
                 ),
                 (
                     25,
-                    "Pairs write `material()` in centipawns, scored for White.",
+                    "Student pairs write `material()` in centipawns, scored for White.",
                 ),
                 (
                     50,
@@ -3039,7 +3039,7 @@ DAY_GUIDES = {
                 (
                     65,
                     (
-                        "Each pair proposes one change to one table, and the class "
+                        "Each student pair proposes one change to one table, and the class "
                         "votes."
                     ),
                 ),
@@ -3086,7 +3086,7 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        'Unplugged warm-up, "Paper minimax": pairs back up max and '
+                        'Unplugged warm-up, "Paper minimax": student pairs back up max and '
                         "min on a printed two-ply tree and circle the best move. A "
                         "seven-student human tree can act it out at the front of the "
                         "room."
@@ -3096,7 +3096,7 @@ DAY_GUIDES = {
                     15,
                     (
                         "The teacher writes `minimax()` to depth 2 with a node "
-                        "counter, and pairs compare its answer with their worksheets."
+                        "counter, and student pairs compare its answer with their worksheets."
                     ),
                 ),
                 (
@@ -3110,7 +3110,7 @@ DAY_GUIDES = {
                 (
                     40,
                     (
-                        "Pairs write `negamax()` until the tests show it agrees with "
+                        "Student pairs write `negamax()` until the tests show it agrees with "
                         "minimax and leaves the root state unchanged."
                     ),
                 ),
@@ -3124,7 +3124,7 @@ DAY_GUIDES = {
                     0,
                     (
                         'Unplugged warm-up, "Fewest flips": the same tree as '
-                        "face-down cards. Pairs turn a card only when the answer could"
+                        "face-down cards. Student pairs turn a card only when the answer could"
                         " still change."
                     ),
                 ),
@@ -3135,14 +3135,14 @@ DAY_GUIDES = {
                 (
                     25,
                     (
-                        "Pairs write `alpha_beta()` beside `negamax()` and run "
+                        "Student pairs write `alpha_beta()` beside `negamax()` and run "
                         "`compare_search.py`: the same score, fewer nodes."
                     ),
                 ),
                 (
                     55,
                     (
-                        "Pairs work through `python_sorting.py`: `insert()` puts the "
+                        "Student pairs work through `python_sorting.py`: `insert()` puts the "
                         'biggest victim first, `float("inf")`, and timing a perft '
                         "run."
                     ),
@@ -3166,13 +3166,13 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Pairs write `quiescence()`, which may stand pat with the "
+                        "Student pairs write `quiescence()`, which may stand pat with the "
                         "evaluation or try a capture that does better."
                     ),
                 ),
                 (
                     70,
-                    "Pairs run the puzzle again: Remus keeps its queen.",
+                    "Student pairs run the puzzle again: Remus keeps its queen.",
                 ),
                 (
                     80,
@@ -3190,20 +3190,20 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs write `mvv_lva_score()`. The teacher writes "
+                        "Student pairs write `mvv_lva_score()`. The teacher writes "
                         "`order_moves()` and the check extension."
                     ),
                 ),
                 (
                     40,
                     (
-                        "Pairs measure node counts before and after ordering with "
+                        "Student pairs measure node counts before and after ordering with "
                         "`compare_search.py`."
                     ),
                 ),
                 (
                     65,
-                    "Pairs run the mate puzzles.",
+                    "Student pairs run the mate puzzles.",
                 ),
                 (
                     80,
@@ -3220,8 +3220,8 @@ DAY_GUIDES = {
         "theme": "The clock and the enhanced engines",
         "summary": (
             "Day 9 gives Remus a clock, then splits the class into ten enhancement "
-            "color versions. Each pair adds one idea to the same engine, Remus-WHITE, and "
-            "tests it. In period 4 the pairs carry their color versions to each other's laptops "
+            "color versions. Each student pair adds one idea to the same engine, Remus-WHITE, and "
+            "tests it. In period 4 the student pairs carry their color versions to each other's laptops "
             "on USB sticks and battle. By 4:30 every color version passes its tests and "
             "has played two battles."
         ),
@@ -3257,7 +3257,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs write `think()` (the iterative deepening loop): depth "
+                        "Student pairs write `think()` (the iterative deepening loop): depth "
                         "1, then 2, then 3, keeping the best move of the deepest "
                         "search that finished."
                     ),
@@ -3283,7 +3283,7 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Pairs work through `python_caches.py`: a dict remembers "
+                        "Student pairs work through `python_caches.py`: a dict remembers "
                         "answers, `math.dist()`, and `random.seed()`."
                     ),
                 ),
@@ -3299,7 +3299,7 @@ DAY_GUIDES = {
                 (
                     30,
                     (
-                        "Each pair opens its color version in `period2/student/engines`, "
+                        "Each student pair opens its color version in `period2/student/engines`, "
                         "reads the version README, and writes the color version's stubbed "
                         "code."
                     ),
@@ -3308,12 +3308,17 @@ DAY_GUIDES = {
             3: [
                 (
                     0,
-                    "Pairs finish their color version code and pass its tests.",
+                    (
+                        "Student pairs finish their color version code, then open "
+                        "`run_tests.py` in their engine folder in "
+                        "`period2/student/engines` and press Run until every test "
+                        "passes. The table above links each engine folder."
+                    ),
                 ),
                 (
                     40,
                     (
-                        "Each pair opens `smoke_test.py` in its version folder and "
+                        "Each student pair opens `smoke_test.py` in its engine folder and "
                         "presses Run in VS Code: one 2-minute game against "
                         "Remus-WHITE, which checks only that the engine plays legal "
                         "moves to the end."
@@ -3322,7 +3327,7 @@ DAY_GUIDES = {
                 (
                     70,
                     (
-                        "Each pair writes one sentence on the board: what its "
+                        "Each student pair writes one sentence on the board: what its "
                         "enhancement should change, and how the class will see it."
                     ),
                 ),
@@ -3331,31 +3336,32 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Slides: how a battle works. Each pair copies its own color "
+                        "Slides: how a battle works. Each student pair copies its own color "
                         "folder from `period2/student/engines` onto its USB stick. The teacher posts the "
-                        "pairings for two rounds; in each round five pairs host and "
+                        "pairings for two rounds; in each round five student pairs host and "
                         "five visit."
                     ),
                 ),
                 (
                     10,
                     (
-                        "Round 1. The visiting pair copies its color folder over the "
-                        "folder of the same engine color in the host laptop's `engines` "
-                        "folder. The host opens `play_battle.py` in its own color "
-                        "folder, presses Run in VS Code, and types the visitor's "
-                        "engine color. Two 10-minute games run side by side, one with "
-                        "each piece color. Each pair writes the score on the board."
+                        "Round 1. The visiting student pair drags its engine folder "
+                        "from the USB stick into the host laptop's "
+                        "`period2/student/engines` folder and replaces the folder of "
+                        "the same name. The host opens `play_battle.py` in its own "
+                        "engine folder, sets `VISITING_ENGINE` to the visitor's engine "
+                        "color, and presses Run in VS Code. Two 10-minute games run side by side, one with "
+                        "each piece color. Each student pair writes the score on the board."
                     ),
                 ),
                 (
                     40,
-                    "Round 2: the pairs that visited now host, against new opponents.",
+                    "Round 2: the student pairs that visited now host, against new opponents.",
                 ),
                 (
                     45,
                     (
-                        "While the round 2 games run, each pair turns its round 1 "
+                        "While the round 2 games run, each student pair turns its round 1 "
                         "result into an Elo gap with a margin of error in "
                         "`demo_results.py`, then tries its engine color's league games."
                     ),
@@ -3371,9 +3377,9 @@ DAY_GUIDES = {
                 (
                     85,
                     (
-                        "Each visiting pair takes its USB stick back. The visitor's "
+                        "Each visiting student pair takes its USB stick back. The visitor's "
                         "folder stays on the host laptop in place of an engine color the host "
-                        "pair never writes, so the host's own color folder is "
+                        "student pair never writes, so the host's own engine folder is "
                         "untouched."
                     ),
                 ),
@@ -3390,8 +3396,8 @@ DAY_GUIDES = {
             "Day 10 aims the engine's ideas at real science. The same generate, score,"
             " and choose loop picks where to measure a hidden peak, and the full tree "
             "search, with make and undo, names the crystal phases in an X-ray powder "
-            "pattern. The day ends with each pair reporting its science results, and "
-            "every pair takes its code home."
+            "pattern. The day ends with each student pair reporting its science results, and "
+            "every student pair takes its code home."
         ),
         "objectives": [
             (
@@ -3421,7 +3427,7 @@ DAY_GUIDES = {
                     0,
                     (
                         'Unplugged warm-up, "Find the hidden peak": a 10x10 grid '
-                        "hides a hot spot, and each pair gets five measurements to "
+                        "hides a hot spot, and each student pair gets five measurements to "
                         "find it."
                     ),
                 ),
@@ -3436,14 +3442,14 @@ DAY_GUIDES = {
                 (
                     25,
                     (
-                        "Pairs write `candidate_squares()`, `score_candidate()`, and "
+                        "Student pairs write `candidate_squares()`, `score_candidate()`, and "
                         "`choose_next_measurement()` in `hidden_peak.py`."
                     ),
                 ),
                 (
                     65,
                     (
-                        "Pairs tune `explore_weight` and post their 100-grid benchmark"
+                        "Student pairs tune `explore_weight` and post their 100-grid benchmark"
                         " average on the board, next to random guessing."
                     ),
                 ),
@@ -3460,14 +3466,14 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        'Unplugged warm-up, "Name the powder": pairs lay paper '
+                        'Unplugged warm-up, "Name the powder": student pairs lay paper '
                         "fingerprint strips over a printed mystery pattern."
                     ),
                 ),
                 (
                     30,
                     (
-                        "Pairs write `score()` in `phase_hunt.py`: a point for each "
+                        "Student pairs write `score()` in `phase_hunt.py`: a point for each "
                         "explained peak, and a point lost for each extra peak, missing"
                         " peak, and phase used."
                     ),
@@ -3475,7 +3481,7 @@ DAY_GUIDES = {
                 (
                     55,
                     (
-                        "Pairs write `greedy_phases()`, which adds the best phase "
+                        "Student pairs write `greedy_phases()`, which adds the best phase "
                         "again and again with `append` and `pop`. Greedy names 166 of "
                         "200 powders right and 34 wrong, and it mistakes silver for "
                         "gold."
@@ -3494,7 +3500,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Pairs write `search()`, which scores every set of up to three"
+                        "Student pairs write `search()`, which scores every set of up to three"
                         " phases and keeps every set that ties for the best score."
                     ),
                 ),
@@ -3502,7 +3508,7 @@ DAY_GUIDES = {
                     50,
                     (
                         "The class verifies on 200 known powders: 139 right, 52 "
-                        "\"can't tell\", and 9 wrong, against greedy's 34 wrong. Pairs"
+                        "\"can't tell\", and 9 wrong, against greedy's 34 wrong. Student pairs"
                         " change `PHASE_COST` and `MISSING` and watch the verdicts "
                         "move."
                     ),
@@ -3520,7 +3526,7 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Each student copies the pair's Remus folder to a USB drive "
+                        "Each student copies the student pair's Remus folder to a USB drive "
                         "in File Explorer, leaving out the `.venv` folder, and checks "
                         "that the copy opens in VS Code."
                     ),
@@ -3528,17 +3534,17 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Each pair runs `hidden_peak.py` and `phase_hunt.py` once more "
+                        "Each student pair runs `hidden_peak.py` and `phase_hunt.py` once more "
                         "and fills in its results table: measurements against random "
                         "guessing, and right, wrong, and can't-tell counts for greedy "
-                        "and for search. The class collects every pair's numbers on "
+                        "and for search. The class collects every student pair's numbers on "
                         "the board."
                     ),
                 ),
                 (
                     40,
                     (
-                        "Each pair picks one powder its search named and one it "
+                        "Each student pair picks one powder its search named and one it "
                         "answered with can't tell, and works out which measurement "
                         "would settle the second."
                     ),
@@ -3546,7 +3552,7 @@ DAY_GUIDES = {
                 (
                     55,
                     (
-                        "Each pair presents its results and its two powders in three "
+                        "Each student pair presents its results and its two powders in three "
                         "minutes."
                     ),
                 ),
@@ -3560,8 +3566,8 @@ DAY_GUIDES = {
             ],
         },
         "checkpoint": (
-            "Every pair's `choose_next_measurement()` beats random guessing, every "
-            "pair's `search()` makes fewer wrong calls than greedy, and every pair has "
+            "Every student pair's `choose_next_measurement()` beats random guessing, every "
+            "student pair's `search()` makes fewer wrong calls than greedy, and every student pair has "
             "reported its results and taken its code home."
         ),
     },

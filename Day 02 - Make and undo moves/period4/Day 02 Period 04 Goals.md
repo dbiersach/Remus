@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Make a move and take it back exactly. **Measured by:** The make and undo tests pass, and ten moves made and undone leave the same state as the start, clocks and rights included.
-- Explain why undo needs a record of what the move changed. **Measured by:** The pair names what a capture destroys (the captured piece) and where the undo record keeps it.
+- Explain why undo needs a record of what the move changed. **Measured by:** The student pair names what a capture destroys (the captured piece) and where the undo record keeps it.
 
 ## The files
 
@@ -17,12 +17,12 @@ Files that grow this period:
 
 - `test_make_move.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `make_move()` in `make_move.py`
 - `undo_move()` in `make_move.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -42,7 +42,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 3:00 to 3:15 | Unplugged warm-up, "Undo from the card": one partner makes three moves with sticky-note pieces and writes an undo card for each. The other partner restores the start position from the cards alone. |
 | 3:15 to 3:25 | Slides: what a move destroys (the captured piece, the clocks, the side to move) and the undo record that saves it. The teacher shows `state_snapshot()` and the "make ten, undo ten, compare" test. |
-| 3:25 to 4:15 | Pairs write `make_move()` and `undo_move()` in `make_move.py` until the tests pass. |
+| 3:25 to 4:15 | Student pairs write `make_move()` and `undo_move()` in `make_move.py` until the tests pass. |
 | 4:15 to 4:30 | Show and choose for `make_move()`, then the checkpoint: ten moves made and undone give back the exact start state. |
 
 ## What you edit this period

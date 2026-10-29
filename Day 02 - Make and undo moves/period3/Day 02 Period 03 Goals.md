@@ -2,7 +2,7 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Tell the piece color of a piece, and handle an empty square. **Measured by:** The `is_white` and `color_of` tests in `test_make_move.py` pass, including `None` for `.`.
 - Write a move as UCI text and read it back. **Measured by:** `move_to_uci` and `move_from_uci` round-trip `e2e4` and `e7e8q`.
@@ -20,14 +20,14 @@ Files that grow this period:
 
 - `board.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `is_white()` in `game_state.py`
 - `color_of()` in `game_state.py`
 - `move_to_uci()` in `moves.py`
 - `move_from_uci()` in `moves.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -54,8 +54,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Slides: the game state dict in `new_game()` and the `Move` dataclass with `from_square`, `to_square`, and `promotion`. |
-| 1:15 to 2:05 | Pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, running `run_tests.py` after each. |
-| 2:05 to 2:15 | Pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
+| 1:15 to 2:05 | Student pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, running `run_tests.py` after each. |
+| 2:05 to 2:15 | Student pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
 | 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()` for the class repository. |
 
 ## What you edit this period

@@ -29,7 +29,7 @@ caches search results the same way, and Remus-CYAN measures king distances.
 2. Part #2: measure the distance from d4 to g7.
 3. Part #3: seed the random generator so a roll repeats.
 
-The pair types 7 lines.
+The student pair types 7 lines.
 
 ## Try it
 

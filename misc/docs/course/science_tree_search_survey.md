@@ -271,10 +271,10 @@ Dara's "keep a phase only if it improves the fit by 2 percent" rule plays.
 
 - **Teacher writes:** the phase library, `matches()`, `predicted_peaks()`,
   `make_pattern(seed)`, the `Hunt` record, `judge()`, and the benchmark.
-- **Pairs write, period 2 (28 lines):** `score(phases, measured)`, the evaluation
+- **Student pairs write, period 2 (28 lines):** `score(phases, measured)`, the evaluation
   (11 lines), and `greedy_phases(measured)`, the greedy agent with append and pop
   as make and undo (17 lines).
-- **Pairs write, period 3 (13 lines):** `search(phases, measured, depth, start,
+- **Student pairs write, period 3 (13 lines):** `search(phases, measured, depth, start,
   hunt)`, the recursive search that keeps every tied set. Then the class runs the
   benchmark and changes `PHASE_COST` and `MISSING` to watch the verdicts move.
 

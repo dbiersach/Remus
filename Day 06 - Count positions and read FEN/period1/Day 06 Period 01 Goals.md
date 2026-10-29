@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Write a recursive function with a base case. **Measured by:** The lab's countdown and leaf count give the worksheet's numbers.
-- Trace a call stack by hand. **Measured by:** The pair draws the calls of a depth-2 count and the value each one returns.
+- Trace a call stack by hand. **Measured by:** The student pair draws the calls of a depth-2 count and the value each one returns.
 
 ## The files
 
@@ -15,7 +15,7 @@ The code here is the same as at the end of the period before.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_recursion.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_recursion_instructor.py`.
+The student pairs fill in the blanks of `python_recursion.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_recursion_instructor.py`.
 
 Part #1: `countdown()` calls itself with a smaller number until it reaches the base case, 0. Without the base case the calls would never stop.
 
@@ -30,7 +30,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Slides: a function that calls itself, its base case, and the call stack. |
-| 8:45 to 9:35 | Pairs work through the three parts of `python_recursion.py`: count down, count the leaves of a small tree, and count the paths of a knight. |
+| 8:45 to 9:35 | Student pairs work through the three parts of `python_recursion.py`: count down, count the leaves of a small tree, and count the paths of a knight. |
 | 9:35 to 9:50 | The teacher draws the call stack of a short count on the whiteboard while the class traces it. |
 | 9:50 to 10:00 | Wrap-up: what stops a recursion? |
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env -S uv run
 """demo_practice_positions_instructor.py
 
-Day 4, period 4 demo: practice positions. For each small position the pair writes
+Day 4, period 4 demo: practice positions. For each small position the student pair writes
 down a prediction of the number of legal moves, then lets Remus count them: the
 start position, a king in check, and a pinned knight.
-The student file demo_practice_positions.py leaves one # line for each line the pair types.
+The student file demo_practice_positions.py leaves one # line for each line the student pair types.
 """
 
 from attacks import in_check
@@ -26,7 +26,7 @@ def position(pieces: dict[str, str]) -> dict:
 
 
 def compare(state: dict, prediction: int) -> None:
-    """Print the board, the pair's prediction, and the number of legal moves Remus finds."""
+    """Print the board, the student pair's prediction, and the number of legal moves Remus finds."""
     print_board(state["board"])
     count = len(legal_moves(state))
     print(f"You predicted {prediction}, Remus finds {count} legal moves")

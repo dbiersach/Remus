@@ -2,9 +2,9 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
-- Name every way a game ends: checkmate, stalemate, insufficient material, repetition, and the fifty-move rule. **Measured by:** Six-position quiz: each pair gets at least five right.
+- Name every way a game ends: checkmate, stalemate, insufficient material, repetition, and the fifty-move rule. **Measured by:** Six-position quiz: each student pair gets at least five right.
 - Detect the end of a game in code. **Measured by:** The game-end tests in `test_game.py` pass for all five endings.
 
 ## The files
@@ -20,12 +20,12 @@ Files that grow this period:
 - `make_move.py`
 - `test_game.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `insufficient_material()` in `game_end.py`
 - `game_result()` in `game_end.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -45,8 +45,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 8:30 to 8:50 | Chess refresher: stalemate, repetition, the fifty and 75-move rules, and insufficient material, with a six-position quiz. |
 | 8:50 to 9:00 | Slides: the halfmove clock and `position_key()`, which the teacher writes. |
-| 9:00 to 9:45 | Pairs write `insufficient_material()` and `game_result()` in `game_end.py`. |
-| 9:45 to 10:00 | Pairs check their answers on the quiz positions, then show and choose. |
+| 9:00 to 9:45 | Student pairs write `insufficient_material()` and `game_result()` in `game_end.py`. |
+| 9:45 to 10:00 | Student pairs check their answers on the quiz positions, then show and choose. |
 
 ## What you edit this period
 

@@ -45,7 +45,7 @@ Day 5, Period 2.
 ## Table 2: By period
 
 Lab periods and review periods change no Remus code. Their folders are copies of the
-period before, so a pair can always open the newest folder. Each Python lab
+period before, so a student pair can always open the newest folder. Each Python lab
 (`python_*.py`) and each demo (`demo_*.py`) lives only in its own period folder; the student folder holds the file with blanks, and the
 instructor folder holds the answer file `<name>_instructor.py`.
 
@@ -83,8 +83,8 @@ instructor folder holds the answer file `<name>_instructor.py`.
 | D8 P4 | `move_ordering.py` | `search.py`: ordering, check extension, clock. `test_search.py` |
 | D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock and thinking time. `console_game.py`: uses `think()`. `test_search.py` |
 | D9 P2, P3 | Ten color version folders in `period2/instructor/engines` and `period2/student/engines` (see [remus_versions.md](../engines/remus_versions.md)). Lab 12 in P2: `python_caches.py` | None: from period 2 on, the Day 9 period folders hold no engine code, and Remus-WHITE stays in `period1` |
-| D9 P4 | `play_battle.py` in each color version folder: color battles between pairs. Demo: `demo_results.py` | None |
+| D9 P4 | `play_battle.py` in each color version folder: color battles between student pairs. Demo: `demo_results.py` | None |
 | D10 P1 | `hidden_peak.py`, `test_hidden_peak.py`. The Day 10 folders hold only the science files; the engine is Remus-GOLD (`transposition_table.py`, `opening_book.py`, `upgraded_search()`, and the other enhancements) | None |
 | D10 P2 | `phase_hunt.py`, `test_phase_hunt.py` | None |
 | D10 P3 | None | `phase_hunt.py`: the tree search. `test_phase_hunt.py` |
-| D10 P4 | None: the pairs report their science results | None |
+| D10 P4 | None: the student pairs report their science results | None |

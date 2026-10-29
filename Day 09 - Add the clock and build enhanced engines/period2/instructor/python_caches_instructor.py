@@ -5,7 +5,7 @@ Day 9, period 2, Python lab 12: a dict as a cache with tuple keys, math.dist(),
 and random.seed(). The chess drill remembers
 perft counts it has already computed, the idea behind the RED color version's
 transposition table.
-The student file python_caches.py leaves one # line for each line the pair types.
+The student file python_caches.py leaves one # line for each line the student pair types.
 """
 
 import math

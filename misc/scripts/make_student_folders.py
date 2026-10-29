@@ -7,10 +7,10 @@ Each period folder of each Day holds an instructor folder and a student folder.
 The student folder holds the same files as the instructor folder, except that the
 functions the students write in that period are stubs: the signature and docstring
 stay, and the body raises NotImplementedError. The tests stay complete, so they
-fail until the pair writes each function. Functions from earlier periods are
+fail until the student pair writes each function. Functions from earlier periods are
 complete, so every student folder starts from working code.
 
-It adds the timed flow of the period and the pairs' exact tasks to each period's
+It adds the timed flow of the period and the student pairs' exact tasks to each period's
 goals file, such as "Day 03 Period 02 Goals.md", and writes
 misc/docs/course/student_edit_plan.md and the syllabus, "Day NN Syllabus.md", at the
 top of every Day folder, from DAY_GUIDES in period_guides.py.
@@ -35,8 +35,8 @@ def instructor_folders() -> list[Path]:
     return sorted(ROOT.glob("Day */period*/instructor"))
 
 
-MAX_TYPED_LINES = 40  # Most lines of code a pair types in one period
-EditRow = dict[str, Any]  # One function a pair writes: file, name, line, tests
+MAX_TYPED_LINES = 40  # Most lines of code a student pair types in one period
+EditRow = dict[str, Any]  # One function a student pair writes: file, name, line, tests
 
 # (day, period, file, function) for every function the students write
 STUDENT_FUNCTIONS = [
@@ -176,7 +176,7 @@ def edit_section(rows: list[EditRow]) -> str:
     Parameters
     ----------
     rows : list[EditRow]
-        One row per function the pair writes in the period.
+        One row per function the student pair writes in the period.
 
     Returns
     -------
@@ -279,7 +279,7 @@ def changed_files(folder: Path, before: Path | None) -> tuple[list[str], list[st
 
 
 def pairs_write(day: int, period: int, rows: dict, version_note: str) -> str:
-    """Return what the pairs write in one period, with the lines each one takes."""
+    """Return what the student pairs write in one period, with the lines each one takes."""
     parts = []
     for row in rows.get((day, period), []):
         count = lines_text(row["typed"])
@@ -318,13 +318,13 @@ def day_readme(day: int, rows: dict) -> str:
 
     guide = DAY_GUIDES[day]
     out = [f"# Day {day}: {guide['theme']}", "", guide["summary"], ""]
-    out += ["## Objectives for the day", "", "By 4:30, each pair can:", ""]
+    out += ["## Objectives for the day", "", "By 4:30, each student pair can:", ""]
     out += [f"- {objective}" for objective in guide["objectives"]]
     out += [
         "",
         "## The day at a glance",
         "",
-        "| Period | Time | Title | Pairs write |",
+        "| Period | Time | Title | Student pairs write |",
         "| --- | --- | --- | --- |",
     ]
     for period in range(1, 5):
@@ -360,7 +360,7 @@ def day_readme(day: int, rows: dict) -> str:
                 f"[`Day {day:02} Period {period:02} Goals.md`]"
                 f"(<period{period}/Day {day:02} Period {period:02} Goals.md>) "
                 "lists the period's learning objectives, how each one is measured, "
-                "every change the pairs make, and their exact tasks."
+                "every change the student pairs make, and their exact tasks."
             ),
         ]
     out += [
@@ -370,7 +370,7 @@ def day_readme(day: int, rows: dict) -> str:
         f"**Checkpoint:** {guide['checkpoint']}",
         "",
         (
-            "Each period folder starts from working code, so a pair that falls behind "
+            "Each period folder starts from working code, so a student pair that falls behind "
             "opens the next period's folder with the rest of the class."
         ),
     ]
@@ -392,7 +392,7 @@ def flow_section(day: int, period: int) -> str:
 
 def write_goals(day: int, period: int, sections: list[str]) -> None:
     """
-    Add the flow of the period and the pairs' tasks to the period's goals file.
+    Add the flow of the period and the student pairs' tasks to the period's goals file.
 
     make_period_folders.py writes the first part of the file. Everything from
     FLOW_HEADING on is rewritten here, so running this script twice gives the
@@ -420,7 +420,7 @@ def write_day_readmes(rows: dict) -> None:
 
 
 def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
-    """Write misc/docs/course/student_edit_plan.md: what changes and what pairs write, by period."""
+    """Write misc/docs/course/student_edit_plan.md: what changes and what student pairs write, by period."""
     from make_period_folders import PERIOD_TITLES  # Imported here: it imports this file
 
     out = [
@@ -429,7 +429,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
         (
             "`make_student_folders.py` writes this page from the code, so it always matches "
             "the folders. For every period it names the files that arrive or grow, which "
-            "the teacher writes, and the functions the pairs write, which are stubs in "
+            "the teacher writes, and the functions the student pairs write, which are stubs in "
             "each `student` folder and finished in the `instructor` folder beside it. Each "
             "period's "
             "goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check "
@@ -443,7 +443,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
         period = int(folder.parent.name.removeprefix("period"))
         if period == 1:
             out += [f"## {folder.parent.parent.name}", ""]
-            out += ["| Period | Title | New files | Files that grow | Pairs write |"]
+            out += ["| Period | Title | New files | Files that grow | Student pairs write |"]
             out += ["| --- | --- | --- | --- | --- |"]
         new, changed = changed_files(folder, before)
         writes = pairs_write(day, period, rows, "in the table below")
@@ -459,9 +459,9 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
     out += [
         "## Color versions (Day 9, periods 2 and 3)",
         "",
-        "Each pair writes the functions of one color version in `period2/student/engines`.",
+        "Each student pair writes the functions of one color version in `period2/student/engines`.",
         "",
-        "| Color version | Pairs write |",
+        "| Color version | Student pairs write |",
         "| --- | --- |",
     ]
     for version in VERSIONS_TABLE:
@@ -482,7 +482,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
 
 def main():
     stubbed = 0
-    typed: dict[tuple[int, int], int] = {}  # (day, period) -> lines the pairs type
+    typed: dict[tuple[int, int], int] = {}  # (day, period) -> lines the student pairs type
     rows: dict = {}  # (day, period), or ("version", folder), -> list[EditRow]
     for folder in instructor_folders():
         day = int(folder.parent.parent.name[4:6])
@@ -524,6 +524,12 @@ def main():
             (target / f"{name}_instructor.py").unlink()
             lab_path = target / f"{name}.py"
             lab_path.write_text(lab_text, newline="")
+            if (target / "run_tests.py").exists():
+                # make_period_folders imports this file, so it is imported here
+                from make_period_folders import run_tests_text
+
+                # run_tests.py names the student lab file, not the answer file
+                (target / "run_tests.py").write_text(run_tests_text(target))
             lab_path.chmod(0o755)  # Each script runs on its own
             count = lab_blanks(lab_path.read_text())
             typed[(day, period)] = typed.get((day, period), 0) + count
@@ -537,7 +543,7 @@ def main():
             rows.setdefault((day, period), []).append(row)
             sections.append(bug_hunt_section(count))
         write_goals(day, period, sections)
-    # Each color version folder stubs the functions its pair writes on Day 9. The
+    # Each color version folder stubs the functions its student pair writes on Day 9. The
     # student engines folder holds the ten color versions and version_match.py, but
     # not Remus-GOLD or Niram-GOLD, which stay in the teacher's folders.
     period_2 = next(ROOT.glob("Day 09 - *")) / "period2"

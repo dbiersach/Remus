@@ -2,7 +2,7 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Tell whether a king is in check. **Measured by:** The `in_check` tests pass in check and out of check.
 - Keep only legal moves by making each move, testing the king, and undoing it. **Measured by:** The legal-move tests pass: 20 moves from the start, only escapes in check, and no moves for a pinned knight.
@@ -18,12 +18,12 @@ Files that grow this period:
 - `attacks.py`
 - `test_legal_moves.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `in_check()` in `attacks.py`
 - `legal_moves()` in `legal_moves.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -41,10 +41,10 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 
 | Time | Activity |
 | --- | --- |
-| 1:00 to 1:15 | Unplugged warm-up, "Pin hunt": on four printed positions, pairs cross out every move that leaves the mover's king attacked. |
+| 1:00 to 1:15 | Unplugged warm-up, "Pin hunt": on four printed positions, student pairs cross out every move that leaves the mover's king attacked. |
 | 1:15 to 1:25 | Slides: a move is legal only if the mover's king is safe after the move. Make it, test the king, undo it. |
-| 1:25 to 2:05 | Pairs write `in_check()` and `legal_moves()` until the tests pass. |
-| 2:05 to 2:15 | Pairs compare Remus's answers with their pin hunt worksheets. |
+| 1:25 to 2:05 | Student pairs write `in_check()` and `legal_moves()` until the tests pass. |
+| 2:05 to 2:15 | Student pairs compare Remus's answers with their pin hunt worksheets. |
 | 2:15 to 2:30 | Show and choose for `legal_moves()`. |
 
 ## What you edit this period

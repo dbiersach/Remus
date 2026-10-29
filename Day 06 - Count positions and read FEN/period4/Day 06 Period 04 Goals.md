@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Read and write the piece placement of FEN. **Measured by:** `test_game.py` FEN tests pass: the start FEN goes in and comes back out the same.
-- Name the six fields of a FEN string. **Measured by:** `python_fen_fields.py` prints the six fields of the start FEN with their names, and the pair labels them on the worksheet.
+- Name the six fields of a FEN string. **Measured by:** `python_fen_fields.py` prints the six fields of the start FEN with their names, and the student pair labels them on the worksheet.
 
 ## The files
 
@@ -20,18 +20,18 @@ Files that grow this period:
 
 - `test_perft.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `fen_placement()` in `fen.py`
 - `board_from_placement()` in `fen.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
-The pairs fill in the blanks of `python_fen_fields.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_fen_fields_instructor.py`.
+The student pairs fill in the blanks of `python_fen_fields.py`. Each `#` line in the student file stands for one line to type, and the answer sits on the same line of `python_fen_fields_instructor.py`.
 
-The lab cuts the start FEN into its six fields with `split()` and prints each with its name, the map the pair needs before writing `fen.py`. Then `try` and `except ValueError` catch the error that `int()` raises on text that is not a number, which is how a FEN reader can reject a broken string instead of crashing.
+The lab cuts the start FEN into its six fields with `split()` and prints each with its name, the map the student pair needs before writing `fen.py`. Then `try` and `except ValueError` catch the error that `int()` raises on text that is not a number, which is how a FEN reader can reject a broken string instead of crashing.
 
 ### `fen_placement()` in `fen.py`
 
@@ -48,8 +48,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:10 | Slides: the six fields of FEN, `split()`, `int()`, and `ValueError`. |
-| 3:10 to 3:30 | Pairs work through `python_fen_fields.py`. |
-| 3:30 to 4:20 | Pairs write `fen_placement()` and `board_from_placement()` in `fen.py`. The teacher writes the other five fields. |
+| 3:10 to 3:30 | Student pairs work through `python_fen_fields.py`. |
+| 3:30 to 4:20 | Student pairs write `fen_placement()` and `board_from_placement()` in `fen.py`. The teacher writes the other five fields. |
 | 4:20 to 4:30 | Checkpoint: every test position loads from FEN and perft matches the reference. |
 
 ## What you edit this period

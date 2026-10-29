@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Capture en passant on the very next move only. **Measured by:** The en passant tests pass, including the capture that is legal only once.
-- Find the square of the pawn an en passant capture removes. **Measured by:** The pair names the removed pawn's square for exd6 (d5) on the printed board.
+- Find the square of the pawn an en passant capture removes. **Measured by:** The student pair names the removed pawn's square for exd6 (d5) on the printed board.
 
 ## The files
 
@@ -15,11 +15,11 @@ Files that grow this period:
 - `move_generation.py`
 - `test_special_moves.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `en_passant_victim_square()` in `make_move.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -35,8 +35,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 1:00 to 1:15 | Chess refresher: en passant is allowed only on the very next move after a two-square push, and the captured pawn is not on the destination square. |
 | 1:15 to 1:30 | Slides: the double step sets the en passant target. The teacher walks through the en passant make and undo. |
-| 1:30 to 1:55 | Pairs write `en_passant_victim_square()`, then trace a capture and its undo on the printed board. |
-| 1:55 to 2:20 | Pairs run the en passant tests, including the rare capture that exposes the king along the rank. |
+| 1:30 to 1:55 | Student pairs write `en_passant_victim_square()`, then trace a capture and its undo on the printed board. |
+| 1:55 to 2:20 | Student pairs run the en passant tests, including the rare capture that exposes the king along the rank. |
 | 2:20 to 2:30 | Wrap-up: which square does the undo put the captured pawn back on? |
 
 ## What you edit this period

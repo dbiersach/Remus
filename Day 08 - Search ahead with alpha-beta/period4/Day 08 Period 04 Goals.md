@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Order moves so the best ones come first. **Measured by:** The `mvv_lva_score` test passes: pawn takes queen scores above queen takes rook.
-- Measure what ordering saves. **Measured by:** The pair records node counts before and after ordering for one position.
+- Measure what ordering saves. **Measured by:** The student pair records node counts before and after ordering for one position.
 
 ## The files
 
@@ -18,11 +18,11 @@ Files that grow this period:
 - `search.py`
 - `test_search.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `mvv_lva_score()` in `move_ordering.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -37,9 +37,9 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:15 | Slides: alpha-beta cuts more when the best move comes first. Most valuable victim, least valuable attacker (MVV-LVA). |
-| 3:15 to 3:40 | Pairs write `mvv_lva_score()`. The teacher writes `order_moves()` and the check extension. |
-| 3:40 to 4:05 | Pairs measure node counts before and after ordering with `compare_search.py`. |
-| 4:05 to 4:20 | Pairs run the mate puzzles. |
+| 3:15 to 3:40 | Student pairs write `mvv_lva_score()`. The teacher writes `order_moves()` and the check extension. |
+| 3:40 to 4:05 | Student pairs measure node counts before and after ordering with `compare_search.py`. |
+| 4:05 to 4:20 | Student pairs run the mate puzzles. |
 | 4:20 to 4:30 | Checkpoint: every mate in 1 and every puzzle mate in 2. |
 
 ## What you edit this period

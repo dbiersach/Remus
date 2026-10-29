@@ -30,7 +30,7 @@ times negamax against alpha-beta.
 2. Part #2: find the best victim with a best value that starts at minus infinity.
 3. Part #3: time `perft(3)` from the start position.
 
-The pair types 19 lines.
+The student pair types 19 lines.
 
 ## Try it
 

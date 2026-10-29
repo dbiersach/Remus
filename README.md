@@ -20,7 +20,7 @@ rebuilt in modern Python.
 The code grows one class period at a time. The top folder holds one folder per day,
 `Day 01 - ...` to `Day 10 - ...`, and each Day folder holds `period1` to `period4`.
 Inside every period folder, `instructor/` is a complete, runnable copy of Remus at the
-end of that period, and `student/` is the same code with the functions the pairs write
+end of that period, and `student/` is the same code with the functions the student pairs write
 left as stubs for them to fill in. Beside them sits the period's goals file, such as
 `Day 04 Period 03 Goals.md`: the objectives, the timed steps, and the exact tasks.
 Each Day folder's syllabus, such as `Day 04 Syllabus.md`, gives the day's
@@ -37,7 +37,8 @@ in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.
 
 Remus runs on Windows 11 with [Git](https://git-scm.com/),
 [uv](https://docs.astral.sh/uv/), [VS Code](https://code.visualstudio.com/), and Lucas
-Chess. On Day 1 the course designer walks each pair through steps 1 to 4 once. After
+Chess. On Day 1 the instructor walks each student through steps 1 to 4 below to initially
+install the required courseware. After
 that setup no student or teacher types a git or uv command: every step of the workshop
 runs from VS Code's Run button. The same steps set up any other computer, such as the
 teacher's laptop or a computer at home.

@@ -30,7 +30,7 @@ in `board.py` returns on Day 1, period 4, with row 0 as rank 8.
 3. Part #3: make 8 rows of dots, put in the pieces (row 0 is rank 8), and print the board.
 4. Part #4: play 1. e4 by changing `board[6][4]` and `board[4][4]`, then count White's pawns on rank 2.
 
-The pair types 25 lines.
+The student pair types 25 lines.
 
 ## Try it
 

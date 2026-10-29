@@ -6,12 +6,12 @@
 
 A rule in the code is right only if it gives the right answer on positions where
 you already know the answer. This demo builds three small positions, and for each
-the pair writes a prediction before Remus counts the legal moves.
+the student pair writes a prediction before Remus counts the legal moves.
 
 ## Where this piece fits
 
 The demo runs in the Day 4, period 4 folder and uses the legal-move filter that the
-pairs finished in period 3. Its positions are the same as the practice-position tests
+student pairs finished in period 3. Its positions are the same as the practice-position tests
 in `test_legal_moves.py`.
 
 - **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`attacks.py`](attacks.md), [`legal_moves.py`](legal_moves.md), [`moves.py`](moves.md)
@@ -21,7 +21,7 @@ in `test_legal_moves.py`.
 
 - **check:** the king is attacked. Every legal move must end the check.
 - **pin:** a piece that cannot move because moving it would expose its own king.
-- **prediction:** the count the pair expects, written down before running the code.
+- **prediction:** the count the student pair expects, written down before running the code.
 
 ## How it works
 
@@ -31,7 +31,7 @@ in `test_legal_moves.py`.
 4. Part #3: add a White knight on e2 and count only the moves that start on e2.
 5. Part #4: change the pieces and predict again.
 
-The pair types 14 lines.
+The student pair types 14 lines.
 
 ## Try it
 

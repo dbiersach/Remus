@@ -2,10 +2,10 @@
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Decide whether a knight, pawn, or king attacks a square. **Measured by:** The attack tests in `test_legal_moves.py` pass for all three pieces.
-- Explain that a pawn attacks diagonally but moves straight. **Measured by:** The pair marks the two squares a White pawn on e4 attacks (d5, f5) on the printed board.
+- Explain that a pawn attacks diagonally but moves straight. **Measured by:** The student pair marks the two squares a White pawn on e4 attacks (d5, f5) on the printed board.
 
 ## The files
 
@@ -14,13 +14,13 @@ New files this period:
 - `attacks.py`
 - `test_legal_moves.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `piece_at_offsets()` in `attacks.py`
 - `attacked_by_pawn()` in `attacks.py`
 - `attacked_by_king()` in `attacks.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -44,8 +44,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 10:30 to 10:45 | Chess refresher on the demonstration board: check, pins, and discovered check. |
 | 10:45 to 11:00 | Slides: a square is attacked if a piece could capture there. Stand on the square and look outward like a "super piece". The teacher writes `attacked_by_knight()` and the sliding-line part. |
-| 11:00 to 11:40 | Pairs write `piece_at_offsets()`, then `attacked_by_pawn()` and `attacked_by_king()` on top of it. |
-| 11:40 to 11:50 | Pairs run the attack tests and the file's self-check. |
+| 11:00 to 11:40 | Student pairs write `piece_at_offsets()`, then `attacked_by_pawn()` and `attacked_by_king()` on top of it. |
+| 11:40 to 11:50 | Student pairs run the attack tests and the file's self-check. |
 | 11:50 to 12:00 | Show and choose for `piece_at_offsets()`. |
 
 ## What you edit this period

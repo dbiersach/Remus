@@ -31,7 +31,7 @@ into rows with `split("/")`.
 2. Part #2: print each field with its name.
 3. Part #3: turn text into a number inside `try`, and catch `ValueError`.
 
-The pair types 8 lines.
+The student pair types 8 lines.
 
 ## Try it
 

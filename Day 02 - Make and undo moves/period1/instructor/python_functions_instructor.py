@@ -4,7 +4,7 @@
 Day 2, period 1, Python lab 3: functions, type hints, tuples, assert, and pytest.
 The chess drill writes is_white() and on_board(), two small questions Remus asks
 all the time, and checks them with assert, first by hand and then with pytest.
-The student file python_functions.py leaves one # line for each line the pair types.
+The student file python_functions.py leaves one # line for each line the student pair types.
 """
 
 

@@ -5,7 +5,7 @@ Day 2, period 2, Python lab 4: dicts, dataclasses, aliasing, and copying.
 The chess drill stores a game state in a dict, shows two names sharing one board,
 fixes that with a copy, and describes a move with a dataclass, the way
 game_state.py and moves.py do on Day 2, period 3.
-The student file python_dicts.py leaves one # line for each line the pair types.
+The student file python_dicts.py leaves one # line for each line the student pair types.
 """
 
 from copy import deepcopy

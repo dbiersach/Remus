@@ -4,7 +4,7 @@
 Day 6, period 4, Python lab 9: split(), int(), and exceptions with try and
 ValueError. The chess drill cuts a FEN string into its six fields, the first step
 of reading FEN in fen.py later this period.
-The student file python_fen_fields.py leaves one # line for each line the pair types.
+The student file python_fen_fields.py leaves one # line for each line the student pair types.
 """
 
 START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"

@@ -4,10 +4,10 @@ The `bug_hunt` folder holds a copy of this period's Remus with three planted bug
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
 - Compare Remus with python-chess on standard positions. **Measured by:** `test_perft.py` passes on all five positions.
-- Find a planted bug with `divide()`. **Measured by:** Running `hunt.py` in `bug_hunt/` points at three bugs; the pair fixes at least two of them and names the root move that showed each one.
+- Find a planted bug with `divide()`. **Measured by:** Running `hunt.py` in `bug_hunt/` points at three bugs; the student pair fixes at least two of them and names the root move that showed each one.
 
 ## The files
 
@@ -22,8 +22,8 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Slides: `test_perft.py` compares Remus with python-chess on the standard positions. |
-| 1:15 to 2:10 | Bug hunt: the `bug_hunt` folder holds a copy of Remus with three planted bugs. Pairs run `hunt.py` there and race to find each bug from the root moves whose counts disagree. |
-| 2:10 to 2:25 | Pairs explain each bug they found and the rule it broke. |
+| 1:15 to 2:10 | Bug hunt: the `bug_hunt` folder holds a copy of Remus with three planted bugs. Student pairs run `hunt.py` there and race to find each bug from the root moves whose counts disagree. |
+| 2:10 to 2:25 | Student pairs explain each bug they found and the rule it broke. |
 | 2:25 to 2:30 | Wrap-up: the hunt is over when `hunt.py` prints 0 root moves that disagree. |
 
 ## What you edit in the bug hunt

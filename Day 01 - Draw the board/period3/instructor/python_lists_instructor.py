@@ -4,7 +4,7 @@
 Day 1, period 3, Python lab 2: lists, for and range, len(), and nested lists.
 The chess drill builds an 8x8 board of dots, sets up the pieces, and counts the
 pawns in a row, the same board that board.py holds on Day 1, period 4.
-The student file python_lists.py leaves one # line for each line the pair types.
+The student file python_lists.py leaves one # line for each line the student pair types.
 """
 
 

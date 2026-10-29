@@ -4,10 +4,10 @@ Running `phase_hunt.py` names the crystal phases in an X-ray powder pattern and 
 
 ## Learning objectives
 
-By the end of this period, each pair can:
+By the end of this period, each student pair can:
 
-- Score a guess about what a powder holds. **Measured by:** The `score` test passes, and the pair explains why an extra phase costs a point even when every peak is explained.
-- Build an answer greedily, one best step at a time. **Measured by:** The `greedy_phases` tests pass, and the pair explains why greedy names gold for a powder that holds silver.
+- Score a guess about what a powder holds. **Measured by:** The `score` test passes, and the student pair explains why an extra phase costs a point even when every peak is explained.
+- Build an answer greedily, one best step at a time. **Measured by:** The `greedy_phases` tests pass, and the student pair explains why greedy names gold for a powder that holds silver.
 
 ## The experiment: what is in this powder?
 
@@ -111,7 +111,7 @@ Silver's peaks sit less than 0.3 degrees from gold's, so the peaks fit gold exac
 as well. Gold comes first in the library, so greedy says "anatase and gold" and
 sounds just as sure as when it is right.
 
-![Gold's and silver's four peaks side by side, each pair inside the 0.3 degree
+![Gold's and silver's four peaks side by side, each student pair inside the 0.3 degree
 tolerance](../../misc/docs/images/phase_hunt/gold_and_silver.png)
 
 Run `phase_hunt.py` in VS Code when both functions pass their tests. Greedy names 166 of
@@ -123,7 +123,7 @@ tell", and a scientist knows to take a second measurement.
 ## Real scientists do this
 
 Naming the phases in a powder pattern is called **phase identification**, and
-beamline scientists do it every day. At the NSLS-II Pair Distribution Function (PDF)
+beamline scientists do it every day. At the NSLS-II Student pair Distribution Function (PDF)
 beamline, Brookhaven's Crystallography Companion Agent names phases while the data
 comes in. The CrystalShift program (Cornell, 2025) and the Dara program (Berkeley Lab,
 2025) search a tree of phase sets the way your code will in period 3, on real
@@ -148,12 +148,12 @@ New files this period:
 - `phase_hunt.py`
 - `test_phase_hunt.py`
 
-Functions the pairs write this period:
+Functions the student pairs write this period:
 
 - `score()` in `phase_hunt.py`
 - `greedy_phases()` in `phase_hunt.py`
 
-In the `student` folder these functions raise `NotImplementedError` until a pair writes them. In the `instructor` folder they are finished.
+In the `student` folder these functions raise `NotImplementedError` until a student pair writes them. In the `instructor` folder they are finished.
 
 ## The changes and why
 
@@ -172,9 +172,9 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | A scientist (or the teacher) shows the NSLS-II PDF beamline and its daily question: which crystal phases are in this powder? |
-| 10:45 to 11:00 | Unplugged warm-up, "Name the powder": pairs lay paper fingerprint strips over a printed mystery pattern. |
-| 11:00 to 11:25 | Pairs write `score()` in `phase_hunt.py`: a point for each explained peak, and a point lost for each extra peak, missing peak, and phase used. |
-| 11:25 to 12:00 | Pairs write `greedy_phases()`, which adds the best phase again and again with `append` and `pop`. Greedy names 166 of 200 powders right and 34 wrong, and it mistakes silver for gold. |
+| 10:45 to 11:00 | Unplugged warm-up, "Name the powder": student pairs lay paper fingerprint strips over a printed mystery pattern. |
+| 11:00 to 11:25 | Student pairs write `score()` in `phase_hunt.py`: a point for each explained peak, and a point lost for each extra peak, missing peak, and phase used. |
+| 11:25 to 12:00 | Student pairs write `greedy_phases()`, which adds the best phase again and again with `append` and `pop`. Greedy names 166 of 200 powders right and 34 wrong, and it mistakes silver for gold. |
 
 ## What you edit this period
 

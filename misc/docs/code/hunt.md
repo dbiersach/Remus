@@ -7,7 +7,7 @@
 Perft counts tell you that something is wrong; `divide()` tells you where. This
 demo runs `divide()` on four standard positions with a copy of Remus that has three
 planted bugs, compares each root move's count with python-chess, and prints the root
-moves that disagree. The pair reads those moves, finds each bug, and fixes it.
+moves that disagree. The student pair reads those moves, finds each bug, and fixes it.
 
 ## Where this piece fits
 
@@ -30,7 +30,7 @@ the same way it is in `test_perft.py`.
 2. For each move, ask which rule that move or the replies to it need: castling, en passant, or promotion.
 3. Find the line in `bug_hunt/` that breaks the rule, fix it, and run the hunt again.
 
-The pair fixes 3 lines.
+The student pair fixes 3 lines.
 
 ## Try it
 

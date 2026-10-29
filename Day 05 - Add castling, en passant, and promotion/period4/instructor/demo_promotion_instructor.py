@@ -4,7 +4,7 @@
 Day 5, period 4 demo: promotion and underpromotion. White's pawn on b7 may become
 a queen, a rook, a bishop, or a knight. Three of the four leave Black with no legal
 move and no check, which is stalemate, a draw. Only the knight gives checkmate.
-The student file demo_promotion.py leaves one # line for each line the pair types.
+The student file demo_promotion.py leaves one # line for each line the student pair types.
 """
 
 from attacks import in_check

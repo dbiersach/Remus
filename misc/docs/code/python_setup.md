@@ -4,8 +4,8 @@
 
 ## The big picture
 
-Before a pair writes any chess code, the laptop has to run Python. This lab checks
-that, and it is the pair's first program: it prints a greeting with the team name and
+Before a student pair writes any chess code, the laptop has to run Python. This lab checks
+that, and it is the student pair's first program: it prints a greeting with the team name and
 picks the king out of White's back rank.
 
 ## Where this piece fits
@@ -29,7 +29,7 @@ variables, f-strings, and indexing a string, show up in `board.py` on Day 1, per
 2. Part #2: store the team name, print a greeting, and count its characters with `len()`.
 3. Part #3: store White's back rank as one string and print `back_rank[4]`, the king.
 
-The pair types 6 lines.
+The student pair types 6 lines.
 
 ## Try it
 

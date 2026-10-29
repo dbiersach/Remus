@@ -4,7 +4,7 @@
 Day 1, period 2, Python lab 1: strings, indexing, ord() and chr(), and f-strings.
 The chess drill turns the square name "e2" into file number 4 and rank number 2,
 the numbers board.py needs on Day 1, period 4.
-The student file python_strings.py leaves one # line for each line the pair types.
+The student file python_strings.py leaves one # line for each line the student pair types.
 """
 
 
