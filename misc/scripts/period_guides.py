@@ -1855,8 +1855,9 @@ LAB_NOTES = {
     ],
     (9, 2): [
         (
-            "Part #1: `remembered_perft()` stores each answer in a dict under the tuple "
-            "key `(name, depth)`. The second call finds the answer and returns at once. "
+            "Part #1: `remembered_perft()` stores each knight path count in a dict under "
+            "the tuple key `(square, depth)`. The second call finds the answer and "
+            "returns at once. "
             "The RED color version's transposition table remembers search results the same way."
         ),
         (
