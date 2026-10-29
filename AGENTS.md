@@ -302,9 +302,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   against Remus-WHITE or another color, and `play_battle.py` in each color folder
   runs it for the Day 9 battles. `version_league.py` plays a round robin of all 12
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
-  with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions against
-  Stockfish at five UCI_Elo levels from frozen copies of the versions and writes the
-  table to `misc/docs/engines/remus_elo.md`.
+  with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions, and
+  Niram-GOLD with `--niram-gold`, against Stockfish at four UCI_Elo levels near an
+  even score, from frozen copies of the versions, and prints the tables that
+  `misc/docs/engines/engines_elo.md` reports beside the league table.
 - `Niram-GOLD` (in `period2/instructor/engines`) holds Remus-GOLD rewritten in Rust, named for
   Naram-Sin, Sargon's grandson: a Cargo workspace with the shared rules in `rules/`
   and the engine in `gold/`. It is a teacher's tool that runs the same engine about
@@ -360,8 +361,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
     `.py` file a student modifies or reads, named after that file (`board.py` has
     `board.md`).
   - `misc/docs/engines/`: the Remus versions and Niram-GOLD: `remus_versions.md`,
-    the ten color versions and Remus-GOLD; `remus_elo.md`, which `version_elo.py`
-    writes; and `engine_parity.md`, which `engine_parity.py` writes.
+    the ten color versions and Remus-GOLD; `engines_elo.md`, the league and Stockfish
+    ratings; and `engine_parity.md`, which `engine_parity.py` writes.
   Pictures live in `misc/docs/images/` (`lucas_chess/` and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `misc/docs/`.
 - Remus-WHITE, the ten color versions (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
@@ -369,6 +370,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   versions, never "stations", in file names, code, and prose. Game records keep the
   Event names `Station match`, `Station league`, and `Station Elo test`, so the
   games already in `misc/games/remus_games.pgn` still count toward the ratings.
+  `version_elo.py` plays a new test under the Event `Engine Elo test`, which keeps
+  the four-level run apart from the five-level `Station Elo test` games.
 
 # Part 2: Python style
 

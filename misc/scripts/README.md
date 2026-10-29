@@ -46,7 +46,7 @@ those saved games and plays none.
 | Script | What it does |
 | --- | --- |
 | `version_league.py` | Plays a round robin of all 12 versions on a 10-minute clock and fits one Elo rating each, with Remus-WHITE pinned at 0. `--rate-only` prints the ratings from saved games. |
-| `version_elo.py` | Rates all 12 versions against Stockfish at five strengths and writes the table to `misc/docs/engines/remus_elo.md`. `--report-only` writes the table from saved games. |
+| `version_elo.py` | Rates all 12 versions, and Niram-GOLD with `--niram-gold`, against Stockfish at four strengths near an even score, and prints the tables for `misc/docs/engines/engines_elo.md`. `--report-only` prints the tables from saved games. |
 
 ## Compare Remus with Niram
 
