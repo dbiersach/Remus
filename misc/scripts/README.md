@@ -49,7 +49,7 @@ those saved games and plays none.
 | --- | --- |
 | `version_match.py` | Plays one enhanced engine against Remus-WHITE or another engine, 2 games at 10 minutes a side, and prints the Elo gap. `play_battle.py` and `smoke_test.py` in each engine folder run it with `--engines`; by hand it plays the engines in `engines/instructor`. |
 | `version_league.py` | Plays a round robin of all 12 versions on a 10-minute clock and fits one Elo rating each, with Remus-WHITE pinned at 0. `--rate-only` prints the ratings from saved games. |
-| `version_elo.py` | Rates all 12 versions, and Niram with `--niram`, against Stockfish at four strengths near an even score, and prints the tables for `misc/docs/engines/engines_elo.md`. `--report-only` prints the tables from saved games. |
+| `version_elo.py` | Rates all 12 versions, and Niram with `--niram`, against Stockfish at four strengths near an even score. `--bracket` instead sets each round's Stockfish strength to the engine's rating so far, the run that `misc/docs/engines/engines_elo.md` reports. `--report-only` prints the tables from saved games. |
 
 ## Compare Remus with Niram
 
