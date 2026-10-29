@@ -46,3 +46,37 @@ Every other function is finished. Change only these, and only below each docstri
 | `move_generation.py` | `slide()` | 70 | 14 | `test_move_generation.py::test_slide_stops_at_a_friend_and_captures_an_enemy` |
 
 Lines to type in all: 14. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `slide()` in `move_generation.py`
+
+**Where:** lines 91 to 104 of `move_generation.py`, inside `slide()`, in place of the stub below the docstring. It is called by `slider_moves()` in `move_generation.py`.
+
+```text
+ 70 | def slide(board: Board, square: Square, direction: Direction, color: str) -> list[Move]:
+      ...
+ 89 |         that piece is an enemy, the capture is the last move in the list.
+ 90 |     """
+ 91 +     row, col = square
+ 92 +     row_change, col_change = direction
+ 93 +     moves = []
+ 94 +     row, col = row + row_change, col + col_change
+ 95 +     while on_board(row, col):
+ 96 +         target_piece = piece_at(board, (row, col))
+ 97 +         if target_piece == EMPTY:
+ 98 +             moves.append(Move(square, (row, col)))
+ 99 +         else:
+100 +             if color_of(target_piece) != color:
+101 +                 moves.append(Move(square, (row, col)))
+102 +             break
+103 +         row, col = row + row_change, col + col_change
+104 +     return moves
+105 |
+106 |
+107 | def slider_moves(
+```

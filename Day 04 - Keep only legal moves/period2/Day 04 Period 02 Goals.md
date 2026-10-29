@@ -55,7 +55,64 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `attacks.py` | `piece_at_offsets()` | 64 | 6 | `run_tests.py` |
-| `attacks.py` | `attacked_by_pawn()` | 103 | 3 | `run_tests.py` |
-| `attacks.py` | `attacked_by_king()` | 97 | 2 | `run_tests.py` |
+| `attacks.py` | `attacked_by_pawn()` | 106 | 3 | `run_tests.py` |
+| `attacks.py` | `attacked_by_king()` | 100 | 2 | `run_tests.py` |
 
 Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `piece_at_offsets()` in `attacks.py`
+
+**Where:** lines 86 to 91 of `attacks.py`, inside `piece_at_offsets()`, in place of the stub below the docstring. It is called by `attacked_by_knight()` in `attacks.py`.
+
+```text
+64 | def piece_at_offsets(
+     ...
+84 |         True if one of the squares the offsets reach holds the piece.
+85 |     """
+86 +     row, col = square
+87 +     for row_change, col_change in offsets:
+88 +         target = (row + row_change, col + col_change)
+89 +         if on_board(*target) and piece_at(board, target) == piece:
+90 +             return True
+91 +     return False
+92 |
+93 |
+94 | def attacked_by_knight(board: Board, square: Square, by_color: str) -> bool:
+```
+
+### `attacked_by_pawn()` in `attacks.py`
+
+**Where:** lines 113 to 115 of `attacks.py`, inside `attacked_by_pawn()`, in place of the stub below the docstring. It is called by `is_square_attacked()` in `attacks.py`.
+
+```text
+106 | def attacked_by_pawn(board: Board, square: Square, by_color: str) -> bool:
+      ...
+111 |     stands one row below it, at (row + 1, col - 1) or (row + 1, col + 1).
+112 |     """
+113 +     if by_color == WHITE:
+114 +         return piece_at_offsets(board, square, "P", [(1, -1), (1, 1)])
+115 +     return piece_at_offsets(board, square, "p", [(-1, -1), (-1, 1)])
+116 |
+117 |
+118 | def first_piece(board: Board, square: Square, direction: Direction) -> str:
+```
+
+### `attacked_by_king()` in `attacks.py`
+
+**Where:** lines 102 to 103 of `attacks.py`, inside `attacked_by_king()`, in place of the stub below the docstring. It is called by `is_square_attacked()` in `attacks.py`.
+
+```text
+100 | def attacked_by_king(board: Board, square: Square, by_color: str) -> bool:
+101 |     """Return True if the king of by_color is one step away."""
+102 +     king = "K" if by_color == WHITE else "k"
+103 +     return piece_at_offsets(board, square, king, KING_STEPS)
+104 |
+105 |
+106 | def attacked_by_pawn(board: Board, square: Square, by_color: str) -> bool:
+```

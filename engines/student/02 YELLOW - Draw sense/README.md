@@ -73,7 +73,84 @@ Every other function is finished. Change only these, and only below each docstri
 | --- | --- | --- | --- | --- |
 | `search.py` | `is_draw_in_search()` | 396 | 2 | `test_upgrades.py::test_a_repeated_position_is_a_draw`, `test_upgrades.py::test_the_fifty_move_limit_is_a_draw` |
 | `test_upgrades.py` | `test_draw_sense_search_agrees_with_alpha_beta()` | 21 | 7 | `run_tests.py` |
-| `test_upgrades.py` | `test_a_repeated_position_is_a_draw()` | 30 | 5 | `run_tests.py` |
-| `test_upgrades.py` | `test_the_fifty_move_limit_is_a_draw()` | 37 | 2 | `run_tests.py` |
+| `test_upgrades.py` | `test_a_repeated_position_is_a_draw()` | 32 | 5 | `run_tests.py` |
+| `test_upgrades.py` | `test_the_fifty_move_limit_is_a_draw()` | 41 | 2 | `run_tests.py` |
 
 Lines to type in all: 16. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `is_draw_in_search()` in `search.py`
+
+**Where:** lines 413 to 414 of `search.py`, inside `is_draw_in_search()`, in place of the stub below the docstring. It is called by `draw_sense_search()` in `search.py`.
+
+```text
+396 | def is_draw_in_search(state: dict) -> bool:
+      ...
+411 |         the search scores it 0 instead of chasing a win that cannot happen.
+412 |     """
+413 +     key = state["history"][-1]
+414 +     return state["history"].count(key) >= 2 or state["halfmove_clock"] >= 100
+415 |
+416 |
+417 | def draw_sense_search(
+```
+
+**How it works:** `state["history"]` holds the key of every position of the game so far, with the current position last, so `key` is the position on the board right now. `count(key) >= 2` is True when that same position appeared before, the first step toward a threefold repetition. The search treats the first repeat as a draw: if the line can repeat once, the side that wants a draw can repeat it again. `halfmove_clock >= 100` catches the fifty-move rule: 100 half-moves, 50 by each side, with no capture and no pawn move. `or` makes the function return True when either rule applies.
+
+### `test_draw_sense_search_agrees_with_alpha_beta()` in `test_upgrades.py`
+
+**Where:** lines 23 to 29 of `test_upgrades.py`, inside `test_draw_sense_search_agrees_with_alpha_beta()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+21 | def test_draw_sense_search_agrees_with_alpha_beta() -> None:
+22 |     """The color version saves work but finds the same score at the same depth."""
+23 +     state = state_from_fen(ITALIAN)
+24 +     before = state_snapshot(state)
+25 +     plain_score, _ = alpha_beta_with_quiescence(state, 3, 0, *WIDE, SearchInfo())
+26 +     score, pv = draw_sense_search(state, 3, 0, *WIDE, SearchInfo())
+27 +     assert score == plain_score
+28 +     assert pv
+29 +     assert state_snapshot(state) == before
+30 |
+31 |
+32 | def test_a_repeated_position_is_a_draw() -> None:
+```
+
+**How it works:** The test sets up the Italian opening from its FEN and takes a snapshot of the whole state. It runs the plain search, `alpha_beta_with_quiescence`, to depth 3 with the wide window, then the color version's `draw_sense_search` on the same position. The three asserts check that both searches give the same score, that the new search returns a line of moves (a non-empty principal variation), and that the snapshot is unchanged, which proves every `make_move` was undone. `*WIDE` unpacks the pair of numbers into the two arguments `alpha` and `beta`.
+
+### `test_a_repeated_position_is_a_draw()` in `test_upgrades.py`
+
+**Where:** lines 34 to 38 of `test_upgrades.py`, inside `test_a_repeated_position_is_a_draw()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+32 | def test_a_repeated_position_is_a_draw() -> None:
+33 |     """After Nf3 Nf6 Ng1 Ng8 the starting position appears for the second time."""
+34 +     state = state_from_fen(START_FEN)
+35 +     assert not is_draw_in_search(state)
+36 +     for text in ("g1f3", "g8f6", "f3g1", "f6g8"):
+37 +         make_move(state, move_from_uci(text))
+38 +     assert is_draw_in_search(state)
+39 |
+40 |
+41 | def test_the_fifty_move_limit_is_a_draw() -> None:
+```
+
+**How it works:** The game starts from the normal starting position, where nothing has repeated, so the first assert expects False. The loop plays four moves from their UCI text: the knights jump out (g1f3, g8f6) and back (f3g1, f6g8). The board then looks exactly like the start, with White to move, so its key is in the history twice and `is_draw_in_search` must say True.
+
+### `test_the_fifty_move_limit_is_a_draw()` in `test_upgrades.py`
+
+**Where:** lines 43 to 44 of `test_upgrades.py`, inside `test_the_fifty_move_limit_is_a_draw()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+41 | def test_the_fifty_move_limit_is_a_draw() -> None:
+42 |     """A halfmove clock of 100 is 50 moves by each side with no capture or pawn move."""
+43 +     state = state_from_fen("4k3/8/8/8/8/8/8/R3K3 w - - 100 80")
+44 +     assert is_draw_in_search(state)
+```
+
+**How it works:** The FEN puts a king and rook against a lone king and sets the halfmove clock, the fifth field, to 100. Nothing has repeated, so only the fifty-move rule can make the assert pass.

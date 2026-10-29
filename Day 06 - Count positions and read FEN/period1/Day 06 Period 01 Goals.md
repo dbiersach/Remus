@@ -39,3 +39,37 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 Open `python_recursion.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 11. Check the work by running `python_recursion.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### `countdown()`
+
+```text
+15 |     """Print number, number - 1, ..., 1, and then Go!"""
+16 |     # Base case: at 0 the function stops calling itself
+17 +     if number == 0:
+18 +         print("  Go!")
+19 +         return
+20 |     # Recursive case: print one number, then let a smaller call do the rest
+21 +     print(f"  {number}")
+22 +     countdown(number - 1)
+23 |
+24 |
+```
+
+### `count_leaves()`
+
+```text
+37 |         The number of leaves in the whole tree.
+38 |     """
+39 +     if isinstance(tree, str):
+40 +         return 1
+41 +     total = 0
+42 +     for branch in tree:
+43 +         total += count_leaves(branch)
+44 +     return total
+45 |
+46 |
+```

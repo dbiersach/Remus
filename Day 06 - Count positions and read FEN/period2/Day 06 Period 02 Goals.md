@@ -46,3 +46,31 @@ Every other function is finished. Change only these, and only below each docstri
 | `perft.py` | `perft()` | 25 | 8 | `run_tests.py` |
 
 Lines to type in all: 8. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `perft()` in `perft.py`
+
+**Where:** lines 41 to 48 of `perft.py`, inside `perft()`, in place of the stub below the docstring. It is called by `divide()` in `perft.py`.
+
+```text
+25 | def perft(state: dict, depth: int) -> int:
+     ...
+39 |         The number of leaf positions. At depth 0 the position itself counts as 1.
+40 |     """
+41 +     if depth == 0:
+42 +         return 1
+43 +     count = 0
+44 +     for move in legal_moves(state):
+45 +         undo = make_move(state, move)
+46 +         count += perft(state, depth - 1)
+47 +         undo_move(state, undo)
+48 +     return count
+49 |
+50 |
+51 | def divide(state: dict, depth: int) -> dict[str, int]:
+```

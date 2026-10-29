@@ -183,6 +183,68 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `phase_hunt.py` | `score()` | 110 | 11 | `test_phase_hunt.py::test_score_rewards_explained_peaks_and_punishes_the_rest` |
-| `phase_hunt.py` | `greedy_phases()` | 134 | 17 | `test_phase_hunt.py::test_greedy_names_a_clean_mixture`, `test_phase_hunt.py::test_greedy_mistakes_silver_for_gold` |
+| `phase_hunt.py` | `greedy_phases()` | 142 | 17 | `test_phase_hunt.py::test_greedy_names_a_clean_mixture`, `test_phase_hunt.py::test_greedy_mistakes_silver_for_gold` |
 
 Lines to type in all: 28. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `score()` in `phase_hunt.py`
+
+**Where:** lines 129 to 139 of `phase_hunt.py`, inside `score()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+110 | def score(phases: Phases, measured: list[float]) -> int:
+      ...
+127 |         each phase. A larger score is a better explanation.
+128 |     """
+129 +     predicted = predicted_peaks(phases)
+130 +     total = -PHASE_COST * len(phases)
+131 +     for peak in measured:
+132 +         if matches(peak, predicted):
+133 +             total += EXPLAINED
+134 +         else:
+135 +             total -= LEFT_OVER
+136 +     for peak in predicted:
+137 +         if not matches(peak, measured):
+138 +             total -= MISSING
+139 +     return total
+140 |
+141 |
+142 | def greedy_phases(measured: list[float]) -> Phases:
+```
+
+### `greedy_phases()` in `phase_hunt.py`
+
+**Where:** lines 158 to 174 of `phase_hunt.py`, inside `greedy_phases()`, in place of the stub below the docstring. It is called by `greedy_answer()` in `phase_hunt.py`.
+
+```text
+142 | def greedy_phases(measured: list[float]) -> Phases:
+      ...
+156 |         phase raises the score, or when it holds MAX_PHASES phases.
+157 |     """
+158 +     phases = []
+159 +     while len(phases) < MAX_PHASES:
+160 +         best_name = None
+161 +         best_score = score(phases, measured)
+162 +         for name in PHASE_NAMES:
+163 +             if name in phases:
+164 +                 continue
+165 +             phases.append(name)  # Try the phase, like making a move
+166 +             trial_score = score(phases, measured)
+167 +             phases.pop()  # Take it back, like undoing the move
+168 +             if trial_score > best_score:
+169 +                 best_name = name
+170 +                 best_score = trial_score
+171 +         if best_name is None:
+172 +             break
+173 +         phases.append(best_name)
+174 +     return phases
+175 |
+176 |
+177 | def greedy_answer(measured: list[float]) -> list[Phases]:
+```

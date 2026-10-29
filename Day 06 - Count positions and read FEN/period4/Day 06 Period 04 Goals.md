@@ -59,12 +59,117 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `fen.py` | `fen_placement()` | 21 | 18 | `run_tests.py` |
-| `fen.py` | `board_from_placement()` | 41 | 14 | `run_tests.py` |
+| `fen.py` | `board_from_placement()` | 56 | 14 | `run_tests.py` |
 
 Lines to type in all: 32. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `fen_placement()` in `fen.py`
+
+**Where:** lines 36 to 53 of `fen.py`, inside `fen_placement()`, in place of the stub below the docstring. It is called by `state_to_fen()` in `fen.py`.
+
+```text
+21 | def fen_placement(board: Board) -> str:
+     ...
+34 |         empty squares in a row, so an empty rank is "8".
+35 |     """
+36 +     placement = ""
+37 +     for row in board:
+38 +         text = ""
+39 +         empty_count = 0
+40 +         for piece in row:
+41 +             if piece == EMPTY:
+42 +                 empty_count += 1
+43 +             else:
+44 +                 if empty_count > 0:
+45 +                     text += str(empty_count)
+46 +                     empty_count = 0
+47 +                 text += piece
+48 +         if empty_count > 0:
+49 +             text += str(empty_count)
+50 +         if placement != "":
+51 +             placement += "/"  # A slash separates one rank from the next
+52 +         placement += text
+53 +     return placement
+54 |
+55 |
+56 | def board_from_placement(text: str) -> Board:
+```
+
+### `board_from_placement()` in `fen.py`
+
+**Where:** lines 70 to 83 of `fen.py`, inside `board_from_placement()`, in place of the stub below the docstring. It is called by `state_from_fen()` in `fen.py`.
+
+```text
+56 | def board_from_placement(text: str) -> Board:
+     ...
+68 |         The board, row 0 (rank 8) first.
+69 |     """
+70 +     board = []
+71 +     for rank_text in text.split("/"):
+72 +         row = []
+73 +         for character in rank_text:
+74 +             if character.isdigit():
+75 +                 row += [EMPTY] * int(character)
+76 +             else:
+77 +                 row.append(character)
+78 +         if len(row) != 8:
+79 +             raise ValueError(f"A FEN rank must describe 8 squares: {rank_text!r}")
+80 +         board.append(row)
+81 +     if len(board) != 8:
+82 +         raise ValueError(f"FEN must describe 8 ranks: {text!r}")
+83 +     return board
+84 |
+85 |
+86 | def state_from_fen(fen: str) -> dict:
+```
 
 ## What you edit in the lab
 
 Open `python_fen_fields.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 8. Check the work by running `python_fen_fields.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #1 - split() Cuts Text at Every Space
+
+```text
+22 |     print("Part #1 - split() Cuts Text at Every Space")
+23 |     # split("/") cuts at every slash instead, the way fen.py cuts the placement into rows
+24 +     fields = START_FEN.split()
+25 +     print(f"Fields: {len(fields)}  (expected 6)")
+26 |
+27 |     print("Part #2 - Name the Six Fields")
+```
+
+### Part #2 - Name the Six Fields
+
+```text
+26 |
+27 |     print("Part #2 - Name the Six Fields")
+28 +     for i in range(6):
+29 +         print(f"  {FIELD_NAMES[i]}: {fields[i]}")
+30 |     print("  (expected the placement, w, KQkq, -, 0, and 1)")
+31 |
+```
+
+### Part #3 - int() and ValueError
+
+```text
+33 |     # Try "12" here too: int() turns digits into a number and raises ValueError otherwise
+34 |     text = "x"
+35 +     try:
+36 +         print(f"  {text} is the number {int(text)}")
+37 +     except ValueError:
+38 +         print(f"  {text} is not a number, so int() raised ValueError")
+39 |     print("  (expected x is not a number)")
+40 |
+```

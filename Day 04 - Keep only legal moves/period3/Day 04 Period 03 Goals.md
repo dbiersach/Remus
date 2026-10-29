@@ -57,3 +57,47 @@ Every other function is finished. Change only these, and only below each docstri
 | `legal_moves.py` | `legal_moves()` | 16 | 8 | `test_legal_moves.py::test_king_cannot_step_next_to_the_other_king`, `test_legal_moves.py::test_legal_moves_leave_the_state_unchanged` |
 
 Lines to type in all: 10. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `in_check()` in `attacks.py`
+
+**Where:** lines 195 to 196 of `attacks.py`, inside `in_check()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+179 | def in_check(state: dict, color: str) -> bool:
+      ...
+193 |         True if that king stands on a square the other side attacks.
+194 |     """
+195 +     board = state["board"]
+196 +     return is_square_attacked(board, find_king(board, color), opponent(color))
+197 |
+198 |
+199 | def main():
+```
+
+### `legal_moves()` in `legal_moves.py`
+
+**Where:** lines 30 to 37 of `legal_moves.py`, inside `legal_moves()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+16 | def legal_moves(state: dict) -> list[Move]:
+     ...
+28 |         The pseudo-legal moves that do not leave the mover's king in check.
+29 |     """
+30 +     mover = state["turn"]
+31 +     moves = []
+32 +     for move in pseudo_legal_moves(state):
+33 +         undo = make_move(state, move)
+34 +         if not in_check(state, mover):
+35 +             moves.append(move)
+36 +         undo_move(state, undo)
+37 +     return moves
+38 |
+39 |
+40 | def main():
+```

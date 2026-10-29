@@ -13,7 +13,7 @@ By the end of this period, each student pair can:
 
 The demo is `demo_results.py` in the `student` folder, with the answers in `demo_results_instructor.py` in the `instructor` folder beside it. Open `demo_results.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-This folder holds no engine code. Each student pair works in its own engine folder in `engines/student`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder.
+This folder holds no engine code. Each student pair works in its own engine folder in `engines/student`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder. The `README.md` in each engine folder explains its enhancement, and its section "The code you type" shows every line the student pair types, with line numbers, the lines around it, and how the code works.
 
 ## The changes and why
 
@@ -37,3 +37,40 @@ Parts #1 and #2 of `demo_results.py` turn a match result into a score and an Elo
 Open `demo_results.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 13. Check the work by running `demo_results.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #1 - Points, Score, and Elo Gap
+
+```text
+34 |     # Put your own battle result here, or your color's league games
+35 |     wins, draws, losses = 9, 4, 7
+36 +     games = wins + draws + losses
+37 +     points = wins + draws / 2
+38 +     score = points / games
+39 +     gap = elo_gap(score)
+40 +     print(f"{points} points of {games}: score {score:.2f}, Elo gap {gap:+.0f}")
+41 |     print("  (expected 11.0 points of 20: score 0.55, Elo gap +35)")
+42 |
+```
+
+### Part #2 - The Margin of Error
+
+```text
+43 |     print("Part #2 - The Margin of Error")
+44 |     # 95 percent of the time the true score lies within about 2 standard errors
+45 +     margin = 1.96 * math.sqrt(score * (1 - score) / games)
+46 +     low = elo_gap(score - margin)
+47 +     high = elo_gap(score + margin)
+48 +     print(f"The Elo gap lies between {low:+.0f} and {high:+.0f}")
+49 |     print("  (expected between -121 and +208)")
+50 |     # A gap is real when its whole range sits on one side of 0
+51 +     if low > 0 or high < 0:
+52 +         print("The gap is larger than its margin: the enhancement made a difference")
+53 +     else:
+54 +         print("The margin reaches past 0: more games are needed to be sure")
+55 |
+56 |
+```

@@ -72,3 +72,81 @@ Every other function is finished. Change only these, and only below each docstri
 | `test_upgrades.py` | `test_killers_keep_two_quiet_moves()` | 21 | 5 | `run_tests.py` |
 
 Lines to type in all: 27. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `remember_killer()` in `search.py`
+
+**Where:** lines 399 to 404 of `search.py`, inside `remember_killer()`, in place of the stub below the docstring. It is called by `killer_search()` in `search.py`.
+
+```text
+397 | def remember_killer(info: SearchInfo, ply: int, move: Move, board: Board) -> None:
+398 |     """Keep a quiet move that caused a cutoff as one of two killers for this ply."""
+399 +     if piece_at(board, move.to_square) != EMPTY or move.promotion is not None:
+400 +         return  # Captures are already ordered first
+401 +     killers = info.killers.setdefault(ply, [])
+402 +     if move not in killers:
+403 +         killers.insert(0, move)
+404 +         del killers[2:]
+405 |
+406 |
+407 | def killer_search(
+```
+
+**How it works:** A killer is a quiet move that caused a cutoff, so the first line returns at once for a capture or a promotion, which move ordering already puts first. `info.killers` maps each ply to its list of killers; `setdefault` makes an empty list the first time a ply appears. A new killer goes to the front of the list with `insert(0, move)`, and `del killers[2:]` cuts the list back to the two newest moves.
+
+### `order_moves()` in `move_ordering.py`
+
+**Where:** lines 79 to 95 of `move_ordering.py`, inside `order_moves()`, in place of the stub below the docstring. It is called by `quiescence()` in `search.py`, `alpha_beta_with_quiescence()` in `search.py`, `killer_search()` in `search.py`, `think()` in `search.py`.
+
+```text
+52 | def order_moves(
+     ...
+77 |         `first` at the front.
+78 |     """
+79 +     killers = killers or []
+80 +     ordered = []
+81 +     scores = []
+82 +     for move in moves:
+83 +         score = mvv_lva_score(move, board)
+84 +         if score == 0 and move in killers:
+85 +             score = KILLER_SCORE
+86 +         # Step past every move that scores at least as high, so ties keep their order
+87 +         place = 0
+88 +         while place < len(scores) and scores[place] >= score:
+89 +             place += 1
+90 +         ordered.insert(place, move)
+91 +         scores.insert(place, score)
+92 +     if first in ordered:
+93 +         ordered.remove(first)
+94 +         ordered.insert(0, first)
+95 +     return ordered
+96 |
+97 |
+98 | def main():
+```
+
+**How it works:** Each move gets a score: `mvv_lva_score` gives a capture a high score and a quiet move 0, and a quiet move that is one of this ply's killers gets `KILLER_SCORE` (50) instead, which ranks it above the other quiet moves but below every capture. The `while` loop finds where the move belongs in the list kept sorted from the highest score down, stepping past every move that scores at least as high so that ties keep the order the generator gave them. `insert` puts the move and its score at that place. At the end, the move named `first`, such as the best move of the last iteration, moves to the very front.
+
+### `test_killers_keep_two_quiet_moves()` in `test_upgrades.py`
+
+**Where:** lines 23 to 27 of `test_upgrades.py`, inside `test_killers_keep_two_quiet_moves()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+21 | def test_killers_keep_two_quiet_moves() -> None:
+22 |     """Expected: after three cutoffs at ply 2, the two newest moves stay, newest first."""
+23 +     info = SearchInfo()
+24 +     board = state_from_fen(START_FEN)["board"]
+25 +     for text in ("e2e4", "d2d4", "g1f3"):
+26 +         remember_killer(info, 2, move_from_uci(text), board)
+27 +     assert [move_to_uci(move) for move in info.killers[2]] == ["g1f3", "d2d4"]
+28 |
+29 |
+30 | def test_killer_search_agrees_with_alpha_beta() -> None:
+```
+
+**How it works:** The test takes the board of the starting position and records three quiet moves as killers at ply 2: e2e4, then d2d4, then g1f3. Only two fit, the newest first, so the list must read g1f3, d2d4. `move_to_uci` turns each Move into text for the comparison.

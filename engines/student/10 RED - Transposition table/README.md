@@ -80,3 +80,83 @@ Every other function is finished. Change only these, and only below each docstri
 | `test_upgrades.py` | `test_transposition_table_bounds()` | 17 | 13 | `run_tests.py` |
 
 Lines to type in all: 27. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `store()` in `transposition_table.py`
+
+**Where:** lines 29 to 31 of `transposition_table.py`, inside `store()`, in place of the stub below the docstring. It is called by `table_search()` in `search.py`.
+
+```text
+25 | def store(
+     ...
+27 | ) -> None:
+28 |     """Save a search result for a position, keeping the deeper of two results."""
+29 +     old = table.get(key)
+30 +     if old is None or depth >= old["depth"]:
+31 +         table[key] = {"depth": depth, "score": score, "bound": bound, "best": best}
+32 |
+33 |
+34 | def probe(table: dict, key: str, depth: int, alpha: int, beta: int) -> int | None:
+```
+
+**How it works:** `table.get(key)` returns what the table already holds for this position, or None. The new result is saved when there is no old one, or when the new search went at least as deep (`depth >= old["depth"]`), because a deeper search is worth more. The entry is a small dict with the depth, the score, the bound (EXACT, LOWER, or UPPER), and the best move.
+
+### `probe()` in `transposition_table.py`
+
+**Where:** lines 56 to 66 of `transposition_table.py`, inside `probe()`, in place of the stub below the docstring. It is called by `table_search()` in `search.py`.
+
+```text
+34 | def probe(table: dict, key: str, depth: int, alpha: int, beta: int) -> int | None:
+     ...
+54 |         or an upper bound at or below alpha (no improvement). Otherwise None.
+55 |     """
+56 +     entry = table.get(key)
+57 +     if entry is None or entry["depth"] < depth:
+58 +         return None
+59 +     score = entry["score"]
+60 +     if entry["bound"] == EXACT:
+61 +         return score
+62 +     if entry["bound"] == LOWER and score >= beta:
+63 +         return score
+64 +     if entry["bound"] == UPPER and score <= alpha:
+65 +         return score
+66 +     return None
+67 |
+68 |
+69 | def best_stored_move(table: dict, key: str) -> Move | None:
+```
+
+**How it works:** The function returns a score only when the stored result answers the question this search asks. A missing entry, or one searched less deeply than `depth`, returns None. An EXACT score always answers. A LOWER bound means the true score is at least the stored score, so it answers only when it reaches `beta`: that is already a cutoff. An UPPER bound means the true score is at most the stored score, so it answers only when it is at or below `alpha`: the move cannot improve on the best so far. Anything else returns None, and the position is searched.
+
+### `test_transposition_table_bounds()` in `test_upgrades.py`
+
+**Where:** lines 20 to 32 of `test_upgrades.py`, inside `test_transposition_table_bounds()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+17 | def test_transposition_table_bounds() -> None:
+18 |     """Expected: an exact entry answers at its depth; a bound answers only when it
+19 |     settles the window."""
+20 +     table = {}
+21 +     best = Move((6, 4), (4, 4))
+22 +     store(table, "a", 3, 50, EXACT, best)
+23 +     store(table, "b", 3, 80, LOWER, None)
+24 +     store(table, "c", 3, -20, UPPER, None)
+25 +     assert probe(table, "a", 3, -100, 100) == 50
+26 +     assert probe(table, "a", 4, -100, 100) is None  # Not searched deep enough
+27 +     assert probe(table, "b", 3, -100, 70) == 80  # At least 80 is a cutoff above beta 70
+28 +     assert (
+29 +         probe(table, "b", 3, -100, 100) is None
+30 +     )  # At least 80 does not settle beta 100
+31 +     assert probe(table, "c", 3, 0, 100) == -20  # At most -20 cannot beat alpha 0
+32 +     assert best_stored_move(table, "a") == best
+33 |
+34 |
+35 | def test_two_move_orders_reach_one_position_key() -> None:
+```
+
+**How it works:** The test fills an empty table by hand with three made-up positions, "a", "b", and "c", one for each kind of bound. Each assert then asks one question. Position a's exact 50 answers at depth 3 but not at depth 4, which was never searched. Position b is at least 80: that settles a window whose beta is 70 (a cutoff), but not one whose beta is 100. Position c is at most -20, which cannot beat alpha 0. The last line checks that the best move of position a was kept.

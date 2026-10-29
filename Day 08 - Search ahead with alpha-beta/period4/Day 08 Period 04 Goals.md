@@ -51,3 +51,31 @@ Every other function is finished. Change only these, and only below each docstri
 | `move_ordering.py` | `mvv_lva_score()` | 18 | 8 | `test_search.py::test_capture_moves_and_mvv_lva` |
 
 Lines to type in all: 8. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `mvv_lva_score()` in `move_ordering.py`
+
+**Where:** lines 36 to 43 of `move_ordering.py`, inside `mvv_lva_score()`, in place of the stub below the docstring. It is called by `order_moves()` in `move_ordering.py`.
+
+```text
+18 | def mvv_lva_score(move: Move, board: Board) -> int:
+     ...
+34 |         A promotion counts like capturing the new piece.
+35 |     """
+36 +     victim = piece_at(board, move.to_square)
+37 +     attacker = piece_at(board, move.from_square)
+38 +     score = 0
+39 +     if victim != EMPTY:
+40 +         score = 10 * PIECE_VALUES[victim.upper()] - PIECE_VALUES[attacker.upper()]
+41 +     if move.promotion is not None:
+42 +         score += 10 * PIECE_VALUES[move.promotion.upper()]
+43 +     return score
+44 |
+45 |
+46 | def order_moves(
+```

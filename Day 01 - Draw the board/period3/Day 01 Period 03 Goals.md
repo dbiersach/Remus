@@ -39,3 +39,70 @@ Part #4: you play 1. e4 by changing two squares, then count the White pawns left
 Open `python_lists.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 25. Check the work by running `python_lists.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #1 - A List of Pieces
+
+```text
+12 |     print("Part #1 - A List of Pieces")
+13 |     back_rank = ["r", "n", "b", "q", "k", "b", "n", "r"]
+14 +     print(f"Pieces on Black's back rank: {len(back_rank)}  (expected 8)")
+15 |     # Index 3 is the fourth square from the a-file: the d-file
+16 +     print(f"The piece on the d-file: {back_rank[3]}  (expected q)")
+17 |
+18 |     print("Part #2 - Visit Every Square with for and range")
+```
+
+### Part #2 - Visit Every Square with for and range
+
+```text
+18 |     print("Part #2 - Visit Every Square with for and range")
+19 |     # range(8) counts 0, 1, 2, ..., 7: one number for each file
+20 +     for col in range(8):
+21 +         print(back_rank[col], end=" ")
+22 +     print()
+23 |     print("  (expected r n b q k b n r)")
+24 |
+```
+
+### Part #3 - A Board Is a List of Rows
+
+```text
+25 |     print("Part #3 - A Board Is a List of Rows")
+26 |     # Each row is a fresh list of 8 dots, so changing one row leaves the others alone
+27 +     board = []
+28 +     for row in range(8):
+29 +         board.append(["."] * 8)
+30 |     # Row 0 is rank 8, so Black's pieces fill rows 0 and 1, and White's rows 6 and 7
+31 +     board[0] = back_rank
+32 +     board[1] = ["p"] * 8
+33 +     board[6] = ["P"] * 8
+34 +     board[7] = ["R", "N", "B", "Q", "K", "B", "N", "R"]
+35 +     for row in range(8):
+36 +         line = ""
+37 +         for col in range(8):
+38 +             line += board[row][col] + " "
+39 +         print(line)
+40 |     print("  (expected the starting position, Black at the top)")
+41 |
+```
+
+### Part #4 - Count the Pawns in a Row
+
+```text
+42 |     print("Part #4 - Count the Pawns in a Row")
+43 |     # Play 1. e4: the pawn leaves e2 (row 6, col 4) and lands on e4 (row 4, col 4)
+44 +     board[6][4] = "."
+45 +     board[4][4] = "P"
+46 +     pawns = 0
+47 +     for piece in board[6]:
+48 +         if piece == "P":
+49 +             pawns += 1
+50 +     print(f"White pawns left on rank 2: {pawns}  (expected 7)")
+51 +     print(f"board[4][4] holds {board[4][4]}  (expected P, the pawn on e4)")
+52 |
+53 |
+```

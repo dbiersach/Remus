@@ -60,8 +60,90 @@ Every other function is finished. Change only these, and only below each docstri
 
 Lines to type in all: 5. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `parse_san()` in `notation.py`
+
+**Where:** lines 112 to 116 of `notation.py`, inside `parse_san()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`.
+
+```text
+ 90 | def parse_san(state: dict, text: str) -> Move:
+      ...
+110 |         If no legal move matches.
+111 |     """
+112 +     wanted = text.strip().rstrip("+#!?").replace("0", "O")
+113 +     for move in legal_moves(state):
+114 +         if move_to_san(state, move).rstrip("+#") == wanted:
+115 +             return move
+116 +     raise ValueError(f"Not a legal move here: {text!r}")
+117 |
+118 |
+119 | def main():
+```
+
 ## What you edit in the lab
 
 Open `python_input_output.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 16. Check the work by running `python_input_output.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #1 - random.choice() Picks One Item
+
+```text
+24 |     random.seed(2016)  # The same seed gives the same pick on every run
+25 |     moves = ["e2e4", "d2d4", "g1f3", "c2c4"]
+26 +     pick = random.choice(moves)
+27 +     print(f"Random move: {pick}  (expected one of the four)")
+28 |
+29 |     print("Part #2 - A Loop Keeps the Best Item So Far")
+```
+
+### Part #2 - A Loop Keeps the Best Item So Far
+
+```text
+30 |     # Start with the first piece, then swap in any piece worth more
+31 |     victims = ["p", "q", "n"]
+32 +     best = victims[0]
+33 +     for piece in victims:
+34 +         if victim_value(piece) > victim_value(best):
+35 +             best = piece
+36 +     print(f"Most valuable capture: {best}  (expected q)")
+37 |
+38 |     print("Part #3 - Notes Go to stderr")
+```
+
+### Part #3 - Notes Go to stderr
+
+```text
+38 |     print("Part #3 - Notes Go to stderr")
+39 |     # A GUI reads stdout, so notes for people go to stderr where the GUI ignores them
+40 +     print("This note goes to stderr", file=sys.stderr)
+41 |
+42 |     print("Part #4 - Read Commands from stdin and Answer")
+```
+
+### Part #4 - Read Commands from stdin and Answer
+
+```text
+42 |     print("Part #4 - Read Commands from stdin and Answer")
+43 |     print("Type isready, then hello, then quit, pressing Enter after each")
+44 +     for line in sys.stdin:
+45 +         command = line.strip()
+46 +         if command == "quit":
+47 +             break
+48 |         # flush=True sends the answer right away instead of keeping it in a buffer
+49 +         if command == "isready":
+50 +             print("readyok", flush=True)
+51 +         else:
+52 +             print(f"echo {command}", flush=True)
+53 |     print("  (expected readyok, then echo hello)")
+54 |
+```

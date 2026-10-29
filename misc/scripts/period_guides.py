@@ -1345,6 +1345,256 @@ fluorescence, which tells gold from silver at once.""",
 }
 
 # (file, function) -> one paragraph: what the change does, why, and the big picture
+# (file, function), or (lab name, "Part #N") and (lab name, function), -> how the
+# code a student pair types works, line by line. make_student_folders.py writes each
+# note under the code in the "The code you type" section.
+CODE_NOTES: dict[tuple[str, str], str] = {
+    ("evaluation.py", "king_safety"): (
+        "The loop runs twice, once for each side. The first pass looks at White's "
+        "king `K`, its pawns `P`, and Black's queen `q`. White's pawns stand in "
+        "front of its king at smaller row numbers (row 0 is rank 8), so `forward` "
+        "is -1, and `sign` is +1 because points for White are positive. The second "
+        "pass swaps all four for Black. The first small loop sets `queen_on_board` "
+        "to True if the enemy queen is anywhere on the board; with no enemy queen, "
+        "`continue` skips that side, since a king is safe enough without a shield. "
+        "Next the two loops over `row` and `col` find the king. For the king's own "
+        "file and the files on each side (`col - 1` to `col + 1`), the code looks "
+        "one and then two squares ahead. The first friendly pawn it finds adds "
+        "`SHIELD_PAWN` (15) and `break` stops, so each file counts at most once. "
+        "Example: a White king on g1 with pawns on f2, g2, and h2 earns 3 x 15 = "
+        "45."
+    ),
+    ("search.py", "is_draw_in_search"): (
+        '`state["history"]` holds the key of every position of the game so far, '
+        "with the current position last, so `key` is the position on the board "
+        "right now. `count(key) >= 2` is True when that same position appeared "
+        "before, the first step toward a threefold repetition. The search treats "
+        "the first repeat as a draw: if the line can repeat once, the side that "
+        "wants a draw can repeat it again. `halfmove_clock >= 100` catches the "
+        "fifty-move rule: 100 half-moves, 50 by each side, with no capture and no "
+        "pawn move. `or` makes the function return True when either rule applies."
+    ),
+    ("test_upgrades.py", "test_draw_sense_search_agrees_with_alpha_beta"): (
+        "The test sets up the Italian opening from its FEN and takes a snapshot of "
+        "the whole state. It runs the plain search, `alpha_beta_with_quiescence`, "
+        "to depth 3 with the wide window, then the color version's "
+        "`draw_sense_search` on the same position. The three asserts check that "
+        "both searches give the same score, that the new search returns a line of "
+        "moves (a non-empty principal variation), and that the snapshot is "
+        "unchanged, which proves every `make_move` was undone. `*WIDE` unpacks the "
+        "pair of numbers into the two arguments `alpha` and `beta`."
+    ),
+    ("test_upgrades.py", "test_a_repeated_position_is_a_draw"): (
+        "The game starts from the normal starting position, where nothing has "
+        "repeated, so the first assert expects False. The loop plays four moves "
+        "from their UCI text: the knights jump out (g1f3, g8f6) and back (f3g1, "
+        "f6g8). The board then looks exactly like the start, with White to move, so "
+        "its key is in the history twice and `is_draw_in_search` must say True."
+    ),
+    ("test_upgrades.py", "test_the_fifty_move_limit_is_a_draw"): (
+        "The FEN puts a king and rook against a lone king and sets the halfmove "
+        "clock, the fifth field, to 100. Nothing has repeated, so only the "
+        "fifty-move rule can make the assert pass."
+    ),
+    ("evaluation.py", "mating_bonus"): (
+        "The first loops walk the board once. They remember where each king stands "
+        "in the dict `kings` and add up the material of each side with "
+        "`PIECE_VALUES`, using the uppercase letter for a Black piece. `lead` is "
+        "White's material minus Black's, and `weaker` is the smaller of the two "
+        "totals. If the lead is under `MATING_MARGIN` (200) or the weaker side "
+        "still has more than `WEAK_SIDE_LIMIT` (600), the endgame is not yet a "
+        "mating race and the function returns 0. Otherwise the code picks the "
+        "winning and losing kings. `CENTER_DISTANCE` gives 3 for an edge row or "
+        "column and 0 for the middle, so `edge` grows as the losing king is pushed "
+        "toward the edge or a corner. `kings_apart` counts the king steps between "
+        "the two kings, and `7 - kings_apart` grows as the winning king closes in. "
+        "The bonus is positive when White is winning and negative when Black is."
+    ),
+    ("search.py", "search_later_move"): (
+        "This is the heart of principal variation search. The first call to "
+        "`pvs_search` uses a null window, `-alpha - 1` to `-alpha`, a window one "
+        "point wide. It costs little and answers one question: is this move better "
+        "than the best move so far? The minus signs flip the window and the score, "
+        "as in every negamax call. If the score lands strictly between `alpha` and "
+        "`beta`, the move surprised us by being better, so the code searches it "
+        "again with the full window, `-beta` to `-alpha`, to learn its exact score. "
+        "Most moves are not better, so most moves need only the cheap search."
+    ),
+    ("test_upgrades.py", "test_pvs_search_agrees_with_alpha_beta"): (
+        "The test runs the plain search, `alpha_beta_with_quiescence`, and the "
+        "color version's `pvs_search` on the Italian opening at depth 3. The "
+        "asserts check that both find the same score, that PVS returns a line of "
+        "moves, and that the state snapshot is unchanged, which proves the search "
+        "undid every move it made. `*WIDE` unpacks the pair of numbers into `alpha` "
+        "and `beta`."
+    ),
+    ("test_upgrades.py", "test_a_null_window_answers_only_better_or_not"): (
+        "First the test finds the exact score with the wide window. Then it tries "
+        "two null windows, one 50 points below the exact score and one 50 points "
+        "above. A null-window search does not promise the exact score, only the "
+        "right side of `alpha`: the assert checks that `score > alpha` agrees with "
+        "`exact > alpha` both times."
+    ),
+    ("search.py", "make_null_move"): (
+        "A null move is a pass: the side to move gives the turn away without moving "
+        "a piece. The function saves the en passant target first, because the undo "
+        'needs it back. `opponent` flips the turn from "w" to "b" or back. A pass '
+        "cancels any en passant capture, so the target becomes None. The new "
+        "position's key goes onto the history, so the repetition rules still see "
+        "every position the search visits, and the saved target is returned for "
+        "`undo_null_move`."
+    ),
+    ("search.py", "undo_null_move"): (
+        "The undo takes the three steps of `make_null_move` back in reverse order: "
+        "it removes the last history key, flips the turn back, and puts back the en "
+        "passant target that `make_null_move` returned."
+    ),
+    ("test_upgrades.py", "test_null_move_and_undo_restore_the_state"): (
+        "The test takes a snapshot of the Italian opening, makes a null move, and "
+        "checks that Black now has the turn. After `undo_null_move` the snapshot "
+        "must match exactly: same board, turn, en passant target, clocks, and "
+        "history."
+    ),
+    ("test_upgrades.py", "test_null_move_search_saves_work_and_keeps_the_state"): (
+        "Two `SearchInfo` records count positions: `plain` for ordinary alpha-beta "
+        "and `upgraded` for the null-move search, both at depth 4 on the Italian "
+        "opening. The asserts check that the upgraded search visits fewer "
+        "positions, that it returns a line of moves, and that the state snapshot is "
+        "unchanged afterward."
+    ),
+    ("search.py", "reduction"): (
+        "`index` is the move's place in the ordered list, counting from 0, so "
+        "`index >= LATE_MOVE_INDEX` (3) means the fourth move or later. `depth >= "
+        "3` keeps the reduction away from the last plies, where one ply matters "
+        "most. `quiet` is True for a move that captures nothing (`captured == "
+        "EMPTY`) and does not promote. The last line returns 1, meaning search this "
+        "move one ply shallower, only for a late, quiet move that does not give "
+        "check. Every other move returns 0 and gets the full depth."
+    ),
+    ("test_upgrades.py", "test_only_late_quiet_moves_are_reduced"): (
+        "The test builds one quiet pawn move, a2a3, and asks `reduction` about it "
+        "five times, changing one thing each time. At depth 4 and index 5 with no "
+        "capture and no check the answer is 1. Each other line breaks one "
+        "condition, an early index, a depth of 2, a captured pawn, or a check, and "
+        "expects 0."
+    ),
+    ("test_upgrades.py", "test_reduced_search_saves_work_and_keeps_the_state"): (
+        "Two `SearchInfo` records count positions: `plain` for ordinary alpha-beta "
+        "and `upgraded` for `reduced_search`, both at depth 4 on the Italian "
+        "opening. The asserts check that the reduced search visits fewer positions, "
+        "that it returns a line of moves, and that the state snapshot is unchanged "
+        "afterward."
+    ),
+    ("evaluation.py", "pawn_structure"): (
+        "The outer loop runs once for White (`P`, enemy `p`, sign +1) and once for "
+        "Black. First it counts the side's pawns on each file in the list `files`, "
+        "so `files[4]` is the number of pawns on the e-file. The second pass visits "
+        "each pawn. A file with more than one pawn means doubled pawns, and each "
+        "costs `DOUBLED_PAWN` (8). If both neighboring files hold no friendly pawn, "
+        "the pawn is isolated and costs `ISOLATED_PAWN` (20); a pawn on the a-file "
+        "or h-file has only one neighbor, so the missing side counts as 0. Then "
+        "`ahead` lists the rows in front of the pawn: smaller rows for White, "
+        "because row 0 is rank 8. If no enemy pawn stands on those rows on the "
+        "pawn's own file or a neighboring file, nothing can stop it, so it is "
+        "passed. `advanced` counts how far it has come from its starting row, and "
+        "`PASSED_PAWN[advanced]` gives a bigger bonus the closer it is to "
+        "promoting."
+    ),
+    ("opening_book.py", "load_book"): (
+        "The book is a dict from a position key to a list of moves. If the file is "
+        "missing, the function prints a note to stderr (not stdout, which belongs "
+        "to the UCI conversation) and returns the empty book, so Remus still plays. "
+        "Otherwise it reads the file line by line and skips blank lines and "
+        'comments. `read_defender` splits a line such as "Black: e4 e5 Bc4 Nc6" '
+        "into the side it teaches and its moves. Each line replays from the "
+        "starting position: `parse_san` turns text such as Nc6 into a Move, and a "
+        "move that is not legal skips the rest of the line. Before making each "
+        "move, the code stores it under the current position's key, but in a trap "
+        "line only for the defending side. `setdefault` makes a new empty list the "
+        "first time a position appears, and `if move not in moves_here` keeps a "
+        "move from appearing twice when two openings share it."
+    ),
+    ("opening_book.py", "book_move"): (
+        "`book.get` looks up the current position's key and returns its list of "
+        "moves, or None if the position is not in the book. `random.choice` picks "
+        "one of the moves, so Remus does not play the same opening every game. When "
+        "the list is missing, the function returns None and the search chooses the "
+        "move instead."
+    ),
+    ("search.py", "remember_killer"): (
+        "A killer is a quiet move that caused a cutoff, so the first line returns "
+        "at once for a capture or a promotion, which move ordering already puts "
+        "first. `info.killers` maps each ply to its list of killers; `setdefault` "
+        "makes an empty list the first time a ply appears. A new killer goes to the "
+        "front of the list with `insert(0, move)`, and `del killers[2:]` cuts the "
+        "list back to the two newest moves."
+    ),
+    ("move_ordering.py", "order_moves"): (
+        "Each move gets a score: `mvv_lva_score` gives a capture a high score and a "
+        "quiet move 0, and a quiet move that is one of this ply's killers gets "
+        "`KILLER_SCORE` (50) instead, which ranks it above the other quiet moves "
+        "but below every capture. The `while` loop finds where the move belongs in "
+        "the list kept sorted from the highest score down, stepping past every move "
+        "that scores at least as high so that ties keep the order the generator "
+        "gave them. `insert` puts the move and its score at that place. At the end, "
+        "the move named `first`, such as the best move of the last iteration, moves "
+        "to the very front."
+    ),
+    ("test_upgrades.py", "test_killers_keep_two_quiet_moves"): (
+        "The test takes the board of the starting position and records three quiet "
+        "moves as killers at ply 2: e2e4, then d2d4, then g1f3. Only two fit, the "
+        "newest first, so the list must read g1f3, d2d4. `move_to_uci` turns each "
+        "Move into text for the comparison."
+    ),
+    ("transposition_table.py", "store"): (
+        "`table.get(key)` returns what the table already holds for this position, "
+        "or None. The new result is saved when there is no old one, or when the new "
+        'search went at least as deep (`depth >= old["depth"]`), because a deeper '
+        "search is worth more. The entry is a small dict with the depth, the score, "
+        "the bound (EXACT, LOWER, or UPPER), and the best move."
+    ),
+    ("transposition_table.py", "probe"): (
+        "The function returns a score only when the stored result answers the "
+        "question this search asks. A missing entry, or one searched less deeply "
+        "than `depth`, returns None. An EXACT score always answers. A LOWER bound "
+        "means the true score is at least the stored score, so it answers only when "
+        "it reaches `beta`: that is already a cutoff. An UPPER bound means the true "
+        "score is at most the stored score, so it answers only when it is at or "
+        "below `alpha`: the move cannot improve on the best so far. Anything else "
+        "returns None, and the position is searched."
+    ),
+    ("test_upgrades.py", "test_transposition_table_bounds"): (
+        'The test fills an empty table by hand with three made-up positions, "a", '
+        '"b", and "c", one for each kind of bound. Each assert then asks one '
+        "question. Position a's exact 50 answers at depth 3 but not at depth 4, "
+        "which was never searched. Position b is at least 80: that settles a window "
+        "whose beta is 70 (a cutoff), but not one whose beta is 100. Position c is "
+        "at most -20, which cannot beat alpha 0. The last line checks that the best "
+        "move of position a was kept."
+    ),
+    ("python_caches", "remembered_perft"): (
+        "`(square, depth)` packs two values into one tuple, such as `((7, 6), 8)` "
+        "for 8 moves from g1. A tuple never changes, so Python accepts it as a dict "
+        "key, and one key holds both facts. `if key not in cache` asks whether this "
+        "question has been answered before. Only when it has not does the slow "
+        "`knight_perft` run, and its answer goes into `cache[key]`. The last line "
+        "returns the stored answer either way, so the second call with the same "
+        "square and depth skips the counting and returns at once."
+    ),
+    ("python_caches", "Part #2"): (
+        "`math.dist` measures the straight-line distance between two points. d4 is "
+        "(row 4, col 3) and g7 is (row 1, col 6): 3 rows and 3 columns apart, so "
+        "the distance is the square root of 3 x 3 + 3 x 3 = 18, about 4.243. The "
+        "f-string's `:.3f` prints three digits after the decimal point."
+    ),
+    ("python_caches", "Part #3"): (
+        "`random.seed(2016)` sets the starting point of Python's random numbers. "
+        "The code below rolls a die, seeds again with the same number, and rolls "
+        "again, so both rolls are the same and the comparison prints True. Without "
+        "the first seed the two rolls would match only about one time in six."
+    ),
+}
+
 CHANGE_NOTES = {
     ("board.py", "print_board"): "Prints the board one row at a time, with the rank "
     "number at the left of each row and the file letters along the bottom. Row 0 is "
@@ -2462,7 +2712,9 @@ DAY_GUIDES = {
                 ),
                 (
                     80,
-                    ("Every student pair shows its map to the teacher or the assistant."),
+                    (
+                        "Every student pair shows its map to the teacher or the assistant."
+                    ),
                 ),
             ],
             2: [

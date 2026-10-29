@@ -51,3 +51,27 @@ Every other function is finished. Change only these, and only below each docstri
 | `make_move.py` | `update_castling_rights()` | 24 | 4 | `test_special_moves.py::test_rook_capture_removes_the_right` |
 
 Lines to type in all: 4. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `update_castling_rights()` in `make_move.py`
+
+**Where:** lines 41 to 44 of `make_move.py`, inside `update_castling_rights()`, in place of the stub below the docstring. It is called by `make_move()` in `make_move.py`.
+
+```text
+24 | def update_castling_rights(rights: str, move: Move) -> str:
+     ...
+39 |         The rights after the move, such as "Qkq" after the h1 rook moves.
+40 |     """
+41 +     for square in (move.from_square, move.to_square):
+42 +         for letter in CASTLING_SQUARES.get(square, ""):
+43 +             rights = rights.replace(letter, "")
+44 +     return rights
+45 |
+46 |
+47 | def castling_rook_move(move: Move) -> tuple[Square, Square]:
+```

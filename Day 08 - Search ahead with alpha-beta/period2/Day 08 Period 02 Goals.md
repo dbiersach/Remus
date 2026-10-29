@@ -63,8 +63,95 @@ Every other function is finished. Change only these, and only below each docstri
 
 Lines to type in all: 16. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `alpha_beta()` in `search.py`
+
+**Where:** lines 226 to 241 of `search.py`, inside `alpha_beta()`, in place of the stub below the docstring. It is called by `main()` in `compare_search.py`.
+
+```text
+197 | def alpha_beta(
+      ...
+224 |         The same score negamax returns at this depth.
+225 |     """
+226 +     info.nodes += 1
+227 +     if depth == 0:
+228 +         return evaluate(state)
+229 +     moves = legal_moves(state)
+230 +     if not moves:
+231 +         return -(MATE_SCORE - ply) if in_check(state, state["turn"]) else 0
+232 +     for move in moves:
+233 +         undo = make_move(state, move)
+234 +         try:
+235 +             score = -alpha_beta(state, depth - 1, ply + 1, -beta, -alpha, info)
+236 +         finally:
+237 +             undo_move(state, undo)
+238 +         if score >= beta:
+239 +             return score  # Cutoff: the opponent will not allow this
+240 +         alpha = max(alpha, score)
+241 +     return alpha
+242 |
+243 |
+244 | def main():
+```
+
 ## What you edit in the lab
 
 Open `python_sorting.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 19. Check the work by running `python_sorting.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #1 - insert() Puts the Biggest Victim First
+
+```text
+26 |     victims = ["p", "r", "q", "n"]
+27 |     # Step past every piece worth at least as much, then insert the new piece there
+28 +     ordered = []
+29 +     for piece in victims:
+30 +         value = victim_value(piece)
+31 +         place = 0
+32 +         while place < len(ordered) and victim_value(ordered[place]) >= value:
+33 +             place += 1
+34 +         ordered.insert(place, piece)
+35 +     print(f"Victims, best first: {ordered}  (expected ['q', 'r', 'n', 'p'])")
+36 |
+37 |     print("Part #2 - Start the Best at Minus Infinity")
+```
+
+### Part #2 - Start the Best at Minus Infinity
+
+```text
+37 |     print("Part #2 - Start the Best at Minus Infinity")
+38 |     # Every real value beats minus infinity, so the first victim always becomes best
+39 +     best_value = -float("inf")
+40 |     best_piece = ""
+41 +     for piece in victims:
+42 +         if victim_value(piece) > best_value:
+43 +             best_value = victim_value(piece)
+44 +             best_piece = piece
+45 +     print(f"Best victim: {best_piece}, worth {best_value}  (expected q, worth 9)")
+46 |
+47 |     print("Part #3 - Time a perft Run")
+```
+
+### Part #3 - Time a perft Run
+
+```text
+46 |
+47 |     print("Part #3 - Time a perft Run")
+48 +     start = time.perf_counter()
+49 +     count = perft(new_game(), 3)
+50 +     elapsed = time.perf_counter() - start
+51 +     print(f"perft(3) = {count:,}  (expected 8,902)")
+52 +     print(f"Total run time (sec): {elapsed:.3f}")
+53 |
+54 |
+```

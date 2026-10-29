@@ -64,8 +64,84 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `board.py` | `print_board()` | 37 | 6 | `run_tests.py` |
-| `board.py` | `square_name()` | 51 | 1 | `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips` |
-| `board.py` | `parse_square()` | 72 | 5 | `test_board.py::test_e2_is_row_6_col_4`, `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips`, `test_board.py::test_bad_square_names_are_rejected`, `test_board.py::test_start_position_pieces` |
-| `board.py` | `piece_at()` | 96 | 2 | `test_board.py::test_start_position_pieces` |
+| `board.py` | `square_name()` | 56 | 1 | `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips` |
+| `board.py` | `parse_square()` | 75 | 5 | `test_board.py::test_e2_is_row_6_col_4`, `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips`, `test_board.py::test_bad_square_names_are_rejected`, `test_board.py::test_start_position_pieces` |
+| `board.py` | `piece_at()` | 101 | 2 | `test_board.py::test_start_position_pieces` |
 
 Lines to type in all: 14. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `print_board()` in `board.py`
+
+**Where:** lines 46 to 53 of `board.py`, inside `print_board()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+37 | def print_board(board: Board) -> None:
+     ...
+44 |         The board, row 0 first (rank 8).
+45 |     """
+46 +     for row in range(8):
+47 +         # Start the line with the rank number, then add a space and each square
+48 +         line = BOARD_RANKS[row]
+49 +         for col in range(8):
+50 +             line = line + " " + board[row][col]
+51 +         print(line)
+52 +     # Two spaces line up the file letters under the squares
+53 +     print("  a b c d e f g h")
+54 |
+55 |
+56 | def square_name(row: int, col: int) -> str:
+```
+
+### `square_name()` in `board.py`
+
+**Where:** lines 72 to 72 of `board.py`, inside `square_name()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+56 | def square_name(row: int, col: int) -> str:
+     ...
+70 |         The square name, such as "e2" for (6, 4).
+71 |     """
+72 +     return BOARD_FILES[col] + BOARD_RANKS[row]
+73 |
+74 |
+75 | def parse_square(name: str) -> Square:
+```
+
+### `parse_square()` in `board.py`
+
+**Where:** lines 94 to 98 of `board.py`, inside `parse_square()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+ 75 | def parse_square(name: str) -> Square:
+      ...
+ 92 |         If the name is not a square on the board, such as "i9".
+ 93 |     """
+ 94 +     if len(name) != 2 or name[0] not in BOARD_FILES or name[1] not in BOARD_RANKS:
+ 95 +         raise ValueError(f"Not a square: {name!r}")
+ 96 +     col = BOARD_FILES.index(name[0])
+ 97 +     row = BOARD_RANKS.index(name[1])
+ 98 +     return row, col
+ 99 |
+100 |
+101 | def piece_at(board: Board, square: Square) -> str:
+```
+
+### `piece_at()` in `board.py`
+
+**Where:** lines 103 to 104 of `board.py`, inside `piece_at()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+101 | def piece_at(board: Board, square: Square) -> str:
+102 |     """Return the piece on a (row, col) square, or EMPTY."""
+103 +     row, col = square
+104 +     return board[row][col]
+105 |
+106 |
+107 | def main():
+```

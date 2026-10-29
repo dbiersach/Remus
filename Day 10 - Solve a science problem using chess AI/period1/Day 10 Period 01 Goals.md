@@ -56,7 +56,74 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `hidden_peak.py` | `candidate_squares()` | 85 | 6 | `test_hidden_peak.py::test_greedy_ai_measures_where_it_looks_hot` |
-| `hidden_peak.py` | `score_candidate()` | 104 | 4 | `run_tests.py` |
-| `hidden_peak.py` | `choose_next_measurement()` | 132 | 9 | `test_hidden_peak.py::test_greedy_ai_measures_where_it_looks_hot`, `test_hidden_peak.py::test_greedy_ai_beats_random_guessing` |
+| `hidden_peak.py` | `score_candidate()` | 107 | 4 | `run_tests.py` |
+| `hidden_peak.py` | `choose_next_measurement()` | 136 | 9 | `test_hidden_peak.py::test_greedy_ai_measures_where_it_looks_hot`, `test_hidden_peak.py::test_greedy_ai_beats_random_guessing` |
 
 Lines to type in all: 19. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `candidate_squares()` in `hidden_peak.py`
+
+**Where:** lines 99 to 104 of `hidden_peak.py`, inside `candidate_squares()`, in place of the stub below the docstring. It is called by `random_strategy()` in `hidden_peak.py`, `expectimax_choice()` in `hidden_peak.py`.
+
+```text
+ 85 | def candidate_squares(readings: dict[tuple[int, int], int]) -> list[tuple[int, int]]:
+      ...
+ 97 |         The unmeasured squares, row by row.
+ 98 |     """
+ 99 +     squares = []
+100 +     for row in range(SIZE):
+101 +         for col in range(SIZE):
+102 +             if (row, col) not in readings:
+103 +                 squares.append((row, col))
+104 +     return squares
+105 |
+106 |
+107 | def score_candidate(
+```
+
+### `score_candidate()` in `hidden_peak.py`
+
+**Where:** lines 130 to 133 of `hidden_peak.py`, inside `score_candidate()`, in place of the stub below the docstring. It is called by `expectimax_choice()` in `hidden_peak.py`.
+
+```text
+107 | def score_candidate(
+      ...
+128 |         nearest reading (explore).
+129 |     """
+130 +     nearest = math.inf  # Farther than any real square
+131 +     for measured in readings:
+132 +         nearest = min(nearest, math.dist(square, measured))
+133 +     return predicted_value(square, readings) + explore_weight * nearest
+134 |
+135 |
+136 | def choose_next_measurement(
+```
+
+### `choose_next_measurement()` in `hidden_peak.py`
+
+**Where:** lines 140 to 148 of `hidden_peak.py`, inside `choose_next_measurement()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+136 | def choose_next_measurement(
+      ...
+138 | ) -> tuple[int, int]:
+139 |     """Return the unmeasured square with the highest score, like greedy_move()."""
+140 +     candidates = candidate_squares(readings)
+141 +     best_square = candidates[0]
+142 +     best_score = score_candidate(best_square, readings, explore_weight)
+143 +     for square in candidates:
+144 +         score = score_candidate(square, readings, explore_weight)
+145 +         if score > best_score:
+146 +             best_square = square
+147 +             best_score = score
+148 +     return best_square
+149 |
+150 |
+151 | def random_strategy(readings: dict[tuple[int, int], int]) -> tuple[int, int]:
+```

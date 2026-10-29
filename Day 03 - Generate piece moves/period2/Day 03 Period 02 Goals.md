@@ -53,3 +53,22 @@ Every other function is finished. Change only these, and only below each docstri
 | `move_generation.py` | `king_moves()` | 62 | 1 | `test_move_generation.py::test_king_in_the_corner_has_three_moves` |
 
 Lines to type in all: 1. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `king_moves()` in `move_generation.py`
+
+**Where:** lines 64 to 64 of `move_generation.py`, inside `king_moves()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+62 | def king_moves(board: Board, square: Square, color: str) -> list[Move]:
+63 |     """Return the one-step moves of a king on the square (castling comes later)."""
+64 +     return jump_moves(board, square, color, KING_STEPS)
+65 |
+66 |
+67 | def main():
+```

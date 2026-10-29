@@ -69,6 +69,71 @@ Every other function is finished. Change only these, and only below each docstri
 | --- | --- | --- | --- | --- |
 | `search.py` | `reduction()` | 397 | 3 | `test_upgrades.py::test_only_late_quiet_moves_are_reduced` |
 | `test_upgrades.py` | `test_only_late_quiet_moves_are_reduced()` | 22 | 6 | `run_tests.py` |
-| `test_upgrades.py` | `test_reduced_search_saves_work_and_keeps_the_state()` | 31 | 9 | `run_tests.py` |
+| `test_upgrades.py` | `test_reduced_search_saves_work_and_keeps_the_state()` | 32 | 9 | `run_tests.py` |
 
 Lines to type in all: 18. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `reduction()` in `search.py`
+
+**Where:** lines 423 to 425 of `search.py`, inside `reduction()`, in place of the stub below the docstring. It is called by `reduced_search()` in `search.py`.
+
+```text
+397 | def reduction(
+      ...
+421 |         quiet move rarely turns out best. Otherwise 0.
+422 |     """
+423 +     late = index >= LATE_MOVE_INDEX and depth >= 3
+424 +     quiet = captured == EMPTY and move.promotion is None
+425 +     return 1 if late and quiet and not gives_check else 0
+426 |
+427 |
+428 | def reduced_search(
+```
+
+**How it works:** `index` is the move's place in the ordered list, counting from 0, so `index >= LATE_MOVE_INDEX` (3) means the fourth move or later. `depth >= 3` keeps the reduction away from the last plies, where one ply matters most. `quiet` is True for a move that captures nothing (`captured == EMPTY`) and does not promote. The last line returns 1, meaning search this move one ply shallower, only for a late, quiet move that does not give check. Every other move returns 0 and gets the full depth.
+
+### `test_only_late_quiet_moves_are_reduced()` in `test_upgrades.py`
+
+**Where:** lines 24 to 29 of `test_upgrades.py`, inside `test_only_late_quiet_moves_are_reduced()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+22 | def test_only_late_quiet_moves_are_reduced() -> None:
+23 |     """Expected: only a late, quiet move with no check and 3 plies to go loses 1 ply."""
+24 +     quiet = Move((6, 0), (5, 0))
+25 +     assert reduction(4, 5, quiet, EMPTY, False) == 1
+26 +     assert reduction(4, 1, quiet, EMPTY, False) == 0  # Early in the list
+27 +     assert reduction(2, 5, quiet, EMPTY, False) == 0  # Too close to the leaves
+28 +     assert reduction(4, 5, quiet, "p", False) == 0  # A capture
+29 +     assert reduction(4, 5, quiet, EMPTY, True) == 0  # A check
+30 |
+31 |
+32 | def test_reduced_search_saves_work_and_keeps_the_state() -> None:
+```
+
+**How it works:** The test builds one quiet pawn move, a2a3, and asks `reduction` about it five times, changing one thing each time. At depth 4 and index 5 with no capture and no check the answer is 1. Each other line breaks one condition, an early index, a depth of 2, a captured pawn, or a check, and expects 0.
+
+### `test_reduced_search_saves_work_and_keeps_the_state()` in `test_upgrades.py`
+
+**Where:** lines 34 to 42 of `test_upgrades.py`, inside `test_reduced_search_saves_work_and_keeps_the_state()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+32 | def test_reduced_search_saves_work_and_keeps_the_state() -> None:
+33 |     """The upgraded search visits fewer positions than plain alpha-beta at depth 4."""
+34 +     state = state_from_fen(ITALIAN)
+35 +     before = state_snapshot(state)
+36 +     plain = SearchInfo()
+37 +     upgraded = SearchInfo()
+38 +     alpha_beta_with_quiescence(state, 4, 0, *WIDE, plain)
+39 +     _, pv = reduced_search(state, 4, 0, *WIDE, upgraded)
+40 +     assert upgraded.nodes < plain.nodes
+41 +     assert pv
+42 +     assert state_snapshot(state) == before
+```
+
+**How it works:** Two `SearchInfo` records count positions: `plain` for ordinary alpha-beta and `upgraded` for `reduced_search`, both at depth 4 on the Italian opening. The asserts check that the reduced search visits fewer positions, that it returns a line of moves, and that the state snapshot is unchanged afterward.

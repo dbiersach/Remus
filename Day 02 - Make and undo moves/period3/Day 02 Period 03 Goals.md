@@ -65,8 +65,82 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `game_state.py` | `is_white()` | 38 | 1 | `run_tests.py` |
-| `game_state.py` | `color_of()` | 45 | 5 | `test_make_move.py::test_colors` |
+| `game_state.py` | `color_of()` | 43 | 5 | `test_make_move.py::test_colors` |
 | `moves.py` | `move_to_uci()` | 28 | 4 | `test_make_move.py::test_uci_round_trip` |
-| `moves.py` | `move_from_uci()` | 47 | 6 | `test_make_move.py::test_uci_round_trip`, `test_make_move.py::test_move_record_holds_squares` |
+| `moves.py` | `move_from_uci()` | 48 | 6 | `test_make_move.py::test_uci_round_trip`, `test_make_move.py::test_move_record_holds_squares` |
 
 Lines to type in all: 16. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `is_white()` in `game_state.py`
+
+**Where:** lines 40 to 40 of `game_state.py`, inside `is_white()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+38 | def is_white(piece: str) -> bool:
+39 |     """Return True if the piece is White (an uppercase letter)."""
+40 +     return piece.isupper()
+41 |
+42 |
+43 | def color_of(piece: str) -> str | None:
+```
+
+### `color_of()` in `game_state.py`
+
+**Where:** lines 45 to 49 of `game_state.py`, inside `color_of()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+43 | def color_of(piece: str) -> str | None:
+44 |     """Return "w" or "b" for a piece, or None for an empty square."""
+45 +     if piece == EMPTY:
+46 +         return None
+47 +     if is_white(piece):
+48 +         return WHITE
+49 +     return BLACK
+50 |
+51 |
+52 | def opponent(color: str) -> str:
+```
+
+### `move_to_uci()` in `moves.py`
+
+**Where:** lines 42 to 45 of `moves.py`, inside `move_to_uci()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+28 | def move_to_uci(move: Move) -> str:
+     ...
+40 |         Text such as "e2e4", or "e7e8q" for a promotion (always lowercase).
+41 |     """
+42 +     text = square_name(*move.from_square) + square_name(*move.to_square)
+43 +     if move.promotion is not None:
+44 +         text += move.promotion.lower()
+45 +     return text
+46 |
+47 |
+48 | def move_from_uci(text: str, white_to_move: bool = True) -> Move:
+```
+
+### `move_from_uci()` in `moves.py`
+
+**Where:** lines 64 to 69 of `moves.py`, inside `move_from_uci()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+48 | def move_from_uci(text: str, white_to_move: bool = True) -> Move:
+     ...
+62 |         The move the text describes.
+63 |     """
+64 +     from_square = parse_square(text[0:2])
+65 +     to_square = parse_square(text[2:4])
+66 +     promotion = None
+67 +     if len(text) == 5:
+68 +         promotion = text[4].upper() if white_to_move else text[4].lower()
+69 +     return Move(from_square, to_square, promotion)
+70 |
+71 |
+72 | def main():
+```

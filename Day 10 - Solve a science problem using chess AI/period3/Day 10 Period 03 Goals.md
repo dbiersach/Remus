@@ -78,3 +78,36 @@ Every other function is finished. Change only these, and only below each docstri
 | `phase_hunt.py` | `search()` | 187 | 13 | `test_phase_hunt.py::test_search_leaves_the_phases_as_it_found_them` |
 
 Lines to type in all: 13. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `search()` in `phase_hunt.py`
+
+**Where:** lines 213 to 225 of `phase_hunt.py`, inside `search()`, in place of the stub below the docstring. It is called by `run_search()` in `phase_hunt.py`.
+
+```text
+187 | def search(
+      ...
+211 |         to hunt.nodes for each set it scores.
+212 |     """
+213 +     hunt.nodes += 1
+214 +     here = score(phases, measured)
+215 +     if here > hunt.score:
+216 +         hunt.score = here
+217 +         hunt.sets = [list(phases)]  # A copy, because phases keeps changing
+218 +     elif here == hunt.score:
+219 +         hunt.sets.append(list(phases))
+220 +     if depth == 0:
+221 +         return
+222 +     for index in range(start, len(PHASE_NAMES)):
+223 +         phases.append(PHASE_NAMES[index])  # Make: add one phase
+224 +         search(phases, measured, depth - 1, index + 1, hunt)
+225 +         phases.pop()  # Undo: take the phase back out
+226 |
+227 |
+228 | def run_search(measured: list[float]) -> Hunt:
+```

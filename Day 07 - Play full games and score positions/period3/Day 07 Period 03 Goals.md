@@ -59,6 +59,49 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `search.py` | `random_move()` | 25 | 1 | `run_tests.py` |
-| `search.py` | `greedy_move()` | 40 | 10 | `test_game.py::test_greedy_takes_the_queen` |
+| `search.py` | `greedy_move()` | 38 | 10 | `test_game.py::test_greedy_takes_the_queen` |
 
 Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `random_move()` in `search.py`
+
+**Where:** lines 27 to 27 of `search.py`, inside `random_move()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+25 | def random_move(state: dict) -> Move:
+26 |     """Return a random legal move."""
+27 +     return random.choice(legal_moves(state))
+28 |
+29 |
+30 | def capture_value(state: dict, move: Move) -> int:
+```
+
+### `greedy_move()` in `search.py`
+
+**Where:** lines 53 to 62 of `search.py`, inside `greedy_move()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`.
+
+```text
+38 | def greedy_move(state: dict) -> Move:
+     ...
+51 |         a random legal move.
+52 |     """
+53 +     moves = legal_moves(state)
+54 +     random.shuffle(moves)  # Break ties between equal captures at random
+55 +     best_move = moves[0]
+56 +     best_value = capture_value(state, best_move)
+57 +     for move in moves:
+58 +         value = capture_value(state, move)
+59 +         if value > best_value:
+60 +             best_move = move
+61 +             best_value = value
+62 +     return best_move
+63 |
+64 |
+65 | def main():
+```

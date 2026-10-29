@@ -48,3 +48,24 @@ Every other function is finished. Change only these, and only below each docstri
 | `make_move.py` | `en_passant_victim_square()` | 48 | 1 | `run_tests.py` |
 
 Lines to type in all: 1. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `en_passant_victim_square()` in `make_move.py`
+
+**Where:** lines 54 to 54 of `make_move.py`, inside `en_passant_victim_square()`, in place of the stub below the docstring. It is called by `make_move()` in `make_move.py`.
+
+```text
+48 | def en_passant_victim_square(move: Move) -> Square:
+     ...
+52 |     starts from, in the column it lands in.
+53 |     """
+54 +     return move.from_square[0], move.to_square[1]
+55 |
+56 |
+57 | def castling_rook_move(move: Move) -> tuple[Square, Square]:
+```

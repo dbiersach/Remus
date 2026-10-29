@@ -47,3 +47,38 @@ Every other function is finished. Change only these, and only below each docstri
 | `search.py` | `quiescence()` | 271 | 15 | `test_search.py::test_quiescence_stands_pat_or_takes_a_free_pawn` |
 
 Lines to type in all: 15. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `quiescence()` in `search.py`
+
+**Where:** lines 296 to 310 of `search.py`, inside `quiescence()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+271 | def quiescence(state: dict, alpha: int, beta: int, info: SearchInfo) -> int:
+      ...
+294 |         The score for the side to move.
+295 |     """
+296 +     info.nodes += 1
+297 +     stand_pat = evaluate(state)
+298 +     if stand_pat >= beta:
+299 +         return stand_pat
+300 +     alpha = max(alpha, stand_pat)
+301 +     for move in capture_moves(state):
+302 +         undo = make_move(state, move)
+303 +         try:
+304 +             score = -quiescence(state, -beta, -alpha, info)
+305 +         finally:
+306 +             undo_move(state, undo)
+307 +         if score >= beta:
+308 +             return score
+309 +         alpha = max(alpha, score)
+310 +     return alpha
+311 |
+312 |
+313 | def main():
+```

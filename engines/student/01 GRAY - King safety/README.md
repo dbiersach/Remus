@@ -62,3 +62,50 @@ Every other function is finished. Change only these, and only below each docstri
 | `evaluation.py` | `king_safety()` | 126 | 24 | `test_upgrades.py::test_king_safety_rewards_the_pawn_shield` |
 
 Lines to type in all: 24. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `king_safety()` in `evaluation.py`
+
+**Where:** lines 143 to 167 of `evaluation.py`, inside `king_safety()`, in place of the stub below the docstring. It is called by `evaluate()` in `evaluation.py`, `explain_evaluation()` in `evaluation.py`.
+
+```text
+126 | def king_safety(board: Board) -> int:
+      ...
+141 |         queens are gone the king is safe enough to walk forward, so the term is 0.
+142 |     """
+143 +     score = 0
+144 +     # White's pawns stand in front of its king at smaller rows, since row 0 is rank 8
+145 +     for king, pawn, enemy_queen, forward, sign in (
+146 +         ("K", "P", "q", -1, 1),
+147 +         ("k", "p", "Q", 1, -1),
+148 +     ):
+149 +         queen_on_board = False
+150 +         for row in board:
+151 +             if enemy_queen in row:
+152 +                 queen_on_board = True
+153 +         if not queen_on_board:
+154 +             continue
+155 +         for row in range(8):
+156 +             for col in range(8):
+157 +                 if board[row][col] != king:
+158 +                     continue
+159 +                 for file in (col - 1, col, col + 1):
+160 +                     if not 0 <= file < 8:
+161 +                         continue
+162 +                     for step in (1, 2):
+163 +                         ahead = row + forward * step
+164 +                         if 0 <= ahead < 8 and board[ahead][file] == pawn:
+165 +                             score += sign * SHIELD_PAWN
+166 +                             break
+167 +     return score
+168 |
+169 |
+170 | def evaluate(state: dict) -> int:
+```
+
+**How it works:** The loop runs twice, once for each side. The first pass looks at White's king `K`, its pawns `P`, and Black's queen `q`. White's pawns stand in front of its king at smaller row numbers (row 0 is rank 8), so `forward` is -1, and `sign` is +1 because points for White are positive. The second pass swaps all four for Black. The first small loop sets `queen_on_board` to True if the enemy queen is anywhere on the board; with no enemy queen, `continue` skips that side, since a king is safe enough without a shield. Next the two loops over `row` and `col` find the king. For the king's own file and the files on each side (`col - 1` to `col + 1`), the code looks one and then two squares ahead. The first friendly pawn it finds adds `SHIELD_PAWN` (15) and `break` stops, so each file counts at most once. Example: a White king on g1 with pawns on f2, g2, and h2 earns 3 x 15 = 45.
