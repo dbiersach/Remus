@@ -12,7 +12,7 @@ Black, on a 10 minute clock. The script then finds each version's Elo rating the
 way estimate_elo.py does, adds every game to misc/games/remus_games.pgn, and
 prints the table that misc/docs/engines/engines_elo.md reports.
 
-With --niram-gold, Niram, the Rust copy of Remus-GOLD that chooses the same
+With --niram, Niram, the Rust copy of Remus-GOLD that chooses the same
 moves about 50 times faster, plays too, at 2000, 2200, 2400, and 2600. Build it
 first with "cargo build --release" inside its folder. Its games are rated apart
 from the Remus games.
@@ -27,7 +27,7 @@ keep --workers at or below the number of physical cores.
 
 Usage:
     uv run misc/scripts/version_elo.py --workers 20         all 12 versions, 576 games
-    uv run misc/scripts/version_elo.py --niram-gold         Niram too, 48 more
+    uv run misc/scripts/version_elo.py --niram              Niram too, 48 more
     uv run misc/scripts/version_elo.py --colors WHITE GOLD  only some versions
     uv run misc/scripts/version_elo.py --levels 1800 2000   other Stockfish strengths
     uv run misc/scripts/version_elo.py --games 2            fewer games per strength
@@ -68,10 +68,10 @@ for folder in Path(__file__).parents:
 # Every game any script plays goes into one file
 GAMES_PATH = REPOSITORY / "misc" / "games" / "remus_games.pgn"
 # Niram's program, which cargo builds inside engines/Niram
-NIRAM_GOLD = ENGINES / "Niram"
-NIRAM_GOLD_PROGRAM = NIRAM_GOLD / "target" / "release" / "niram"
+NIRAM_FOLDER = ENGINES / "Niram"
+NIRAM_PROGRAM = NIRAM_FOLDER / "target" / "release" / "niram"
 if sys.platform == "win32":
-    NIRAM_GOLD_PROGRAM = NIRAM_GOLD_PROGRAM.with_suffix(".exe")
+    NIRAM_PROGRAM = NIRAM_PROGRAM.with_suffix(".exe")
 LUCAS_CHESS_ENGINES = (
     Path.home() / "AppData" / "Local" / "Programs" / "LucasChessR" / "bin" / "OS"
 )  # Where Lucas Chess keeps the Stockfish it installs on Windows
@@ -258,6 +258,13 @@ def play_game(player: Player, stockfish_path: str, elo: int, number: int):
     return game
 
 
+def player_name(name: str) -> str:
+    """Return a player's name, reading the older "Niram-GOLD" in the games file as "Niram"."""
+    if name == "Niram-GOLD":
+        return "Niram"
+    return name
+
+
 def read_results(engine: str = "Remus") -> dict[str, dict[int, list[float]]]:
     """
     Return every saved game of this script as points by version and level.
@@ -278,7 +285,8 @@ def read_results(engine: str = "Remus") -> dict[str, dict[int, list[float]]]:
                 name, remus_points = headers["White"], white_points
             else:
                 name, remus_points = headers["Black"], 1 - white_points
-            if not name.startswith(engine + "-"):
+            name = player_name(name)
+            if engine_of(name) != engine:
                 continue
             elo = int(headers["Round"].split(".")[0])
             results.setdefault(name, {}).setdefault(elo, []).append(remus_points)
@@ -296,12 +304,12 @@ def played_games() -> set[tuple[str, str]]:
                 remus = headers["White"]
                 if remus.startswith("Stockfish"):
                     remus = headers["Black"]
-                played.add((remus, headers.get("Round", "")))
+                played.add((player_name(remus), headers.get("Round", "")))
     return played
 
 
 def engine_of(name: str) -> str:
-    """Return "Remus" or "Niram", the engine part of a name like "Niram-GOLD"."""
+    """Return "Remus" or "Niram", the engine part of a name like "Remus-RED"."""
     return name.split("-")[0]
 
 
@@ -402,7 +410,7 @@ def main():
     )
     parser.add_argument("--stockfish", default=None, help="path to Stockfish")
     parser.add_argument("--report-only", action="store_true", help="skip the games")
-    parser.add_argument("--niram-gold", action="store_true", help="play Niram too")
+    parser.add_argument("--niram", action="store_true", help="play Niram too")
     parser.add_argument(
         "--levels", type=int, nargs="+", help="Stockfish strengths, like 1800 2000"
     )
@@ -421,11 +429,10 @@ def main():
     for player in all_players():
         if not wanted or player[0].split("-")[1] in wanted:
             players.append(player)
-    if options.niram_gold:
-        if not options.report_only and not NIRAM_GOLD_PROGRAM.exists():
-            sys.exit(f"No {NIRAM_GOLD_PROGRAM}: run 'cargo build --release' first")
-        # The games file names Niram "Niram-GOLD", so its saved games still count
-        players.append(("Niram-GOLD", NIRAM_GOLD_PROGRAM))
+    if options.niram:
+        if not options.report_only and not NIRAM_PROGRAM.exists():
+            sys.exit(f"No {NIRAM_PROGRAM}: run 'cargo build --release' first")
+        players.append(("Niram", NIRAM_PROGRAM))
     if not options.report_only:
         stockfish_path = options.stockfish or find_stockfish()
         print(f"Stockfish: {stockfish_path}")
