@@ -427,7 +427,7 @@ moves" milestone.
 - **P2. Python lab 12 and the color versions.** The lab, `python_caches.py`,
   covers dicts as caches and tuples as keys (7 typed lines, so an enhancement of 30 lines
   stays within the limit). Then each of the 10 student pairs takes one color version from
-  `period2/student/engines`: Remus-WHITE plus one enhancement, with the student pair's function stubbed (at
+  `engines/student` at the top of the Remus folder: Remus-WHITE plus one enhancement, with the student pair's function stubbed (at
   most 30 typed lines). Colors replace numbers so no color version sounds better than
   another. The color versions are described in [remus_versions.md](../engines/remus_versions.md).
 
@@ -451,7 +451,7 @@ moves" milestone.
   what its enhancement should change, and how the class will see it.
 - **P4. Color battles.** Each student pair copies its engine folder onto its USB stick. In
   each of two rounds five student pairs host and five visit: the visitors copy their folder
-  over the folder of the same engine color in the host laptop's `period2/student/engines` folder, and the host
+  over the folder of the same engine color in the host laptop's `engines/student` folder, and the host
   opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the
   visitor's engine color, and presses Run. The two engine colors play twice at 10 minutes a side, once
   with each piece color, and each student pair writes the score on the board. The class reads the board and
@@ -555,8 +555,8 @@ The full description of each script is in `misc/docs/code/`.
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
 | `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
 | `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build enhanced engines` | `play_battle.py` in each color version folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the color versions live in `period2/instructor/engines` |
-| `Day 10 - Solve a science problem using chess AI` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`. The Day 10 engine is Remus-GOLD in the teacher's Day 9 `period2/instructor/engines/Remus-GOLD`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
+| `Day 09 - Add the clock and build enhanced engines` | `play_battle.py` in each color version folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the color versions live in the top `engines/` folder |
+| `Day 10 - Solve a science problem using chess AI` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`. The Day 10 engine is Remus-GOLD in the teacher's `engines/instructor/11 GOLD - All enhancements`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
 
 Outside the Day folders:
 
@@ -566,7 +566,7 @@ Outside the Day folders:
 | `misc/scripts/` | The course designer's tools, which no student or teacher needs in class: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`, `version_elo.py`, `remus_benchmark.py`, `engine_parity.py`, and `make_phase_hunt_figures.py` |
 | `misc/scripts/run_all_tests.py` | Runs pytest on each period's `instructor/` folder in turn |
 | `misc/scripts/make_period_folders.py` | Builds the `instructor/` folders of `period1` to `period3` of each Day from `period4` |
-| `misc/scripts/make_version_folders.py` | Builds the ten color version folders in Day 9 `period2/instructor/engines` from the Day 9 `period1` code and Remus-GOLD |
+| `misc/scripts/make_version_folders.py` | Copies Remus-WHITE and builds the ten color version folders in `engines/instructor` from the Day 9 `period1` code and Remus-GOLD |
 | `student/` in each period, `misc/scripts/make_student_folders.py` | The student copy of every period, with that period's student functions as stubs, and the script that builds it |
 | `misc/docs/` | `course/` (this plan, the roadmap, the slide plan, the Lucas Chess guide, and the two briefing PDFs), `code/` (the program overview and the script pages), and `engines/` (the Remus versions and their ratings) |
 | `<skill>.py` in the student period folder, `<skill>_instructor.py` in the instructor one | Python skills labs: student file with blanks, instructor file with answers, in the period of their lab (`period_guides.LABS` lists the 16 lab and demo periods) |

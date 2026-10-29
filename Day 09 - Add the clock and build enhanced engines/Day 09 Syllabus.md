@@ -41,7 +41,7 @@ By 4:30, each student pair can:
 | --- | --- |
 | 10:30 to 10:50 | Student pairs work through `python_caches.py`: a dict remembers answers, `math.dist()`, and `random.seed()`. |
 | 10:50 to 11:00 | Slides: the ten color versions. Each is Remus-WHITE plus one enhancement, such as RED (transposition table) or BLUE (killer moves). Colors name the color versions so that no color version sounds better than another. |
-| 11:00 to 12:00 | Each student pair opens its color version in `period2/student/engines`, reads the version README, and writes the color version's stubbed code. |
+| 11:00 to 12:00 | Each student pair opens its color version in `engines/student`, reads the version README, and writes the color version's stubbed code. |
 
 [`Day 09 Period 02 Goals.md`](<period2/Day 09 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
@@ -49,7 +49,7 @@ By 4:30, each student pair can:
 
 | Time | Activity |
 | --- | --- |
-| 1:00 to 1:40 | Student pairs finish their color version code, then open `run_tests.py` in their engine folder in `period2/student/engines` and press Run until every test passes. The table above links each engine folder. |
+| 1:00 to 1:40 | Student pairs finish their engine enhancement, then open `run_tests.py` in their engine folder in `engines/student` and press Run until every test passes. The table above links each engine folder. |
 | 1:40 to 2:10 | Each student pair opens `smoke_test.py` in its engine folder and presses Run in VS Code: one 2-minute game against Remus-WHITE, which checks only that the engine plays legal moves to the end. |
 | 2:10 to 2:30 | Each student pair writes one sentence on the board: what its enhancement should change, and how the class will see it. |
 
@@ -59,8 +59,8 @@ By 4:30, each student pair can:
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:10 | Slides: how a battle works. Each student pair copies its own color folder from `period2/student/engines` onto its USB stick. The teacher posts the pairings for two rounds; in each round five student pairs host and five visit. |
-| 3:10 to 3:40 | Round 1. The visiting student pair drags its engine folder from the USB stick into the host laptop's `period2/student/engines` folder and replaces the folder of the same name. The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the visitor's engine color, and presses Run in VS Code. Two 10-minute games run side by side, one with each piece color. Each student pair writes the score on the board. |
+| 3:00 to 3:10 | Slides: how a battle works. Each student pair copies its finished engine folder, such as `engines/student/10 RED - Transposition table`, onto its USB stick. The teacher posts the pairings for two rounds; in each round five student pairs host and five visit. |
+| 3:10 to 3:40 | Round 1. The visiting student pair pastes its engine folder into the same path on the host laptop, `engines/student`, and replaces the folder of the same name. The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the visitor's engine color, and presses Run in VS Code. Two 10-minute games run side by side, one with each piece color. Each student pair writes the score on the board. |
 | 3:40 to 3:45 | Round 2: the student pairs that visited now host, against new opponents. |
 | 3:45 to 4:10 | While the round 2 games run, each student pair turns its round 1 result into an Elo gap with a margin of error in `demo_results.py`, then tries its engine color's league games. |
 | 4:10 to 4:25 | The class reads the board: which engine colors won, and why two games prove little. The teacher shows the league table, 110 games for each engine color, and compares. |

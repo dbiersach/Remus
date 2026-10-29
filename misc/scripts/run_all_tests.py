@@ -19,10 +19,8 @@ def main():
     for folder in sorted(ROOT.glob("Day */period*/instructor")):
         if list(folder.glob("test_*.py")):
             folders.append(folder)  # Periods before any Remus code have no tests
-    day_9 = next(ROOT.glob("Day 09 - *"))
-    engines = day_9 / "period2" / "instructor" / "engines"
-    folders += sorted(engines.glob("* - *"))
-    folders.append(engines / "Remus-GOLD")
+    # engines/instructor holds Remus-WHITE, the ten color versions, and Remus-GOLD
+    folders += sorted((ROOT / "engines" / "instructor").glob("* - *"))
     folders.append(ROOT / "misc" / "scripts")  # test_reference_tools.py
     failed = []
     for folder in folders:

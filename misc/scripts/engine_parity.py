@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """engine_parity.py
 
-Check that Niram-GOLD, the Rust copy of Remus-GOLD, thinks exactly like its Remus
+Check that Niram, the Rust copy of Remus-GOLD, thinks exactly like its Remus
 twin. For each test position, the script compares what the two engines see and
 choose:
 
@@ -43,12 +43,10 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/scripts/
-DAY_9 = next(ROOT.glob("Day 09 - *"))
-ENGINES_FOLDER = DAY_9 / "period2" / "instructor" / "engines"  # The Remus versions
-GOLD_FOLDER = (
-    ENGINES_FOLDER / "Remus-GOLD"
-)  # The finished Remus, with all ten enhancements
-NIRAM = ENGINES_FOLDER / "Niram-GOLD"  # Remus-GOLD rewritten in Rust
+ENGINES_FOLDER = ROOT / "engines" / "instructor"  # The Remus versions
+# The finished Remus, with all ten enhancements
+GOLD_FOLDER = ENGINES_FOLDER / "11 GOLD - All enhancements"
+NIRAM = ROOT / "engines" / "Niram"  # Remus-GOLD rewritten in Rust
 REPORT_PATH = ROOT / "misc" / "docs" / "engines" / "remus-niram parity.md"
 DEFAULT_NODES = 25_000  # Remus searches this many positions in about 3 to 8 seconds
 PARITY_MAX_DEPTH = 12  # The deepest search Niram's parity command asks for
@@ -255,13 +253,13 @@ def version_folders() -> list[Path]:
 
 
 def color_of(folder: Path) -> str:
-    """Return the color in a folder name: "Remus-GOLD" gives "GOLD"."""
-    return folder.name.split("-")[-1]
+    """Return the engine color in a folder name: "11 GOLD - All enhancements" gives "GOLD"."""
+    return folder.name.split(" - ")[0].split()[-1]
 
 
 def niram_program(color: str) -> Path:
-    """Return the Niram program of a color, such as Niram-GOLD/target/release/niram-gold."""
-    name = "niram-" + color.lower()
+    """Return the Niram program, Niram/target/release/niram; Remus-GOLD is its only color."""
+    name = "niram"
     if sys.platform == "win32":
         name += ".exe"
     return NIRAM / "target" / "release" / name
@@ -502,7 +500,7 @@ def write_report(
     colors = [color_of(folder) for folder in folders]
     text = "# Engine parity: Remus and Niram\n\n"
     text += (
-        "`misc/scripts/engine_parity.py` checks that Niram-GOLD thinks exactly like "
+        "`misc/scripts/engine_parity.py` checks that Niram thinks exactly like "
         "Remus-GOLD. For every position below, both engines "
         "report the position key, the version's evaluation, the legal moves in "
         "generation order and in search order, the book moves, and a search with no "
@@ -512,7 +510,7 @@ def write_report(
         "in any field counts as a mismatch.\n\n"
     )
     text += (
-        f"Last run: {date.today().isoformat()}, Remus-GOLD and Niram-GOLD, "
+        f"Last run: {date.today().isoformat()}, Remus-GOLD and Niram, "
         f"{len(CASES)} positions, {len(colors) * len(CASES)} searches, "
         f"{len(mismatches)} mismatches, {elapsed / 60:.1f} minutes on "
         f"{arguments.workers} cores.\n\n"
@@ -542,7 +540,7 @@ def write_report(
         )
     text += "\n## Opening book\n\n"
     text += (
-        "Niram reads `Niram-GOLD/opening_book.txt`; the check compares every position "
+        "Niram reads `engines/Niram/opening_book.txt`; the check compares every position "
         "and move of its book, in order, with the book Remus-GOLD loads.\n\n"
     )
     text += "| Version | Positions | Moves | Same as Niram's book | Same file |\n"

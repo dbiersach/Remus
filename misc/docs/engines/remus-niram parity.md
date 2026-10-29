@@ -1,8 +1,8 @@
 # Engine parity: Remus and Niram
 
-`misc/scripts/engine_parity.py` checks that Niram-GOLD thinks exactly like Remus-GOLD. For every position below, both engines report the position key, the version's evaluation, the legal moves in generation order and in search order, the book moves, and a search with no clock: each depth's score, node count, and principal variation, and the best move. Niram picks the depth, the deepest search that visits at most 500,000 positions, and Remus repeats that search. Any difference in any field counts as a mismatch.
+`misc/scripts/engine_parity.py` checks that Niram thinks exactly like Remus-GOLD. For every position below, both engines report the position key, the version's evaluation, the legal moves in generation order and in search order, the book moves, and a search with no clock: each depth's score, node count, and principal variation, and the best move. Niram picks the depth, the deepest search that visits at most 500,000 positions, and Remus repeats that search. Any difference in any field counts as a mismatch.
 
-Last run: 2026-10-29, Remus-GOLD and Niram-GOLD, 49 positions, 49 searches, 0 mismatches, 8.6 minutes on 4 cores.
+Last run: 2026-10-29, Remus-GOLD and Niram, 49 positions, 49 searches, 0 mismatches, 8.6 minutes on 4 cores.
 
 Run it again with `uv run misc/scripts/engine_parity.py --nodes 500000` from the repository folder.
 
@@ -14,7 +14,7 @@ Run it again with `uv run misc/scripts/engine_parity.py --nodes 500000` from the
 
 ## Opening book
 
-Niram reads `Niram-GOLD/opening_book.txt`; the check compares every position and move of its book, in order, with the book Remus-GOLD loads.
+Niram reads `engines/Niram/opening_book.txt`; the check compares every position and move of its book, in order, with the book Remus-GOLD loads.
 
 | Version | Positions | Moves | Same as Niram's book | Same file |
 | --- | ---: | ---: | --- | --- |

@@ -12,7 +12,7 @@ Black, on a 10 minute clock. The script then finds each version's Elo rating the
 way estimate_elo.py does, adds every game to misc/games/remus_games.pgn, and
 prints the table that misc/docs/engines/engines_elo.md reports.
 
-With --niram-gold, Niram-GOLD, the Rust copy of Remus-GOLD that chooses the same
+With --niram-gold, Niram, the Rust copy of Remus-GOLD that chooses the same
 moves about 50 times faster, plays too, at 2000, 2200, 2400, and 2600. Build it
 first with "cargo build --release" inside its folder. Its games are rated apart
 from the Remus games.
@@ -27,7 +27,7 @@ keep --workers at or below the number of physical cores.
 
 Usage:
     uv run misc/scripts/version_elo.py --workers 20         all 12 versions, 576 games
-    uv run misc/scripts/version_elo.py --niram-gold         Niram-GOLD too, 48 more
+    uv run misc/scripts/version_elo.py --niram-gold         Niram too, 48 more
     uv run misc/scripts/version_elo.py --colors WHITE GOLD  only some versions
     uv run misc/scripts/version_elo.py --levels 1800 2000   other Stockfish strengths
     uv run misc/scripts/version_elo.py --games 2            fewer games per strength
@@ -53,9 +53,9 @@ import chess
 import chess.engine
 import chess.pgn
 
-# version_match.py lives beside the color versions in Day 9, period2/instructor/engines
-DAY_9 = next(Path(__file__).parent.parent.parent.glob("Day 09 - *"))
-sys.path.insert(0, str(DAY_9 / "period2" / "instructor" / "engines"))
+# version_match.py lives beside the Remus versions in engines/instructor
+ENGINES = Path(__file__).parent.parent.parent / "engines"
+sys.path.insert(0, str(ENGINES / "instructor"))
 
 from version_match import Player, all_players
 
@@ -67,9 +67,9 @@ for folder in Path(__file__).parents:
         break
 # Every game any script plays goes into one file
 GAMES_PATH = REPOSITORY / "misc" / "games" / "remus_games.pgn"
-# Niram-GOLD's program, which cargo builds inside its folder
-NIRAM_GOLD = DAY_9 / "period2" / "instructor" / "engines" / "Niram-GOLD"
-NIRAM_GOLD_PROGRAM = NIRAM_GOLD / "target" / "release" / "niram-gold"
+# Niram's program, which cargo builds inside engines/Niram
+NIRAM_GOLD = ENGINES / "Niram"
+NIRAM_GOLD_PROGRAM = NIRAM_GOLD / "target" / "release" / "niram"
 if sys.platform == "win32":
     NIRAM_GOLD_PROGRAM = NIRAM_GOLD_PROGRAM.with_suffix(".exe")
 LUCAS_CHESS_ENGINES = (
@@ -196,7 +196,7 @@ def play_game(player: Player, stockfish_path: str, elo: int, number: int):
     """
     name, program = player
     remus_white = number % 2 == 1
-    # Niram-GOLD is one program file; a Remus version is a folder of Python
+    # Niram is one program file; a Remus version is a folder of Python
     if program.is_file():
         command, folder = [str(program)], program.parent
     else:
@@ -402,7 +402,7 @@ def main():
     )
     parser.add_argument("--stockfish", default=None, help="path to Stockfish")
     parser.add_argument("--report-only", action="store_true", help="skip the games")
-    parser.add_argument("--niram-gold", action="store_true", help="play Niram-GOLD too")
+    parser.add_argument("--niram-gold", action="store_true", help="play Niram too")
     parser.add_argument(
         "--levels", type=int, nargs="+", help="Stockfish strengths, like 1800 2000"
     )
@@ -424,6 +424,7 @@ def main():
     if options.niram_gold:
         if not options.report_only and not NIRAM_GOLD_PROGRAM.exists():
             sys.exit(f"No {NIRAM_GOLD_PROGRAM}: run 'cargo build --release' first")
+        # The games file names Niram "Niram-GOLD", so its saved games still count
         players.append(("Niram-GOLD", NIRAM_GOLD_PROGRAM))
     if not options.report_only:
         stockfish_path = options.stockfish or find_stockfish()

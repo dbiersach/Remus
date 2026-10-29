@@ -85,7 +85,7 @@ written yet.
 | 10 | 3 | `phase_hunt.py` | `search` |
 
 On Day 9, periods 2 and 3, each student pair also writes the functions of its color version
-in the Day 9 `period2/student/engines` folder, listed in
+in the `engines/student` folder at the top of the Remus folder, listed in
 [`remus_versions.md`](../engines/remus_versions.md).
 
 The finished versions are in the `instructor` folder beside each `student` folder.

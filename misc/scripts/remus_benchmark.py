@@ -2,7 +2,7 @@
 """remus_benchmark.py
 
 Time one Remus version on the ten positions of compare_search.py. For Remus-GOLD,
-the speed can be compared with Niram-GOLD, the Rust copy of that version.
+the speed can be compared with Niram, the Rust copy of that version.
 Each position gets that version's own think(), one depth at a time up to the depth
 asked for, with no clock, so both engines visit exactly the same positions.
 
@@ -11,9 +11,9 @@ Run it from the repository folder:
     uv run misc/scripts/remus_benchmark.py GOLD        Remus-GOLD, depth 4
     uv run misc/scripts/remus_benchmark.py WHITE 5     Remus-WHITE, depth 5
 
-and the matching Rust benchmark from inside Niram-GOLD/:
+and the matching Rust benchmark from inside engines/Niram/:
 
-    cargo run --release -p niram-gold -- bench
+    cargo run --release -p niram -- bench
 """
 
 import sys
@@ -21,10 +21,10 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/scripts/
-DAY_9 = next(ROOT.glob("Day 09 - *"))
-WHITE_FOLDER = DAY_9 / "period1" / "instructor"  # Remus-WHITE, the finished Day 9 Remus
-ENGINES_FOLDER = DAY_9 / "period2" / "instructor" / "engines"  # Colors and GOLD
-GOLD_FOLDER = ENGINES_FOLDER / "Remus-GOLD"  # All ten enhancements
+ENGINES_FOLDER = ROOT / "engines" / "instructor"  # WHITE, the colors, and GOLD
+# Remus-WHITE, the finished Day 9 Remus
+WHITE_FOLDER = ENGINES_FOLDER / "00 WHITE - No enhancements"
+GOLD_FOLDER = ENGINES_FOLDER / "11 GOLD - All enhancements"  # All ten enhancements
 DEPTH = 4  # The deepest iteration, the same for both engines
 POSITIONS = [  # The ten positions of compare_search.py
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
