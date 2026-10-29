@@ -32,6 +32,11 @@ Usage:
     uv run misc/scripts/version_elo.py --levels 1800 2000   other Stockfish strengths
     uv run misc/scripts/version_elo.py --games 2            fewer games per strength
     uv run misc/scripts/version_elo.py --report-only        only the ratings, saved games
+    uv run misc/scripts/version_elo.py --bracket --colors WHITE GOLD --niram --workers 24
+
+With --bracket the script closes in on each rating round by round instead: in each
+of 8 rounds every engine plays 8 games against one Stockfish strength, set by
+next_level() from all its games so far, under the Event "Engine Elo bracket".
 
 A game already in the games file is not played twice, so a run that stops
 partway, such as when the computer restarts, picks up where it stopped.
@@ -80,6 +85,14 @@ EVENT = "Engine Elo test"  # The Event header of every game this script plays
 # Stockfish strengths for each engine, close to where each engine scores half
 LEVELS = {"Remus": [1650, 1800, 1950, 2100], "Niram": [2000, 2200, 2400, 2600]}
 GAMES_PER_LEVEL = 12  # Half with the version as White, half as Black
+BRACKET_EVENT = "Engine Elo bracket"  # The Event header of the bracketing games
+# The first Stockfish strength of each engine in a bracketing run
+BRACKET_START = {"Remus-WHITE": 1850, "Remus-GOLD": 2000, "Niram": 2500}
+BRACKET_ROUNDS = 8  # Rounds in a bracketing run
+BRACKET_GAMES = 8  # Games per engine in each round, half as White, half as Black
+BRACKET_STEP = 25  # Each round's Stockfish strength is a multiple of this
+LOWEST_ELO = 1320  # Stockfish's weakest UCI_Elo
+HIGHEST_ELO = 3190  # Stockfish's strongest UCI_Elo
 MINUTES = 10.0  # Each side's clock
 INCREMENT = 0.0  # Seconds added after each move
 # Milliseconds Stockfish keeps in reserve on every move. The referee times each move
@@ -183,7 +196,9 @@ def game_round(elo: int, number: int) -> str:
     return f"{elo}.{number}"
 
 
-def play_game(player: Player, stockfish_path: str, elo: int, number: int):
+def play_game(
+    player: Player, stockfish_path: str, elo: int, number: int, event: str = EVENT
+):
     """
     Play one game of a Remus version against Stockfish and return it as PGN.
 
@@ -249,7 +264,7 @@ def play_game(player: Player, stockfish_path: str, elo: int, number: int):
         stockfish.quit()
     game = chess.pgn.Game.from_board(board)
     stockfish_name = f"Stockfish {elo}"
-    game.headers["Event"] = EVENT
+    game.headers["Event"] = event
     game.headers["Date"] = date.today().strftime("%Y.%m.%d")
     game.headers["Round"] = game_round(elo, number)
     game.headers["White"] = name if remus_white else stockfish_name
@@ -269,7 +284,9 @@ def player_name(name: str) -> str:
     return name
 
 
-def read_results(engine: str = "Remus") -> dict[str, dict[int, list[float]]]:
+def read_results(
+    engine: str = "Remus", event: str = EVENT
+) -> dict[str, dict[int, list[float]]]:
     """
     Return every saved game of this script as points by version and level.
 
@@ -282,7 +299,7 @@ def read_results(engine: str = "Remus") -> dict[str, dict[int, list[float]]]:
     points = {"1-0": 1.0, "0-1": 0.0, "1/2-1/2": 0.5}
     with GAMES_PATH.open() as file:
         while (headers := chess.pgn.read_headers(file)) is not None:
-            if headers.get("Event") != EVENT or headers.get("Result") not in points:
+            if headers.get("Event") != event or headers.get("Result") not in points:
                 continue
             white_points = points[headers["Result"]]
             if headers["Black"].startswith("Stockfish"):
@@ -359,6 +376,106 @@ def play_all(
             )
 
 
+def read_bracket_games(name: str) -> list[tuple[int, float]]:
+    """Return (Stockfish UCI_Elo, points) for each bracketing game of one engine, in order."""
+    games = []
+    if not GAMES_PATH.exists():
+        return games
+    points = {"1-0": 1.0, "0-1": 0.0, "1/2-1/2": 0.5}
+    with GAMES_PATH.open() as file:
+        while (headers := chess.pgn.read_headers(file)) is not None:
+            if headers.get("Event") != BRACKET_EVENT:
+                continue
+            if headers.get("Result") not in points:
+                continue
+            white_points = points[headers["Result"]]
+            if headers["Black"].startswith("Stockfish"):
+                player, player_points = headers["White"], white_points
+            else:
+                player, player_points = headers["Black"], 1 - white_points
+            if player == name:
+                elo = int(headers["Round"].split(".")[0])
+                games.append((elo, player_points))
+    return games
+
+
+def next_level(games: list[tuple[int, float]], start: int) -> int:
+    """
+    Return the Stockfish strength for an engine's next round.
+
+    The next round plays Stockfish at the rating that best explains every game so
+    far, where the result is hardest to predict and each game tells the most. A
+    round of 7 wins in 8 moves the level up a few hundred points; a round of 4 in 8
+    barely moves it.
+    """
+    if not games:
+        return start
+    rating, _ = estimate_rating(games)
+    level = round(rating / BRACKET_STEP) * BRACKET_STEP
+    return min(max(level, LOWEST_ELO), HIGHEST_ELO)
+
+
+def play_bracket(
+    players: list[Player],
+    rounds: int,
+    per_round: int,
+    stockfish_path: str,
+    workers: int,
+) -> None:
+    """Play a bracketing run: each round, every engine plays Stockfish near its rating."""
+    print(
+        f"{rounds} rounds of {per_round} games per engine at {MINUTES:g} min + "
+        f"{INCREMENT:g} s, {workers} at a time"
+    )
+    print(f"Adding every game to {GAMES_PATH}")
+    GAMES_PATH.parent.mkdir(exist_ok=True)
+    frozen = dict(zip(players, freeze(players), strict=True))
+    start = time.perf_counter()
+    for round_number in range(1, rounds + 1):
+        jobs: list[Job] = []
+        for player in players:
+            games = read_bracket_games(player[0])
+            done = len(games)
+            if done >= round_number * per_round:
+                continue
+            if done > (round_number - 1) * per_round:
+                elo = games[-1][0]  # Finish a round that stopped partway
+            else:
+                elo = next_level(games, BRACKET_START.get(player[0], 1900))
+            print(f"Round {round_number}: {player[0]} plays Stockfish {elo}")
+            for number in range(done + 1, round_number * per_round + 1):
+                jobs.append((player, elo, number))
+        with ThreadPoolExecutor(workers) as pool:
+            futures = []
+            for player, elo, number in jobs:
+                futures.append(
+                    pool.submit(
+                        play_game,
+                        frozen[player],
+                        stockfish_path,
+                        elo,
+                        number,
+                        BRACKET_EVENT,
+                    )
+                )
+            for future in futures:
+                game = future.result()
+                with GAMES_PATH.open("a") as file:
+                    print(game, end="\n\n", file=file)
+                minutes = (time.perf_counter() - start) / 60
+                print(
+                    f"  [{minutes:.0f} min] {game.headers['White']} vs "
+                    f"{game.headers['Black']}: {game.headers['Result']} "
+                    f"{game.headers.get('Termination', '')}",
+                    flush=True,
+                )
+        for player in players:
+            rating, margin = estimate_rating(read_bracket_games(player[0]))
+            print(
+                f"After round {round_number}: {player[0]} {rating:.0f} +/- {margin:.0f}"
+            )
+
+
 def write_report(results: dict[str, dict[int, list[float]]]) -> str:
     """Return the Markdown table of every version's rating and score at each level."""
     levels = []
@@ -421,6 +538,11 @@ def main():
     parser.add_argument(
         "--games", type=int, default=GAMES_PER_LEVEL, help="games per strength"
     )
+    parser.add_argument(
+        "--bracket", action="store_true", help="close in on each rating round by round"
+    )
+    parser.add_argument("--rounds", type=int, default=BRACKET_ROUNDS)
+    parser.add_argument("--round-games", type=int, default=BRACKET_GAMES)
     options = parser.parse_args()
     start = time.perf_counter()
     if options.levels:
@@ -443,9 +565,19 @@ def main():
         stockfish = chess.engine.SimpleEngine.popen_uci(stockfish_path)
         print(f"Stockfish names itself: {stockfish.id.get('name', 'unknown')}")
         stockfish.quit()
-        play_all(players, options.games, stockfish_path, options.workers)
+        if options.bracket:
+            play_bracket(
+                players,
+                options.rounds,
+                options.round_games,
+                stockfish_path,
+                options.workers,
+            )
+        else:
+            play_all(players, options.games, stockfish_path, options.workers)
+    event = BRACKET_EVENT if options.bracket else EVENT
     for engine in ["Remus", "Niram"]:
-        results = read_results(engine)
+        results = read_results(engine, event)
         if not results:
             continue
         print(f"{engine} versions against Stockfish")
