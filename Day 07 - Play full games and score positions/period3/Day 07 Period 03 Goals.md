@@ -40,7 +40,7 @@ Picks any legal move at random. It is Remus's first brain: weak, but it proves t
 
 Picks the move that captures the most valuable piece, after shuffling so ties are broken at random. Greedy Remus beats random Remus, yet falls for any trap one move deep, which is why searching ahead comes next.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 
@@ -58,7 +58,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `random_move()` | 25 | 1 | `uv run pytest` |
+| `search.py` | `random_move()` | 25 | 1 | `run_tests.py` |
 | `search.py` | `greedy_move()` | 40 | 10 | `test_game.py::test_greedy_takes_the_queen` |
 
 Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

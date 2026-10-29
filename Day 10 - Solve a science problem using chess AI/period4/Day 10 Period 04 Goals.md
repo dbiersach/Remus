@@ -8,7 +8,7 @@ By the end of this period, each pair can:
 
 - Report a science result the way a scientist does. **Measured by:** The pair's results table gives the hidden-peak benchmark against random guessing and the phase hunt's right, wrong, and can't-tell counts for greedy and for search, from the pair's own runs.
 - Explain one decision the science AI made. **Measured by:** Each pair presents one powder its search named and one it answered with can't tell, and says which measurement would settle the second.
-- Take the code home. **Measured by:** Each student's USB copy opens and runs `uv run pytest`.
+- Take the code home. **Measured by:** Each student's USB copy opens and passes `run_tests.py`.
 
 ## The files
 
@@ -16,13 +16,13 @@ The engine for Day 10 is Remus-GOLD, the finished Remus with all ten enhancement
 
 The code here is the same as at the end of the period before.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `hidden_peak.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `hidden_peak.py`, open it and click the same button.
 
 ## The period step by step
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:15 | Each student copies the pair's repository to a USB drive with `git clone --no-hardlinks` and checks that the copy opens and runs `uv run pytest`. |
+| 3:00 to 3:15 | Each student copies the pair's repository to a USB drive with `git clone --no-hardlinks` and checks that the copy opens and passes `run_tests.py`. |
 | 3:15 to 3:40 | Each pair runs `hidden_peak.py` and `phase_hunt.py` once more and fills in its results table: measurements against random guessing, and right, wrong, and can't-tell counts for greedy and for search. The class collects every pair's numbers on the board. |
 | 3:40 to 3:55 | Each pair picks one powder its search named and one it answered with can't tell, and works out which measurement would settle the second. |
 | 3:55 to 4:20 | Each pair presents its results and its two powders in three minutes. |

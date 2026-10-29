@@ -45,14 +45,14 @@ Does the reverse: turns e4 into (4, 4), and raises `ValueError` for text that is
 
 Unpacks a square into its row and column and returns the piece there. Almost every rule in Remus asks "what is on this square?", so this tiny function is the one they all call.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:15 | Slides: the Remus board is an 8x8 list of one-character strings. Uppercase is White, lowercase is Black, and `.` is empty. The teacher walks through `new_board()`. |
-| 3:15 to 4:00 | Pairs write `print_board()`, `square_name()`, `parse_square()`, and `piece_at()` in `board.py` and run `uv run pytest` after each one. |
+| 3:15 to 4:00 | Pairs write `print_board()`, `square_name()`, `parse_square()`, and `piece_at()` in `board.py` and run `run_tests.py` after each one. |
 | 4:00 to 4:10 | Pairs run `show_board.py`, which draws their board as a picture in the web browser. |
 | 4:10 to 4:25 | Show and choose: two or three pairs show their `parse_square()` on the projector, the class picks one for clarity, and the teacher adds it to the class repository with the pair's team name in `CONTRIBUTORS.md`. |
 | 4:25 to 4:30 | Checkpoint: running `board.py` prints the start board and "b1 holds N, expected N". |
@@ -63,7 +63,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `board.py` | `print_board()` | 37 | 6 | `uv run pytest` |
+| `board.py` | `print_board()` | 37 | 6 | `run_tests.py` |
 | `board.py` | `square_name()` | 51 | 1 | `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips` |
 | `board.py` | `parse_square()` | 72 | 5 | `test_board.py::test_e2_is_row_6_col_4`, `test_board.py::test_corners_round_trip`, `test_board.py::test_every_square_round_trips`, `test_board.py::test_bad_square_names_are_rejected`, `test_board.py::test_start_position_pieces` |
 | `board.py` | `piece_at()` | 96 | 2 | `test_board.py::test_start_position_pieces` |

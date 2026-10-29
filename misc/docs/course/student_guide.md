@@ -32,7 +32,7 @@ of Remus with three planted bugs for you to find and fix.
    such as `misc/docs/code/board.md`.
 2. Read the function's docstring. It says what the function must do.
 3. Delete the two stub comments and the `raise` line, and write the body.
-4. Run the tests from inside the `student` folder: `uv run pytest`.
+4. Run the tests: open `run_tests.py` in the `student` folder and press Run.
 5. Run the file itself, such as `board.py`, with VS Code's Run Python File button,
    and compare with the expected answers.
 

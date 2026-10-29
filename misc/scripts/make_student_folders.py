@@ -197,7 +197,7 @@ def edit_section(rows: list[EditRow]) -> str:
         "| --- | --- | --- | --- | --- |",
     ]
     for row in rows:
-        tests = ", ".join(f"`{test}`" for test in row["tests"]) or "`uv run pytest`"
+        tests = ", ".join(f"`{test}`" for test in row["tests"]) or "`run_tests.py`"
         lines.append(
             f"| `{row['file']}` | `{row['function']}()` | {row['line']} | "
             f"{row['typed']} | {tests} |"

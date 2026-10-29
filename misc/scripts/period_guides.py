@@ -144,7 +144,7 @@ OBJECTIVES = {
         (
             "Check a function with `assert` and with pytest.",
             (
-                "`uv run pytest` shows the lab's tests passing, and one deliberately "
+                "`run_tests.py` shows the lab's tests passing, and one deliberately "
                 "wrong `assert` fails with a clear report."
             ),
         ),
@@ -256,8 +256,9 @@ OBJECTIVES = {
         (
             "Split code into modules and import one from another.",
             (
-                "The lab's two files run together, and `uv run` on the imported file "
-                "alone prints its own self-check only through `main()`."
+                "The lab's two files run together, and running the imported file "
+                "alone with the Run button prints its own self-check only through "
+                "`main()`."
             ),
         ),
         (
@@ -572,7 +573,7 @@ OBJECTIVES = {
         (
             "Test an enhancement before trusting it.",
             (
-                "The color version passes `uv run pytest` and a one-game smoke test against "
+                "The color version passes `run_tests.py` and a one-game smoke test against "
                 "Remus-WHITE with no illegal moves."
             ),
         ),
@@ -673,7 +674,7 @@ OBJECTIVES = {
         ),
         (
             "Take the code home.",
-            "Each student's USB copy opens and runs `uv run pytest`.",
+            "Each student's USB copy opens and passes `run_tests.py`.",
         ),
     ],
 }
@@ -686,7 +687,7 @@ VERSION_OBJECTIVES = [
     ),
     (
         "Add the enhancement without breaking the rules.",
-        "`uv run pytest` passes in the version folder.",
+        "`run_tests.py` passes in the version folder.",
     ),
     (
         "Run a fair experiment: same opening, both colors.",
@@ -1683,7 +1684,7 @@ LAB_NOTES = {
         ),
         (
             "Part #4 runs the two test functions, whose `assert` lines stop the program "
-            "when a check fails. `uv run pytest python_functions.py` runs the same tests "
+            "when a check fails. Running `run_tests.py` runs the same tests with pytest "
             "and prints a report, and breaking one test on purpose shows what a failure "
             "looks like before a real one happens."
         ),
@@ -1935,7 +1936,7 @@ DAY_GUIDES = {
                         "Pairs type the 6 lines of `python_setup.py` and run it. It "
                         "checks the laptop, greets the team, and prints a first chess "
                         "line. The teacher and the assistant check that every laptop "
-                        "passes `uv run pytest` and opens Lucas Chess."
+                        "runs a file with the Run button and opens Lucas Chess."
                     ),
                 ),
                 (
@@ -2026,8 +2027,8 @@ DAY_GUIDES = {
                     15,
                     (
                         "Pairs write `print_board()`, `square_name()`, "
-                        "`parse_square()`, and `piece_at()` in `board.py` and run `uv "
-                        "run pytest` after each one."
+                        "`parse_square()`, and `piece_at()` in `board.py` and run "
+                        "`run_tests.py` after each one."
                     ),
                 ),
                 (
@@ -2167,7 +2168,7 @@ DAY_GUIDES = {
                     (
                         "Pairs write `is_white()` and `color_of()` in `game_state.py`,"
                         " then `move_to_uci()` and `move_from_uci()` in `moves.py`, "
-                        "with `uv run pytest` after each."
+                        "running `run_tests.py` after each."
                     ),
                 ),
                 (
@@ -3493,7 +3494,7 @@ DAY_GUIDES = {
                     (
                         "Each student copies the pair's repository to a USB drive "
                         "with `git clone --no-hardlinks` and checks that the copy "
-                        "opens and runs `uv run pytest`."
+                        "opens and passes `run_tests.py`."
                     ),
                 ),
                 (

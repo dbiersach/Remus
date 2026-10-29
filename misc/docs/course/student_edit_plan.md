@@ -9,7 +9,7 @@
 | P1 | Welcome and setup | `python_setup_instructor.py` | None | The lab `python_setup.py` (6 lines) |
 | P2 | Python lab 1: scripts, strings, ord and chr, f-strings | `python_strings_instructor.py` | None | The lab `python_strings.py` (13 lines) |
 | P3 | Python lab 2: lists and nested lists | `python_lists_instructor.py` | None | The lab `python_lists.py` (25 lines) |
-| P4 | board.py: the board and its square names | `board.py`, `show_board.py`, `test_board.py` | None | `print_board()` in `board.py` (6 lines); `square_name()` in `board.py` (1 line); `parse_square()` in `board.py` (5 lines); `piece_at()` in `board.py` (2 lines) |
+| P4 | board.py: the board and its square names | `board.py`, `run_tests.py`, `show_board.py`, `test_board.py` | None | `print_board()` in `board.py` (6 lines); `square_name()` in `board.py` (1 line); `parse_square()` in `board.py` (5 lines); `piece_at()` in `board.py` (2 lines) |
 
 ## Day 02 - Make and undo moves
 
@@ -87,7 +87,7 @@
 
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |
-| P1 | Science AI: hidden_peak.py | `hidden_peak.py`, `test_hidden_peak.py` | None | `candidate_squares()` in `hidden_peak.py` (6 lines); `score_candidate()` in `hidden_peak.py` (4 lines); `choose_next_measurement()` in `hidden_peak.py` (9 lines) |
+| P1 | Science AI: hidden_peak.py | `hidden_peak.py`, `run_tests.py`, `test_hidden_peak.py` | None | `candidate_squares()` in `hidden_peak.py` (6 lines); `score_candidate()` in `hidden_peak.py` (4 lines); `choose_next_measurement()` in `hidden_peak.py` (9 lines) |
 | P2 | The phase hunt: score a guess, and the greedy agent | `phase_hunt.py`, `test_phase_hunt.py` | None | `score()` in `phase_hunt.py` (11 lines); `greedy_phases()` in `phase_hunt.py` (17 lines) |
 | P3 | The phase hunt: search every set, and verify | None | `phase_hunt.py`, `test_phase_hunt.py` | `search()` in `phase_hunt.py` (13 lines) |
 | P4 | Science results, take-home, and wrap-up | None | None | Nothing: a demo or teacher code |

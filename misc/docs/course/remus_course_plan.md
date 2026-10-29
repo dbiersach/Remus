@@ -84,7 +84,7 @@ for a pair to finish in 20 to 40 minutes, and each one ships in the engine.
 1. **The scaffold.** Before the period, the teacher's checkpoint holds the function's
    signature, its NumPy docstring, and tests that fail. The body says `raise
    NotImplementedError`.
-2. **The pair writes the body** until `uv run pytest test_<topic>.py` passes inside the day's folder and
+2. **The pair writes the body** until `run_tests.py` passes in the period's `student` folder and
    the module's own self-check prints the expected answer.
 3. **Show and choose.** Two or three pairs show their version on the projector. With 10
    pairs and about 40 functions, the teacher rotates who presents so every pair ships
@@ -201,8 +201,8 @@ refresher with a demonstration board comes right before the code that needs each
 2. **Finish the laptop image.** The 10 Windows 11 laptops arrive with git, `uv`, VS Code,
    and Lucas Chess. Check that the image also has Python 3.14 cached by `uv` and the
    VS Code extensions from `install_vscode_extensions.ps1`. Clone the class repository as
-   described in "Sharing code without GitHub", then run `uv sync` and `uv run pytest`
-   on every laptop before Day 1, so no laptop needs the internet on Day 1.
+   described in "Sharing code without GitHub", then run `uv sync` once and press Run on a
+   `run_tests.py` on every laptop before Day 1, so no laptop needs the internet on Day 1.
 3. **Register Remus in Lucas Chess.** Add the reference Remus as an external engine
    through `remus.bat`, following [`lucas_chess_guide.md`](lucas_chess_guide.md), and play
    one full game on one laptop. Start Lucas Chess from the Start menu or its desktop
@@ -218,7 +218,7 @@ refresher with a demonstration board comes right before the code that needs each
 6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
    both partners take the code home, plus one class stick for bundles. Give the assistant
    the Day 1 checklist. With preconfigured laptops, Day 1 Period 1 needs only a quick
-   check that every laptop runs `uv run pytest` and opens Lucas Chess.
+   check that every laptop runs a file with the Run button and opens Lucas Chess.
 7. **Prepare unplugged materials:** for each pair, a printed board, sticky-note
    pieces, a deck of index cards, and the warm-up worksheets listed under "Unplugged
    warm-ups"; for the room, a large demonstration board and score cards for the human
@@ -233,8 +233,8 @@ refresher with a demonstration board comes right before the code that needs each
 ### Day 1: Setup and the board
 
 - **P1. Welcome and setup.** Watch the finished reference Remus play in the GUI. Tell
-  the Sargon and Rimush story from `AGENTS.md`. Form pairs, check every laptop runs
-  `uv run pytest`, and review SAN and UCI notation on the demonstration board. Each
+  the Sargon and Rimush story from `AGENTS.md`. Form pairs, check every laptop runs a
+  file with the Run button, and review SAN and UCI notation on the demonstration board. Each
   pair runs `python_setup.py`, which checks the laptop and prints the team's first
   greeting (6 typed lines).
 - **P2. Python lab 1, `python_strings.py`:** scripts, strings, `ord` and `chr`,
@@ -522,7 +522,7 @@ test, and has played two battles against other colors.
 - **P4. Science results, take-home, and wrap-up.** Day 10 stays on the science; the
   chess matches end with the Day 9 battles. First each student copies the pair's
   repository to a USB drive with `git clone --no-hardlinks` and checks that the copy
-  opens and runs `uv run pytest`. Then each pair runs `hidden_peak.py` and
+  opens and passes `run_tests.py`. Then each pair runs `hidden_peak.py` and
   `phase_hunt.py` once more and fills in a results table: how many measurements its
   `choose_next_measurement()` needs against random guessing, and the right, wrong, and
   can't-tell counts of greedy and search on the 200 powders. The class collects every

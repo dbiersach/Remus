@@ -36,7 +36,7 @@ Looks diagonally for an enemy pawn on the row behind the square, from the attack
 
 Looks one step away in all eight directions for the enemy king, with the same `KING_STEPS` the king moves by. Kings can never stand next to each other, and this check is what stops a king from walking up to the other king.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 
@@ -54,8 +54,8 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `attacks.py` | `piece_at_offsets()` | 64 | 6 | `uv run pytest` |
-| `attacks.py` | `attacked_by_pawn()` | 103 | 3 | `uv run pytest` |
-| `attacks.py` | `attacked_by_king()` | 97 | 2 | `uv run pytest` |
+| `attacks.py` | `piece_at_offsets()` | 64 | 6 | `run_tests.py` |
+| `attacks.py` | `attacked_by_pawn()` | 103 | 3 | `run_tests.py` |
+| `attacks.py` | `attacked_by_king()` | 97 | 2 | `run_tests.py` |
 
 Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

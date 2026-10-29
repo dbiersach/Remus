@@ -38,7 +38,7 @@ Scores a square by its predicted value plus a bonus for being far from earlier r
 
 Returns the candidate with the highest score, just as `greedy_move()` returns the best capture. The same generate, score, and choose loop now runs on a science problem.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `hidden_peak.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `hidden_peak.py`, open it and click the same button.
 
 ## The period step by step
 
@@ -56,7 +56,7 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `hidden_peak.py` | `candidate_squares()` | 85 | 6 | `test_hidden_peak.py::test_greedy_ai_measures_where_it_looks_hot` |
-| `hidden_peak.py` | `score_candidate()` | 104 | 4 | `uv run pytest` |
+| `hidden_peak.py` | `score_candidate()` | 104 | 4 | `run_tests.py` |
 | `hidden_peak.py` | `choose_next_measurement()` | 132 | 9 | `test_hidden_peak.py::test_greedy_ai_measures_where_it_looks_hot`, `test_hidden_peak.py::test_greedy_ai_beats_random_guessing` |
 
 Lines to type in all: 19. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

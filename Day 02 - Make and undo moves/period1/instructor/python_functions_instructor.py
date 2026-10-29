@@ -75,7 +75,7 @@ def main():
     test_is_white()
     test_on_board()
     print("Every assert passed  (expected this line)")
-    print("Now run the same tests with pytest: uv run pytest python_functions.py")
+    print("Now run the same tests with pytest: press Run on run_tests.py")
     print("Then change 8 to 7 in test_on_board and read the report of the failing test")
 
 

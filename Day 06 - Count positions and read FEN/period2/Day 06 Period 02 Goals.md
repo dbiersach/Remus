@@ -25,7 +25,7 @@ In the `student` folder these functions raise `NotImplementedError` until a pair
 
 Counts every position reached after exactly `depth` moves, by making each legal move, counting below it, and undoing it. The counts from the start (20, 400, 8,902) are published, so a match proves the rules right and a mismatch points to a bug.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 
@@ -43,6 +43,6 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `perft.py` | `perft()` | 25 | 8 | `uv run pytest` |
+| `perft.py` | `perft()` | 25 | 8 | `run_tests.py` |
 
 Lines to type in all: 8. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.

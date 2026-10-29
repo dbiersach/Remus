@@ -61,7 +61,7 @@ By 4:30, each pair can:
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:15 | Each student copies the pair's repository to a USB drive with `git clone --no-hardlinks` and checks that the copy opens and runs `uv run pytest`. |
+| 3:00 to 3:15 | Each student copies the pair's repository to a USB drive with `git clone --no-hardlinks` and checks that the copy opens and passes `run_tests.py`. |
 | 3:15 to 3:40 | Each pair runs `hidden_peak.py` and `phase_hunt.py` once more and fills in its results table: measurements against random guessing, and right, wrong, and can't-tell counts for greedy and for search. The class collects every pair's numbers on the board. |
 | 3:40 to 3:55 | Each pair picks one powder its search named and one it answered with can't tell, and works out which measurement would settle the second. |
 | 3:55 to 4:20 | Each pair presents its results and its two powders in three minutes. |

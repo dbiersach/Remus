@@ -5,7 +5,7 @@
 By the end of this period, each pair can:
 
 - Write a function with parameters, a return value, type hints, and a docstring. **Measured by:** The lab's `is_white()` and `on_board()` return the right answers for every example on the worksheet.
-- Check a function with `assert` and with pytest. **Measured by:** `uv run pytest` shows the lab's tests passing, and one deliberately wrong `assert` fails with a clear report.
+- Check a function with `assert` and with pytest. **Measured by:** `run_tests.py` shows the lab's tests passing, and one deliberately wrong `assert` fails with a clear report.
 - Pack two numbers into a tuple and unpack them. **Measured by:** The pair writes `row, col = square` and explains what each name holds.
 
 ## The files
@@ -24,9 +24,9 @@ Part #2: you write `is_black()` from nothing: the `def` line with its type hints
 
 Part #3 packs e4 into the tuple `(4, 4)` and unpacks it with `row, col = square`. Every Remus square is a tuple like this one.
 
-Part #4 runs the two test functions, whose `assert` lines stop the program when a check fails. `uv run pytest python_functions.py` runs the same tests and prints a report, and breaking one test on purpose shows what a failure looks like before a real one happens.
+Part #4 runs the two test functions, whose `assert` lines stop the program when a check fails. Running `run_tests.py` runs the same tests with pytest and prints a report, and breaking one test on purpose shows what a failure looks like before a real one happens.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 

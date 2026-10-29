@@ -23,7 +23,7 @@ Part #2: `count_leaves()` counts the moves at the bottom of a small tree made of
 
 Part #3 is finished code to read and trace: `knight_paths()` counts the ways a knight can jump from a1. It has the same shape as `perft()` in period 2: at depth 0 return 1, otherwise add up the count under every move.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 

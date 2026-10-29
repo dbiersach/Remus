@@ -4,7 +4,7 @@
 
 By the end of this period, each pair can:
 
-- Split code into modules and import one from another. **Measured by:** The lab's two files run together, and `uv run` on the imported file alone prints its own self-check only through `main()`.
+- Split code into modules and import one from another. **Measured by:** The lab's two files run together, and running the imported file alone with the Run button prints its own self-check only through `main()`.
 - Save work with git: switch to a branch, commit, and read the log. **Measured by:** `git log --oneline` shows the pair's commit on its own branch.
 
 ## The files
@@ -23,7 +23,7 @@ Part #1 prints `__name__`: the file that VS Code runs is `__main__`, and an impo
 
 Part #2 calls `new_board()` and `knight_moves()` from the imported files and lists the two knight moves from g1. Part #3 runs `board.py` on its own in VS Code, and Part #4 makes a git branch, a commit, and the log in the terminal.
 
-Check the work with the tests: open a terminal in VS Code inside the `student` folder and type `uv run pytest`. To run one file on its own, such as `board.py`, open it in VS Code and click the Run Python File button (the triangle at the top right of the editor).
+Check the work with the tests: open `run_tests.py` in the `student` folder in VS Code and click the Run Python File button (the triangle at the top right of the editor). It runs every test in the folder. To run one file on its own, such as `board.py`, open it and click the same button.
 
 ## The period step by step
 

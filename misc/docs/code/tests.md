@@ -50,17 +50,9 @@ def test_twenty_legal_moves_from_the_start() -> None:
 
 ## Try it
 
-From the folder you are working in, run all of its tests:
-
-```bash
-uv run pytest
-```
-
-Or run one test file:
-
-```bash
-uv run pytest test_board.py
-```
+Open `run_tests.py` in the folder you are working in and click the Run Python File
+button (the triangle at the top right of the editor). It runs every test in the
+folder.
 
 A dot means a test passed. An `F` means it failed, with a report below. The teacher
 runs the tests of every finished `instructor/` folder with

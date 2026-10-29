@@ -32,7 +32,7 @@ By 4:30, each pair can:
 | 8:45 to 8:55 | The story of the name: Sargon, the 1978 chess program, and Rimush, the first son of Sargon of Akkad. Remus is a son of Sargon. |
 | 8:55 to 9:10 | Form the ten pairs. The driver types and the navigator reads and checks; the two swap roles every period. Each pair picks a team name for `CONTRIBUTORS.md`. |
 | 9:10 to 9:25 | Notation on the demonstration board: square names, SAN for people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs (`g1f3`). |
-| 9:25 to 9:50 | Pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop passes `uv run pytest` and opens Lucas Chess. |
+| 9:25 to 9:50 | Pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop runs a file with the Run button and opens Lucas Chess. |
 | 9:50 to 10:00 | Exit ticket: each student lists three of the five parts of a chess engine (board, moves, rules, search, evaluation) and one job of each. |
 
 [`Day 01 Period 01 Goals.md`](<period1/Day 01 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
@@ -65,7 +65,7 @@ By 4:30, each pair can:
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:15 | Slides: the Remus board is an 8x8 list of one-character strings. Uppercase is White, lowercase is Black, and `.` is empty. The teacher walks through `new_board()`. |
-| 3:15 to 4:00 | Pairs write `print_board()`, `square_name()`, `parse_square()`, and `piece_at()` in `board.py` and run `uv run pytest` after each one. |
+| 3:15 to 4:00 | Pairs write `print_board()`, `square_name()`, `parse_square()`, and `piece_at()` in `board.py` and run `run_tests.py` after each one. |
 | 4:00 to 4:10 | Pairs run `show_board.py`, which draws their board as a picture in the web browser. |
 | 4:10 to 4:25 | Show and choose: two or three pairs show their `parse_square()` on the projector, the class picks one for clarity, and the teacher adds it to the class repository with the pair's team name in `CONTRIBUTORS.md`. |
 | 4:25 to 4:30 | Checkpoint: running `board.py` prints the start board and "b1 holds N, expected N". |
