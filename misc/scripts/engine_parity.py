@@ -29,7 +29,7 @@ Run it from the repository folder:
     uv run misc/scripts/engine_parity.py                 25,000 nodes a search
     uv run misc/scripts/engine_parity.py --nodes 100000  Deeper searches, slower Remus
 
-The results go to misc/docs/engines/engine_parity.md. The exit code is 1 if anything differs.
+The results go to misc/docs/engines/remus-niram parity.md. The exit code is 1 if anything differs.
 """
 
 import argparse
@@ -49,7 +49,7 @@ GOLD_FOLDER = (
     ENGINES_FOLDER / "Remus-GOLD"
 )  # The finished Remus, with all ten enhancements
 NIRAM = ENGINES_FOLDER / "Niram-GOLD"  # Remus-GOLD rewritten in Rust
-REPORT_PATH = ROOT / "misc" / "docs" / "engines" / "engine_parity.md"
+REPORT_PATH = ROOT / "misc" / "docs" / "engines" / "remus-niram parity.md"
 DEFAULT_NODES = 25_000  # Remus searches this many positions in about 3 to 8 seconds
 FIELDS = ["key", "eval", "legal", "ordered", "book", "info", "nodes", "best"]
 
@@ -497,7 +497,7 @@ def main():
 def write_report(
     folders, niram_results, remus_seconds, mismatches, book_rows, arguments, elapsed
 ):
-    """Write misc/docs/engines/engine_parity.md with one row per version and one per position."""
+    """Write misc/docs/engines/remus-niram parity.md with one row per version and one per position."""
     colors = [color_of(folder) for folder in folders]
     text = "# Engine parity: Remus and Niram\n\n"
     text += (

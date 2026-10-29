@@ -52,5 +52,5 @@ those saved games and plays none.
 
 | Script | What it does |
 | --- | --- |
-| `engine_parity.py` | Checks that Niram-GOLD matches Remus-GOLD on 49 positions: evaluation, legal moves, book moves, and every search depth's score, node count, and best line. It writes `misc/docs/engines/engine_parity.md` and exits with code 1 if anything differs. |
+| `engine_parity.py` | Checks that Niram-GOLD matches Remus-GOLD on 49 positions: evaluation, legal moves, book moves, and every search depth's score, node count, and best line. It writes `misc/docs/engines/remus-niram parity.md` and exits with code 1 if anything differs. |
 | `remus_benchmark.py` | Times one Remus version, such as `GOLD`, on the ten positions of `compare_search.py`, so the speed of Remus-GOLD can be compared with the Niram-GOLD benchmark. |
