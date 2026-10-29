@@ -25,7 +25,7 @@ Each version searched the ten positions of `compare_search.py`, one depth at a t
 
 ## What to expect
 
-In the designer's league, where every version searched about as deep as Remus does in a game of several hours, Remus-GOLD scored 85 percent and rated +339 plus or minus 91 over Remus-WHITE, far ahead of every single enhancement. It gains more the longer the clock, because null moves and late move reductions save work only at depth 3 and deeper.
+In the designer's league, where every version searched about as deep as Remus does in a game of several hours, Remus-GOLD scored 85 percent and rated +339 plus or minus 91 over Remus-WHITE, far ahead of every engine with one enhancement. It gains more the longer the clock, because null moves and late move reductions save work only at depth 3 and deeper.
 
 ## Check it
 

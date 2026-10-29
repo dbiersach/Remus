@@ -789,7 +789,7 @@ VERSION_GUIDES = {
             "In the designer's league, where every version searched about as deep "
             "as Remus does in a game of several hours, Remus-GOLD scored 85 "
             "percent and rated +339 plus or minus 91 over Remus-WHITE, far ahead "
-            "of every single enhancement. It gains more the longer the clock, "
+            "of every engine with one enhancement. It gains more the longer the clock, "
             "because null moves and late move reductions save work only at depth 3 "
             "and deeper."
         ),
@@ -842,7 +842,7 @@ VERSION_GUIDES = {
             "same position gets a different mate score at a different ply."
         ),
         "expect": (
-            "Remus-RED is the only single enhancement that rated clearly above "
+            "Remus-RED is the only engine with one enhancement that rated clearly above "
             "Remus-WHITE in the designer's league: +101 plus or minus 67. "
             "Fewer positions for the same depth, and the biggest savings in endgames, "
             "where a few pieces shuffle between the same squares and nearly every "
