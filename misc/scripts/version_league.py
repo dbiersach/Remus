@@ -57,9 +57,8 @@ from pathlib import Path
 
 import chess.pgn
 
-# version_match.py lives beside the Remus versions in engines/instructor
+# version_match.py sits beside this file in misc/scripts
 ENGINES = Path(__file__).parent.parent.parent / "engines"
-sys.path.insert(0, str(ENGINES / "instructor"))
 
 from version_match import (
     GAMES_PATH,

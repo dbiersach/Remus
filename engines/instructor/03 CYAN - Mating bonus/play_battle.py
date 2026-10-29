@@ -14,7 +14,7 @@ The Day 9 battle: Remus-CYAN on this laptop plays the engine of a visiting stude
 5. Press the Run Python File button. Remus-CYAN plays two 10-minute games against
    the visitor from the same opening, with the White pieces in game 1 and the Black
    pieces in game 2. The two games take about 20 minutes.
-version_match.py, in the folder above this one, plays the games and adds
+version_match.py, in the misc/scripts folder, plays the games and adds
 them to misc/games/remus_games.pgn.
 """
 
@@ -30,11 +30,27 @@ def main():
     if VISITING_ENGINE == "":
         print("Set VISITING_ENGINE at the top of this file, then press Run again.")
         return
-    match_path = Path(__file__).parent.parent / "version_match.py"
+    # The top Remus folder is the nearest folder above this one with pyproject.toml
+    top = Path(__file__).parent
+    for folder in Path(__file__).parents:
+        if (folder / "pyproject.toml").exists():
+            top = folder
+            break
+    match_path = top / "misc" / "scripts" / "version_match.py"
+    # The folder above this one holds this engine folder and its opponents
+    engines = Path(__file__).parent.parent
     print(f"Running {match_path}")
     # sys.executable is the Python that VS Code runs, with python-chess
     subprocess.run(
-        [sys.executable, str(match_path), "CYAN", VISITING_ENGINE.upper()], check=True
+        [
+            sys.executable,
+            str(match_path),
+            "--engines",
+            str(engines),
+            "CYAN",
+            VISITING_ENGINE.upper(),
+        ],
+        check=True,
     )
 
 

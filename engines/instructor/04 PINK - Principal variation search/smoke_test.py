@@ -4,7 +4,7 @@
 The Day 9 smoke test for this enhanced engine. Press Run in VS Code: Remus-PINK plays
 one 2-minute game against Remus-WHITE, which shows that the engine plays legal
 moves to the end of a game. Nobody reads the result.
-version_match.py, in the folder above this one, plays the games and adds
+version_match.py, in the misc/scripts folder, plays the games and adds
 them to misc/games/remus_games.pgn.
 """
 
@@ -14,11 +14,29 @@ from pathlib import Path
 
 
 def main():
-    match_path = Path(__file__).parent.parent / "version_match.py"
+    # The top Remus folder is the nearest folder above this one with pyproject.toml
+    top = Path(__file__).parent
+    for folder in Path(__file__).parents:
+        if (folder / "pyproject.toml").exists():
+            top = folder
+            break
+    match_path = top / "misc" / "scripts" / "version_match.py"
+    # The folder above this one holds this engine folder and its opponents
+    engines = Path(__file__).parent.parent
     print(f"Running {match_path}")
     # sys.executable is the Python that VS Code runs, with python-chess
     subprocess.run(
-        [sys.executable, str(match_path), "PINK", "--games", "1", "--minutes", "2"],
+        [
+            sys.executable,
+            str(match_path),
+            "--engines",
+            str(engines),
+            "PINK",
+            "--games",
+            "1",
+            "--minutes",
+            "2",
+        ],
         check=True,
     )
 

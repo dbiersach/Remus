@@ -735,8 +735,8 @@ def main():
             sections.append(bug_hunt_section(count))
         write_goals(day, period, sections)
     # Each engine folder stubs the functions its student pair writes on Day 9.
-    # engines/student holds Remus-WHITE, the ten enhanced engines, and
-    # version_match.py, but not Remus-GOLD, which stays in engines/instructor.
+    # engines/student holds Remus-WHITE and the ten enhanced engines, but not
+    # Remus-GOLD, which stays in engines/instructor.
     engines = ROOT / "engines" / "instructor"
     student_engines = ROOT / "engines" / "student"
     white = "00 WHITE - No enhancements"
