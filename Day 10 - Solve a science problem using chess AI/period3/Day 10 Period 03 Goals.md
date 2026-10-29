@@ -106,7 +106,7 @@ The number at the left of each line is its line number once the code is typed. W
 221 +         return
 222 +     for index in range(start, len(PHASE_NAMES)):
 223 +         phases.append(PHASE_NAMES[index])  # Make: add one phase
-224 +         search(phases, measured, depth - 1, index + 1, hunt)
+224 +         search(phases, measured, depth - 1, index + 1, hunt)  # Recursive call to itself
 225 +         phases.pop()  # Undo: take the phase back out
 226 |
 227 |

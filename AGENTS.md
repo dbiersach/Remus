@@ -288,13 +288,13 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   (David, 2026-10-28): the builders `make_period_folders.py`,
   `make_version_folders.py`, `make_student_folders.py`,
   `make_phase_hunt_figures.py`, and `make_board_diagrams.py`, the README text in `period_guides.py`,
-  `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`,
+  `run_all_tests.py`, `test_reference_tools.py`, `version_match.py`, `version_league.py`,
   `version_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
   top Remus folder from its own path, so it
   runs from the top folder with `uv run misc/scripts/<name>.py`. Students never open
   `misc/scripts/`. Files a student pair opens or runs in class stay beside the code they belong to:
-  `version_match.py` in `engines/instructor` and `engines/student` for the
-  battles, and `play_match.py`, `estimate_elo.py`, and the tests inside their
+  `play_battle.py` and `smoke_test.py` in each engine folder for the battles
+  (they run `misc/scripts/version_match.py`, David, 2026-10-29), and `play_match.py`, `estimate_elo.py`, and the tests inside their
   period and version folders. Put a new course designer tool in `misc/scripts/`, and list every
   script there in `misc/scripts/README.md` with what it does (David, 2026-10-28).
 - `period4/instructor` holds the finished code of the day, and it is the only period
@@ -314,7 +314,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - The Remus versions live in the top `engines/` folder (David, 2026-10-29), which
   holds `engines/instructor`, `engines/student`, and `engines/Niram`. Each of
   `instructor` and `student` holds one engine folder per Remus version, named by its
-  engine color, and `version_match.py`. `00 WHITE - No enhancements` is Remus-WHITE,
+  engine color. `00 WHITE - No enhancements` is Remus-WHITE,
   the finished Day 9 Remus with none of the ten enhancements (named by David on
   2026-10-27): an exact copy of the Day 9 `period1/instructor` folder in `instructor`
   and of `period1/student` in `student`. `01 GRAY - King safety` to `10 RED -
@@ -335,7 +335,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   folders by each version's Elo over WHITE in the designer's league (Niram league 1,
   660 games at 10 minutes a side, with GREEN's and GOLD's games started from move 1
   so their book plays): 01 GRAY, 02 YELLOW, 03 CYAN, 04 PINK, 05 ORANGE, 06 BROWN,
-  07 PURPLE, 08 GREEN, 09 BLUE, 10 RED. `version_match.py` plays an enhanced engine
+  07 PURPLE, 08 GREEN, 09 BLUE, 10 RED. `misc/scripts/version_match.py` plays an enhanced engine
   against Remus-WHITE or another enhanced engine, and `play_battle.py` in each engine folder
   runs it for the Day 9 battles. `version_league.py` plays a round robin of all 12
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version

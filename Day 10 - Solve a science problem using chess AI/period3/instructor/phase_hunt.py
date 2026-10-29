@@ -221,7 +221,7 @@ def search(
         return
     for index in range(start, len(PHASE_NAMES)):
         phases.append(PHASE_NAMES[index])  # Make: add one phase
-        search(phases, measured, depth - 1, index + 1, hunt)
+        search(phases, measured, depth - 1, index + 1, hunt)  # Recursive call to itself
         phases.pop()  # Undo: take the phase back out
 
 

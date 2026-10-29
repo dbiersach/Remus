@@ -43,7 +43,7 @@ def perft(state: dict, depth: int) -> int:
     count = 0
     for move in legal_moves(state):
         undo = make_move(state, move)
-        count += perft(state, depth - 1)
+        count += perft(state, depth - 1)  # Recursive call to itself
         undo_move(state, undo)
     return count
 

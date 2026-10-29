@@ -59,7 +59,7 @@ Counts positions: the reduced search must visit fewer than the Day 9 search at t
 
 ## Check it
 
-Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: Remus-BROWN plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-BROWN plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `version_match.py` from the folder above this one.
+Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: Remus-BROWN plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-BROWN plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/scripts/version_match.py`, which plays the games.
 
 ## What you edit this period
 
@@ -67,7 +67,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `reduction()` | 397 | 3 | `test_upgrades.py::test_only_late_quiet_moves_are_reduced` |
+| `search.py` | `reduction()` | 399 | 3 | `test_upgrades.py::test_only_late_quiet_moves_are_reduced` |
 | `test_upgrades.py` | `test_only_late_quiet_moves_are_reduced()` | 22 | 6 | `run_tests.py` |
 | `test_upgrades.py` | `test_reduced_search_saves_work_and_keeps_the_state()` | 32 | 9 | `run_tests.py` |
 
@@ -81,20 +81,20 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `reduction()` in `search.py`
 
-**Where:** lines 423 to 425 of `search.py`, inside `reduction()`, in place of the stub below the docstring. It is called by `reduced_search()` in `search.py`.
+**Where:** lines 425 to 427 of `search.py`, inside `reduction()`, in place of the stub below the docstring. It is called by `reduced_search()` in `search.py`.
 
 ```python
-397 | def reduction(
-398 |     depth: int, index: int, move: Move, captured: str, gives_check: bool
+399 | def reduction(
+400 |     depth: int, index: int, move: Move, captured: str, gives_check: bool
       ...
-421 |         quiet move rarely turns out best. Otherwise 0.
-422 |     """
-423 +     late = index >= LATE_MOVE_INDEX and depth >= 3
-424 +     quiet = captured == EMPTY and move.promotion is None
-425 +     return 1 if late and quiet and not gives_check else 0
-426 |
-427 |
-428 | def reduced_search(
+423 |         quiet move rarely turns out best. Otherwise 0.
+424 |     """
+425 +     late = index >= LATE_MOVE_INDEX and depth >= 3
+426 +     quiet = captured == EMPTY and move.promotion is None
+427 +     return 1 if late and quiet and not gives_check else 0
+428 |
+429 |
+430 | def reduced_search(
 ```
 
 **How it works:** `index` is the move's place in the ordered list, counting from 0, so `index >= LATE_MOVE_INDEX` (3) means the fourth move or later. `depth >= 3` keeps the reduction away from the last plies, where one ply matters most. `quiet` is True for a move that captures nothing (`captured == EMPTY`) and does not promote. The last line returns 1, meaning search this move one ply shallower, only for a late, quiet move that does not give check. Every other move returns 0 and gets the full depth.

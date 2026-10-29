@@ -68,7 +68,7 @@ The number at the left of each line is its line number once the code is typed. W
 43 +     count = 0
 44 +     for move in legal_moves(state):
 45 +         undo = make_move(state, move)
-46 +         count += perft(state, depth - 1)
+46 +         count += perft(state, depth - 1)  # Recursive call to itself
 47 +         undo_move(state, undo)
 48 +     return count
 49 |

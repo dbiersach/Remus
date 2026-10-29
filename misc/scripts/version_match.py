@@ -3,7 +3,7 @@
 
 Measure how much one enhanced engine adds. An enhanced engine's Remus plays a match
 against Remus-WHITE (the finished Day 9 Remus with no enhancements, in the
-00 WHITE engine folder beside this file), or against another enhanced engine, with
+00 WHITE engine folder), or against another enhanced engine, with
 python-chess as the referee. Every game is added to the class
 games file, misc/games/remus_games.pgn at the top of the Remus folder, and the script
 turns the score into an Elo gap. This is a referee outside the engine: the engine itself never
@@ -14,18 +14,21 @@ the starting position would be the same game twice. Each pair of games therefore
 starts from one of the OPENINGS, three moves deep, and each player takes White once.
 
 Student pairs never type a command: smoke_test.py and play_battle.py in each engine folder
-run this file with the Run button. The course designer may also run it by hand:
-    uv run version_match.py RED            Remus-RED against Remus-WHITE, 2 games
-    uv run version_match.py RED BLUE       Remus-RED against Remus-BLUE
-    uv run version_match.py RED --games 1 --minutes 2
-                                           one short game, to check the engine runs
-    uv run version_match.py RED GOLD       Remus-RED against Remus-GOLD
+run this file with the Run button, and pass --engines with the folder that holds
+their engine folder, such as engines/student. Without --engines the script plays
+the engines in engines/instructor. The course designer may also run it by hand
+from the top Remus folder:
+    uv run misc/scripts/version_match.py RED          Remus-RED against Remus-WHITE
+    uv run misc/scripts/version_match.py RED BLUE     Remus-RED against Remus-BLUE
+    uv run misc/scripts/version_match.py RED --games 1 --minutes 2
+                                                      one short game, to check it runs
+    uv run misc/scripts/version_match.py RED GOLD     Remus-RED against Remus-GOLD
 
 Each side gets 10 minutes, because Remus searches only a few thousand positions a
 second and a shorter clock stops every version too shallow for most enhancements
 to help. The two games run at once, so the match takes about 20 minutes.
 
-An engine color names an engine folder beside this file, so "RED" finds
+An engine color names an engine folder in the engines folder, so "RED" finds
 "10 RED - Transposition table", "WHITE" finds "00 WHITE - No enhancements", and
 "GOLD" finds "11 GOLD - All enhancements", which only engines/instructor holds.
 The numbers 01 to 10 rank the enhanced engines by the designer's league.
@@ -45,13 +48,14 @@ import chess
 import chess.engine
 import chess.pgn
 
-REMUS_FOLDER = Path(__file__).parent
 # The top Remus folder is the nearest folder above this one with pyproject.toml
 REPOSITORY = Path(__file__).parent
 for folder in Path(__file__).parents:
     if (folder / "pyproject.toml").exists():
         REPOSITORY = folder
         break
+# The folder that holds the engine folders; --engines changes it
+ENGINES_FOLDER = REPOSITORY / "engines" / "instructor"
 # Every game any script plays
 GAMES_PATH = REPOSITORY / "misc" / "games" / "remus_games.pgn"
 YARDSTICK = "WHITE"  # Remus-WHITE, with no enhancements, measures every enhanced engine
@@ -117,7 +121,7 @@ def all_players() -> list[Player]:
     """
     # The engine folders run from 00 WHITE to 11 GOLD, so sorting puts them in order
     players = []
-    for folder in sorted(REMUS_FOLDER.iterdir()):
+    for folder in sorted(ENGINES_FOLDER.iterdir()):
         if folder.is_dir() and " - " in folder.name:
             players.append((f"Remus-{version_color(folder.name)}", folder))
     return players
@@ -342,7 +346,13 @@ def main():
     parser.add_argument(
         "--increment", type=float, default=INCREMENT, help="seconds added per move"
     )
+    parser.add_argument(
+        "--engines", type=Path, default=None, help="the folder of engine folders"
+    )
     options = parser.parse_args()
+    if options.engines is not None:
+        global ENGINES_FOLDER
+        ENGINES_FOLDER = options.engines
     clock = (options.minutes, options.increment)
     first = find_player(options.first)
     second = find_player(options.second)

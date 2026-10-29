@@ -59,7 +59,7 @@ Shows what a null window really returns. With a window one point wide, the score
 
 ## Check it
 
-Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: Remus-PINK plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-PINK plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `version_match.py` from the folder above this one.
+Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `smoke_test.py` in VS Code and press Run: Remus-PINK plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-PINK plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/scripts/version_match.py`, which plays the games.
 
 ## What you edit this period
 
@@ -67,7 +67,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `search_later_move()` | 396 | 6 | `run_tests.py` |
+| `search.py` | `search_later_move()` | 398 | 6 | `run_tests.py` |
 | `test_upgrades.py` | `test_pvs_search_agrees_with_alpha_beta()` | 14 | 7 | `run_tests.py` |
 | `test_upgrades.py` | `test_a_null_window_answers_only_better_or_not()` | 25 | 5 | `run_tests.py` |
 
@@ -81,23 +81,23 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `search_later_move()` in `search.py`
 
-**Where:** lines 423 to 428 of `search.py`, inside `search_later_move()`, in place of the stub below the docstring. It is called by `pvs_search()` in `search.py`.
+**Where:** lines 425 to 430 of `search.py`, inside `search_later_move()`, in place of the stub below the docstring. It is called by `pvs_search()` in `search.py`.
 
 ```python
-396 | def search_later_move(
-397 |     state: dict, depth: int, ply: int, alpha: int, beta: int, info: SearchInfo
+398 | def search_later_move(
+399 |     state: dict, depth: int, ply: int, alpha: int, beta: int, info: SearchInfo
       ...
-421 |         the full window to find the exact score.
-422 |     """
-423 +     score, line = pvs_search(state, depth, ply, -alpha - 1, -alpha, info)
-424 +     score = -score
-425 +     if alpha < score < beta:  # A surprise: search it again with the full window
-426 +         score, line = pvs_search(state, depth, ply, -beta, -alpha, info)
-427 +         score = -score
-428 +     return score, line
-429 |
-430 |
-431 | def pvs_search(
+423 |         the full window to find the exact score.
+424 |     """
+425 +     score, line = pvs_search(state, depth, ply, -alpha - 1, -alpha, info)
+426 +     score = -score
+427 +     if alpha < score < beta:  # A surprise: search it again with the full window
+428 +         score, line = pvs_search(state, depth, ply, -beta, -alpha, info)
+429 +         score = -score
+430 +     return score, line
+431 |
+432 |
+433 | def pvs_search(
 ```
 
 **How it works:** This is the heart of principal variation search. The first call to `pvs_search` uses a null window, `-alpha - 1` to `-alpha`, a window one point wide. It costs little and answers one question: is this move better than the best move so far? The minus signs flip the window and the score, as in every negamax call. If the score lands strictly between `alpha` and `beta`, the move surprised us by being better, so the code searches it again with the full window, `-beta` to `-alpha`, to learn its exact score. Most moves are not better, so most moves need only the cheap search.

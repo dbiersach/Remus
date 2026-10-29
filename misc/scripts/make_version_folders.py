@@ -84,7 +84,19 @@ def version_search(name: str, summary: str, edits: list[tuple[str, str]]) -> str
     text = replace_once(text, BASE_SUMMARY, summary, name)
     for old, new in edits:
         text = replace_once(text, old, new, name)
-    return text
+    # Mark each call the search makes to itself, as the Day 9 search does
+    marked = ""
+    for line in text.splitlines(keepends=True):
+        is_call = f"{name}(" in line and not line.lstrip().startswith("def ")
+        if is_call and "#" not in line:
+            line = line.rstrip("\n")
+            if len(line) + len("  # Recursive call to itself") <= 88:
+                line += "  # Recursive call to itself\n"
+            else:
+                indent = line[: len(line) - len(line.lstrip())]
+                line = indent + "# Recursive call to itself\n" + line + "\n"
+        marked += line
+    return marked
 
 
 # Lines of alpha_beta_with_quiescence that the search enhancements change
@@ -98,7 +110,7 @@ CUTOFF = """        if score >= beta:
 """
 FINAL_RETURN = """    return alpha, best_line
 """
-CHILD_SEARCH = """            score, line = {name}(
+CHILD_SEARCH = """            score, line = {name}(  # Recursive call to itself
                 state, depth - 1, ply + 1, -beta, -alpha, info
             )
             score = -score
@@ -996,7 +1008,7 @@ def readme_text(version: dict) -> str:
                 "`engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press "
                 f"Run. Remus-{color} plays it twice at 10 minutes a side, "
                 "once with each piece color, and both games go into misc/games/remus_games.pgn. Each "
-                "script runs `version_match.py` from the folder above this one."
+                "script runs `misc/scripts/version_match.py`, which plays the games."
             ),
         ]
     return "\n\n".join(sections) + "\n"
@@ -1077,16 +1089,29 @@ def run_script_text(name: str, color: str) -> str:
             arguments += f', "{word}"'
     return (
         f'#!/usr/bin/env -S uv run\n"""{name}\n\n{about.format(color=color, example=example, example_folder=example_folder)}\n'
-        "version_match.py, in the folder above this one, plays the games and "
+        "version_match.py, in the misc/scripts folder, plays the games and "
         'adds\nthem to misc/games/remus_games.pgn.\n"""\n\n'
         "import subprocess\nimport sys\nfrom pathlib import Path\n\n"
         + setting
         + "def main():\n"
         + ask
-        + '    match_path = Path(__file__).parent.parent / "version_match.py"\n'
+        + "    # The top Remus folder is the nearest folder above this one with "
+        "pyproject.toml\n"
+        "    top = Path(__file__).parent\n"
+        "    for folder in Path(__file__).parents:\n"
+        '        if (folder / "pyproject.toml").exists():\n'
+        "            top = folder\n"
+        "            break\n"
+        '    match_path = top / "misc" / "scripts" / "version_match.py"\n'
+        "    # The folder above this one holds this engine folder and its opponents\n"
+        "    engines = Path(__file__).parent.parent\n"
         '    print(f"Running {match_path}")\n'
         "    # sys.executable is the Python that VS Code runs, with python-chess\n"
-        f"    subprocess.run([sys.executable, str(match_path){arguments}], check=True)\n"
+        "    subprocess.run(\n"
+        "        [sys.executable, str(match_path), \"--engines\", str(engines)"
+        f"{arguments}],\n"
+        "        check=True,\n"
+        "    )\n"
         '\n\nif __name__ == "__main__":\n    main()\n'
     )
 

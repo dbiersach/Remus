@@ -105,7 +105,7 @@ def minimax(state: dict, depth: int, info: SearchInfo) -> int:
     for move in moves:
         undo = make_move(state, move)
         try:
-            scores.append(minimax(state, depth - 1, info))
+            scores.append(minimax(state, depth - 1, info))  # Recursive call to itself
         finally:
             undo_move(state, undo)
     return max(scores) if state["turn"] == "w" else min(scores)

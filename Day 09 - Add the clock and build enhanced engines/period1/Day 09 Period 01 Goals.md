@@ -46,7 +46,7 @@ Every other function is finished. Change only these, and only below each docstri
 
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
-| `search.py` | `think()` | 427 | 17 | `test_search.py::test_think_respects_its_time` |
+| `search.py` | `think()` | 429 | 17 | `test_search.py::test_think_respects_its_time` |
 
 Lines to type in all: 17. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
 
@@ -58,34 +58,34 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `think()` in `search.py`
 
-**Where:** lines 447 to 463 of `search.py`, inside `think()`, in place of the stub below the docstring. It is called by `think_move()` in `search.py`, `main()` in `uci_engine.py`.
+**Where:** lines 449 to 465 of `search.py`, inside `think()`, in place of the stub below the docstring. It is called by `think_move()` in `search.py`, `main()` in `uci_engine.py`.
 
 ```python
-427 | def think(state: dict, seconds: float = 2.0, max_depth: int = 64, report=None) -> Move:
-428 |     """
+429 | def think(state: dict, seconds: float = 2.0, max_depth: int = 64, report=None) -> Move:
+430 |     """
       ...
-445 |         The best move of the deepest search that finished.
-446 |     """
-447 +     info = SearchInfo(deadline=time.perf_counter() + seconds)
-448 +     moves = legal_moves(state)
-449 +     best = order_moves(moves, state["board"])[0]
-450 +     for depth in range(1, max_depth + 1):
-451 +         try:
-452 +             score, pv = alpha_beta_with_quiescence(
-453 +                 state, depth, 0, -MATE_SCORE - 1, MATE_SCORE + 1, info, best
-454 +             )
-455 +         except SearchTimeout:
-456 +             break  # Keep the best move of the last depth that finished
-457 +         if pv:
-458 +             best = pv[0]
-459 +         if report is not None:
-460 +             report(format_info(depth, score, info.nodes, pv))
-461 +         if abs(score) > MATE_SCORE - 1000 or len(moves) == 1:
-462 +             break  # A forced mate or a single legal move needs no deeper search
-463 +     return best
-464 |
-465 |
-466 | def think_move(state: dict) -> Move:
+447 |         The best move of the deepest search that finished.
+448 |     """
+449 +     info = SearchInfo(deadline=time.perf_counter() + seconds)
+450 +     moves = legal_moves(state)
+451 +     best = order_moves(moves, state["board"])[0]
+452 +     for depth in range(1, max_depth + 1):
+453 +         try:
+454 +             score, pv = alpha_beta_with_quiescence(
+455 +                 state, depth, 0, -MATE_SCORE - 1, MATE_SCORE + 1, info, best
+456 +             )
+457 +         except SearchTimeout:
+458 +             break  # Keep the best move of the last depth that finished
+459 +         if pv:
+460 +             best = pv[0]
+461 +         if report is not None:
+462 +             report(format_info(depth, score, info.nodes, pv))
+463 +         if abs(score) > MATE_SCORE - 1000 or len(moves) == 1:
+464 +             break  # A forced mate or a single legal move needs no deeper search
+465 +     return best
+466 |
+467 |
+468 | def think_move(state: dict) -> Move:
 ```
 
 **How it works:** `SearchInfo` holds the node count and the deadline, now plus the seconds allowed. Before searching, `best` is the first move of the ordered list, so Remus always has an answer. The loop searches depth 1, then 2, then 3: iterative deepening. Each search starts with the best move of the last one. When time runs out, the search raises `SearchTimeout`, and `break` keeps the move from the last depth that finished. A forced mate or a single legal move ends the loop early.

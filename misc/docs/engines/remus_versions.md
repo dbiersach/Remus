@@ -20,8 +20,8 @@ holds three folders:
 
 | Folder | Holds |
 | --- | --- |
-| `engines/instructor` | `00 WHITE - No enhancements` to `11 GOLD - All enhancements`, the finished engines, and `version_match.py` |
-| `engines/student` | `00 WHITE - No enhancements` to `10 RED - Transposition table`, with the functions each student pair writes stubbed, and `version_match.py` |
+| `engines/instructor` | `00 WHITE - No enhancements` to `11 GOLD - All enhancements`, the finished engines |
+| `engines/student` | `00 WHITE - No enhancements` to `10 RED - Transposition table`, with the functions each student pair writes stubbed |
 | `engines/Niram` | Niram, Remus-GOLD rewritten in Rust, a course designer's tool |
 
 `00 WHITE - No enhancements` is Remus-WHITE, an exact copy of the Day 9 `period1`
@@ -86,12 +86,12 @@ both `uci_engine.py` and `console_game.py`.
 
 ## The Day 9 battles: version_match.py
 
-`version_match.py`, in `engines/student` and `engines/instructor`, plays an enhanced engine's Remus against Remus-WHITE,
+`version_match.py`, in `misc/scripts`, plays an enhanced engine's Remus against Remus-WHITE,
 or against another enhanced engine, at 10 minutes a side. It adds every game to
 `misc/games/remus_games.pgn` and prints the score.
 
 Nobody types a command to run it. Every engine folder holds two short scripts that
-run `version_match.py` for its own engine, so a student pair (or the teacher) opens one in VS
+run `version_match.py` for its own engine and pass it the folder that holds that engine folder, so a student pair (or the teacher) opens one in VS
 Code and presses the Run Python File button:
 
 | Script | When | What it plays |

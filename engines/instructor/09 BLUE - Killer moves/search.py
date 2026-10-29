@@ -126,7 +126,7 @@ def minimax(state: dict, depth: int, info: SearchInfo) -> int:
     for move in moves:
         undo = make_move(state, move)
         try:
-            scores.append(minimax(state, depth - 1, info))
+            scores.append(minimax(state, depth - 1, info))  # Recursive call to itself
         finally:
             undo_move(state, undo)
     return max(scores) if state["turn"] == "w" else min(scores)
@@ -169,6 +169,7 @@ def negamax(state: dict, depth: int, ply: int, info: SearchInfo) -> int:
     for move in moves:
         undo = make_move(state, move)
         try:
+            # Recursive call to itself
             score = -negamax(state, depth - 1, ply + 1, info)
         finally:
             undo_move(state, undo)
@@ -250,6 +251,7 @@ def alpha_beta(
     for move in moves:
         undo = make_move(state, move)
         try:
+            # Recursive call to itself
             score = -alpha_beta(state, depth - 1, ply + 1, -beta, -alpha, info)
         finally:
             undo_move(state, undo)
@@ -319,7 +321,7 @@ def quiescence(state: dict, alpha: int, beta: int, info: SearchInfo) -> int:
     for move in order_moves(capture_moves(state), state["board"]):
         undo = make_move(state, move)
         try:
-            score = -quiescence(state, -beta, -alpha, info)
+            score = -quiescence(state, -beta, -alpha, info)  # Recursive call to itself
         finally:
             undo_move(state, undo)
         if score >= beta:
@@ -380,7 +382,7 @@ def alpha_beta_with_quiescence(
     for move in order_moves(moves, state["board"], first):
         undo = make_move(state, move)
         try:
-            score, line = alpha_beta_with_quiescence(
+            score, line = alpha_beta_with_quiescence(  # Recursive call to itself
                 state, depth - 1, ply + 1, -beta, -alpha, info
             )
             score = -score
@@ -458,7 +460,9 @@ def killer_search(
     for move in order_moves(moves, state["board"], first, killers):
         undo = make_move(state, move)
         try:
-            score, line = killer_search(state, depth - 1, ply + 1, -beta, -alpha, info)
+            score, line = killer_search(  # Recursive call to itself
+                state, depth - 1, ply + 1, -beta, -alpha, info
+            )
             score = -score
         finally:
             undo_move(state, undo)
