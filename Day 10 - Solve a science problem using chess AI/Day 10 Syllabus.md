@@ -33,7 +33,7 @@ By 4:30, each pair can:
 | 8:55 to 9:35 | Pairs write `candidate_squares()`, `score_candidate()`, and `choose_next_measurement()` in `hidden_peak.py`. |
 | 9:35 to 10:00 | Pairs tune `explore_weight` and post their 100-grid benchmark average on the board, next to random guessing. |
 
-[`period1/student/README.md`](period1/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 10 Period 01 Goals.md`](<period1/Day 10 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: The phase hunt: score a guess, and the greedy agent
 
@@ -44,7 +44,7 @@ By 4:30, each pair can:
 | 11:00 to 11:25 | Pairs write `score()` in `phase_hunt.py`: a point for each explained peak, and a point lost for each extra peak, missing peak, and phase used. |
 | 11:25 to 12:00 | Pairs write `greedy_phases()`, which adds the best phase again and again with `append` and `pop`. Greedy names 166 of 200 powders right and 34 wrong, and it mistakes silver for gold. |
 
-[`period2/student/README.md`](period2/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 10 Period 02 Goals.md`](<period2/Day 10 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: The phase hunt: search every set, and verify
 
@@ -55,7 +55,7 @@ By 4:30, each pair can:
 | 1:50 to 2:15 | The class verifies on 200 known powders: 139 right, 52 "can't tell", and 9 wrong, against greedy's 34 wrong. Pairs change `PHASE_COST` and `MISSING` and watch the verdicts move. |
 | 2:15 to 2:30 | The teacher closes with the programs that search the same tree on real synchrotron data, and the beamline agent at Brookhaven. |
 
-[`period3/student/README.md`](period3/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 10 Period 03 Goals.md`](<period3/Day 10 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Science results, take-home, and wrap-up
 
@@ -67,7 +67,7 @@ By 4:30, each pair can:
 | 3:55 to 4:20 | Each pair presents its results and its two powders in three minutes. |
 | 4:20 to 4:30 | The class closes with what comes next: AI agents that steer real experiments at light sources such as NSLS-II. |
 
-[`period4/student/README.md`](period4/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 10 Period 04 Goals.md`](<period4/Day 10 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## By the end of the day
 

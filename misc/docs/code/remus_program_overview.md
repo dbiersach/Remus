@@ -22,15 +22,16 @@ holds four period folders, `period1` to `period4`, one for each class period:
 | `Day 06 - Count positions and read FEN` | Proves the rules right by counting positions against published totals, then reads and writes FEN |
 | `Day 07 - Play full games and score positions` | Adds game endings, SAN, two simple brains, the UCI link to the GUI, and the evaluation |
 | `Day 08 - Search ahead with alpha-beta` | Looks ahead with minimax and negamax, then prunes with alpha-beta, searches captures to quiet positions, and orders moves |
-| `Day 09 - Add the clock and build the color versions` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten color versions, and ends with battles between the colors |
+| `Day 09 - Add the clock and build enhanced engines` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten color versions, and ends with battles between the colors |
 | `Day 10 - Solve a science problem using chess AI` | Holds only the hidden-peak and phase-hunt Science AI; the Day 10 engine is Remus-GOLD in Day 9 `period2/instructor/engines/Remus-GOLD`, with all ten enhancements |
 
 Every period folder holds two folders. `instructor/` holds only finished reference
 code that runs as it is, with no blanks to fill in, and `student/` holds the code
-students write and change. Every `instructor/` folder is a complete, runnable copy of Remus as it stands at the end of that period, and its
-`README.md` names the period, its learning objectives with how each is measured, the
+students write and change. Every `instructor/` folder is a complete, runnable copy of Remus as it stands at the end of that period. Beside the two folders sits the
+period's goals file, such as `Day 06 Period 02 Goals.md`, which names the period, its learning objectives with how each is measured, the
 files that are new or growing, the functions the pairs write, and a paragraph on each
-change and why (the text comes from `period_guides.py`). `period4/instructor` holds the finished code of the day. `make_period_folders.py`
+change and why (the text comes from `period_guides.py`), then the timed steps of the
+period and the pairs' exact tasks. `period4/instructor` holds the finished code of the day. `make_period_folders.py`
 builds the instructor folders of `period1` to `period3` from it, so a file that grows during the day, such as
 `make_move.py` on Day 5, gains castling in `period2`, en passant in `period3`, and
 promotion in `period4`. Above the period folders, each Day folder's syllabus, such as `Day 05 Syllabus.md`, gives
@@ -244,7 +245,7 @@ positions and depth it visits exactly as many positions as Remus-GOLD and picks 
 same moves, about 50 times faster: some 200,000 positions a second against about
 4,000. The teacher's league ran on Rust copies of all 12 versions, so its 10-minute
 games searched as deep as a Remus league of 8-hour games. See
-[its README](<../../../Day 09 - Add the clock and build the color versions/period2/instructor/engines/Niram-GOLD/README.md>).
+[its README](<../../../Day 09 - Add the clock and build enhanced engines/period2/instructor/engines/Niram-GOLD/README.md>).
 
 ## Science AI
 

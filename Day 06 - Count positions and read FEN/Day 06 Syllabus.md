@@ -33,7 +33,7 @@ By 4:30, each pair can:
 | 9:35 to 9:50 | The teacher draws the call stack of a short count on the whiteboard while the class traces it. |
 | 9:50 to 10:00 | Wrap-up: what stops a recursion? |
 
-[`period1/student/README.md`](period1/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 06 Period 01 Goals.md`](<period1/Day 06 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Perft
 
@@ -45,7 +45,7 @@ By 4:30, each pair can:
 | 11:25 to 11:50 | Pairs run `perft.py` from the start: 20, 400, and 8,902. The teacher shows `divide()`, which prints the count under each root move. |
 | 11:50 to 12:00 | Show and choose for `perft()`. |
 
-[`period2/student/README.md`](period2/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 06 Period 02 Goals.md`](<period2/Day 06 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: Perft against python-chess, and bug hunt
 
@@ -56,7 +56,7 @@ By 4:30, each pair can:
 | 2:10 to 2:25 | Pairs explain each bug they found and the rule it broke. |
 | 2:25 to 2:30 | Wrap-up: the hunt is over when `hunt.py` prints 0 root moves that disagree. |
 
-[`period3/student/README.md`](period3/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 06 Period 03 Goals.md`](<period3/Day 06 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Python lab 9 and FEN
 
@@ -67,7 +67,7 @@ By 4:30, each pair can:
 | 3:30 to 4:20 | Pairs write `fen_placement()` and `board_from_placement()` in `fen.py`. The teacher writes the other five fields. |
 | 4:20 to 4:30 | Checkpoint: every test position loads from FEN and perft matches the reference. |
 
-[`period4/student/README.md`](period4/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 06 Period 04 Goals.md`](<period4/Day 06 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## By the end of the day
 

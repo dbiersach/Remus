@@ -1,6 +1,6 @@
 # Student Edit Plan: Who Writes What, Period by Period
 
-`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which the teacher writes, and the functions the pairs write, which are stubs in each `student` folder and finished in the `instructor` folder beside it. Each student folder's `README.md` has the same list with line numbers and the tests that check each function.
+`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which the teacher writes, and the functions the pairs write, which are stubs in each `student` folder and finished in the `instructor` folder beside it. Each period's goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check each function.
 
 ## Day 01 - Draw the board
 
@@ -74,7 +74,7 @@
 | P3 | The horizon effect and quiescence | None | `search.py`, `test_search.py` | `quiescence()` in `search.py` (15 lines) |
 | P4 | Move ordering | `move_ordering.py` | `search.py`, `test_search.py` | `mvv_lva_score()` in `move_ordering.py` (8 lines) |
 
-## Day 09 - Add the clock and build the color versions
+## Day 09 - Add the clock and build enhanced engines
 
 | Period | Title | New files | Files that grow | Pairs write |
 | --- | --- | --- | --- | --- |

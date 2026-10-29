@@ -34,7 +34,7 @@ By 4:30, each pair can:
 | 9:30 to 9:50 | Pairs finish Part #4 and save the lab with their first commit. |
 | 9:50 to 10:00 | Every pair shows its `git log` to the teacher or the assistant. |
 
-[`period1/student/README.md`](period1/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 04 Period 01 Goals.md`](<period1/Day 04 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Attacks
 
@@ -46,7 +46,7 @@ By 4:30, each pair can:
 | 11:40 to 11:50 | Pairs run the attack tests and the file's self-check. |
 | 11:50 to 12:00 | Show and choose for `piece_at_offsets()`. |
 
-[`period2/student/README.md`](period2/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 04 Period 02 Goals.md`](<period2/Day 04 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: Check and the legal filter
 
@@ -58,7 +58,7 @@ By 4:30, each pair can:
 | 2:05 to 2:15 | Pairs compare Remus's answers with their pin hunt worksheets. |
 | 2:15 to 2:30 | Show and choose for `legal_moves()`. |
 
-[`period3/student/README.md`](period3/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 04 Period 03 Goals.md`](<period3/Day 04 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Practice positions
 
@@ -69,7 +69,7 @@ By 4:30, each pair can:
 | 3:50 to 4:15 | Part #4: each pair builds a position of its own and trades it with the next pair, who predict before they run it. |
 | 4:15 to 4:30 | Checkpoint: a pinned knight has zero legal moves, and a king in check has only escapes. |
 
-[`period4/student/README.md`](period4/student/README.md) lists the period's learning objectives, how each one is measured, and every change the pairs make.
+[`Day 04 Period 04 Goals.md`](<period4/Day 04 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the pairs make, and their exact tasks.
 
 ## By the end of the day
 

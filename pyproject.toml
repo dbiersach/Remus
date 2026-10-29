@@ -56,5 +56,5 @@ addopts = "-q"
 # the Day 9 period2/instructor/engines folder, where every pair runs it for the battles.
 [tool.pyright]
 executionEnvironments = [
-    { root = "misc/scripts", extraPaths = ["Day 09 - Add the clock and build the color versions/period2/instructor/engines"] },
+    { root = "misc/scripts", extraPaths = ["Day 09 - Add the clock and build enhanced engines/period2/instructor/engines"] },
 ]

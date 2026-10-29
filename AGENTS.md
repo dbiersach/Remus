@@ -201,9 +201,11 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `student/`, the code students write and change. Each `instructor/` folder is a
   complete, runnable copy of Remus as it stands at the end of that period (Day 10
   holds only its science files, and Day 9 periods 2 to 4 hold no engine code: see
-  below), with a `README.md`
-  that names the period, its new and growing files, and the functions pairs write.
-  Every period README and color version README also holds (David, 2026-10-27):
+  below). Beside `instructor/` and `student/` sits one goals file for the period,
+  such as `Day 03 Period 02 Goals.md` (David, 2026-10-29), which replaces separate
+  instructor and student READMEs. It names the period, its new and growing files,
+  and the functions pairs write. Every period goals file and color version README
+  also holds (David, 2026-10-27):
   - **Learning objectives** as a bulleted list, each with a **Measured by** line that
     says how the teacher sees a pair has learned it: a named test that passes, a
     printed result, or something the pair explains without running code.
@@ -227,7 +229,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   in `misc/docs/images/phase_hunt/`, drawn by `uv run misc/scripts/make_phase_hunt_figures.py`,
   which installs matplotlib for itself alone. Measure `VERSION_MEASURES` again after any
   change to a color version's search or evaluation.
-  Each student README adds a "What you edit this period" table with the line where
+  Each goals file also lists the timed steps of its period (from `DAY_GUIDES`) and
+  a "What you edit this period" table with the line where
   each stub starts, the lines to type, and the tests that check it, and
   `misc/docs/course/student_edit_plan.md` lists the same plan for the whole course.
 - Each Python skills lab lives in its own period folder (David, 2026-10-28; there is
@@ -273,8 +276,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   tests fail until a pair writes the function. `make_student_folders.py` builds
   every `student/` folder from its `instructor/` sibling and lists every student function by day and period;
   run it after `make_period_folders.py`, and never edit a student stub by hand.
-- The Remus versions live in `Day 09 - Add the clock and build the color
-  versions/period2/instructor/engines` (David, 2026-10-28). Remus-WHITE, the finished Day 9
+- The Remus versions live in `Day 09 - Add the clock and build enhanced
+  engines/period2/instructor/engines` (David, 2026-10-28; the Day 9 folder name was
+  set on 2026-10-29). Remus-WHITE, the finished Day 9
   Remus with none of the ten enhancements (named by David on 2026-10-27), is the
   Day 9 `period1/instructor` folder; it has no folder of its own. `engines/` holds the ten color
   versions, one folder per color (`10 RED - Transposition table`, ...), each

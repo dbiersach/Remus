@@ -1,13 +1,14 @@
 #!/usr/bin/env -S uv run
 """period_guides.py
 
-The teaching text of every period README: the learning objectives, each with a way
+The teaching text of every period goals file: the learning objectives, each with a way
 to measure it, and one paragraph for every change the pairs make to the code. It
-also holds the overview of every day, which goes into the README.md at the top of
-each Day folder.
+also holds the overview of every day, which goes into the syllabus at the top of
+each Day folder ("Day NN Syllabus.md").
 
-make_period_folders.py writes this text into each instructor period README, and
-make_student_folders.py into each student period README and version README. Keep
+make_period_folders.py writes this text into each period goals file, such as
+"Day 03 Period 02 Goals.md", and make_student_folders.py adds the period's timed
+steps and tasks to it and writes the version READMEs. Keep
 the language at a middle school reading level: short sentences, one idea each.
 """
 
@@ -1167,8 +1168,8 @@ VERSION_MEASURES = {
     "GRAY": {"nodes": 459_732, "seconds": 93.3, "depth": 3.1},
 }
 
-# Picture folder, as a path from a period README (Day, period, instructor or student)
-PHASE_HUNT_IMAGES = "../../../misc/docs/images/phase_hunt"
+# Picture folder, as a path from a period goals file at the top of Day NN/periodK
+PHASE_HUNT_IMAGES = "../../misc/docs/images/phase_hunt"
 
 # A longer illustrated guide for a period that needs more than the objectives and
 # change notes, written into the README right after the objectives.
@@ -1309,7 +1310,7 @@ In period 2, `greedy_phases()` built one guess, one phase at a time. In this per
 `search()` scores **every** guess of up to three phases. The guesses form a tree,
 like Remus's game tree: the empty guess at the top, one more phase on each level
 down. Going down a branch adds a phase (`append`, like making a move), and coming
-back up takes it out (`pop`, like undoing it). The period 2 README explains the
+back up takes it out (`pop`, like undoing it). The period 2 goals file explains the
 experiment and the score.
 
 ![The tree of guesses for powder 23, using 4 of the 10 phases and 2 levels, with
@@ -2687,7 +2688,7 @@ DAY_GUIDES = {
                     45,
                     (
                         "The teacher hands out `uci_engine.py` and `remus.bat`. Pairs "
-                        "register `remus.bat` from this period folder in Lucas Chess, "
+                        "register `remus.bat` from the period's `student` folder in Lucas Chess, "
                         "following the [Lucas Chess guide](../misc/docs/course/lucas_chess_guide.md)."
                     ),
                 ),
@@ -2969,7 +2970,7 @@ DAY_GUIDES = {
                 (
                     60,
                     (
-                        "Pairs register `remus.bat` from this folder in Lucas Chess "
+                        "Pairs register `remus.bat` from the `student` folder in Lucas Chess "
                         "again and play greedy Remus."
                     ),
                 ),
@@ -3189,7 +3190,7 @@ DAY_GUIDES = {
         ),
     },
     9: {
-        "theme": "The clock and the color versions",
+        "theme": "The clock and the enhanced engines",
         "summary": (
             "Day 9 gives Remus a clock, then splits the class into ten enhancement "
             "color versions. Each pair adds one idea to the same engine, Remus-WHITE, and "

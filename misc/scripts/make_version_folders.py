@@ -1052,7 +1052,7 @@ def run_script_text(name: str, color: str) -> str:
             arguments += f', "{word}"'
     return (
         f'#!/usr/bin/env -S uv run\n"""{name}\n\n{about.format(color=color)}\n'
-        "version_match.py, in the Remus folder above this one, plays the games and "
+        "version_match.py, in the engines folder above this one, plays the games and "
         'adds\nthem to misc/games/remus_games.pgn.\n"""\n\n'
         "import subprocess\nimport sys\nfrom pathlib import Path\n\n\n"
         "def main():\n"
