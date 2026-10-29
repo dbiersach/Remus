@@ -72,8 +72,92 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `search.py` | `make_null_move()` | 398 | 5 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
-| `search.py` | `undo_null_move()` | 418 | 3 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
+| `search.py` | `undo_null_move()` | 420 | 3 | `test_upgrades.py::test_null_move_and_undo_restore_the_state` |
 | `test_upgrades.py` | `test_null_move_and_undo_restore_the_state()` | 21 | 6 | `run_tests.py` |
-| `test_upgrades.py` | `test_null_move_search_saves_work_and_keeps_the_state()` | 30 | 9 | `run_tests.py` |
+| `test_upgrades.py` | `test_null_move_search_saves_work_and_keeps_the_state()` | 31 | 9 | `run_tests.py` |
 
 Lines to type in all: 23. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `make_null_move()` in `search.py`
+
+**Where:** lines 413 to 417 of `search.py`, inside `make_null_move()`, in place of the stub below the docstring. It is called by `null_move_search()` in `search.py`.
+
+```text
+398 | def make_null_move(state: dict) -> Square | None:
+      ...
+411 |         The en passant target before the null move, which undo_null_move restores.
+412 |     """
+413 +     en_passant = state["en_passant"]
+414 +     state["turn"] = opponent(state["turn"])
+415 +     state["en_passant"] = None
+416 +     state["history"].append(position_key(state))
+417 +     return en_passant
+418 |
+419 |
+420 | def undo_null_move(state: dict, en_passant: Square | None) -> None:
+```
+
+**How it works:** A null move is a pass: the side to move gives the turn away without moving a piece. The function saves the en passant target first, because the undo needs it back. `opponent` flips the turn from "w" to "b" or back. A pass cancels any en passant capture, so the target becomes None. The new position's key goes onto the history, so the repetition rules still see every position the search visits, and the saved target is returned for `undo_null_move`.
+
+### `undo_null_move()` in `search.py`
+
+**Where:** lines 422 to 424 of `search.py`, inside `undo_null_move()`, in place of the stub below the docstring. It is called by `null_move_search()` in `search.py`.
+
+```text
+420 | def undo_null_move(state: dict, en_passant: Square | None) -> None:
+421 |     """Take back a null move, restoring the side to move and the en passant target."""
+422 +     state["history"].pop()
+423 +     state["turn"] = opponent(state["turn"])
+424 +     state["en_passant"] = en_passant
+425 |
+426 |
+427 | def has_pieces(board: Board, color: str) -> bool:
+```
+
+**How it works:** The undo takes the three steps of `make_null_move` back in reverse order: it removes the last history key, flips the turn back, and puts back the en passant target that `make_null_move` returned.
+
+### `test_null_move_and_undo_restore_the_state()` in `test_upgrades.py`
+
+**Where:** lines 23 to 28 of `test_upgrades.py`, inside `test_null_move_and_undo_restore_the_state()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+21 | def test_null_move_and_undo_restore_the_state() -> None:
+22 |     """Expected: a pass gives Black the turn, and its undo restores the exact state."""
+23 +     state = state_from_fen(ITALIAN)
+24 +     before = state_snapshot(state)
+25 +     en_passant = make_null_move(state)
+26 +     assert state["turn"] == "b"
+27 +     undo_null_move(state, en_passant)
+28 +     assert state_snapshot(state) == before
+29 |
+30 |
+31 | def test_null_move_search_saves_work_and_keeps_the_state() -> None:
+```
+
+**How it works:** The test takes a snapshot of the Italian opening, makes a null move, and checks that Black now has the turn. After `undo_null_move` the snapshot must match exactly: same board, turn, en passant target, clocks, and history.
+
+### `test_null_move_search_saves_work_and_keeps_the_state()` in `test_upgrades.py`
+
+**Where:** lines 33 to 41 of `test_upgrades.py`, inside `test_null_move_search_saves_work_and_keeps_the_state()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
+
+```text
+31 | def test_null_move_search_saves_work_and_keeps_the_state() -> None:
+32 |     """The upgraded search visits fewer positions than plain alpha-beta at depth 4."""
+33 +     state = state_from_fen(ITALIAN)
+34 +     before = state_snapshot(state)
+35 +     plain = SearchInfo()
+36 +     upgraded = SearchInfo()
+37 +     alpha_beta_with_quiescence(state, 4, 0, *WIDE, plain)
+38 +     _, pv = null_move_search(state, 4, 0, *WIDE, upgraded)
+39 +     assert upgraded.nodes < plain.nodes
+40 +     assert pv
+41 +     assert state_snapshot(state) == before
+```
+
+**How it works:** Two `SearchInfo` records count positions: `plain` for ordinary alpha-beta and `upgraded` for the null-move search, both at depth 4 on the Italian opening. The asserts check that the upgraded search visits fewer positions, that it returns a line of moves, and that the state snapshot is unchanged afterward.

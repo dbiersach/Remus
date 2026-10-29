@@ -255,8 +255,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   change to a color version's search or evaluation.
   Each goals file also lists the timed steps of its period (from `DAY_GUIDES`) and
   a "What you edit this period" table with the line where
-  each stub starts, the lines to type, and the tests that check it, and
-  `misc/docs/course/student_edit_plan.md` lists the same plan for the whole course.
+  each stub starts, the lines to type, and the tests that check it. Every goals
+  file and color version README then has "The code you type" (David, 2026-10-29):
+  for each function and lab part, the lines to type marked `+`, with the lines
+  around them and their line numbers, where the code sits and what calls it, and
+  how it works, from `CODE_NOTES` in `period_guides.py`.
+  `make_student_folders.py` writes the code blocks from the code itself, and a test
+  in `test_reference_tools.py` checks every quoted line against its file.
+  `misc/docs/course/student_edit_plan.md` lists the edit plan for the whole course.
 - Each Python skills lab lives in its own period folder (David, 2026-10-28; there is
   no separate `labs/` folder): the student file with `#` blanks, `<name>.py`, in the
   student period folder, and the answer file, `<name>_instructor.py`, in the

@@ -49,3 +49,29 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 Open `demo_promotion.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 12. Check the work by running `demo_promotion.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #1 - Try All Four Promotions
+
+```text
+37 |     print("Part #1 - Try All Four Promotions")
+38 |     # Predict first: which piece wins, and which ones only draw?
+39 +     for letter in "QRBN":
+40 +         move = Move(parse_square("b7"), parse_square("b8"), letter)
+41 +         undo = make_move(state, move)
+42 +         replies = len(legal_moves(state))
+43 |         # No legal reply is checkmate if Black is in check, and stalemate if not
+44 +         if replies > 0:
+45 +             result = f"{replies} legal replies"
+46 +         elif in_check(state, BLACK):
+47 +             result = "checkmate"
+48 +         else:
+49 +             result = "stalemate"
+50 +         print(f"  b8={letter}: {result}")
+51 +         undo_move(state, undo)
+52 |     print("  (expected stalemate for Q, R, and B, and checkmate for N)")
+53 |
+```

@@ -40,3 +40,46 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 Open `python_modules.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 11. Check the work by running `python_modules.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### 
+
+```text
+10 |
+11 | # Each import line reads another file of this folder by its name, without the .py
+12 + import board
+13 + from board import new_board, parse_square
+14 + from game_state import WHITE
+15 + from move_generation import knight_moves
+16 | from moves import move_to_uci
+17 |
+```
+
+### Part #1 - Every File Has a __name__
+
+```text
+20 |     print("Part #1 - Every File Has a __name__")
+21 |     # The file that VS Code runs is named "__main__"; an imported file keeps its name
+22 +     print(f"This file's __name__: {__name__}  (expected __main__)")
+23 +     print(f"board.py's __name__: {board.__name__}  (expected board)")
+24 |     print("board.py printed no board when it was imported: its main() did not run")
+25 |
+```
+
+### Part #2 - Use Functions from Another File
+
+```text
+25 |
+26 |     print("Part #2 - Use Functions from Another File")
+27 +     start = new_board()
+28 +     square = parse_square("g1")
+29 +     moves = knight_moves(start, square, WHITE)
+30 |     names = ""
+31 +     for move in moves:
+32 +         names += move_to_uci(move) + " "
+33 |     print(f"Knight moves from g1: {names}  (expected g1f3 g1h3)")
+34 |
+```

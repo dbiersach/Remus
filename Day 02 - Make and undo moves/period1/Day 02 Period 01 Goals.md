@@ -43,3 +43,89 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 Open `python_functions.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 16. Check the work by running `python_functions.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### `is_white()`
+
+```text
+11 | def is_white(piece: str) -> bool:
+12 |     """Return True if the piece is White. White pieces are uppercase letters."""
+13 +     return piece.isupper()
+14 |
+15 |
+```
+
+### `on_board()`
+
+```text
+30 |         True when both the row and the column are between 0 and 7.
+31 |     """
+32 +     return 0 <= row <= 7 and 0 <= col <= 7
+33 |
+34 |
+35 | # Write a whole function yourself: its def line, its docstring, and its body
+36 + def is_black(piece: str) -> bool:
+37 +     """Return True if the piece is Black. Black pieces are lowercase letters."""
+38 +     return piece.islower()
+39 |
+40 |
+```
+
+### `test_is_white()`
+
+```text
+41 | def test_is_white():
+42 |     """A White knight is White, and a Black knight is not."""
+43 +     assert is_white("N")
+44 +     assert not is_white("n")
+45 |
+46 |
+```
+
+### `test_on_board()`
+
+```text
+48 |     """The corner a1 is on the board, and row 8 is one row past rank 1."""
+49 |     # a1 is row 7, col 0
+50 +     assert on_board(7, 0)
+51 +     assert not on_board(8, 3)
+52 |
+53 |
+```
+
+### Part #2 - Your Own Function
+
+```text
+60 |
+61 |     print("Part #2 - Your Own Function")
+62 +     print(f'is_black("q") is {is_black("q")}  (expected True)')
+63 +     print(f'is_black("Q") is {is_black("Q")}  (expected False)')
+64 |
+65 |     print("Part #3 - A Square Is a Tuple")
+```
+
+### Part #3 - A Square Is a Tuple
+
+```text
+67 |     square = (4, 4)
+68 |     # Unpacking gives each number its own name, in order
+69 +     row, col = square
+70 +     print(f"row {row}, col {col}  (expected row 4, col 4)")
+71 +     print(f"On the board: {on_board(row, col)}  (expected True)")
+72 |
+73 |     print("Part #4 - Check the Functions with assert")
+```
+
+### Part #4 - Check the Functions with assert
+
+```text
+73 |     print("Part #4 - Check the Functions with assert")
+74 |     # assert does nothing when its test is True and stops the program when it is False
+75 +     test_is_white()
+76 +     test_on_board()
+77 |     print("Every assert passed  (expected this line)")
+78 |     print("Now run the same tests with pytest: press Run on run_tests.py")
+```

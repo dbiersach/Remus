@@ -9,22 +9,22 @@ By the end of this period, each student pair can:
 
 ## The files
 
-This folder holds no engine code. Each student pair works in its own engine folder in `engines/student`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder.
+This folder holds no engine code. Each student pair works in its own engine folder in `engines/student`, a complete copy of Remus-WHITE plus one enhancement. Remus-WHITE itself is in the `period1` folder. The `README.md` in each engine folder explains its enhancement, and its section "The code you type" shows every line the student pair types, with line numbers, the lines around it, and how the code works.
 
 Before the smoke test, check your engine: open `run_tests.py` in your student pair's engine folder in `engines/student` and press Run. Every test must pass. Click your engine folder below to find it.
 
-| Engine folder | Tests |
-| --- | --- |
-| [01 GRAY - King safety](../../engines/student/01%20GRAY%20-%20King%20safety) | [`run_tests.py`](../../engines/student/01%20GRAY%20-%20King%20safety/run_tests.py) |
-| [02 YELLOW - Draw sense](../../engines/student/02%20YELLOW%20-%20Draw%20sense) | [`run_tests.py`](../../engines/student/02%20YELLOW%20-%20Draw%20sense/run_tests.py) |
-| [03 CYAN - Mating bonus](../../engines/student/03%20CYAN%20-%20Mating%20bonus) | [`run_tests.py`](../../engines/student/03%20CYAN%20-%20Mating%20bonus/run_tests.py) |
-| [04 PINK - Principal variation search](../../engines/student/04%20PINK%20-%20Principal%20variation%20search) | [`run_tests.py`](../../engines/student/04%20PINK%20-%20Principal%20variation%20search/run_tests.py) |
-| [05 ORANGE - Null-move pruning](../../engines/student/05%20ORANGE%20-%20Null-move%20pruning) | [`run_tests.py`](../../engines/student/05%20ORANGE%20-%20Null-move%20pruning/run_tests.py) |
-| [06 BROWN - Late move reductions](../../engines/student/06%20BROWN%20-%20Late%20move%20reductions) | [`run_tests.py`](../../engines/student/06%20BROWN%20-%20Late%20move%20reductions/run_tests.py) |
-| [07 PURPLE - Pawn structure](../../engines/student/07%20PURPLE%20-%20Pawn%20structure) | [`run_tests.py`](../../engines/student/07%20PURPLE%20-%20Pawn%20structure/run_tests.py) |
-| [08 GREEN - Opening book](../../engines/student/08%20GREEN%20-%20Opening%20book) | [`run_tests.py`](../../engines/student/08%20GREEN%20-%20Opening%20book/run_tests.py) |
-| [09 BLUE - Killer moves](../../engines/student/09%20BLUE%20-%20Killer%20moves) | [`run_tests.py`](../../engines/student/09%20BLUE%20-%20Killer%20moves/run_tests.py) |
-| [10 RED - Transposition table](../../engines/student/10%20RED%20-%20Transposition%20table) | [`run_tests.py`](../../engines/student/10%20RED%20-%20Transposition%20table/run_tests.py) |
+| Engine folder | The code you type | Tests |
+| --- | --- | --- |
+| [01 GRAY - King safety](../../engines/student/01%20GRAY%20-%20King%20safety) | [`README.md`](../../engines/student/01%20GRAY%20-%20King%20safety/README.md) | [`run_tests.py`](../../engines/student/01%20GRAY%20-%20King%20safety/run_tests.py) |
+| [02 YELLOW - Draw sense](../../engines/student/02%20YELLOW%20-%20Draw%20sense) | [`README.md`](../../engines/student/02%20YELLOW%20-%20Draw%20sense/README.md) | [`run_tests.py`](../../engines/student/02%20YELLOW%20-%20Draw%20sense/run_tests.py) |
+| [03 CYAN - Mating bonus](../../engines/student/03%20CYAN%20-%20Mating%20bonus) | [`README.md`](../../engines/student/03%20CYAN%20-%20Mating%20bonus/README.md) | [`run_tests.py`](../../engines/student/03%20CYAN%20-%20Mating%20bonus/run_tests.py) |
+| [04 PINK - Principal variation search](../../engines/student/04%20PINK%20-%20Principal%20variation%20search) | [`README.md`](../../engines/student/04%20PINK%20-%20Principal%20variation%20search/README.md) | [`run_tests.py`](../../engines/student/04%20PINK%20-%20Principal%20variation%20search/run_tests.py) |
+| [05 ORANGE - Null-move pruning](../../engines/student/05%20ORANGE%20-%20Null-move%20pruning) | [`README.md`](../../engines/student/05%20ORANGE%20-%20Null-move%20pruning/README.md) | [`run_tests.py`](../../engines/student/05%20ORANGE%20-%20Null-move%20pruning/run_tests.py) |
+| [06 BROWN - Late move reductions](../../engines/student/06%20BROWN%20-%20Late%20move%20reductions) | [`README.md`](../../engines/student/06%20BROWN%20-%20Late%20move%20reductions/README.md) | [`run_tests.py`](../../engines/student/06%20BROWN%20-%20Late%20move%20reductions/run_tests.py) |
+| [07 PURPLE - Pawn structure](../../engines/student/07%20PURPLE%20-%20Pawn%20structure) | [`README.md`](../../engines/student/07%20PURPLE%20-%20Pawn%20structure/README.md) | [`run_tests.py`](../../engines/student/07%20PURPLE%20-%20Pawn%20structure/run_tests.py) |
+| [08 GREEN - Opening book](../../engines/student/08%20GREEN%20-%20Opening%20book) | [`README.md`](../../engines/student/08%20GREEN%20-%20Opening%20book/README.md) | [`run_tests.py`](../../engines/student/08%20GREEN%20-%20Opening%20book/run_tests.py) |
+| [09 BLUE - Killer moves](../../engines/student/09%20BLUE%20-%20Killer%20moves) | [`README.md`](../../engines/student/09%20BLUE%20-%20Killer%20moves/README.md) | [`run_tests.py`](../../engines/student/09%20BLUE%20-%20Killer%20moves/run_tests.py) |
+| [10 RED - Transposition table](../../engines/student/10%20RED%20-%20Transposition%20table) | [`README.md`](../../engines/student/10%20RED%20-%20Transposition%20table/README.md) | [`run_tests.py`](../../engines/student/10%20RED%20-%20Transposition%20table/run_tests.py) |
 
 ## The period step by step
 

@@ -46,3 +46,34 @@ Every other function is finished. Change only these, and only below each docstri
 | `move_generation.py` | `pawn_pushes()` | 130 | 11 | `test_move_generation.py::test_pawn_pushes_from_the_start_rank`, `test_move_generation.py::test_blocked_pawn_has_no_pushes`, `test_move_generation.py::test_pawn_promotes_to_four_pieces` |
 
 Lines to type in all: 11. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `pawn_pushes()` in `move_generation.py`
+
+**Where:** lines 148 to 158 of `move_generation.py`, inside `pawn_pushes()`, in place of the stub below the docstring. It is called by `piece_moves()` in `move_generation.py`.
+
+```text
+130 | def pawn_pushes(board: Board, square: Square, color: str) -> list[Move]:
+      ...
+146 |         The pushes onto empty squares. A pawn never captures straight ahead.
+147 |     """
+148 +     row, col = square
+149 +     forward = -1 if color == WHITE else 1
+150 +     start_row = 6 if color == WHITE else 1
+151 +     moves = []
+152 +     one_step = (row + forward, col)
+153 +     if on_board(*one_step) and piece_at(board, one_step) == EMPTY:
+154 +         moves += pawn_moves_to(square, one_step, color)
+155 +         two_steps = (row + 2 * forward, col)
+156 +         if row == start_row and piece_at(board, two_steps) == EMPTY:
+157 +             moves.append(Move(square, two_steps))
+158 +     return moves
+159 |
+160 |
+161 | def pawn_captures(board: Board, square: Square, color: str) -> list[Move]:
+```

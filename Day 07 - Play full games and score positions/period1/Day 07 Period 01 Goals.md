@@ -55,6 +55,70 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `game_end.py` | `insufficient_material()` | 17 | 18 | `test_game.py::test_insufficient_material` |
-| `game_end.py` | `game_result()` | 42 | 12 | `test_game.py::test_checkmate_and_stalemate`, `test_game.py::test_threefold_repetition_and_undo`, `test_game.py::test_fifty_move_rule` |
+| `game_end.py` | `game_result()` | 57 | 12 | `test_game.py::test_checkmate_and_stalemate`, `test_game.py::test_threefold_repetition_and_undo`, `test_game.py::test_fifty_move_rule` |
 
 Lines to type in all: 30. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `insufficient_material()` in `game_end.py`
+
+**Where:** lines 32 to 49 of `game_end.py`, inside `insufficient_material()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+17 | def insufficient_material(board: Board) -> bool:
+     ...
+30 |         against king, and kings with bishops that all stand on squares of one color.
+31 |     """
+32 +     pieces = []
+33 +     bishop_square_colors = set()
+34 +     for row in range(8):
+35 +         for col in range(8):
+36 +             piece = board[row][col]
+37 +             if piece == EMPTY or piece.upper() == "K":
+38 +                 continue
+39 +             pieces.append(piece.upper())
+40 +             if piece.upper() == "B":
+41 +                 bishop_square_colors.add((row + col) % 2)
+42 +     if not pieces:
+43 +         return True
+44 +     if len(pieces) == 1 and pieces[0] in "BN":
+45 +         return True
+46 +     for piece in pieces:
+47 +         if piece != "B":
+48 +             return False  # A knight beside other pieces, or any pawn, rook, or queen
+49 +     return len(bishop_square_colors) == 1
+50 |
+51 |
+52 | def repetition_count(state: dict) -> int:
+```
+
+### `game_result()` in `game_end.py`
+
+**Where:** lines 72 to 83 of `game_end.py`, inside `game_result()`, in place of the stub below the docstring. The tests call it directly.
+
+```text
+57 | def game_result(state: dict) -> tuple[str, str] | None:
+     ...
+70 |         ("1-0", "checkmate").
+71 |     """
+72 +     if not legal_moves(state):
+73 +         if in_check(state, state["turn"]):
+74 +             winner = "0-1" if state["turn"] == "w" else "1-0"
+75 +             return winner, "checkmate"
+76 +         return "1/2-1/2", "stalemate"
+77 +     if insufficient_material(state["board"]):
+78 +         return "1/2-1/2", "insufficient material"
+79 +     if repetition_count(state) >= 3:
+80 +         return "1/2-1/2", "threefold repetition"
+81 +     if state["halfmove_clock"] >= 100:
+82 +         return "1/2-1/2", "fifty-move rule"
+83 +     return None
+84 |
+85 |
+86 | def main():
+```

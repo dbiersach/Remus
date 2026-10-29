@@ -25,7 +25,7 @@ from pathlib import Path
 from typing import Any
 
 from make_version_folders import VERSIONS_TABLE
-from period_guides import DAY_GUIDES, LABS
+from period_guides import CODE_NOTES, DAY_GUIDES, LABS
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/scripts/
 
@@ -211,6 +211,158 @@ def edit_section(rows: list[EditRow]) -> str:
         ),
     ]
     return "\n".join(lines) + "\n"
+
+
+CODE_INTRO = (
+    "Each block below shows the code to type with a few lines around it, so you can "
+    "find the spot. A line marked `+` is one you type; a line marked `|` is already "
+    "in the file. Type the code without the number and the mark, and keep the indent "
+    "shown. Lines that start with `#` are comments: they explain the code, and "
+    "typing them is optional."
+)
+CODE_NUMBERS = (
+    "The number at the left of each line is its line number once the code is typed. "
+    "When one file holds two functions to write, type the higher one first: until "
+    "it is typed, the stub of a function lower down sits a few lines higher than "
+    "these numbers say."
+)
+
+
+def snippet_block(numbered: list[tuple[int, str, str]]) -> str:
+    """Return a Markdown code block from (line number, mark, text); number 0 is a gap."""
+    width = len(str(numbered[-1][0]))
+    out = "```text\n"
+    for number, mark, text in numbered:
+        if number == 0:
+            out += " " * width + "   " + text + "\n"  # Lines left out, such as "..."
+        else:
+            out += f"{number:>{width}} {mark} {text}".rstrip() + "\n"
+    return out + "```\n"
+
+
+def body_span(text: str, name: str) -> tuple[int, int, int, int]:
+    """Return (def line, docstring end, body start, body end) of a function, from 1."""
+    for node in ast.parse(text).body:
+        if isinstance(node, ast.FunctionDef) and node.name == name:
+            docstring_end = node.body[0].end_lineno or node.lineno
+            return node.lineno, docstring_end, docstring_end + 1, node.end_lineno or 0
+    raise ValueError(f"No function named {name}")
+
+
+def callers(folder: Path, name: str, home: str) -> list[str]:
+    """Return "`caller()` in `file`" for every engine function in a folder that calls name."""
+    found = []
+    for path in sorted(folder.glob("*.py")):
+        if path.name.startswith("test_"):
+            continue
+        for node in ast.parse(path.read_text()).body:
+            if not isinstance(node, ast.FunctionDef) or node.name == name:
+                continue
+            if node.name == "main" and path.name == home:
+                continue  # The file's own main() only runs its self-check
+            for item in ast.walk(node):
+                called = isinstance(item, ast.Call) and (
+                    (isinstance(item.func, ast.Name) and item.func.id == name)
+                    or (isinstance(item.func, ast.Attribute) and item.func.attr == name)
+                )
+                if called:
+                    found.append(f"`{node.name}()` in `{path.name}`")
+                    break
+    return found
+
+
+def function_code(student: Path, answer: Path, row: EditRow) -> str:
+    """Return the "code you type" part for one function: where, the code, and how."""
+    name, file_name = row["function"], row["file"]
+    lines = answer.read_text().splitlines()
+    def_number, docstring_end, first, last = body_span(answer.read_text(), name)
+    numbered = [(def_number, "|", lines[def_number - 1])]
+    context_start = max(def_number + 1, docstring_end - 1)
+    if context_start > def_number + 1:
+        numbered.append((0, "", "..."))  # The middle of a long docstring
+    for number in range(context_start, docstring_end + 1):
+        numbered.append((number, "|", lines[number - 1]))
+    for number in range(first, last + 1):
+        numbered.append((number, "+", lines[number - 1]))
+    # Show the lines after the function up to the next line that holds code
+    for number in range(last + 1, min(last + 3, len(lines)) + 1):
+        numbered.append((number, "|", lines[number - 1]))
+        if lines[number - 1].strip():
+            break
+    called_by = callers(student.parent, name, file_name)
+    if name.startswith("test_"):
+        used = "`run_tests.py` runs it with every other test in the folder."
+    elif called_by:
+        used = "It is called by " + ", ".join(called_by) + "."
+    else:
+        used = "The tests call it directly."
+    where = (
+        f"**Where:** lines {first} to {last} of `{file_name}`, inside `{name}()`, "
+        f"in place of the stub below the docstring. {used}"
+    )
+    parts = [f"### `{name}()` in `{file_name}`", "", where, "", snippet_block(numbered)]
+    note = CODE_NOTES.get((file_name, name))
+    if note:
+        parts += [f"**How it works:** {note}", ""]
+    return "\n".join(parts)
+
+
+def lab_groups(student_text: str) -> list[tuple[str, list[int]]]:
+    """Return (label, blank line numbers) for each part or function of a lab file."""
+    groups: list[tuple[str, list[int]]] = []
+    label = ""
+    for number, line in enumerate(student_text.splitlines(), start=1):
+        stripped = line.strip()
+        if stripped.startswith("def "):
+            label = "`" + stripped[4:].split("(")[0] + "()`"
+        elif stripped.startswith(('print("Part #', "print('Part #")):
+            # print("Part #2 - Sets") gives the label Part #2 - Sets
+            label = "Part #" + stripped.split("Part #", 1)[1][:-2]
+        elif stripped == "#":
+            if not groups or groups[-1][0] != label:
+                groups.append((label, []))
+            groups[-1][1].append(number)
+    return groups
+
+
+def lab_code(name: str, student: Path, answer: Path) -> str:
+    """Return the "code you type" section of a lab or demo period."""
+    student_lines = student.read_text().splitlines()
+    answer_lines_all = answer.read_text().splitlines()
+    out = ["## The code you type", "", CODE_INTRO, ""]
+    for label, blanks in lab_groups(student.read_text()):
+        out += [f"### {label}", ""]
+        # Split a part into blocks wherever two blanks sit more than four lines apart
+        blocks = [[blanks[0]]]
+        for number in blanks[1:]:
+            if number - blocks[-1][-1] > 4:
+                blocks.append([])
+            blocks[-1].append(number)
+        for block in blocks:
+            numbered = []
+            start = max(1, block[0] - 2)
+            stop = min(len(student_lines), block[-1] + 2)
+            for number in range(start, stop + 1):
+                if number in block:
+                    numbered.append((number, "+", answer_lines_all[number - 1]))
+                else:
+                    numbered.append((number, "|", student_lines[number - 1]))
+            out += [snippet_block(numbered)]
+        key = label.removesuffix("()`").removeprefix("`")
+        note = CODE_NOTES.get((name, key.split(" - ")[0]))
+        if note:
+            out += [f"**How it works:** {note}", ""]
+    return "\n".join(out)
+
+
+def code_section(folder: Path, answers: Path, rows: list[EditRow]) -> str:
+    """Return the "code you type" section for the functions of one period or version."""
+    out = ["## The code you type", "", CODE_INTRO, "", CODE_NUMBERS, ""]
+    for row in rows:
+        out.append(
+            function_code(folder / row["file"], answers / row["file"], row)
+        )
+    return "\n".join(out)
 
 
 def lab_section(name: str, count: int) -> str:
@@ -510,7 +662,7 @@ def main():
             count = typed_lines(text, function)
             typed[(day, period)] = typed.get((day, period), 0) + count
             row = {"file": file_name, "function": function, "typed": count}
-            row["line"] = def_line(text, function)
+            row["line"] = def_line((folder / file_name).read_text(), function)
             row["tests"] = checking_tests(folder, function)
             rows.setdefault((day, period), []).append(row)
             file_path.write_text(stub_function(text, function, stub_day, stub_period))
@@ -518,6 +670,7 @@ def main():
         sections = []
         if (day, period) in rows:
             sections.append(edit_section(rows[(day, period)]))
+            sections.append(code_section(target, folder, rows[(day, period)]))
         if (day, period) in LABS:
             # A student folder holds the lab with blanks, never the answer file
             name = LABS[(day, period)]
@@ -536,6 +689,9 @@ def main():
             row = {"file": f"{name}.py", "function": "", "typed": count}
             rows.setdefault((day, period), []).append(row)
             sections.append(lab_section(name, count))
+            sections.append(
+                lab_code(name, lab_path, folder / f"{name}_instructor.py")
+            )
         if (target / "bug_hunt").exists():
             count = write_bug_hunt_student(target)
             typed[(day, period)] = typed.get((day, period), 0) + count
@@ -577,7 +733,7 @@ def main():
             text = file_path.read_text()
             row = {"file": file_name, "function": function}
             row["typed"] = typed_lines(text, function)
-            row["line"] = def_line(text, function)
+            row["line"] = def_line((folder / file_name).read_text(), function)
             row["tests"] = checking_tests(folder, function)
             rows.setdefault(("version", version["folder"]), []).append(row)
             count += row["typed"]
@@ -585,7 +741,9 @@ def main():
             stubbed += 1
         if version["students"]:
             with (target / "README.md").open("a") as file:
-                file.write("\n" + edit_section(rows[("version", version["folder"])]))
+                written = rows[("version", version["folder"])]
+                file.write("\n" + edit_section(written))
+                file.write("\n" + code_section(target, folder, written))
         print(f"{color} color version: {count} lines to type")
         if count > MAX_TYPED_LINES:
             print(f"  Too long: the {color} color version asks for {count} lines")

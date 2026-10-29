@@ -40,3 +40,57 @@ Part #4: `upper()` turns Black's pieces into White's, and `isupper()` tells the 
 Open `python_strings.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 13. Check the work by running `python_strings.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #1 - Strings and Indexing
+
+```text
+13 |     square = "e2"
+14 |     # Index 0 is the first character of a string, index 1 the second
+15 +     file_letter = square[0]
+16 +     rank_digit = square[1]
+17 +     print(f"{square}: file letter {file_letter}, rank digit {rank_digit}")
+18 |     print("  (expected file letter e, rank digit 2)")
+19 |
+```
+
+### Part #2 - Letters Are Numbers: ord() and chr()
+
+```text
+23 |     print(f"chr(98) is {chr(98)}  (expected b)")
+24 |     # Counting from file a = 0, file e is 4 letters after a
+25 +     file_number = ord(file_letter) - ord("a")
+26 +     rank_number = int(rank_digit)
+27 +     print(f"{square} is file number {file_number}, rank number {rank_number}")
+28 |     print("  (expected file number 4, rank number 2)")
+29 |
+```
+
+### Part #3 - Numbers Back to a Square Name
+
+```text
+30 |     print("Part #3 - Numbers Back to a Square Name")
+31 |     # File number 6 is the g-file: start at "a" and count 6 letters on
+32 +     letter = chr(ord("a") + 6)
+33 +     name = f"{letter}{7}"
+34 +     print(f"File number 6, rank 7 is the square {name}  (expected g7)")
+35 |
+36 |     print("Part #4 - Upper and Lower Case")
+```
+
+### Part #4 - Upper and Lower Case
+
+```text
+37 |     # In Remus, uppercase letters are White pieces and lowercase are Black
+38 |     black_back_rank = "rnbqkbnr"
+39 +     white_back_rank = black_back_rank.upper()
+40 +     print(f"Black: {black_back_rank}  White: {white_back_rank}")
+41 |     print("  (expected Black: rnbqkbnr  White: RNBQKBNR)")
+42 +     is_white = "N".isupper()
+43 +     print(f"Is N a White piece? {is_white}  (expected True)")
+44 |
+45 |
+```

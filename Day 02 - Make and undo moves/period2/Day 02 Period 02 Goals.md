@@ -42,3 +42,73 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 Open `python_dicts.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 18. Check the work by running `python_dicts.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### 
+
+```text
+16 |
+17 | # A dataclass is a record with named fields, written once and used for every move
+18 + @dataclass
+19 + class Move:
+20 +     from_square: str
+21 +     to_square: str
+22 |
+23 |
+```
+
+### Part #1 - A Dict Holds Named Facts
+
+```text
+26 |     state = {"turn": "w", "castling": CASTLING_AT_START, "fullmove_number": 1}
+27 |     # Read a value by its key, inside [ ]
+28 +     print(f"Side to move: {state['turn']}  (expected w)")
+29 +     print(f"Castling rights: {state['castling']}  (expected KQkq)")
+30 |     # Store a new value under a key that is already there
+31 +     state["turn"] = "b"
+32 |     print(f"Side to move after White plays: {state['turn']}  (expected b)")
+33 |
+```
+
+### Part #2 - Two Names for One Board
+
+```text
+37 |         board.append(["."] * 8)
+38 |     # b2 = board gives the same board a second name: no new board is made
+39 +     b2 = board
+40 +     b2[4][4] = "P"
+41 |     print(f"board[4][4] is {board[4][4]}  (expected P, the change shows in both)")
+42 +     print(f"Same board? {b2 is board}  (expected True)")
+43 |
+44 |     print("Part #3 - A Copy Is a New Board")
+```
+
+### Part #3 - A Copy Is a New Board
+
+```text
+44 |     print("Part #3 - A Copy Is a New Board")
+45 |     # deepcopy copies the outer list and every row inside it
+46 +     b3 = deepcopy(board)
+47 +     b3[0][0] = "r"
+48 |     print(f"board[0][0] is {board[0][0]}  (expected ., the original stays the same)")
+49 +     print(f"b3[0][0] is {b3[0][0]}  (expected r)")
+50 +     print(f"Same board? {b3 is board}  (expected False)")
+51 +     print(f"Equal boards? {b3 == board}  (expected False, a1 differs)")
+52 |
+53 |     print("Part #4 - A Dataclass Describes a Move")
+```
+
+### Part #4 - A Dataclass Describes a Move
+
+```text
+52 |
+53 |     print("Part #4 - A Dataclass Describes a Move")
+54 +     move = Move("e2", "e4")
+55 +     print(f"The pawn lands on {move.to_square}  (expected e4)")
+56 +     print(move)
+57 |     print("  (expected Move(from_square='e2', to_square='e4'))")
+58 |
+```

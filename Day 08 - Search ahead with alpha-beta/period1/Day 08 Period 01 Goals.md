@@ -49,3 +49,40 @@ Every other function is finished. Change only these, and only below each docstri
 | `search.py` | `negamax()` | 114 | 17 | `test_search.py::test_negamax_finds_mate_in_one`, `test_search.py::test_minimax_and_negamax_agree`, `test_search.py::test_stalemate_scores_zero` |
 
 Lines to type in all: 17. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `negamax()` in `search.py`
+
+**Where:** lines 139 to 155 of `search.py`, inside `negamax()`, in place of the stub below the docstring. It is called by `best_move()` in `search.py`.
+
+```text
+114 | def negamax(state: dict, depth: int, ply: int, info: SearchInfo) -> int:
+      ...
+137 |         The score for the side to move.
+138 |     """
+139 +     info.nodes += 1
+140 +     if depth == 0:
+141 +         return evaluate(state)
+142 +     moves = legal_moves(state)
+143 +     if not moves:
+144 +         if in_check(state, state["turn"]):
+145 +             return -(MATE_SCORE - ply)  # Checkmated: worse the sooner it happens
+146 +         return 0  # Stalemate
+147 +     best = -MATE_SCORE - 1
+148 +     for move in moves:
+149 +         undo = make_move(state, move)
+150 +         try:
+151 +             score = -negamax(state, depth - 1, ply + 1, info)
+152 +         finally:
+153 +             undo_move(state, undo)
+154 +         best = max(best, score)
+155 +     return best
+156 |
+157 |
+158 | def best_move(state: dict, depth: int) -> tuple[Move, int, SearchInfo]:
+```

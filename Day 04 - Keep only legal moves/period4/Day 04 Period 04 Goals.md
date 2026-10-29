@@ -39,3 +39,49 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 Open `demo_practice_positions.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 14. Check the work by running `demo_practice_positions.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #1 - The Start Position
+
+```text
+36 |     print("Part #1 - The Start Position")
+37 |     # Write your prediction first, then run the file
+38 +     prediction = 20
+39 +     compare(new_game(), prediction)
+40 |
+41 |     print("Part #2 - A King in Check")
+```
+
+### Part #2 - A King in Check
+
+```text
+41 |     print("Part #2 - A King in Check")
+42 |     # White: king on e1. Black: rook on e8 and king on a8. The rook checks down the e-file.
+43 +     state = position({"e1": "K", "e8": "r", "a8": "k"})
+44 +     print(f"White in check: {in_check(state, WHITE)}  (expected True)")
+45 +     prediction = 4
+46 +     compare(state, prediction)
+47 |
+48 |     print("Part #3 - A Pinned Knight")
+```
+
+### Part #3 - A Pinned Knight
+
+```text
+48 |     print("Part #3 - A Pinned Knight")
+49 |     # Put a White knight on e2, between the king and the rook
+50 +     state = position({"e1": "K", "e2": "N", "e8": "r", "a8": "k"})
+51 +     prediction = 4
+52 +     compare(state, prediction)
+53 |     # Count only the moves that start on e2
+54 +     knight_count = 0
+55 +     for move in legal_moves(state):
+56 +         if move_to_uci(move).startswith("e2"):
+57 +             knight_count += 1
+58 +     print(f"Legal knight moves: {knight_count}  (expected 0: the knight is pinned)")
+59 |
+60 |     print("Part #4 - Your Own Position")
+```

@@ -64,6 +64,69 @@ Every other function is finished. Change only these, and only below each docstri
 | File | Function | Starts at line | Lines to type | Tests that check it |
 | --- | --- | --- | --- | --- |
 | `opening_book.py` | `load_book()` | 58 | 24 | `test_upgrades.py::test_opening_book_is_legal_and_answers_e4`, `test_upgrades.py::test_book_typo_is_skipped_without_touching_stdout`, `test_upgrades.py::test_trap_line_stores_only_the_defenders_moves`, `test_upgrades.py::test_book_answers_scholars_mate_but_never_tries_it`, `test_upgrades.py::test_missing_book_never_stops_play` |
-| `opening_book.py` | `book_move()` | 79 | 2 | `test_upgrades.py::test_opening_book_is_legal_and_answers_e4`, `test_upgrades.py::test_trap_line_stores_only_the_defenders_moves`, `test_upgrades.py::test_book_answers_scholars_mate_but_never_tries_it`, `test_upgrades.py::test_missing_book_never_stops_play` |
+| `opening_book.py` | `book_move()` | 101 | 2 | `test_upgrades.py::test_opening_book_is_legal_and_answers_e4`, `test_upgrades.py::test_trap_line_stores_only_the_defenders_moves`, `test_upgrades.py::test_book_answers_scholars_mate_but_never_tries_it`, `test_upgrades.py::test_missing_book_never_stops_play` |
 
 Lines to type in all: 26. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `load_book()` in `opening_book.py`
+
+**Where:** lines 74 to 98 of `opening_book.py`, inside `load_book()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`, `main()` in `uci_engine.py`.
+
+```text
+ 58 | def load_book(file_path: Path = BOOK_PATH) -> dict[str, list[Move]]:
+      ...
+ 72 |         The dict is empty if the file does not exist.
+ 73 |     """
+ 74 +     book = {}
+ 75 +     if not file_path.exists():
+ 76 +         print(
+ 77 +             f"No opening book at {file_path}; Remus searches every move",
+ 78 +             file=sys.stderr,
+ 79 +         )
+ 80 +         return book
+ 81 +     for line in file_path.read_text().splitlines():
+ 82 +         if not line.strip() or line.startswith("#"):
+ 83 +             continue
+ 84 +         defender, words = read_defender(line)
+ 85 +         state = state_from_fen(START_FEN)
+ 86 +         for text in words:
+ 87 +             try:
+ 88 +                 move = parse_san(state, text)
+ 89 +             except ValueError:
+ 90 +                 print(f"Book line skipped at {text!r}: {line}", file=sys.stderr)
+ 91 +                 break
+ 92 +             # A trap line teaches the defense, so the attacker's moves stay out
+ 93 +             if defender is None or state["turn"] == defender:
+ 94 +                 moves_here = book.setdefault(position_key(state), [])
+ 95 +                 if move not in moves_here:
+ 96 +                     moves_here.append(move)
+ 97 +             make_move(state, move)
+ 98 +     return book
+ 99 |
+100 |
+101 | def book_move(book: dict[str, list[Move]], state: dict) -> Move | None:
+```
+
+**How it works:** The book is a dict from a position key to a list of moves. If the file is missing, the function prints a note to stderr (not stdout, which belongs to the UCI conversation) and returns the empty book, so Remus still plays. Otherwise it reads the file line by line and skips blank lines and comments. `read_defender` splits a line such as "Black: e4 e5 Bc4 Nc6" into the side it teaches and its moves. Each line replays from the starting position: `parse_san` turns text such as Nc6 into a Move, and a move that is not legal skips the rest of the line. Before making each move, the code stores it under the current position's key, but in a trap line only for the defending side. `setdefault` makes a new empty list the first time a position appears, and `if move not in moves_here` keeps a move from appearing twice when two openings share it.
+
+### `book_move()` in `opening_book.py`
+
+**Where:** lines 103 to 104 of `opening_book.py`, inside `book_move()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`, `main()` in `uci_engine.py`.
+
+```text
+101 | def book_move(book: dict[str, list[Move]], state: dict) -> Move | None:
+102 |     """Return a random book move for this position, or None when out of book."""
+103 +     choices = book.get(position_key(state))
+104 +     return random.choice(choices) if choices else None
+105 |
+106 |
+107 | def main():
+```
+
+**How it works:** `book.get` looks up the current position's key and returns its list of moves, or None if the position is not in the book. `random.choice` picks one of the moves, so Remus does not play the same opening every game. When the list is missing, the function returns None and the search chooses the move instead.

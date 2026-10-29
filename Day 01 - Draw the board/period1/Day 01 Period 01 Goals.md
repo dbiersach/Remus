@@ -41,3 +41,32 @@ Part #3: you store White's back rank as one string and print the letter at index
 Open `python_setup.py` in the `student` folder. Under each `Part` heading, every line that holds only a `#` is one line of code to type. Replace the `#` with the code, keeping its indent. The printed text next to each step says what the line must produce.
 
 Lines to type in all: 6. Check the work by running `python_setup.py` with the Run Python File button (the triangle at the top right of the editor), and compare each printed result with the expected value beside it.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+### Part #2 - Say Hello
+
+```text
+18 |     print("Part #2 - Say Hello")
+19 |     # Store your team name, then print a greeting that uses it
+20 +     team_name = "Knight Riders"
+21 +     print(f"Hello from team {team_name}!")
+22 |     # len() counts the characters in a string, spaces included
+23 +     print(f"Our team name has {len(team_name)} characters")
+24 |
+25 |     print("Part #3 - Your First Chess Line")
+```
+
+### Part #3 - Your First Chess Line
+
+```text
+25 |     print("Part #3 - Your First Chess Line")
+26 |     # White's back rank, from the a-file to the h-file, as one string
+27 +     back_rank = "RNBQKBNR"
+28 +     print(f"White's back rank: {back_rank}  (expected RNBQKBNR)")
+29 +     print(f"The king stands on the e-file: {back_rank[4]}  (expected K)")
+30 |
+31 |
+```

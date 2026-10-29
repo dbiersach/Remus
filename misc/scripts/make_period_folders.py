@@ -718,18 +718,30 @@ def day_folder(day: int) -> Path:
 
 
 def engine_folder_table(day: int, period: int) -> str:
-    """Return a reminder to run each engine folder's tests, with a link to each."""
+    """Return a table of the student engine folders, with links to each README and test."""
     engines = ROOT / "engines" / "student"
     rows = ""
     for folder in sorted(engines.iterdir()):
         if folder.is_dir() and folder.name[:2].isdigit() and folder.name[:2] != "00":
             link = "../../engines/student/" + quote(folder.name)
-            rows += f"| [{folder.name}]({link}) | [`run_tests.py`]({link}/run_tests.py) |\n"
+            rows += (
+                f"| [{folder.name}]({link}) | [`README.md`]({link}/README.md) | "
+                f"[`run_tests.py`]({link}/run_tests.py) |\n"
+            )
+    if period == 2:
+        intro = (
+            "Click your student pair's engine folder below. Its `README.md` shows "
+            "the code to type, and `run_tests.py` checks it."
+        )
+    else:
+        intro = (
+            "Before the smoke test, check your engine: open `run_tests.py` in your "
+            "student pair's engine folder in `engines/student` and press Run. Every "
+            "test must pass. Click your engine folder below to find it."
+        )
     return (
-        "Before the smoke test, check your engine: open `run_tests.py` in your "
-        "student pair's engine folder in `engines/student` and press Run. Every test must "
-        "pass. Click your engine folder below to find it.\n\n"
-        "| Engine folder | Tests |\n| --- | --- |\n" + rows.rstrip("\n")
+        intro + "\n\n| Engine folder | The code you type | Tests |\n"
+        "| --- | --- | --- |\n" + rows.rstrip("\n")
     )
 
 
@@ -1010,9 +1022,12 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
             "This folder holds no engine code. Each student pair works in its own "
             "engine folder in `engines/student`, a complete copy of "
             "Remus-WHITE plus one enhancement. Remus-WHITE itself is in the "
-            "`period1` folder."
+            "`period1` folder. The `README.md` in each engine folder explains its "
+            "enhancement, and its section \"The code you type\" shows every line "
+            "the student pair types, with line numbers, the lines around it, and how "
+            "the code works."
         )
-        if (day, period) == (9, 3):
+        if (day, period) in [(9, 2), (9, 3)]:
             sections.append(engine_folder_table(day, period))
     elif not files:
         if (day, period) not in LABS:

@@ -48,3 +48,33 @@ Every other function is finished. Change only these, and only below each docstri
 | `evaluation.py` | `material()` | 79 | 10 | `test_search.py::test_start_position_is_level` |
 
 Lines to type in all: 10. Each stub is two comment lines that start with `# Day ...` and a `raise NotImplementedError` statement. Delete them and write the body in their place.
+
+## The code you type
+
+Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
+
+The number at the left of each line is its line number once the code is typed. When one file holds two functions to write, type the higher one first: until it is typed, the stub of a function lower down sits a few lines higher than these numbers say.
+
+### `material()` in `evaluation.py`
+
+**Where:** lines 93 to 102 of `evaluation.py`, inside `material()`, in place of the stub below the docstring. It is called by `evaluate()` in `evaluation.py`, `explain_evaluation()` in `evaluation.py`.
+
+```text
+ 79 | def material(board: Board) -> int:
+      ...
+ 91 |         White's piece values minus Black's.
+ 92 |     """
+ 93 +     score = 0
+ 94 +     for row in board:
+ 95 +         for piece in row:
+ 96 +             if piece == EMPTY:
+ 97 +                 continue
+ 98 +             if piece.isupper():
+ 99 +                 score += PIECE_VALUES[piece]
+100 +             else:
+101 +                 score -= PIECE_VALUES[piece.upper()]
+102 +     return score
+103 |
+104 |
+105 | def placement(board: Board) -> int:
+```
