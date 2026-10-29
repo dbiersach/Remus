@@ -57,8 +57,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 148 to 158 of `move_generation.py`, inside `pawn_pushes()`, in place of the stub below the docstring. It is called by `piece_moves()` in `move_generation.py`.
 
-```text
+```python
 130 | def pawn_pushes(board: Board, square: Square, color: str) -> list[Move]:
+131 |     """
       ...
 146 |         The pushes onto empty squares. A pawn never captures straight ahead.
 147 |     """

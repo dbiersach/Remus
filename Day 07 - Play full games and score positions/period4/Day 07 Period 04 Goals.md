@@ -59,8 +59,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 93 to 102 of `evaluation.py`, inside `material()`, in place of the stub below the docstring. It is called by `evaluate()` in `evaluation.py`, `explain_evaluation()` in `evaluation.py`.
 
-```text
+```python
  79 | def material(board: Board) -> int:
+ 80 |     """
       ...
  91 |         White's piece values minus Black's.
  92 |     """

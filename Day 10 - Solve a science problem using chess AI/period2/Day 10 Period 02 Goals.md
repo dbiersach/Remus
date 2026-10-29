@@ -197,8 +197,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 129 to 139 of `phase_hunt.py`, inside `score()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 110 | def score(phases: Phases, measured: list[float]) -> int:
+111 |     """
       ...
 127 |         each phase. A larger score is a better explanation.
 128 |     """
@@ -224,8 +225,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 158 to 174 of `phase_hunt.py`, inside `greedy_phases()`, in place of the stub below the docstring. It is called by `greedy_answer()` in `phase_hunt.py`.
 
-```text
+```python
 142 | def greedy_phases(measured: list[float]) -> Phases:
+143 |     """
       ...
 156 |         phase raises the score, or when it holds MAX_PHASES phases.
 157 |     """

@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-The RED color version adds table_search, and think uses it.
+Remus-RED adds table_search, and think uses it.
 """
 
 import random

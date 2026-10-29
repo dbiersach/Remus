@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """version_league.py
 
-Rank every Remus version: Remus-WHITE, the ten color versions, and Remus-GOLD.
+Rank every Remus version: Remus-WHITE, the ten enhanced engines, and Remus-GOLD.
 
 A league plays a round robin: every version plays every other version, a few games
 each, from the OPENINGS of version_match.py. Then the script fits one Elo rating to

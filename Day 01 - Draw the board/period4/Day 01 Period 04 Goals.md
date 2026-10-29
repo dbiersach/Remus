@@ -80,8 +80,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 46 to 53 of `board.py`, inside `print_board()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 37 | def print_board(board: Board) -> None:
+38 |     """
      ...
 44 |         The board, row 0 first (rank 8).
 45 |     """
@@ -104,8 +105,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** line 72 of `board.py`, inside `square_name()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 56 | def square_name(row: int, col: int) -> str:
+57 |     """
      ...
 70 |         The square name, such as "e2" for (6, 4).
 71 |     """
@@ -121,8 +123,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 94 to 98 of `board.py`, inside `parse_square()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
  75 | def parse_square(name: str) -> Square:
+ 76 |     """
       ...
  92 |         If the name is not a square on the board, such as "i9".
  93 |     """
@@ -142,7 +145,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 103 to 104 of `board.py`, inside `piece_at()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 101 | def piece_at(board: Board, square: Square) -> str:
 102 |     """Return the piece on a (row, col) square, or EMPTY."""
 103 +     row, col = square

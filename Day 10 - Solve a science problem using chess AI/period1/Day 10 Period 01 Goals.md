@@ -71,8 +71,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 99 to 104 of `hidden_peak.py`, inside `candidate_squares()`, in place of the stub below the docstring. It is called by `random_strategy()` in `hidden_peak.py`, `expectimax_choice()` in `hidden_peak.py`.
 
-```text
+```python
  85 | def candidate_squares(readings: dict[tuple[int, int], int]) -> list[tuple[int, int]]:
+ 86 |     """
       ...
  97 |         The unmeasured squares, row by row.
  98 |     """
@@ -93,8 +94,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 130 to 133 of `hidden_peak.py`, inside `score_candidate()`, in place of the stub below the docstring. It is called by `expectimax_choice()` in `hidden_peak.py`.
 
-```text
+```python
 107 | def score_candidate(
+108 |     square: tuple[int, int], readings: dict[tuple[int, int], int], explore_weight: float
       ...
 128 |         nearest reading (explore).
 129 |     """
@@ -113,9 +115,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 140 to 148 of `hidden_peak.py`, inside `choose_next_measurement()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 136 | def choose_next_measurement(
-      ...
+137 |     readings: dict[tuple[int, int], int], explore_weight: float = EXPLORE_WEIGHT
 138 | ) -> tuple[int, int]:
 139 |     """Return the unmeasured square with the highest score, like greedy_move()."""
 140 +     candidates = candidate_squares(readings)

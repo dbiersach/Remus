@@ -58,8 +58,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 296 to 310 of `search.py`, inside `quiescence()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 271 | def quiescence(state: dict, alpha: int, beta: int, info: SearchInfo) -> int:
+272 |     """
       ...
 294 |         The score for the side to move.
 295 |     """

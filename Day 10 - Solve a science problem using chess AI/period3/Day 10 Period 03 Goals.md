@@ -89,8 +89,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 213 to 225 of `phase_hunt.py`, inside `search()`, in place of the stub below the docstring. It is called by `run_search()` in `phase_hunt.py`.
 
-```text
+```python
 187 | def search(
+188 |     phases: Phases, measured: list[float], depth: int, start: int, hunt: Hunt
       ...
 211 |         to hunt.nodes for each set it scores.
 212 |     """

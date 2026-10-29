@@ -81,7 +81,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** line 40 of `game_state.py`, inside `is_white()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 38 | def is_white(piece: str) -> bool:
 39 |     """Return True if the piece is White (an uppercase letter)."""
 40 +     return piece.isupper()
@@ -96,7 +96,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 45 to 49 of `game_state.py`, inside `color_of()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 43 | def color_of(piece: str) -> str | None:
 44 |     """Return "w" or "b" for a piece, or None for an empty square."""
 45 +     if piece == EMPTY:
@@ -115,8 +115,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 42 to 45 of `moves.py`, inside `move_to_uci()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 28 | def move_to_uci(move: Move) -> str:
+29 |     """
      ...
 40 |         Text such as "e2e4", or "e7e8q" for a promotion (always lowercase).
 41 |     """
@@ -135,8 +136,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 64 to 69 of `moves.py`, inside `move_from_uci()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 48 | def move_from_uci(text: str, white_to_move: bool = True) -> Move:
+49 |     """
      ...
 62 |         The move the text describes.
 63 |     """

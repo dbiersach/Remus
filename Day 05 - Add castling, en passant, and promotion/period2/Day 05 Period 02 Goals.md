@@ -66,8 +66,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 41 to 44 of `make_move.py`, inside `update_castling_rights()`, in place of the stub below the docstring. It is called by `make_move()` in `make_move.py`.
 
-```text
+```python
 24 | def update_castling_rights(rights: str, move: Move) -> str:
+25 |     """
      ...
 39 |         The rights after the move, such as "Qkq" after the h1 rook moves.
 40 |     """

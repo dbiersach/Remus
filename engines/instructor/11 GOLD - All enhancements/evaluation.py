@@ -11,7 +11,7 @@ A positive score is good for White. Two terms make up the score:
 Each table is written from White's side, row 0 (rank 8) first. A Black piece reads
 the table upside down, so its row 7 uses the table's row 0.
 
-Day 10 adds three evaluation terms from the color versions:
+Day 10 adds three evaluation terms from the enhanced engines:
 
 3. Pawn structure: penalties for doubled and isolated pawns, a bonus for passed pawns.
 4. Mating: with a big material lead, drive the losing king to the edge and bring

@@ -79,9 +79,9 @@
 | Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Iterative deepening, the clock, and UCI info | None | `console_game.py`, `search.py`, `test_game.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
-| P2 | Python lab 12 and the color versions | `python_caches_instructor.py` | None | The lab `python_caches.py` (7 lines); their color version's functions, in the table below |
-| P3 | Color versions: test and measure | None | None | Their color version's functions, in the table below |
-| P4 | Color battles | `demo_results_instructor.py` | None | The demo `demo_results.py` (13 lines) |
+| P2 | Python lab 12 and the engine enhancements | `python_caches_instructor.py` | None | The lab `python_caches.py` (7 lines); their enhanced engine's functions, in the table below |
+| P3 | Engine enhancements: test and measure | None | None | Their enhanced engine's functions, in the table below |
+| P4 | Engine battles | `demo_results_instructor.py` | None | The demo `demo_results.py` (13 lines) |
 
 ## Day 10 - Solve a science problem using chess AI
 
@@ -92,11 +92,11 @@
 | P3 | The phase hunt: search every set, and verify | None | `phase_hunt.py`, `test_phase_hunt.py` | `search()` in `phase_hunt.py` (13 lines) |
 | P4 | Science results, take-home, and wrap-up | None | None | Nothing: a demo or teacher code |
 
-## Color versions (Day 9, periods 2 and 3)
+## Enhanced engines (Day 9, periods 2 and 3)
 
-Each student pair writes the functions of one color version in `engines/student`.
+Each student pair writes the functions of one enhanced engine in `engines/student`.
 
-| Color version | Student pairs write |
+| Enhanced engine | Student pairs write |
 | --- | --- |
 | 10 RED - Transposition table | `store()` in `transposition_table.py` (3 lines); `probe()` in `transposition_table.py` (11 lines); `test_transposition_table_bounds()` in `test_upgrades.py` (13 lines) |
 | 08 GREEN - Opening book | `load_book()` in `opening_book.py` (24 lines); `book_move()` in `opening_book.py` (2 lines) |

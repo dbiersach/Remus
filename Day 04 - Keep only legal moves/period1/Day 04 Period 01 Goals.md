@@ -47,7 +47,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### The imports
 
-```text
+```python
 10 |
 11 | # Each import line reads another file of this folder by its name, without the .py
 12 + import board
@@ -62,7 +62,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #1 - Every File Has a __name__
 
-```text
+```python
 20 |     print("Part #1 - Every File Has a __name__")
 21 |     # The file that VS Code runs is named "__main__"; an imported file keeps its name
 22 +     print(f"This file's __name__: {__name__}  (expected __main__)")
@@ -75,7 +75,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - Use Functions from Another File
 
-```text
+```python
 25 |
 26 |     print("Part #2 - Use Functions from Another File")
 27 +     start = new_board()

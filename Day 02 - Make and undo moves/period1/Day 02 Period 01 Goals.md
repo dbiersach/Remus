@@ -50,7 +50,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### `is_white()`
 
-```text
+```python
 11 | def is_white(piece: str) -> bool:
 12 |     """Return True if the piece is White. White pieces are uppercase letters."""
 13 +     return piece.isupper()
@@ -62,7 +62,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### `on_board()`
 
-```text
+```python
 30 |         True when both the row and the column are between 0 and 7.
 31 |     """
 32 +     return 0 <= row <= 7 and 0 <= col <= 7
@@ -74,7 +74,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### `is_black()`
 
-```text
+```python
 34 |
 35 | # Write a whole function yourself: its def line, its docstring, and its body
 36 + def is_black(piece: str) -> bool:
@@ -88,7 +88,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### `test_is_white()`
 
-```text
+```python
 41 | def test_is_white():
 42 |     """A White knight is White, and a Black knight is not."""
 43 +     assert is_white("N")
@@ -101,7 +101,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### `test_on_board()`
 
-```text
+```python
 48 |     """The corner a1 is on the board, and row 8 is one row past rank 1."""
 49 |     # a1 is row 7, col 0
 50 +     assert on_board(7, 0)
@@ -114,7 +114,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - Your Own Function
 
-```text
+```python
 60 |
 61 |     print("Part #2 - Your Own Function")
 62 +     print(f'is_black("q") is {is_black("q")}  (expected True)')
@@ -127,7 +127,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - A Square Is a Tuple
 
-```text
+```python
 67 |     square = (4, 4)
 68 |     # Unpacking gives each number its own name, in order
 69 +     row, col = square
@@ -141,7 +141,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #4 - Check the Functions with assert
 
-```text
+```python
 73 |     print("Part #4 - Check the Functions with assert")
 74 |     # assert does nothing when its test is True and stops the program when it is False
 75 +     test_is_white()

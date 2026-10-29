@@ -49,7 +49,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### The `Move` class
 
-```text
+```python
 16 |
 17 | # A dataclass is a record with named fields, written once and used for every move
 18 + @dataclass
@@ -64,7 +64,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #1 - A Dict Holds Named Facts
 
-```text
+```python
 26 |     state = {"turn": "w", "castling": CASTLING_AT_START, "fullmove_number": 1}
 27 |     # Read a value by its key, inside [ ]
 28 +     print(f"Side to move: {state['turn']}  (expected w)")
@@ -79,7 +79,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #2 - Two Names for One Board
 
-```text
+```python
 37 |         board.append(["."] * 8)
 38 |     # b2 = board gives the same board a second name: no new board is made
 39 +     b2 = board
@@ -94,7 +94,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #3 - A Copy Is a New Board
 
-```text
+```python
 44 |     print("Part #3 - A Copy Is a New Board")
 45 |     # deepcopy copies the outer list and every row inside it
 46 +     b3 = deepcopy(board)
@@ -111,7 +111,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #4 - A Dataclass Describes a Move
 
-```text
+```python
 52 |
 53 |     print("Part #4 - A Dataclass Describes a Move")
 54 +     move = Move("e2", "e4")

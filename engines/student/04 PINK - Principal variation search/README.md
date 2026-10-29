@@ -6,7 +6,7 @@ Search the first move with the full window and every other move with a cheap nul
 
 By the end of Day 9, each student pair can:
 
-- Explain the idea of the color version's enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
+- Explain the idea of this enhancement in two sentences. **Measured by:** The student pair explains the idea to another student pair, who can restate it.
 - Add the enhancement without breaking the rules. **Measured by:** `run_tests.py` passes in the version folder.
 - Run a fair experiment: same opening, both piece colors. **Measured by:** In the Day 9 battles, `play_battle.py` in the version folder plays both 10-minute games with no illegal moves or crashes when the student pair presses Run in VS Code, and the student pair says why two games cannot show which enhancement is stronger.
 
@@ -83,8 +83,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 423 to 428 of `search.py`, inside `search_later_move()`, in place of the stub below the docstring. It is called by `pvs_search()` in `search.py`.
 
-```text
+```python
 396 | def search_later_move(
+397 |     state: dict, depth: int, ply: int, alpha: int, beta: int, info: SearchInfo
       ...
 421 |         the full window to find the exact score.
 422 |     """
@@ -105,9 +106,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 16 to 22 of `test_upgrades.py`, inside `test_pvs_search_agrees_with_alpha_beta()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 14 | def test_pvs_search_agrees_with_alpha_beta() -> None:
-15 |     """The color version saves work but finds the same score at the same depth."""
+15 |     """The enhanced engine saves work but finds the same score at the same depth."""
 16 +     state = state_from_fen(ITALIAN)
 17 +     before = state_snapshot(state)
 18 +     plain_score, _ = alpha_beta_with_quiescence(state, 3, 0, *WIDE, SearchInfo())
@@ -120,13 +121,13 @@ The number at the left of each line is its line number once the code is typed. W
 25 | def test_a_null_window_answers_only_better_or_not() -> None:
 ```
 
-**How it works:** The test runs the plain search, `alpha_beta_with_quiescence`, and the color version's `pvs_search` on the Italian opening at depth 3. The asserts check that both find the same score, that PVS returns a line of moves, and that the state snapshot is unchanged, which proves the search undid every move it made. `*WIDE` unpacks the pair of numbers into `alpha` and `beta`.
+**How it works:** The test runs the plain search, `alpha_beta_with_quiescence`, and the enhanced engine's `pvs_search` on the Italian opening at depth 3. The asserts check that both find the same score, that PVS returns a line of moves, and that the state snapshot is unchanged, which proves the search undid every move it made. `*WIDE` unpacks the pair of numbers into `alpha` and `beta`.
 
 ### `test_a_null_window_answers_only_better_or_not()` in `test_upgrades.py`
 
 **Where:** lines 27 to 31 of `test_upgrades.py`, inside `test_a_null_window_answers_only_better_or_not()`, in place of the stub below the docstring. `run_tests.py` runs it with every other test in the folder.
 
-```text
+```python
 25 | def test_a_null_window_answers_only_better_or_not() -> None:
 26 |     """A null window (alpha, alpha + 1) says only whether the exact score beats alpha."""
 27 +     state = state_from_fen(ITALIAN)

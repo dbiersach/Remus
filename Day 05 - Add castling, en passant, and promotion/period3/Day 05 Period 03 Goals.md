@@ -63,8 +63,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** line 54 of `make_move.py`, inside `en_passant_victim_square()`, in place of the stub below the docstring. It is called by `make_move()` in `make_move.py`.
 
-```text
+```python
 48 | def en_passant_victim_square(move: Move) -> Square:
+49 |     """Return the square of the pawn an en passant capture removes.
      ...
 52 |     starts from, in the column it lands in.
 53 |     """

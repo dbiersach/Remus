@@ -37,7 +37,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 8:30 to 8:45 | Slides: the clock. The teacher reads `go movetime`, `wtime`, and `btime`, turns them into a thinking time, and writes `format_info()`. |
 | 8:45 to 9:25 | Student pairs write `think()` (the iterative deepening loop): depth 1, then 2, then 3, keeping the best move of the deepest search that finished. |
-| 9:25 to 9:35 | Show and choose for `think()`. The chosen code makes Remus-WHITE, the Remus with none of the enhancements and the starting point of every color version. |
+| 9:25 to 9:35 | Show and choose for `think()`. The chosen code makes Remus-WHITE, the Remus with none of the enhancements and the starting point of every enhanced engine. |
 | 9:35 to 10:00 | The class watches Remus-WHITE play a 5-minute game against Stockfish at 1500 Elo in Lucas Chess and reads the `info` lines as it thinks. |
 
 ## What you edit this period
@@ -60,8 +60,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 447 to 463 of `search.py`, inside `think()`, in place of the stub below the docstring. It is called by `think_move()` in `search.py`, `main()` in `uci_engine.py`.
 
-```text
+```python
 427 | def think(state: dict, seconds: float = 2.0, max_depth: int = 64, report=None) -> Move:
+428 |     """
       ...
 445 |         The best move of the deepest search that finished.
 446 |     """

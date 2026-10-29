@@ -11,7 +11,7 @@ moves that cannot change the result, quiescence keeps looking until the captures
 stop, and move ordering tries strong moves first. Day 9 adds iterative
 deepening, which searches one move deeper at a time until the clock runs out.
 
-Day 10 adds the enhancements of the color versions to one final search, upgraded_search: a
+Day 10 adds the enhancements of the enhanced engines to one final search, upgraded_search: a
 transposition table, killer moves, principal variation search, draw sense,
 null-move pruning, and late move reductions.
 """

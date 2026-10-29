@@ -60,7 +60,7 @@ Each block below shows the code to type with a few lines around it, so you can f
 
 ### Part #1 - Try All Four Promotions
 
-```text
+```python
 37 |     print("Part #1 - Try All Four Promotions")
 38 |     # Predict first: which piece wins, and which ones only draw?
 39 +     for letter in "QRBN":

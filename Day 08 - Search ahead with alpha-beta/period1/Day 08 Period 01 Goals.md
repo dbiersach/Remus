@@ -60,8 +60,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 139 to 155 of `search.py`, inside `negamax()`, in place of the stub below the docstring. It is called by `best_move()` in `search.py`.
 
-```text
+```python
 114 | def negamax(state: dict, depth: int, ply: int, info: SearchInfo) -> int:
+115 |     """
       ...
 137 |         The score for the side to move.
 138 |     """

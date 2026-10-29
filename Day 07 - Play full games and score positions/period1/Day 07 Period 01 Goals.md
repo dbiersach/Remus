@@ -69,8 +69,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 32 to 49 of `game_end.py`, inside `insufficient_material()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 17 | def insufficient_material(board: Board) -> bool:
+18 |     """
      ...
 30 |         against king, and kings with bishops that all stand on squares of one color.
 31 |     """
@@ -103,8 +104,9 @@ The number at the left of each line is its line number once the code is typed. W
 
 **Where:** lines 72 to 83 of `game_end.py`, inside `game_result()`, in place of the stub below the docstring. The tests call it directly.
 
-```text
+```python
 57 | def game_result(state: dict) -> tuple[str, str] | None:
+58 |     """
      ...
 70 |         ("1-0", "checkmate").
 71 |     """
