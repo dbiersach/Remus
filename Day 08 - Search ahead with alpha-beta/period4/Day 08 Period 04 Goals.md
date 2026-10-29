@@ -79,3 +79,5 @@ The number at the left of each line is its line number once the code is typed. W
 45 |
 46 | def order_moves(
 ```
+
+**How it works:** MVV-LVA means most valuable victim, least valuable attacker. A capture scores 10 times the victim's value minus the attacker's value, so pawn takes queen (9,000 - 100) comes before queen takes queen (9,000 - 900). A quiet move scores 0. A promotion adds 10 times the new piece's value, as if it captured that piece.

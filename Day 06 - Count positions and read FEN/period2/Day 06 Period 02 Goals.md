@@ -74,3 +74,5 @@ The number at the left of each line is its line number once the code is typed. W
 50 |
 51 | def divide(state: dict, depth: int) -> dict[str, int]:
 ```
+
+**How it works:** At depth 0 the position itself is one leaf. Otherwise the function makes each legal move, counts the leaves below it with `perft(state, depth - 1)`, and undoes the move before trying the next one. The total is the number of positions at the given depth. From the start position perft(3) is 8,902.

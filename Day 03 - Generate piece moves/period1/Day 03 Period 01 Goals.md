@@ -57,6 +57,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 28 |
 ```
 
+**How it works:** A `while` loop repeats its indented lines as long as its test is True. `count` starts at 0 and grows by 1 each time, so the loop prints steps 0, 1, and 2 and stops when `count` reaches 3.
+
 ### Part #2 - A Direction Is a Tuple
 
 ```text
@@ -67,6 +69,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 34 |
 35 |     print("Part #3 - Walk Until the Edge or a Piece")
 ```
+
+**How it works:** A direction is a tuple of two steps. Unpacking gives each step a name: `row_step` is -1, one row toward rank 8, and `col_step` is 1, one column to the right.
 
 ### Part #3 - Walk Until the Edge or a Piece
 
@@ -86,3 +90,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 53 |     print(f"Squares reached: {squares}  (expected e5 f6 g7)")
 54 |
 ```
+
+**How it works:** `while True` repeats until a `break` stops it. Each pass takes one step in the direction. If the step leaves the board, the walk ends. Otherwise the square's name is added to the text, and if a piece stands there the walk ends too, after counting that square. This is the walk a bishop, rook, or queen makes.

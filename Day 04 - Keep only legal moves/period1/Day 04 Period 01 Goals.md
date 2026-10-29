@@ -45,7 +45,7 @@ Lines to type in all: 11. Check the work by running `python_modules.py` with the
 
 Each block below shows the code to type with a few lines around it, so you can find the spot. A line marked `+` is one you type; a line marked `|` is already in the file. Type the code without the number and the mark, and keep the indent shown. Lines that start with `#` are comments: they explain the code, and typing them is optional.
 
-### 
+### The imports
 
 ```text
 10 |
@@ -58,6 +58,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 17 |
 ```
 
+**How it works:** `import board` loads `board.py` and keeps its names behind `board.`, as in `board.__name__`. `from board import new_board, parse_square` copies those two names into this file, so they can be called without the prefix. Python finds each file by its name, without `.py`, in the same folder.
+
 ### Part #1 - Every File Has a __name__
 
 ```text
@@ -68,6 +70,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 24 |     print("board.py printed no board when it was imported: its main() did not run")
 25 |
 ```
+
+**How it works:** Every file has a `__name__`. The file you run is called "__main__", and a file you import keeps its own name, "board". The `if __name__ == "__main__"` guard at the bottom of `board.py` is false when the file is imported, so its `main()` does not run.
 
 ### Part #2 - Use Functions from Another File
 
@@ -83,3 +87,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 33 |     print(f"Knight moves from g1: {names}  (expected g1f3 g1h3)")
 34 |
 ```
+
+**How it works:** These lines use functions from three other files. They build the starting board, turn "g1" into a square, and ask `knight_moves` for the knight's moves. The loop adds each move's UCI text to `names`.

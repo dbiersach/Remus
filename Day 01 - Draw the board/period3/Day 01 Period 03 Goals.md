@@ -56,6 +56,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 18 |     print("Part #2 - Visit Every Square with for and range")
 ```
 
+**How it works:** `len()` counts the items in a list: 8 pieces. `back_rank[3]` reads the item at index 3. Counting from 0, a is index 0 and d is index 3, so the d-file holds the queen.
+
 ### Part #2 - Visit Every Square with for and range
 
 ```text
@@ -67,6 +69,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 23 |     print("  (expected r n b q k b n r)")
 24 |
 ```
+
+**How it works:** `for col in range(8)` runs the indented line once for each number from 0 to 7. `end=" "` prints a space instead of starting a new line, so the eight pieces appear on one line. The empty `print()` after the loop ends that line.
 
 ### Part #3 - A Board Is a List of Rows
 
@@ -90,6 +94,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 41 |
 ```
 
+**How it works:** The board starts as an empty list, and the first loop appends 8 rows of 8 dots. Each `["."] * 8` builds a new list, so changing one row never changes another. The next four lines put the pieces on rows 0, 1, 6, and 7; row 0 is rank 8, Black's back rank. The last two loops build one line of text per row with `+=` and print it, so the board appears with Black at the top.
+
 ### Part #4 - Count the Pawns in a Row
 
 ```text
@@ -106,3 +112,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 52 |
 53 |
 ```
+
+**How it works:** `board[6][4]` is row 6 (rank 2), column 4 (the e-file), the square e2. Setting it to a dot and `board[4][4]` to `P` plays 1. e4. The loop then visits each square of row 6 and adds 1 to `pawns` for every White pawn it finds: 7 are left.

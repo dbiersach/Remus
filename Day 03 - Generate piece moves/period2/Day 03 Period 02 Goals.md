@@ -62,7 +62,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `king_moves()` in `move_generation.py`
 
-**Where:** lines 64 to 64 of `move_generation.py`, inside `king_moves()`, in place of the stub below the docstring. The tests call it directly.
+**Where:** line 64 of `move_generation.py`, inside `king_moves()`, in place of the stub below the docstring. The tests call it directly.
 
 ```text
 62 | def king_moves(board: Board, square: Square, color: str) -> list[Move]:
@@ -72,3 +72,5 @@ The number at the left of each line is its line number once the code is typed. W
 66 |
 67 | def main():
 ```
+
+**How it works:** A king jumps one step in any of eight directions, and `KING_STEPS` lists them. `jump_moves` already does the work for the knight: it tries each step, skips a square off the board or one with a friendly piece, and returns the rest. The king needs only its own list of steps.

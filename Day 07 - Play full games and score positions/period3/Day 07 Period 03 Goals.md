@@ -71,7 +71,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `random_move()` in `search.py`
 
-**Where:** lines 27 to 27 of `search.py`, inside `random_move()`, in place of the stub below the docstring. The tests call it directly.
+**Where:** line 27 of `search.py`, inside `random_move()`, in place of the stub below the docstring. The tests call it directly.
 
 ```text
 25 | def random_move(state: dict) -> Move:
@@ -81,6 +81,8 @@ The number at the left of each line is its line number once the code is typed. W
 29 |
 30 | def capture_value(state: dict, move: Move) -> int:
 ```
+
+**How it works:** `legal_moves` lists every legal move, and `random.choice` picks one. This is the simplest brain: it plays legal chess with no plan.
 
 ### `greedy_move()` in `search.py`
 
@@ -105,3 +107,5 @@ The number at the left of each line is its line number once the code is typed. W
 64 |
 65 | def main():
 ```
+
+**How it works:** The function shuffles the legal moves, so equal captures are picked at random. It starts with the first move as the best and checks every move with `capture_value`. A move that captures more becomes the new best. A greedy brain grabs the biggest piece it can, without looking at the reply.

@@ -97,6 +97,8 @@ The number at the left of each line is its line number once the code is typed. W
 52 | def repetition_count(state: dict) -> int:
 ```
 
+**How it works:** The loops collect every piece except the kings in `pieces`, in uppercase. For each bishop they add the color of its square: `(row + col) % 2` is 0 on one color and 1 on the other. Kings alone, or a king with one bishop or one knight, cannot mate, so the answer is True. Any other piece besides bishops can mate, so the answer is False. When only bishops are left, mate is impossible only if they all stand on squares of one color.
+
 ### `game_result()` in `game_end.py`
 
 **Where:** lines 72 to 83 of `game_end.py`, inside `game_result()`, in place of the stub below the docstring. The tests call it directly.
@@ -122,3 +124,5 @@ The number at the left of each line is its line number once the code is typed. W
 85 |
 86 | def main():
 ```
+
+**How it works:** The checks run in order. With no legal move, the game is over: checkmate if the side to move is in check, and the other side wins; stalemate if not. Next come the three draws: too little material to mate, the same position three times, and 100 half-moves with no capture or pawn move. If none applies, the game goes on and the function returns None.

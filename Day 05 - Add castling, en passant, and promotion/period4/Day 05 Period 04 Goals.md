@@ -75,3 +75,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 52 |     print("  (expected stalemate for Q, R, and B, and checkmate for N)")
 53 |
 ```
+
+**How it works:** The loop tries all four promotions on b8, one after the other. For each one it makes the move, counts Black's legal replies, and decides the result. With no reply, a king in check is checkmated and a king not in check is stalemated. `undo_move` restores the position before the next promotion is tried.

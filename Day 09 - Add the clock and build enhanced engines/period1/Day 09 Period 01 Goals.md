@@ -86,3 +86,5 @@ The number at the left of each line is its line number once the code is typed. W
 465 |
 466 | def think_move(state: dict) -> Move:
 ```
+
+**How it works:** `SearchInfo` holds the node count and the deadline, now plus the seconds allowed. Before searching, `best` is the first move of the ordered list, so Remus always has an answer. The loop searches depth 1, then 2, then 3: iterative deepening. Each search starts with the best move of the last one. When time runs out, the search raises `SearchTimeout`, and `break` keeps the move from the last depth that finished. A forced mate or a single legal move ends the loop early.

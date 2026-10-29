@@ -79,7 +79,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `is_white()` in `game_state.py`
 
-**Where:** lines 40 to 40 of `game_state.py`, inside `is_white()`, in place of the stub below the docstring. The tests call it directly.
+**Where:** line 40 of `game_state.py`, inside `is_white()`, in place of the stub below the docstring. The tests call it directly.
 
 ```text
 38 | def is_white(piece: str) -> bool:
@@ -89,6 +89,8 @@ The number at the left of each line is its line number once the code is typed. W
 42 |
 43 | def color_of(piece: str) -> str | None:
 ```
+
+**How it works:** `isupper()` is True for an uppercase letter. FEN writes White pieces in uppercase, so `"N".isupper()` is True and `"n".isupper()` is False.
 
 ### `color_of()` in `game_state.py`
 
@@ -107,6 +109,8 @@ The number at the left of each line is its line number once the code is typed. W
 52 | def opponent(color: str) -> str:
 ```
 
+**How it works:** An empty square, the dot `EMPTY`, has no color, so the function returns None first. Every other square holds a piece: `is_white` sends White pieces to `WHITE` ("w"), and every piece left is Black.
+
 ### `move_to_uci()` in `moves.py`
 
 **Where:** lines 42 to 45 of `moves.py`, inside `move_to_uci()`, in place of the stub below the docstring. The tests call it directly.
@@ -124,6 +128,8 @@ The number at the left of each line is its line number once the code is typed. W
 47 |
 48 | def move_from_uci(text: str, white_to_move: bool = True) -> Move:
 ```
+
+**How it works:** `move.from_square` is a tuple such as (6, 4), and the `*` unpacks it into the two arguments `square_name` needs, giving "e2". The two names glue together into "e2e4". A promotion adds the new piece's letter in lowercase, as UCI always writes it: e7e8q.
 
 ### `move_from_uci()` in `moves.py`
 
@@ -144,3 +150,5 @@ The number at the left of each line is its line number once the code is typed. W
 71 |
 72 | def main():
 ```
+
+**How it works:** `text[0:2]` is the first two characters, such as "e7", and `parse_square` turns them into a (row, col) tuple; `text[2:4]` is the landing square. A five-character move ends in a promotion letter. That letter becomes uppercase when White moves and lowercase when Black moves, so the new piece has the right piece color.

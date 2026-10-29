@@ -78,3 +78,5 @@ The number at the left of each line is its line number once the code is typed. W
 104 |
 105 | def placement(board: Board) -> int:
 ```
+
+**How it works:** The loops visit every square. An empty square adds nothing. A White piece adds its value from `PIECE_VALUES`, and a Black piece subtracts the value of its uppercase letter. The result is positive when White has more material, as in the starting position minus one Black knight: +300.

@@ -57,7 +57,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `en_passant_victim_square()` in `make_move.py`
 
-**Where:** lines 54 to 54 of `make_move.py`, inside `en_passant_victim_square()`, in place of the stub below the docstring. It is called by `make_move()` in `make_move.py`.
+**Where:** line 54 of `make_move.py`, inside `en_passant_victim_square()`, in place of the stub below the docstring. It is called by `make_move()` in `make_move.py`.
 
 ```text
 48 | def en_passant_victim_square(move: Move) -> Square:
@@ -69,3 +69,5 @@ The number at the left of each line is its line number once the code is typed. W
 56 |
 57 | def castling_rook_move(move: Move) -> tuple[Square, Square]:
 ```
+
+**How it works:** An en passant capture lands behind the pawn it takes. The captured pawn stands on the row the capturing pawn starts from, `move.from_square[0]`, and in the column it lands in, `move.to_square[1]`. Example: a White pawn on e5 captures on d6, and the Black pawn it takes stands on d5.

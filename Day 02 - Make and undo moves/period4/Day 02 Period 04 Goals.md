@@ -102,6 +102,8 @@ The number at the left of each line is its line number once the code is typed. W
 58 | def undo_move(state: dict, undo: dict) -> None:
 ```
 
+**How it works:** First the function reads the moving piece and whatever stands on the landing square. Before anything changes, it records the old values in the `undo` dict: the move, both pieces, the castling rights, the en passant target, and both clocks. Next `set_piece` puts the piece on its new square and empties the old one. A capture or a pawn move resets the halfmove clock to 0, and any other move adds 1. The fullmove number grows after Black moves. Finally the turn passes to the opponent, and the function returns the undo record.
+
 ### `undo_move()` in `make_move.py`
 
 **Where:** lines 69 to 77 of `make_move.py`, inside `undo_move()`, in place of the stub below the docstring. The tests call it directly.
@@ -124,3 +126,5 @@ The number at the left of each line is its line number once the code is typed. W
 79 |
 80 | def state_snapshot(state: dict) -> str:
 ```
+
+**How it works:** The undo record holds everything the move changed. The piece goes back to its starting square, and the landing square gets back what stood there before: the captured piece, or `EMPTY` for a quiet move. The turn flips back, and the castling rights, en passant target, and both clocks are copied from the record.

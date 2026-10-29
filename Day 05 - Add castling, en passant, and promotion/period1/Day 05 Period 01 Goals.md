@@ -57,6 +57,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 21 |     print("Part #2 - Ask a Question with in")
 ```
 
+**How it works:** `set()` makes an empty set, and `add` puts an item in. A set holds each item only once, so adding h1 a second time changes nothing and `len` counts 2.
+
 ### Part #2 - Ask a Question with in
 
 ```text
@@ -68,6 +70,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 25 |     print("Part #3 - Look Up a Right in a Dict")
 ```
 
+**How it works:** `in` asks whether an item is in the set and answers True or False. The question works on lists and dicts too, but a set answers it fastest.
+
 ### Part #3 - Look Up a Right in a Dict
 
 ```text
@@ -78,6 +82,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 30 |
 31 |     print("Part #4 - Remove Rights with replace()")
 ```
+
+**How it works:** The dict maps each home square to the castling rights a move from it removes. `rights_lost['h1']` reads the rights of h1. `in` on a dict asks about its keys, and d1 is not one of them.
 
 ### Part #4 - Remove Rights with replace()
 
@@ -93,3 +99,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 40 |     rights = rights.replace("k", "")
 41 |     print(f"Replacing a letter that is gone changes nothing: {rights}  (expected Q)")
 ```
+
+**How it works:** Strings never change, so `replace("K", "")` returns a new string without the K, and the code stores it back in `rights`. The loop removes each letter that e8 guards, k and then q, which is what a Black king move does.

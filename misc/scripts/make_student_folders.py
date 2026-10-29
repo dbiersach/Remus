@@ -296,42 +296,68 @@ def function_code(student: Path, answer: Path, row: EditRow) -> str:
         used = "It is called by " + ", ".join(called_by) + "."
     else:
         used = "The tests call it directly."
+    span = f"line {first}" if first == last else f"lines {first} to {last}"
     where = (
-        f"**Where:** lines {first} to {last} of `{file_name}`, inside `{name}()`, "
+        f"**Where:** {span} of `{file_name}`, inside `{name}()`, "
         f"in place of the stub below the docstring. {used}"
     )
     parts = [f"### `{name}()` in `{file_name}`", "", where, "", snippet_block(numbered)]
-    note = CODE_NOTES.get((file_name, name))
-    if note:
-        parts += [f"**How it works:** {note}", ""]
+    if (file_name, name) not in CODE_NOTES:
+        raise KeyError(
+            f"Write CODE_NOTES[({file_name!r}, {name!r})] in period_guides.py"
+        )
+    parts += [f"**How it works:** {CODE_NOTES[(file_name, name)]}", ""]
     return "\n".join(parts)
 
 
-def lab_groups(student_text: str) -> list[tuple[str, list[int]]]:
-    """Return (label, blank line numbers) for each part or function of a lab file."""
-    groups: list[tuple[str, list[int]]] = []
-    label = ""
+def lab_groups(student_text: str, answer_text: str) -> list[tuple[str, str, list[int]]]:
+    """
+    Return (heading, note key, blank line numbers) for each part of a lab file.
+
+    A blank belongs to the Part heading or the function above it. A blank at the
+    left edge of the file takes its heading from its answer: the imports, a class,
+    or a new function.
+    """
+    answers = answer_text.splitlines()
+    groups: list[tuple[str, str, list[int]]] = []
+    heading, key = "", ""
     for number, line in enumerate(student_text.splitlines(), start=1):
         stripped = line.strip()
         if stripped.startswith("def "):
-            label = "`" + stripped[4:].split("(")[0] + "()`"
+            key = stripped[4:].split("(")[0]
+            heading = f"`{key}()`"
         elif stripped.startswith(('print("Part #', "print('Part #")):
-            # print("Part #2 - Sets") gives the label Part #2 - Sets
-            label = "Part #" + stripped.split("Part #", 1)[1][:-2]
-        elif stripped == "#":
-            if not groups or groups[-1][0] != label:
-                groups.append((label, []))
-            groups[-1][1].append(number)
+            # print("Part #2 - Sets") gives the heading Part #2 - Sets
+            heading = "Part #" + stripped.split("Part #", 1)[1][:-2]
+            key = heading.split(" - ")[0]
+        elif line == "#":
+            answer = answers[number - 1]
+            if answer.startswith(("import ", "from ")):
+                heading, key = "The imports", "imports"
+            elif answer.startswith("def "):
+                key = answer[4:].split("(")[0]
+                heading = f"`{key}()`"
+            elif answer.startswith(("@", "class ")):
+                for text in answers[number - 1 :]:
+                    if text.startswith("class "):
+                        key = text[6:].split("(")[0].rstrip(":")
+                        break
+                heading = f"The `{key}` class"
+        if stripped == "#":
+            if not groups or groups[-1][1] != key:
+                groups.append((heading, key, []))
+            groups[-1][2].append(number)
     return groups
 
 
-def lab_code(name: str, student: Path, answer: Path) -> str:
-    """Return the "code you type" section of a lab or demo period."""
+def lab_code(name: str, student: Path, answer: Path, with_heading: bool = True) -> str:
+    """Return the "code you type" part of a lab or demo, with its heading if asked."""
     student_lines = student.read_text().splitlines()
     answer_lines_all = answer.read_text().splitlines()
-    out = ["## The code you type", "", CODE_INTRO, ""]
-    for label, blanks in lab_groups(student.read_text()):
-        out += [f"### {label}", ""]
+    out = ["## The code you type", "", CODE_INTRO, ""] if with_heading else []
+    groups = lab_groups(student.read_text(), answer.read_text())
+    for heading, key, blanks in groups:
+        out += [f"### {heading}", ""]
         # Split a part into blocks wherever two blanks sit more than four lines apart
         blocks = [[blanks[0]]]
         for number in blanks[1:]:
@@ -348,10 +374,9 @@ def lab_code(name: str, student: Path, answer: Path) -> str:
                 else:
                     numbered.append((number, "|", student_lines[number - 1]))
             out += [snippet_block(numbered)]
-        key = label.removesuffix("()`").removeprefix("`")
-        note = CODE_NOTES.get((name, key.split(" - ")[0]))
-        if note:
-            out += [f"**How it works:** {note}", ""]
+        if (name, key) not in CODE_NOTES:
+            raise KeyError(f"Write CODE_NOTES[({name!r}, {key!r})] in period_guides.py")
+        out += [f"**How it works:** {CODE_NOTES[(name, key)]}", ""]
     return "\n".join(out)
 
 
@@ -359,9 +384,7 @@ def code_section(folder: Path, answers: Path, rows: list[EditRow]) -> str:
     """Return the "code you type" section for the functions of one period or version."""
     out = ["## The code you type", "", CODE_INTRO, "", CODE_NUMBERS, ""]
     for row in rows:
-        out.append(
-            function_code(folder / row["file"], answers / row["file"], row)
-        )
+        out.append(function_code(folder / row["file"], answers / row["file"], row))
     return "\n".join(out)
 
 
@@ -595,7 +618,9 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
         period = int(folder.parent.name.removeprefix("period"))
         if period == 1:
             out += [f"## {folder.parent.parent.name}", ""]
-            out += ["| Period | Title | New files | Files that grow | Student pairs write |"]
+            out += [
+                "| Period | Title | New files | Files that grow | Student pairs write |"
+            ]
             out += ["| --- | --- | --- | --- | --- |"]
         new, changed = changed_files(folder, before)
         writes = pairs_write(day, period, rows, "in the table below")
@@ -634,7 +659,9 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
 
 def main():
     stubbed = 0
-    typed: dict[tuple[int, int], int] = {}  # (day, period) -> lines the student pairs type
+    typed: dict[
+        tuple[int, int], int
+    ] = {}  # (day, period) -> lines the student pairs type
     rows: dict = {}  # (day, period), or ("version", folder), -> list[EditRow]
     for folder in instructor_folders():
         day = int(folder.parent.parent.name[4:6])
@@ -689,9 +716,13 @@ def main():
             row = {"file": f"{name}.py", "function": "", "typed": count}
             rows.setdefault((day, period), []).append(row)
             sections.append(lab_section(name, count))
-            sections.append(
-                lab_code(name, lab_path, folder / f"{name}_instructor.py")
-            )
+            # A period with functions to write already opened "The code you type"
+            first = not any(row["function"] for row in rows[(day, period)])
+            code = lab_code(name, lab_path, folder / f"{name}_instructor.py", first)
+            if first:
+                sections.append(code)
+            else:
+                sections[-2] += "\n" + code
         if (target / "bug_hunt").exists():
             count = write_bug_hunt_student(target)
             typed[(day, period)] = typed.get((day, period), 0) + count

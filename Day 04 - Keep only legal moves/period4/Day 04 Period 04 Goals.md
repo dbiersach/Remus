@@ -55,6 +55,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 41 |     print("Part #2 - A King in Check")
 ```
 
+**How it works:** Before you run the file, change `prediction` to the number of legal moves you expect, then compare it with the count Remus prints. From the starting position it is 20: 16 pawn moves and 4 knight moves.
+
 ### Part #2 - A King in Check
 
 ```text
@@ -67,6 +69,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 47 |
 48 |     print("Part #3 - A Pinned Knight")
 ```
+
+**How it works:** `position` builds a board holding only the pieces in the dict. The Black rook on e8 checks the White king on e1 along the e-file, so `in_check` prints True. Count the king's legal moves yourself, put the number in `prediction`, and run the file.
 
 ### Part #3 - A Pinned Knight
 
@@ -85,3 +89,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 59 |
 60 |     print("Part #4 - Your Own Position")
 ```
+
+**How it works:** The White knight on e2 stands between its king and the Black rook, so it is pinned: any knight move would expose the king. The loop counts the legal moves that start on e2, using the first two characters of each move's UCI text, and finds none.

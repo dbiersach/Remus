@@ -56,6 +56,8 @@ Each block below shows the code to type with a few lines around it, so you can f
 42 |
 ```
 
+**How it works:** A win is 1 point and a draw half a point, so 9 wins and 4 draws make 11. The score is points per game, 11 / 20 = 0.55. `elo_gap` turns that score into the rating difference the Elo formula expects, about +35.
+
 ### Part #2 - The Margin of Error
 
 ```text
@@ -74,3 +76,5 @@ Each block below shows the code to type with a few lines around it, so you can f
 55 |
 56 |
 ```
+
+**How it works:** 20 games cannot measure a score exactly. `1.96 * sqrt(score * (1 - score) / games)` is the margin that covers the true score 95 times in 100. Turning the low and high scores into Elo gives a range. If the whole range is above 0 or below 0, the enhancement really changed the strength; if it reaches past 0, more games are needed.

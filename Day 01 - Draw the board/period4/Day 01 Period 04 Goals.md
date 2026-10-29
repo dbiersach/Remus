@@ -98,9 +98,11 @@ The number at the left of each line is its line number once the code is typed. W
 56 | def square_name(row: int, col: int) -> str:
 ```
 
+**How it works:** The loop prints one line per row, row 0 (rank 8) first. Each line starts with the rank number from `BOARD_RANKS`, and the inner loop adds a space and each square's letter with `+`. After the eight rows, the last line prints the file letters, with two spaces in front so each letter sits under its column.
+
 ### `square_name()` in `board.py`
 
-**Where:** lines 72 to 72 of `board.py`, inside `square_name()`, in place of the stub below the docstring. The tests call it directly.
+**Where:** line 72 of `board.py`, inside `square_name()`, in place of the stub below the docstring. The tests call it directly.
 
 ```text
 56 | def square_name(row: int, col: int) -> str:
@@ -112,6 +114,8 @@ The number at the left of each line is its line number once the code is typed. W
 74 |
 75 | def parse_square(name: str) -> Square:
 ```
+
+**How it works:** `BOARD_FILES` is "abcdefgh", so `BOARD_FILES[col]` is the file letter, and `BOARD_RANKS` lists the rank digits from row 0, so `BOARD_RANKS[row]` is the rank. Glued together, (6, 4) gives "e" + "2" = "e2".
 
 ### `parse_square()` in `board.py`
 
@@ -132,6 +136,8 @@ The number at the left of each line is its line number once the code is typed. W
 101 | def piece_at(board: Board, square: Square) -> str:
 ```
 
+**How it works:** A square name has exactly two characters, a file letter and a rank digit. Anything else, such as "i9" or "e10", raises `ValueError` with a message that shows the bad text. `index` finds where a character sits in a string, which turns the letter into a column and the digit into a row: "e4" becomes (4, 4).
+
 ### `piece_at()` in `board.py`
 
 **Where:** lines 103 to 104 of `board.py`, inside `piece_at()`, in place of the stub below the docstring. The tests call it directly.
@@ -145,3 +151,5 @@ The number at the left of each line is its line number once the code is typed. W
 106 |
 107 | def main():
 ```
+
+**How it works:** A square is a (row, col) tuple, so unpacking gives the two numbers their names. `board[row][col]` picks the row from the list of rows and then the square from that row.

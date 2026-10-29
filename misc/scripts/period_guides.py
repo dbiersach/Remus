@@ -1593,6 +1593,550 @@ CODE_NOTES: dict[tuple[str, str], str] = {
         "again, so both rolls are the same and the comparison prints True. Without "
         "the first seed the two rolls would match only about one time in six."
     ),
+    ("python_setup", "Part #2"): (
+        "The first line stores text in a variable named `team_name`; the quotes "
+        "mark where the text starts and stops. An f-string, the `f` before the "
+        "quotes, fills each `{...}` with the value inside, so the greeting prints "
+        "your team name. `len()` counts the characters of a string, and spaces "
+        "count too."
+    ),
+    ("python_setup", "Part #3"): (
+        "`back_rank` holds White's eight back-rank pieces as one string, from the "
+        "a-file to the h-file. `back_rank[4]` reads the character at index 4. "
+        "Python counts from 0, so index 4 is the fifth letter, the king on the "
+        "e-file."
+    ),
+    ("python_strings", "Part #1"): (
+        "A string is a row of characters, and `[ ]` reads one of them by its index. "
+        "`square[0]` is the first character, the file letter e, and `square[1]` is "
+        "the second, the rank digit 2. The f-string prints both."
+    ),
+    ("python_strings", "Part #2"): (
+        "`ord()` turns a letter into its number in the computer's character table, "
+        'and the letters a to h have numbers in a row. Subtracting `ord("a")` gives '
+        '0 for a, 1 for b, and 4 for e: a file number. `int()` turns the text "2" '
+        "into the number 2, so Python can do arithmetic with it."
+    ),
+    ("python_strings", "Part #3"): (
+        "`chr()` goes the other way, from a number back to a letter. Adding 6 to "
+        'the number of "a" lands on "g". The f-string then glues the letter and the '
+        "rank 7 into the square name g7."
+    ),
+    ("python_strings", "Part #4"): (
+        "`upper()` returns a new string with every letter in uppercase, which turns "
+        "Black's back rank into White's. Remus uses the same rule as FEN: uppercase "
+        'is White and lowercase is Black. `"N".isupper()` asks whether a letter is '
+        "uppercase and gives True or False."
+    ),
+    ("python_lists", "Part #1"): (
+        "`len()` counts the items in a list: 8 pieces. `back_rank[3]` reads the "
+        "item at index 3. Counting from 0, a is index 0 and d is index 3, so the "
+        "d-file holds the queen."
+    ),
+    ("python_lists", "Part #2"): (
+        "`for col in range(8)` runs the indented line once for each number from 0 "
+        'to 7. `end=" "` prints a space instead of starting a new line, so the '
+        "eight pieces appear on one line. The empty `print()` after the loop ends "
+        "that line."
+    ),
+    ("python_lists", "Part #3"): (
+        "The board starts as an empty list, and the first loop appends 8 rows of 8 "
+        'dots. Each `["."] * 8` builds a new list, so changing one row never '
+        "changes another. The next four lines put the pieces on rows 0, 1, 6, and "
+        "7; row 0 is rank 8, Black's back rank. The last two loops build one line "
+        "of text per row with `+=` and print it, so the board appears with Black at "
+        "the top."
+    ),
+    ("python_lists", "Part #4"): (
+        "`board[6][4]` is row 6 (rank 2), column 4 (the e-file), the square e2. "
+        "Setting it to a dot and `board[4][4]` to `P` plays 1. e4. The loop then "
+        "visits each square of row 6 and adds 1 to `pawns` for every White pawn it "
+        "finds: 7 are left."
+    ),
+    ("python_functions", "is_white"): (
+        "`isupper()` returns True when a letter is uppercase. In Remus uppercase "
+        "letters are White pieces, so this one line answers the question in the "
+        "function's name."
+    ),
+    ("python_functions", "on_board"): (
+        "`0 <= row <= 7` is True only when the row is 0, 1, ..., or 7, and the same "
+        "test checks the column. `and` makes the whole answer True only when both "
+        "are inside the board."
+    ),
+    ("python_functions", "is_black"): (
+        "This function you write from nothing: the `def` line names it and lists "
+        "its input with a type hint, the docstring says what it does, and the body "
+        "returns the answer. `islower()` is True for a lowercase letter, a Black "
+        "piece."
+    ),
+    ("python_functions", "test_is_white"): (
+        "A test is a function whose name starts with `test_`. Each `assert` checks "
+        "one fact: a White knight `N` is White, and a Black knight `n` is not. If a "
+        "fact is False, the assert stops the program and names the line."
+    ),
+    ("python_functions", "test_on_board"): (
+        "The first assert checks a square in the corner, a1 (row 7, col 0). The "
+        "second checks row 8, which is one row past the edge, so `on_board` must "
+        "answer False."
+    ),
+    ("python_functions", "Part #2"): (
+        "Each line calls your `is_black` inside an f-string and prints the answer "
+        "next to the expected one. The single quotes around the f-string let the "
+        "code use double quotes inside it."
+    ),
+    ("python_functions", "Part #3"): (
+        "A square is a tuple of two numbers. `row, col = square` unpacks it, giving "
+        "the first number the name `row` and the second the name `col`. The last "
+        "line passes both names to `on_board`."
+    ),
+    ("python_functions", "Part #4"): (
+        "Calling the two test functions runs their asserts. If every assert is "
+        "True, nothing happens and the program goes on to print its success line."
+    ),
+    ("python_dicts", "Move"): (
+        "`@dataclass` turns a short class into a record type. Each line inside "
+        "names one field and its type. Python then writes the code that builds a "
+        "Move from two values and prints it neatly."
+    ),
+    ("python_dicts", "Part #1"): (
+        "A dict stores values under keys. `state['turn']` reads the value stored "
+        'under the key "turn". Inside an f-string that already uses double quotes, '
+        'the key needs single quotes. `state["turn"] = "b"` replaces the value: '
+        "Black is to move."
+    ),
+    ("python_dicts", "Part #2"): (
+        "`b2 = board` makes no copy. It gives the same board a second name, so "
+        "writing a pawn through `b2` changes `board` too. `is` asks whether two "
+        "names point to the very same object, and here the answer is True."
+    ),
+    ("python_dicts", "Part #3"): (
+        "`deepcopy` builds a new board, a new outer list holding new copies of "
+        "every row. Changing `b3` leaves `board` alone. `is` is now False, because "
+        "these are two objects, and `==` compares their contents, which differ on "
+        "a8."
+    ),
+    ("python_dicts", "Part #4"): (
+        '`Move("e2", "e4")` builds a record, filling the fields in the order the '
+        "class lists them. `move.to_square` reads one field by name, and "
+        "`print(move)` shows all of them."
+    ),
+    ("game_state.py", "is_white"): (
+        "`isupper()` is True for an uppercase letter. FEN writes White pieces in "
+        'uppercase, so `"N".isupper()` is True and `"n".isupper()` is False.'
+    ),
+    ("game_state.py", "color_of"): (
+        "An empty square, the dot `EMPTY`, has no color, so the function returns "
+        "None first. Every other square holds a piece: `is_white` sends White "
+        'pieces to `WHITE` ("w"), and every piece left is Black.'
+    ),
+    ("moves.py", "move_to_uci"): (
+        "`move.from_square` is a tuple such as (6, 4), and the `*` unpacks it into "
+        'the two arguments `square_name` needs, giving "e2". The two names glue '
+        'together into "e2e4". A promotion adds the new piece\'s letter in '
+        "lowercase, as UCI always writes it: e7e8q."
+    ),
+    ("moves.py", "move_from_uci"): (
+        '`text[0:2]` is the first two characters, such as "e7", and `parse_square` '
+        "turns them into a (row, col) tuple; `text[2:4]` is the landing square. A "
+        "five-character move ends in a promotion letter. That letter becomes "
+        "uppercase when White moves and lowercase when Black moves, so the new "
+        "piece has the right piece color."
+    ),
+    ("make_move.py", "make_move"): (
+        "First the function reads the moving piece and whatever stands on the "
+        "landing square. Before anything changes, it records the old values in the "
+        "`undo` dict: the move, both pieces, the castling rights, the en passant "
+        "target, and both clocks. Next `set_piece` puts the piece on its new square "
+        "and empties the old one. A capture or a pawn move resets the halfmove "
+        "clock to 0, and any other move adds 1. The fullmove number grows after "
+        "Black moves. Finally the turn passes to the opponent, and the function "
+        "returns the undo record."
+    ),
+    ("make_move.py", "undo_move"): (
+        "The undo record holds everything the move changed. The piece goes back to "
+        "its starting square, and the landing square gets back what stood there "
+        "before: the captured piece, or `EMPTY` for a quiet move. The turn flips "
+        "back, and the castling rights, en passant target, and both clocks are "
+        "copied from the record."
+    ),
+    ("python_loops", "Part #1"): (
+        "A `while` loop repeats its indented lines as long as its test is True. "
+        "`count` starts at 0 and grows by 1 each time, so the loop prints steps 0, "
+        "1, and 2 and stops when `count` reaches 3."
+    ),
+    ("python_loops", "Part #2"): (
+        "A direction is a tuple of two steps. Unpacking gives each step a name: "
+        "`row_step` is -1, one row toward rank 8, and `col_step` is 1, one column "
+        "to the right."
+    ),
+    ("python_loops", "Part #3"): (
+        "`while True` repeats until a `break` stops it. Each pass takes one step in "
+        "the direction. If the step leaves the board, the walk ends. Otherwise the "
+        "square's name is added to the text, and if a piece stands there the walk "
+        "ends too, after counting that square. This is the walk a bishop, rook, or "
+        "queen makes."
+    ),
+    ("move_generation.py", "king_moves"): (
+        "A king jumps one step in any of eight directions, and `KING_STEPS` lists "
+        "them. `jump_moves` already does the work for the knight: it tries each "
+        "step, skips a square off the board or one with a friendly piece, and "
+        "returns the rest. The king needs only its own list of steps."
+    ),
+    ("move_generation.py", "slide"): (
+        "The function unpacks the start square and the direction, then takes its "
+        "first step. The `while` loop runs while the square is on the board. An "
+        "empty square is a move, and the walk goes on. A square with a piece ends "
+        "the walk: an enemy piece is one last move, a capture, and a friendly piece "
+        "is not a move at all. The last line of the loop takes the next step."
+    ),
+    ("move_generation.py", "pawn_pushes"): (
+        "White pawns move toward row 0 (rank 8), so `forward` is -1 for White and 1 "
+        "for Black, and each side's pawns start on their own row. A pawn may step "
+        "one square ahead only onto an empty square. `pawn_moves_to` turns a step "
+        "onto the last rank into four promotions. Only when the first square is "
+        "empty, and the pawn still stands on its starting row, may it also step two "
+        "squares to another empty square."
+    ),
+    ("python_modules", "imports"): (
+        "`import board` loads `board.py` and keeps its names behind `board.`, as in "
+        "`board.__name__`. `from board import new_board, parse_square` copies those "
+        "two names into this file, so they can be called without the prefix. Python "
+        "finds each file by its name, without `.py`, in the same folder."
+    ),
+    ("python_modules", "Part #1"): (
+        'Every file has a `__name__`. The file you run is called "__main__", and a '
+        'file you import keeps its own name, "board". The `if __name__ == '
+        '"__main__"` guard at the bottom of `board.py` is false when the file is '
+        "imported, so its `main()` does not run."
+    ),
+    ("python_modules", "Part #2"): (
+        "These lines use functions from three other files. They build the starting "
+        'board, turn "g1" into a square, and ask `knight_moves` for the knight\'s '
+        "moves. The loop adds each move's UCI text to `names`."
+    ),
+    ("attacks.py", "piece_at_offsets"): (
+        "The function adds each offset, such as (2, 1), to the square to reach a "
+        "target square. If the target is on the board and holds the exact piece "
+        "asked for, such as a White knight `N`, the square is attacked and the "
+        "function returns True at once. After trying every offset with no match it "
+        "returns False."
+    ),
+    ("attacks.py", "attacked_by_pawn"): (
+        "A pawn attacks one step diagonally forward. To ask whether a White pawn "
+        "attacks a square, look one row toward rank 1 from that square, at (row + "
+        "1, col - 1) and (row + 1, col + 1), because White pawns move toward row 0. "
+        "For a Black pawn, look the other way, at row - 1. `piece_at_offsets` does "
+        "the looking."
+    ),
+    ("attacks.py", "attacked_by_king"): (
+        "The function picks the king letter of the attacking side, `K` for White "
+        "and `k` for Black, and asks `piece_at_offsets` whether that king stands on "
+        "any of the eight squares around the target."
+    ),
+    ("attacks.py", "in_check"): (
+        "`find_king` finds the king of `color` on the board, and `opponent` gives "
+        "the other side. A king is in check when the other side attacks its square, "
+        "so one call to `is_square_attacked` answers the question."
+    ),
+    ("legal_moves.py", "legal_moves"): (
+        "The function remembers whose move it is in `mover`, because `make_move` "
+        "passes the turn. For each pseudo-legal move it makes the move, asks "
+        "whether the mover's own king is now in check, and keeps the move only if "
+        "it is not. `undo_move` puts the position back before the next move is "
+        "tried. This one test catches pins, moves into check, and en passant "
+        "captures that expose the king."
+    ),
+    ("demo_practice_positions", "Part #1"): (
+        "Before you run the file, change `prediction` to the number of legal moves "
+        "you expect, then compare it with the count Remus prints. From the starting "
+        "position it is 20: 16 pawn moves and 4 knight moves."
+    ),
+    ("demo_practice_positions", "Part #2"): (
+        "`position` builds a board holding only the pieces in the dict. The Black "
+        "rook on e8 checks the White king on e1 along the e-file, so `in_check` "
+        "prints True. Count the king's legal moves yourself, put the number in "
+        "`prediction`, and run the file."
+    ),
+    ("demo_practice_positions", "Part #3"): (
+        "The White knight on e2 stands between its king and the Black rook, so it "
+        "is pinned: any knight move would expose the king. The loop counts the "
+        "legal moves that start on e2, using the first two characters of each "
+        "move's UCI text, and finds none."
+    ),
+    ("python_sets", "Part #1"): (
+        "`set()` makes an empty set, and `add` puts an item in. A set holds each "
+        "item only once, so adding h1 a second time changes nothing and `len` "
+        "counts 2."
+    ),
+    ("python_sets", "Part #2"): (
+        "`in` asks whether an item is in the set and answers True or False. The "
+        "question works on lists and dicts too, but a set answers it fastest."
+    ),
+    ("python_sets", "Part #3"): (
+        "The dict maps each home square to the castling rights a move from it "
+        "removes. `rights_lost['h1']` reads the rights of h1. `in` on a dict asks "
+        "about its keys, and d1 is not one of them."
+    ),
+    ("python_sets", "Part #4"): (
+        'Strings never change, so `replace("K", "")` returns a new string without '
+        "the K, and the code stores it back in `rights`. The loop removes each "
+        "letter that e8 guards, k and then q, which is what a Black king move does."
+    ),
+    ("make_move.py", "update_castling_rights"): (
+        "A move can touch two home squares, the one it leaves and the one it lands "
+        'on, so the loop checks both. `CASTLING_SQUARES.get(square, "")` gives the '
+        "rights that square guards, or an empty string for any other square. Each "
+        "guarded letter is removed with `replace`. Moving the h1 rook removes K, "
+        "and capturing the rook on h1 removes K too."
+    ),
+    ("make_move.py", "en_passant_victim_square"): (
+        "An en passant capture lands behind the pawn it takes. The captured pawn "
+        "stands on the row the capturing pawn starts from, `move.from_square[0]`, "
+        "and in the column it lands in, `move.to_square[1]`. Example: a White pawn "
+        "on e5 captures on d6, and the Black pawn it takes stands on d5."
+    ),
+    ("demo_promotion", "Part #1"): (
+        "The loop tries all four promotions on b8, one after the other. For each "
+        "one it makes the move, counts Black's legal replies, and decides the "
+        "result. With no reply, a king in check is checkmated and a king not in "
+        "check is stalemated. `undo_move` restores the position before the next "
+        "promotion is tried."
+    ),
+    ("python_recursion", "countdown"): (
+        "A recursive function calls itself on a smaller problem. The base case "
+        "comes first: at 0 the function prints Go! and returns, so the calls stop. "
+        "Otherwise it prints its number and calls `countdown(number - 1)`, which "
+        "does the rest."
+    ),
+    ("python_recursion", "count_leaves"): (
+        "A leaf is a string, and it counts as 1. Any other tree is a list of "
+        "branches, so the function adds up `count_leaves` of each branch. Each "
+        "branch is a smaller tree, so every call gets closer to the leaves."
+    ),
+    ("perft.py", "perft"): (
+        "At depth 0 the position itself is one leaf. Otherwise the function makes "
+        "each legal move, counts the leaves below it with `perft(state, depth - "
+        "1)`, and undoes the move before trying the next one. The total is the "
+        "number of positions at the given depth. From the start position perft(3) "
+        "is 8,902."
+    ),
+    ("fen.py", "fen_placement"): (
+        "FEN writes each rank from the a-file to the h-file, and a run of empty "
+        "squares becomes one digit. For each row the code counts empty squares in "
+        "`empty_count`. When a piece appears, the count, if any, is written first, "
+        "then the piece letter. At the end of the row a final count is written. A "
+        'slash goes between ranks, so the starting row 0 gives "rnbqkbnr" and an '
+        'empty rank gives "8".'
+    ),
+    ("fen.py", "board_from_placement"): (
+        '`split("/")` cuts the placement into eight ranks, rank 8 first. In each '
+        "rank a digit adds that many empty squares and a letter adds one piece. A "
+        "rank that does not add up to 8 squares, or a placement without 8 ranks, "
+        "raises `ValueError`, so a typing mistake in a FEN stops at once."
+    ),
+    ("python_fen_fields", "Part #1"): (
+        "`split()` with no argument cuts text at every run of spaces and returns a "
+        "list of the pieces. A FEN has six fields, so the list holds 6 items."
+    ),
+    ("python_fen_fields", "Part #2"): (
+        "The loop counts i from 0 to 5 and prints the name of field i next to its "
+        "value, so each field is labeled."
+    ),
+    ("python_fen_fields", "Part #3"): (
+        '`try` runs a line that may fail. `int("x")` cannot make a number from x, '
+        "so Python raises `ValueError`, and the `except ValueError` lines run "
+        'instead of stopping the program. Change `text` to "12" to see the other '
+        "path."
+    ),
+    ("game_end.py", "insufficient_material"): (
+        "The loops collect every piece except the kings in `pieces`, in uppercase. "
+        "For each bishop they add the color of its square: `(row + col) % 2` is 0 "
+        "on one color and 1 on the other. Kings alone, or a king with one bishop or "
+        "one knight, cannot mate, so the answer is True. Any other piece besides "
+        "bishops can mate, so the answer is False. When only bishops are left, mate "
+        "is impossible only if they all stand on squares of one color."
+    ),
+    ("game_end.py", "game_result"): (
+        "The checks run in order. With no legal move, the game is over: checkmate "
+        "if the side to move is in check, and the other side wins; stalemate if "
+        "not. Next come the three draws: too little material to mate, the same "
+        "position three times, and 100 half-moves with no capture or pawn move. If "
+        "none applies, the game goes on and the function returns None."
+    ),
+    ("notation.py", "parse_san"): (
+        '`strip()` removes spaces, `rstrip("+#!?")` removes check, mate, and '
+        'comment marks from the end, and `replace("0", "O")` accepts castling typed '
+        "with zeros. Then the function writes every legal move in SAN with "
+        "`move_to_san` and returns the one whose text matches. Nothing matching "
+        "means the text is not a legal move here, so it raises `ValueError`."
+    ),
+    ("python_input_output", "Part #1"): (
+        "`random.choice` picks one item from a list. The seed above it makes the "
+        "pick the same on every run."
+    ),
+    ("python_input_output", "Part #2"): (
+        "The loop remembers the best item so far. It starts with the first victim, "
+        "and every piece worth more takes its place. After the loop, `best` holds "
+        "the most valuable piece, the queen."
+    ),
+    ("python_input_output", "Part #3"): (
+        "`file=sys.stderr` sends the text to the error stream instead of the normal "
+        "output. Lucas Chess reads only the normal output, so notes for people go "
+        "to stderr and never confuse the GUI."
+    ),
+    ("python_input_output", "Part #4"): (
+        "`for line in sys.stdin` reads one line each time you press Enter. "
+        '`strip()` removes the newline. "quit" ends the loop; "isready" gets '
+        '"readyok", the answer a UCI engine gives; anything else is echoed back. '
+        "`flush=True` sends each answer at once, as the UCI conversation needs."
+    ),
+    ("search.py", "random_move"): (
+        "`legal_moves` lists every legal move, and `random.choice` picks one. This "
+        "is the simplest brain: it plays legal chess with no plan."
+    ),
+    ("search.py", "greedy_move"): (
+        "The function shuffles the legal moves, so equal captures are picked at "
+        "random. It starts with the first move as the best and checks every move "
+        "with `capture_value`. A move that captures more becomes the new best. A "
+        "greedy brain grabs the biggest piece it can, without looking at the reply."
+    ),
+    ("evaluation.py", "material"): (
+        "The loops visit every square. An empty square adds nothing. A White piece "
+        "adds its value from `PIECE_VALUES`, and a Black piece subtracts the value "
+        "of its uppercase letter. The result is positive when White has more "
+        "material, as in the starting position minus one Black knight: +300."
+    ),
+    ("search.py", "negamax"): (
+        "Each call counts one node. At depth 0 the function stops looking ahead and "
+        "returns `evaluate`. With no legal moves the game is over: a checkmated "
+        "side gets a large negative score, worse the sooner the mate (`ply` counts "
+        "how deep the search is), and stalemate is 0. Otherwise every move is made, "
+        "searched one ply less deep, and undone; `try` and `finally` undo the move "
+        "even if the search stops early. The minus sign turns the opponent's score "
+        "into ours, and `best` keeps the highest."
+    ),
+    ("search.py", "alpha_beta"): (
+        "The body is negamax with a window. `alpha` is the best score this side is "
+        "already sure of, and `beta` is the most the opponent will allow. Each "
+        "child is searched with the window flipped, `-beta` and `-alpha`. A score "
+        "at or above `beta` is a cutoff: the opponent will never let the game reach "
+        "this position, so the remaining moves are skipped. Otherwise a better "
+        "score raises `alpha`, and the function returns `alpha`."
+    ),
+    ("python_sorting", "Part #1"): (
+        "The list `ordered` starts empty. For each victim the `while` loop steps "
+        "past every piece worth at least as much, and `insert(place, piece)` puts "
+        "the new piece there. The list stays sorted from the most valuable down "
+        "after each insert."
+    ),
+    ("python_sorting", "Part #2"): (
+        '`-float("inf")` is minus infinity, a number smaller than any real value. '
+        "Starting the best there means the first victim always replaces it, so no "
+        "special case is needed."
+    ),
+    ("python_sorting", "Part #3"): (
+        "`time.perf_counter()` reads a precise clock. Reading it before and after "
+        "`perft` and subtracting gives the seconds the count took."
+    ),
+    ("search.py", "quiescence"): (
+        "Quiescence keeps searching captures after the main search ends, so Remus "
+        "never stops in the middle of a trade. The side to move may stand pat, "
+        "keeping the score it has without capturing. If that score already reaches "
+        "`beta`, the opponent avoids this position, so the function returns at "
+        "once. Otherwise each capture is made, searched with the window flipped, "
+        "and undone, with the same cutoff as alpha-beta."
+    ),
+    ("move_ordering.py", "mvv_lva_score"): (
+        "MVV-LVA means most valuable victim, least valuable attacker. A capture "
+        "scores 10 times the victim's value minus the attacker's value, so pawn "
+        "takes queen (9,000 - 100) comes before queen takes queen (9,000 - 900). A "
+        "quiet move scores 0. A promotion adds 10 times the new piece's value, as "
+        "if it captured that piece."
+    ),
+    ("search.py", "think"): (
+        "`SearchInfo` holds the node count and the deadline, now plus the seconds "
+        "allowed. Before searching, `best` is the first move of the ordered list, "
+        "so Remus always has an answer. The loop searches depth 1, then 2, then 3: "
+        "iterative deepening. Each search starts with the best move of the last "
+        "one. When time runs out, the search raises `SearchTimeout`, and `break` "
+        "keeps the move from the last depth that finished. A forced mate or a "
+        "single legal move ends the loop early."
+    ),
+    ("demo_results", "Part #1"): (
+        "A win is 1 point and a draw half a point, so 9 wins and 4 draws make 11. "
+        "The score is points per game, 11 / 20 = 0.55. `elo_gap` turns that score "
+        "into the rating difference the Elo formula expects, about +35."
+    ),
+    ("demo_results", "Part #2"): (
+        "20 games cannot measure a score exactly. `1.96 * sqrt(score * (1 - score) "
+        "/ games)` is the margin that covers the true score 95 times in 100. "
+        "Turning the low and high scores into Elo gives a range. If the whole range "
+        "is above 0 or below 0, the enhancement really changed the strength; if it "
+        "reaches past 0, more games are needed."
+    ),
+    ("hidden_peak.py", "candidate_squares"): (
+        "The two loops visit every square of the grid, row by row, and keep each "
+        "one that has no reading yet. Like `legal_moves` in Remus, this lists the "
+        "choices at the current step."
+    ),
+    ("hidden_peak.py", "score_candidate"): (
+        "`nearest` starts at infinity, and the loop lowers it to the distance from "
+        "the square to the closest square already measured. The score adds two "
+        "parts: `predicted_value`, how hot the square looks from the readings "
+        "nearby (exploit), and `explore_weight` times that distance, a reward for "
+        "trying somewhere new (explore)."
+    ),
+    ("hidden_peak.py", "choose_next_measurement"): (
+        "This is `greedy_move` again, aimed at a science problem. The function "
+        "lists the unmeasured squares, scores each one, and keeps the best so far "
+        "in a loop. The square with the highest score is the next one to measure."
+    ),
+    ("phase_hunt.py", "score"): (
+        "`predicted_peaks` lists every peak the chosen phases would make. The score "
+        "starts with a cost for each phase, so a simpler answer wins a tie. Each "
+        "measured peak that a predicted peak matches adds a point, and each one "
+        "nothing explains costs a point. Each predicted peak that the measurement "
+        "does not show also costs a point."
+    ),
+    ("phase_hunt.py", "greedy_phases"): (
+        "The loop adds one phase at a time, up to `MAX_PHASES`. In each round it "
+        "tries every phase not chosen yet: append it, score the set, and pop it "
+        "back off, like making and undoing a move. The phase with the best score "
+        "that beats the current set is kept. When no phase helps, `break` ends the "
+        "search."
+    ),
+    ("phase_hunt.py", "search"): (
+        "Each call scores the current set of phases. A new best score starts a "
+        "fresh list of best sets, and a tie joins the list; `list(phases)` saves a "
+        "copy, because `phases` keeps changing. At depth 0 the search stops. "
+        "Otherwise it tries each phase from `start` on: append it (make), search "
+        "one level deeper with the next index, and pop it (undo). Starting at "
+        "`index + 1` means each set is tried once, never in two orders."
+    ),
+    ("board.py", "print_board"): (
+        "The loop prints one line per row, row 0 (rank 8) first. Each line starts "
+        "with the rank number from `BOARD_RANKS`, and the inner loop adds a space "
+        "and each square's letter with `+`. After the eight rows, the last line "
+        "prints the file letters, with two spaces in front so each letter sits "
+        "under its column."
+    ),
+    ("board.py", "square_name"): (
+        '`BOARD_FILES` is "abcdefgh", so `BOARD_FILES[col]` is the file letter, and '
+        "`BOARD_RANKS` lists the rank digits from row 0, so `BOARD_RANKS[row]` is "
+        'the rank. Glued together, (6, 4) gives "e" + "2" = "e2".'
+    ),
+    ("board.py", "parse_square"): (
+        "A square name has exactly two characters, a file letter and a rank digit. "
+        'Anything else, such as "i9" or "e10", raises `ValueError` with a message '
+        "that shows the bad text. `index` finds where a character sits in a string, "
+        'which turns the letter into a column and the digit into a row: "e4" '
+        "becomes (4, 4)."
+    ),
+    ("board.py", "piece_at"): (
+        "A square is a (row, col) tuple, so unpacking gives the two numbers their "
+        "names. `board[row][col]` picks the row from the list of rows and then the "
+        "square from that row."
+    ),
 }
 
 CHANGE_NOTES = {

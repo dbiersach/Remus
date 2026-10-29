@@ -80,6 +80,8 @@ The number at the left of each line is its line number once the code is typed. W
 199 | def main():
 ```
 
+**How it works:** `find_king` finds the king of `color` on the board, and `opponent` gives the other side. A king is in check when the other side attacks its square, so one call to `is_square_attacked` answers the question.
+
 ### `legal_moves()` in `legal_moves.py`
 
 **Where:** lines 30 to 37 of `legal_moves.py`, inside `legal_moves()`, in place of the stub below the docstring. The tests call it directly.
@@ -101,3 +103,5 @@ The number at the left of each line is its line number once the code is typed. W
 39 |
 40 | def main():
 ```
+
+**How it works:** The function remembers whose move it is in `mover`, because `make_move` passes the turn. For each pseudo-legal move it makes the move, asks whether the mover's own king is now in check, and keeps the move only if it is not. `undo_move` puts the position back before the next move is tried. This one test catches pins, moves into check, and en passant captures that expose the king.
