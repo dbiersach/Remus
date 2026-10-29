@@ -6,6 +6,7 @@ File button (the triangle at the top right of the editor). pytest prints a dot f
 each test that passes and an F for each test that fails, with a report below.
 """
 
+import sys
 from pathlib import Path
 
 import pytest
@@ -21,8 +22,8 @@ def main():
     for name in LAB_TEST_FILES:
         if (folder / name).exists():
             targets.append(str(folder / name))
-    # -q keeps the report short; no cache folder is left behind in this folder
-    pytest.main([*targets, "-q", "-p", "no:cacheprovider"])
+    # No cache folder is left behind, and the exit code says if every test passed
+    sys.exit(pytest.main([*targets, "-p", "no:cacheprovider"]))
 
 
 if __name__ == "__main__":

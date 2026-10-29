@@ -53,6 +53,7 @@ RUN_TESTS = (
     "each test that passes and an F for each test that fails, with a report below.\n"
     '"""\n'
     "\n"
+    "import sys\n"
     "from pathlib import Path\n"
     "\n"
     "import pytest\n"
@@ -68,8 +69,8 @@ RUN_TESTS = (
     "    for name in LAB_TEST_FILES:\n"
     "        if (folder / name).exists():\n"
     "            targets.append(str(folder / name))\n"
-    "    # -q keeps the report short; no cache folder is left behind in this folder\n"
-    '    pytest.main([*targets, "-q", "-p", "no:cacheprovider"])\n'
+    "    # No cache folder is left behind, and the exit code says if every test passed\n"
+    '    sys.exit(pytest.main([*targets, "-p", "no:cacheprovider"]))\n'
     "\n"
     "\n"
     'if __name__ == "__main__":\n'
