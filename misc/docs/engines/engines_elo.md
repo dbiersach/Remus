@@ -48,14 +48,14 @@ and each enhancement.
 
 ## The Stockfish rating plan
 
-`misc/scripts/version_elo.py` plays every Remus version against Stockfish 19 at 10
+`misc/scripts/version_elo.py` plays every Remus version against Stockfish at 10
 minutes a side, from frozen copies of the version folders, and adds every game to
 `misc/games/remus_games.pgn` under the Event "Engine Elo test". The plan below has
 not been played yet, so this page has no results from it.
 
 | Setting | Value |
 | --- | --- |
-| Opponent | Stockfish 19 from Lucas Chess, 1 thread, `UCI_LimitStrength` on, 1 second of `Move Overhead` |
+| Opponent | The newest Stockfish from [stockfishchess.org](https://stockfishchess.org/), the universal Windows build in `~/stockfish`, 1 thread, `UCI_LimitStrength` on, 1 second of `Move Overhead` |
 | Remus levels (UCI_Elo) | 1650, 1800, 1950, 2100 |
 | Niram levels (UCI_Elo) | 2000, 2200, 2400, 2600 |
 | Games per version and level | 12: the version takes White in 6 and Black in 6 |
