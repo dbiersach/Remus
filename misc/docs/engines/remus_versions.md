@@ -43,18 +43,18 @@ the Day 9 `period1` code and Remus-GOLD.
 
 | Folder | Enhancement | The idea in one line | The student pair writes | Lines to type |
 | --- | --- | --- | --- | --- |
-| 01 GRAY | King safety | Reward pawns that shelter the king while the enemy queen is on the board | `king_safety()` in `evaluation.py` | 20 |
+| 01 GRAY | King safety | Reward pawns that shelter the king while the enemy queen is on the board | `king_safety()` in `evaluation.py` | 24 |
 | 02 YELLOW | Draw sense | Score a repeated position, or one at the fifty-move limit, as 0 inside the search | `is_draw_in_search()` in `search.py`, plus 3 tests in `test_upgrades.py` | 16 |
 | 03 CYAN | Mating bonus | With a big lead, drive the losing king to the edge | `mating_bonus()` in `evaluation.py` | 24 |
 | 04 PINK | Principal variation search | Search the first move with the full window and the rest with a cheap null window | `search_later_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
 | 05 ORANGE | Null-move pruning | Let the opponent move twice; if Remus is still too far ahead, the opponent would never allow this position, so stop searching it | `make_null_move()` in `search.py` and `undo_null_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 23 |
 | 06 BROWN | Late move reductions | Search late, quiet moves one ply shallower, and in full only if they surprise | `reduction()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
-| 07 PURPLE | Pawn structure | Penalize doubled and isolated pawns, reward passed pawns | `pawn_structure()` in `evaluation.py` | 30 |
-| 08 GREEN | Opening book | Play the first moves of well-known openings from a book | `load_book()` in `opening_book.py` and `book_move()` in `opening_book.py` | 24 |
+| 07 PURPLE | Pawn structure | Penalize doubled and isolated pawns, reward passed pawns | `pawn_structure()` in `evaluation.py` | 29 |
+| 08 GREEN | Opening book | Play the first moves of well-known openings from a book | `load_book()` in `opening_book.py` and `book_move()` in `opening_book.py` | 26 |
 | 09 BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` and `order_moves()` in `move_ordering.py`, plus 1 test in `test_upgrades.py` | 27 |
 | 10 RED | Transposition table | Remember positions already searched, so one position reached in two move orders is scored once | `store()` in `transposition_table.py` and `probe()` in `transposition_table.py`, plus 1 test in `test_upgrades.py` | 27 |
 
-Every enhanced engine asks for 16 to 30 typed lines, under the 40-line limit for one period. Where the enhancement itself is short, the student pair also writes the tests that prove it works, such as the test that a null window answers only "better or not?", so every student pair spends both periods thinking about its idea rather than waiting.
+Every enhanced engine asks for 16 to 29 typed lines, under the 40-line limit for one period. Where the enhancement itself is short, the student pair also writes the tests that prove it works, such as the test that a null window answers only "better or not?", so every student pair spends both periods thinking about its idea rather than waiting.
 
 ## Words to know
 
@@ -112,9 +112,8 @@ student pair never writes, and the host's own engine folder is untouched. Two ga
 stronger, so the script prints no Elo gap for fewer than 10 games; while round 2
 runs, each student pair puts its round 1 score into `demo_results.py` and sees how wide the
 margin of error is. The teacher then shows the league table in
-[`engines_elo.md`](engines_elo.md), which rates every enhanced engine from 110 games, along with
-Remus-GOLD's score against every enhanced engine and Remus-WHITE. Nothing needs to run: the
-table is already written.
+[`engines_elo.md`](engines_elo.md), which rates every Remus version from 110 games.
+Nothing needs to run: the table is already written.
 
 The Day 9 smoke test plays one game on a short clock only to prove that the enhanced engine's
 engine plays legal moves to the end; nobody reads its result.
@@ -163,7 +162,7 @@ as many positions as an 8-hour Remus game. Only Niram is kept, in
 `engines/Niram` ([`remus-niram parity.md`](remus-niram%20parity.md) shows that the two match), but
 the league's games stay in the games file. `--niram --rate-only` rates them apart
 from Remus games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays
-Niram against Stockfish.
+Niram against Stockfish ([`engines_elo.md`](engines_elo.md) gives its rating).
 
 Without `--at-once`, the league plays one game per processor thread. Give it the
 number of cores or fewer, because each game needs a whole core to itself to use its
@@ -181,10 +180,10 @@ of the league. Anything an engine prints to stderr, such as the traceback of a
 crash, is saved with the game's names and opening in `misc/games/engine_errors.log`.
 
 The league can stop partway, such as when a laptop restarts. Run it again and it
-plays only the games that are not in the games file yet. A 10-minute game lasts
-about 16 minutes on average. The course designer's 24-core computer, playing 16 games at a
-time, finished about one game a minute, so the whole league took about 7 hours. A
-4-core laptop playing 4 games at a time needs about a day.
+plays only the games that are not in the games file yet. A 10-minute Remus game lasts
+about 16 minutes on average, so a 24-core computer playing 16 games at a time finishes
+about one game a minute and the 396-game league in about 7 hours. A 4-core laptop
+playing 4 games at a time needs about a day.
 
 ### The designer's league run
 
@@ -241,24 +240,24 @@ through another module when Lucas Chess runs that version. Test files and tools 
 as `perft.py`, `play_match.py`, and `show_board.py` do not count.
 
 | Version | Enhancement | Engine files | Code lines | Lines over WHITE |
-| --- | --- | --- | --- | --- |
-| Remus-WHITE | No enhancements | 12 | 1,040 | 0 |
-| Remus-RED | Transposition table | 13 | 1,125 | +85 |
-| Remus-GREEN | Opening book | 14 | 1,172 | +132 |
-| Remus-BLUE | Killer moves | 12 | 1,092 | +52 |
-| Remus-PINK | Principal variation search | 12 | 1,090 | +50 |
-| Remus-YELLOW | Draw sense | 12 | 1,082 | +42 |
-| Remus-PURPLE | Pawn structure | 12 | 1,077 | +37 |
-| Remus-CYAN | Mating bonus | 12 | 1,070 | +30 |
-| Remus-ORANGE | Null-move pruning | 12 | 1,119 | +79 |
-| Remus-BROWN | Late move reductions | 12 | 1,092 | +52 |
-| Remus-GRAY | King safety | 12 | 1,070 | +30 |
-| Remus-GOLD | All enhancements | 15 | 1,463 | +423 |
+| --- | --- | ---: | ---: | ---: |
+| Remus-WHITE | No enhancements | 12 | 1,058 | 0 |
+| Remus-GRAY | King safety | 12 | 1,088 | +30 |
+| Remus-YELLOW | Draw sense | 12 | 1,100 | +42 |
+| Remus-CYAN | Mating bonus | 12 | 1,088 | +30 |
+| Remus-PINK | Principal variation search | 12 | 1,110 | +52 |
+| Remus-ORANGE | Null-move pruning | 12 | 1,137 | +79 |
+| Remus-BROWN | Late move reductions | 12 | 1,110 | +52 |
+| Remus-PURPLE | Pawn structure | 12 | 1,095 | +37 |
+| Remus-GREEN | Opening book | 14 | 1,200 | +142 |
+| Remus-BLUE | Killer moves | 12 | 1,112 | +54 |
+| Remus-RED | Transposition table | 13 | 1,145 | +87 |
+| Remus-GOLD | All enhancements | 15 | 1,491 | +433 |
 
-Remus-GOLD holds 423 more code lines than Remus-WHITE. The ten enhanced engines add 589
-lines when each one is counted on its own, so GOLD needs 166 fewer. Most enhanced engines
+Remus-GOLD holds 433 more code lines than Remus-WHITE. The ten enhanced engines add 605
+lines when each one is counted on its own, so GOLD needs 172 fewer. Most enhanced engines
 change the same search loop in `search.py`, and GOLD holds one copy of that loop
-with all ten ideas inside it. GREEN adds the most lines of any single enhancement, 132,
+with all ten ideas inside it. GREEN adds the most lines of any single enhancement, 142,
 because its book reads moves in SAN and so loads `notation.py` as well.
 
 ## Puzzle questions

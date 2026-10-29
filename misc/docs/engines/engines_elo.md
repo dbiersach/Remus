@@ -123,6 +123,13 @@ to 8. At Python speed Remus-GOLD reaches only a few plies in 10 minutes, so most
 enhancements get little chance to work, and its evaluation costs about three times as
 much per position as Remus-WHITE's.
 
+**Remus-GOLD and Niram score less with Black.** Over all 64 games, Remus-GOLD and
+Niram each scored 19.5 of 32 with White and 11.5 of 32 with Black, while Remus-WHITE
+scored 13 of 32 with White and 11.5 of 32 with Black. Moving first helps Stockfish
+when Remus plays Black, but Remus-WHITE shows only a small gap, so the larger gap may
+come from how Remus-GOLD plays Black, perhaps its opening book. Thirty-two games with
+each piece color cannot settle the cause.
+
 **Elo is not fully transitive.** An engine can beat another head to head and still
 score the same against a third. Remus-GOLD shares Remus-WHITE's search and
 evaluation, so its enhancements aim at exactly the mistakes Remus-WHITE makes.
