@@ -51,6 +51,7 @@ GOLD_FOLDER = (
 NIRAM = ENGINES_FOLDER / "Niram-GOLD"  # Remus-GOLD rewritten in Rust
 REPORT_PATH = ROOT / "misc" / "docs" / "engines" / "remus-niram parity.md"
 DEFAULT_NODES = 25_000  # Remus searches this many positions in about 3 to 8 seconds
+PARITY_MAX_DEPTH = 12  # The deepest search Niram's parity command asks for
 FIELDS = ["key", "eval", "legal", "ordered", "book", "info", "nodes", "best"]
 
 # Each case is (name, what it tests, UCI position command). Cases given by moves
@@ -549,15 +550,18 @@ def write_report(
     for color, positions, moves, same_book, same_file in book_rows:
         text += f"| {color} | {positions} | {moves} | {'yes' if same_book else 'NO'} | {'yes' if same_file else 'NO'} |\n"
     text += "\n## Positions\n\n"
-    text += "The depth column gives the depth each search reached.\n\n"
-    text += "| Position | What it tests | Depths |\n| --- | --- | --- |\n"
+    text += (
+        "Each row gives the depth the search reached and the positions it visited. "
+        "A search stops short of the cap when the next depth would pass it, when it "
+        f"reaches depth {PARITY_MAX_DEPTH}, or when it finds a forced mate.\n\n"
+    )
+    text += "| Position | What it tests | Depth | Positions searched |\n"
+    text += "| --- | --- | ---: | ---: |\n"
     for name, purpose, _ in CASES:
-        depths = ""
         for color in colors:
-            if depths:
-                depths += " "
-            depths += niram_results[color][name]["depth"][0]
-        text += f"| {name} | {purpose} | {depths} |\n"
+            result = niram_results[color][name]
+            nodes = int(result["nodes"][0]) if result["nodes"] else 0
+            text += f"| {name} | {purpose} | {result['depth'][0]} | {nodes:,} |\n"
     if mismatches:
         text += "\n## Mismatches\n\n| Version | Position | First difference |\n| --- | --- | --- |\n"
         for color, name, difference in mismatches:
