@@ -1,17 +1,17 @@
 # Niram: Remus-GOLD rewritten in Rust.
 #
-# rules/ holds the board, the rules of chess, FEN, SAN, the opening book, the
-# evaluation terms, move ordering, the transposition table, the search helpers, the
-# UCI loop, and the benchmark. gold/ holds the engine: its evaluate(), its search,
-# and its think(), like the Remus-GOLD folder.
-[workspace]
-resolver = "3"
-members = ["rules", "gold"]
-
-[workspace.package]
+# src/ holds every Rust file, each named after the Remus-GOLD Python file it matches:
+# the board, the rules of chess, FEN, SAN, the opening book, the evaluation, move
+# ordering, the transposition table, the search, the UCI loop, and the benchmark.
+[package]
+name = "niram"
+description = "Niram: Remus-GOLD in Rust, with all ten enhancements"
 version = "0.2.0"
 edition = "2024"
 license = "BSD-3-Clause"
+
+# Niram uses the Rust standard library only, the way Remus uses Python's.
+[dependencies]
 
 [profile.release]
 debug = false

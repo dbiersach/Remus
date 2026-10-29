@@ -1,8 +1,8 @@
 //! evaluation.rs
 //!
 //! The terms that score a position in centipawns (hundredths of a pawn) without
-//! looking ahead. A positive term is good for White. Remus-WHITE adds the first two;
-//! each color's evaluate() in its own evaluation.rs adds the terms its version uses:
+//! looking ahead. A positive term is good for White. evaluate() at the end adds all
+//! five, the way Remus-GOLD's evaluation.py does:
 //!
 //! 1. Material: the value of every piece on the board.
 //! 2. Placement: a bonus or penalty from a piece-square table, such as a knight in
@@ -17,6 +17,7 @@
 //! reads the table upside down, so its row 7 uses the table's row 0.
 
 use crate::board::{Board, EMPTY};
+use crate::game_state::{State, WHITE};
 
 type Table = [[i32; 8]; 8];
 
@@ -274,4 +275,14 @@ pub fn king_safety(board: &Board) -> i32 {
         }
     }
     score
+}
+
+/// Score the position for the side to move: material, placement, pawn structure,
+/// the mating bonus, and king safety, positive when the side to move stands better.
+/// Negamax search needs the score from the mover's side.
+pub fn evaluate(state: &State) -> i32 {
+    let board = &state.board;
+    let white_score =
+        material(board) + placement(board) + pawn_structure(board) + mating_bonus(board) + king_safety(board);
+    if state.turn == WHITE { white_score } else { -white_score }
 }

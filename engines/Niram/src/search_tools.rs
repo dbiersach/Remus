@@ -1,9 +1,8 @@
 //! search_tools.rs
 //!
-//! The pieces of search.py that every Niram version shares: the search counters,
+//! The pieces of search.py that search.rs builds on: the search counters,
 //! the clock, the capture list for quiescence, killer moves, the null move, late
-//! move reductions, draw sense, and the UCI "info" line. Each color's search.rs
-//! puts the pieces its version uses together.
+//! move reductions, draw sense, and the UCI "info" line.
 //!
 //! Python's Remus stops a search that runs out of time by raising SearchTimeout.
 //! Rust has no exceptions, so each search function returns a Result: Ok with the
@@ -165,13 +164,4 @@ pub fn new_search_info(start: Instant, seconds: Option<f64>) -> SearchInfo {
         deadline: seconds.map(|seconds| start + std::time::Duration::from_secs_f64(seconds)),
         ..SearchInfo::default()
     }
-}
-
-/// Return the line that starts with a move and goes on with the line after it,
-/// the Rust form of Python's [move] + line.
-pub fn with_first_move(mv: Move, line: Vec<Move>) -> Vec<Move> {
-    let mut whole = Vec::with_capacity(line.len() + 1);
-    whole.push(mv);
-    whole.extend(line);
-    whole
 }
