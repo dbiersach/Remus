@@ -13,7 +13,7 @@ way estimate_elo.py does, adds every game to misc/games/remus_games.pgn, and
 prints the table that misc/docs/engines/engines_elo.md reports.
 
 With --niram, Niram, the Rust copy of Remus-GOLD that chooses the same
-moves about 50 times faster, plays too, at 2000, 2200, 2400, and 2600. Build it
+moves about 15 times faster, plays too, at 2000, 2200, 2400, and 2600. Build it
 first with "cargo build --release" inside its folder. Its games are rated apart
 from the Remus games.
 

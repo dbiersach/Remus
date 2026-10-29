@@ -348,7 +348,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - `engines/Niram` holds Niram, Remus-GOLD rewritten in Rust, named for
   Naram-Sin, Sargon's grandson: one Cargo package whose `src/` folder
   holds every Rust file. It is a course designer's tool that runs the same engine about
-  50 times faster; students never edit it. Each `.rs` file matches the Python file of
+  15 times faster; students never edit it. Each `.rs` file matches the Python file of
   the same name, and Niram must visit exactly the same number of positions as
   Remus-GOLD at each depth (`cargo test --release` inside `engines/Niram`;
   `uv run misc/scripts/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).

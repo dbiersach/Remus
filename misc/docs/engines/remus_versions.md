@@ -157,8 +157,8 @@ moves at random, so their games still differ from each other, while the other pa
 keep the openings. Rate such a league with `--book-start` as well.
 
 The designer's league ran on Niram, Rust copies of all 12 versions that picked the
-same moves as Remus about 50 times faster, so a 10-minute Niram game searched about
-as many positions as an 8-hour Remus game. Only Niram is kept, in
+same moves as Remus about 15 times faster, so a 10-minute Niram game searched about
+as many positions as a 2.5-hour Remus game. Only Niram is kept, in
 `engines/Niram` ([`remus-niram same algorithms.md`](remus-niram%20same%20algorithms.md) shows that the two match), but
 the league's games stay in the games file. `--niram --rate-only` rates them apart
 from Remus games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays
@@ -190,8 +190,8 @@ playing 4 games at a time needs about a day.
 The course designer ran a league of 660 games: every version played every
 other version 10 times, 5 times with each piece color, at 10 minutes a side. The league
 ran on Niram, the Rust twins of the 12 versions, which choose the same moves as
-Remus about 50 times faster. A 10-minute Niram game therefore searches about as deep
-as a Remus game of 8 hours, so the table shows what each enhancement adds with
+Remus about 15 times faster. A 10-minute Niram game therefore searches about as deep
+as a Remus game of 2.5 hours, so the table shows what each enhancement adds with
 plenty of time to think, deeper than a class laptop reaches in 10 minutes. The 450
 games between versions without a book started from the 32 openings. The 210 games
 with Remus-GREEN or Remus-GOLD started from the starting position (`--book-start`),
