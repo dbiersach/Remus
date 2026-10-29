@@ -15,17 +15,27 @@ plus Niram, the Rust copy of Remus-GOLD. Two yardsticks measure them:
 runs the same algorithms as Remus-GOLD and picks the same moves at the same depth. The
 two engines differ in speed, and the speed gap makes Niram far stronger with a clock.
 
-## The league: every version against the others
+## The league: every version against the others, in Rust
 
-The designer's league holds 660 games at 10 minutes a side, every
-version against every other version 10 times, 5 with each piece color. It ran on Niram,
-the Rust twins of the 12 versions, which pick the same moves as Remus about 50 times
-faster. The 450 games between versions without a book started from 32 openings; the
-210 games with Remus-GREEN or Remus-GOLD started from the starting position, so
-their book played from move 1. Each rating is the version's gain over Remus-WHITE,
-pinned at 0, with a 95 percent margin. `misc/scripts/version_league.py --niram
---rate-only --event "Niram league 1" --book-start` rebuilds the table from the saved
-games.
+The designer's league did not play the Python engines. It played Rust copies of all
+12 versions, Niram-WHITE to Niram-GOLD, which run the same algorithms as the Python
+versions and pick the same moves, only much faster. That is why its games carry the
+Event "Niram league 1" and why `version_league.py` needs `--niram` to rate them. The
+Rust copies let 660 games at 10 minutes a side finish in one night, and they search
+deep enough for every enhancement to show what it adds. Only Niram, the copy of
+Remus-GOLD, is kept in `engines/Niram`; the games of the other copies stay in the
+games file.
+
+Every version played every other version 10 times, 5 with each piece color. The 450
+games between versions without a book started from 32 openings; the 210 games with
+GREEN or GOLD started from the starting position, so their book played from move 1. The
+games file also holds 210 earlier GREEN and GOLD games started from the openings;
+`--book-start` leaves those out.
+Each rating is the version's gain over WHITE, pinned at 0, with a 95 percent margin.
+`misc/scripts/version_league.py --niram --rate-only --event "Niram league 1"
+--book-start` rebuilds the table from the saved games. The Version column names the
+Remus version each Rust copy matches, and the Folder column links its Python engine
+folder.
 
 | Rank | Version | Folder | Wins-draws-losses | Score | Elo vs WHITE |
 | ---: | --- | --- | --- | ---: | ---: |
@@ -47,6 +57,10 @@ range stays above 0; every other enhanced engine's range includes 0. Remus-YELLO
 Remus-GRAY both scored 46.5 points, and Remus-YELLOW ranks above because it beat
 Remus-GRAY 5.5 to 4.5. [`remus_versions.md`](remus_versions.md) explains the league
 and each enhancement.
+
+At Python speed the gaps shrink, because the Python engines search fewer plies in the
+same 10 minutes. In the Python match further down, Remus-GOLD beat Remus-WHITE by
+about +147, less than half of the +339 its Rust copy gained here.
 
 ## The Stockfish bracket run
 
