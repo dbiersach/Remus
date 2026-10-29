@@ -52,8 +52,9 @@ folder.
 | 11 | Remus-GRAY | [01 GRAY](../../../engines/instructor/01%20GRAY%20-%20King%20safety) | 10-73-27 | 42.3% | +4 +/- 67 |
 | 12 | Remus-WHITE | [00 WHITE](../../../engines/instructor/00%20WHITE%20-%20No%20enhancements) | 7-76-27 | 40.9% | 0 (pinned) |
 
-Each version played 110 games. Remus-GOLD and Remus-RED are the only versions whose
-range stays above 0; every other enhanced engine's range includes 0. Remus-YELLOW and
+Each version played 110 games. The ranges of Remus-GOLD, Remus-RED, and Remus-BLUE stay
+above 0, Remus-BLUE's only just: +67.1 +/- 66.5 runs from +0.6 to +133.6. Every other
+enhanced engine's range includes 0. Remus-YELLOW and
 Remus-GRAY both scored 46.5 points, and Remus-YELLOW ranks above because it beat
 Remus-GRAY 5.5 to 4.5. [`remus_versions.md`](remus_versions.md) explains the league
 and each enhancement.
