@@ -11,16 +11,18 @@ into misc/docs/engine_comparison/remus_program_overview.md:
    code in it grows, and where a goals file names it.
 
 The table comes from the Day folders: each period's instructor folder and its
-"Day NN Period NN Goals.md" file. Graphviz's dot program lays out the diagram, so
-Graphviz (graphviz.org) must be installed with dot on the PATH. Run it from the top Remus folder with `uv run misc/scripts/make_white_map.py`
-after `make_student_folders.py`.
+"Day NN Period NN Goals.md" file. The script lays out the diagram itself: each
+file sits in a row one below the lowest file that imports it, the rows are ordered to
+keep crossings few, and every arrow runs straight down or bends at right angles,
+leaving and reaching a box at its own spot on the edge. Run it from the top Remus
+folder with `uv run misc/scripts/make_white_map.py` after `make_student_folders.py`.
 """
 
 import ast
+import random
 import re
-import shutil
-import subprocess
 import textwrap
+from itertools import pairwise
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder
@@ -36,8 +38,26 @@ NOT_IN_DIAGRAM = ("play_match.py", "run_tests.py")
 # engine folder, a copy of Remus-WHITE in engines/student
 ENHANCED_FILES = ("evaluation.py", "move_ordering.py", "search.py")
 
-RAIL = "board"  # The file drawn as a rail along the bottom of the diagram
-RAIL_WIDTH = 15.0  # Inches across board.py's rail, about as wide as the boxes above
+BOX_HEIGHT = 34  # Pixels tall for each file's box
+BOX_MIN_WIDTH = 150  # Pixels wide for a file's box with few arrows
+PORT_GAP = 16  # Pixels between two arrows that leave or reach one side of a box
+LANE_WIDTH = 16  # Pixels wide for an arrow passing a row of boxes
+NODE_GAP = 26  # Pixels between two boxes in a row
+TRACK_GAP = 9  # Pixels between two horizontal arrow segments in one channel
+MARGIN = 20  # Pixels of white space around the drawing
+# One color per importing file, so the eye can follow each file's arrows
+ARROW_COLORS = (
+    "#1f6fb4",
+    "#c2551b",
+    "#2e8b57",
+    "#8e44ad",
+    "#b8860b",
+    "#c0392b",
+    "#16808a",
+    "#6b5b3e",
+    "#d6338a",
+    "#4b5d9c",
+)
 
 
 def white_files() -> list[str]:
@@ -74,92 +94,503 @@ def import_edges() -> list[tuple[str, str]]:
     return edges
 
 
-def dot_text(edges: list[tuple[str, str]], rail_width: float) -> str:
-    """Return the Graphviz text of the import diagram, with an arrow for each import."""
-    modules = sorted({name for edge in edges for name in edge} - {RAIL})
-    modules.insert(0, RAIL)  # The rail comes first, which gives dot its best layout
-    pairs = set(edges)
-    lines = [
-        "digraph remus_white {",
-        (
-            "  graph [nodesep=0.3, ranksep=0.55, splines=spline, remincross=true, mclimit=5, "
-            'bgcolor="white", pad=0.2];'
-        ),
-        (
-            '  node [shape=box, style="rounded,filled", fillcolor="#eef3fb", '
-            'color="#33415c", fontname="Helvetica", fontsize=14, width=2.2, '
-            "height=0.45, fixedsize=true, penwidth=1.4];"
-        ),
-        '  edge [color="#5c677d", arrowsize=0.8, penwidth=1.1];',
-    ]
-    for module in modules:
-        if module == RAIL:
-            # board.py is a wide rail along the bottom, so its arrows land side by side
-            lines.append(
-                f'  {{ rank=sink; "{module}" [label="{module}.py", '
-                f"width={rail_width:.2f}]; }}"
+def layers_of(nodes, edges):
+    """Return each file's row: 0 for files that import nothing, one more per level."""
+    layer = {}
+
+    def depth(node):
+        if node not in layer:
+            below = [depth(v) for (u, v) in edges if u == node]
+            layer[node] = 1 + max(below) if below else 0
+        return layer[node]
+
+    for node in nodes:
+        depth(node)
+    # Move each file to the row that makes its arrows shortest
+    for _ in range(20):
+        for node in nodes:
+            below = [layer[v] for (u, v) in edges if u == node]
+            above = [layer[u] for (u, v) in edges if v == node]
+            low = max(below) + 1 if below else 0
+            high = min(above) - 1 if above else max(layer.values())
+            if not below:
+                continue
+            best = layer[node]
+            best_cost = None
+            for row in range(low, high + 1):
+                cost = sum(row - b for b in below) + sum(a - row for a in above)
+                if (
+                    best_cost is None
+                    or cost < best_cost
+                    or (cost == best_cost and row == layer[node])
+                ):
+                    best, best_cost = row, cost
+            layer[node] = best
+    return layer
+
+
+def split_edges(edges, layer):
+    """Return the chain of points (real files and pass-through lanes) of each arrow."""
+    chains = []
+    for u, v in edges:
+        chain = [u]
+        for row in range(layer[u] - 1, layer[v], -1):
+            chain.append(("lane", u, v, row))
+        chain.append(v)
+        chains.append(chain)
+    return chains
+
+
+def crossings(upper, lower, links):
+    """Count the crossings between two neighboring rows."""
+    up = {n: i for i, n in enumerate(upper)}
+    low = {n: i for i, n in enumerate(lower)}
+    pairs = sorted((up[a], low[b]) for a, b in links if a in up and b in low)
+    count = 0
+    for i in range(len(pairs)):
+        for j in range(i + 1, len(pairs)):
+            if pairs[i][0] != pairs[j][0] and pairs[i][1] > pairs[j][1]:
+                count += 1
+    return count
+
+
+def order_rows(rows, links, seed=2016, restarts=12, sweeps=16):
+    """Order the boxes of every row to keep crossing arrows few."""
+    rng = random.Random(seed)
+    down = {}
+    upn = {}
+    for a, b in links:
+        down.setdefault(a, []).append(b)
+        upn.setdefault(b, []).append(a)
+    tops = sorted(rows)[::-1]
+
+    def total(order):
+        return sum(
+            crossings(order[tops[i]], order[tops[i + 1]], links)
+            for i in range(len(tops) - 1)
+        )
+
+    best, best_count = None, None
+    for attempt in range(restarts):
+        order = {r: list(rows[r]) for r in rows}
+        if attempt:
+            for row in order.values():
+                rng.shuffle(row)
+        for sweep in range(sweeps):
+            sequence = tops[1:] if sweep % 2 == 0 else tops[::-1][1:]
+            for r in sequence:
+                other = r + 1 if sweep % 2 == 0 else r - 1
+                pos = {n: i for i, n in enumerate(order[other])}
+                neighbors = upn if sweep % 2 == 0 else down
+                keyed = []
+                for i, n in enumerate(order[r]):
+                    near = [pos[m] for m in neighbors.get(n, []) if m in pos]
+                    keyed.append((sum(near) / len(near) if near else i, i, n))
+                keyed.sort()
+                order[r] = [n for _, _, n in keyed]
+            # Swap neighbors when the swap removes crossings
+            for r in tops:
+                improved = True
+                while improved:
+                    improved = False
+                    for i in range(len(order[r]) - 1):
+                        before = total_near(order, r, links, tops)
+                        order[r][i], order[r][i + 1] = order[r][i + 1], order[r][i]
+                        if total_near(order, r, links, tops) < before:
+                            improved = True
+                        else:
+                            order[r][i], order[r][i + 1] = order[r][i + 1], order[r][i]
+            count = total(order)
+            if best_count is None or count < best_count:
+                best, best_count = {r: list(order[r]) for r in order}, count
+    return best, best_count
+
+
+def total_near(order, r, links, tops):
+    """Count the crossings next to one row."""
+    count = 0
+    if r + 1 in order:
+        count += crossings(order[r + 1], order[r], links)
+    if r - 1 in order:
+        count += crossings(order[r], order[r - 1], links)
+    return count
+
+
+def text_width(text):
+    """Return the rough width in pixels of a file name in the boxes' font."""
+    return 8.0 * len(text)
+
+
+def layout_svg(edges):
+    """Return the rows, the x of every box and lane, and the links between rows."""
+    nodes = sorted({n for e in edges for n in e})
+    layer = layers_of(nodes, edges)
+    chains = split_edges(edges, layer)
+    rows = {}
+    for n in nodes:
+        rows.setdefault(layer[n], []).append(n)
+    links = []
+    for chain in chains:
+        for a, b in pairwise(chain):
+            if isinstance(a, tuple):
+                rows.setdefault(a[3], [])
+                if a not in rows[a[3]]:
+                    rows[a[3]].append(a)
+            links.append((a, b))
+    order, count = order_rows(rows, links)
+
+    # Ports: how many arrows touch the top and the bottom of each box
+    out_count = {}
+    in_count = {}
+    for a, b in links:
+        out_count[a] = out_count.get(a, 0) + 1
+        in_count[b] = in_count.get(b, 0) + 1
+
+    def width(n):
+        if isinstance(n, tuple):
+            return LANE_WIDTH
+        ports = max(out_count.get(n, 0), in_count.get(n, 0))
+        return max(BOX_MIN_WIDTH, text_width(f"{n}.py") + 30, ports * PORT_GAP + 20)
+
+    # Place boxes: start packed, then pull each toward its neighbors
+    x = {}
+    for r in order:
+        cursor = 0.0
+        for n in order[r]:
+            x[n] = cursor + width(n) / 2
+            cursor += width(n) + NODE_GAP
+    neighbors = {}
+    for a, b in links:
+        neighbors.setdefault(a, []).append(b)
+        neighbors.setdefault(b, []).append(a)
+    tops = sorted(order)[::-1]
+    for step in range(400):
+        sequence = tops if step % 2 == 0 else tops[::-1]
+        for r in sequence:
+            row = order[r]
+            desired = []
+            for n in row:
+                total, weight = 0.0, 0.0
+                for m in neighbors.get(n, []):
+                    w = 1.0
+                    if isinstance(n, tuple) and isinstance(m, tuple):
+                        w = 12.0
+                    elif isinstance(n, tuple) or isinstance(m, tuple):
+                        w = 3.0
+                    total += w * x[m]
+                    weight += w
+                desired.append(total / weight if weight else x[n])
+            placed = place_row(row, desired, width)
+            for n, value in zip(row, placed):
+                x[n] = value
+    # Snap the lanes of each long arrow onto one straight line where the rows allow
+    chains = {}
+    for r in order:
+        for n in order[r]:
+            if isinstance(n, tuple):
+                chains.setdefault((n[1], n[2]), []).append(n)
+    for _ in range(6):
+        for lanes in chains.values():
+            values = sorted(x[n] for n in lanes)
+            target = values[len(values) // 2]
+            for n in lanes:
+                row = order[n[3]]
+                i = row.index(n)
+                low = (
+                    -1e9
+                    if i == 0
+                    else x[row[i - 1]] + width(row[i - 1]) / 2 + NODE_GAP + width(n) / 2
+                )
+                high = (
+                    1e9
+                    if i == len(row) - 1
+                    else x[row[i + 1]] - width(row[i + 1]) / 2 - NODE_GAP - width(n) / 2
+                )
+                x[n] = min(max(target, low), high)
+    # A lane that sits within a few pixels of the lane above it lines up with it
+    for lanes in chains.values():
+        lanes.sort(key=lambda n: -n[3])
+        for above, below in pairwise(lanes):
+            if abs(x[above] - x[below]) < 8:
+                x[below] = x[above]
+    left = min(x[n] - width(n) / 2 for n in x)
+    for n in x:
+        x[n] += MARGIN - left
+    return order, x, width, links, layer, count
+
+
+def place_row(row, desired, width):
+    """Return x positions closest to the desired ones that keep the row's order."""
+    # Pool adjacent violators: blocks of boxes pushed together share one offset
+    blocks = []
+    for i, n in enumerate(row):
+        blocks.append([i, i, desired[i], 1])
+        while len(blocks) > 1:
+            a, b = blocks[-2], blocks[-1]
+            a_end = offset_x(a, desired, row, width)
+            b_start = offset_x(b, desired, row, width)
+            if b_start[0] >= a_end[1] + NODE_GAP:
+                break
+            merged = [a[0], b[1], 0, 0]
+            blocks.pop()
+            blocks[-1] = merged
+    positions = []
+    for block in blocks:
+        start, end = block[0], block[1]
+        # Offsets of each box from the block's first box
+        offsets = [0.0]
+        for i in range(start + 1, end + 1):
+            offsets.append(
+                offsets[-1] + width(row[i - 1]) / 2 + NODE_GAP + width(row[i]) / 2
             )
-        else:
-            lines.append(f'  "{module}" [label="{module}.py"];')
-    for importer, imported in edges:
-        if (imported, importer) in pairs:
-            # Two files that import each other share one arrow with two heads
-            if importer < imported:
-                lines.append(f'  "{importer}" -> "{imported}" [dir=both];')
-        else:
-            lines.append(f'  "{importer}" -> "{imported}";')
-    lines.append("}")
-    return "\n".join(lines) + "\n"
+        weights = [lane_weight(row[i]) for i in range(start, end + 1)]
+        shift = sum(
+            weights[i - start] * (desired[i] - offsets[i - start])
+            for i in range(start, end + 1)
+        )
+        shift /= sum(weights)
+        for i in range(start, end + 1):
+            positions.append(shift + offsets[i - start])
+    return positions
 
 
-def run_dot(text: str, output_format: str) -> str:
-    """Return what Graphviz's dot program writes for a graph in one format."""
-    dot = shutil.which("dot")
-    if dot is None:
-        raise SystemExit("Install Graphviz (graphviz.org) so that dot is on the PATH")
-    result = subprocess.run(
-        [dot, f"-T{output_format}"],
-        input=text,
-        capture_output=True,
-        text=True,
-        check=True,
+def offset_x(block, desired, row, width):
+    """Return the left and right edges of a block placed at its best shift."""
+    start, end = block[0], block[1]
+    offsets = [0.0]
+    for i in range(start + 1, end + 1):
+        offsets.append(
+            offsets[-1] + width(row[i - 1]) / 2 + NODE_GAP + width(row[i]) / 2
+        )
+    weights = [lane_weight(row[i]) for i in range(start, end + 1)]
+    shift = sum(
+        weights[i - start] * (desired[i] - offsets[i - start])
+        for i in range(start, end + 1)
     )
-    return result.stdout
+    shift /= sum(weights)
+    return (shift - width(row[start]) / 2, shift + offsets[-1] + width(row[end]) / 2)
 
 
-def stretch_rail(svg: str) -> str:
-    """Return the SVG with board.py's rail stretched across the whole diagram."""
-    view_box = re.search(r'viewBox="([\d. ]+)"', svg)
-    shift = re.search(r"translate\(([\d.]+) ", svg)
-    if view_box is None or shift is None:
-        raise ValueError("dot wrote an SVG without a viewBox or a translate")
-    width = float(view_box.group(1).split()[2]) - 2 * float(shift.group(1))
-    start = svg.index(f"<title>{RAIL}</title>")
-    end = svg.index("</g>", start)
-    group = svg[start:end]
-    path = re.search(r'<path ([^>]*?) d="([^"]+)"/>', group)
-    label = re.search(r'<text text-anchor="middle" x="([\d.-]+)"', group)
-    if path is None or label is None:
-        raise ValueError(f"dot wrote {RAIL} without a box and a label")
-    heights = []
-    for number in re.findall(r",(-?[\d.]+)", path.group(2)):
-        heights.append(float(number))
-    top = min(heights)
-    rail = (
-        f'<rect {path.group(1)} x="0" y="{top}" width="{width:.2f}" '
-        f'height="{max(heights) - top}" rx="10.67"/>'
-    )
-    group = group.replace(path.group(0), rail)
-    group = group.replace(f'x="{label.group(1)}"', f'x="{width / 2:.2f}"', 1)
-    return svg[:start] + group + svg[end:]
+def ports(order, x, links):
+    """Return where each link leaves its upper box and enters its lower box."""
+    leave = {}
+    enter = {}
+    outgoing = {}
+    incoming = {}
+    for link in links:
+        outgoing.setdefault(link[0], []).append(link)
+        incoming.setdefault(link[1], []).append(link)
+    for node, group in outgoing.items():
+        group.sort(key=lambda link: (x[link[1]], str(link[1])))
+        spread(node, group, x, leave)
+    for node, group in incoming.items():
+        group.sort(key=lambda link: (x[link[0]], str(link[0])))
+        spread(node, group, x, enter)
+    return leave, enter
+
+
+def spread(node, group, x, result):
+    """Space the arrows of one box side PORT_GAP apart, centered on the box."""
+    if isinstance(node, tuple):
+        for link in group:
+            result[link] = x[node]
+        return
+    k = len(group)
+    for i, link in enumerate(group):
+        result[link] = x[node] + (i - (k - 1) / 2) * PORT_GAP
+
+
+def assign_tracks(segments):
+    """Give each bending segment in one channel a track, top track 0."""
+    bends = [s for s in segments if abs(s[1] - s[2]) > 0.5]
+    above = {s[0]: set() for s in bends}  # s must sit above these
+
+    def overlap(s, t):
+        lo1, hi1 = sorted((s[1], s[2]))
+        lo2, hi2 = sorted((t[1], t[2]))
+        return lo1 <= hi2 + 4 and lo2 <= hi1 + 4
+
+    def inside(value, s):
+        lo, hi = sorted((s[1], s[2]))
+        return lo - 0.5 <= value <= hi + 0.5
+
+    def reaches(a, b):
+        seen, stack = set(), [a]
+        while stack:
+            n = stack.pop()
+            if n == b:
+                return True
+            if n not in seen:
+                seen.add(n)
+                stack.extend(above[n])
+        return False
+
+    pairs = []
+    for i, s in enumerate(bends):
+        for t in bends[i + 1 :]:
+            if overlap(s, t):
+                # Crossings when s sits above t, and when t sits above s
+                s_over = inside(t[1], s) + inside(s[2], t)
+                t_over = inside(s[1], t) + inside(t[2], s)
+                pairs.append((abs(s_over - t_over), s, t, s_over <= t_over))
+    pairs.sort(key=lambda p: -p[0])
+    for _, s, t, s_first in pairs:
+        a, b = (s, t) if s_first else (t, s)
+        if not reaches(b[0], a[0]):
+            above[a[0]].add(b[0])
+        else:
+            above[b[0]].add(a[0])
+    track = {}
+
+    def depth(n):
+        if n not in track:
+            track[n] = 0
+            parents = [m for m in above if n in above[m]]
+            track[n] = 1 + max(depth(m) for m in parents) if parents else 0
+        return track[n]
+
+    for s in bends:
+        depth(s[0])
+    return track
+
+
+def draw(edges, path):
+    """Draw the diagram into an SVG file and return its count of lane crossings."""
+    order, x, width, links, layer, count = layout_svg(edges)
+    leave, enter = ports(order, x, links)
+    tops = sorted(order)[::-1]
+    channel_tracks = {}
+    for r in tops:
+        segments = []
+        for link in links:
+            row_of = link[0][3] if isinstance(link[0], tuple) else layer[link[0]]
+            if row_of == r:
+                segments.append((link, leave[link], enter[link]))
+        channel_tracks[r] = assign_tracks(segments)
+    y = {}
+    cursor = MARGIN
+    track_y = {}
+    for r in tops:
+        y[r] = cursor
+        cursor += BOX_HEIGHT
+        tracks = channel_tracks[r]
+        n_tracks = 1 + max(tracks.values()) if tracks else 0
+        channel = max(40, (n_tracks + 1) * TRACK_GAP + 16)
+        for link, t in tracks.items():
+            track_y[link] = cursor + 8 + (t + 1) * TRACK_GAP
+        cursor += channel
+    height = cursor - 40 + MARGIN
+    right = max(x[n] + width(n) / 2 for n in x) + MARGIN
+    sources = sorted({e[0] for e in edges}, key=lambda n: (-layer[n], x[n]))
+    color_of = {n: ARROW_COLORS[i % len(ARROW_COLORS)] for i, n in enumerate(sources)}
+    parts = [
+        (
+            f'<svg xmlns="http://www.w3.org/2000/svg" '
+            f'viewBox="0 0 {right:.0f} {height:.0f}" width="{right:.0f}" '
+            f'height="{height:.0f}" font-family="Helvetica, Arial, sans-serif">'
+        ),
+        f'<rect width="{right:.0f}" height="{height:.0f}" fill="white"/>',
+    ]
+    for color in ARROW_COLORS:
+        parts.append(
+            f'<marker id="head{color[1:]}" viewBox="0 0 10 10" refX="10" refY="5" '
+            f'markerWidth="7" markerHeight="7" orient="auto">'
+            f'<path d="M0,0 L10,5 L0,10 z" fill="{color}"/></marker>'
+        )
+    for u, v in edges:
+        chain = [u]
+        for row in range(layer[u] - 1, layer[v], -1):
+            chain.append(("lane", u, v, row))
+        chain.append(v)
+        points = []
+        for a, b in pairwise(chain):
+            link = (a, b)
+            r = a[3] if isinstance(a, tuple) else layer[a]
+            x1, x2 = leave[link], enter[link]
+            y1 = y[r] + BOX_HEIGHT
+            y2 = y[r - 1]
+            if isinstance(a, tuple):
+                points.append((x1, y[r]))
+            points.append((x1, y1))
+            if link in track_y:
+                points.append((x1, track_y[link]))
+                points.append((x2, track_y[link]))
+            points.append((x2, y2))
+        color = color_of[u]
+        parts.append(
+            f'<path d="{rounded(points)}" fill="none" stroke="{color}" '
+            f'stroke-width="1.6" marker-end="url(#head{color[1:]})"/>'
+        )
+    for r in order:
+        for n in order[r]:
+            if isinstance(n, tuple):
+                continue
+            w = width(n)
+            parts.append(
+                f'<rect x="{x[n] - w / 2:.1f}" y="{y[r]}" width="{w:.1f}" '
+                f'height="{BOX_HEIGHT}" rx="9" fill="#eef3fb" stroke="#33415c" '
+                'stroke-width="1.4"/>'
+            )
+            parts.append(
+                f'<text x="{x[n]:.1f}" y="{y[r] + BOX_HEIGHT / 2 + 5}" '
+                f'text-anchor="middle" font-size="15" fill="#1b2433">{n}.py</text>'
+            )
+    parts.append("</svg>")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(parts) + "\n")
+    return count
+
+
+def rounded(points, radius=5):
+    """Return an SVG path through the points with small rounded corners."""
+    clean = [points[0]]
+    for p in points[1:]:
+        if abs(p[0] - clean[-1][0]) > 0.01 or abs(p[1] - clean[-1][1]) > 0.01:
+            clean.append(p)
+    # Drop points in the middle of a straight run
+    simple = [clean[0]]
+    for i in range(1, len(clean) - 1):
+        a, b, c = simple[-1], clean[i], clean[i + 1]
+        if (abs(a[0] - b[0]) < 0.01 and abs(b[0] - c[0]) < 0.01) or (
+            abs(a[1] - b[1]) < 0.01 and abs(b[1] - c[1]) < 0.01
+        ):
+            continue
+        simple.append(b)
+    simple.append(clean[-1])
+    d = f"M{simple[0][0]:.1f},{simple[0][1]:.1f}"
+    for i in range(1, len(simple) - 1):
+        a, b, c = simple[i - 1], simple[i], simple[i + 1]
+        r1 = min(radius, dist(a, b) / 2)
+        r2 = min(radius, dist(b, c) / 2)
+        p1 = toward(b, a, r1)
+        p2 = toward(b, c, r2)
+        d += f" L{p1[0]:.1f},{p1[1]:.1f} Q{b[0]:.1f},{b[1]:.1f} {p2[0]:.1f},{p2[1]:.1f}"
+    d += f" L{simple[-1][0]:.1f},{simple[-1][1]:.1f}"
+    return d
+
+
+def dist(a, b):
+    """Return the distance between two points on one straight run."""
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+
+def toward(b, a, r):
+    """Return the point r pixels from b toward a."""
+    length = dist(a, b)
+    if length == 0:
+        return b
+    return (b[0] + (a[0] - b[0]) * r / length, b[1] + (a[1] - b[1]) * r / length)
+
+
+def lane_weight(node):
+    """Lanes weigh more, so a long arrow keeps one straight line."""
+    return 6.0 if isinstance(node, tuple) else 1.0
 
 
 def draw_diagram(edges: list[tuple[str, str]]):
-    """Draw the import diagram as an SVG picture with Graphviz's dot."""
-    svg = stretch_rail(run_dot(dot_text(edges, RAIL_WIDTH), "svg"))
-    IMAGE.parent.mkdir(parents=True, exist_ok=True)
-    IMAGE.write_text(svg)
-    print(f"Drew {len(edges)} imports in {IMAGE}")
+    """Draw the import diagram as an SVG picture."""
+    crossing_count = draw(edges, IMAGE)
+    print(f"Drew {len(edges)} imports in {IMAGE}, {crossing_count} crossings")
 
 
 def goals_text(period_folder: Path) -> str:
@@ -296,10 +727,13 @@ def section_text(files: list[str], edges: list[tuple[str, str]]) -> str:
         "`search.py` calls `evaluate()`. A two-headed arrow would mean two files "
         "import each other; no two Remus files do. Every arrow points down the "
         "page. The programs a person runs, such as `uci_engine.py`, sit along the "
-        "top edge, because no file imports them. `board.py` imports no Remus file "
-        "and almost every file imports it, so it is the wide rail along the bottom "
-        "edge, where its 13 arrows land side by side. The files with the most "
-        "arrows, such as `search.py` and `legal_moves.py`, sit in the middle rows. "
+        "top edge, because no file imports them, and each file sits one row below "
+        "the lowest file that imports it. `board.py` imports no Remus file and "
+        "almost every file imports it, so it sits alone in the bottom row, where "
+        "its 13 arrows land side by side along its top edge. Every arrow runs "
+        "straight down or bends at right angles, leaves and reaches a box at its "
+        "own spot, and takes the color of the file that imports, so the eye can "
+        "follow one file's arrows from top to bottom. "
         "The test files, `run_tests.py`, and `play_match.py`, which starts Remus as "
         "a separate program, are left out."
     )

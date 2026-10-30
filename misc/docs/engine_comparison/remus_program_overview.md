@@ -177,11 +177,13 @@ arrow points from the file that imports to the file it imports: `search.py` poin
 `evaluation.py` because `search.py` calls `evaluate()`. A two-headed arrow would mean
 two files import each other; no two Remus files do. Every arrow points down the page.
 The programs a person runs, such as `uci_engine.py`, sit along the top edge, because no
-file imports them. `board.py` imports no Remus file and almost every file imports it, so
-it is the wide rail along the bottom edge, where its 13 arrows land side by side. The
-files with the most arrows, such as `search.py` and `legal_moves.py`, sit in the middle
-rows. The test files, `run_tests.py`, and `play_match.py`, which starts Remus as a
-separate program, are left out.
+file imports them, and each file sits one row below the lowest file that imports it.
+`board.py` imports no Remus file and almost every file imports it, so it sits alone in
+the bottom row, where its 13 arrows land side by side along its top edge. Every arrow
+runs straight down or bends at right angles, leaves and reaches a box at its own spot,
+and takes the color of the file that imports, so the eye can follow one file's arrows
+from top to bottom. The test files, `run_tests.py`, and `play_match.py`, which starts
+Remus as a separate program, are left out.
 
 ![Import diagram of Remus-WHITE](../images/code/remus_white_imports.svg)
 
