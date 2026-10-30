@@ -21,8 +21,8 @@ holds three folders:
 | Folder | Holds |
 | --- | --- |
 | `engines/instructor` | `00 Remus-WHITE - No enhancements` to `11 Remus-GOLD - All enhancements`, the finished engines |
-| `engines/student` | `00 Remus-WHITE - No enhancements` to `10 Remus-RED - Transposition table`, with the functions each student pair writes stubbed |
 | `engines/Niram` | Niram, Remus-GOLD rewritten in Rust, a course designer's tool |
+| `engines/student` | `00 Remus-WHITE - No enhancements` to `10 Remus-RED - Transposition table`, with the functions each student pair writes stubbed |
 
 `00 Remus-WHITE - No enhancements` is Remus-WHITE, a copy of the Day 9 `period1`
 folder without `show_board.py`, which only the Day 1 and Day 3 lessons run: the Day 9 Remus at the end of period 1, when its engine is finished and before

@@ -1,14 +1,122 @@
 # Turning a Chess Engine into Science AI: Remus Course Plan
 
-This plan turns the [workshop roadmap](workshop_roadmap.md) into a
-two-week course for students about 13 years old: 10 days, four 90-minute periods a day,
-60 class hours in all. Students work in student pairs. They learn the Python they need in short
-labs, and then they write real sections of Remus: small functions that go into the
-class engine and stay there.
+Remus is a chess engine written in native Python, one understandable step at a time,
+for a two-week course for students about 13 years old: 10 days, four 90-minute
+periods a day, 60 class hours in all. Students work in student pairs. They learn the
+Python they need in short labs, and then they write real sections of Remus: small
+functions that go into the class engine and stay there. On the last day they aim the
+same search at a science problem.
 
-The plan also shows where Remus connects to `python-chess` and a desktop GUI so the
-class never has to build one. The standing rules in [`AGENTS.md`](../../../AGENTS.md) apply
-to everything below.
+This plan holds the whole course in one place: the teaching principles, the engine
+the class builds, the thirteen lessons and the gate that ends each one, the day-by-day
+schedule, and the checklists the teacher uses to verify the rules. The standing rules
+in [`AGENTS.md`](../../../AGENTS.md) apply to everything below.
+
+## Teaching principles
+
+Every lesson explains the chess idea, shows the code, lets the student pair inspect a
+small example, and ends with a concrete exercise. A working game comes first; stronger
+play comes later. The course succeeds when a student pair can explain a move, trace an
+undo, and say why a search result is legal and preferred.
+
+1. **Clarity over speed.** Remus uses ordinary Python lists, dictionaries, tuples,
+   strings, and functions, and a small class or `dataclass` only where it makes
+   ownership clearer. A clear loop beats a compact trick, and slow but understandable
+   code is fine.
+2. **No esoteric structures or third-party libraries inside the engine.** No
+   bitboards, magic numbers, specialized trees, clever caches, compiled extensions, or
+   framework machinery. Standard-library modules are fine when their use is obvious.
+   Opening books, endgame tables, and other programs stay at the boundary, never as
+   hidden substitutes for the lessons on how the engine works.
+3. **Explain the state before changing it.** For every move, name the squares, side to
+   move, castling rights, en passant target, clocks, and history that may change.
+4. **Make and undo the same move.** Search relies on exact reversal, so every move
+   records the old state, and a test checks that undo restores it exactly.
+5. **Separate chess rules from search.** The legal move generator passes perft before
+   minimax, alpha-beta, books, tables, or GUI work. The one early exception is the
+   teacher-written UCI plug at the end of Day 5, which plays random legal moves so
+   student pairs see their rules on a real board.
+6. **Keep one source of truth.** The engine owns its game state and rules. Lucas Chess
+   sends moves and displays results; it never repairs illegal engine behavior.
+7. **Introduce one idea at a time.** Each idea starts as a correct, small version. A
+   faster or more advanced version comes only after the simple one is understood, with
+   an explanation of why it is needed.
+
+These principles hold through the hardest topics: move generation, search, evaluation,
+recording a game, undo, null-window search, principal variation search, and the
+transposition table and opening book. Each of them stays readable Python even where
+that limits Remus's playing strength.
+
+### The rhythm of a lesson
+
+Each period follows the same pattern:
+
+1. Name the chess rule or search question in plain language.
+2. Draw one minimal position or search tree.
+3. Trace the Python state before and after one operation.
+4. Write the simplest correct code together.
+5. Run focused examples, including one that fails.
+6. Let the student pairs change or extend the code and explain their result.
+7. Save a short list of unanswered questions for the next period.
+
+The teacher never drops in a complete optimized engine.
+
+## What the class builds
+
+Remus has four parts, and only the first holds chess knowledge:
+
+| Part | Responsibility |
+| --- | --- |
+| Native Python engine | Board, rules, legal moves, game state, search, evaluation, and move choice |
+| Console driver | A human-readable board and commands for early lessons and debugging |
+| UCI adapter | `uci`, `isready`, `ucinewgame`, `position startpos/fen ...`, `go`, `stop`, `quit`: turns GUI commands into engine calls and returns the best move and its analysis, with protocol text on stdout and debug text on stderr |
+| GUI | Lucas Chess on every class laptop, which starts `remus.bat` and hosts Remus as an external UCI engine |
+
+Remus runs without Lucas Chess or `python-chess` installed. `python-chess` is a Python
+chess library, not a GUI: it plays matches and checks Remus from outside in the tests,
+and it never supplies the engine's board, move generator, search, or evaluation.
+"Connecting Remus to python-chess and a GUI" near the end of this plan lists every
+place it appears.
+
+### The starting representation
+
+The board is an 8-by-8 list of lists. A square holds a one-character piece letter, as
+FEN writes it, or `.` for empty. Uppercase letters are White and lowercase letters are
+Black. Row 0 is rank 8 and column 0 is file `a`, and the comments repeat that rule
+wherever it matters.
+
+```python
+board = [
+    list("rnbqkbnr"),
+    list("pppppppp"),
+    list("........"),
+    list("........"),
+    list("........"),
+    list("........"),
+    list("PPPPPPPP"),
+    list("RNBQKBNR"),
+]
+```
+
+The game state is a plain dict, which `new_game()` in `game_state.py` builds:
+
+```python
+state = {
+    "board": board,
+    "turn": "w",
+    "castling": "KQkq",
+    "en_passant": None,
+    "halfmove_clock": 0,
+    "fullmove_number": 1,
+    "position_history": [],
+}
+```
+
+A square is a `(row, col)` tuple inside the engine, and a move is the small `Move`
+dataclass in `moves.py`, with `from_square`, `to_square`, and `promotion`. People read
+and type moves in standard algebraic notation (SAN: `d4`, `Nc3`, `Bxh8`, `O-O`,
+`e8=N+`), and Lucas Chess uses UCI (`e2e4`, `e7e8q`). Remus converts between them only
+at the input and output boundary.
 
 ## Decisions this plan is built on
 
@@ -29,9 +137,170 @@ to everything below.
 | First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
 | First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
-| Matches | Day 10: each student pair's enhanced engine plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the designer's league |
+| Matches | Day 9, period 4: engine battles, two enhanced engines at a time, twice at 10 minutes a side, once with each piece color, on five laptops at once. The teacher then shows the designer's league table of all twelve Remus versions |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
-| Documentation | `misc/docs/engines/remus_program_overview.md` for the whole program, one page per script in `misc/docs/engine_code/`, one page per Python lab in `misc/docs/learning_python/`, and `misc/docs/course/slide_plan.md` for the PowerPoint slides |
+| Documentation | `misc/docs/engines/remus_program_overview.md` for the whole program, one page per script in `misc/docs/engine_code/`, one page per Python lab in `misc/docs/learning_python/`, chess pages in `misc/docs/chess_instruction/`, and `misc/docs/course/slide_plan.md` for the PowerPoint slides |
+
+## The thirteen lessons
+
+The course teaches thirteen lessons, each a step that the next one builds on. The
+schedule below spreads them over the ten days; this section names the idea of each
+lesson, where it is taught, and the gate that ends it. Don't skip a gate.
+
+### 1. Draw the board and read coordinates (Day 1)
+
+Print the board with files `a` to `h` and ranks `8` to `1`. Convert `e2` into a row
+and column, `(6, 4)`, and back again, and reject a name such as `"i9"`. Exercise:
+print the start board and name the piece on `b1`.
+
+**Ready to move on when:** the printed board, the internal indices, and the square
+names agree in both directions.
+
+### 2. Describe a move and make an ordinary one (Day 2)
+
+Represent a move plainly. Make a quiet move or an ordinary capture, and undo it. The
+undo record saves the captured piece and every part of the state the move changes.
+No search yet. Exercise: make `e2e4`, undo it, and compare the restored state with
+the original.
+
+**Ready to move on when:** every ordinary move undoes exactly and the side to move
+changes correctly.
+
+### 3. Generate pseudo-legal moves (Day 3)
+
+For each piece of the side to move, list the squares its movement pattern reaches,
+without yet checking whether its own king is exposed. Pawns move toward row 0 for
+White, step twice from the start rank, and capture diagonally. Sliding pieces stop at
+the first occupied square, capturing an enemy there. The king steps one square and the
+knight jumps; one function per piece type keeps each idea easy to trace.
+
+**Ready to move on when:** hand-built positions produce the expected moves, and the
+start position gives 20.
+
+### 4. Detect attacks, check, and legal moves (Day 4)
+
+`is_square_attacked(square, by_side)` stands apart from the legal-move filter. A
+pawn's attacked squares differ from its forward moves. To find the legal moves, make
+each pseudo-legal move, reject it if the mover's king is attacked, and undo it. This
+approach is slow and correct. No move may capture the opposing king; checkmate is a
+position with no legal escape.
+
+**Ready to move on when:** pinned pieces, discovered checks, king moves into attack,
+check escapes, checkmate, and stalemate all behave correctly.
+
+### 5. Handle special moves explicitly (Day 5)
+
+Add one rule at a time, with both make and undo, using the special-move checklist
+below. Castling rights live in the state, never in the board alone: a rook that moved
+away and came back has lost its right. The en passant target lives in the state too,
+never in the shape of the last move.
+
+**Ready to move on when:** the special moves pass the focused examples and restore
+exactly after undo.
+
+### 6. Record a complete game (Days 6 and 7)
+
+Update the halfmove clock, fullmove number, castling rights, en passant target, and
+position history. FEN reads and writes a position at the boundary. The position key
+identifies a repeated position by its piece placement, side to move, castling rights,
+and an en passant target. SAN turns moves into text people read and type.
+
+**Ready to move on when:** a game replays move by move and every position undoes back
+to the start.
+
+### 7. End the game correctly (Day 7)
+
+Detect checkmate and stalemate, threefold and fivefold repetition, the fifty and
+75-move rules, and insufficient material, and tell a draw a player may claim from one
+that ends the game by itself. A side with no moves is checkmated only if its king is
+attacked.
+
+**Ready to move on when:** the console game reports a clear result and reason.
+
+### 8. Evaluate a position (Day 7, then Day 9)
+
+Start with material, scored for White, and flip the sign for the side to move at the
+search boundary. Add piece-square tables, then pawn structure, a mating bonus, and
+king safety in the Day 9 enhanced engines, each one a term the student pairs can
+explain and test on sample positions. A mate score outweighs every ordinary score and
+prefers the faster mate.
+
+**Ready to move on when:** `explain_evaluation()` shows why Remus prefers one quiet
+position over another.
+
+### 9. Search a small game tree (Day 8)
+
+Draw the tree on paper first. Write minimax, then negamax, then alpha-beta. Each node
+makes a move, searches one ply deeper, and undoes the move even when it prunes or
+returns early, with `try/finally` around the make and undo. Count nodes and compare a
+small search with the hand count. With no legal moves, the node scores mate or
+stalemate.
+
+**Ready to move on when:** Remus chooses a legal move, scores mate and stalemate at a
+leaf, and leaves the root position unchanged after searching.
+
+### 10. Improve the search carefully (Days 8 and 9)
+
+Quiescence search, move ordering, the check extension, iterative deepening, and the
+clock each get their own period. The horizon effect comes before quiescence. The
+principal variation is a list of moves that replays on the board.
+
+Null-window search and principal variation search (the PINK enhanced engine) come
+only after alpha-beta is correct. A null-window search answers whether a position
+crosses a bound; it never returns an exact score by itself. Principal variation
+search searches the first move with a full window, probes the later moves with a null
+window, and searches again with the full window when a probe finds a better move. The
+PINK tests check that a null window answers only "better or not" and that principal
+variation search returns the same score as alpha-beta.
+
+### 11. Cache results and use an opening book (Day 9)
+
+The transposition table (the RED enhanced engine) is a plain Python dict. Its key is
+the position key, so it includes the side to move and the castling and en passant
+rights. An entry stores the search depth, the score, the bound (`exact`, `lower`, or
+`upper`), and the best move. A bound is not an exact score: a `lower` entry settles
+a search only when its score already reaches beta, and an `upper` entry only when its
+score stays at or below alpha.
+
+The opening book (the GREEN enhanced engine) is a short list of named openings in
+SAN, and Remus checks every book move against its own legal moves. An endgame
+tablebase is an optional extension beyond the course: a probe answers only the
+positions its table covers, and Remus falls back to its own search everywhere else.
+An absent book or table never stops play.
+
+### 12. Connect to a GUI (Day 5, then Days 7 and 9)
+
+The UCI loop around the engine handles `uci`, `isready`, `ucinewgame`,
+`position startpos ...`, `position fen ...`, `go`, `stop`, and `quit`. It answers in
+UCI notation, such as `e2e4` or `e7e8q`, and sends `bestmove 0000` only when there is
+no legal move. Protocol text goes to stdout and debug text to stderr, so Lucas Chess
+can read every answer. Day 5 hands out the plug as random Remus; Day 7 explains the
+protocol and adds FEN and the brains; Day 9 adds the clock and `info` lines.
+
+**Completion test:** Lucas Chess starts a game, sends moves, receives legal replies,
+shows promotions correctly, and ends the game without losing track of the position.
+
+### 13. Turn the search on a science problem (Day 10)
+
+The engine's loop of generating candidates, scoring each one, and choosing the best
+does not depend on chess. A 10x10 grid hides a hot spot, and each measurement reveals
+the value at one square; `hidden_peak.py` finds the peak in as few measurements as
+it can. Scientists at Brookhaven's NSLS-II face the same choice when an AI agent
+decides which spot on a sample to measure next. A depth-2 search averages over the
+possible readings instead of taking an opponent's minimum (expectimax), because
+nature is uncertain, not hostile, and an average gives alpha-beta no branch to cut
+off.
+
+The second problem, `phase_hunt.py`, turns the full tree search on a question a
+beamline answers every day: which crystal phases are in this powder? It searches every
+set of up to three phases from a library of ten, with append and pop as make and
+undo, and checks itself on 200 powders whose phases are known, the way perft checked
+the rules. Day 10 below gives the details and the numbers.
+
+**Ready to move on when:** the greedy strategy needs fewer measurements than random
+guessing on the 100-grid benchmark, the phase-hunt search makes fewer wrong calls than
+greedy on the 200-powder benchmark, and the student pair can say which engine idea each
+function reuses and which one (the opponent's minimum) does not apply.
 
 ## The shape of the two weeks
 
@@ -48,7 +317,7 @@ plugs it into a GUI, and teaches Remus to think.
 | 6 | Counting the tree, and FEN | Recursion; `split`, exceptions | Perft matches the reference counts; FEN in and out |
 | 7 | A whole game, and judging a position | `random`, a loop that keeps the best so far, stdin and stdout | SAN; end the game; play random and greedy moves in a GUI; evaluate a position |
 | 8 | Searching ahead, then smarter | Recursion review, keeping a list in order with `insert` | Minimax, negamax, alpha-beta, quiescence, move ordering |
-| 9 | The clock and the engine enhancements | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhanced engine per student pair; battles between the colors |
+| 9 | The clock and the engine enhancements | `time`, dicts as caches, tuples as keys | Iterative deepening (Remus-WHITE); one enhanced engine per student pair; battles between the enhanced engines |
 | 10 | Solve a science problem using chess AI | `math.dist`, `random.seed`, `append` and `pop` as make and undo | A measurement AI that finds a hidden peak; a phase hunt that names the crystals in an X-ray pattern; each student pair reports its science results |
 
 Week 1 is Days 1 to 5 and Week 2 is Days 6 to 10. Week 1 ends with every special move
@@ -186,6 +455,65 @@ refresher with a demonstration board comes right before the code that needs each
 | Insufficient material | K vs K, K+B vs K, K+N vs K, and K+B vs K+B with same-colored bishops are draws | D7 P1 |
 | Piece values and tactics | Pawn 1, knight 3, bishop 3, rook 5, queen 9; fork, pin, skewer | D7 P4 |
 
+## Special-move checklist
+
+Lesson 5 adds these cases one at a time. Each row says what makes the move legal and
+what make and undo must save and restore.
+
+| Case | Generation and legality | State and undo reminders |
+| --- | --- | --- |
+| Kingside and queenside castling | The king and that rook have not moved; the squares between them are empty; the king is not in check and does not pass through or land on an attacked square. An attack on a square only the rook crosses (b1 or b8) does not matter | Move both pieces. Clear both rights of that king, or one right when a rook moves or is captured on its home square. Undo puts both pieces back and restores the earlier rights |
+| En passant | A pawn may capture only on the move right after the opponent's double pawn push, from the file next to it. Test the king's safety after removing the captured pawn | Store the en passant target for the next side's turn only. Remove the captured pawn from its own square, not the destination square. Undo puts it back there and restores the earlier target |
+| Promotion and underpromotion | A pawn reaching its last rank offers a queen, rook, bishop, or knight, for quiet moves and captures alike. A bare destination square is not enough | Replace the pawn with the chosen piece and record the choice. Undo restores the pawn and any captured piece. UCI adds `q`, `r`, `b`, or `n` to the move |
+| Two queens or other promoted pieces | Never assume one queen per side or a fixed count of rooks, bishops, or knights. Loop over the board | Every promoted piece fits on the board beside the original pieces, and captures and undo treat it the same way |
+| Double pawn push | Only from the pawn's start rank, with both the square passed over and the destination empty | Set the en passant target; every other move clears an old target |
+| Rook captured on its home square | The capture removes the opponent's castling right even though the opponent did not move | The undo record saves and restores all earlier castling rights |
+| Check, pin, and discovered attack | A special move is legal only if the mover's king is safe in the final position | Test after the whole move, including the rook's move in castling or the pawn removed by en passant |
+
+## Exact undo contract
+
+Before `make_move` changes the state, it saves everything the resulting board cannot
+tell it reliably:
+
+- the moving piece, the piece on the destination square, and the pawn an en passant
+  capture removes;
+- the earlier castling rights and en passant target;
+- the earlier halfmove clock, fullmove number, and side to move;
+- the promotion choice and the rook's move in castling;
+- the position history entry the move adds.
+
+After `undo_move(make_move(state, move))`, the whole game state equals its original
+snapshot, clocks and rights included, not only the visible pieces. A search leaves the
+live position unchanged even if it stops early.
+
+## Verification exercises
+
+Short named positions catch more bugs than games from the start position. For each
+one, the student pair writes the expected legal moves or result before running Remus.
+
+1. The start position: 20 legal moves.
+2. A king in check: only the moves that remove the check.
+3. A pinned piece: no move that exposes its king.
+4. Castling available, blocked, through check, and after the rook comes back.
+5. En passant available, expired, and illegal because it exposes the king.
+6. A quiet promotion, a capture promotion, and each underpromotion.
+7. A position with two queens on one side.
+8. Checkmate against stalemate.
+9. A repetition where the castling or en passant rights changed.
+10. A long sequence of makes and undos that returns exactly to the start.
+
+Perft counts the leaves of the legal move tree to a shallow depth, and Day 6 compares
+those counts with `python-chess` on the standard positions. Perft checks the move
+generator with no search strength mixed in, and a mismatch is traced by dividing the
+count by root move.
+
+For the search lessons, record the root's legal moves, the chosen move, the score, the
+principal variation, the node count, and whether the root state is unchanged. Tiny
+tactical positions, such as the ten in `mate_puzzles.epd`, have answers a student pair
+can check by hand. Stockfish or `python-chess` checks Remus from outside only after the
+student pairs can explain Remus's own answer.
+
+
 ## Teacher preparation
 
 1. **Build the reference engine first.** The teacher's Remus is complete before the
@@ -206,8 +534,7 @@ refresher with a demonstration board comes right before the code that needs each
 4. **Print handouts:** a board diagram labeled with both `e2` and `(6, 4)`, the rules
    refresher table, a SAN and UCI cheat sheet, a perft reference table, and a blank game
    tree for Day 8.
-5. **Collect test positions as FEN:** the ten verification exercises in the workshop
-   file, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
+5. **Collect test positions as FEN:** the ten verification exercises above, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
    mate puzzles in `mate_puzzles.epd`, and a horizon-effect position.
 6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
    both partners take the code home, plus one class stick for the Day 9 battles. Give the assistant
@@ -294,7 +621,7 @@ refresher with a demonstration board comes right before the code that needs each
 - **P3. Check and the legal filter.** Unplugged warm-up: "Pin hunt." **Students write:** `in_check(state, color)` and
   `legal_moves(state)`: make each pseudo-legal move, reject it if the mover's king is
   attacked, undo it.
-- **P4. Practice positions.** Student pairs build tests for the workshop's first three
+- **P4. Practice positions.** Student pairs build tests for the first three
   verification exercises: 20 moves from the start, a king in check, and a pinned piece.
   In `demo_practice_positions.py` each student pair types the three positions and a
   prediction for each, then lets Remus count the legal moves.
@@ -315,7 +642,7 @@ only escapes.
   passant make and undo, including the line that sets the target after a double step.
 - **P4. Promotion and underpromotion.** Puzzle: promoting to a knight wins, promoting to
   a queen stalemates. The teacher writes promotion in `make_move` and `undo_move`,
-  and student pairs write tests from the workshop's special-move checklist. In
+  and student pairs write tests from the special-move checklist. In
   `demo_promotion.py` student pairs write the loop that tries all four promotions on the
   puzzle and prints stalemate for the queen, rook, and bishop and checkmate for the
   knight. To close the week,
@@ -428,20 +755,20 @@ moves" milestone.
   covers dicts as caches and tuples as keys (7 typed lines, so an enhancement of 30 lines
   stays within the limit). Then each of the 10 student pairs takes one enhanced engine from
   `engines/student` at the top of the Remus folder: the period 1 engine with one enhancement added, with the student pair's function stubbed (at
-  most 30 typed lines). The folder names use colors so no engine sounds better than another. The enhanced engines are described in [remus_versions.md](../engines/remus_versions.md).
+  most 30 typed lines). The folder names use engine colors so no engine sounds better than another. The enhanced engines are described in [remus_versions.md](../engines/remus_versions.md).
 
-| Color | Enhanced engine |
+| Engine folder | Enhanced engine |
 | --- | --- |
-| RED | Transposition table: a dict from `position_key` to depth, score, bound, and best move |
-| GREEN | Opening book: SAN lines checked with `legal_moves()` |
-| BLUE | Killer moves: two quiet moves per ply that caused a cutoff |
-| PINK | Principal variation search: null window on every move after the first |
-| YELLOW | Draw sense: a repeated position scores 0 inside the search |
-| PURPLE | Pawn structure: doubled, isolated, and passed pawns |
-| CYAN | Mating bonus: push the losing king to the edge |
-| ORANGE | Null-move pruning: give the opponent two moves in a row; if Remus is still too far ahead, stop searching |
-| BROWN | Late move reductions: search late, quiet moves one ply shallower |
-| GRAY | King safety: reward the pawn shield while queens are on |
+| `01 Remus-GRAY` | King safety: reward the pawn shield while queens are on |
+| `02 Remus-YELLOW` | Draw sense: a repeated position scores 0 inside the search |
+| `03 Remus-CYAN` | Mating bonus: push the losing king to the edge |
+| `04 Remus-PINK` | Principal variation search: null window on every move after the first |
+| `05 Remus-ORANGE` | Null-move pruning: give the opponent two moves in a row; if Remus is still too far ahead, stop searching |
+| `06 Remus-BROWN` | Late move reductions: search late, quiet moves one ply shallower |
+| `07 Remus-PURPLE` | Pawn structure: doubled, isolated, and passed pawns |
+| `08 Remus-GREEN` | Opening book: SAN lines checked with `legal_moves()` |
+| `09 Remus-BLUE` | Killer moves: two quiet moves per ply that caused a cutoff |
+| `10 Remus-RED` | Transposition table: a dict from `position_key` to depth, score, bound, and best move |
 
 - **P3. Engine enhancements: test and measure.** Each student pair finishes its enhanced engine,
   passes its tests, and plays one short basic test game against Remus-WHITE: it opens
@@ -561,17 +888,17 @@ Outside the Day folders:
 
 | Path | Holds |
 | --- | --- |
-| `misc/scripts/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
+| `CONTRIBUTORS.md` | Which student pair wrote which function (starts on Day 1) |
+| `misc/docs/` | `chess_instruction/` (how to read and play chess), `course/` (this plan, the slide plan, the Lucas Chess guide, and the two briefing PDFs), `engine_code/` (one page per script), `engines/` (the program overview, the tests, the Remus versions, and their ratings), and `learning_python/` (one page per Python lab) |
+| `misc/docs/course/student_edit_plan.md` | Generated by `make_student_folders.py`: what the student pairs write in every period, with line counts |
 | `misc/scripts/` | The course designer's tools, which no student or teacher needs in class: the builders below, `run_all_tests.py`, `test_reference_tools.py`, `version_league.py`, `version_elo.py`, `remus_benchmark.py`, `engine_parity.py`, `make_phase_hunt_figures.py`, and `make_board_diagrams.py` |
-| `misc/scripts/run_all_tests.py` | Runs pytest on each period's `instructor/` folder in turn |
 | `misc/scripts/make_period_folders.py` | Builds the `instructor/` folders of `period1` to `period3` of each Day from `period4` |
 | `misc/scripts/make_version_folders.py` | Copies Remus-WHITE and builds the ten enhanced engine folders in `engines/instructor` from the Day 9 `period1` code and Remus-GOLD |
-| `student/` in each period, `misc/scripts/make_student_folders.py` | The student copy of every period, with that period's student functions as stubs, and the script that builds it |
-| `misc/docs/` | `course/` (this plan, the roadmap, the slide plan, the Lucas Chess guide, and the two briefing PDFs), `engine_code/` (the program overview and the script pages), and `engines/` (the Remus versions and their ratings) |
-| `<skill>.py` in the student period folder, `<skill>_instructor.py` in the instructor one | Python skills labs: student file with blanks, instructor file with answers, in the period of their lab (`period_guides.LABS` lists the 16 lab and demo periods) |
 | `misc/scripts/period_guides.py` | The learning objectives, how each is measured, and the paragraph on every change, which the builders write into every period goals file; and `DAY_GUIDES`, the day overview with timed activities that `make_student_folders.py` writes into the syllabus at the top of each Day folder (`Day NN Syllabus.md`) |
-| `misc/docs/course/student_edit_plan.md` | Generated by `make_student_folders.py`: what the student pairs write in every period, with line counts |
-| `CONTRIBUTORS.md` | Which student pair wrote which function (starts on Day 1) |
+| `misc/scripts/run_all_tests.py` | Runs pytest on each period's `instructor/` folder in turn |
+| `misc/scripts/test_reference_tools.py` | Checks that python-chess is installed and agrees with known counts |
+| `<skill>.py` in the student period folder, `<skill>_instructor.py` in the instructor one | Python skills labs: student file with blanks, instructor file with answers, in the period of their lab (`period_guides.LABS` lists the 16 lab and demo periods) |
+| `student/` in each period, `misc/scripts/make_student_folders.py` | The student copy of every period, with that period's student functions as stubs, and the script that builds it |
 
 A module keeps one file name all course. When a newer version teaches by comparison,
 the older function stays beside it in the same file: `is_attacked_by_scanning` next to
@@ -602,3 +929,12 @@ engine, and the engine never imports it.
 
 Three habits keep the UCI link from breaking: print protocol lines with `flush=True`;
 send all debug text to `sys.stderr`; and never print anything when a module is imported.
+
+## Reference links
+
+- [Lucas Chess](https://lucaschess.pythonanywhere.com)
+- [python-chess documentation for UCI and XBoard communication](https://python-chess.readthedocs.io/en/latest/engine.html)
+- [python-chess project and its features](https://github.com/niklasf/python-chess)
+
+These links support the GUI link and the outside checks. Remus itself stays native
+Python and self-contained.
