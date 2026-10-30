@@ -47,7 +47,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/scripts/
 ENGINES_FOLDER = ROOT / "engines" / "instructor"  # The Remus versions
 # The finished Remus, with all ten enhancements
-GOLD_FOLDER = ENGINES_FOLDER / "11 GOLD - All enhancements"
+GOLD_FOLDER = ENGINES_FOLDER / "11 Remus-GOLD - All enhancements"
 NIRAM = ROOT / "engines" / "Niram"  # Remus-GOLD rewritten in Rust
 REPORT_PATH = ROOT / "misc" / "docs" / "engines" / "remus-niram same algorithms.md"
 DEFAULT_NODES = 25_000  # Remus searches this many positions in about 3 to 8 seconds
@@ -255,8 +255,8 @@ def version_folders() -> list[Path]:
 
 
 def color_of(folder: Path) -> str:
-    """Return the engine color in a folder name: "11 GOLD - All enhancements" gives "GOLD"."""
-    return folder.name.split(" - ")[0].split()[-1]
+    """Return the engine color in a folder name: "11 Remus-GOLD - All enhancements" gives "GOLD"."""
+    return folder.name.split(" - ")[0].split()[-1].removeprefix("Remus-")
 
 
 def niram_program(color: str) -> Path:

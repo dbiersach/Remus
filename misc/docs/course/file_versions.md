@@ -82,7 +82,7 @@ instructor folder holds the answer file `<name>_instructor.py`.
 | D8 P3 | None | `search.py`: quiescence. `test_search.py` |
 | D8 P4 | `move_ordering.py` | `search.py`: ordering, check extension, clock. `test_search.py` |
 | D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock and thinking time. `console_game.py`: uses `think()`. `test_search.py` |
-| D9 P2, P3 | Ten enhanced engine folders in `engines/instructor` and `engines/student` (see [remus_versions.md](../engines/remus_versions.md)). Lab 12 in P2: `python_caches.py` | None: from period 2 on, the Day 9 period folders hold no engine code, and Remus-WHITE stays in `period1` and in `engines/.../00 WHITE - No enhancements` |
+| D9 P2, P3 | Ten enhanced engine folders in `engines/instructor` and `engines/student` (see [remus_versions.md](../engines/remus_versions.md)). Lab 12 in P2: `python_caches.py` | None: from period 2 on, the Day 9 period folders hold no engine code, and Remus-WHITE stays in `period1` and in `engines/.../00 Remus-WHITE - No enhancements` |
 | D9 P4 | `play_battle.py` in each engine folder: engine battles between student pairs. Demo: `demo_results.py` | None |
 | D10 P1 | `hidden_peak.py`, `test_hidden_peak.py`. The Day 10 folders hold only the science files; the engine is Remus-GOLD (`transposition_table.py`, `opening_book.py`, `upgraded_search()`, and the other enhancements) | None |
 | D10 P2 | `phase_hunt.py`, `test_phase_hunt.py` | None |

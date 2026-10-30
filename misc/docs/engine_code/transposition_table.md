@@ -1,6 +1,6 @@
 # transposition_table.py: Remember positions already searched
 
-*Lives in Remus-GOLD, in the teacher's `engines/instructor/11 GOLD - All enhancements`, the engine of Day 10.*
+*Lives in Remus-GOLD, in the teacher's `engines/instructor/11 Remus-GOLD - All enhancements`, the engine of Day 10.*
 
 ## The big picture
 
@@ -68,7 +68,7 @@ best_stored_move()
 
 ## Try it
 
-Open `transposition_table.py` from the `11 GOLD - All enhancements` folder in VS Code, and click the Run Python File
+Open `transposition_table.py` from the `11 Remus-GOLD - All enhancements` folder in VS Code, and click the Run Python File
 button (the triangle at the top right of the editor).
 
 You should see: A saved score found at depth 3, and `None` when the search asks for depth 4.

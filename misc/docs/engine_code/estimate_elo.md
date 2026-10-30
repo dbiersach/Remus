@@ -1,6 +1,6 @@
 # estimate_elo.py: How strong is Remus?
 
-*Lives in Remus-GOLD, in the teacher's `engines/instructor/11 GOLD - All enhancements`, the engine of Day 10.*
+*Lives in Remus-GOLD, in the teacher's `engines/instructor/11 Remus-GOLD - All enhancements`, the engine of Day 10.*
 
 ## The big picture
 
@@ -65,7 +65,7 @@ main()
 
 ## Try it
 
-Open `estimate_elo.py` from the `11 GOLD - All enhancements` folder in VS Code, and click the Run Python File
+Open `estimate_elo.py` from the `11 Remus-GOLD - All enhancements` folder in VS Code, and click the Run Python File
 button (the triangle at the top right of the editor).
 
 You should see: The result of every game, the score at each level, and the estimated Elo with its error margin.

@@ -24,7 +24,7 @@ holds four period folders, `period1` to `period4`, one for each class period:
 | `Day 07 - Play full games and score positions` | Adds game endings, SAN, two simple brains, the UCI link to the GUI, and the evaluation |
 | `Day 08 - Search ahead with alpha-beta` | Looks ahead with minimax and negamax, then prunes with alpha-beta, searches captures to quiet positions, and orders moves |
 | `Day 09 - Add the clock and build enhanced engines` | Thinks on a clock with iterative deepening (Remus-WHITE), builds the ten enhanced engines, and ends with battles between the colors |
-| `Day 10 - Solve a science problem using chess AI` | Holds only the hidden-peak and phase-hunt Science AI; the Day 10 engine is Remus-GOLD in `engines/instructor/11 GOLD - All enhancements`, with all ten enhancements |
+| `Day 10 - Solve a science problem using chess AI` | Holds only the hidden-peak and phase-hunt Science AI; the Day 10 engine is Remus-GOLD in `engines/instructor/11 Remus-GOLD - All enhancements`, with all ten enhancements |
 
 Every period folder holds two folders. `instructor/` holds only finished reference
 code that runs as it is, with no blanks to fill in, and `student/` holds the code
@@ -167,7 +167,7 @@ The pages, in the order the class builds them:
 
 ## Remus-WHITE across the course
 
-Remus-WHITE is the finished Day 9 Remus, in `engines/instructor/00 WHITE - No
+Remus-WHITE is the finished Day 9 Remus, in `engines/instructor/00 Remus-WHITE - No
 enhancements`. It holds 27 Python files.
 
 ### Which file imports which
