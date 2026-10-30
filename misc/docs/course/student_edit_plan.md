@@ -61,15 +61,15 @@
 | Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
 | P1 | Ending the game | `game_end.py` | `fen.py`, `game_state.py`, `make_move.py`, `test_game.py` | `insufficient_material()` in `game_end.py` (18 lines); `game_result()` in `game_end.py` (12 lines) |
-| P2 | SAN and the console game | `console_game.py`, `notation.py`, `python_input_output_instructor.py` | `test_game.py` | `parse_san()` in `notation.py` (5 lines); the lab `python_input_output.py` (16 lines) |
-| P3 | First brains and the GUI | `play_match.py`, `search.py` | `console_game.py`, `test_game.py`, `uci_engine.py` | `random_move()` in `search.py` (1 line); `greedy_move()` in `search.py` (10 lines) |
+| P2 | SAN: moves people read and type | `notation.py`, `python_input_output_instructor.py` | `test_game.py` | `parse_san()` in `notation.py` (5 lines); the lab `python_input_output.py` (16 lines) |
+| P3 | First brains and the GUI | `play_match.py`, `search.py` | `test_game.py`, `uci_engine.py` | `random_move()` in `search.py` (1 line); `greedy_move()` in `search.py` (10 lines) |
 | P4 | What makes a position good? Material and piece-square tables | `evaluation.py`, `test_search.py` | None | `material()` in `evaluation.py` (10 lines) |
 
 ## Day 08 - Search ahead with alpha-beta
 
 | Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
-| P1 | Minimax, negamax, and mates | None | `console_game.py`, `search.py`, `test_search.py`, `uci_engine.py` | `negamax()` in `search.py` (17 lines) |
+| P1 | Minimax, negamax, and mates | None | `search.py`, `test_search.py`, `uci_engine.py` | `negamax()` in `search.py` (17 lines) |
 | P2 | Python lab 11 and alpha-beta | `compare_search.py`, `mate_puzzles.epd`, `python_sorting_instructor.py` | `search.py`, `test_search.py` | `alpha_beta()` in `search.py` (16 lines); the lab `python_sorting.py` (19 lines) |
 | P3 | The horizon effect and quiescence | None | `search.py`, `test_search.py` | `quiescence()` in `search.py` (15 lines) |
 | P4 | Move ordering | `move_ordering.py` | `search.py`, `test_search.py` | `mvv_lva_score()` in `move_ordering.py` (8 lines) |
@@ -78,7 +78,7 @@
 
 | Period | Title | New files | Files that grow | Student pairs write |
 | --- | --- | --- | --- | --- |
-| P1 | Iterative deepening, the clock, and UCI info | None | `console_game.py`, `search.py`, `test_game.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
+| P1 | Iterative deepening, the clock, and UCI info | None | `search.py`, `test_game.py`, `test_search.py`, `uci_engine.py` | `think()` in `search.py` (17 lines) |
 | P2 | Python lab 12 and the engine enhancements | `python_caches_instructor.py` | None | The lab `python_caches.py` (7 lines); their enhanced engine's functions, in the table below |
 | P3 | Engine enhancements: test and measure | None | None | Their enhanced engine's functions, in the table below |
 | P4 | Engine battles | `demo_results_instructor.py` | None | The demo `demo_results.py` (13 lines) |

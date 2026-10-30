@@ -15,7 +15,7 @@ moves that disagree. The student pair reads those moves, finds each bug, and fix
 folder, so the correct Remus beside it stays untouched. python-chess is the reference,
 the same way it is in `test_perft.py`.
 
-- **Uses:** [`perft.py`](perft.md) and the buggy copies of the Remus files in `bug_hunt/`
+- **Uses:** [`perft.py`](../engine_code/perft.md) and the buggy copies of the Remus files in `bug_hunt/`
 - **Used by:** nothing; the instructor's `bug_hunt/README.md` lists the answers
 
 ## Words to know

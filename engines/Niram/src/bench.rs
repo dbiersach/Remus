@@ -28,7 +28,7 @@ use crate::uci_engine::set_position;
 pub type EvalFn = fn(&State) -> i32;
 
 pub const BENCH_POSITIONS: [&str; 10] = [
-    // The ten positions of Remus's compare_search.py and misc/scripts/remus_benchmark.py
+    // The ten positions of misc/scripts/remus_benchmark.py (and the Day 8 compare_search.py)
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
     "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
     "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5",

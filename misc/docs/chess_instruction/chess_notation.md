@@ -2,8 +2,8 @@
 
 Chess players write every move of a game so they can play it over later, send it to a
 friend, or study it in a book. The usual way is called **SAN**, short for Standard
-Algebraic Notation. Remus prints its moves in SAN, and you type your moves in SAN when
-you play `console_game.py`.
+Algebraic Notation. Remus prints its moves in SAN, and Lucas Chess lists every move of a
+game in SAN.
 
 ## Name every square
 

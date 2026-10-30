@@ -18,7 +18,7 @@ By 4:30, each student pair can:
 | --- | --- | --- | --- |
 | P1 | 8:30 to 10:00 | Ending the game | `insufficient_material()` in `game_end.py` (18 lines); `game_result()` in `game_end.py` (12 lines) |
 | | 10:00 to 10:30 | Break | |
-| P2 | 10:30 to 12:00 | SAN and the console game | `parse_san()` in `notation.py` (5 lines); the lab `python_input_output.py` (16 lines) |
+| P2 | 10:30 to 12:00 | SAN: moves people read and type | `parse_san()` in `notation.py` (5 lines); the lab `python_input_output.py` (16 lines) |
 | | 12:00 to 1:00 | Lunch | |
 | P3 | 1:00 to 2:30 | First brains and the GUI | `random_move()` in `search.py` (1 line); `greedy_move()` in `search.py` (10 lines) |
 | | 2:30 to 3:00 | Break | |
@@ -35,13 +35,13 @@ By 4:30, each student pair can:
 
 [`Day 07 Period 01 Goals.md`](<period1/Day 07 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
-## Period 2, 10:30 to 12:00: SAN and the console game
+## Period 2, 10:30 to 12:00: SAN: moves people read and type
 
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Slides: SAN. The teacher walks through `move_to_san()`, including `Nbd2` and the `+` and `#` endings. |
 | 10:45 to 11:05 | Student pairs write `parse_san()`: build the SAN of every legal move and return the one that matches. |
-| 11:05 to 11:20 | Student pairs play each other with `console_game.py`, typing moves in SAN. |
+| 11:05 to 11:20 | Student pairs run `notation.py`, then change its position and check that `parse_san()` reads each SAN move it prints. |
 | 11:20 to 12:00 | Student pairs work through `python_input_output.py`: `random.choice()`, a loop that keeps the best so far, stderr, and a tiny program that answers `isready` with `readyok`. |
 
 [`Day 07 Period 02 Goals.md`](<period2/Day 07 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.

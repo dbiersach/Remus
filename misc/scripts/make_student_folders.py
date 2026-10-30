@@ -24,7 +24,7 @@ import shutil
 from pathlib import Path
 from typing import Any
 
-from make_version_folders import VERSIONS_TABLE
+from make_version_folders import ENGINE_SKIPS, VERSIONS_TABLE
 from period_guides import CODE_NOTES, DAY_GUIDES, LABS
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/scripts/
@@ -746,7 +746,7 @@ def main():
     shutil.copytree(
         next(ROOT.glob("Day 09 - *")) / "period1" / "student",
         student_engines / white,
-        ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg", "show_board.py"),
+        ignore=shutil.ignore_patterns(*ENGINE_SKIPS),
     )
     shutil.copy2(engines / white / "README.md", student_engines / white / "README.md")
     for version in VERSIONS_TABLE:

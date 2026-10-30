@@ -68,7 +68,7 @@ Remus has four parts, and only the first holds chess knowledge:
 | Part | Responsibility |
 | --- | --- |
 | Native Python engine | Board, rules, legal moves, game state, search, evaluation, and move choice |
-| Console driver | A human-readable board and commands for early lessons and debugging |
+| Console printout | `print_board()` and each file's self-check print a human-readable board and results for lessons and debugging |
 | UCI adapter | `uci`, `isready`, `ucinewgame`, `position startpos/fen ...`, `go`, `stop`, `quit`: turns GUI commands into engine calls and returns the best move and its analysis, with protocol text on stdout and debug text on stderr |
 | GUI | Lucas Chess on every class laptop, which starts `remus.bat` and hosts Remus as an external UCI engine |
 
@@ -215,7 +215,7 @@ Detect checkmate and stalemate, threefold and fivefold repetition, the fifty and
 that ends the game by itself. A side with no moves is checkmated only if its king is
 attacked.
 
-**Ready to move on when:** the console game reports a clear result and reason.
+**Ready to move on when:** `game_result()` reports a clear result and reason for every ending the tests in `test_game.py` try.
 
 ### 8. Evaluate a position (Day 7, then Day 9)
 
@@ -343,7 +343,7 @@ of Day 7), then it plays **good** moves (Days 7 to 10).
 | Choosing a move | Random legal move (D7) | Greedy: biggest capture (D7) | Minimax, then negamax (D8) | Alpha-beta, quiescence, ordering (D8), iterative deepening (D9), the ten enhanced engines (D9) |
 | Evaluation | Material count (D7) | Piece-square tables (D7) | Mate scores that prefer the faster mate (D8) | Pawn structure, mating bonus, and king safety enhanced engines (D9) |
 | Science AI | Paper hidden-peak game and greedy measurement choice (D10 P1) | Explore and exploit weight tuned on a benchmark (D10 P1) | Phase hunt: score a guess about a powder, and a greedy agent (D10 P2) | Search every set of phases with make and undo, keep every tie, and verify on known powders (D10 P3) |
-| Interface | Console printout and a board picture (D1) | Move arrows (D3) and random Remus in Lucas Chess (D5) | Console game in SAN and full UCI (D7) | `info` lines, time control, `stop` (D9) |
+| Interface | Console printout and a board picture (D1) | Move arrows (D3) and random Remus in Lucas Chess (D5) | SAN in and out, and full UCI (D7) | `info` lines, time control, `stop` (D9) |
 
 ## How students write real Remus code
 
@@ -690,10 +690,11 @@ is now met.
   rules, and insufficient material, with a six-position quiz. The teacher writes the
   halfmove clock and `position_key()`. **Students write:** `insufficient_material(board)`
   and the result-and-reason checks in `game_result(state)`.
-- **P2. SAN and the console game.** The teacher writes `move_to_san()`, including
+- **P2. SAN: moves people read and type.** The teacher writes `move_to_san()`, including
   disambiguation (`Nbd2`) and the `+` and `#` suffixes. **Students write:**
   `parse_san(state, text)`, which builds the SAN of every legal move and returns the one
-  that matches what the player typed. Then `console_game.py` lets two people play in SAN.
+  that matches what the player typed. Then student pairs run `notation.py` and check
+  that `parse_san()` reads back each SAN move it prints.
   Python lab 10, `python_input_output.py` (stdin, stdout, `random`, and a loop that keeps the best so far),
   closes the period.
 - **P3. First brains and the GUI.** **Students write:** `random_move()` and
@@ -879,9 +880,9 @@ The full description of each script is in `misc/docs/engine_code/`.
 | `Day 04 - Keep only legal moves` | `attacks.py`, `legal_moves.py`, `test_legal_moves.py` | |
 | `Day 05 - Add castling, en passant, and promotion` | `uci_engine.py`, `remus.bat`, `test_special_moves.py` | `make_move.py`, `move_generation.py`, `legal_moves.py` |
 | `Day 06 - Count positions and read FEN` | `perft.py`, `test_perft.py`, `fen.py`, `test_game.py` | |
-| `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `console_game.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
-| `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` and `console_game.py` (negamax brain) |
-| `Day 09 - Add the clock and build enhanced engines` | `play_battle.py` in each engine folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time), `console_game.py` (uses `think`); the enhanced engines live in the top `engines/` folder |
+| `Day 07 - Play full games and score positions` | `notation.py`, `game_end.py`, `search.py`, `play_match.py`, `evaluation.py`, `test_search.py` | `game_state.py` (`position_key`), `make_move.py` (history), `fen.py` (history), `uci_engine.py` (FEN, brains) |
+| `Day 08 - Search ahead with alpha-beta` | `compare_search.py`, `move_ordering.py` | `search.py` (minimax, negamax, alpha-beta, quiescence), `uci_engine.py` (negamax brain) |
+| `Day 09 - Add the clock and build enhanced engines` | `play_battle.py` in each engine folder | `search.py` (`think`), `uci_engine.py` (clock, thinking time); the enhanced engines live in the top `engines/` folder |
 | `Day 10 - Solve a science problem using chess AI` | `hidden_peak.py`, `phase_hunt.py`, `test_hidden_peak.py`, `test_phase_hunt.py`. The Day 10 engine is Remus-GOLD in the teacher's `engines/instructor/11 Remus-GOLD - All enhancements`, which holds `transposition_table.py`, `opening_book.py`, `estimate_elo.py`, and the other enhancements | None: the science files never import the engine |
 
 Outside the Day folders:

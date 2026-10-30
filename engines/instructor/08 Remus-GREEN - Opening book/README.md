@@ -30,7 +30,7 @@ Nothing during the search: the book is read once when the engine starts, and ask
 
 ## Measured against Remus-WHITE
 
-Each version searched the ten positions of `compare_search.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
+Each version searched the ten positions of the designer's benchmark, `misc/scripts/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
 
 | Version | Positions to finish depth 4 | Share of Remus-WHITE's | Positions per second | Average depth in 5 seconds |
 | --- | ---: | ---: | ---: | ---: |
@@ -43,7 +43,7 @@ The time saved goes to later moves. Remus thinks about one thirtieth of its rema
 
 ## Where your code fits
 
-`uci_engine.py` and `console_game.py` ask `book_move()` before they search. `None` means the position is not in the book, and the engine calls `think()` as Remus-WHITE does.
+`uci_engine.py` asks `book_move()` before it searches. `None` means the position is not in the book, and the engine calls `think()` as Remus-WHITE does.
 
 ## The files
 

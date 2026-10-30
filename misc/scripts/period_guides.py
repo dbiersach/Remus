@@ -435,10 +435,10 @@ OBJECTIVES = {
             "The `parse_san` tests pass, and a typo raises `ValueError`.",
         ),
         (
-            "Play a whole game in the console.",
+            "Write every legal move of a position in SAN.",
             (
-                "Two students play `console_game.py` to a finish and the program prints "
-                "the right result."
+                "Running `notation.py` lists every legal move in SAN, and "
+                "`parse_san()` reads `O-O-O` back as the queenside castling move."
             ),
         ),
         (
@@ -903,9 +903,9 @@ VERSION_GUIDES = {
             "the book, so its numbers match Remus-WHITE's exactly."
         ),
         "fits": (
-            "`uci_engine.py` and `console_game.py` ask `book_move()` before they "
-            "search. `None` means the position is not in the book, and the engine "
-            "calls `think()` as Remus-WHITE does."
+            "`uci_engine.py` asks `book_move()` before it searches. `None` means "
+            "the position is not in the book, and the engine calls `think()` as "
+            "Remus-WHITE does."
         ),
     },
     "BLUE": {
@@ -1247,7 +1247,7 @@ VERSION_GUIDES = {
     },
 }
 
-# Each version's search on the ten positions of compare_search.py, measured with
+# Each version's search on the ten positions of remus_benchmark.py, measured with
 # think() on one computer: positions to finish depth 4, the seconds that took, and
 # the average deepest depth finished in 5 seconds a position
 VERSION_MEASURES = {
@@ -2360,8 +2360,8 @@ CHANGE_NOTES = {
     "(row + col) % 2.",
     ("game_end.py", "game_result"): "Checks every way a game ends, in order: no legal "
     "moves (checkmate or stalemate), insufficient material, threefold repetition, and "
-    "the fifty-move rule. It returns the result and the reason, so the console and "
-    "the GUI can say why a game is over.",
+    "the fifty-move rule. It returns the result and the reason, so a test can "
+    "check why a game is over.",
     ("notation.py", "parse_san"): "Finds the legal move that matches typed SAN, such "
     "as Nf3, by writing the SAN of every legal move and comparing. Matching against "
     "real moves means any text Remus accepts is a legal move.",
@@ -3902,8 +3902,8 @@ DAY_GUIDES = {
                 (
                     35,
                     (
-                        "Student pairs play each other with `console_game.py`, typing moves in"
-                        " SAN."
+                        "Student pairs run `notation.py`, then change its position and "
+                        "check that `parse_san()` reads each SAN move it prints."
                     ),
                 ),
                 (

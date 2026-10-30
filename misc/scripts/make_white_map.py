@@ -31,8 +31,9 @@ OVERVIEW = ROOT / "misc" / "docs" / "engine_comparison" / "remus_program_overvie
 IMAGE = ROOT / "misc" / "docs" / "images" / "code" / "remus_white_imports.svg"
 HEADING = "## Remus-WHITE across the course"  # The section this script rewrites
 
-# Files of Remus-WHITE that import no Remus module, so the diagram leaves them out
-NOT_IN_DIAGRAM = ("play_match.py", "run_tests.py")
+# The program Lucas Chess and every match start: the diagram shows this file and
+# every file it imports, directly or through another file, and nothing else
+ENGINE_START = "uci_engine"
 
 # Day 9 periods 2 and 3: each student pair edits these files in its own enhanced
 # engine folder, a copy of Remus-WHITE in engines/student
@@ -82,13 +83,21 @@ def imports_of(file_name: str, modules: set[str]) -> set[str]:
 
 
 def import_edges() -> list[tuple[str, str]]:
-    """Return every (importer, imported) pair of modules drawn in the diagram."""
+    """Return every (importer, imported) pair of the modules a game of chess loads."""
     modules = set()
     for name in white_files():
-        if not name.startswith("test_") and name not in NOT_IN_DIAGRAM:
-            modules.add(name[:-3])
+        modules.add(name[:-3])
+    # Follow the imports from uci_engine.py, so tests, demos, and match runners,
+    # which no game loads, stay out of the diagram
+    engine = set()
+    waiting = [ENGINE_START]
+    while waiting:
+        module = waiting.pop()
+        if module not in engine:
+            engine.add(module)
+            waiting.extend(imports_of(module + ".py", modules))
     edges = []
-    for module in sorted(modules):
+    for module in sorted(engine):
         for imported in sorted(imports_of(module + ".py", modules)):
             edges.append((module, imported))
     return edges
@@ -712,7 +721,17 @@ def paragraph(text: str) -> str:
 
 def section_text(files: list[str], edges: list[tuple[str, str]]) -> str:
     """Return the whole Remus-WHITE section of the overview page."""
-    diagram_count = len({name for edge in edges for name in edge})
+    drawn = {name for edge in edges for name in edge}
+    diagram_count = len(drawn)
+    others = []
+    for name in files:
+        if name[:-3] not in drawn and not name.startswith("test_"):
+            others.append(f"`{name}`")
+    left_out = ", ".join(others[:-1]) + ", and " + others[-1]
+    board_arrows = 0
+    for _, imported in edges:
+        if imported == "board":
+            board_arrows += 1
     text = f"{HEADING}\n\n"
     text += paragraph(
         "Remus-WHITE is the finished Day 9 Remus, in "
@@ -721,22 +740,23 @@ def section_text(files: list[str], edges: list[tuple[str, str]]) -> str:
     )
     text += "### Which file imports which\n\n"
     text += paragraph(
-        f"The diagram shows the {diagram_count} files that import another Remus "
-        "file or are imported by one. An arrow points from a file to each file "
+        f"The diagram shows the {diagram_count} files that a game of chess runs: "
+        "`uci_engine.py`, the program that Lucas Chess and every match start, and "
+        "every file it imports, directly or through another file. An arrow points from a file to each file "
         "that imports it: `evaluation.py` points at `search.py` because "
         "`search.py` calls `evaluate()`. A two-headed arrow would mean two files "
         "import each other; no two Remus files do. Every arrow points up the "
-        "page, from the code that is used to the code that uses it. The programs "
-        "a person runs, such as `uci_engine.py`, sit along the "
-        "top edge, because no file imports them, and each file sits one row below "
+        "page, from the code that is used to the code that uses it. "
+        "`uci_engine.py` sits at the top, because no file imports it, and each "
+        "file sits one row below "
         "the lowest file that imports it. `board.py` imports no Remus file and "
         "almost every file imports it, so it sits alone in the bottom row, where "
-        "its 13 arrows leave side by side along its top edge. Every arrow runs "
+        f"its {board_arrows} arrows leave side by side along its top edge. Every arrow runs "
         "straight up or bends at right angles, leaves and reaches a box at its "
         "own spot, and takes the color of the file it points at, so the eye can "
-        "follow the arrows that gather at one file. "
-        "The test files, `run_tests.py`, and `play_match.py`, which starts Remus as "
-        "a separate program, are left out."
+        "follow the arrows that gather at one file. The test files and "
+        f"{left_out} are left out: they check Remus or run its matches, and no "
+        "game loads them."
     )
     text += (
         "![Import diagram of Remus-WHITE](../images/code/remus_white_imports.svg)\n\n"
@@ -771,14 +791,14 @@ def section_text(files: list[str], edges: list[tuple[str, str]]) -> str:
 
 
 def write_section(section: str):
-    """Put the section into the overview page, before "The four boundaries"."""
+    """Put the section into the overview page, before "The three boundaries"."""
     text = OVERVIEW.read_text()
     if HEADING in text:
         start = text.index(HEADING)
         end = text.index("\n## ", start) + 1
         text = text[:start] + section + text[end:]
     else:
-        anchor = text.index("## The four boundaries")
+        anchor = text.index("## The three boundaries")
         text = text[:anchor] + section + text[anchor:]
     OVERVIEW.write_text(text)
     print(f"Wrote the Remus-WHITE section of {OVERVIEW}")
@@ -789,7 +809,7 @@ def main():
     edges = import_edges()
     draw_diagram(edges)
     write_section(section_text(files, edges))
-    print(f"Mapped {len(files)} Remus-WHITE files  (expected 27)")
+    print(f"Mapped {len(files)} Remus-WHITE files  (expected 25)")
 
 
 if __name__ == "__main__":

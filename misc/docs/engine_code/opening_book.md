@@ -18,10 +18,10 @@ those lines, Remus plays the next book move right away.
 
 ## Where this piece fits
 
-opening_book.py uses notation.py, make_move.py, and game_state.py. uci_engine.py and console_game.py use it on Day 10.
+opening_book.py uses notation.py, make_move.py, and game_state.py. uci_engine.py uses it in Remus-GREEN and Remus-GOLD.
 
 - **Uses:** [`fen.py`](fen.md), [`game_state.py`](game_state.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md), [`notation.py`](notation.md)
-- **Used by:** [`console_game.py`](console_game.md), [`uci_engine.py`](uci_engine.md)
+- **Used by:** [`uci_engine.py`](uci_engine.md)
 
 ## Words to know
 

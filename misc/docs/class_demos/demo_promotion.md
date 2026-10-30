@@ -18,7 +18,7 @@ That is stalemate, a draw. Only the knight gives check, and it is checkmate.
 The demo runs in the Day 5, period 4 folder and uses the promotion code the teacher
 adds to `make_move.py` in this period, together with `legal_moves()` and `in_check()`.
 
-- **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`attacks.py`](attacks.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`moves.py`](moves.md)
+- **Uses:** [`board.py`](../engine_code/board.md), [`game_state.py`](../engine_code/game_state.md), [`attacks.py`](../engine_code/attacks.md), [`legal_moves.py`](../engine_code/legal_moves.md), [`make_move.py`](../engine_code/make_move.md), [`moves.py`](../engine_code/moves.md)
 - **Used by:** nothing; `test_special_moves.py` tests the four promotions
 
 ## Words to know

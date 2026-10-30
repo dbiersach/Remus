@@ -12,7 +12,7 @@ slide to 12 lines or fewer; the full function lives in the Day folder.
 
 | Slide | Title | What it shows |
 | --- | --- | --- |
-| 1.1 | Remus at a glance | The four boundaries as boxes: engine, console, UCI adapter, Lucas Chess. Arrows show that only moves and text cross a boundary |
+| 1.1 | Remus at a glance | The engine, the UCI adapter, and Lucas Chess as boxes. Arrows show that only moves and text cross a boundary |
 | 1.2 | The module map | Every module of Day 10 as a box, arranged bottom to top in the order it is built (board, game_state, moves, make_move, move_generation, attacks, legal_moves, ...), with import arrows |
 | 1.3 | The board is a list of lists | An 8x8 grid with `board[row][col]` indexes on one side and rank and file labels on the other. Highlight `board[6][4]` = e2 = `"P"` |
 | 1.4 | Square names and coordinates | `"e2"` to `(6, 4)` and back: `col = "abcdefgh".index("e")`, `row = 8 - 2`. Three worked examples: a8, e2, h1 |
