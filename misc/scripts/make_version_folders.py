@@ -39,6 +39,10 @@ DAY_9 = next(ROOT.glob("Day 09 - *"))
 BASE = DAY_9 / "period1" / "instructor"  # Remus-WHITE
 REMUS_FOLDER = ROOT / "engines" / "instructor"  # WHITE, the colors, and GOLD
 WHITE = REMUS_FOLDER / "00 WHITE - No enhancements"  # A copy of BASE
+# Files a Day folder holds that no engine folder needs: show_board.py draws the
+# board for the Day 1 and Day 3 lessons, and nothing in an engine folder runs it
+ENGINE_SKIPS = ("__pycache__", "*.pgn", "*.svg", "show_board.py")
+ENGINE_IGNORE = shutil.ignore_patterns(*ENGINE_SKIPS)
 FINAL = REMUS_FOLDER / "11 GOLD - All enhancements"  # Written by hand
 
 
@@ -1135,9 +1139,7 @@ def main():
     REMUS_FOLDER.mkdir(parents=True, exist_ok=True)
     if WHITE.exists():
         shutil.rmtree(WHITE)
-    shutil.copytree(
-        BASE, WHITE, ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg")
-    )
+    shutil.copytree(BASE, WHITE, ignore=ENGINE_IGNORE)
     (WHITE / "README.md").write_text(white_readme())
     built = []
     for version in VERSIONS_TABLE:
@@ -1151,7 +1153,7 @@ def main():
         shutil.copytree(
             version.get("source", BASE),
             folder,
-            ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg", "README.md"),
+            ignore=shutil.ignore_patterns(*ENGINE_SKIPS, "README.md"),
         )
         for name in version["copies"]:
             shutil.copy2(FINAL / name, folder / name)

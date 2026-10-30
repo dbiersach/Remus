@@ -10,8 +10,9 @@ The pages fall into three folders. Pick the folder by the question you have.
 
 The pictures for these pages live in [`images/`](images/): the chess board
 diagrams of the enhanced engine READMEs, goals files, and code pages in `images/boards/`, the Lucas Chess
-screenshots in `images/lucas_chess/`, and the phase hunt figures in
-`images/phase_hunt/`.
+screenshots in `images/lucas_chess/`, the phase hunt figures in
+`images/phase_hunt/`, and the Remus-WHITE import diagram of the program overview in
+`images/code/`.
 
 Two pages come from scripts, so edit the script, not the page.
 `misc/scripts/make_student_folders.py` writes `course/student_edit_plan.md`, and

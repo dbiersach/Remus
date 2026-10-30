@@ -287,7 +287,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Every course designer tool that is not part of an engine lives in `misc/scripts/`
   (David, 2026-10-28): the builders `make_period_folders.py`,
   `make_version_folders.py`, `make_student_folders.py`,
-  `make_phase_hunt_figures.py`, and `make_board_diagrams.py`, the README text in `period_guides.py`,
+  `make_phase_hunt_figures.py`, `make_board_diagrams.py`, and `make_white_map.py`, the README text in `period_guides.py`,
   `run_all_tests.py`, `test_reference_tools.py`, `version_match.py`, `version_league.py`,
   `version_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
   top Remus folder from its own path, so it
@@ -316,8 +316,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `instructor` and `student` holds one engine folder per Remus version, named by its
   engine color. `00 WHITE - No enhancements` is Remus-WHITE,
   the finished Day 9 Remus with none of the ten enhancements (named by David on
-  2026-10-27): an exact copy of the Day 9 `period1/instructor` folder in `instructor`
-  and of `period1/student` in `student`. `01 GRAY - King safety` to `10 RED -
+  2026-10-27): a copy of the Day 9 `period1/instructor` folder in `instructor`
+  and of `period1/student` in `student`, without `show_board.py`, which only the
+  Day 1 and Day 3 lessons run, so that every engine folder holds only files that
+  something imports, runs, or names. `01 GRAY - King safety` to `10 RED -
   Transposition table` are the ten enhanced engines, each Remus-WHITE plus one
   enhancement. `11 GOLD - All enhancements` is Remus-GOLD, the finished Remus with
   all ten (David, 2026-10-27), and only `engines/instructor` holds it. `engines/Niram`
@@ -403,7 +405,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - `misc/docs/engines/`: the Remus versions and Niram: `remus_versions.md`,
     the ten enhanced engines and Remus-GOLD; `engines_elo.md`, the league and Stockfish
     ratings; and `remus-niram same algorithms.md`, which `engine_parity.py` writes.
-  Pictures live in `misc/docs/images/` (`boards/`, `lucas_chess/`, and `phase_hunt/`). A new page goes
+  Pictures live in `misc/docs/images/` (`boards/`, `code/`, `lucas_chess/`, and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `misc/docs/`.
 - Remus-WHITE, the ten enhanced engines (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
   are the **Remus versions** (David, 2026-10-28). Call them Remus versions or enhanced

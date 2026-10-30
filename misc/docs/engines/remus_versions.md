@@ -24,8 +24,8 @@ holds three folders:
 | `engines/student` | `00 WHITE - No enhancements` to `10 RED - Transposition table`, with the functions each student pair writes stubbed |
 | `engines/Niram` | Niram, Remus-GOLD rewritten in Rust, a course designer's tool |
 
-`00 WHITE - No enhancements` is Remus-WHITE, an exact copy of the Day 9 `period1`
-folder: the Day 9 Remus at the end of period 1, when its engine is finished and before
+`00 WHITE - No enhancements` is Remus-WHITE, a copy of the Day 9 `period1`
+folder without `show_board.py`, which only the Day 1 and Day 3 lessons run: the Day 9 Remus at the end of period 1, when its engine is finished and before
 the student pairs start their enhanced engines. Each engine folder from `01 GRAY` to
 `10 RED`, such as `10 RED - Transposition table`, starts as the same engine with one
 enhancement added. From period 2 to the end of the day, each student pair works only in
@@ -238,7 +238,7 @@ The table counts the lines of Python code in each version. A line counts only wh
 it holds code: comment lines, docstrings, and blank lines do not count. The count
 covers only the engine's own `.py` files, the ones `uci_engine.py` loads directly or
 through another module when Lucas Chess runs that version. Test files and tools such
-as `perft.py`, `play_match.py`, and `show_board.py` do not count.
+as `perft.py`, `play_match.py`, and `compare_search.py` do not count.
 
 | Version | Enhancement | Engine files | Code lines | Lines over WHITE |
 | --- | --- | ---: | ---: | ---: |
