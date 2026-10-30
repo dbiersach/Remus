@@ -15,7 +15,7 @@ The lab does not import Remus. On Day 5, period 2, `update_castling_rights()` in
 `make_move.py` removes letters with `replace()` exactly as Part #4 does.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`make_move.py`](../code/make_move.md)
+- **Used by:** nothing; it is practice for [`make_move.py`](../engine_code/make_move.md)
 
 ## Words to know
 

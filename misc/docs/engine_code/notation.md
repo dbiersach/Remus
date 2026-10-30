@@ -21,21 +21,9 @@ notation.py uses board.py, attacks.py, legal_moves.py, and make_move.py. console
 ## Words to know
 
 - **SAN:** Standard Algebraic Notation, the way chess books write moves.
+  [Chess notation](../chess_instruction/chess_notation.md) explains how to read and
+  write it: piece letters, captures, castling, promotion, check, and checkmate.
 - **disambiguation:** an extra letter or number when two pieces could make the same move, as in `Nbd2`.
-- **check sign:** `+` means check. `#` means checkmate.
-
-## What it stores
-
-Parts of a SAN move:
-
-```text
-N  b  x  d2  +
-|  |  |  |   gives check
-|  |  |  square it lands on
-|  |  captures
-|  which knight (the one on the b-file)
-piece letter (no letter for a pawn)
-```
 
 ## How it works
 

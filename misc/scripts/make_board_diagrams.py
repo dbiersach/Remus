@@ -10,7 +10,7 @@ draws each one with python-chess's chess.svg, with the files a to h and the rank
 diagram marked "row_col" also prints Remus's column numbers along the top and its
 row numbers down the right side, so a reader sees that row 0 is rank 8. The README
 text in period_guides.py links each picture with board_image(), and the pages in
-misc/docs/code/ link them by hand. VS Code's
+misc/docs/engine_code/ link them by hand. VS Code's
 Markdown preview and GitHub both show SVG pictures, and python-chess is already in
 the dev dependency group, so `uv run misc/scripts/make_board_diagrams.py` needs
 nothing else.

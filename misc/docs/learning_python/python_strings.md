@@ -15,7 +15,7 @@ The lab does not import Remus. On Day 1, period 4, `parse_square()` and
 `is_white()` in `game_state.py` is the one call from Part #4.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`board.py`](../code/board.md) and [`game_state.py`](../code/game_state.md)
+- **Used by:** nothing; it is practice for [`board.py`](../engine_code/board.md) and [`game_state.py`](../engine_code/game_state.md)
 
 ## Words to know
 

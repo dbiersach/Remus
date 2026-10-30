@@ -252,7 +252,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   builders write it into the READMEs, so edit it there. The phase hunt pictures live
   in `misc/docs/images/phase_hunt/`, drawn by `uv run misc/scripts/make_phase_hunt_figures.py`,
   which installs matplotlib for itself alone. The chess board diagrams in the enhanced
-  engine READMEs, the goals files, and the `misc/docs/code/` pages live in
+  engine READMEs, the goals files, and the `misc/docs/engine_code/` pages live in
   `misc/docs/images/boards/`, drawn with python-chess's `chess.svg` by
   `uv run misc/scripts/make_board_diagrams.py`. `board_image()` and
   `goals_board_image()` in `period_guides.py` link a diagram into the README and
@@ -387,7 +387,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   and Day 9 period folder and every version folder that reads them. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
-- Every `.py` file a student modifies or reads has a page in `misc/docs/code/`, the
+- Every `.py` file a student modifies or reads has a page in `misc/docs/engine_code/`, the
   "puzzle box top" for that file: the big picture first, then where it fits (uses and
   used by), words to know, a call tree, a plain-language line for each function, and
   questions. Each Python skills lab (`python_*.py`) has its page in
@@ -398,17 +398,17 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `games/`, and `scripts/`, so the top folder shows the ten Day folders and little
   else.
 - `misc/docs/` holds its folders and a `README.md` that maps them (David, 2026-10-28).
-  `misc/docs/code/` holds only pages named after a `.py` file (David, 2026-10-30):
+  `misc/docs/engine_code/` holds only pages named after a `.py` file (David, 2026-10-30):
   every other page goes into the folder of its subject.
   - `misc/docs/course/`: the roadmap, the course plan, the slide plan, the Lucas Chess
     guide, the science survey, the two briefing PDFs, `file_versions.md`, and
     `student_edit_plan.md`, which `make_student_folders.py` writes.
-  - `misc/docs/code/`: one page for every engine or tool `.py` file a student modifies
+  - `misc/docs/engine_code/`: one page for every engine or tool `.py` file a student modifies
     or reads, named after that file (`board.py` has `board.md`).
   - `misc/docs/learning_python/`: one page for every Python skills lab, named after
     its file (`python_lists.py` has `python_lists.md`).
-  - `misc/docs/chess_instruction/`, when it exists: pages about chess itself (how to
-    play, the rules, chess notation) rather than about Remus or Python.
+  - `misc/docs/chess_instruction/`: pages about chess itself (how to play, the rules,
+    chess notation) rather than about Remus or Python, such as `chess_notation.md`.
   - `misc/docs/engines/`: the program overview, `remus_program_overview.md`;
     `tests.md`, how the test files check Remus; and the Remus versions and Niram: `remus_versions.md`,
     the ten enhanced engines and Remus-GOLD; `engines_elo.md`, the league and Stockfish
