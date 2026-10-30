@@ -16,7 +16,7 @@ shape of `knight_paths()` in Part #3: at depth 0 return 1, otherwise add up the 
 after every move.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`perft.py`](perft.md)
+- **Used by:** nothing; it is practice for [`perft.py`](../code/perft.md)
 
 ## Words to know
 

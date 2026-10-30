@@ -15,8 +15,8 @@ The lab runs in the Day 8, period 2 folder and times `perft()` from `perft.py`. 
 same period, `alpha_beta()` starts alpha at the lowest score, and `compare_search.py`
 times negamax against alpha-beta.
 
-- **Uses:** [`perft.py`](perft.md), [`game_state.py`](game_state.md)
-- **Used by:** nothing; it is practice for [`search.py`](search.md), [`move_ordering.py`](move_ordering.md), and [`compare_search.py`](compare_search.md)
+- **Uses:** [`perft.py`](../code/perft.md), [`game_state.py`](../code/game_state.md)
+- **Used by:** nothing; it is practice for [`search.py`](../code/search.md), [`move_ordering.py`](../code/move_ordering.md), and [`compare_search.py`](../code/compare_search.md)
 
 ## Words to know
 

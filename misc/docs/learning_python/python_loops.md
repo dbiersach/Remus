@@ -14,7 +14,7 @@ The lab does not import Remus. On Day 3, period 3, `slide()` in `move_generation
 is the same walk, and it collects moves instead of square names.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`move_generation.py`](move_generation.md)
+- **Used by:** nothing; it is practice for [`move_generation.py`](../code/move_generation.md)
 
 ## Words to know
 

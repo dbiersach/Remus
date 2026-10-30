@@ -14,7 +14,7 @@ The lab does not import Remus, and no Remus file imports it. The skills it pract
 variables, f-strings, and indexing a string, show up in `board.py` on Day 1, period 4.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`board.py`](board.md)
+- **Used by:** nothing; it is practice for [`board.py`](../code/board.md)
 
 ## Words to know
 
