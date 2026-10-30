@@ -14,7 +14,7 @@ The lab sits in the Day 4, period 1 folder, beside the Remus code from Day 3, so
 imports find `board.py`, `game_state.py`, `move_generation.py`, and `moves.py`. Every
 later Remus file starts with imports like these.
 
-- **Uses:** [`board.py`](../code/board.md), [`game_state.py`](../code/game_state.md), [`move_generation.py`](../code/move_generation.md), [`moves.py`](../code/moves.md)
+- **Uses:** [`board.py`](../engine_code/board.md), [`game_state.py`](../engine_code/game_state.md), [`move_generation.py`](../engine_code/move_generation.md), [`moves.py`](../engine_code/moves.md)
 - **Used by:** nothing; it is practice for every Remus file
 
 ## Words to know

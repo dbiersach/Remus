@@ -2,7 +2,7 @@
 
 These are the PowerPoint slides the workshop needs to picture Remus's data structures
 and program flow. Slides are numbered by day: slide 4.2 is the second slide of Day 4.
-Each script page in [`misc/docs/code/`](../code/) lists the slides that go with it.
+Each script page in [`misc/docs/engine_code/`](../engine_code/) lists the slides that go with it.
 
 Most slides follow one pattern: a small position or tree the class can trace by hand,
 the state before and after, and the few lines of code that do the work. Keep code on a

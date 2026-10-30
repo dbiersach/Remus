@@ -28,8 +28,8 @@ of Remus with three planted bugs for you to find and fix.
 
 ## How to work on a function
 
-1. Read the period's goals file, then the page for the file in `misc/docs/code/`,
-   such as `misc/docs/code/board.md`.
+1. Read the period's goals file, then the page for the file in `misc/docs/engine_code/`,
+   such as `misc/docs/engine_code/board.md`.
 2. Read the function's docstring. It says what the function must do.
 3. Delete the two stub comments and the `raise` line, and write the body.
 4. Run the tests: open `run_tests.py` in the `student` folder and press Run.
