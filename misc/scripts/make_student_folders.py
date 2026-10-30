@@ -746,7 +746,7 @@ def main():
     shutil.copytree(
         next(ROOT.glob("Day 09 - *")) / "period1" / "student",
         student_engines / white,
-        ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg"),
+        ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg", "show_board.py"),
     )
     shutil.copy2(engines / white / "README.md", student_engines / white / "README.md")
     for version in VERSIONS_TABLE:
