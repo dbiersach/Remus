@@ -159,8 +159,8 @@ The pages, in the order the class builds them:
 | [`opening_book.py`](../code/opening_book.md) | Play known openings without thinking |
 | [`estimate_elo.py`](../code/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
 | [`demo_results.py`](../code/demo_results.md) | Day 9 demo: read a battle result |
-| [`misc/scripts/version_match.py`](../engines/remus_versions.md) | Plays one enhanced engine against Remus-WHITE, the Day 9 Remus with no enhancements, or against another enhanced engine: the Day 9 battles |
-| [`misc/scripts/version_league.py`](../engines/remus_versions.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
+| [`misc/scripts/version_match.py`](remus_versions.md) | Plays one enhanced engine against Remus-WHITE, the Day 9 Remus with no enhancements, or against another enhanced engine: the Day 9 battles |
+| [`misc/scripts/version_league.py`](remus_versions.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
 | [`hidden_peak.py`](../code/hidden_peak.md) | Science AI: find the hidden peak |
 | [`phase_hunt.py`](../code/phase_hunt.md) | Science AI: name the crystals in a powder |
 | [The test files](tests.md) | Checking that Remus works |
