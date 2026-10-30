@@ -16,7 +16,7 @@ The lab does not import Remus. In period 3, `random_move()` and `greedy_move()` 
 reads `sys.stdin` and answers with `flush=True` as Part #4 does.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`search.py`](search.md) and [`uci_engine.py`](uci_engine.md)
+- **Used by:** nothing; it is practice for [`search.py`](../code/search.md) and [`uci_engine.py`](../code/uci_engine.md)
 
 ## Words to know
 

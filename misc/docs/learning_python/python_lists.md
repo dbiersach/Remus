@@ -14,7 +14,7 @@ The lab does not import Remus. Part #3 builds the same 8x8 board that `new_board
 in `board.py` returns on Day 1, period 4, with row 0 as rank 8.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`board.py`](board.md)
+- **Used by:** nothing; it is practice for [`board.py`](../code/board.md)
 
 ## Words to know
 

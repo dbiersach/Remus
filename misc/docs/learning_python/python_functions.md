@@ -16,7 +16,7 @@ is the same one line as here, and `on_board()` in `move_generation.py` keeps eve
 move on the 64 squares.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`game_state.py`](game_state.md) and [`move_generation.py`](move_generation.md)
+- **Used by:** nothing; it is practice for [`game_state.py`](../code/game_state.md) and [`move_generation.py`](../code/move_generation.md)
 
 ## Words to know
 

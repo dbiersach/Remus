@@ -1,11 +1,13 @@
 # Remus documentation
 
-The pages fall into three folders. Pick the folder by the question you have.
+The pages fall into five folders. Pick the folder by the question you have.
 
 | Folder | Read it to learn | Pages |
 | --- | --- | --- |
-| [`course/`](course/) | How the two weeks run: what each day and period teaches, which slides go with it, and how to run Remus in Lucas Chess, plus the workshop in a few pages for managers and for students and parents | [`workshop_roadmap.md`](course/workshop_roadmap.md), [`remus_course_plan.md`](course/remus_course_plan.md), [`slide_plan.md`](course/slide_plan.md), [`lucas_chess_guide.md`](course/lucas_chess_guide.md), [`student_edit_plan.md`](course/student_edit_plan.md), [`science_tree_search_survey.md`](course/science_tree_search_survey.md), and the two briefing PDFs |
-| [`code/`](code/) | How the program fits together, and what each `.py` file does | [`remus_program_overview.md`](code/remus_program_overview.md), [`file_versions.md`](code/file_versions.md), and one page per file, such as [`board.md`](code/board.md) for `board.py` |
+| [`course/`](course/) | How the two weeks run: what each day and period teaches, which slides go with it, and how to run Remus in Lucas Chess, plus the workshop in a few pages for managers and for students and parents | [`workshop_roadmap.md`](course/workshop_roadmap.md), [`remus_course_plan.md`](course/remus_course_plan.md), [`slide_plan.md`](course/slide_plan.md), [`lucas_chess_guide.md`](course/lucas_chess_guide.md), [`student_edit_plan.md`](course/student_edit_plan.md), [`file_versions.md`](course/file_versions.md), [`science_tree_search_survey.md`](course/science_tree_search_survey.md), and the two briefing PDFs |
+| [`program/`](program/) | How the whole program fits together and how its tests check it | [`remus_program_overview.md`](program/remus_program_overview.md), [`tests.md`](program/tests.md) |
+| [`code/`](code/) | What each `.py` file of Remus does: one page per file, named after it | [`board.md`](code/board.md) for `board.py`, [`notation.md`](code/notation.md) for `notation.py` |
+| [`learning_python/`](learning_python/) | The Python skills labs: one page per lab, named after its file | [`python_lists.md`](learning_python/python_lists.md) for `python_lists.py` |
 | [`engines/`](engines/) | The twelve Remus engines (Remus-WHITE, the ten enhanced engines, and Remus-GOLD), how strong each one plays, and whether Niram runs the same algorithms as Remus-GOLD | [`remus_versions.md`](engines/remus_versions.md), [`engines_elo.md`](engines/engines_elo.md), [`remus-niram same algorithms.md`](engines/remus-niram%20same%20algorithms.md) |
 
 The pictures for these pages live in [`images/`](images/): the chess board

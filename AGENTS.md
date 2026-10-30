@@ -4,7 +4,7 @@ Remus is a chess engine written in pure, native Python as a teaching project for
 **"Turning a Chess Engine into Science AI"** workshop. The full lesson plan lives in
 [`misc/docs/course/workshop_roadmap.md`](misc/docs/course/workshop_roadmap.md) and the
 day-by-day course in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md); read both
-before starting any lesson. [`misc/docs/code/remus_program_overview.md`](misc/docs/code/remus_program_overview.md)
+before starting any lesson. [`misc/docs/program/remus_program_overview.md`](misc/docs/program/remus_program_overview.md)
 explains how the code fits together.
 
 This file holds every project and style rule, so that every AI tool used with this
@@ -390,18 +390,27 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Every `.py` file a student modifies or reads has a page in `misc/docs/code/`, the
   "puzzle box top" for that file: the big picture first, then where it fits (uses and
   used by), words to know, a call tree, a plain-language line for each function, and
-  questions. Write the pages for middle school readers, in short sentences, and do not
-  repeat the code's comments line by line. When a file changes, update its page.
+  questions. Each Python skills lab (`python_*.py`) has its page in
+  `misc/docs/learning_python/` instead. Write the pages for middle school readers, in
+  short sentences, and do not repeat the code's comments line by line. When a file
+  changes, update its page.
 - `misc/` holds everything that is not a Day folder (David, 2026-10-28): `docs/`,
   `games/`, and `scripts/`, so the top folder shows the ten Day folders and little
   else.
-- `misc/docs/` holds three folders and a `README.md` that maps them (David, 2026-10-28):
+- `misc/docs/` holds its folders and a `README.md` that maps them (David, 2026-10-28).
+  `misc/docs/code/` holds only pages named after a `.py` file (David, 2026-10-30):
+  every other page goes into the folder of its subject.
   - `misc/docs/course/`: the roadmap, the course plan, the slide plan, the Lucas Chess
-    guide, the science survey, the two briefing PDFs, and `student_edit_plan.md`,
-    which `make_student_folders.py` writes.
-  - `misc/docs/code/`: the program overview, `file_versions.md`, and one page for every
-    `.py` file a student modifies or reads, named after that file (`board.py` has
-    `board.md`).
+    guide, the science survey, the two briefing PDFs, `file_versions.md`, and
+    `student_edit_plan.md`, which `make_student_folders.py` writes.
+  - `misc/docs/program/`: the program overview, `remus_program_overview.md`, and
+    `tests.md`, how the test files check Remus.
+  - `misc/docs/code/`: one page for every engine or tool `.py` file a student modifies
+    or reads, named after that file (`board.py` has `board.md`).
+  - `misc/docs/learning_python/`: one page for every Python skills lab, named after
+    its file (`python_lists.py` has `python_lists.md`).
+  - `misc/docs/chess_rules/`, when it exists: pages about chess itself rather than
+    about Remus or Python.
   - `misc/docs/engines/`: the Remus versions and Niram: `remus_versions.md`,
     the ten enhanced engines and Remus-GOLD; `engines_elo.md`, the league and Stockfish
     ratings; and `remus-niram same algorithms.md`, which `engine_parity.py` writes.

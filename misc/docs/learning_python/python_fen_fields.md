@@ -16,7 +16,7 @@ starts with the same `split()`, and `board_from_placement()` cuts the first fiel
 into rows with `split("/")`.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`fen.py`](fen.md)
+- **Used by:** nothing; it is practice for [`fen.py`](../code/fen.md)
 
 ## Words to know
 

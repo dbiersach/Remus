@@ -16,7 +16,7 @@ returns a dict like the one in Part #1, and `Move` in `moves.py` is a dataclass 
 the one in Part #4.
 
 - **Uses:** nothing from Remus
-- **Used by:** nothing; it is practice for [`game_state.py`](game_state.md) and [`moves.py`](moves.md)
+- **Used by:** nothing; it is practice for [`game_state.py`](../code/game_state.md) and [`moves.py`](../code/moves.md)
 
 ## Words to know
 
