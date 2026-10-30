@@ -15,7 +15,7 @@ This file does both jobs. `make_move()` plays a move and hands back an undo reco
 make_move.py uses board.py, game_state.py, and moves.py. Legal moves, perft, search, and the UCI engine all depend on it.
 
 - **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`moves.py`](moves.md)
-- **Used by:** [`console_game.py`](console_game.md), [`legal_moves.py`](legal_moves.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`perft.py`](perft.md), [`search.py`](search.md), [`uci_engine.py`](uci_engine.md)
+- **Used by:** [`legal_moves.py`](legal_moves.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`perft.py`](perft.md), [`search.py`](search.md), [`uci_engine.py`](uci_engine.md)
 
 ## Words to know
 

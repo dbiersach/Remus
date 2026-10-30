@@ -11,7 +11,6 @@ By the end of this period, each student pair can:
 
 Files that grow this period:
 
-- `console_game.py`
 - `search.py`
 - `test_game.py`
 - `test_search.py`

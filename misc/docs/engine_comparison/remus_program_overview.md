@@ -124,7 +124,7 @@ The pages, in the order the class builds them:
 | [`python_strings.py`](../learning_python/python_strings.md) | Day 1 lab: square names are text |
 | [`python_lists.py`](../learning_python/python_lists.md) | Day 1 lab: a board is a list of rows |
 | [`board.py`](../engine_code/board.md) | The chessboard |
-| [`show_board.py`](../engine_code/show_board.md) | Draw the board and its moves as a picture |
+| [`show_board.py`](../class_demos/show_board.md) | Draw the board and its moves as a picture |
 | [`python_functions.py`](../learning_python/python_functions.md) | Day 2 lab: small functions and their tests |
 | [`python_dicts.py`](../learning_python/python_dicts.md) | Day 2 lab: a dict, a copy, and a dataclass |
 | [`game_state.py`](../engine_code/game_state.md) | Everything the board does not show |
@@ -135,56 +135,56 @@ The pages, in the order the class builds them:
 | [`python_modules.py`](../learning_python/python_modules.md) | Day 4 lab: one file uses another |
 | [`attacks.py`](../engine_code/attacks.md) | Is this square under attack? |
 | [`legal_moves.py`](../engine_code/legal_moves.md) | Keep only the legal moves |
-| [`demo_practice_positions.py`](../engine_code/demo_practice_positions.md) | Day 4 demo: predict, then count the legal moves |
+| [`demo_practice_positions.py`](../class_demos/demo_practice_positions.md) | Day 4 demo: predict, then count the legal moves |
 | [`python_sets.py`](../learning_python/python_sets.md) | Day 5 lab: castling rights as letters |
-| [`demo_promotion.py`](../engine_code/demo_promotion.md) | Day 5 demo: why a pawn becomes a knight |
+| [`demo_promotion.py`](../class_demos/demo_promotion.md) | Day 5 demo: why a pawn becomes a knight |
 | [`python_recursion.py`](../learning_python/python_recursion.md) | Day 6 lab: a function that calls itself |
 | [`perft.py`](../engine_code/perft.md) | Count positions to prove the rules |
-| [`hunt.py`](../engine_code/hunt.md) | Day 6 demo: find three planted bugs |
+| [`hunt.py`](../class_demos/hunt.md) | Day 6 demo: find three planted bugs |
 | [`python_fen_fields.py`](../learning_python/python_fen_fields.md) | Day 6 lab: the six fields of FEN |
 | [`fen.py`](../engine_code/fen.md) | A whole position in one line |
 | [`notation.py`](../engine_code/notation.md) | Moves the way people write them |
 | [`game_end.py`](../engine_code/game_end.md) | Is the game over? |
-| [`console_game.py`](../engine_code/console_game.md) | Play chess in the terminal |
 | [`python_input_output.py`](../learning_python/python_input_output.md) | Day 7 lab: read commands, answer at once |
 | [`uci_engine.py`](../engine_code/uci_engine.md) | Talk to Lucas Chess |
-| [`play_match.py`](../engine_code/play_match.md) | Two Remus brains play each other |
+| [`play_match.py`](play_match.md) | Two Remus brains play each other |
 | [`evaluation.py`](../engine_code/evaluation.md) | How good is this position? |
 | [`search.py`](../engine_code/search.md) | Choosing a move |
 | [`python_sorting.py`](../learning_python/python_sorting.md) | Day 8 lab: sort, start at minus infinity, time it |
-| [`compare_search.py`](../engine_code/compare_search.md) | Prove that alpha-beta saves work |
+| [`compare_search.py`](../class_demos/compare_search.md) | Prove that alpha-beta saves work |
 | [`move_ordering.py`](../engine_code/move_ordering.md) | Try the best moves first |
 | [`python_caches.py`](../learning_python/python_caches.md) | Day 9 lab: remember answers in a dict |
 | [`transposition_table.py`](../engine_code/transposition_table.md) | Remember positions already searched |
 | [`opening_book.py`](../engine_code/opening_book.md) | Play known openings without thinking |
-| [`estimate_elo.py`](../engine_code/estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
-| [`demo_results.py`](../engine_code/demo_results.md) | Day 9 demo: read a battle result |
+| [`estimate_elo.py`](estimate_elo.md) | Measures the Elo rating of Remus against Stockfish |
+| [`demo_results.py`](../class_demos/demo_results.md) | Day 9 demo: read a battle result |
 | [`misc/scripts/version_match.py`](remus_versions.md) | Plays one enhanced engine against Remus-WHITE, the Day 9 Remus with no enhancements, or against another enhanced engine: the Day 9 battles |
 | [`misc/scripts/version_league.py`](remus_versions.md) | Ranks all 12 Remus versions with a round robin and one fitted Elo rating each |
-| [`hidden_peak.py`](../engine_code/hidden_peak.md) | Science AI: find the hidden peak |
-| [`phase_hunt.py`](../engine_code/phase_hunt.md) | Science AI: name the crystals in a powder |
+| [`hidden_peak.py`](../science/hidden_peak.md) | Science AI: find the hidden peak |
+| [`phase_hunt.py`](../science/phase_hunt.md) | Science AI: name the crystals in a powder |
 | [The test files](tests.md) | Checking that Remus works |
 
 ## Remus-WHITE across the course
 
 Remus-WHITE is the finished Day 9 Remus, in `engines/instructor/00 Remus-WHITE - No
-enhancements`. It holds 27 Python files.
+enhancements`. It holds 25 Python files.
 
 ### Which file imports which
 
-The diagram shows the 17 files that import another Remus file or are imported by one. An
-arrow points from a file to each file that imports it: `evaluation.py` points at
-`search.py` because `search.py` calls `evaluate()`. A two-headed arrow would mean two
-files import each other; no two Remus files do. Every arrow points up the page, from the
-code that is used to the code that uses it. The programs a person runs, such as
-`uci_engine.py`, sit along the top edge, because no file imports them, and each file
-sits one row below the lowest file that imports it. `board.py` imports no Remus file and
-almost every file imports it, so it sits alone in the bottom row, where its 13 arrows
-leave side by side along its top edge. Every arrow runs straight up or bends at right
-angles, leaves and reaches a box at its own spot, and takes the color of the file it
-points at, so the eye can follow the arrows that gather at one file. The test files,
-`run_tests.py`, and `play_match.py`, which starts Remus as a separate program, are left
-out.
+The diagram shows the 12 files that a game of chess runs: `uci_engine.py`, the program
+that Lucas Chess and every match start, and every file it imports, directly or through
+another file. An arrow points from a file to each file that imports it: `evaluation.py`
+points at `search.py` because `search.py` calls `evaluate()`. A two-headed arrow would
+mean two files import each other; no two Remus files do. Every arrow points up the page,
+from the code that is used to the code that uses it. `uci_engine.py` sits at the top,
+because no file imports it, and each file sits one row below the lowest file that
+imports it. `board.py` imports no Remus file and almost every file imports it, so it
+sits alone in the bottom row, where its 10 arrows leave side by side along its top edge.
+Every arrow runs straight up or bends at right angles, leaves and reaches a box at its
+own spot, and takes the color of the file it points at, so the eye can follow the arrows
+that gather at one file. The test files and `game_end.py`, `notation.py`, `perft.py`,
+`play_match.py`, and `run_tests.py` are left out: they check Remus or run its matches,
+and no game loads them.
 
 ![Import diagram of Remus-WHITE](../images/code/remus_white_imports.svg)
 
@@ -228,23 +228,20 @@ column.
 | `fen.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE | T |  |  |  |  |  |  |  |  |  |  |
 | `test_game.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N | T | T | T |  |  |  |  |  | T |  |  |
 | `game_end.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  |  |  |  |  |  |
-| `console_game.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N | T |  | T |  |  |  | T |  |  |
 | `notation.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  |  |  |  |  |
 | `play_match.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N |  |  |  |  |  |  |  |  |
 | `search.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  | ET | ET | ET | T | ET | X | X |
 | `evaluation.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  | X | X |
 | `test_search.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N | T | T | T | T | T |  |  |
-| `compare_search.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N |  | M |  |  |  |
 | `move_ordering.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  | X | X |
 
-## The four boundaries
+## The three boundaries
 
 | Part | Files | Responsibility |
 | --- | --- | --- |
 | Native Python engine | `board.py` to `search.py` | Board, rules, legal moves, state, search, evaluation, move choice |
-| Console driver | `console_game.py` | Prints the board and reads SAN moves typed in the terminal |
 | UCI adapter | `uci_engine.py`, `remus.bat` | Speaks UCI with Lucas Chess on standard input and output |
-| Referees and designer tools | `play_match.py`, `compare_search.py`, `estimate_elo.py`, `misc/scripts/version_match.py`, `misc/scripts/version_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
+| Referees and designer tools | `play_match.py`, `estimate_elo.py`, `misc/scripts/version_match.py`, `misc/scripts/version_league.py`, tests | Use `python-chess` as an outside referee; the engine never imports it |
 
 ## The core data structures
 
@@ -323,7 +320,7 @@ games searched as deep as a Remus league of 2.5-hour games. See
 `hidden_peak.py` reuses the engine's loop of "list the candidates, score each one,
 choose the best" to choose where to measure next on a 10x10 sample. A greedy AI with an
 exploration term finds the hidden peak in about 9 measurements, against about 54 for
-random guessing. See [`hidden_peak.md`](../engine_code/hidden_peak.md).
+random guessing. See [`hidden_peak.md`](../science/hidden_peak.md).
 
 `phase_hunt.py` aims the full tree search at X-ray phase identification: which
 crystal phases, from a library of ten, made the peaks in a powder pattern? The search
@@ -331,4 +328,4 @@ scores every set of up to three phases with append and pop as make and undo, and
 phases in library order so each set is scored once, 176 sets instead of 821. It keeps
 every set that ties for the best score. Over 200 known powders a greedy agent is wrong
 on 34; the search is wrong on 9 and says "can't tell" on 52, mostly gold against
-silver, whose peaks overlap. See [`phase_hunt.md`](../engine_code/phase_hunt.md).
+silver, whose peaks overlap. See [`phase_hunt.md`](../science/phase_hunt.md).

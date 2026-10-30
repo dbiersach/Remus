@@ -16,7 +16,7 @@ same period, `alpha_beta()` starts alpha at the lowest score, and `compare_searc
 times negamax against alpha-beta.
 
 - **Uses:** [`perft.py`](../engine_code/perft.md), [`game_state.py`](../engine_code/game_state.md)
-- **Used by:** nothing; it is practice for [`search.py`](../engine_code/search.md), [`move_ordering.py`](../engine_code/move_ordering.md), and [`compare_search.py`](../engine_code/compare_search.md)
+- **Used by:** nothing; it is practice for [`search.py`](../engine_code/search.md), [`move_ordering.py`](../engine_code/move_ordering.md), and [`compare_search.py`](../class_demos/compare_search.md)
 
 ## Words to know
 

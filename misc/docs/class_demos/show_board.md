@@ -14,8 +14,8 @@ show_board.py is a helper beside the engine. It uses board.py, and from Day 3 on
 
 It is the one engine-side file that imports python-chess. python-chess only draws the picture. Remus never asks it about the rules.
 
-- **Uses:** [`board.py`](board.md), [`moves.py`](moves.md)
-- **Uses only in its self-check:** [`game_state.py`](game_state.md), [`move_generation.py`](move_generation.md)
+- **Uses:** [`board.py`](../engine_code/board.md), [`moves.py`](../engine_code/moves.md)
+- **Uses only in its self-check:** [`game_state.py`](../engine_code/game_state.md), [`move_generation.py`](../engine_code/move_generation.md)
 - **Used by:** no other Remus file
 
 ## Words to know

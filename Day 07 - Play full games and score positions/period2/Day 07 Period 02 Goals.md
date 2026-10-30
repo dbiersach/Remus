@@ -1,11 +1,11 @@
-# Day 7, Period 2: SAN and the console game
+# Day 7, Period 2: SAN: moves people read and type
 
 ## Learning objectives
 
 By the end of this period, each student pair can:
 
 - Read a move typed in SAN, such as Nf3 or O-O. **Measured by:** The `parse_san` tests pass, and a typo raises `ValueError`.
-- Play a whole game in the console. **Measured by:** Two students play `console_game.py` to a finish and the program prints the right result.
+- Write every legal move of a position in SAN. **Measured by:** Running `notation.py` lists every legal move in SAN, and `parse_san()` reads `O-O-O` back as the queenside castling move.
 - Read commands from `sys.stdin` and answer on stdout. **Measured by:** `python_input_output.py` answers `isready` with `readyok` and stops at `quit`.
 
 ## The files
@@ -14,7 +14,6 @@ The lab is `python_input_output.py` in the `student` folder, with the answers in
 
 New files this period:
 
-- `console_game.py`
 - `notation.py`
 
 Files that grow this period:
@@ -47,7 +46,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 10:30 to 10:45 | Slides: SAN. The teacher walks through `move_to_san()`, including `Nbd2` and the `+` and `#` endings. |
 | 10:45 to 11:05 | Student pairs write `parse_san()`: build the SAN of every legal move and return the one that matches. |
-| 11:05 to 11:20 | Student pairs play each other with `console_game.py`, typing moves in SAN. |
+| 11:05 to 11:20 | Student pairs run `notation.py`, then change its position and check that `parse_san()` reads each SAN move it prints. |
 | 11:20 to 12:00 | Student pairs work through `python_input_output.py`: `random.choice()`, a loop that keeps the best so far, stderr, and a tiny program that answers `isready` with `readyok`. |
 
 ## What you edit this period
@@ -68,7 +67,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `parse_san()` in `notation.py`
 
-**Where:** lines 112 to 116 of `notation.py`, inside `parse_san()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`.
+**Where:** lines 112 to 116 of `notation.py`, inside `parse_san()`, in place of the stub below the docstring. The tests call it directly.
 
 ```python
  90 | def parse_san(state: dict, text: str) -> Move:

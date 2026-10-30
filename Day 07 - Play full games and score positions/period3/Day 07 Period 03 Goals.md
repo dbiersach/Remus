@@ -19,7 +19,6 @@ New files this period:
 
 Files that grow this period:
 
-- `console_game.py`
 - `test_game.py`
 - `uci_engine.py`
 
@@ -86,7 +85,7 @@ The number at the left of each line is its line number once the code is typed. W
 
 ### `greedy_move()` in `search.py`
 
-**Where:** lines 53 to 62 of `search.py`, inside `greedy_move()`, in place of the stub below the docstring. It is called by `main()` in `console_game.py`.
+**Where:** lines 53 to 62 of `search.py`, inside `greedy_move()`, in place of the stub below the docstring. The tests call it directly.
 
 ```python
 38 | def greedy_move(state: dict) -> Move:

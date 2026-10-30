@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run
 """remus_benchmark.py
 
-Time one Remus version on the ten positions of compare_search.py. For Remus-GOLD,
+Time one Remus version on the ten positions of the Day 8 compare_search.py. For Remus-GOLD,
 the speed can be compared with Niram, the Rust copy of that version.
 Each position gets that version's own think(), one depth at a time up to the depth
 asked for, with no clock, so both engines visit exactly the same positions.
@@ -28,7 +28,7 @@ GOLD_FOLDER = (
     ENGINES_FOLDER / "11 Remus-GOLD - All enhancements"
 )  # All ten enhancements
 DEPTH = 4  # The deepest iteration, the same for both engines
-POSITIONS = [  # The ten positions of compare_search.py
+POSITIONS = [  # The ten positions of the Day 8 compare_search.py
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
     "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
     "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5",

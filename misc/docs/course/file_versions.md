@@ -28,11 +28,10 @@ Day 5, Period 2.
 | `fen.py` | D6 P4: FEN in and out | D7 P1: starts the position history |
 | `game_end.py` | D7 P1: mate, stalemate, draws | No changes |
 | `notation.py` | D7 P2: SAN in and out | No changes |
-| `console_game.py` | D7 P2: two people play in SAN | D7 P3: Remus plays greedy moves. D8 P1: Remus plays with negamax. D9 P1: Remus thinks on a clock. Remus-GOLD: Remus plays book moves first |
 | `search.py` | D7 P3: random and greedy brains | D8 P1: minimax, negamax, and mate scores. D8 P2: alpha-beta. D8 P3: quiescence. D8 P4: move ordering, check extension, the clock. D9 P1: iterative deepening and `info` lines. Remus-GOLD: `upgraded_search()` with memory, killers, PVS, draw sense, null moves, late move reductions |
 | `play_match.py` | D7 P3: two brains play a match | No changes |
 | `evaluation.py` | D7 P4: material and piece-square tables | Remus-GOLD: pawn structure, the mating bonus, king safety |
-| `compare_search.py` | D8 P2: negamax against alpha-beta | No changes |
+| `compare_search.py` | D8 P2: negamax against alpha-beta | Day 8 only: Day 9 and the engine folders leave it out |
 | `move_ordering.py` | D8 P4: captures first by MVV-LVA | Remus-GOLD: killer moves |
 | `transposition_table.py` | Remus-GOLD: remembers searched positions | Last day |
 | `opening_book.py`, `opening_book.txt` | Remus-GOLD: plays known openings | Last day |
@@ -74,14 +73,14 @@ instructor folder holds the answer file `<name>_instructor.py`.
 | D6 P3 | `test_perft.py`. Demo: the `bug_hunt/` folder, a copy of the period's Remus with three planted bugs, and `hunt.py`, which finds them with `divide()` | None |
 | D6 P4 | `fen.py`, `test_game.py`. Lab 9: `python_fen_fields.py` | `test_perft.py`: sets up positions with `fen.py` |
 | D7 P1 | `game_end.py` | `game_state.py`: `position_key()`. `make_move.py` and `fen.py`: position history. `test_game.py` |
-| D7 P2 | `notation.py`, `console_game.py`. Lab 10: `python_input_output.py` | `test_game.py` |
-| D7 P3 | `search.py`, `play_match.py` | `uci_engine.py`: the full engine. `console_game.py`: Remus plays. `test_game.py` |
+| D7 P2 | `notation.py`. Lab 10: `python_input_output.py` | `test_game.py` |
+| D7 P3 | `search.py`, `play_match.py` | `uci_engine.py`: the full engine. `test_game.py` |
 | D7 P4 | `evaluation.py`, `test_search.py` | None |
-| D8 P1 | None | `search.py`: minimax and negamax. `uci_engine.py` and `console_game.py`: the negamax brain. `test_search.py` |
+| D8 P1 | None | `search.py`: minimax and negamax. `uci_engine.py`: the negamax brain. `test_search.py` |
 | D8 P2 | `compare_search.py`. Lab 11: `python_sorting.py` | `search.py`: alpha-beta. `test_search.py` |
 | D8 P3 | None | `search.py`: quiescence. `test_search.py` |
 | D8 P4 | `move_ordering.py` | `search.py`: ordering, check extension, clock. `test_search.py` |
-| D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock and thinking time. `console_game.py`: uses `think()`. `test_search.py` |
+| D9 P1 | None | `search.py`: `think()`. `uci_engine.py`: clock and thinking time. `test_search.py` |
 | D9 P2, P3 | Ten enhanced engine folders in `engines/instructor` and `engines/student` (see [remus_versions.md](../engine_comparison/remus_versions.md)). Lab 12 in P2: `python_caches.py` | None: from period 2 on, the Day 9 period folders hold no engine code, and Remus-WHITE stays in `period1` and in `engines/.../00 Remus-WHITE - No enhancements` |
 | D9 P4 | `play_battle.py` in each engine folder: engine battles between student pairs. Demo: `demo_results.py` | None |
 | D10 P1 | `hidden_peak.py`, `test_hidden_peak.py`. The Day 10 folders hold only the science files; the engine is Remus-GOLD (`transposition_table.py`, `opening_book.py`, `upgraded_search()`, and the other enhancements) | None |

@@ -17,7 +17,7 @@ This file turns one into the other.
 board.py is the bottom piece of the puzzle. It uses no other Remus file, and almost every other file uses it.
 
 - **Uses:** no other Remus file
-- **Used by:** [`attacks.py`](attacks.md), [`console_game.py`](console_game.md), [`evaluation.py`](evaluation.md), [`fen.py`](fen.md), [`game_end.py`](game_end.md), [`game_state.py`](game_state.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`moves.py`](moves.md), [`notation.py`](notation.md), [`search.py`](search.md), [`show_board.py`](show_board.md)
+- **Used by:** [`attacks.py`](attacks.md), [`evaluation.py`](evaluation.md), [`fen.py`](fen.md), [`game_end.py`](game_end.md), [`game_state.py`](game_state.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`moves.py`](moves.md), [`notation.py`](notation.md), [`search.py`](search.md), [`show_board.py`](../class_demos/show_board.md)
 
 ## Words to know
 

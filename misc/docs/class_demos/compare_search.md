@@ -9,9 +9,11 @@ checks that on ten positions.
 
 ## Where this piece fits
 
-compare_search.py uses search.py and fen.py. It is a Day 8 experiment.
+compare_search.py uses search.py and fen.py. It is a Day 8 experiment, and it lives
+only in the Day 8 period folders: Day 9 and the engine folders leave it out, and no game
+of chess ever runs it.
 
-- **Uses:** [`fen.py`](fen.md), [`search.py`](search.md)
+- **Uses:** [`fen.py`](../engine_code/fen.md), [`search.py`](../engine_code/search.md)
 - **Used by:** no other Remus file
 
 ## Words to know

@@ -162,7 +162,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
 | Part | Responsibility |
 | --- | --- |
 | Native Python engine | Board, rules, legal moves, state, search, evaluation, move choice |
-| Console driver | Human-readable board and commands for lessons and debugging |
+| Console printout | `print_board()` and each file's `main()` self-check, for lessons and debugging |
 | UCI adapter | `uci`, `isready`, `ucinewgame`, `position startpos/fen ...`, `go`, `stop`, `quit`; protocol on stdout, debug on stderr; `bestmove 0000` only with no legal move |
 | GUI | Lucas Chess, which starts `remus.bat` and hosts Remus as an external UCI engine |
 
@@ -318,8 +318,13 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   the finished Day 9 Remus with none of the ten enhancements (named by David on
   2026-10-27): a copy of the Day 9 `period1/instructor` folder in `instructor`
   and of `period1/student` in `student`, without `show_board.py`, which only the
-  Day 1 and Day 3 lessons run, so that every engine folder holds only files that
-  something imports, runs, or names. `01 Remus-GRAY - King safety` to `10 Remus-RED -
+  Day 1 and Day 3 lessons run. Every engine folder holds only three kinds of file
+  (David, 2026-10-30): the files a game loads (`uci_engine.py`, `remus.bat`, and every
+  module `uci_engine.py` imports), the match runners (`play_match.py`,
+  `play_battle.py`, `basic_test.py`, `estimate_elo.py`), and the tests with the files
+  they need (`perft.py`, `game_end.py`, `notation.py`, `mate_puzzles.epd`). Class
+  demos and experiments, such as `compare_search.py`, stay in their period folders.
+  Remus has no console game: every game runs in Lucas Chess or a match script. `01 Remus-GRAY - King safety` to `10 Remus-RED -
   Transposition table` are the ten enhanced engines, each Remus-WHITE plus one
   enhancement. `11 Remus-GOLD - All enhancements` is Remus-GOLD, the finished Remus with
   all ten (David, 2026-10-27), and only `engines/instructor` holds it. `engines/Niram`
@@ -387,8 +392,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   and Day 9 period folder and every version folder that reads them. A test
   that uses `python-chess` as a reference states the expected count in its docstring
   or assertion before comparing against Remus.
-- Every `.py` file a student modifies or reads has a page in `misc/docs/engine_code/`, the
-  "puzzle box top" for that file: the big picture first, then where it fits (uses and
+- Every `.py` file a student modifies or reads has a page, the
+  "puzzle box top" for that file, in the docs folder of its kind (see below): the big picture first, then where it fits (uses and
   used by), words to know, a call tree, a plain-language line for each function, and
   questions. Each Python skills lab (`python_*.py`) has its page in
   `misc/docs/learning_python/` instead. Write the pages for middle school readers, in
@@ -398,13 +403,18 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `games/`, and `scripts/`, so the top folder shows the ten Day folders and little
   else.
 - `misc/docs/` holds its folders and a `README.md` that maps them (David, 2026-10-28).
-  `misc/docs/engine_code/` holds only pages named after a `.py` file (David, 2026-10-30):
-  every other page goes into the folder of its subject.
+  `misc/docs/engine_code/` holds only pages named after an engine `.py` file (David,
+  2026-10-30): a module that every engine folder holds, which a game loads or the
+  engine's tests check. Every other page goes into the folder of its subject.
   - `misc/docs/course/`: the course plan, the slide plan, the Lucas Chess
     guide, the science survey, the two briefing PDFs, `file_versions.md`, and
     `student_edit_plan.md`, which `make_student_folders.py` writes.
-  - `misc/docs/engine_code/`: one page for every engine or tool `.py` file a student modifies
-    or reads, named after that file (`board.py` has `board.md`).
+  - `misc/docs/engine_code/`: one page for every engine `.py` file, named after that
+    file (`board.py` has `board.md`).
+  - `misc/docs/class_demos/`: one page for every class demo and experiment that lives
+    only in its period folders, such as `demo_promotion.py`, `compare_search.py`, and
+    `show_board.py`. No engine folder holds these files.
+  - `misc/docs/science/`: the Day 10 science files, `hidden_peak.py` and `phase_hunt.py`.
   - `misc/docs/learning_python/`: one page for every Python skills lab, named after
     its file (`python_lists.py` has `python_lists.md`).
   - `misc/docs/chess_instruction/`: pages about chess itself (how to play, the rules,
@@ -412,7 +422,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - `misc/docs/engine_comparison/`: the program overview, `remus_program_overview.md`;
     `tests.md`, how the test files check Remus; and the Remus versions and Niram: `remus_versions.md`,
     the ten enhanced engines and Remus-GOLD; `engines_elo.md`, the league and Stockfish
-    ratings; and `remus-niram same algorithms.md`, which `engine_parity.py` writes.
+    ratings; `remus-niram same algorithms.md`, which `engine_parity.py` writes; and the
+    pages of the match tools in the engine folders, `play_match.py` and `estimate_elo.py`.
   Pictures live in `misc/docs/images/` (`boards/`, `code/`, `lucas_chess/`, and `phase_hunt/`). A new page goes
   into the folder of its subject; nothing else sits at the top of `misc/docs/`.
 - Remus-WHITE, the ten enhanced engines (Remus-RED, Remus-BLUE, ...), and Remus-GOLD

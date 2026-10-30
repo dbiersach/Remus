@@ -140,7 +140,6 @@ ARRIVALS = {
         "make_move.py": 1,
         "game_end.py": 1,
         "notation.py": 2,
-        "console_game.py": 2,
         "search.py": 3,
         "uci_engine.py": 3,
         "play_match.py": 3,
@@ -150,7 +149,6 @@ ARRIVALS = {
     8: {
         "search.py": 1,
         "test_search.py": 1,
-        "console_game.py": 1,
         "uci_engine.py": 1,
         "compare_search.py": 2,
         "mate_puzzles.epd": 2,
@@ -159,7 +157,6 @@ ARRIVALS = {
     9: {
         "search.py": 1,
         "test_search.py": 1,
-        "console_game.py": 1,
         "uci_engine.py": 1,
         "test_game.py": 1,
     },
@@ -448,38 +445,6 @@ because Remus learns to read FEN in period 4.""",
             "divide(state_from_python_chess(board), 2)",
         ),
     ],
-    (7, 2, "console_game.py"): [
-        (
-            "replace",
-            """Play chess in the terminal by typing moves in SAN, such as e4, Nf3, or O-O.
-With "remus" as the first argument, Remus plays Black. Type "quit" to stop.""",
-            """Two players take turns typing moves in SAN, such as e4, Nf3, or O-O.
-Type "quit" to stop.""",
-        ),
-        (
-            "main",
-            """def main():
-    state = state_from_fen(START_FEN)
-    while True:
-        print_board(state["board"])
-        outcome = game_result(state)
-        if outcome is not None:
-            break  # The game is over
-        text = input(f"{'White' if state['turn'] == 'w' else 'Black'} to move: ")
-        if text.strip() == "quit":
-            print("Game stopped.")
-            return
-        try:
-            move = parse_san(state, text)
-        except ValueError as error:
-            print(error)
-            continue
-        make_move(state, move)
-    result, reason = outcome
-    print(f"Game over: {result} by {reason}")
-""",
-        ),
-    ],
     (8, 1, "search.py"): [
         ("replace", "\n\n" + SEARCH_DAY_8_ABOUT, ""),
         ("replace", SEARCH_INFO_CLOCK, ""),
@@ -644,7 +609,7 @@ PERIOD_TITLES = {
     (6, 3): "Perft against python-chess, and bug hunt",
     (6, 4): "Python lab 9 and FEN",
     (7, 1): "Ending the game",
-    (7, 2): "SAN and the console game",
+    (7, 2): "SAN: moves people read and type",
     (7, 3): "First brains and the GUI",
     (7, 4): "What makes a position good? Material and piece-square tables",
     (8, 1): "Minimax, negamax, and mates",

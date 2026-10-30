@@ -14,7 +14,7 @@ This file reads FEN into a game state and writes a game state back out as FEN.
 fen.py uses board.py and game_state.py. Tests, puzzles, the UCI engine, and many self-checks use it to set up positions.
 
 - **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md)
-- **Used by:** [`compare_search.py`](compare_search.md), [`console_game.py`](console_game.md), [`opening_book.py`](opening_book.md), [`uci_engine.py`](uci_engine.md)
+- **Used by:** [`compare_search.py`](../class_demos/compare_search.md), [`opening_book.py`](opening_book.md), [`uci_engine.py`](uci_engine.md)
 
 ## Words to know
 

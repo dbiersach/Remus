@@ -15,7 +15,7 @@ as text like `e2e4`, which Lucas Chess understands.
 moves.py uses board.py for square names. Every file that makes or lists moves uses it.
 
 - **Uses:** [`board.py`](board.md)
-- **Used by:** [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`perft.py`](perft.md), [`search.py`](search.md), [`show_board.py`](show_board.md), [`transposition_table.py`](transposition_table.md), [`uci_engine.py`](uci_engine.md)
+- **Used by:** [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_generation.py`](move_generation.md), [`move_ordering.py`](move_ordering.md), [`notation.py`](notation.md), [`opening_book.py`](opening_book.md), [`perft.py`](perft.md), [`search.py`](search.md), [`show_board.py`](../class_demos/show_board.md), [`transposition_table.py`](transposition_table.md), [`uci_engine.py`](uci_engine.md)
 
 ## Words to know
 

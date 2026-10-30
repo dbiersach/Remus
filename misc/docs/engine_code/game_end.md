@@ -11,11 +11,11 @@ goes on.
 
 ## Where this piece fits
 
-game_end.py uses attacks.py and legal_moves.py. console_game.py uses it to stop the game.
+game_end.py uses attacks.py and legal_moves.py. The tests in test_game.py call it on every kind of ending. In Lucas Chess, the GUI decides when a game is over.
 
 - **Uses:** [`attacks.py`](attacks.md), [`board.py`](board.md), [`legal_moves.py`](legal_moves.md)
 - **Uses only in its self-check:** [`fen.py`](fen.md)
-- **Used by:** [`console_game.py`](console_game.md)
+- **Used by:** the tests in `test_game.py`
 
 ## Words to know
 

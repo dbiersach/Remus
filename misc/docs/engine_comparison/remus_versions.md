@@ -82,7 +82,7 @@ is the Day 9 search with one change, so a student pair can compare the two side 
 
 The evaluation enhancements (PURPLE, CYAN, GRAY) add one term to `evaluate()` and one
 line to `explain_evaluation()`. Remus-GREEN asks the book before searching, in
-both `uci_engine.py` and `console_game.py`.
+`uci_engine.py`.
 
 ## The Day 9 battles: version_match.py
 
@@ -238,7 +238,7 @@ The table counts the lines of Python code in each version. A line counts only wh
 it holds code: comment lines, docstrings, and blank lines do not count. The count
 covers only the engine's own `.py` files, the ones `uci_engine.py` loads directly or
 through another module when Lucas Chess runs that version. Test files and tools such
-as `perft.py`, `play_match.py`, and `compare_search.py` do not count.
+as `perft.py` and `play_match.py` do not count.
 
 | Version | Enhancement | Engine files | Code lines | Lines over WHITE |
 | --- | --- | ---: | ---: | ---: |

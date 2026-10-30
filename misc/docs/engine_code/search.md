@@ -11,11 +11,11 @@ the older one. That way you can run both and compare.
 
 ## Where this piece fits
 
-search.py uses almost every engine file: legal_moves.py, make_move.py, evaluation.py, move_ordering.py, and transposition_table.py. uci_engine.py and console_game.py call it.
+search.py uses almost every engine file: legal_moves.py, make_move.py, evaluation.py, move_ordering.py, and transposition_table.py. uci_engine.py calls it.
 
 - **Uses:** [`attacks.py`](attacks.md), [`board.py`](board.md), [`evaluation.py`](evaluation.md), [`game_state.py`](game_state.md), [`legal_moves.py`](legal_moves.md), [`make_move.py`](make_move.md), [`move_ordering.py`](move_ordering.md), [`moves.py`](moves.md), [`transposition_table.py`](transposition_table.md)
 - **Uses only in its self-check:** [`fen.py`](fen.md)
-- **Used by:** [`compare_search.py`](compare_search.md), [`console_game.py`](console_game.md), [`uci_engine.py`](uci_engine.md)
+- **Used by:** [`compare_search.py`](../class_demos/compare_search.md), [`uci_engine.py`](uci_engine.md)
 
 ## Words to know
 

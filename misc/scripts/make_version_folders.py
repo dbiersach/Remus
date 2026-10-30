@@ -39,9 +39,11 @@ DAY_9 = next(ROOT.glob("Day 09 - *"))
 BASE = DAY_9 / "period1" / "instructor"  # Remus-WHITE
 REMUS_FOLDER = ROOT / "engines" / "instructor"  # WHITE, the colors, and GOLD
 WHITE = REMUS_FOLDER / "00 Remus-WHITE - No enhancements"  # A copy of BASE
-# Files a Day folder holds that no engine folder needs: show_board.py draws the
-# board for the Day 1 and Day 3 lessons, and nothing in an engine folder runs it
-ENGINE_SKIPS = ("__pycache__", "*.pgn", "*.svg", "show_board.py")
+# Files a Day folder holds that no engine folder needs. An engine folder keeps only
+# the files that play a game (uci_engine.py and what it imports), the files that run
+# matches, and the tests. show_board.py draws the board for the Day 1 and Day 3
+# lessons, and console_game.py lets two people play in the terminal on Days 7 to 9
+ENGINE_SKIPS = ("__pycache__", "*.pgn", "*.svg", "show_board.py", "console_game.py")
 ENGINE_IGNORE = shutil.ignore_patterns(*ENGINE_SKIPS)
 FINAL = REMUS_FOLDER / "11 Remus-GOLD - All enhancements"  # Written by hand
 
@@ -641,27 +643,6 @@ VERSIONS_TABLE = [
                     '{move_to_uci(opening)}")\n            else:\n                seconds = thinking_time('
                 ),
             ),
-            (
-                "console_game.py",
-                "from search import think_move\n",
-                (
-                    "from opening_book import book_move, load_book\nfrom search import "
-                    "think_move\n"
-                ),
-            ),
-            (
-                "console_game.py",
-                "    state = state_from_fen(START_FEN)\n",
-                "    book = load_book()\n    state = state_from_fen(START_FEN)\n",
-            ),
-            (
-                "console_game.py",
-                "            move = think_move(state)\n",
-                (
-                    "            move = book_move(book, state) or think_move(state)  "
-                    "# Book first\n"
-                ),
-            ),
         ],
         "tests": test_text(
             "Tests for Remus-GREEN: the opening book.",
@@ -946,8 +927,8 @@ def measured_table(color: str) -> str:
             f"{measure['depth']:.1f} |"
         )
     return (
-        "Each version searched the ten positions of `compare_search.py`, one depth at "
-        "a time up to depth 4, on one computer. Fewer positions for the same depth "
+        "Each version searched the ten positions of the designer's benchmark, "
+        "`misc/scripts/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth "
         "means a smaller search tree. Positions per second shows what each position "
         "costs. The last column gave each position 5 seconds, the way a game does, "
         "and averages the deepest search that finished.\n\n" + "\n".join(lines)

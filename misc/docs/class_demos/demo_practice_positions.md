@@ -14,7 +14,7 @@ The demo runs in the Day 4, period 4 folder and uses the legal-move filter that 
 student pairs finished in period 3. Its positions are the same as the practice-position tests
 in `test_legal_moves.py`.
 
-- **Uses:** [`board.py`](board.md), [`game_state.py`](game_state.md), [`attacks.py`](attacks.md), [`legal_moves.py`](legal_moves.md), [`moves.py`](moves.md)
+- **Uses:** [`board.py`](../engine_code/board.md), [`game_state.py`](../engine_code/game_state.md), [`attacks.py`](../engine_code/attacks.md), [`legal_moves.py`](../engine_code/legal_moves.md), [`moves.py`](../engine_code/moves.md)
 - **Used by:** nothing; the tests in `test_legal_moves.py` check the same positions
 
 ## Words to know
