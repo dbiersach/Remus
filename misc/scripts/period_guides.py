@@ -4277,7 +4277,7 @@ DAY_GUIDES = {
                     0,
                     (
                         "Slides: how a battle works. Each student pair copies its "
-                        "finished engine folder, such as `engines/student/10 RED - "
+                        "finished engine folder, such as `engines/student/10 Remus-RED - "
                         "Transposition table`, onto its USB stick. The teacher posts the "
                         "pairings for two rounds; in each round five student pairs host and "
                         "five visit."

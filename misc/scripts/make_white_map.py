@@ -24,7 +24,7 @@ import textwrap
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder
-WHITE = ROOT / "engines" / "instructor" / "00 WHITE - No enhancements"
+WHITE = ROOT / "engines" / "instructor" / "00 Remus-WHITE - No enhancements"
 OVERVIEW = ROOT / "misc" / "docs" / "engines" / "remus_program_overview.md"
 IMAGE = ROOT / "misc" / "docs" / "images" / "code" / "remus_white_imports.svg"
 HEADING = "## Remus-WHITE across the course"  # The section this script rewrites
@@ -285,7 +285,7 @@ def section_text(files: list[str], edges: list[tuple[str, str]]) -> str:
     text = f"{HEADING}\n\n"
     text += paragraph(
         "Remus-WHITE is the finished Day 9 Remus, in "
-        "`engines/instructor/00 WHITE - No enhancements`. "
+        "`engines/instructor/00 Remus-WHITE - No enhancements`. "
         f"It holds {len(files)} Python files."
     )
     text += "### Which file imports which\n\n"

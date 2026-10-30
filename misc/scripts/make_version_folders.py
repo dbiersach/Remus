@@ -4,14 +4,14 @@
 Build one engine folder per Remus version in engines/instructor.
 
 Remus-WHITE is the Day 9 Remus at the end of period 1, with none of the ten
-enhancements. Its engine folder, engines/instructor/00 WHITE - No enhancements, is an
+enhancements. Its engine folder, engines/instructor/00 Remus-WHITE - No enhancements, is an
 exact copy of the Day 9 period1 instructor folder, and its engine is complete before
 the student pairs start their enhanced engines in period 2. Each enhanced engine
 folder is Remus-WHITE plus one enhancement,
 named by a color so that no engine sounds better than another. A student pair builds its
 enhanced engine, then its Remus plays Remus-WHITE to measure how much Elo the one
 enhancement adds. Remus-GOLD, the finished Remus of Day 10, holds every
-enhancement at once. Its folder, engines/instructor/11 GOLD - All enhancements, is
+enhancement at once. Its folder, engines/instructor/11 Remus-GOLD - All enhancements, is
 written by hand, and this script only rewrites its README.md. engines/Niram holds
 the same engine in Rust.
 
@@ -38,12 +38,12 @@ ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/s
 DAY_9 = next(ROOT.glob("Day 09 - *"))
 BASE = DAY_9 / "period1" / "instructor"  # Remus-WHITE
 REMUS_FOLDER = ROOT / "engines" / "instructor"  # WHITE, the colors, and GOLD
-WHITE = REMUS_FOLDER / "00 WHITE - No enhancements"  # A copy of BASE
+WHITE = REMUS_FOLDER / "00 Remus-WHITE - No enhancements"  # A copy of BASE
 # Files a Day folder holds that no engine folder needs: show_board.py draws the
 # board for the Day 1 and Day 3 lessons, and nothing in an engine folder runs it
 ENGINE_SKIPS = ("__pycache__", "*.pgn", "*.svg", "show_board.py")
 ENGINE_IGNORE = shutil.ignore_patterns(*ENGINE_SKIPS)
-FINAL = REMUS_FOLDER / "11 GOLD - All enhancements"  # Written by hand
+FINAL = REMUS_FOLDER / "11 Remus-GOLD - All enhancements"  # Written by hand
 
 
 def function_text(file_path: Path, name: str) -> str:
@@ -539,7 +539,7 @@ from search import MATE_SCORE, SearchInfo, alpha_beta_with_quiescence, {names}
 # and the functions the student pair writes
 VERSIONS_TABLE = [
     {
-        "folder": "11 GOLD - All enhancements",
+        "folder": "11 Remus-GOLD - All enhancements",
         "idea": "Remus-GOLD is the finished Remus of Day 10, with all ten "
         "enhancements at once. It lives only in the teacher's folders; "
         "estimate_elo.py measures its rating against Stockfish, and Niram, in "
@@ -551,7 +551,7 @@ VERSIONS_TABLE = [
         "students": [],
     },
     {
-        "folder": "10 RED - Transposition table",
+        "folder": "10 Remus-RED - Transposition table",
         "idea": "Remember positions already searched, so the same position reached "
         "in two move orders is scored once.",
         "copies": ["transposition_table.py"],
@@ -601,7 +601,7 @@ VERSIONS_TABLE = [
         ],
     },
     {
-        "folder": "08 GREEN - Opening book",
+        "folder": "08 Remus-GREEN - Opening book",
         "idea": "Play the first moves of well-known openings from a book instead of "
         "searching.",
         "copies": ["opening_book.py", "opening_book.txt"],
@@ -683,7 +683,7 @@ VERSIONS_TABLE = [
         ],
     },
     {
-        "folder": "09 BLUE - Killer moves",
+        "folder": "09 Remus-BLUE - Killer moves",
         "idea": "Try quiet moves that caused a cutoff at the same depth right after "
         "the captures.",
         "copies": ["move_ordering.py"],
@@ -725,7 +725,7 @@ VERSIONS_TABLE = [
         ],
     },
     {
-        "folder": "04 PINK - Principal variation search",
+        "folder": "04 Remus-PINK - Principal variation search",
         "idea": "Search the first move with the full window and every other move "
         "with a cheap null window first.",
         "copies": [],
@@ -745,7 +745,7 @@ VERSIONS_TABLE = [
         ],
     },
     {
-        "folder": "02 YELLOW - Draw sense",
+        "folder": "02 Remus-YELLOW - Draw sense",
         "idea": "Score a repeated position, or one at the fifty-move limit, as a "
         "draw inside the search.",
         "copies": [],
@@ -784,7 +784,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         ],
     },
     {
-        "folder": "07 PURPLE - Pawn structure",
+        "folder": "07 Remus-PURPLE - Pawn structure",
         "idea": "Penalize doubled and isolated pawns and reward passed pawns.",
         "copies": [],
         "edits": evaluation_version(
@@ -806,7 +806,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         "students": [("evaluation.py", "pawn_structure")],
     },
     {
-        "folder": "03 CYAN - Mating bonus",
+        "folder": "03 Remus-CYAN - Mating bonus",
         "idea": "With a big material lead, drive the losing king to the edge and "
         "bring the winning king close.",
         "copies": [],
@@ -825,7 +825,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         "students": [("evaluation.py", "mating_bonus")],
     },
     {
-        "folder": "05 ORANGE - Null-move pruning",
+        "folder": "05 Remus-ORANGE - Null-move pruning",
         "idea": "Let the opponent move twice in a shallow search. If Remus is still "
         "too far ahead, the opponent would never allow this position, so stop "
         "searching it.",
@@ -876,7 +876,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         ],
     },
     {
-        "folder": "06 BROWN - Late move reductions",
+        "folder": "06 Remus-BROWN - Late move reductions",
         "idea": "Search late, quiet moves one ply shallower, and in full only if "
         "they surprise.",
         "copies": [],
@@ -910,7 +910,7 @@ def test_the_fifty_move_limit_is_a_draw() -> None:
         ],
     },
     {
-        "folder": "01 GRAY - King safety",
+        "folder": "01 Remus-GRAY - King safety",
         "idea": "While the enemy queen is on the board, reward pawns that shelter "
         "the king.",
         "copies": [],
@@ -957,7 +957,9 @@ def measured_table(color: str) -> str:
 def readme_text(version: dict) -> str:
     """Return the README.md that explains one version folder."""
     number_and_color, name = version["folder"].split(" - ")
-    color = number_and_color.split(" ")[1]  # "10 RED" gives "RED"
+    color = number_and_color.split(" ")[1].removeprefix(
+        "Remus-"
+    )  # "10 Remus-RED" gives "RED"
     guide = VERSION_GUIDES[color]
     sections = [
         f"# Remus-{color}: {name}\n\n{version['idea']}",
@@ -998,7 +1000,7 @@ def readme_text(version: dict) -> str:
             f"## Where your code fits\n\n{guide['fits']}",
             (
                 "## The files\n\nThis folder is Remus-WHITE, the finished Day 9 Remus in "
-                "`00 WHITE - No enhancements` beside it, "
+                "`00 Remus-WHITE - No enhancements` beside it, "
                 f"plus this one enhancement. The student pair writes {written}."
             ),
             f"## The changes and why\n\n{changes}",
@@ -1070,9 +1072,9 @@ def run_script_text(name: str, color: str) -> str:
     """Return a script that runs version_match.py for one color from the Run button."""
     about, extra = RUN_SCRIPTS[name]
     # The example visitor is always another engine than this one
-    example, example_folder = "BLUE", "09 BLUE - Killer moves"
+    example, example_folder = "BLUE", "09 Remus-BLUE - Killer moves"
     if color == "BLUE":
-        example, example_folder = "PURPLE", "07 PURPLE - Pawn structure"
+        example, example_folder = "PURPLE", "07 Remus-PURPLE - Pawn structure"
     arguments = ""
     ask = ""
     setting = "\n"
@@ -1086,7 +1088,7 @@ def run_script_text(name: str, color: str) -> str:
                 "        return\n"
             )
             setting = (
-                f"# The visitor's engine color, such as \"{example}\" (step 4 above)\n"
+                f'# The visitor\'s engine color, such as "{example}" (step 4 above)\n'
                 'VISITING_ENGINE = ""\n\n\n'
             )
         else:
@@ -1112,7 +1114,7 @@ def run_script_text(name: str, color: str) -> str:
         '    print(f"Running {match_path}")\n'
         "    # sys.executable is the Python that VS Code runs, with python-chess\n"
         "    subprocess.run(\n"
-        "        [sys.executable, str(match_path), \"--engines\", str(engines)"
+        '        [sys.executable, str(match_path), "--engines", str(engines)'
         f"{arguments}],\n"
         "        check=True,\n"
         "    )\n"
@@ -1165,14 +1167,16 @@ def main():
             (folder / "test_upgrades.py").write_text(version["tests"])
         (folder / "README.md").write_text(readme_text(version))
         if version["students"]:
-            color = version["folder"].split(" - ")[0].split()[-1]
+            color = version["folder"].split(" - ")[0].split()[-1].removeprefix("Remus-")
             for name in RUN_SCRIPTS:
                 (folder / name).write_text(run_script_text(name, color))
                 (folder / name).chmod(0o755)  # The shebang runs it on Mac and Linux
         built.append(folder)
     tidy(built)
     print(f"Copied Remus-WHITE from {BASE} to {WHITE}")
-    print(f"Built {len(built)} enhanced engine folders in {REMUS_FOLDER}  (expected 10)")
+    print(
+        f"Built {len(built)} enhanced engine folders in {REMUS_FOLDER}  (expected 10)"
+    )
     print(f"Kept the hand-written {FINAL.name} and rewrote its README.md")
 
 

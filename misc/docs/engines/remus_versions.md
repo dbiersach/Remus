@@ -9,7 +9,7 @@ one of them, so the class can measure which idea adds the most strength. In peri
 the student pairs carry their enhanced engines to each other's laptops and play battles to find
 out which enhanced engine is strongest.
 
-Each engine folder carries a color in its name, such as `10 RED`, instead of a number or
+Each engine folder carries a color in its name, such as `10 Remus-RED`, instead of a number or
 a letter. The color is only a label that tells the folders apart, so no engine sounds
 better than another before the games are played.
 
@@ -20,21 +20,21 @@ holds three folders:
 
 | Folder | Holds |
 | --- | --- |
-| `engines/instructor` | `00 WHITE - No enhancements` to `11 GOLD - All enhancements`, the finished engines |
-| `engines/student` | `00 WHITE - No enhancements` to `10 RED - Transposition table`, with the functions each student pair writes stubbed |
+| `engines/instructor` | `00 Remus-WHITE - No enhancements` to `11 Remus-GOLD - All enhancements`, the finished engines |
+| `engines/student` | `00 Remus-WHITE - No enhancements` to `10 Remus-RED - Transposition table`, with the functions each student pair writes stubbed |
 | `engines/Niram` | Niram, Remus-GOLD rewritten in Rust, a course designer's tool |
 
-`00 WHITE - No enhancements` is Remus-WHITE, a copy of the Day 9 `period1`
+`00 Remus-WHITE - No enhancements` is Remus-WHITE, a copy of the Day 9 `period1`
 folder without `show_board.py`, which only the Day 1 and Day 3 lessons run: the Day 9 Remus at the end of period 1, when its engine is finished and before
-the student pairs start their enhanced engines. Each engine folder from `01 GRAY` to
-`10 RED`, such as `10 RED - Transposition table`, starts as the same engine with one
+the student pairs start their enhanced engines. Each engine folder from `01 Remus-GRAY` to
+`10 Remus-RED`, such as `10 Remus-RED - Transposition table`, starts as the same engine with one
 enhancement added. From period 2 to the end of the day, each student pair works only in
 its own engine folder in `engines/student`, so periods 2, 3, and 4 of Day 9 hold no
-engine code of their own. No student pair edits `00 WHITE` after period 1: it stays
+engine code of their own. No student pair edits `00 Remus-WHITE` after period 1: it stays
 plain Remus so every enhancement has something to be measured against. The number in front of each enhanced engine ranks it by its rating
-over Remus-WHITE in the designer's 10-minute league (below), from 01 GRAY to 10 RED.
+over Remus-WHITE in the designer's 10-minute league (below), from 01 Remus-GRAY to 10 Remus-RED.
 
-`11 GOLD - All enhancements` is Remus-GOLD, the finished Remus of Day 10 with all ten
+`11 Remus-GOLD - All enhancements` is Remus-GOLD, the finished Remus of Day 10 with all ten
 enhancements at once. No student pair writes GOLD, so only `engines/instructor` holds
 it. `make_version_folders.py` copies Remus-WHITE and builds the ten enhanced engines from
 the Day 9 `period1` code and Remus-GOLD.
@@ -43,16 +43,16 @@ the Day 9 `period1` code and Remus-GOLD.
 
 | Folder | Enhancement | The idea in one line | The student pair writes | Lines to type |
 | --- | --- | --- | --- | --- |
-| 01 GRAY | King safety | Reward pawns that shelter the king while the enemy queen is on the board | `king_safety()` in `evaluation.py` | 24 |
-| 02 YELLOW | Draw sense | Score a repeated position, or one at the fifty-move limit, as 0 inside the search | `is_draw_in_search()` in `search.py`, plus 3 tests in `test_upgrades.py` | 16 |
-| 03 CYAN | Mating bonus | With a big lead, drive the losing king to the edge | `mating_bonus()` in `evaluation.py` | 24 |
-| 04 PINK | Principal variation search | Search the first move with the full window and the rest with a cheap null window | `search_later_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
-| 05 ORANGE | Null-move pruning | Let the opponent move twice; if Remus is still too far ahead, the opponent would never allow this position, so stop searching it | `make_null_move()` in `search.py` and `undo_null_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 23 |
-| 06 BROWN | Late move reductions | Search late, quiet moves one ply shallower, and in full only if they surprise | `reduction()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
-| 07 PURPLE | Pawn structure | Penalize doubled and isolated pawns, reward passed pawns | `pawn_structure()` in `evaluation.py` | 29 |
-| 08 GREEN | Opening book | Play the first moves of well-known openings from a book | `load_book()` in `opening_book.py` and `book_move()` in `opening_book.py` | 26 |
-| 09 BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` and `order_moves()` in `move_ordering.py`, plus 1 test in `test_upgrades.py` | 27 |
-| 10 RED | Transposition table | Remember positions already searched, so one position reached in two move orders is scored once | `store()` in `transposition_table.py` and `probe()` in `transposition_table.py`, plus 1 test in `test_upgrades.py` | 27 |
+| 01 Remus-GRAY | King safety | Reward pawns that shelter the king while the enemy queen is on the board | `king_safety()` in `evaluation.py` | 24 |
+| 02 Remus-YELLOW | Draw sense | Score a repeated position, or one at the fifty-move limit, as 0 inside the search | `is_draw_in_search()` in `search.py`, plus 3 tests in `test_upgrades.py` | 16 |
+| 03 Remus-CYAN | Mating bonus | With a big lead, drive the losing king to the edge | `mating_bonus()` in `evaluation.py` | 24 |
+| 04 Remus-PINK | Principal variation search | Search the first move with the full window and the rest with a cheap null window | `search_later_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
+| 05 Remus-ORANGE | Null-move pruning | Let the opponent move twice; if Remus is still too far ahead, the opponent would never allow this position, so stop searching it | `make_null_move()` in `search.py` and `undo_null_move()` in `search.py`, plus 2 tests in `test_upgrades.py` | 23 |
+| 06 Remus-BROWN | Late move reductions | Search late, quiet moves one ply shallower, and in full only if they surprise | `reduction()` in `search.py`, plus 2 tests in `test_upgrades.py` | 18 |
+| 07 Remus-PURPLE | Pawn structure | Penalize doubled and isolated pawns, reward passed pawns | `pawn_structure()` in `evaluation.py` | 29 |
+| 08 Remus-GREEN | Opening book | Play the first moves of well-known openings from a book | `load_book()` in `opening_book.py` and `book_move()` in `opening_book.py` | 26 |
+| 09 Remus-BLUE | Killer moves | Try quiet moves that caused a cutoff at the same depth right after the captures | `remember_killer()` in `search.py` and `order_moves()` in `move_ordering.py`, plus 1 test in `test_upgrades.py` | 27 |
+| 10 Remus-RED | Transposition table | Remember positions already searched, so one position reached in two move orders is scored once | `store()` in `transposition_table.py` and `probe()` in `transposition_table.py`, plus 1 test in `test_upgrades.py` | 27 |
 
 Every enhanced engine asks for 16 to 29 typed lines, under the 40-line limit for one period. Where the enhancement itself is short, the student pair also writes the tests that prove it works, such as the test that a null window answers only "better or not?", so every student pair spends both periods thinking about its idea rather than waiting.
 
@@ -215,7 +215,7 @@ illegal move.
 
 Each version played 110 games. Remus-YELLOW and Remus-GRAY scored the same 46.5
 points; Remus-YELLOW ranks above because it beat Remus-GRAY 5.5 to 4.5. The folder
-numbers follow this table, from `01 GRAY` to `10 RED`.
+numbers follow this table, from `01 Remus-GRAY` to `10 Remus-RED`.
 
 Remus-GOLD, with all ten enhancements, wins most of its games: its +339 plus or minus
 91 runs from +248 to +430, and it scored at least 6.5 of 10 against every other

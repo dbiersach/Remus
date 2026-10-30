@@ -23,8 +23,10 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/scripts/
 ENGINES_FOLDER = ROOT / "engines" / "instructor"  # WHITE, the colors, and GOLD
 # Remus-WHITE, the finished Day 9 Remus
-WHITE_FOLDER = ENGINES_FOLDER / "00 WHITE - No enhancements"
-GOLD_FOLDER = ENGINES_FOLDER / "11 GOLD - All enhancements"  # All ten enhancements
+WHITE_FOLDER = ENGINES_FOLDER / "00 Remus-WHITE - No enhancements"
+GOLD_FOLDER = (
+    ENGINES_FOLDER / "11 Remus-GOLD - All enhancements"
+)  # All ten enhancements
 DEPTH = 4  # The deepest iteration, the same for both engines
 POSITIONS = [  # The ten positions of compare_search.py
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -42,7 +44,7 @@ MATE_SCORE = 100_000  # The same as search.py
 
 
 def find_folder(color: str) -> Path:
-    """Return the version folder of a color: "RED" finds "10 RED - Transposition table"."""
+    """Return the version folder of a color: "RED" finds "10 Remus-RED - Transposition table"."""
     if color.upper() == "WHITE":
         return WHITE_FOLDER
     if color.upper() == "GOLD":
@@ -50,7 +52,7 @@ def find_folder(color: str) -> Path:
     for folder in sorted(ENGINES_FOLDER.iterdir()):
         if folder.is_dir() and " - " in folder.name:
             words = folder.name.split(" - ")[0].split()
-            if words[len(words) - 1] == color.upper():
+            if words[len(words) - 1].removeprefix("Remus-") == color.upper():
                 return folder
     sys.exit(f"No version folder has the color {color!r}")
 

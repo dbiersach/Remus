@@ -314,14 +314,14 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - The Remus versions live in the top `engines/` folder (David, 2026-10-29), which
   holds `engines/instructor`, `engines/student`, and `engines/Niram`. Each of
   `instructor` and `student` holds one engine folder per Remus version, named by its
-  engine color. `00 WHITE - No enhancements` is Remus-WHITE,
+  engine color. `00 Remus-WHITE - No enhancements` is Remus-WHITE,
   the finished Day 9 Remus with none of the ten enhancements (named by David on
   2026-10-27): a copy of the Day 9 `period1/instructor` folder in `instructor`
   and of `period1/student` in `student`, without `show_board.py`, which only the
   Day 1 and Day 3 lessons run, so that every engine folder holds only files that
-  something imports, runs, or names. `01 GRAY - King safety` to `10 RED -
+  something imports, runs, or names. `01 Remus-GRAY - King safety` to `10 Remus-RED -
   Transposition table` are the ten enhanced engines, each Remus-WHITE plus one
-  enhancement. `11 GOLD - All enhancements` is Remus-GOLD, the finished Remus with
+  enhancement. `11 Remus-GOLD - All enhancements` is Remus-GOLD, the finished Remus with
   all ten (David, 2026-10-27), and only `engines/instructor` holds it. `engines/Niram`
   holds Niram, the same engine in Rust. Remus-GOLD is the engine of Day 10 (David,
   2026-10-28): the Day 10 period folders hold only the science files
@@ -336,8 +336,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   engine sounds better than another. A two-digit prefix (David, 2026-10-28) orders the
   folders by each version's Elo over WHITE in the designer's league (Niram league 1,
   660 games at 10 minutes a side, with GREEN's and GOLD's games started from move 1
-  so their book plays): 01 GRAY, 02 YELLOW, 03 CYAN, 04 PINK, 05 ORANGE, 06 BROWN,
-  07 PURPLE, 08 GREEN, 09 BLUE, 10 RED. `misc/scripts/version_match.py` plays an enhanced engine
+  so their book plays): 01 Remus-GRAY, 02 Remus-YELLOW, 03 Remus-CYAN, 04 Remus-PINK, 05 Remus-ORANGE, 06 Remus-BROWN,
+  07 Remus-PURPLE, 08 Remus-GREEN, 09 Remus-BLUE, 10 Remus-RED. `misc/scripts/version_match.py` plays an enhanced engine
   against Remus-WHITE or another enhanced engine, and `play_battle.py` in each engine folder
   runs it for the Day 9 battles. `version_league.py` plays a round robin of all 12
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
@@ -427,7 +427,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Markdown file, and every text the builders write into one, qualifies a bare
   "color" as **piece color** or **engine color**: "5 games with each piece color",
   "the visitor's engine color, such as `RED`". A Remus
-  version's folder, such as `10 RED - Transposition table`, is its **engine
+  version's folder, such as `10 Remus-RED - Transposition table`, is its **engine
   folder**, never a "color folder". Code identifiers such as `color_of()` and
   `--colors` keep their names.
 - **Color is a folder label, not an identity** (David, 2026-10-29). The engine color

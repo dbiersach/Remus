@@ -1,6 +1,6 @@
 # Day 9, Period 2: Python lab 12 and the engine enhancements
 
-Each student pair builds one enhanced engine in `engines/student` at the top of the Remus folder, such as `engines/student/10 RED - Transposition table`. That engine folder already holds the whole Remus engine from period 1, so the student pair adds only its one enhancement there. Leave `00 WHITE - No enhancements` as it is: it is plain Remus, kept so the class can measure each enhancement against it.
+Each student pair builds one enhanced engine in `engines/student` at the top of the Remus folder, such as `engines/student/10 Remus-RED - Transposition table`. That engine folder already holds the whole Remus engine from period 1, so the student pair adds only its one enhancement there. Leave `00 Remus-WHITE - No enhancements` as it is: it is plain Remus, kept so the class can measure each enhancement against it.
 
 ## Learning objectives
 
@@ -13,22 +13,22 @@ By the end of this period, each student pair can:
 
 The lab is `python_caches.py` in the `student` folder, with the answers in `python_caches_instructor.py` in the `instructor` folder beside it. Open `python_caches.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-This folder holds no engine code. Your student pair works in one folder only: your own engine folder in `engines/student`, such as `10 RED - Transposition table`. That folder already holds the whole Remus engine you finished in period 1, so you add only your one enhancement there. Do not change `00 WHITE - No enhancements`: it is plain Remus with no enhancement, and it stays as it is so the class can measure every enhancement against it. The `README.md` in each engine folder explains its enhancement, and its section "The code you type" shows every line the student pair types, with line numbers, the lines around it, and how the code works.
+This folder holds no engine code. Your student pair works in one folder only: your own engine folder in `engines/student`, such as `10 Remus-RED - Transposition table`. That folder already holds the whole Remus engine you finished in period 1, so you add only your one enhancement there. Do not change `00 Remus-WHITE - No enhancements`: it is plain Remus with no enhancement, and it stays as it is so the class can measure every enhancement against it. The `README.md` in each engine folder explains its enhancement, and its section "The code you type" shows every line the student pair types, with line numbers, the lines around it, and how the code works.
 
 Click your student pair's engine folder below. Its `README.md` shows the code to type, and `run_tests.py` checks it.
 
 | Engine folder | The code you type | Tests |
 | --- | --- | --- |
-| [01 GRAY - King safety](../../engines/student/01%20GRAY%20-%20King%20safety) | [`README.md`](../../engines/student/01%20GRAY%20-%20King%20safety/README.md) | [`run_tests.py`](../../engines/student/01%20GRAY%20-%20King%20safety/run_tests.py) |
-| [02 YELLOW - Draw sense](../../engines/student/02%20YELLOW%20-%20Draw%20sense) | [`README.md`](../../engines/student/02%20YELLOW%20-%20Draw%20sense/README.md) | [`run_tests.py`](../../engines/student/02%20YELLOW%20-%20Draw%20sense/run_tests.py) |
-| [03 CYAN - Mating bonus](../../engines/student/03%20CYAN%20-%20Mating%20bonus) | [`README.md`](../../engines/student/03%20CYAN%20-%20Mating%20bonus/README.md) | [`run_tests.py`](../../engines/student/03%20CYAN%20-%20Mating%20bonus/run_tests.py) |
-| [04 PINK - Principal variation search](../../engines/student/04%20PINK%20-%20Principal%20variation%20search) | [`README.md`](../../engines/student/04%20PINK%20-%20Principal%20variation%20search/README.md) | [`run_tests.py`](../../engines/student/04%20PINK%20-%20Principal%20variation%20search/run_tests.py) |
-| [05 ORANGE - Null-move pruning](../../engines/student/05%20ORANGE%20-%20Null-move%20pruning) | [`README.md`](../../engines/student/05%20ORANGE%20-%20Null-move%20pruning/README.md) | [`run_tests.py`](../../engines/student/05%20ORANGE%20-%20Null-move%20pruning/run_tests.py) |
-| [06 BROWN - Late move reductions](../../engines/student/06%20BROWN%20-%20Late%20move%20reductions) | [`README.md`](../../engines/student/06%20BROWN%20-%20Late%20move%20reductions/README.md) | [`run_tests.py`](../../engines/student/06%20BROWN%20-%20Late%20move%20reductions/run_tests.py) |
-| [07 PURPLE - Pawn structure](../../engines/student/07%20PURPLE%20-%20Pawn%20structure) | [`README.md`](../../engines/student/07%20PURPLE%20-%20Pawn%20structure/README.md) | [`run_tests.py`](../../engines/student/07%20PURPLE%20-%20Pawn%20structure/run_tests.py) |
-| [08 GREEN - Opening book](../../engines/student/08%20GREEN%20-%20Opening%20book) | [`README.md`](../../engines/student/08%20GREEN%20-%20Opening%20book/README.md) | [`run_tests.py`](../../engines/student/08%20GREEN%20-%20Opening%20book/run_tests.py) |
-| [09 BLUE - Killer moves](../../engines/student/09%20BLUE%20-%20Killer%20moves) | [`README.md`](../../engines/student/09%20BLUE%20-%20Killer%20moves/README.md) | [`run_tests.py`](../../engines/student/09%20BLUE%20-%20Killer%20moves/run_tests.py) |
-| [10 RED - Transposition table](../../engines/student/10%20RED%20-%20Transposition%20table) | [`README.md`](../../engines/student/10%20RED%20-%20Transposition%20table/README.md) | [`run_tests.py`](../../engines/student/10%20RED%20-%20Transposition%20table/run_tests.py) |
+| [01 Remus-GRAY - King safety](../../engines/student/01%20Remus-GRAY%20-%20King%20safety) | [`README.md`](../../engines/student/01%20Remus-GRAY%20-%20King%20safety/README.md) | [`run_tests.py`](../../engines/student/01%20Remus-GRAY%20-%20King%20safety/run_tests.py) |
+| [02 Remus-YELLOW - Draw sense](../../engines/student/02%20Remus-YELLOW%20-%20Draw%20sense) | [`README.md`](../../engines/student/02%20Remus-YELLOW%20-%20Draw%20sense/README.md) | [`run_tests.py`](../../engines/student/02%20Remus-YELLOW%20-%20Draw%20sense/run_tests.py) |
+| [03 Remus-CYAN - Mating bonus](../../engines/student/03%20Remus-CYAN%20-%20Mating%20bonus) | [`README.md`](../../engines/student/03%20Remus-CYAN%20-%20Mating%20bonus/README.md) | [`run_tests.py`](../../engines/student/03%20Remus-CYAN%20-%20Mating%20bonus/run_tests.py) |
+| [04 Remus-PINK - Principal variation search](../../engines/student/04%20Remus-PINK%20-%20Principal%20variation%20search) | [`README.md`](../../engines/student/04%20Remus-PINK%20-%20Principal%20variation%20search/README.md) | [`run_tests.py`](../../engines/student/04%20Remus-PINK%20-%20Principal%20variation%20search/run_tests.py) |
+| [05 Remus-ORANGE - Null-move pruning](../../engines/student/05%20Remus-ORANGE%20-%20Null-move%20pruning) | [`README.md`](../../engines/student/05%20Remus-ORANGE%20-%20Null-move%20pruning/README.md) | [`run_tests.py`](../../engines/student/05%20Remus-ORANGE%20-%20Null-move%20pruning/run_tests.py) |
+| [06 Remus-BROWN - Late move reductions](../../engines/student/06%20Remus-BROWN%20-%20Late%20move%20reductions) | [`README.md`](../../engines/student/06%20Remus-BROWN%20-%20Late%20move%20reductions/README.md) | [`run_tests.py`](../../engines/student/06%20Remus-BROWN%20-%20Late%20move%20reductions/run_tests.py) |
+| [07 Remus-PURPLE - Pawn structure](../../engines/student/07%20Remus-PURPLE%20-%20Pawn%20structure) | [`README.md`](../../engines/student/07%20Remus-PURPLE%20-%20Pawn%20structure/README.md) | [`run_tests.py`](../../engines/student/07%20Remus-PURPLE%20-%20Pawn%20structure/run_tests.py) |
+| [08 Remus-GREEN - Opening book](../../engines/student/08%20Remus-GREEN%20-%20Opening%20book) | [`README.md`](../../engines/student/08%20Remus-GREEN%20-%20Opening%20book/README.md) | [`run_tests.py`](../../engines/student/08%20Remus-GREEN%20-%20Opening%20book/run_tests.py) |
+| [09 Remus-BLUE - Killer moves](../../engines/student/09%20Remus-BLUE%20-%20Killer%20moves) | [`README.md`](../../engines/student/09%20Remus-BLUE%20-%20Killer%20moves/README.md) | [`run_tests.py`](../../engines/student/09%20Remus-BLUE%20-%20Killer%20moves/run_tests.py) |
+| [10 Remus-RED - Transposition table](../../engines/student/10%20Remus-RED%20-%20Transposition%20table) | [`README.md`](../../engines/student/10%20Remus-RED%20-%20Transposition%20table/README.md) | [`run_tests.py`](../../engines/student/10%20Remus-RED%20-%20Transposition%20table/run_tests.py) |
 
 ## The changes and why
 

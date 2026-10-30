@@ -739,7 +739,7 @@ def main():
     # Remus-GOLD, which stays in engines/instructor.
     engines = ROOT / "engines" / "instructor"
     student_engines = ROOT / "engines" / "student"
-    white = "00 WHITE - No enhancements"
+    white = "00 Remus-WHITE - No enhancements"
     if (student_engines / white).exists():
         shutil.rmtree(student_engines / white)
     # The student Remus-WHITE is the Day 9 period1 student folder, stubs and all
@@ -761,7 +761,7 @@ def main():
             target,
             ignore=shutil.ignore_patterns("__pycache__", "*.pgn", "*.svg"),
         )
-        color = version["folder"].split(" - ")[0].split(" ")[1]
+        color = version["folder"].split(" - ")[0].split(" ")[1].removeprefix("Remus-")
         count = 0
         for file_name, function in version["students"]:
             file_path = target / file_name

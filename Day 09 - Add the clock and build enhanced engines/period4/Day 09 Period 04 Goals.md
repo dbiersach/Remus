@@ -13,7 +13,7 @@ By the end of this period, each student pair can:
 
 The demo is `demo_results.py` in the `student` folder, with the answers in `demo_results_instructor.py` in the `instructor` folder beside it. Open `demo_results.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-This folder holds no engine code. Your student pair works in one folder only: your own engine folder in `engines/student`, such as `10 RED - Transposition table`. That folder already holds the whole Remus engine you finished in period 1, so you add only your one enhancement there. Do not change `00 WHITE - No enhancements`: it is plain Remus with no enhancement, and it stays as it is so the class can measure every enhancement against it. The `README.md` in each engine folder explains its enhancement, and its section "The code you type" shows every line the student pair types, with line numbers, the lines around it, and how the code works.
+This folder holds no engine code. Your student pair works in one folder only: your own engine folder in `engines/student`, such as `10 Remus-RED - Transposition table`. That folder already holds the whole Remus engine you finished in period 1, so you add only your one enhancement there. Do not change `00 Remus-WHITE - No enhancements`: it is plain Remus with no enhancement, and it stays as it is so the class can measure every enhancement against it. The `README.md` in each engine folder explains its enhancement, and its section "The code you type" shows every line the student pair types, with line numbers, the lines around it, and how the code works.
 
 ## The changes and why
 
@@ -25,7 +25,7 @@ Parts #1 and #2 of `demo_results.py` turn a match result into a score and an Elo
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:10 | Slides: how a battle works. Each student pair copies its finished engine folder, such as `engines/student/10 RED - Transposition table`, onto its USB stick. The teacher posts the pairings for two rounds; in each round five student pairs host and five visit. |
+| 3:00 to 3:10 | Slides: how a battle works. Each student pair copies its finished engine folder, such as `engines/student/10 Remus-RED - Transposition table`, onto its USB stick. The teacher posts the pairings for two rounds; in each round five student pairs host and five visit. |
 | 3:10 to 3:40 | Round 1. The visiting student pair pastes its engine folder into the same path on the host laptop, `engines/student`, and replaces the folder of the same name. The host opens `play_battle.py` in its own engine folder, sets `VISITING_ENGINE` to the visitor's engine color, and presses Run in VS Code. Two 10-minute games run side by side, one with each piece color. Each student pair writes the score on the board. |
 | 3:40 to 3:45 | Round 2: the student pairs that visited now host, against new opponents. |
 | 3:45 to 4:10 | While the round 2 games run, each student pair turns its round 1 result into an Elo gap with a margin of error in `demo_results.py`, then tries its engine's league games. |

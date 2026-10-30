@@ -98,13 +98,13 @@ Each student pair writes the functions of one enhanced engine in `engines/studen
 
 | Enhanced engine | Student pairs write |
 | --- | --- |
-| 10 RED - Transposition table | `store()` in `transposition_table.py` (3 lines); `probe()` in `transposition_table.py` (11 lines); `test_transposition_table_bounds()` in `test_upgrades.py` (13 lines) |
-| 08 GREEN - Opening book | `load_book()` in `opening_book.py` (24 lines); `book_move()` in `opening_book.py` (2 lines) |
-| 09 BLUE - Killer moves | `remember_killer()` in `search.py` (6 lines); `order_moves()` in `move_ordering.py` (16 lines); `test_killers_keep_two_quiet_moves()` in `test_upgrades.py` (5 lines) |
-| 04 PINK - Principal variation search | `search_later_move()` in `search.py` (6 lines); `test_pvs_search_agrees_with_alpha_beta()` in `test_upgrades.py` (7 lines); `test_a_null_window_answers_only_better_or_not()` in `test_upgrades.py` (5 lines) |
-| 02 YELLOW - Draw sense | `is_draw_in_search()` in `search.py` (2 lines); `test_draw_sense_search_agrees_with_alpha_beta()` in `test_upgrades.py` (7 lines); `test_a_repeated_position_is_a_draw()` in `test_upgrades.py` (5 lines); `test_the_fifty_move_limit_is_a_draw()` in `test_upgrades.py` (2 lines) |
-| 07 PURPLE - Pawn structure | `pawn_structure()` in `evaluation.py` (29 lines) |
-| 03 CYAN - Mating bonus | `mating_bonus()` in `evaluation.py` (24 lines) |
-| 05 ORANGE - Null-move pruning | `make_null_move()` in `search.py` (5 lines); `undo_null_move()` in `search.py` (3 lines); `test_null_move_and_undo_restore_the_state()` in `test_upgrades.py` (6 lines); `test_null_move_search_saves_work_and_keeps_the_state()` in `test_upgrades.py` (9 lines) |
-| 06 BROWN - Late move reductions | `reduction()` in `search.py` (3 lines); `test_only_late_quiet_moves_are_reduced()` in `test_upgrades.py` (6 lines); `test_reduced_search_saves_work_and_keeps_the_state()` in `test_upgrades.py` (9 lines) |
-| 01 GRAY - King safety | `king_safety()` in `evaluation.py` (24 lines) |
+| 10 Remus-RED - Transposition table | `store()` in `transposition_table.py` (3 lines); `probe()` in `transposition_table.py` (11 lines); `test_transposition_table_bounds()` in `test_upgrades.py` (13 lines) |
+| 08 Remus-GREEN - Opening book | `load_book()` in `opening_book.py` (24 lines); `book_move()` in `opening_book.py` (2 lines) |
+| 09 Remus-BLUE - Killer moves | `remember_killer()` in `search.py` (6 lines); `order_moves()` in `move_ordering.py` (16 lines); `test_killers_keep_two_quiet_moves()` in `test_upgrades.py` (5 lines) |
+| 04 Remus-PINK - Principal variation search | `search_later_move()` in `search.py` (6 lines); `test_pvs_search_agrees_with_alpha_beta()` in `test_upgrades.py` (7 lines); `test_a_null_window_answers_only_better_or_not()` in `test_upgrades.py` (5 lines) |
+| 02 Remus-YELLOW - Draw sense | `is_draw_in_search()` in `search.py` (2 lines); `test_draw_sense_search_agrees_with_alpha_beta()` in `test_upgrades.py` (7 lines); `test_a_repeated_position_is_a_draw()` in `test_upgrades.py` (5 lines); `test_the_fifty_move_limit_is_a_draw()` in `test_upgrades.py` (2 lines) |
+| 07 Remus-PURPLE - Pawn structure | `pawn_structure()` in `evaluation.py` (29 lines) |
+| 03 Remus-CYAN - Mating bonus | `mating_bonus()` in `evaluation.py` (24 lines) |
+| 05 Remus-ORANGE - Null-move pruning | `make_null_move()` in `search.py` (5 lines); `undo_null_move()` in `search.py` (3 lines); `test_null_move_and_undo_restore_the_state()` in `test_upgrades.py` (6 lines); `test_null_move_search_saves_work_and_keeps_the_state()` in `test_upgrades.py` (9 lines) |
+| 06 Remus-BROWN - Late move reductions | `reduction()` in `search.py` (3 lines); `test_only_late_quiet_moves_are_reduced()` in `test_upgrades.py` (6 lines); `test_reduced_search_saves_work_and_keeps_the_state()` in `test_upgrades.py` (9 lines) |
+| 01 Remus-GRAY - King safety | `king_safety()` in `evaluation.py` (24 lines) |

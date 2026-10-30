@@ -3,7 +3,7 @@
 
 Measure how much one enhanced engine adds. An enhanced engine's Remus plays a match
 against Remus-WHITE (the finished Day 9 Remus with no enhancements, in the
-00 WHITE engine folder), or against another enhanced engine, with
+00 Remus-WHITE engine folder), or against another enhanced engine, with
 python-chess as the referee. Every game is added to the class
 games file, misc/games/remus_games.pgn at the top of the Remus folder, and the script
 turns the score into an Elo gap. This is a referee outside the engine: the engine itself never
@@ -31,8 +31,8 @@ second and a shorter clock stops every version too shallow for most enhancements
 to help. The two games run at once, so the match takes about 20 minutes.
 
 An engine color names an engine folder in the engines folder, so "RED" finds
-"10 RED - Transposition table", "WHITE" finds "00 WHITE - No enhancements", and
-"GOLD" finds "11 GOLD - All enhancements", which only engines/instructor holds.
+"10 Remus-RED - Transposition table", "WHITE" finds "00 Remus-WHITE - No enhancements", and
+"GOLD" finds "11 Remus-GOLD - All enhancements", which only engines/instructor holds.
 The numbers 01 to 10 rank the enhanced engines by the designer's league.
 """
 
@@ -107,9 +107,9 @@ Player = tuple[str, Path]  # A version's name, such as "Remus-RED", and its prog
 
 
 def version_color(folder_name: str) -> str:
-    """Return the color in a version folder's name: "RED" from "10 RED - Transposition table"."""
+    """Return the color in a version folder's name: "RED" from "10 Remus-RED - Transposition table"."""
     words = folder_name.split(" - ")[0].split()
-    return words[len(words) - 1].upper()
+    return words[len(words) - 1].removeprefix("Remus-").upper()
 
 
 def all_players() -> list[Player]:
@@ -121,7 +121,7 @@ def all_players() -> list[Player]:
     list[Player]
         Each version's name, such as "Remus-RED", and its folder.
     """
-    # The engine folders run from 00 WHITE to 11 GOLD, so sorting puts them in order
+    # The engine folders run from 00 Remus-WHITE to 11 Remus-GOLD, so sorting puts them in order
     players = []
     for folder in sorted(ENGINES_FOLDER.iterdir()):
         if folder.is_dir() and " - " in folder.name:
@@ -132,7 +132,7 @@ def all_players() -> list[Player]:
 def find_player(color: str) -> Player:
     """Return one version's name, such as "Remus-RED", and its folder."""
     for player in all_players():
-        if player[0] == f"Remus-{color.upper()}":
+        if player[0] == f"Remus-{color.upper().removeprefix('REMUS-')}":
             return player
     sys.exit(f"No Remus version has the color {color!r}")
 

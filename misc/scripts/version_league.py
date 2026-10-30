@@ -345,7 +345,9 @@ def print_head_to_head(results: list[Result], player: str) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description="Rank every Remus version.")
-    parser.add_argument("--games", type=int, default=6, help="games for each pair of versions")
+    parser.add_argument(
+        "--games", type=int, default=6, help="games for each pair of versions"
+    )
     parser.add_argument("--rate-only", action="store_true", help="skip the games")
     parser.add_argument("--minutes", type=float, default=MINUTES, help="each clock")
     parser.add_argument(
