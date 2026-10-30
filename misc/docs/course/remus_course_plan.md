@@ -31,7 +31,7 @@ to everything below.
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Matches | Day 10: each student pair's enhanced engine plays Remus-WHITE twice at 10 minutes a side, once with each color, all ten laptops at once. The teacher then shows Remus-GOLD's results against every color and Remus-WHITE from the designer's league |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
-| Documentation | `misc/docs/program/remus_program_overview.md` for the whole program, one page per script in `misc/docs/code/`, one page per Python lab in `misc/docs/learning_python/`, and `misc/docs/course/slide_plan.md` for the PowerPoint slides |
+| Documentation | `misc/docs/engines/remus_program_overview.md` for the whole program, one page per script in `misc/docs/code/`, one page per Python lab in `misc/docs/learning_python/`, and `misc/docs/course/slide_plan.md` for the PowerPoint slides |
 
 ## The shape of the two weeks
 
