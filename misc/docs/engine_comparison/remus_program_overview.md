@@ -173,17 +173,18 @@ enhancements`. It holds 27 Python files.
 ### Which file imports which
 
 The diagram shows the 17 files that import another Remus file or are imported by one. An
-arrow points from the file that imports to the file it imports: `search.py` points at
-`evaluation.py` because `search.py` calls `evaluate()`. A two-headed arrow would mean
-two files import each other; no two Remus files do. Every arrow points down the page.
-The programs a person runs, such as `uci_engine.py`, sit along the top edge, because no
-file imports them, and each file sits one row below the lowest file that imports it.
-`board.py` imports no Remus file and almost every file imports it, so it sits alone in
-the bottom row, where its 13 arrows land side by side along its top edge. Every arrow
-runs straight down or bends at right angles, leaves and reaches a box at its own spot,
-and takes the color of the file that imports, so the eye can follow one file's arrows
-from top to bottom. The test files, `run_tests.py`, and `play_match.py`, which starts
-Remus as a separate program, are left out.
+arrow points from a file to each file that imports it: `evaluation.py` points at
+`search.py` because `search.py` calls `evaluate()`. A two-headed arrow would mean two
+files import each other; no two Remus files do. Every arrow points up the page, from the
+code that is used to the code that uses it. The programs a person runs, such as
+`uci_engine.py`, sit along the top edge, because no file imports them, and each file
+sits one row below the lowest file that imports it. `board.py` imports no Remus file and
+almost every file imports it, so it sits alone in the bottom row, where its 13 arrows
+leave side by side along its top edge. Every arrow runs straight up or bends at right
+angles, leaves and reaches a box at its own spot, and takes the color of the file it
+points at, so the eye can follow the arrows that gather at one file. The test files,
+`run_tests.py`, and `play_match.py`, which starts Remus as a separate program, are left
+out.
 
 ![Import diagram of Remus-WHITE](../images/code/remus_white_imports.svg)
 

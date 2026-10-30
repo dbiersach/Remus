@@ -5,7 +5,7 @@ Map the Python files of Remus-WHITE across the course. The script writes two thi
 into misc/docs/engine_comparison/remus_program_overview.md:
 
 1. An import diagram, misc/docs/images/code/remus_white_imports.svg: one box per
-   file, with an arrow from each file to every file it imports.
+   file, with an arrow from each file to every file that imports it.
 2. A table with one row per file and one column per day and period, which marks the
    periods where the file appears, where student pairs edit it, where the teacher's
    code in it grows, and where a goals file names it.
@@ -494,7 +494,7 @@ def draw(edges, path):
     for color in ARROW_COLORS:
         parts.append(
             f'<marker id="head{color[1:]}" viewBox="0 0 10 10" refX="10" refY="5" '
-            f'markerWidth="7" markerHeight="7" orient="auto">'
+            f'markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
             f'<path d="M0,0 L10,5 L0,10 z" fill="{color}"/></marker>'
         )
     for u, v in edges:
@@ -519,7 +519,7 @@ def draw(edges, path):
         color = color_of[u]
         parts.append(
             f'<path d="{rounded(points)}" fill="none" stroke="{color}" '
-            f'stroke-width="1.6" marker-end="url(#head{color[1:]})"/>'
+            f'stroke-width="1.6" marker-start="url(#head{color[1:]})"/>'
         )
     for r in order:
         for n in order[r]:
@@ -722,18 +722,19 @@ def section_text(files: list[str], edges: list[tuple[str, str]]) -> str:
     text += "### Which file imports which\n\n"
     text += paragraph(
         f"The diagram shows the {diagram_count} files that import another Remus "
-        "file or are imported by one. An arrow points from the file that imports "
-        "to the file it imports: `search.py` points at `evaluation.py` because "
+        "file or are imported by one. An arrow points from a file to each file "
+        "that imports it: `evaluation.py` points at `search.py` because "
         "`search.py` calls `evaluate()`. A two-headed arrow would mean two files "
-        "import each other; no two Remus files do. Every arrow points down the "
-        "page. The programs a person runs, such as `uci_engine.py`, sit along the "
+        "import each other; no two Remus files do. Every arrow points up the "
+        "page, from the code that is used to the code that uses it. The programs "
+        "a person runs, such as `uci_engine.py`, sit along the "
         "top edge, because no file imports them, and each file sits one row below "
         "the lowest file that imports it. `board.py` imports no Remus file and "
         "almost every file imports it, so it sits alone in the bottom row, where "
-        "its 13 arrows land side by side along its top edge. Every arrow runs "
-        "straight down or bends at right angles, leaves and reaches a box at its "
-        "own spot, and takes the color of the file that imports, so the eye can "
-        "follow one file's arrows from top to bottom. "
+        "its 13 arrows leave side by side along its top edge. Every arrow runs "
+        "straight up or bends at right angles, leaves and reaches a box at its "
+        "own spot, and takes the color of the file it points at, so the eye can "
+        "follow the arrows that gather at one file. "
         "The test files, `run_tests.py`, and `play_match.py`, which starts Remus as "
         "a separate program, are left out."
     )
