@@ -31,7 +31,7 @@ the games every script plays in `misc/games/`, and the course designer's tools i
 which hold the builders that write the period, version, and student folders, the test runner,
 and the league and rating scripts, each listed in
 [`misc/scripts/README.md`](misc/scripts/README.md). Start with
-[`misc/docs/engines/remus_program_overview.md`](misc/docs/engines/remus_program_overview.md); the course plan is
+[`misc/docs/engine_comparison/remus_program_overview.md`](misc/docs/engine_comparison/remus_program_overview.md); the course plan is
 in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md).
 
 ## Setup

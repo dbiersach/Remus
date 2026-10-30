@@ -2,7 +2,7 @@
 """make_white_map.py
 
 Map the Python files of Remus-WHITE across the course. The script writes two things
-into misc/docs/engines/remus_program_overview.md:
+into misc/docs/engine_comparison/remus_program_overview.md:
 
 1. An import diagram, misc/docs/images/code/remus_white_imports.svg: one box per
    file, with an arrow from each file to every file it imports.
@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder
 WHITE = ROOT / "engines" / "instructor" / "00 Remus-WHITE - No enhancements"
-OVERVIEW = ROOT / "misc" / "docs" / "engines" / "remus_program_overview.md"
+OVERVIEW = ROOT / "misc" / "docs" / "engine_comparison" / "remus_program_overview.md"
 IMAGE = ROOT / "misc" / "docs" / "images" / "code" / "remus_white_imports.svg"
 HEADING = "## Remus-WHITE across the course"  # The section this script rewrites
 
