@@ -1,10 +1,10 @@
 # Remus Project Rules and Python Style Guide
 
 Remus is a chess engine written in pure, native Python as a teaching project for the
-**"Turning a Chess Engine into Science AI"** workshop. The full lesson plan lives in
-[`misc/docs/course/workshop_roadmap.md`](misc/docs/course/workshop_roadmap.md) and the
-day-by-day course in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md); read both
-before starting any lesson. [`misc/docs/engines/remus_program_overview.md`](misc/docs/engines/remus_program_overview.md)
+**"Turning a Chess Engine into Science AI"** workshop. The course plan,
+[`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md), holds the
+teaching principles, the thirteen lessons and their gates, and the day-by-day schedule;
+read it before starting any lesson. [`misc/docs/engines/remus_program_overview.md`](misc/docs/engines/remus_program_overview.md)
 explains how the code fits together.
 
 This file holds every project and style rule, so that every AI tool used with this
@@ -186,7 +186,7 @@ The engine must run without Lucas Chess or `python-chess` installed.
     measurement problem (`hidden_peak.py`), then the full tree search at X-ray phase
     identification (`phase_hunt.py`)
 
-Each lesson has a "Ready to move on when" gate in the workshop file. Don't skip a gate.
+Each lesson has a "Ready to move on when" gate in the course plan. Don't skip a gate.
 
 The course plan maps these 13 lessons onto the ten days. Students see their board as a
 picture on Day 1 and their moves as arrows on Day 3, and play a random-move Remus in
@@ -195,7 +195,7 @@ Day 7, after perft has verified the rules.
 
 ## Verification
 
-- Write expected results before running. Use small named positions (see the workshop's
+- Write expected results before running. Use small named positions (see the course plan's
   ten verification exercises: 20 moves from start, check, pins, castling cases,
   en passant cases, promotions, two queens, mate vs stalemate, repetition with rights,
   long make/undo sequences).
@@ -400,7 +400,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - `misc/docs/` holds its folders and a `README.md` that maps them (David, 2026-10-28).
   `misc/docs/engine_code/` holds only pages named after a `.py` file (David, 2026-10-30):
   every other page goes into the folder of its subject.
-  - `misc/docs/course/`: the roadmap, the course plan, the slide plan, the Lucas Chess
+  - `misc/docs/course/`: the course plan, the slide plan, the Lucas Chess
     guide, the science survey, the two briefing PDFs, `file_versions.md`, and
     `student_edit_plan.md`, which `make_student_folders.py` writes.
   - `misc/docs/engine_code/`: one page for every engine or tool `.py` file a student modifies
