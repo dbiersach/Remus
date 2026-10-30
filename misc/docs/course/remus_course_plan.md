@@ -139,7 +139,7 @@ at the input and output boundary.
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Matches | Day 9, period 4: engine battles, two enhanced engines at a time, twice at 10 minutes a side, once with each piece color, on five laptops at once. The teacher then shows the designer's league table of all twelve Remus versions |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
-| Documentation | `misc/docs/engines/remus_program_overview.md` for the whole program, one page per script in `misc/docs/engine_code/`, one page per Python lab in `misc/docs/learning_python/`, chess pages in `misc/docs/chess_instruction/`, and `misc/docs/course/slide_plan.md` for the PowerPoint slides |
+| Documentation | `misc/docs/engine_comparison/remus_program_overview.md` for the whole program, one page per script in `misc/docs/engine_code/`, one page per Python lab in `misc/docs/learning_python/`, chess pages in `misc/docs/chess_instruction/`, and `misc/docs/course/slide_plan.md` for the PowerPoint slides |
 
 ## The thirteen lessons
 
@@ -755,7 +755,7 @@ moves" milestone.
   covers dicts as caches and tuples as keys (7 typed lines, so an enhancement of 30 lines
   stays within the limit). Then each of the 10 student pairs takes one enhanced engine from
   `engines/student` at the top of the Remus folder: the period 1 engine with one enhancement added, with the student pair's function stubbed (at
-  most 30 typed lines). The folder names use engine colors so no engine sounds better than another. The enhanced engines are described in [remus_versions.md](../engines/remus_versions.md).
+  most 30 typed lines). The folder names use engine colors so no engine sounds better than another. The enhanced engines are described in [remus_versions.md](../engine_comparison/remus_versions.md).
 
 | Engine folder | Enhanced engine |
 | --- | --- |
@@ -782,7 +782,7 @@ moves" milestone.
   visitor's engine color, and presses Run. The two engines play twice at 10 minutes a side, once
   with each piece color, and each student pair writes the score on the board. The class reads the board and
   asks why two games prove little; the teacher then shows the league table from
-  `misc/docs/engines/remus_versions.md`, 110 games for each engine. While round 2 runs, each
+  `misc/docs/engine_comparison/remus_versions.md`, 110 games for each engine. While round 2 runs, each
   student pair puts its round 1 score into the demo `demo_results.py`, which turns it into an
   Elo gap with a margin of error, then tries its engine's 110 league games and sees the
   margin shrink. The visitor's folder stays on the host laptop, in place of an engine

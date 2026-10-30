@@ -4,7 +4,7 @@ Remus is a chess engine written in pure, native Python as a teaching project for
 **"Turning a Chess Engine into Science AI"** workshop. The course plan,
 [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md), holds the
 teaching principles, the thirteen lessons and their gates, and the day-by-day schedule;
-read it before starting any lesson. [`misc/docs/engines/remus_program_overview.md`](misc/docs/engines/remus_program_overview.md)
+read it before starting any lesson. [`misc/docs/engine_comparison/remus_program_overview.md`](misc/docs/engine_comparison/remus_program_overview.md)
 explains how the code fits together.
 
 This file holds every project and style rule, so that every AI tool used with this
@@ -346,7 +346,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   even score, from frozen copies of the versions. With `--bracket` it sets each
   round's Stockfish level to the engine's rating so far; the bracket ratings of
   Remus-WHITE, Remus-GOLD, and Niram are the ones
-  `misc/docs/engines/engines_elo.md` reports beside the league table.
+  `misc/docs/engine_comparison/engines_elo.md` reports beside the league table.
 - `engines/Niram` holds Niram, Remus-GOLD rewritten in Rust, named for
   Naram-Sin, Sargon's grandson: one Cargo package whose `src/` folder
   holds every Rust file. It is a course designer's tool that runs the same engine about
@@ -356,7 +356,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `uv run misc/scripts/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).
   `uv run misc/scripts/engine_parity.py` checks the two engines on 49 positions: evaluation,
   legal moves, book moves, and every depth's score, node count, and principal
-  variation must match, and the results go to `misc/docs/engines/remus-niram same algorithms.md`. A
+  variation must match, and the results go to `misc/docs/engine_comparison/remus-niram same algorithms.md`. A
   change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
   change in Niram and a clean `engine_parity.py` run. The Rust copies of WHITE
   and the ten enhanced engines were deleted (David, 2026-10-28) after Niram league 1, whose
@@ -409,7 +409,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
     its file (`python_lists.py` has `python_lists.md`).
   - `misc/docs/chess_instruction/`: pages about chess itself (how to play, the rules,
     chess notation) rather than about Remus or Python, such as `chess_notation.md`.
-  - `misc/docs/engines/`: the program overview, `remus_program_overview.md`;
+  - `misc/docs/engine_comparison/`: the program overview, `remus_program_overview.md`;
     `tests.md`, how the test files check Remus; and the Remus versions and Niram: `remus_versions.md`,
     the ten enhanced engines and Remus-GOLD; `engines_elo.md`, the league and Stockfish
     ratings; and `remus-niram same algorithms.md`, which `engine_parity.py` writes.

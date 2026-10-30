@@ -10,7 +10,7 @@ always wins, or always loses, says almost nothing about a rating: 1650, 1800,
 1950, and 2100. At every strength a version plays 12 games, 6 as White and 6 as
 Black, on a 10 minute clock. The script then finds each version's Elo rating the
 way estimate_elo.py does, adds every game to misc/games/remus_games.pgn, and
-prints the table that misc/docs/engines/engines_elo.md reports.
+prints the table that misc/docs/engine_comparison/engines_elo.md reports.
 
 With --niram, Niram, the Rust copy of Remus-GOLD that chooses the same
 moves about 15 times faster, plays too, at 2000, 2200, 2400, and 2600. Build it
