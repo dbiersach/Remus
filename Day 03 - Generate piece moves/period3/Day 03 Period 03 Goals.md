@@ -11,8 +11,8 @@ By the end of this period, each student pair can:
 
 Files that grow this period:
 
-- `move_generation.py`
-- `test_move_generation.py`
+- `move_generation.py`: the teacher adds `slider_moves()`; the teacher changes `main()`
+- `test_move_generation.py`: 3 new tests
 
 Functions the student pairs write this period:
 

@@ -15,10 +15,10 @@ New files this period:
 
 Files that grow this period:
 
-- `fen.py`
-- `game_state.py`
-- `make_move.py`
-- `test_game.py`
+- `fen.py`: the teacher changes `state_from_fen()`
+- `game_state.py`: the teacher adds `position_key()`; the teacher changes `new_game()`
+- `make_move.py`: the teacher changes `make_move()`, `undo_move()`, `state_snapshot()`
+- `test_game.py`: 4 new tests
 
 Functions the student pairs write this period:
 

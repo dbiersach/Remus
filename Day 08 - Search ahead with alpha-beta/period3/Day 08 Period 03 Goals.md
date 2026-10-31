@@ -11,8 +11,8 @@ By the end of this period, each student pair can:
 
 Files that grow this period:
 
-- `search.py`
-- `test_search.py`
+- `search.py`: the teacher adds `capture_moves()`
+- `test_search.py`: 1 new test
 
 Functions the student pairs write this period:
 

@@ -43,8 +43,8 @@ The engine for Day 10 is Remus-GOLD, the finished Remus with all ten enhancement
 
 Files that grow this period:
 
-- `phase_hunt.py`
-- `test_phase_hunt.py`
+- `phase_hunt.py`: the teacher adds `run_search()`, `search_answer()`, `sets_every_order()`; the teacher changes `main()`
+- `test_phase_hunt.py`: 4 new tests
 
 Functions the student pairs write this period:
 

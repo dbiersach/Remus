@@ -18,7 +18,7 @@ New files this period:
 
 Files that grow this period:
 
-- `board.py`
+- `board.py`: the teacher adds `set_piece()`
 
 Functions the student pairs write this period:
 

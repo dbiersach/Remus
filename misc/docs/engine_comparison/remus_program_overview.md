@@ -199,7 +199,7 @@ means Day 7, period 2. A cell holds one or more letters:
 | N | New: the file first appears in this period's folder |
 | E | Edited: the student pairs write a function in this file |
 | X | Edited in an enhanced engine: the student pairs change their own copy of this file in `engines/student` |
-| T | Teacher code: the teacher's finished code in this file grows, and the student pairs type none of it |
+| T | Teacher code: the file grows with code the teacher writes before class, and the student pairs type none of it. The period's goals file names the functions the teacher adds or changes |
 | M | Mentioned: the period's goals file names the file, which the student pairs run or read |
 
 Read a row from left to right: the N cell is the period the file arrives, and the last E

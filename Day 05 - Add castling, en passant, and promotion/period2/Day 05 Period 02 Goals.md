@@ -15,8 +15,8 @@ New files this period:
 
 Files that grow this period:
 
-- `legal_moves.py`
-- `make_move.py`
+- `legal_moves.py`: the teacher adds `castling_moves()`; the teacher changes `legal_moves()`
+- `make_move.py`: the teacher adds `castling_rook_move()`; the teacher changes `make_move()`, `undo_move()`, `main()`
 
 Functions the student pairs write this period:
 

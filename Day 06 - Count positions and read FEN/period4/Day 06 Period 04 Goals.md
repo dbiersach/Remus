@@ -18,7 +18,7 @@ New files this period:
 
 Files that grow this period:
 
-- `test_perft.py`
+- `test_perft.py`: the teacher changes the tests
 
 Functions the student pairs write this period:
 

@@ -19,8 +19,8 @@ New files this period:
 
 Files that grow this period:
 
-- `search.py`
-- `test_search.py`
+- `search.py`: the teacher changes `main()`
+- `test_search.py`: 1 new test
 
 Functions the student pairs write this period:
 

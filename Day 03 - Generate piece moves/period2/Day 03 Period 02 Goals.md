@@ -18,7 +18,7 @@ New files this period:
 
 Files that grow this period:
 
-- `show_board.py`
+- `show_board.py`: the teacher adds `python_chess_square()`, `show_moves()`; the teacher changes `main()`
 
 Functions the student pairs write this period:
 
