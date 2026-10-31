@@ -188,52 +188,31 @@ and no game loads them.
 
 ![Import diagram of Remus-WHITE](../images/code/remus_white_imports.svg)
 
-### When each file appears and changes
+### When each engine file appears and changes
 
-Each row is one file, in the order the class meets it: by the period the file first
-appears, then by name. Each column is a period that touches a Remus-WHITE file; D07 P2
-means Day 7, period 2. A cell holds one or more letters:
+The table follows the same files as the diagram, the ones a game of chess loads. Each
+row is one file, in the order the class meets it. Each column is a period that brings a
+new engine file or has the student pairs edit one; D07 P2 means Day 7, period 2. N marks
+the period the file first appears, and E marks a period when the student pairs write
+code in it. On Day 9, periods 2 and 3, each student pair edits its own enhanced engine's
+copy of the file in `engines/student`. Between those periods the student pairs type
+nothing in the file: any other code it gains is already written in that period's folder
+when the student pairs open it.
 
-| Mark | Meaning |
-| --- | --- |
-| N | New: the file first appears in this period's folder |
-| E | Edited: the student pairs write a function in this file |
-| X | Edited in an enhanced engine: the student pairs change their own copy of this file in `engines/student` |
-| T | Teacher code: the file grows with code the teacher writes before class, and the student pairs type none of it. The period's goals file names the functions the teacher adds or changes |
-| M | Mentioned: the period's goals file names the file, which the student pairs run or read |
-
-Read a row from left to right: the N cell is the period the file arrives, and the last E
-or X cell is the last period a student pair changes it. Student pairs run `run_tests.py`
-in every period that has tests. Day 10 holds only the science files, so it has no
-column.
-
-| File | D01 P3 | D01 P4 | D02 P1 | D02 P2 | D02 P3 | D02 P4 | D03 P1 | D03 P2 | D03 P3 | D03 P4 | D04 P1 | D04 P2 | D04 P3 | D04 P4 | D05 P1 | D05 P2 | D05 P3 | D05 P4 | D06 P1 | D06 P2 | D06 P3 | D06 P4 | D07 P1 | D07 P2 | D07 P3 | D07 P4 | D08 P1 | D08 P2 | D08 P3 | D08 P4 | D09 P1 | D09 P2 | D09 P3 |
-| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| `board.py` | M | NE |  |  | T |  |  |  |  |  | M |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `run_tests.py` |  | N | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M | M |
-| `test_board.py` |  | N |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `game_state.py` |  |  |  | M | NE |  |  |  |  |  | M |  |  |  |  |  |  |  |  |  |  |  | T |  |  |  |  |  |  |  |  |  |  |
-| `moves.py` |  |  |  | M | NE |  |  |  |  |  | M |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `test_make_move.py` |  |  |  |  | N | T |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `make_move.py` |  |  |  |  |  | NE |  |  |  |  |  |  |  |  | M | ET | ET | T |  |  |  |  | T |  |  |  |  |  |  |  |  |  |  |
-| `move_generation.py` |  |  |  |  |  |  |  | NE | ET | ET | M |  |  |  |  |  | T |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `test_move_generation.py` |  |  |  |  |  |  |  | N | T | T |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `attacks.py` |  |  |  |  |  |  |  |  |  |  |  | NE | ET |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `test_legal_moves.py` |  |  |  |  |  |  |  |  |  |  |  | N | T | T |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `legal_moves.py` |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  | T |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `test_special_moves.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N | T | T |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `uci_engine.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N |  |  |  |  |  |  | T |  | T |  |  |  | T |  |  |
-| `perft.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| `test_perft.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N | T |  |  |  |  |  |  |  |  |  |  |  |
-| `fen.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE | T |  |  |  |  |  |  |  |  |  |  |
-| `test_game.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N | T | T | T |  |  |  |  |  | T |  |  |
-| `game_end.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  |  |  |  |  |  |
-| `notation.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  |  |  |  |  |
-| `play_match.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N |  |  |  |  |  |  |  |  |
-| `search.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  | ET | ET | ET | T | ET | X | X |
-| `evaluation.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  | X | X |
-| `test_search.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | N | T | T | T | T | T |  |  |
-| `move_ordering.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  | X | X |
+| File | D01 P4 | D02 P3 | D02 P4 | D03 P2 | D03 P3 | D03 P4 | D04 P2 | D04 P3 | D05 P2 | D05 P3 | D05 P4 | D06 P4 | D07 P3 | D07 P4 | D08 P1 | D08 P2 | D08 P3 | D08 P4 | D09 P1 | D09 P2 | D09 P3 |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| `board.py` | NE |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| `game_state.py` |  | NE |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| `moves.py` |  | NE |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| `make_move.py` |  |  | NE |  |  |  |  |  | E | E |  |  |  |  |  |  |  |  |  |  |  |
+| `move_generation.py` |  |  |  | NE | E | E |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| `attacks.py` |  |  |  |  |  |  | NE | E |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| `legal_moves.py` |  |  |  |  |  |  |  | NE |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| `uci_engine.py` |  |  |  |  |  |  |  |  |  |  | N |  |  |  |  |  |  |  |  |  |  |
+| `fen.py` |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  |  |  |  |  |
+| `search.py` |  |  |  |  |  |  |  |  |  |  |  |  | NE |  | E | E | E |  | E | E | E |
+| `evaluation.py` |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  |  |  |  |  | E | E |
+| `move_ordering.py` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | NE |  | E | E |
 
 ## The three boundaries
 
