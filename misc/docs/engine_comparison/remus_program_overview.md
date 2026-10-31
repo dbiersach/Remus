@@ -164,6 +164,45 @@ The pages, in the order the class builds them:
 | [`phase_hunt.py`](../science/phase_hunt.md) | Science AI: name the crystals in a powder |
 | [The test files](tests.md) | Checking that Remus works |
 
+### Remus-GOLD code lines, script by script
+
+Remus-GOLD, the finished engine in `engines/instructor/11 Remus-GOLD - All
+enhancements`, loads 15 of the engine pieces when it plays a game: every file in the stack of rows
+above except `perft.py` and `game_end.py`, which only the tests use. The next table
+lists those 15 scripts in alphabetical order with the lines of Python code in each.
+Only a line that holds code counts: a docstring does not count, even when it runs over
+many lines, and neither does a comment line or a blank line. A line that holds code
+and ends with a comment counts once. The opening book's move list,
+`opening_book.txt`, is data rather than Python, so it does not count.
+
+| Script | Code lines |
+| --- | ---: |
+| [`attacks.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/attacks.py) | 105 |
+| [`board.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/board.py) | 50 |
+| [`evaluation.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/evaluation.py) | 208 |
+| [`fen.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/fen.py) | 81 |
+| [`game_state.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/game_state.py) | 54 |
+| [`legal_moves.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/legal_moves.py) | 44 |
+| [`make_move.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/make_move.py) | 112 |
+| [`move_generation.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/move_generation.py) | 135 |
+| [`move_ordering.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/move_ordering.py) | 44 |
+| [`moves.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/moves.py) | 26 |
+| [`notation.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/notation.py) | 71 |
+| [`opening_book.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/opening_book.py) | 66 |
+| [`search.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/search.py) | 380 |
+| [`transposition_table.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/transposition_table.py) | 37 |
+| [`uci_engine.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/uci_engine.py) | 78 |
+| **Total, 15 scripts** | **1,491** |
+
+`search.py` holds a quarter of GOLD's code, 380 lines, because six of the ten
+enhancements change it: draw sense, principal variation search, null-move pruning,
+late move reductions, killer moves, and the transposition table. `evaluation.py` comes
+next with 208 lines, because king safety, the mating bonus, and pawn structure each
+add a term to the score.
+
+[`remus_versions.md`](remus_versions.md#how-big-is-each-version) counts the code lines
+of every Remus version the same way.
+
 ## Remus-WHITE across the course
 
 Remus-WHITE is the finished Day 9 Remus, in `engines/instructor/00 Remus-WHITE - No
