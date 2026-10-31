@@ -946,6 +946,43 @@ def changes_section(day: int, period: int) -> str:
     return "\n".join(lines)
 
 
+def function_sources(text: str) -> dict[str, str]:
+    """Return {name: source} for each top-level function of a Python file."""
+    tree = ast.parse(text)
+    sources = {}
+    for node in tree.body:
+        if isinstance(node, ast.FunctionDef):
+            sources[node.name] = ast.get_source_segment(text, node) or ""
+    return sources
+
+
+def growth_note(name: str, old: str, new: str, written: set[str]) -> str:
+    """Return what the teacher's code adds to or changes in a file that grows."""
+    if not name.endswith(".py"):
+        return ""
+    before = function_sources(old)
+    after = function_sources(new)
+    added = [f for f in after if f not in before and f not in written]
+    changed = [
+        f for f in after if f in before and after[f] != before[f] and f not in written
+    ]
+    if name.startswith("test_"):
+        tests = [f for f in added if f.startswith("test_")]
+        if len(tests) == 1:
+            return "1 new test"
+        return f"{len(tests)} new tests" if tests else "the teacher changes the tests"
+    parts = []
+    if added:
+        parts.append("the teacher adds " + ", ".join(f"`{f}()`" for f in added))
+    if changed:
+        parts.append("the teacher changes " + ", ".join(f"`{f}()`" for f in changed))
+    if not parts:
+        if written:
+            return "only the functions the student pairs write"
+        return "the teacher's constants and comments change"
+    return "; ".join(parts)
+
+
 def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
     """Return the goals file that explains one period: its first part, for the teacher and student pairs."""
     title = PERIOD_TITLES[(day, period)]
@@ -1015,10 +1052,16 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
             + "\n".join(f"- `{name}`" for name in new_files)
         )
     if grown_files:
-        sections.append(
-            "Files that grow this period:\n\n"
-            + "\n".join(f"- `{name}`" for name in grown_files)
-        )
+        lines = []
+        for name in grown_files:
+            mine = {
+                function
+                for (row_day, row_period, file_name, function) in STUDENT_FUNCTIONS
+                if (row_day, row_period) == (day, period) and file_name == name
+            }
+            note = growth_note(name, files_before[name], files[name], mine)
+            lines.append(f"- `{name}`: {note}" if note else f"- `{name}`")
+        sections.append("Files that grow this period:\n\n" + "\n".join(lines))
     if written:
         sections.append(
             "Functions the student pairs write this period:\n\n" + "\n".join(written)

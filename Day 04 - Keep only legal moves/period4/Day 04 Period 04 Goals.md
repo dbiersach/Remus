@@ -13,7 +13,7 @@ The demo is `demo_practice_positions.py` in the `student` folder, with the answe
 
 Files that grow this period:
 
-- `test_legal_moves.py`
+- `test_legal_moves.py`: 3 new tests
 
 ## The changes and why
 

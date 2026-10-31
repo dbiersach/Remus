@@ -11,8 +11,8 @@ By the end of this period, each student pair can:
 
 Files that grow this period:
 
-- `move_generation.py`
-- `test_move_generation.py`
+- `move_generation.py`: the teacher adds `pawn_moves_to()`, `pawn_captures()`, `piece_moves()`, `pseudo_legal_moves()`; the teacher changes `main()`
+- `test_move_generation.py`: 4 new tests
 
 Functions the student pairs write this period:
 

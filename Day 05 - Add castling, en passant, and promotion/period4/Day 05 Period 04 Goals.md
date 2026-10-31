@@ -21,8 +21,8 @@ New files this period:
 
 Files that grow this period:
 
-- `make_move.py`
-- `test_special_moves.py`
+- `make_move.py`: the teacher changes `make_move()`, `main()`
+- `test_special_moves.py`: 3 new tests
 
 ## The changes and why
 

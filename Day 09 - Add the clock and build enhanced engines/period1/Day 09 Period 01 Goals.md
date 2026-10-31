@@ -11,10 +11,10 @@ By the end of this period, each student pair can:
 
 Files that grow this period:
 
-- `search.py`
-- `test_game.py`
-- `test_search.py`
-- `uci_engine.py`
+- `search.py`: the teacher adds `format_info()`, `think_move()`; the teacher changes `main()`
+- `test_game.py`: 1 new test
+- `test_search.py`: 3 new tests
+- `uci_engine.py`: the teacher adds `thinking_time()`; the teacher changes `main()`
 
 Functions the student pairs write this period:
 

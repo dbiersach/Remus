@@ -15,8 +15,8 @@ New files this period:
 
 Files that grow this period:
 
-- `search.py`
-- `test_search.py`
+- `search.py`: the teacher adds `check_time()`, `alpha_beta_with_quiescence()`; the teacher changes `quiescence()`
+- `test_search.py`: 3 new tests
 
 Functions the student pairs write this period:
 

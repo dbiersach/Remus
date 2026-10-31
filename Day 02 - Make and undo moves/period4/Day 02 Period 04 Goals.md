@@ -15,7 +15,7 @@ New files this period:
 
 Files that grow this period:
 
-- `test_make_move.py`
+- `test_make_move.py`: 4 new tests
 
 Functions the student pairs write this period:
 

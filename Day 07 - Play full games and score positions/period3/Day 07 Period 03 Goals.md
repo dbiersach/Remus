@@ -19,8 +19,8 @@ New files this period:
 
 Files that grow this period:
 
-- `test_game.py`
-- `uci_engine.py`
+- `test_game.py`: 1 new test
+- `uci_engine.py`: the teacher changes `set_position()`, `main()`
 
 Functions the student pairs write this period:
 

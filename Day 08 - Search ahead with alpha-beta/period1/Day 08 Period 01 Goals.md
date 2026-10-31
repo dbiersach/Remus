@@ -11,9 +11,9 @@ By the end of this period, each student pair can:
 
 Files that grow this period:
 
-- `search.py`
-- `test_search.py`
-- `uci_engine.py`
+- `search.py`: the teacher adds `white_score()`, `minimax()`, `best_move()`, `negamax_move()`; the teacher changes `main()`
+- `test_search.py`: 5 new tests
+- `uci_engine.py`: the teacher changes `main()`
 
 Functions the student pairs write this period:
 

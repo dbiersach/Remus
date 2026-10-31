@@ -15,8 +15,8 @@ New files this period:
 
 Files that grow this period:
 
-- `attacks.py`
-- `test_legal_moves.py`
+- `attacks.py`: the teacher adds `find_king()`; the teacher changes `main()`
+- `test_legal_moves.py`: 3 new tests
 
 Functions the student pairs write this period:
 

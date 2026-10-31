@@ -11,9 +11,9 @@ By the end of this period, each student pair can:
 
 Files that grow this period:
 
-- `make_move.py`
-- `move_generation.py`
-- `test_special_moves.py`
+- `make_move.py`: the teacher changes `make_move()`, `undo_move()`, `main()`
+- `move_generation.py`: the teacher adds `en_passant_captures()`; the teacher changes `pseudo_legal_moves()`
+- `test_special_moves.py`: 3 new tests
 
 Functions the student pairs write this period:
 
