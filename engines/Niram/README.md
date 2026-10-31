@@ -43,7 +43,7 @@ scanning attack test) stay in Python only.
 
 The designer's league ran on Rust copies of all 12 Remus versions, from Niram-WHITE
 to Niram. Only Niram is kept. The league's games stay in
-`misc/games/remus_games.pgn`, and `uv run misc/scripts/version_league.py --niram --rate-only
+`misc/games/remus_games.pgn`, and `uv run misc/designer/version_league.py --niram --rate-only
 --event "Niram league 1"` rates them, with Niram-WHITE pinned at 0.
 
 ## Install Rust on Windows
@@ -108,10 +108,10 @@ cargo run --release -- perft 5          # 4,865,609 from the start position
 The matching Python benchmark runs from the repository folder:
 
 ```bash
-uv run misc/scripts/remus_benchmark.py GOLD      # Remus-GOLD, depth 4
+uv run misc/designer/remus_benchmark.py GOLD      # Remus-GOLD, depth 4
 ```
 
-`misc/scripts/engine_parity.py` checks that Niram thinks exactly like Remus-GOLD,
+`misc/designer/engine_parity.py` checks that Niram thinks exactly like Remus-GOLD,
 on 49 positions that cover openings and book trap lines, tactics, checks,
 castling, en passant, promotion, endgames, repetition, the fifty-move rule, and
 mate puzzles. For each position it compares the evaluation, the legal moves in
@@ -120,14 +120,14 @@ depth's score, node count, and principal variation, and the best move. The
 program's `parity` command picks the deepest search that stays within a node
 budget, and Remus repeats that search on every CPU core. `book` prints Niram's
 whole opening book for the same comparison. The latest results are in
-[misc/docs/engine_comparison/remus-niram same algorithms.md](../../misc/docs/engine_comparison/remus-niram%20same%20algorithms.md).
+[misc/designer/remus-niram same algorithms.md](../../misc/designer/remus-niram%20same%20algorithms.md).
 
 ```bash
-uv run misc/scripts/engine_parity.py                  # 25,000 nodes a search
-uv run misc/scripts/engine_parity.py --nodes 100000   # Deeper searches (Remus takes longer)
+uv run misc/designer/engine_parity.py                  # 25,000 nodes a search
+uv run misc/designer/engine_parity.py --nodes 100000   # Deeper searches (Remus takes longer)
 ```
 
 To play Niram in Lucas Chess, run `cargo build --release` and add
 `target/release/niram.exe` as a UCI engine, the same way the
-[Lucas Chess guide](../../misc/docs/course/lucas_chess_guide.md) adds Remus. It needs no
+[Lucas Chess guide](../../misc/students/lucas_chess_guide.md) adds Remus. It needs no
 batch file.

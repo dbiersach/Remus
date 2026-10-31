@@ -7,7 +7,7 @@
 //! niram     bench [depth]        Time the search on ten positions
 //! niram     perft [depth] [fen]  Count the leaf positions of the legal move tree
 //! niram     parity FILE NODES    Print what the engine sees and chooses in each
-//!                                position of FILE, for misc/scripts/engine_parity.py
+//!                                position of FILE, for misc/designer/engine_parity.py
 //! niram     book                 Print every position and move of the opening book
 //! ```
 
@@ -28,7 +28,7 @@ use crate::uci_engine::set_position;
 pub type EvalFn = fn(&State) -> i32;
 
 pub const BENCH_POSITIONS: [&str; 10] = [
-    // The ten positions of misc/scripts/remus_benchmark.py (and the Day 8 compare_search.py)
+    // The ten positions of misc/designer/remus_benchmark.py (and the Day 8 compare_search.py)
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
     "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
     "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5",
@@ -176,7 +176,7 @@ fn search_to_depth(command: &str, think: ThinkFn, depth: i32) -> (Vec<String>, M
     (lines, best, info.nodes)
 }
 
-/// Print, for each position of the file, what misc/scripts/engine_parity.py compares
+/// Print, for each position of the file, what misc/designer/engine_parity.py compares
 /// with Remus: the position key, the evaluation, the legal moves in generation
 /// order and in search order, the book moves, and a search to a fixed depth.
 ///
@@ -226,7 +226,7 @@ fn parity(file_path: &str, budget: u64, think: ThinkFn, evaluate: EvalFn, use_bo
 }
 
 /// Print every position of the opening book with its moves, one position per line
-/// in key order, for misc/scripts/engine_parity.py to compare with Remus's book.
+/// in key order, for misc/designer/engine_parity.py to compare with Remus's book.
 fn print_book() {
     let book = load_book(&book_path());
     let mut keys: Vec<&String> = book.keys().collect();

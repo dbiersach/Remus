@@ -28,7 +28,7 @@ In the `student` folder these functions raise `NotImplementedError` until a stud
 
 Stands on the square and looks at each offset for one piece, such as an enemy knight. Attacks work backward: instead of asking where every enemy piece can go, the test looks out from the square. A knight attacks e5 from exactly the squares a knight on e5 could jump to, so the knight, the king, and the pawn all share this one loop, the way `jump_moves()` serves both the knight and the king.
 
-![Is e5 attacked by a Black knight?](../../misc/docs/images/boards/attack_knight_e5.svg)
+![Is e5 attacked by a Black knight?](../../misc/students/images/boards/attack_knight_e5.svg)
 
 *To test e5 (yellow), the code looks at the eight knight squares around it (gray). It finds a Black knight on f3, so e5 is attacked (the red arrow).*
 
@@ -36,7 +36,7 @@ Stands on the square and looks at each offset for one piece, such as an enemy kn
 
 Looks diagonally for an enemy pawn on the row behind the square, from the attacker's point of view. A pawn captures diagonally even though it moves straight, so its two offsets differ from its push, and they depend on its piece color.
 
-![A White pawn on e4 moves to e5 but attacks d5 and f5](../../misc/docs/images/boards/attack_pawn.svg)
+![A White pawn on e4 moves to e5 but attacks d5 and f5](../../misc/students/images/boards/attack_pawn.svg)
 
 *The White pawn on e4 moves straight to e5 (green) but attacks d5 and f5 (red). So the test for d5 looks one row down and one column to each side for a White pawn.*
 

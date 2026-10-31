@@ -27,7 +27,7 @@ In the `student` folder these functions raise `NotImplementedError` until a stud
 
 Returns the square of the pawn that an en passant capture removes: the capturer's starting row and the landing column. It is the only capture where the victim is not on the landing square.
 
-![White captures en passant from e5 to d6, removing the pawn on d5](../../misc/docs/images/boards/en_passant.svg)
+![White captures en passant from e5 to d6, removing the pawn on d5](../../misc/students/images/boards/en_passant.svg)
 
 *Black has just pushed d7 to d5. The White pawn on e5 captures en passant: it lands on d6 (yellow), and the Black pawn it removes stands on d5 (red), on the capturer's starting row, rank 5, in the landing column, d.*
 

@@ -18,7 +18,7 @@ National Synchrotron Light Source II (NSLS-II), one of the brightest X-ray sourc
 in the world, and shine its X-ray beam through the powder.
 
 ![The experiment: X-rays go through a powder and make rings on a detector, and the
-rings turn into a pattern of peaks](../../misc/docs/images/phase_hunt/experiment.png)
+rings turn into a pattern of peaks](../../misc/students/images/phase_hunt/experiment.png)
 
 A powder is millions of tiny crystals. In a crystal, the atoms sit in rows, as
 neatly as the squares of a chessboard. The rows bounce the X-rays off at a few
@@ -35,7 +35,7 @@ fingerprints of ten real phases, with their four strongest peaks each, in the
 dictionary `LIBRARY`.
 
 ![The fingerprints of the ten phases in the library, each a row of four colored
-peaks, with where you meet each one](../../misc/docs/images/phase_hunt/fingerprints.png)
+peaks, with where you meet each one](../../misc/students/images/phase_hunt/fingerprints.png)
 
 Look closely: gold and silver have almost the same fingerprint. That will matter
 later.
@@ -46,7 +46,7 @@ A powder can hold two or three phases at once. Then the pattern shows **all** th
 peaks together, and the job is to work out which fingerprints were mixed. Here is
 powder 23 from the benchmark. `make_pattern(23)` makes it.
 
-![A pattern with eight peaks. Which crystals made them?](../../misc/docs/images/phase_hunt/mystery_powder.png)
+![A pattern with eight peaks. Which crystals made them?](../../misc/students/images/phase_hunt/mystery_powder.png)
 
 Real patterns are messy, and `make_pattern()` makes them messy on purpose. A real
 peak lands a little away from its library angle (up to 0.15 degrees here), and a
@@ -80,7 +80,7 @@ at every peak twice:
 3. Then -1 for each phase in the guess, so that a simpler explanation wins a tie.
 
 ![Three guesses for powder 23, each peak marked explained, left over, or missing,
-with the points for each](../../misc/docs/images/phase_hunt/scoring.png)
+with the points for each](../../misc/students/images/phase_hunt/scoring.png)
 
 Silicon alone explains 4 peaks and leaves 4 over: 4 - 4 - 0 - 1 = -1 point.
 Silicon + halite explains all 8: 8 - 0 - 0 - 2 = 6 points. Adding zincite explains
@@ -99,7 +99,7 @@ the phase back out (`pop`), and remembers the phase with the best score. If that
 phase raises the score, it stays. If no phase helps, the guess is finished.
 
 ![Greedy on powder 23: step 1 picks silicon, step 2 picks halite, step 3 finds
-nothing that helps and stops](../../misc/docs/images/phase_hunt/greedy_steps.png)
+nothing that helps and stops](../../misc/students/images/phase_hunt/greedy_steps.png)
 
 In step 1, silicon and halite tie at -1. Greedy keeps the first one it found,
 silicon, and picks up halite in step 2. On powder 23 greedy gets the right answer.
@@ -112,7 +112,7 @@ as well. Gold comes first in the library, so greedy says "anatase and gold" and
 sounds just as sure as when it is right.
 
 ![Gold's and silver's four peaks side by side, each student pair inside the 0.3 degree
-tolerance](../../misc/docs/images/phase_hunt/gold_and_silver.png)
+tolerance](../../misc/students/images/phase_hunt/gold_and_silver.png)
 
 Run `phase_hunt.py` in VS Code when both functions pass their tests. Greedy names 166 of
 the 200 benchmark powders right and 34 wrong. In period 3 you write `search()`, which
@@ -128,7 +128,7 @@ beamline, Brookhaven's Crystallography Companion Agent names phases while the da
 comes in. The CrystalShift program (Cornell, 2025) and the Dara program (Berkeley Lab,
 2025) search a tree of phase sets the way your code will in period 3, on real
 patterns from the synchrotrons SSRL and CHESS and from a self-driving lab.
-`misc/docs/course/science_tree_search_survey.md` lists the papers.
+`misc/designer/science_tree_search_survey.md` lists the papers.
 
 ## Words to know
 

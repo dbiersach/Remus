@@ -14,7 +14,7 @@ By the end of Day 9, each student pair can:
 
 White has castled kingside: king on g1, pawns on f2, g2, and h2. Each of the king's three files has a White pawn one or two squares in front, so Remus-GRAY adds 3 x 15 = 45 points. Push the h-pawn to h4, and the h-file no longer shelters the king: 30 points.
 
-![White king on g1 behind pawns on f2, g2, and h2](../../../misc/docs/images/boards/gray_shield_full.svg) ![The same position after the h-pawn moves to h4](../../../misc/docs/images/boards/gray_shield_broken.svg)
+![White king on g1 behind pawns on f2, g2, and h2](../../../misc/students/images/boards/gray_shield_full.svg) ![The same position after the h-pawn moves to h4](../../../misc/students/images/boards/gray_shield_broken.svg)
 
 *Left: the three green pawns on f2, g2, and h2 shield the king on g1, 45 points. Right: after h2 to h4, no White pawn stands on h2 or h3 (the red squares), so only f2 and g2 count, 30 points. Black's queen is still on d8, so the bonus counts in both.*
 
@@ -30,7 +30,7 @@ A scan of the board for the enemy queen and the king, and up to six squares chec
 
 ## Measured against Remus-WHITE
 
-Each version searched the ten positions of the designer's benchmark, `misc/scripts/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
+Each version searched the ten positions of the designer's benchmark, `misc/designer/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
 
 | Version | Positions to finish depth 4 | Share of Remus-WHITE's | Positions per second | Average depth in 5 seconds |
 | --- | ---: | ---: | ---: | ---: |
@@ -57,4 +57,4 @@ Rewards each pawn that shelters the king on its own file or a neighbor, one or t
 
 ## Check it
 
-Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: Remus-GRAY plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-GRAY plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/scripts/version_match.py`, which plays the games.
+Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: Remus-GRAY plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-GRAY plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/designer/version_match.py`, which plays the games.

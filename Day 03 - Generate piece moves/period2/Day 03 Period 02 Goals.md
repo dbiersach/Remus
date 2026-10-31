@@ -32,7 +32,7 @@ In the `student` folder these functions raise `NotImplementedError` until a stud
 
 Hands the king's eight one-step jumps to `jump_moves()`, which the knight uses too. Two pieces share one helper because both jump to fixed squares; only their list of jumps differs.
 
-![A knight on d4 and its 8 squares](../../misc/docs/images/boards/jump_knight_d4.svg) ![A knight on a1 and its 2 squares](../../misc/docs/images/boards/jump_knight_a1.svg) ![A king on a1 and its 3 squares](../../misc/docs/images/boards/jump_king_a1.svg)
+![A knight on d4 and its 8 squares](../../misc/students/images/boards/jump_knight_d4.svg) ![A knight on a1 and its 2 squares](../../misc/students/images/boards/jump_knight_a1.svg) ![A king on a1 and its 3 squares](../../misc/students/images/boards/jump_king_a1.svg)
 
 *Each green square is a jump that stays on the board. A knight on d4 has all 8. On a1 the knight keeps 2 of its 8 jumps and the king keeps 3 of its 8 steps, because the others land off the edge.*
 
