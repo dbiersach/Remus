@@ -261,6 +261,40 @@ change the same search loop in `search.py`, and GOLD holds one copy of that loop
 with all ten ideas inside it. GREEN adds the most lines of any single enhancement, 142,
 because its book reads moves in SAN and so loads `notation.py` as well.
 
+### Remus-GOLD, script by script
+
+The next table splits Remus-GOLD's 1,491 code lines among its 15 engine scripts, the
+files in `engines/instructor/11 Remus-GOLD - All enhancements` that a game loads. It
+counts the same way as the table above: a docstring does not count, even when it runs
+over many lines, and neither does a comment line or a blank line. A line that holds
+code and ends with a comment counts once. The opening book's move list,
+`opening_book.txt`, is data rather than Python, so it does not count.
+
+| Script | Code lines |
+| --- | ---: |
+| [`attacks.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/attacks.py) | 105 |
+| [`board.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/board.py) | 50 |
+| [`evaluation.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/evaluation.py) | 208 |
+| [`fen.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/fen.py) | 81 |
+| [`game_state.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/game_state.py) | 54 |
+| [`legal_moves.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/legal_moves.py) | 44 |
+| [`make_move.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/make_move.py) | 112 |
+| [`move_generation.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/move_generation.py) | 135 |
+| [`move_ordering.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/move_ordering.py) | 44 |
+| [`moves.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/moves.py) | 26 |
+| [`notation.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/notation.py) | 71 |
+| [`opening_book.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/opening_book.py) | 66 |
+| [`search.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/search.py) | 380 |
+| [`transposition_table.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/transposition_table.py) | 37 |
+| [`uci_engine.py`](../../../engines/instructor/11%20Remus-GOLD%20-%20All%20enhancements/uci_engine.py) | 78 |
+| **Total, 15 scripts** | **1,491** |
+
+`search.py` holds a quarter of GOLD's code, 380 lines, because six of the ten
+enhancements change it: draw sense, principal variation search, null-move pruning,
+late move reductions, killer moves, and the transposition table. `evaluation.py` comes
+next with 208 lines, because king safety, the mating bonus, and pawn structure each
+add a term to the score.
+
 ## Puzzle questions
 
 1. Why does every enhanced engine play the same opponent instead of each other?
