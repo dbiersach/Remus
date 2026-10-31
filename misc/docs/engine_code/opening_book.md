@@ -1,6 +1,6 @@
 # opening_book.py: Play known openings without thinking
 
-*Lives in Remus-GOLD, in the teacher's `engines/instructor/11 Remus-GOLD - All enhancements`, the engine of Day 10.*
+*Lives in Remus-GOLD, in `engines/instructor/11 Remus-GOLD - All enhancements`, the engine of Day 10, and in its own enhanced engine (Day 9).*
 
 ## The big picture
 

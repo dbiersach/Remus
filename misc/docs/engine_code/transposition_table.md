@@ -1,6 +1,6 @@
 # transposition_table.py: Remember positions already searched
 
-*Lives in Remus-GOLD, in the teacher's `engines/instructor/11 Remus-GOLD - All enhancements`, the engine of Day 10.*
+*Lives in Remus-GOLD, in `engines/instructor/11 Remus-GOLD - All enhancements`, the engine of Day 10, and in its own enhanced engine (Day 9).*
 
 ## The big picture
 
@@ -12,7 +12,7 @@ value is what the search learned about it.
 
 ## Where this piece fits
 
-transposition_table.py uses game_state.py and moves.py. Only `upgraded_search()` in search.py uses it (Day 10).
+transposition_table.py uses game_state.py and moves.py. Only `upgraded_search()` in search.py uses it, in Remus-RED and Remus-GOLD (Day 9).
 
 - **Uses:** [`moves.py`](moves.md)
 - **Uses only in its self-check:** [`fen.py`](fen.md), [`game_state.py`](game_state.md)
