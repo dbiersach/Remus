@@ -13,11 +13,11 @@ New files this period:
 
 - `game_end.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `fen.py`: the teacher changes `state_from_fen()`
-- `game_state.py`: the teacher adds `position_key()`; the teacher changes `new_game()`
-- `make_move.py`: the teacher changes `make_move()`, `undo_move()`, `state_snapshot()`
+- `fen.py`: changes `state_from_fen()`
+- `game_state.py`: adds `position_key()`; changes `new_game()`
+- `make_move.py`: changes `make_move()`, `undo_move()`, `state_snapshot()`
 - `test_game.py`: 4 new tests
 
 Functions the student pairs write this period:
@@ -44,7 +44,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:50 | Chess refresher: stalemate, repetition, the fifty and 75-move rules, and insufficient material, with a six-position quiz. |
-| 8:50 to 9:00 | Slides: the halfmove clock and `position_key()`, which the teacher writes. |
+| 8:50 to 9:00 | Slides: the halfmove clock and `position_key()`, both in the given code. |
 | 9:00 to 9:45 | Student pairs write `insufficient_material()` and `game_result()` in `game_end.py`. |
 | 9:45 to 10:00 | Student pairs check their answers on the quiz positions, then show and choose. |
 

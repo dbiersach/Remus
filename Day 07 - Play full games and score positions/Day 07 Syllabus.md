@@ -29,7 +29,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:50 | Chess refresher: stalemate, repetition, the fifty and 75-move rules, and insufficient material, with a six-position quiz. |
-| 8:50 to 9:00 | Slides: the halfmove clock and `position_key()`, which the teacher writes. |
+| 8:50 to 9:00 | Slides: the halfmove clock and `position_key()`, both in the given code. |
 | 9:00 to 9:45 | Student pairs write `insufficient_material()` and `game_result()` in `game_end.py`. |
 | 9:45 to 10:00 | Student pairs check their answers on the quiz positions, then show and choose. |
 
@@ -52,7 +52,7 @@ By 4:30, each student pair can:
 | --- | --- |
 | 1:00 to 1:10 | Slides: a brain is a function that picks a move. Random picks any legal move, and greedy takes the most valuable capture. |
 | 1:10 to 1:40 | Student pairs write `random_move()` and `greedy_move()`. |
-| 1:40 to 2:00 | The class reads the Day 5 `uci_engine.py` line by line. The teacher extends it with FEN positions and a choice of brains. |
+| 1:40 to 2:00 | The class reads the Day 5 `uci_engine.py` line by line, then the given version in this folder, which adds FEN positions and a choice of brains. |
 | 2:00 to 2:15 | Student pairs register `remus.bat` from the `student` folder in Lucas Chess again and play greedy Remus. |
 | 2:15 to 2:30 | Student pairs run `play_match.py`: random Remus against greedy Remus for 20 games, with the score at the end. |
 

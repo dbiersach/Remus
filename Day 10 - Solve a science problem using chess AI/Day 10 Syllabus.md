@@ -22,7 +22,7 @@ By 4:30, each student pair can:
 | | 12:00 to 1:00 | Lunch | |
 | P3 | 1:00 to 2:30 | The phase hunt: search every set, and verify | `search()` in `phase_hunt.py` (13 lines) |
 | | 2:30 to 3:00 | Break | |
-| P4 | 3:00 to 4:30 | Science results, take-home, and wrap-up | Nothing: teacher code |
+| P4 | 3:00 to 4:30 | Science results, take-home, and wrap-up | Nothing: given code |
 
 ## Period 1, 8:30 to 10:00: Science AI: hidden_peak.py
 

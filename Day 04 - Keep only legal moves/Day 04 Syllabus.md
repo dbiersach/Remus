@@ -41,7 +41,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Chess refresher on the demonstration board: check, pins, and discovered check. |
-| 10:45 to 11:00 | Slides: a square is attacked if a piece could capture there. Stand on the square and look outward like a "super piece". The teacher writes `attacked_by_knight()` and the sliding-line part. |
+| 10:45 to 11:00 | Slides: a square is attacked if a piece could capture there. Stand on the square and look outward like a "super piece". The given code holds `attacked_by_knight()` and the sliding-line part. |
 | 11:00 to 11:40 | Student pairs write `piece_at_offsets()`, then `attacked_by_pawn()` and `attacked_by_king()` on top of it. |
 | 11:40 to 11:50 | Student pairs run the attack tests and the file's self-check. |
 | 11:50 to 12:00 | Show and choose for `piece_at_offsets()`. |

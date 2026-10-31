@@ -40,7 +40,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Unplugged warm-up, "Shade the reach": student pairs shade every square a knight on d4, a knight on a1, and a bishop on c1 can reach, and compare counts with the next student pair (8, 2, and 7). |
-| 10:45 to 11:00 | Slides: an offset list for the knight. The teacher writes `knight_moves()` on the projector. |
+| 10:45 to 11:00 | Slides: an offset list for the knight. The teacher shows the given `knight_moves()` on the projector. |
 | 11:00 to 11:20 | Student pairs write `king_moves()` the same way and pass the jumping-piece tests: a knight on a1 has 2 moves and a king on a1 has 3. |
 | 11:20 to 11:40 | Student pairs run `show_board.py`, which draws an arrow for every move their generator returns, and count the arrows. |
 | 11:40 to 12:00 | Student pairs try their own squares, such as a king in a corner, and predict the arrows before they run the file. |
@@ -52,7 +52,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Slides: a sliding piece walks one direction until the edge or the first piece, and captures that piece only if it is an enemy. |
-| 1:15 to 2:00 | Student pairs write `slide()` in `move_generation.py`. The teacher's `slider_moves()` calls it with the rook, bishop, and queen directions. |
+| 1:15 to 2:00 | Student pairs write `slide()` in `move_generation.py`. The given `slider_moves()` calls it with the rook, bishop, and queen directions. |
 | 2:00 to 2:15 | Exercise: a rook on an empty board has 14 moves. Student pairs check it with the tests and the arrow picture. |
 | 2:15 to 2:30 | Show and choose for `slide()`. |
 
@@ -62,7 +62,7 @@ By 4:30, each student pair can:
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:15 | Slides: pawns move forward toward row 0 for White, push one or two squares, and capture diagonally. The teacher writes the captures and the four promotion choices. |
+| 3:00 to 3:15 | Slides: pawns move forward toward row 0 for White, push one or two squares, and capture diagonally. The given code holds the captures and the four promotion choices. |
 | 3:15 to 3:55 | Student pairs write `pawn_pushes()`: the single step and the double step from the start rank. |
 | 3:55 to 4:15 | Student pairs run the tests and the arrow picture on the start position. |
 | 4:15 to 4:30 | Checkpoint: `pseudo_legal_moves()` finds 20 moves from the start. |

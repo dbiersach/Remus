@@ -9,11 +9,11 @@ By the end of this period, each student pair can:
 
 ## The files
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `search.py`: the teacher adds `white_score()`, `minimax()`, `best_move()`, `negamax_move()`; the teacher changes `main()`
+- `search.py`: adds `white_score()`, `minimax()`, `best_move()`, `negamax_move()`; changes `main()`
 - `test_search.py`: 5 new tests
-- `uci_engine.py`: the teacher changes `main()`
+- `uci_engine.py`: changes `main()`
 
 Functions the student pairs write this period:
 
@@ -34,7 +34,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Unplugged warm-up, "Paper minimax": student pairs back up max and min on a printed two-ply tree and circle the best move. A seven-student human tree can act it out at the front of the room. |
-| 8:45 to 9:00 | The teacher writes `minimax()` to depth 2 with a node counter, and student pairs compare its answer with their worksheets. |
+| 8:45 to 9:00 | The given code holds `minimax()` to depth 2 with a node counter, and student pairs compare its answer with their worksheets. |
 | 9:00 to 9:10 | Slides: negamax, the same search in one function: flip the sign, wrap make and undo in `try/finally`, and score checkmate as `-(MATE_SCORE - ply)`. |
 | 9:10 to 9:50 | Student pairs write `negamax()` until the tests show it agrees with minimax and leaves the root state unchanged. |
 | 9:50 to 10:00 | Show and choose for `negamax()`. |

@@ -5,10 +5,10 @@ Map the Python files of Remus-WHITE across the course. The script writes two thi
 into misc/docs/engine_comparison/remus_program_overview.md:
 
 1. An import diagram, misc/docs/images/code/remus_white_imports.svg: one box per
-   file, with an arrow from each file to every file that imports it.
-2. A table with one row per file and one column per day and period, which marks the
-   periods where the file appears, where student pairs edit it, where the teacher's
-   code in it grows, and where a goals file names it.
+   engine file, with an arrow from each file to every file that imports it.
+2. A table with one row per engine file (the files a game loads) and one column per
+   day and period, which marks the period where the file appears and the periods
+   where student pairs edit it.
 
 The table comes from the Day folders: each period's instructor folder and its
 "Day NN Period NN Goals.md" file. The script lays out the diagram itself: each
@@ -642,12 +642,8 @@ def course_marks(files: list[str]) -> tuple[list, dict]:
             # Day 10 and Day 9 periods 2 to 4 hold no engine code
             if (instructor / "board.py").exists():
                 present = {path.name for path in instructor.glob("*.py")}
-            has_tests = (
-                bool(present) and (period_folder / "student" / "run_tests.py").exists()
-            )
             text = goals_text(period_folder)
             new = bullet_list(text, "New files this period:")
-            grows = bullet_list(text, "Files that grow this period:")
             written = bullet_list(
                 text, "Functions the student pairs write this period:"
             )
@@ -660,14 +656,8 @@ def course_marks(files: list[str]) -> tuple[list, dict]:
                     mark += "N"
                 if names_file(written, name):
                     mark += "E"
-                if names_file(grows, name):
-                    mark += "T"
-                if enhanced and name in ENHANCED_FILES:
-                    mark += "X"
-                if not mark and names_file(text, name):
-                    mark = "M"
-                if not mark and name == "run_tests.py" and (has_tests or enhanced):
-                    mark = "M"
+                if enhanced and name in ENHANCED_FILES and "E" not in mark:
+                    mark += "E"
                 if mark:
                     marks[name][(day, period)] = mark
             if present:
@@ -761,33 +751,23 @@ def section_text(files: list[str], edges: list[tuple[str, str]]) -> str:
     text += (
         "![Import diagram of Remus-WHITE](../images/code/remus_white_imports.svg)\n\n"
     )
-    text += "### When each file appears and changes\n\n"
+    text += "### When each engine file appears and changes\n\n"
     text += paragraph(
-        "Each row is one file, in the order the class meets it: by the period the "
-        "file first appears, then by name. Each column is a period that touches a "
-        "Remus-WHITE file; D07 P2 means Day 7, period 2. A cell holds one or more "
-        "letters:"
+        "The table follows the same files as the diagram, the ones a game of chess "
+        "loads. Each row is one file, in the order the class meets it. Each column "
+        "is a period that brings a new engine file or has the student pairs edit "
+        "one; D07 P2 means Day 7, period 2. N marks the period the file first "
+        "appears, and E marks a period when the student pairs write code in it. "
+        "On Day 9, periods 2 and 3, each student pair edits its own enhanced "
+        "engine's copy of the file in `engines/student`. Between those periods the "
+        "student pairs type nothing in the file: any other code it gains is "
+        "already written in that period's folder when the student pairs open it."
     )
-    text += (
-        "| Mark | Meaning |\n"
-        "| --- | --- |\n"
-        "| N | New: the file first appears in this period's folder |\n"
-        "| E | Edited: the student pairs write a function in this file |\n"
-        "| X | Edited in an enhanced engine: the student pairs change their own copy "
-        "of this file in `engines/student` |\n"
-        "| T | Teacher code: the file grows with code the teacher writes before "
-        "class, and the student pairs type none of it. The period's goals file "
-        "names the functions the teacher adds or changes |\n"
-        "| M | Mentioned: the period's goals file names the file, which the student "
-        "pairs run or read |\n\n"
-    )
-    text += paragraph(
-        "Read a row from left to right: the N cell is the period the file arrives, "
-        "and the last E or X cell is the last period a student pair changes it. "
-        "Student pairs run `run_tests.py` in every period that has tests. "
-        "Day 10 holds only the science files, so it has no column."
-    )
-    text += table_text(files) + "\n"
+    engine_files = []
+    for name in files:
+        if name[:-3] in drawn:
+            engine_files.append(name)
+    text += table_text(engine_files) + "\n"
     return text
 
 

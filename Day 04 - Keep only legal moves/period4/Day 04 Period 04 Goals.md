@@ -11,7 +11,7 @@ By the end of this period, each student pair can:
 
 The demo is `demo_practice_positions.py` in the `student` folder, with the answers in `demo_practice_positions_instructor.py` in the `instructor` folder beside it. Open `demo_practice_positions.py` in VS Code and run it with the Run Python File button (the triangle at the top right of the editor).
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
 - `test_legal_moves.py`: 3 new tests
 

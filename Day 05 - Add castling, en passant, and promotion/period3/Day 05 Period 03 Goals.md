@@ -9,10 +9,10 @@ By the end of this period, each student pair can:
 
 ## The files
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `make_move.py`: the teacher changes `make_move()`, `undo_move()`, `main()`
-- `move_generation.py`: the teacher adds `en_passant_captures()`; the teacher changes `pseudo_legal_moves()`
+- `make_move.py`: changes `make_move()`, `undo_move()`, `main()`
+- `move_generation.py`: adds `en_passant_captures()`; changes `pseudo_legal_moves()`
 - `test_special_moves.py`: 3 new tests
 
 Functions the student pairs write this period:

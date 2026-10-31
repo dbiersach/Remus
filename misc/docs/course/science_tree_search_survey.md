@@ -269,7 +269,7 @@ Dara's "keep a phase only if it improves the fit by 2 percent" rule plays.
 
 ### Who writes what
 
-- **Teacher writes:** the phase library, `matches()`, `predicted_peaks()`,
+- **Given code:** the phase library, `matches()`, `predicted_peaks()`,
   `make_pattern(seed)`, the `Hunt` record, `judge()`, and the benchmark.
 - **Student pairs write, period 2 (28 lines):** `score(phases, measured)`, the evaluation
   (11 lines), and `greedy_phases(measured)`, the greedy agent with append and pop

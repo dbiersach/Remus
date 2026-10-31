@@ -3000,8 +3000,8 @@ DAY_GUIDES = {
                     (
                         "Show and choose: two or three student pairs show their "
                         "`parse_square()` on the projector, the class picks one for "
-                        "clarity, and the teacher adds it to the class repository with"
-                        " the student pair's team name in `CONTRIBUTORS.md`."
+                        "clarity, and the teacher adds the student pair's team name to "
+                        "`CONTRIBUTORS.md`."
                     ),
                 ),
                 (
@@ -3062,8 +3062,8 @@ DAY_GUIDES = {
                 (
                     55,
                     (
-                        "Slides: `assert` and pytest. The teacher breaks a function on"
-                        " purpose and the class reads the failing test together."
+                        "Slides: `assert` and pytest. A slide shows a function with a "
+                        "mistake in it, and the class reads the failing test together."
                     ),
                 ),
                 (
@@ -3138,8 +3138,8 @@ DAY_GUIDES = {
                 (
                     75,
                     (
-                        "Show and choose: the class picks one `move_from_uci()` for "
-                        "the class repository."
+                        "Show and choose: the class picks one `move_from_uci()`, and the "
+                        "teacher adds its student pair's team name to `CONTRIBUTORS.md`."
                     ),
                 ),
             ],
@@ -3245,8 +3245,8 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Slides: an offset list for the knight. The teacher writes "
-                        "`knight_moves()` on the projector."
+                        "Slides: an offset list for the knight. The teacher shows the "
+                        "given `knight_moves()` on the projector."
                     ),
                 ),
                 (
@@ -3284,7 +3284,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Student pairs write `slide()` in `move_generation.py`. The teacher's "
+                        "Student pairs write `slide()` in `move_generation.py`. The given "
                         "`slider_moves()` calls it with the rook, bishop, and queen "
                         "directions."
                     ),
@@ -3306,7 +3306,7 @@ DAY_GUIDES = {
                     0,
                     (
                         "Slides: pawns move forward toward row 0 for White, push one "
-                        "or two squares, and capture diagonally. The teacher writes "
+                        "or two squares, and capture diagonally. The given code holds "
                         "the captures and the four promotion choices."
                     ),
                 ),
@@ -3417,7 +3417,7 @@ DAY_GUIDES = {
                     (
                         "Slides: a square is attacked if a piece could capture there. "
                         'Stand on the square and look outward like a "super piece". '
-                        "The teacher writes `attacked_by_knight()` and the "
+                        "The given code holds `attacked_by_knight()` and the "
                         "sliding-line part."
                     ),
                 ),
@@ -3574,7 +3574,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Slides: the teacher's castling generation and the "
+                        "Slides: the given castling generation and the "
                         "attacked-square checks."
                     ),
                 ),
@@ -3807,7 +3807,7 @@ DAY_GUIDES = {
                     30,
                     (
                         "Student pairs write `fen_placement()` and `board_from_placement()` in"
-                        " `fen.py`. The teacher writes the other five fields."
+                        " `fen.py`. The given code holds the other five fields."
                     ),
                 ),
                 (
@@ -3865,8 +3865,8 @@ DAY_GUIDES = {
                 (
                     20,
                     (
-                        "Slides: the halfmove clock and `position_key()`, which the "
-                        "teacher writes."
+                        "Slides: the halfmove clock and `position_key()`, both in the "
+                        "given code."
                     ),
                 ),
                 (
@@ -3930,8 +3930,9 @@ DAY_GUIDES = {
                 (
                     40,
                     (
-                        "The class reads the Day 5 `uci_engine.py` line by line. The "
-                        "teacher extends it with FEN positions and a choice of brains."
+                        "The class reads the Day 5 `uci_engine.py` line by line, then the "
+                        "given version in this folder, which adds FEN positions and a "
+                        "choice of brains."
                     ),
                 ),
                 (
@@ -4035,7 +4036,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "The teacher writes `minimax()` to depth 2 with a node "
+                        "The given code holds `minimax()` to depth 2 with a node "
                         "counter, and student pairs compare its answer with their worksheets."
                     ),
                 ),
@@ -4100,7 +4101,7 @@ DAY_GUIDES = {
                     15,
                     (
                         "Slides: quiescence keeps searching captures until the "
-                        "position is quiet. The teacher writes `capture_moves()`."
+                        "position is quiet. The given code holds `capture_moves()`."
                     ),
                 ),
                 (
@@ -4130,7 +4131,7 @@ DAY_GUIDES = {
                 (
                     15,
                     (
-                        "Student pairs write `mvv_lva_score()`. The teacher writes "
+                        "Student pairs write `mvv_lva_score()`. The given code holds "
                         "`order_moves()` and the check extension."
                     ),
                 ),

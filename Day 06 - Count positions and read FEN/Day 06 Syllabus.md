@@ -64,7 +64,7 @@ By 4:30, each student pair can:
 | --- | --- |
 | 3:00 to 3:10 | Slides: the six fields of FEN, `split()`, `int()`, and `ValueError`. |
 | 3:10 to 3:30 | Student pairs work through `python_fen_fields.py`. |
-| 3:30 to 4:20 | Student pairs write `fen_placement()` and `board_from_placement()` in `fen.py`. The teacher writes the other five fields. |
+| 3:30 to 4:20 | Student pairs write `fen_placement()` and `board_from_placement()` in `fen.py`. The given code holds the other five fields. |
 | 4:20 to 4:30 | Checkpoint: every test position loads from FEN and perft matches the reference. |
 
 [`Day 06 Period 04 Goals.md`](<period4/Day 06 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.

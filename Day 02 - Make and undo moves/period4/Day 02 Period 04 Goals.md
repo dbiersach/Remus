@@ -13,7 +13,7 @@ New files this period:
 
 - `make_move.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
 - `test_make_move.py`: 4 new tests
 

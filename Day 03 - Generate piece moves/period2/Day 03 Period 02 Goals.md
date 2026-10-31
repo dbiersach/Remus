@@ -16,9 +16,9 @@ New files this period:
 - `move_generation.py`
 - `test_move_generation.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `show_board.py`: the teacher adds `python_chess_square()`, `show_moves()`; the teacher changes `main()`
+- `show_board.py`: adds `python_chess_square()`, `show_moves()`; changes `main()`
 
 Functions the student pairs write this period:
 
@@ -43,7 +43,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Unplugged warm-up, "Shade the reach": student pairs shade every square a knight on d4, a knight on a1, and a bishop on c1 can reach, and compare counts with the next student pair (8, 2, and 7). |
-| 10:45 to 11:00 | Slides: an offset list for the knight. The teacher writes `knight_moves()` on the projector. |
+| 10:45 to 11:00 | Slides: an offset list for the knight. The teacher shows the given `knight_moves()` on the projector. |
 | 11:00 to 11:20 | Student pairs write `king_moves()` the same way and pass the jumping-piece tests: a knight on a1 has 2 moves and a king on a1 has 3. |
 | 11:20 to 11:40 | Student pairs run `show_board.py`, which draws an arrow for every move their generator returns, and count the arrows. |
 | 11:40 to 12:00 | Student pairs try their own squares, such as a king in a corner, and predict the arrows before they run the file. |

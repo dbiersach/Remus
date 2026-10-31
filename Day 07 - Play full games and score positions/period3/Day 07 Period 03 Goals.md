@@ -17,10 +17,10 @@ New files this period:
 - `play_match.py`
 - `search.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
 - `test_game.py`: 1 new test
-- `uci_engine.py`: the teacher changes `set_position()`, `main()`
+- `uci_engine.py`: changes `set_position()`, `main()`
 
 Functions the student pairs write this period:
 
@@ -47,7 +47,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 1:00 to 1:10 | Slides: a brain is a function that picks a move. Random picks any legal move, and greedy takes the most valuable capture. |
 | 1:10 to 1:40 | Student pairs write `random_move()` and `greedy_move()`. |
-| 1:40 to 2:00 | The class reads the Day 5 `uci_engine.py` line by line. The teacher extends it with FEN positions and a choice of brains. |
+| 1:40 to 2:00 | The class reads the Day 5 `uci_engine.py` line by line, then the given version in this folder, which adds FEN positions and a choice of brains. |
 | 2:00 to 2:15 | Student pairs register `remus.bat` from the `student` folder in Lucas Chess again and play greedy Remus. |
 | 2:15 to 2:30 | Student pairs run `play_match.py`: random Remus against greedy Remus for 20 games, with the score at the end. |
 

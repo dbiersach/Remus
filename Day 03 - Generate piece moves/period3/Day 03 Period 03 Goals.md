@@ -9,9 +9,9 @@ By the end of this period, each student pair can:
 
 ## The files
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `move_generation.py`: the teacher adds `slider_moves()`; the teacher changes `main()`
+- `move_generation.py`: adds `slider_moves()`; changes `main()`
 - `test_move_generation.py`: 3 new tests
 
 Functions the student pairs write this period:
@@ -37,7 +37,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Slides: a sliding piece walks one direction until the edge or the first piece, and captures that piece only if it is an enemy. |
-| 1:15 to 2:00 | Student pairs write `slide()` in `move_generation.py`. The teacher's `slider_moves()` calls it with the rook, bishop, and queen directions. |
+| 1:15 to 2:00 | Student pairs write `slide()` in `move_generation.py`. The given `slider_moves()` calls it with the rook, bishop, and queen directions. |
 | 2:00 to 2:15 | Exercise: a rook on an empty board has 14 moves. Student pairs check it with the tests and the arrow picture. |
 | 2:15 to 2:30 | Show and choose for `slide()`. |
 

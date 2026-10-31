@@ -30,7 +30,7 @@ By 4:30, each student pair can:
 | --- | --- |
 | 8:30 to 8:45 | Slides: functions, parameters, `return`, type hints, and docstrings. |
 | 8:45 to 9:25 | Student pairs work through Parts #1 to #3 of `python_functions.py`: call a function, write their own, and unpack a square tuple such as `row, col = (6, 4)`. |
-| 9:25 to 9:35 | Slides: `assert` and pytest. The teacher breaks a function on purpose and the class reads the failing test together. |
+| 9:25 to 9:35 | Slides: `assert` and pytest. A slide shows a function with a mistake in it, and the class reads the failing test together. |
 | 9:35 to 9:50 | Student pairs finish Part #4, which checks their functions with `assert`. |
 | 9:50 to 10:00 | Wrap-up: each student pair says what a failing test tells them and where to look first. |
 
@@ -54,7 +54,7 @@ By 4:30, each student pair can:
 | 1:00 to 1:15 | Slides: the game state dict in `new_game()` and the `Move` dataclass with `from_square`, `to_square`, and `promotion`. |
 | 1:15 to 2:05 | Student pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, running `run_tests.py` after each. |
 | 2:05 to 2:15 | Student pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
-| 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()` for the class repository. |
+| 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()`, and the teacher adds its student pair's team name to `CONTRIBUTORS.md`. |
 
 [`Day 02 Period 03 Goals.md`](<period3/Day 02 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 

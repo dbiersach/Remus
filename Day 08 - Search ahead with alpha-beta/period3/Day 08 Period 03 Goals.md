@@ -9,9 +9,9 @@ By the end of this period, each student pair can:
 
 ## The files
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `search.py`: the teacher adds `capture_moves()`
+- `search.py`: adds `capture_moves()`
 - `test_search.py`: 1 new test
 
 Functions the student pairs write this period:
@@ -33,7 +33,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Puzzle: at depth 2 Remus takes a defended pawn with its queen. Why? The class names the horizon effect. |
-| 1:15 to 1:30 | Slides: quiescence keeps searching captures until the position is quiet. The teacher writes `capture_moves()`. |
+| 1:15 to 1:30 | Slides: quiescence keeps searching captures until the position is quiet. The given code holds `capture_moves()`. |
 | 1:30 to 2:10 | Student pairs write `quiescence()`, which may stand pat with the evaluation or try a capture that does better. |
 | 2:10 to 2:20 | Student pairs run the puzzle again: Remus keeps its queen. |
 | 2:20 to 2:30 | Show and choose for `quiescence()`. |

@@ -29,7 +29,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 8:30 to 8:45 | Unplugged warm-up, "Paper minimax": student pairs back up max and min on a printed two-ply tree and circle the best move. A seven-student human tree can act it out at the front of the room. |
-| 8:45 to 9:00 | The teacher writes `minimax()` to depth 2 with a node counter, and student pairs compare its answer with their worksheets. |
+| 8:45 to 9:00 | The given code holds `minimax()` to depth 2 with a node counter, and student pairs compare its answer with their worksheets. |
 | 9:00 to 9:10 | Slides: negamax, the same search in one function: flip the sign, wrap make and undo in `try/finally`, and score checkmate as `-(MATE_SCORE - ply)`. |
 | 9:10 to 9:50 | Student pairs write `negamax()` until the tests show it agrees with minimax and leaves the root state unchanged. |
 | 9:50 to 10:00 | Show and choose for `negamax()`. |
@@ -52,7 +52,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | Puzzle: at depth 2 Remus takes a defended pawn with its queen. Why? The class names the horizon effect. |
-| 1:15 to 1:30 | Slides: quiescence keeps searching captures until the position is quiet. The teacher writes `capture_moves()`. |
+| 1:15 to 1:30 | Slides: quiescence keeps searching captures until the position is quiet. The given code holds `capture_moves()`. |
 | 1:30 to 2:10 | Student pairs write `quiescence()`, which may stand pat with the evaluation or try a capture that does better. |
 | 2:10 to 2:20 | Student pairs run the puzzle again: Remus keeps its queen. |
 | 2:20 to 2:30 | Show and choose for `quiescence()`. |
@@ -64,7 +64,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:15 | Slides: alpha-beta cuts more when the best move comes first. Most valuable victim, least valuable attacker (MVV-LVA). |
-| 3:15 to 3:40 | Student pairs write `mvv_lva_score()`. The teacher writes `order_moves()` and the check extension. |
+| 3:15 to 3:40 | Student pairs write `mvv_lva_score()`. The given code holds `order_moves()` and the check extension. |
 | 3:40 to 4:05 | Student pairs measure node counts before and after ordering with `compare_search.py`. |
 | 4:05 to 4:20 | Student pairs run the mate puzzles. |
 | 4:20 to 4:30 | Checkpoint: every mate in 1 and every puzzle mate in 2. |

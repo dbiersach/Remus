@@ -40,7 +40,7 @@ By 4:30, each student pair can:
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Chess refresher on the demonstration board: the five castling conditions. The rook may cross an attacked square (b1), and a rook captured on its home square removes that right. |
-| 10:45 to 11:00 | Slides: the teacher's castling generation and the attacked-square checks. |
+| 10:45 to 11:00 | Slides: the given castling generation and the attacked-square checks. |
 | 11:00 to 11:20 | Student pairs write `update_castling_rights()`, the table of which moves remove K, Q, k, or q. |
 | 11:20 to 11:50 | Student pairs run the castling tests and build one castling position of their own to test. |
 | 11:50 to 12:00 | Show and choose for `update_castling_rights()`. |

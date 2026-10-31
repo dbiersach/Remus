@@ -41,9 +41,9 @@ fluorescence, which tells gold from silver at once.
 
 The engine for Day 10 is Remus-GOLD, the finished Remus with all ten enhancements, in the teacher's `engines/instructor/11 Remus-GOLD - All enhancements` folder. Lucas Chess runs its `remus.bat`, and its `estimate_elo.py` rates it against Stockfish. This folder holds only the science files, which never import the engine.
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `phase_hunt.py`: the teacher adds `run_search()`, `search_answer()`, `sets_every_order()`; the teacher changes `main()`
+- `phase_hunt.py`: adds `run_search()`, `search_answer()`, `sets_every_order()`; changes `main()`
 - `test_phase_hunt.py`: 4 new tests
 
 Functions the student pairs write this period:

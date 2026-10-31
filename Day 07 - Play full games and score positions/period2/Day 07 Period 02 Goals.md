@@ -16,7 +16,7 @@ New files this period:
 
 - `notation.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
 - `test_game.py`: 2 new tests
 
