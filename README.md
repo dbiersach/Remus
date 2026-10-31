@@ -26,13 +26,14 @@ left as stubs for them to fill in. Beside them sits the period's goals file, suc
 Each Day folder's syllabus, such as `Day 04 Syllabus.md`, gives the day's
 objectives and the timed activities of its four periods.
 
-Everything else sits in `misc/`: the course and code documents in `misc/docs/`,
-the games every script plays in `misc/games/`, and the course designer's tools in `misc/scripts/`,
-which hold the builders that write the period, version, and student folders, the test runner,
-and the league and rating scripts, each listed in
-[`misc/scripts/README.md`](misc/scripts/README.md). Start with
-[`misc/docs/engine_comparison/remus_program_overview.md`](misc/docs/engine_comparison/remus_program_overview.md); the course plan is
-in [`misc/docs/course/remus_course_plan.md`](misc/docs/course/remus_course_plan.md).
+Everything else sits in `misc/`, in one folder for each kind of reader:
+
+| Folder | For | Start with |
+| --- | --- | --- |
+| [`misc/students/`](misc/students/) | Student pairs: how to learn chess, how each Remus file works, and how the ten enhancements add up to Remus-GOLD | [`misc/students/README.md`](misc/students/README.md) |
+| [`misc/teachers/`](misc/teachers/) | Teachers: the course plan, the unplugged activities, the slide plan, and the briefs for managers and parents | [`misc/teachers/README.md`](misc/teachers/README.md) |
+| [`misc/designer/`](misc/designer/) | The course designer: the builders that write the period, version, and student folders, the test runner, the league and rating scripts, and the pages they write | [`misc/designer/README.md`](misc/designer/README.md) |
+| `misc/games/` | Every game any script plays, which git ignores | |
 
 ## Setup
 
@@ -96,7 +97,7 @@ teacher's laptop or a computer at home.
    Windows installer from
    [lucaschess.pythonanywhere.com/downloads](https://lucaschess.pythonanywhere.com/downloads)
    and run it. Lucas Chess comes with Stockfish, so no other engine is needed. The
-   [Lucas Chess guide](misc/docs/course/lucas_chess_guide.md) shows, with screenshots, how
+   [Lucas Chess guide](misc/students/lucas_chess_guide.md) shows, with screenshots, how
    to add Remus through its `remus.bat` and watch it play.
 
 ### Stockfish
@@ -117,9 +118,9 @@ engine, the same way the Lucas Chess guide adds Remus.
 From here on, every file runs inside VS Code. Open a file, such as `perft.py` in
 `Day 06 - Count positions and read FEN/period4/instructor`, and click the Run Python
 File button (the triangle at the top right of the editor). Each file prints its own
-check, with the expected answer beside it. The course designer's tools in `misc/scripts/`, such as
+check, with the expected answer beside it. The course designer's tools in `misc/designer/`, such as
 the test runner and the league, are listed with their commands in
-[`misc/scripts/README.md`](misc/scripts/README.md).
+[`misc/designer/README.md`](misc/designer/README.md).
 
 The engine uses only the Python standard library. The development group adds
 `python-chess`, which the tests use as an outside reference for move counts,

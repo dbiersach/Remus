@@ -4,7 +4,7 @@
 The Day 9 basic test for this enhanced engine. Press Run in VS Code: Remus-BROWN plays
 one 2-minute game against Remus-WHITE, which shows that the engine plays legal
 moves to the end of a game. Nobody reads the result.
-version_match.py, in the misc/scripts folder, plays the games and adds
+version_match.py, in the misc/designer folder, plays the games and adds
 them to misc/games/remus_games.pgn.
 """
 
@@ -20,7 +20,7 @@ def main():
         if (folder / "pyproject.toml").exists():
             top = folder
             break
-    match_path = top / "misc" / "scripts" / "version_match.py"
+    match_path = top / "misc" / "designer" / "version_match.py"
     # The folder above this one holds this engine folder and its opponents
     engines = Path(__file__).parent.parent
     print(f"Running {match_path}")

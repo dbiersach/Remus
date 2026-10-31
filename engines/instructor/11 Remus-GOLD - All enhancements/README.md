@@ -16,7 +16,7 @@ Its evaluation does three more scans of the board for every position, so Remus-G
 
 ## Measured against Remus-WHITE
 
-Each version searched the ten positions of the designer's benchmark, `misc/scripts/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
+Each version searched the ten positions of the designer's benchmark, `misc/designer/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
 
 | Version | Positions to finish depth 4 | Share of Remus-WHITE's | Positions per second | Average depth in 5 seconds |
 | --- | ---: | ---: | ---: | ---: |
@@ -29,4 +29,4 @@ In the designer's league, where every version searched about as deep as Remus do
 
 ## Check it
 
-Check it by opening `run_tests.py` in this folder and clicking Run Python File, and rate it against Stockfish the same way with `estimate_elo.py`. [`engines_elo.md`](../../../misc/docs/engine_comparison/engines_elo.md) shows its score against every other version in the designer's league.
+Check it by opening `run_tests.py` in this folder and clicking Run Python File, and rate it against Stockfish the same way with `estimate_elo.py`. [`remus_versions.md`](../../../misc/students/remus_versions.md#the-league-table) shows its score against every other version in the designer's league.

@@ -14,7 +14,7 @@ By the end of Day 9, each student pair can:
 
 1. Nf3 Nf6 2. d4 and 1. d4 Nf6 2. Nf3 reach the same position by two different move orders. Chess players call that a transposition.
 
-![The position after 1. Nf3 Nf6 2. d4, Black to move](../../../misc/docs/images/boards/red_transposition.svg)
+![The position after 1. Nf3 Nf6 2. d4, Black to move](../../../misc/students/images/boards/red_transposition.svg)
 
 *The green arrows are White's two moves, Nf3 and d4, and the blue arrow is Black's Nf6. Play them in either order and the board ends up the same.*
 
@@ -38,7 +38,7 @@ One dict lookup and one dict write per position. The key is already in the game 
 
 ## Measured against Remus-WHITE
 
-Each version searched the ten positions of the designer's benchmark, `misc/scripts/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
+Each version searched the ten positions of the designer's benchmark, `misc/designer/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
 
 | Version | Positions to finish depth 4 | Share of Remus-WHITE's | Positions per second | Average depth in 5 seconds |
 | --- | ---: | ---: | ---: | ---: |
@@ -73,4 +73,4 @@ Proves the rules of `probe()` with three made-up entries before any real search 
 
 ## Check it
 
-Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: Remus-RED plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-RED plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/scripts/version_match.py`, which plays the games.
+Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: Remus-RED plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-RED plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/designer/version_match.py`, which plays the games.

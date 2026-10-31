@@ -14,7 +14,7 @@ By the end of Day 9, each student pair can:
 
 White has king and rook, Black has only a king. Mate needs the Black king on the edge, and it takes far more than 4 plies of good moves to drive it there. Remus-WHITE sees no mate within its depth and scores every rook move the same, +500, so it shuffles. Remus-CYAN adds a bonus once one side leads by at least 200 and the losing side has at most 600 left: 10 points for each step the losing king stands from the center, and 4 points for each step the winning king has closed in.
 
-![The Black king on e5, in the center](../../../misc/docs/images/boards/cyan_king_center.svg) ![The Black king on e8, with the White king on e6](../../../misc/docs/images/boards/cyan_king_edge.svg)
+![The Black king on e5, in the center](../../../misc/students/images/boards/cyan_king_center.svg) ![The Black king on e8, with the White king on e6](../../../misc/students/images/boards/cyan_king_edge.svg)
 
 *The yellow squares are the center. Left: the Black king stands on e5, 0 steps from the center, and the White king on c2 is 3 steps away, so the bonus is 4 x (7 - 3) = 16. Right: the Black king on e8 is 3 steps from the center and the White king on e6 is 2 steps away, so the bonus is 10 x 3 + 4 x (7 - 2) = 50.*
 
@@ -30,7 +30,7 @@ One scan of the board to count material and find the kings, in every evaluated p
 
 ## Measured against Remus-WHITE
 
-Each version searched the ten positions of the designer's benchmark, `misc/scripts/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
+Each version searched the ten positions of the designer's benchmark, `misc/designer/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
 
 | Version | Positions to finish depth 4 | Share of Remus-WHITE's | Positions per second | Average depth in 5 seconds |
 | --- | ---: | ---: | ---: | ---: |
@@ -57,4 +57,4 @@ With a big lead and a weak opponent, rewards pushing the losing king to the edge
 
 ## Check it
 
-Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: Remus-CYAN plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-CYAN plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/scripts/version_match.py`, which plays the games.
+Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: Remus-CYAN plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-CYAN plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/designer/version_match.py`, which plays the games.

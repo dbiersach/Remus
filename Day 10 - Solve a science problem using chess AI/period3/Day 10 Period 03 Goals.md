@@ -17,7 +17,7 @@ back up takes it out (`pop`, like undoing it). The period 2 goals file explains 
 experiment and the score.
 
 ![The tree of guesses for powder 23, using 4 of the 10 phases and 2 levels, with
-the score of each guess; silicon + halite scores best](../../misc/docs/images/phase_hunt/search_tree.png)
+the score of each guess; silicon + halite scores best](../../misc/students/images/phase_hunt/search_tree.png)
 
 Silicon + halite is the same guess as halite + silicon, just as two move orders can
 reach the same chess position. So `search()` adds phases only in library order,
@@ -30,7 +30,7 @@ the answer holds both, and the verdict is "can't tell".
 
 ![Over 200 powders, greedy is right 166 times and wrong 34 times; the search is
 right 139 times, says can't tell 52 times, and is wrong 9
-times](../../misc/docs/images/phase_hunt/verdicts.png)
+times](../../misc/students/images/phase_hunt/verdicts.png)
 
 Greedy names more powders right, because it guesses gold every time and gold is
 right half the time. The search is wrong far less often, and it says so when the

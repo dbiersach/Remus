@@ -30,7 +30,7 @@ The student pairs fill in the blanks of `demo_promotion.py`. Each `#` line in th
 
 `demo_promotion.py` sets up a puzzle: White's pawn on b7 promotes on b8 next to the Black king on a6. The student pair writes the loop that tries all four promotion pieces, counts Black's legal replies, and names the result.
 
-![White king c6, bishop b6, and pawn b7 against the Black king on a6](../../misc/docs/images/boards/promotion_puzzle.svg)
+![White king c6, bishop b6, and pawn b7 against the Black king on a6](../../misc/students/images/boards/promotion_puzzle.svg)
 
 *The puzzle: White's king on c6, bishop on b6, and pawn on b7 against Black's king on a6. The pawn promotes on b8 (the green arrow).*
 
@@ -44,7 +44,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 3:00 to 3:15 | Puzzle on the demonstration board: promoting to a knight wins, and promoting to a queen stalemates. The teacher shows promotion in `make_move()` and `undo_move()`. |
 | 3:15 to 3:45 | In `demo_promotion.py` student pairs write the loop that tries all four promotions and prints stalemate or checkmate for each. |
-| 3:45 to 4:00 | The teacher hands out `uci_engine.py` and `remus.bat`. Student pairs register `remus.bat` from the period's `student` folder in Lucas Chess, following the [Lucas Chess guide](../../misc/docs/course/lucas_chess_guide.md). |
+| 3:45 to 4:00 | The teacher hands out `uci_engine.py` and `remus.bat`. Student pairs register `remus.bat` from the period's `student` folder in Lucas Chess, following the [Lucas Chess guide](../../misc/students/lucas_chess_guide.md). |
 | 4:00 to 4:25 | Student pairs play their own Remus, which answers with random legal moves. Every special move works on a real board. |
 | 4:25 to 4:30 | Checkpoint: every special-move test passes. |
 

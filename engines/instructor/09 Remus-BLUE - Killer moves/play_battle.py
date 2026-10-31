@@ -14,7 +14,7 @@ The Day 9 battle: Remus-BLUE on this laptop plays the engine of a visiting stude
 5. Press the Run Python File button. Remus-BLUE plays two 10-minute games against
    the visitor from the same opening, with the White pieces in game 1 and the Black
    pieces in game 2. The two games take about 20 minutes.
-version_match.py, in the misc/scripts folder, plays the games and adds
+version_match.py, in the misc/designer folder, plays the games and adds
 them to misc/games/remus_games.pgn.
 """
 
@@ -36,7 +36,7 @@ def main():
         if (folder / "pyproject.toml").exists():
             top = folder
             break
-    match_path = top / "misc" / "scripts" / "version_match.py"
+    match_path = top / "misc" / "designer" / "version_match.py"
     # The folder above this one holds this engine folder and its opponents
     engines = Path(__file__).parent.parent
     print(f"Running {match_path}")

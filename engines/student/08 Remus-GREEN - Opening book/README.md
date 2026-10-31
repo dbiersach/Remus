@@ -14,7 +14,7 @@ By the end of Day 9, each student pair can:
 
 `opening_book.txt` holds 43 well-known openings, five moves for each side, written in SAN: `e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7` is the Ruy Lopez. `load_book()` plays every line on a board from the starting position and records, for each position it passes, which moves the book plays there. After 1. e4 the book holds seven replies: ...e5, ...c5, ...e6, ...c6, ...d5, ...d6, and ...Nf6.
 
-![The position after 1. e4, with the book's seven replies marked](../../../misc/docs/images/boards/green_book_replies.svg)
+![The position after 1. e4, with the book's seven replies marked](../../../misc/students/images/boards/green_book_replies.svg)
 
 *After 1. e4 (the green arrow), the yellow squares show where Black's seven book replies go: e5, c5, e6, c6, d5, d6, and the knight to f6.*
 
@@ -30,7 +30,7 @@ Nothing during the search: the book is read once when the engine starts, and ask
 
 ## Measured against Remus-WHITE
 
-Each version searched the ten positions of the designer's benchmark, `misc/scripts/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
+Each version searched the ten positions of the designer's benchmark, `misc/designer/remus_benchmark.py`, one depth at a time up to depth 4, on one computer. Fewer positions for the same depth means a smaller search tree. Positions per second shows what each position costs. The last column gave each position 5 seconds, the way a game does, and averages the deepest search that finished.
 
 | Version | Positions to finish depth 4 | Share of Remus-WHITE's | Positions per second | Average depth in 5 seconds |
 | --- | ---: | ---: | ---: | ---: |
@@ -61,7 +61,7 @@ Looks the position up in the book and picks one of its moves at random, or retur
 
 ## Check it
 
-Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: Remus-GREEN plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-GREEN plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/scripts/version_match.py`, which plays the games.
+Check the work by opening `run_tests.py` in this folder and pressing Run. Then open `basic_test.py` in VS Code and press Run: Remus-GREEN plays one 2-minute game against Remus-WHITE, which shows that the engine plays legal moves to the end of a game. In the Day 9 battles, follow the numbered steps at the top of `play_battle.py`: copy the visiting student pair's engine folder into `engines/student`, set `VISITING_ENGINE` to the visitor's engine color, and press Run. Remus-GREEN plays it twice at 10 minutes a side, once with each piece color, and both games go into misc/games/remus_games.pgn. Each script runs `misc/designer/version_match.py`, which plays the games.
 
 ## What you edit this period
 
