@@ -17,9 +17,9 @@ New files this period:
 - `compare_search.py`
 - `mate_puzzles.epd`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `search.py`: the teacher changes `main()`
+- `search.py`: changes `main()`
 - `test_search.py`: 1 new test
 
 Functions the student pairs write this period:

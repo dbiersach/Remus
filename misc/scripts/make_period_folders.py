@@ -957,7 +957,7 @@ def function_sources(text: str) -> dict[str, str]:
 
 
 def growth_note(name: str, old: str, new: str, written: set[str]) -> str:
-    """Return what the teacher's code adds to or changes in a file that grows."""
+    """Return what the given code adds to or changes in a file that grows."""
     if not name.endswith(".py"):
         return ""
     before = function_sources(old)
@@ -970,16 +970,16 @@ def growth_note(name: str, old: str, new: str, written: set[str]) -> str:
         tests = [f for f in added if f.startswith("test_")]
         if len(tests) == 1:
             return "1 new test"
-        return f"{len(tests)} new tests" if tests else "the teacher changes the tests"
+        return f"{len(tests)} new tests" if tests else "its tests change"
     parts = []
     if added:
-        parts.append("the teacher adds " + ", ".join(f"`{f}()`" for f in added))
+        parts.append("adds " + ", ".join(f"`{f}()`" for f in added))
     if changed:
-        parts.append("the teacher changes " + ", ".join(f"`{f}()`" for f in changed))
+        parts.append("changes " + ", ".join(f"`{f}()`" for f in changed))
     if not parts:
         if written:
             return "only the functions the student pairs write"
-        return "the teacher's constants and comments change"
+        return "its constants and comments change"
     return "; ".join(parts)
 
 
@@ -1061,7 +1061,10 @@ def readme_text(day: int, period: int, files: dict, files_before: dict) -> str:
             }
             note = growth_note(name, files_before[name], files[name], mine)
             lines.append(f"- `{name}`: {note}" if note else f"- `{name}`")
-        sections.append("Files that grow this period:\n\n" + "\n".join(lines))
+        sections.append(
+            "Files that grow this period. The new code in them is given code, already "
+            "in the folder when the class opens it:\n\n" + "\n".join(lines)
+        )
     if written:
         sections.append(
             "Functions the student pairs write this period:\n\n" + "\n".join(written)

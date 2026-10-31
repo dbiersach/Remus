@@ -13,10 +13,10 @@ New files this period:
 
 - `test_special_moves.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `legal_moves.py`: the teacher adds `castling_moves()`; the teacher changes `legal_moves()`
-- `make_move.py`: the teacher adds `castling_rook_move()`; the teacher changes `make_move()`, `undo_move()`, `main()`
+- `legal_moves.py`: adds `castling_moves()`; changes `legal_moves()`
+- `make_move.py`: adds `castling_rook_move()`; changes `make_move()`, `undo_move()`, `main()`
 
 Functions the student pairs write this period:
 
@@ -41,7 +41,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 10:30 to 10:45 | Chess refresher on the demonstration board: the five castling conditions. The rook may cross an attacked square (b1), and a rook captured on its home square removes that right. |
-| 10:45 to 11:00 | Slides: the teacher's castling generation and the attacked-square checks. |
+| 10:45 to 11:00 | Slides: the given castling generation and the attacked-square checks. |
 | 11:00 to 11:20 | Student pairs write `update_castling_rights()`, the table of which moves remove K, Q, k, or q. |
 | 11:20 to 11:50 | Student pairs run the castling tests and build one castling position of their own to test. |
 | 11:50 to 12:00 | Show and choose for `update_castling_rights()`. |

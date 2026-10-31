@@ -9,12 +9,12 @@ By the end of this period, each student pair can:
 
 ## The files
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `search.py`: the teacher adds `format_info()`, `think_move()`; the teacher changes `main()`
+- `search.py`: adds `format_info()`, `think_move()`; changes `main()`
 - `test_game.py`: 1 new test
 - `test_search.py`: 3 new tests
-- `uci_engine.py`: the teacher adds `thinking_time()`; the teacher changes `main()`
+- `uci_engine.py`: adds `thinking_time()`; changes `main()`
 
 Functions the student pairs write this period:
 

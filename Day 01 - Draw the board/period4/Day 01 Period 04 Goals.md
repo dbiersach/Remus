@@ -54,7 +54,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | 3:00 to 3:15 | Slides: the Remus board is an 8x8 list of one-character strings. Uppercase is White, lowercase is Black, and `.` is empty. The teacher walks through `new_board()`. |
 | 3:15 to 4:00 | Student pairs write `print_board()`, `square_name()`, `parse_square()`, and `piece_at()` in `board.py` and run `run_tests.py` after each one. |
 | 4:00 to 4:10 | Student pairs run `show_board.py`, which draws their board as a picture in the web browser. |
-| 4:10 to 4:25 | Show and choose: two or three student pairs show their `parse_square()` on the projector, the class picks one for clarity, and the teacher adds it to the class repository with the student pair's team name in `CONTRIBUTORS.md`. |
+| 4:10 to 4:25 | Show and choose: two or three student pairs show their `parse_square()` on the projector, the class picks one for clarity, and the teacher adds the student pair's team name to `CONTRIBUTORS.md`. |
 | 4:25 to 4:30 | Checkpoint: running `board.py` prints the start board and "b1 holds N, expected N". |
 
 ## What you edit this period

@@ -16,9 +16,9 @@ New files this period:
 - `moves.py`
 - `test_make_move.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `board.py`: the teacher adds `set_piece()`
+- `board.py`: adds `set_piece()`
 
 Functions the student pairs write this period:
 
@@ -56,7 +56,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | 1:00 to 1:15 | Slides: the game state dict in `new_game()` and the `Move` dataclass with `from_square`, `to_square`, and `promotion`. |
 | 1:15 to 2:05 | Student pairs write `is_white()` and `color_of()` in `game_state.py`, then `move_to_uci()` and `move_from_uci()` in `moves.py`, running `run_tests.py` after each. |
 | 2:05 to 2:15 | Student pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
-| 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()` for the class repository. |
+| 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()`, and the teacher adds its student pair's team name to `CONTRIBUTORS.md`. |
 
 ## What you edit this period
 

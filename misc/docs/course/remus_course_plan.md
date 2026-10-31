@@ -34,7 +34,7 @@ undo, and say why a search result is legal and preferred.
    records the old state, and a test checks that undo restores it exactly.
 5. **Separate chess rules from search.** The legal move generator passes perft before
    minimax, alpha-beta, books, tables, or GUI work. The one early exception is the
-   teacher-written UCI plug at the end of Day 5, which plays random legal moves so
+   ready-made UCI plug at the end of Day 5, which plays random legal moves so
    student pairs see their rules on a real board.
 6. **Keep one source of truth.** The engine owns its game state and rules. Lucas Chess
    sends moves and displays results; it never repairs illegal engine behavior.
@@ -135,7 +135,7 @@ at the input and output boundary.
 | Human move text | Standard algebraic notation (SAN) for typing and displaying moves: `d4`, `Nc3`, `Bxh8`, `O-O`, `e8=N+` |
 | GUI move text | UCI (`e2e4`, `e7e8q`), because that is what the GUI protocol uses |
 | First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
-| First GUI game | Day 5 Period 4: a teacher-written `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
+| First GUI game | Day 5 Period 4: a ready-made `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Matches | Day 9, period 4: engine battles, two enhanced engines at a time, twice at 10 minutes a side, once with each piece color, on five laptops at once. The teacher then shows the designer's league table of all twelve Remus versions |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
@@ -386,9 +386,11 @@ drives at the end. Git and `uv` appear once, on Day 1, and never again.
 | Hand in a picked function | Student pair and teacher | The teacher reads the function from the student pair's screen and adds the student pair's team name to `CONTRIBUTORS.md` |
 | Take it home | Each student | In File Explorer, copy the Remus folder onto a USB drive, leaving out the `.venv` folder, which works only on the laptop that built it. At home: install `uv`, run `uv sync` once, install the free Lucas Chess from its download page, and register `remus.bat` as in [`lucas_chess_guide.md`](lucas_chess_guide.md). Remus runs on Windows only |
 
-The "Students write" lines in each day below list these functions. The teacher writes
-the parts whose difficulty is in the chess rules rather than the Python, such as SAN
-disambiguation or the castling legality check, and walks through them line by line.
+The "Students write" lines in each day below list these functions. The given code, which
+the course designer writes and each period folder already holds, covers the parts whose
+difficulty is in the chess rules rather than the Python, such as SAN disambiguation or
+the castling legality check. The teacher writes no code: the teacher walks through the
+given code line by line.
 
 ## Python skills labs
 
@@ -565,7 +567,7 @@ student pairs can explain Remus's own answer.
 - **P3. Python lab 2, `python_lists.py`:** lists and nested lists (25 typed lines).
   Unplugged warm-up: "Call the square" drills "row 0 is rank 8" on the printed board
   before anyone types it.
-- **P4. `board.py`.** The teacher writes `new_board()` and hands out `show_board.py`,
+- **P4. `board.py`.** The given code holds `new_board()`, and the teacher hands out `show_board.py`,
   which draws the board as a picture in the web browser (python-chess draws it; the
   engine never imports python-chess).
   **Students write:** `print_board()`, `square_name(row, col)`,
@@ -578,12 +580,12 @@ student pairs can explain Remus's own answer.
 
 - **P1. Python lab 3, `python_functions.py`:** functions, type hints, tuples, `assert`, pytest.
 - **P2. Python lab 4, `python_dicts.py`:** dicts, dataclasses, aliasing, copying.
-- **P3. `game_state.py` and `moves.py`.** The teacher writes the state dict in
+- **P3. `game_state.py` and `moves.py`.** The given code holds the state dict in
   `new_game()` and the `Move` dataclass (`from_square`, `to_square`, `promotion`).
   **Students write:** `is_white(piece)`, `color_of(piece)`, `move_to_uci(move)`,
   `move_from_uci(text)`.
 - **P4. `make_move.py`, ordinary moves.** Unplugged warm-up: "Undo from the card."
-  The teacher writes `state_snapshot(state)` for the "make ten moves, undo ten moves,
+  The given code holds `state_snapshot(state)` for the "make ten moves, undo ten moves,
   compare" test. **Students write:** `make_move()`, which moves the piece and returns
   an undo record of everything the move destroys, and `undo_move()`, which uses that
   record to take back quiet moves and captures.
@@ -593,17 +595,17 @@ student pairs can explain Remus's own answer.
 ### Day 3: Loops that walk the board
 
 - **P1. Python lab 5, `python_loops.py`:** `while`, `break`, direction tuples.
-- **P2. Jumping pieces.** Unplugged warm-up: "Shade the reach." The teacher writes
+- **P2. Jumping pieces.** Unplugged warm-up: "Shade the reach." The given code holds
   `knight_moves()` from an offset list.
   **Students write:** `king_moves()` the same way. Exercise: a knight on `a1` has two
   moves, to `b3` and `c2`. running `show_board.py` draws an arrow for every move the
   generator returns, so student pairs see their own moves on a real board.
 - **P3. Sliding pieces.** **Students write:** `slide(board, square, direction)`, the
   loop that walks one direction and stops at the first piece, capturing it if it is
-  an enemy. The teacher writes `slider_moves()` that calls it with rook, bishop, and
+  an enemy. The given code holds `slider_moves()` that calls it with rook, bishop, and
   queen directions. Exercise: a rook on an empty board has 14 moves.
 - **P4. Pawns.** **Students write:** `pawn_pushes()` (single step and double step from
-  the start rank). The teacher writes pawn captures and the four promotion choices.
+  the start rank). The given code holds pawn captures and the four promotion choices.
   Exercise: `pseudo_legal_moves()` from the start returns 20.
 
 **Checkpoint (4:30):** 20 pseudo-legal moves from the start position.
@@ -616,7 +618,7 @@ student pairs can explain Remus's own answer.
   on the square and looks outward like a "super piece."
   **Students write:** `piece_at_offsets()`, the one loop that looks for a knight, a
   king, or a pawn a fixed step away, then `attacked_by_pawn()` and `attacked_by_king()`
-  on top of it. The teacher writes `attacked_by_knight()` as the model call, and the
+  on top of it. The given code holds `attacked_by_knight()` as the model call, and the
   sliding-line part, `first_piece()` and `attacked_along_lines()`.
 - **P3. Check and the legal filter.** Unplugged warm-up: "Pin hunt." **Students write:** `in_check(state, color)` and
   `legal_moves(state)`: make each pseudo-legal move, reject it if the mover's king is
@@ -632,16 +634,16 @@ only escapes.
 ### Day 5: Special moves
 
 - **P1. Python lab 7, `python_sets.py`:** sets, `in`, string replacement for castling rights.
-- **P2. Castling.** Refresher with the five conditions on the board. The teacher writes
+- **P2. Castling.** Refresher with the five conditions on the board. The given code holds
   castling generation and the attacked-square checks.
   **Students write:** `update_castling_rights(rights, move, captured)`, the table of
   which moves remove `K`, `Q`, `k`, or `q`, including a rook captured on its home square.
 - **P3. En passant and the double step.** **Students write:**
   `en_passant_victim_square()`, the square of the pawn an en passant capture removes,
-  which is not the square the capturing pawn lands on. The teacher writes the en
+  which is not the square the capturing pawn lands on. The given code holds the en
   passant make and undo, including the line that sets the target after a double step.
 - **P4. Promotion and underpromotion.** Puzzle: promoting to a knight wins, promoting to
-  a queen stalemates. The teacher writes promotion in `make_move` and `undo_move`,
+  a queen stalemates. The given code holds promotion in `make_move` and `undo_move`,
   and student pairs write tests from the special-move checklist. In
   `demo_promotion.py` student pairs write the loop that tries all four promotions on the
   puzzle and prints stalemate for the queen, rook, and bishop and checkmate for the
@@ -666,7 +668,7 @@ which starts from working code.
 - **P1. Python lab 8, `python_recursion.py`:** recursion.
 - **P2. Perft.** Unplugged warm-up: "Count by hand." **Students write:**
   `perft(state, depth)`, the recursive count of leaf
-  positions. The teacher writes `divide()`, which prints the count under each root move.
+  positions. The given code holds `divide()`, which prints the count under each root move.
   Expected: 20, 400, 8,902 from the start.
 - **P3. Perft against python-chess, and bug hunt.** `test_perft.py` compares Remus
   with `python-chess` on the standard positions. The teacher plants three bugs in a copy
@@ -677,7 +679,7 @@ which starts from working code.
 - **P4. Python lab 9 and FEN.** The lab, `python_fen_fields.py`, covers `split` and
   exceptions. Then
   `fen.py`. **Students write:** `fen_placement(board)` (the part of FEN before the
-  first space) and `board_from_placement(text)`. The teacher writes the other five FEN
+  first space) and `board_from_placement(text)`. The given code holds the other five FEN
   fields, and `test_perft.py` switches to Remus's own FEN reader.
 
 **Checkpoint (4:30):** perft matches the reference at depth 3 for the start and
@@ -687,10 +689,10 @@ is now met.
 ### Day 7: A whole game, and judging a position
 
 - **P1. Ending the game.** Refresher on stalemate, repetition, the fifty and 75-move
-  rules, and insufficient material, with a six-position quiz. The teacher writes the
+  rules, and insufficient material, with a six-position quiz. The given code holds the
   halfmove clock and `position_key()`. **Students write:** `insufficient_material(board)`
   and the result-and-reason checks in `game_result(state)`.
-- **P2. SAN: moves people read and type.** The teacher writes `move_to_san()`, including
+- **P2. SAN: moves people read and type.** The given code holds `move_to_san()`, including
   disambiguation (`Nbd2`) and the `+` and `#` suffixes. **Students write:**
   `parse_san(state, text)`, which builds the SAN of every legal move and returns the one
   that matches what the player typed. Then student pairs run `notation.py` and check
@@ -699,8 +701,8 @@ is now met.
   closes the period.
 - **P3. First brains and the GUI.** **Students write:** `random_move()` and
   `greedy_move()` (take the most valuable capture, else a random move). The class
-  reads the Day 5 `uci_engine.py` line by line, and the teacher extends it with FEN
-  positions and a choice of brains. Every student pair registers Remus in the GUI again and
+  reads the Day 5 `uci_engine.py` line by line, then the given version in the period
+  folder, which adds FEN positions and a choice of brains. Every student pair registers Remus in the GUI again and
   plays greedy Remus. `play_match.py` plays random Remus against greedy Remus for
   20 games and prints the score.
 - **P4. What makes a position good?** Student pairs rank three positions and write one reason
@@ -718,7 +720,7 @@ moves" milestone.
 ### Day 8: Searching ahead, then searching smarter
 
 - **P1. Minimax, negamax, and mates.** Unplugged warm-up: "Paper minimax," with the
-  optional human tree at the front of the room. The teacher writes `minimax()` to
+  optional human tree at the front of the room. The given code holds `minimax()` to
   depth 2 with a node counter, and student pairs compare its answer with their worksheets.
   **Students write:** `negamax()`, the same search in one function: each reply's score
   with its sign flipped, `try/finally` around each make and undo, and checkmate scored
@@ -730,11 +732,11 @@ moves" milestone.
   counts fewer nodes. The lab, `python_sorting.py`, covers keeping a list in order with `insert()`,
   `float("inf")`, and timing a perft run.
 - **P3. The horizon effect and quiescence.** Puzzle: at depth 2 Remus takes a defended
-  pawn with its queen. The teacher writes `capture_moves(state)`, the filter of
+  pawn with its queen. The given code holds `capture_moves(state)`, the filter of
   captures and promotions. **Students write:** `quiescence()`, which may "stand pat"
   with the evaluation or try a capture that does better.
 - **P4. Move ordering.** **Students write:** `mvv_lva_score(move, board)` (most valuable
-  victim, least valuable attacker). The teacher writes `order_moves()`, the loop that
+  victim, least valuable attacker). The given code holds `order_moves()`, the loop that
   slides each move into place behind every higher score, and the check extension.
   Student pairs measure node counts before and after.
 
@@ -806,7 +808,7 @@ test, and has played two battles against other enhanced engines.
   | Minimax: the opponent picks the minimum | Expectimax: average over a high or low reading, because nature is not an opponent |
   | Match against greedy Remus | Benchmark: average measurements to find the peak over 100 hidden grids |
 
-  The teacher writes `make_grid(seed)`, `measure(grid, square)`,
+  The given code holds `make_grid(seed)`, `measure(grid, square)`,
   `predicted_value(square, readings)`, and `benchmark(strategy)`. **Students write:**
   `candidate_squares(readings)`, `score_candidate(square, readings, explore_weight)`,
   and `choose_next_measurement(readings, explore_weight)`. Student pairs tune

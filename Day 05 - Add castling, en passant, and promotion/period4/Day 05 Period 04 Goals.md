@@ -19,9 +19,9 @@ New files this period:
 - `remus.bat`
 - `uci_engine.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `make_move.py`: the teacher changes `make_move()`, `main()`
+- `make_move.py`: changes `make_move()`, `main()`
 - `test_special_moves.py`: 3 new tests
 
 ## The changes and why

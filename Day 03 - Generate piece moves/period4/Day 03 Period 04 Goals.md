@@ -9,9 +9,9 @@ By the end of this period, each student pair can:
 
 ## The files
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `move_generation.py`: the teacher adds `pawn_moves_to()`, `pawn_captures()`, `piece_moves()`, `pseudo_legal_moves()`; the teacher changes `main()`
+- `move_generation.py`: adds `pawn_moves_to()`, `pawn_captures()`, `piece_moves()`, `pseudo_legal_moves()`; changes `main()`
 - `test_move_generation.py`: 4 new tests
 
 Functions the student pairs write this period:
@@ -32,7 +32,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:15 | Slides: pawns move forward toward row 0 for White, push one or two squares, and capture diagonally. The teacher writes the captures and the four promotion choices. |
+| 3:00 to 3:15 | Slides: pawns move forward toward row 0 for White, push one or two squares, and capture diagonally. The given code holds the captures and the four promotion choices. |
 | 3:15 to 3:55 | Student pairs write `pawn_pushes()`: the single step and the double step from the start rank. |
 | 3:55 to 4:15 | Student pairs run the tests and the arrow picture on the start position. |
 | 4:15 to 4:30 | Checkpoint: `pseudo_legal_moves()` finds 20 moves from the start. |

@@ -13,9 +13,9 @@ New files this period:
 
 - `move_ordering.py`
 
-Files that grow this period:
+Files that grow this period. The new code in them is given code, already in the folder when the class opens it:
 
-- `search.py`: the teacher adds `check_time()`, `alpha_beta_with_quiescence()`; the teacher changes `quiescence()`
+- `search.py`: adds `check_time()`, `alpha_beta_with_quiescence()`; changes `quiescence()`
 - `test_search.py`: 3 new tests
 
 Functions the student pairs write this period:
@@ -37,7 +37,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:15 | Slides: alpha-beta cuts more when the best move comes first. Most valuable victim, least valuable attacker (MVV-LVA). |
-| 3:15 to 3:40 | Student pairs write `mvv_lva_score()`. The teacher writes `order_moves()` and the check extension. |
+| 3:15 to 3:40 | Student pairs write `mvv_lva_score()`. The given code holds `order_moves()` and the check extension. |
 | 3:40 to 4:05 | Student pairs measure node counts before and after ordering with `compare_search.py`. |
 | 4:05 to 4:20 | Student pairs run the mate puzzles. |
 | 4:20 to 4:30 | Checkpoint: every mate in 1 and every puzzle mate in 2. |

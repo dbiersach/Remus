@@ -1,6 +1,6 @@
 # Student Edit Plan: Who Writes What, Period by Period
 
-`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which the teacher writes, and the functions the student pairs write, which are stubs in each `student` folder and finished in the `instructor` folder beside it. Each period's goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check each function.
+`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which hold given code, and the functions the student pairs write, which are stubs in each `student` folder and finished in the `instructor` folder beside it. Each period's goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check each function.
 
 ## Day 01 - Draw the board
 
@@ -90,7 +90,7 @@
 | P1 | Science AI: hidden_peak.py | `hidden_peak.py`, `run_tests.py`, `test_hidden_peak.py` | None | `candidate_squares()` in `hidden_peak.py` (6 lines); `score_candidate()` in `hidden_peak.py` (4 lines); `choose_next_measurement()` in `hidden_peak.py` (9 lines) |
 | P2 | The phase hunt: score a guess, and the greedy agent | `phase_hunt.py`, `test_phase_hunt.py` | None | `score()` in `phase_hunt.py` (11 lines); `greedy_phases()` in `phase_hunt.py` (17 lines) |
 | P3 | The phase hunt: search every set, and verify | None | `phase_hunt.py`, `test_phase_hunt.py` | `search()` in `phase_hunt.py` (13 lines) |
-| P4 | Science results, take-home, and wrap-up | None | None | Nothing: a demo or teacher code |
+| P4 | Science results, take-home, and wrap-up | None | None | Nothing: a demo or given code |
 
 ## Enhanced engines (Day 9, periods 2 and 3)
 

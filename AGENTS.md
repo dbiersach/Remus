@@ -53,8 +53,8 @@ that are specific to Claude Code. The Python style follows David's course reposi
   Lucas Chess. Remus targets Windows only (David, 2026-10-28): the
   repository holds no Mac or Linux launchers or setup scripts.
 - Python skills labs come before the engine code that needs each skill. Students
-  **write real Remus code**: small functions with a teacher-written signature,
-  docstring, and failing tests. The class picks one student pair's version to merge, and
+  **write real Remus code**: small functions with a ready-made signature,
+  docstring, and failing tests. The class picks one student pair's version as the clearest, and
   `CONTRIBUTORS.md` records who wrote it. Keep student functions short enough for a student pair
   to finish in 20 to 40 minutes.
 - **Student pairs write the most important and most enlightening code, never plumbing**
@@ -62,12 +62,14 @@ that are specific to Claude Code. The Python style follows David's course reposi
   as making a move and recording its undo, negamax's sign flip, an alpha-beta cutoff,
   or quiescence standing pat, in code simple enough that a student pair can explain every line
   it types. Text formatting, protocol strings, and helpers that only move data around
-  stay teacher code. A lab must never become a typing exercise.
+  stay given code. A lab must never become a typing exercise.
 - **No hands-on lab asks a student pair to type more than about 30 to 40 lines of code** in
   one period, counted across every function and lab blank of that period (David,
   2026-10-27). Many 13-year-olds cannot touch-type, so a longer lab spends class time
-  on typing instead of thinking. When an idea needs more code, the teacher writes the
-  rest beforehand and the student pair writes the core. `make_student_folders.py` prints the
+  on typing instead of thinking. When an idea needs more code, the course designer writes the
+  rest beforehand as given code and the student pair writes the core. The teacher
+  writes no code during the workshop (David, 2026-10-31): every line a student pair
+  does not type is already in the period folder. `make_student_folders.py` prints the
   largest count per period and flags any period above `MAX_TYPED_LINES = 40`.
 - Short unplugged warm-ups (paper, cards, and a printed board at the desk) come before
   the hardest ideas. They replace part of the teacher's explanation, never the time a
@@ -136,7 +138,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
    leave the live position unchanged even if it stops early (use `try/finally`).
 6. **Separate rules from search.** Legal move generation must be correct (perft-verified)
    before minimax, alpha-beta, books, tables, or GUI work. The one early exception is
-   the teacher-written UCI plug at the end of Day 5, which plays random legal moves so
+   the ready-made UCI plug at the end of Day 5, which plays random legal moves so
    students see their rules on a real board; the UCI lesson itself waits for Day 7,
    after perft.
 7. **One idea at a time.** Simple correct version first; an advanced version only with an

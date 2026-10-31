@@ -34,7 +34,7 @@ Check the work with the tests: open `run_tests.py` in the `student` folder in VS
 | --- | --- |
 | 8:30 to 8:45 | Slides: functions, parameters, `return`, type hints, and docstrings. |
 | 8:45 to 9:25 | Student pairs work through Parts #1 to #3 of `python_functions.py`: call a function, write their own, and unpack a square tuple such as `row, col = (6, 4)`. |
-| 9:25 to 9:35 | Slides: `assert` and pytest. The teacher breaks a function on purpose and the class reads the failing test together. |
+| 9:25 to 9:35 | Slides: `assert` and pytest. A slide shows a function with a mistake in it, and the class reads the failing test together. |
 | 9:35 to 9:50 | Student pairs finish Part #4, which checks their functions with `assert`. |
 | 9:50 to 10:00 | Wrap-up: each student pair says what a failing test tells them and where to look first. |
 

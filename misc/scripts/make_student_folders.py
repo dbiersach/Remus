@@ -512,7 +512,7 @@ def day_readme(day: int, rows: dict) -> str:
         writes = pairs_write(day, period, rows, "from the version README")
         out.append(
             f"| P{period} | {clock(start)} to {clock(end)} | "
-            f"{PERIOD_TITLES[(day, period)]} | {writes or 'Nothing: teacher code'} |"
+            f"{PERIOD_TITLES[(day, period)]} | {writes or 'Nothing: given code'} |"
         )
         if period in BREAKS:
             next_start = PERIOD_STARTS[period + 1]
@@ -608,7 +608,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
         (
             "`make_student_folders.py` writes this page from the code, so it always matches "
             "the folders. For every period it names the files that arrive or grow, which "
-            "the teacher writes, and the functions the student pairs write, which are stubs in "
+            "hold given code, and the functions the student pairs write, which are stubs in "
             "each `student` folder and finished in the `instructor` folder beside it. Each "
             "period's "
             "goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check "
@@ -632,7 +632,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
             f"| P{period} | {PERIOD_TITLES[(day, period)]} | "
             f"{', '.join(f'`{name}`' for name in new) or 'None'} | "
             f"{', '.join(f'`{name}`' for name in changed) or 'None'} | "
-            f"{writes or 'Nothing: a demo or teacher code'} |"
+            f"{writes or 'Nothing: a demo or given code'} |"
         )
         if period == 4:
             out.append("")
