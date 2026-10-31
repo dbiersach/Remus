@@ -95,26 +95,26 @@ open it: `play_battle.py` and `basic_test.py` in their engine folder run it.
 ## The puzzle box and its pieces
 
 Think of this page as the picture on a jigsaw puzzle box. Each `.py` file is one
-piece. Each piece has its own page in `misc/docs/engine_code/`, or in
-`misc/docs/learning_python/` for a lab. A page starts with the
-big picture, then shows where the piece fits, its call tree, and what each function
-does.
+piece, and each piece has its own page: an engine file in `misc/docs/engine_code/`, a
+lab in `misc/docs/learning_python/`, a class demo in `misc/docs/class_demos/`, and a
+science file in `misc/docs/science/`. A page starts with the big picture, then shows
+where the piece fits, its call tree, and what each function does.
 
-The pieces stack up. Each file uses the ones above it in this map:
+The engine pieces stack up. A file uses only files in its own row or the rows above it:
 
-```text
-board.py                     the grid of squares
-game_state.py, moves.py      whose turn it is, what a move looks like
-make_move.py                 play a move and take it back
-move_generation.py           every move the pieces can make
-attacks.py, legal_moves.py   keep only the legal moves
-fen.py, notation.py          read and write positions and moves
-game_end.py                  is the game over?
-evaluation.py                how good is a position?
-move_ordering.py, transposition_table.py, opening_book.py
-search.py                    choose a move
-uci_engine.py                talk to Lucas Chess
-```
+| Row | Files | What they do |
+| ---: | --- | --- |
+| 1 | [`board.py`](../engine_code/board.md) | The grid of squares |
+| 2 | [`game_state.py`](../engine_code/game_state.md), [`moves.py`](../engine_code/moves.md) | Whose turn it is, and what a move looks like |
+| 3 | [`make_move.py`](../engine_code/make_move.md) | Play a move and take it back |
+| 4 | [`move_generation.py`](../engine_code/move_generation.md) | Every move the pieces can make |
+| 5 | [`attacks.py`](../engine_code/attacks.md), [`legal_moves.py`](../engine_code/legal_moves.md) | Keep only the legal moves |
+| 6 | [`fen.py`](../engine_code/fen.md), [`notation.py`](../engine_code/notation.md) | Read and write positions (FEN) and moves (SAN) |
+| 7 | [`perft.py`](../engine_code/perft.md), [`game_end.py`](../engine_code/game_end.md) | Count positions and spot the end of a game; only the tests use these two |
+| 8 | [`evaluation.py`](../engine_code/evaluation.md) | How good is a position? |
+| 9 | [`move_ordering.py`](../engine_code/move_ordering.md), [`transposition_table.py`](../engine_code/transposition_table.md), [`opening_book.py`](../engine_code/opening_book.md) | Try good moves first, remember searched positions, and play known openings |
+| 10 | [`search.py`](../engine_code/search.md) | Choose a move |
+| 11 | [`uci_engine.py`](../engine_code/uci_engine.md) | Talk to Lucas Chess |
 
 The pages, in the order the class builds them:
 
