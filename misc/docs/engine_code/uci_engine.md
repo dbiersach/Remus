@@ -39,7 +39,7 @@ Lucas Chess -> go wtime 60000 btime 60000   Remus -> info depth 3 ... bestmove e
 
 1. `main()` reads one line at a time.
 2. `position` builds the game with `set_position()`.
-3. `go` picks the brain. On Day 10, a book move comes first if there is one.
+3. `go` picks the brain. In Remus-GREEN and Remus-GOLD, a book move comes first if there is one.
 4. `thinking_time()` turns the clock into seconds to think. It plans to spend a thirtieth of the clock, but
    it never counts the last 3 seconds, because sending each move costs a little time
    the search does not see. Without that reserve, a long game with no increment

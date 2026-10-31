@@ -6,7 +6,7 @@
 
 This is the brain of Remus. It looks ahead at moves and replies, then picks the best.
 
-The file grows every day from Day 7 to Day 10. Each new, smarter search sits next to
+The file grows every day from Day 7 to Day 9. Each new, smarter search sits next to
 the older one. That way you can run both and compare.
 
 ## Where this piece fits
@@ -175,7 +175,7 @@ think_move()
 | `undo_null_move` | Takes back a null move. | Remus-GOLD |
 | `has_pieces` | Checks that a side has a piece besides pawns and the king. | Remus-GOLD |
 | `reduction` | Says how many plies to cut from a late, quiet move. | Remus-GOLD |
-| `upgraded_search` | The Day 10 search, with memory, killer moves, draw sense, null moves, and late move reductions. | Remus-GOLD |
+| `upgraded_search` | The Day 9 enhanced engines' search, with memory, killer moves, draw sense, null moves, and late move reductions. | Remus-GOLD |
 | `format_info` | Writes a line telling the GUI the depth, score, and best line. | Day 9, period 1 |
 | `think` | Searches deeper and deeper until time runs out, then returns the best move. | Day 9, period 1 |
 | `think_move` | The thinking brain, with two seconds per move. | Day 9, period 1 |

@@ -20,7 +20,7 @@ move_ordering.py uses board.py and evaluation.py. search.py calls it at every po
 ## Words to know
 
 - **MVV-LVA:** Most Valuable Victim, Least Valuable Attacker. A rule for sorting captures.
-- **killer move:** a quiet move that worked well in a nearby position. It is tried early (Day 10).
+- **killer move:** a quiet move that worked well in a nearby position. It is tried early (Remus-BLUE and Remus-GOLD, Day 9).
 - **quiet move:** a move that does not capture or promote.
 
 ## What it stores
@@ -29,7 +29,7 @@ How moves are ranked, best first:
 
 1. The `first` move: the best move from the last search.
 2. Captures, by MVV-LVA score.
-3. Killer moves (Day 10).
+3. Killer moves (Remus-BLUE and Remus-GOLD, Day 9).
 4. All other quiet moves.
 
 ## How it works

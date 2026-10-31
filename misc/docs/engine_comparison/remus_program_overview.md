@@ -256,21 +256,29 @@ the rook's squares for castling, and the victim's square for en passant.
 
 ## Program flow: from a GUI command to a move
 
-When Lucas Chess asks Remus for a move, the work runs through the modules in this
-order:
+Lucas Chess asks Remus for one move at a time. Here is one example: Remus has White,
+the game so far is 1.e4 e5, and each side has a minute left. The commands change with
+every game and every move; these are only the ones for this moment.
 
-1. `uci_engine.py` reads `position startpos moves e2e4 e7e5` and builds the state with
-   `fen.state_from_fen` and `make_move`.
-2. On `go wtime 60000 ...`, `thinking_time` turns the clock into seconds to think.
-3. Out of the opening book, `search.think` runs iterative deepening: depth 1, 2, 3,
-   and on, until time runs out.
-4. Each depth calls `upgraded_search` (Day 10) or `alpha_beta_with_quiescence` (Day 8).
-   The search calls `legal_moves`, which calls `pseudo_legal_moves`,
-   `castling_moves`, `make_move`, `in_check`, and `undo_move` for every candidate.
-5. At depth 0, `quiescence` keeps searching captures until the position is quiet, then
+1. Lucas Chess sends the whole game so far: `position startpos moves e2e4 e7e5`.
+   `uci_engine.py` sets up the start position with `fen.state_from_fen` and plays each
+   listed move with `make_move`. After Remus's reply and Black's next move, the list
+   holds four moves, and so on.
+2. Lucas Chess sends `go wtime 60000 btime 60000`: each side has 60,000 milliseconds
+   left.
+3. Remus-GREEN and Remus-GOLD ask their opening book first. The book knows 1.e4 e5, so
+   Remus plays a book move such as `g1f3` (Nf3) at once and skips the search. Remus-WHITE
+   and the other enhanced engines have no book and go straight to step 4.
+4. Out of the book, `thinking_time` turns the clock into seconds to think, and
+   `search.think` runs iterative deepening: depth 1, 2, 3, and on, until time runs out.
+5. Each depth calls `alpha_beta_with_quiescence` (Remus-WHITE, from Day 8) or
+   `upgraded_search` (the enhanced engines and Remus-GOLD, from Day 9). The search
+   calls `legal_moves`, which calls `pseudo_legal_moves`, `castling_moves`,
+   `make_move`, `in_check`, and `undo_move` for every candidate.
+6. At depth 0, `quiescence` keeps searching captures until the position is quiet, then
    `evaluation.evaluate` scores it.
-6. Each finished depth sends an `info` line with the score and principal variation.
-7. `uci_engine.py` sends `bestmove g1f3`.
+7. Each finished depth sends an `info` line with the score and principal variation.
+8. `uci_engine.py` sends `bestmove` with the move it chose, such as `bestmove g1f3`.
 
 The search makes and undoes moves on the one live state. A `try/finally` around every
 `make_move` guarantees the undo, even when the clock stops the search in the middle.
