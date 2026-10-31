@@ -84,6 +84,98 @@ The evaluation enhancements (PURPLE, CYAN, GRAY) add one term to `evaluate()` an
 line to `explain_evaluation()`. Remus-GREEN asks the book before searching, in
 `uci_engine.py`.
 
+## How the ten add up to Remus-GOLD
+
+Remus-GOLD, in `engines/instructor/11 Remus-GOLD - All enhancements`, is Remus-WHITE
+with all ten enhancements in one folder. No student pair writes it. It is there to
+show how ten ideas that each live alone in an enhanced engine fit together inside one
+engine, and it is the engine Day 10 plays in Lucas Chess. Its
+[README](<../../engines/instructor/11 Remus-GOLD - All enhancements/README.md>)
+measures it against Remus-WHITE.
+
+### Which file each enhancement changes
+
+Six of the ten enhancements change how Remus searches, three change how it scores a
+position, and one asks a book before searching at all. Remus-GOLD keeps every file
+of Remus-WHITE and changes these:
+
+| File | What Remus-GOLD adds | Enhancement |
+| --- | --- | --- |
+| `evaluation.py` | `pawn_structure()`, `mating_bonus()`, and `king_safety()`, added into `evaluate()` and printed by `explain_evaluation()` | PURPLE, CYAN, GRAY |
+| `transposition_table.py` | `store()`, `probe()`, and `best_stored_move()`, a plain dict from position key to entry | RED |
+| `move_ordering.py` | `order_moves()` takes the stored move and this ply's killers | RED, BLUE |
+| `opening_book.py` and `opening_book.txt` | `load_book()` and `book_move()` | GREEN |
+| `search.py` | `upgraded_search()`, one function with six enhancements inside, and its helpers `is_draw_in_search()`, `null_move_cutoff()`, `search_later_move()`, `reduction()`, and `remember_killer()` | YELLOW, ORANGE, PINK, BROWN, BLUE, RED |
+| `uci_engine.py` | Asks `book_move()` before `think()` | GREEN |
+
+In an enhanced engine the new search function sits beside
+`alpha_beta_with_quiescence()` under its own name, such as `table_search()`. In
+Remus-GOLD all six search changes sit in the one function `upgraded_search()`, and
+`think()` calls it. The older functions stay in the file, so a reader can compare
+`alpha_beta_with_quiescence()` with `upgraded_search()` line by line and find each
+enhancement.
+
+### One move, from Lucas Chess to bestmove
+
+1. Lucas Chess sends `position` and `go`. `uci_engine.py` asks
+   `book_move(book, state)` first. When the book knows the position, that move goes
+   straight back as `bestmove` and no search runs at all (GREEN).
+2. Otherwise `think()` runs iterative deepening: `upgraded_search()` at depth 1,
+   then 2, then 3, until the clock runs out, and the move of the last finished depth
+   is sent. One `SearchInfo` lives through the whole think, so the transposition
+   table and the killer moves filled at depth 3 are already there when depth 4
+   starts.
+3. At the leaves, `evaluate()` scores the position as the sum of five terms:
+   material, placement, pawn structure, the mating bonus, and king safety. The last
+   three are PURPLE, CYAN, and GRAY, one function each.
+
+### The order of the steps inside upgraded_search
+
+Each call of `upgraded_search()` looks at one position and runs these steps in this
+order. The cheap questions come first, because any one of them can end the call
+before the expensive work of generating and searching moves begins:
+
+| Step | What happens | Enhancement |
+| --- | --- | --- |
+| 1 | Count the position and check the clock | Remus-WHITE |
+| 2 | Draw sense: if the position has already appeared in the game or the search, or the fifty-move limit is reached, return 0 | YELLOW |
+| 3 | Check extension: in check, look one ply deeper | Remus-WHITE |
+| 4 | At depth 0, hand the position to `quiescence()` | Remus-WHITE |
+| 5 | Table lookup: if `probe()` finds this position searched at least this deep, return the stored score | RED |
+| 6 | Null move: pass the turn and search two plies shallower; if the score still reaches beta, return beta without generating moves. Skipped in check, near mate, and with only pawns left | ORANGE |
+| 7 | Generate the legal moves; no moves is mate or stalemate | Remus-WHITE |
+| 8 | Order the moves: the stored best move first, then captures by MVV-LVA, then this ply's killers, then the quiet moves | RED, BLUE, Remus-WHITE |
+| 9 | Search the first move with the full window | Remus-WHITE |
+| 10 | For every later move, `reduction()` cuts one ply from a late quiet move, and `search_later_move()` tries a null window first and searches again in full only when the move beats alpha | BROWN, PINK |
+| 11 | On a cutoff, remember the move as a killer for this ply and store the score in the table as a lower bound | BLUE, RED |
+| 12 | After the loop, store the score as exact or as an upper bound | RED |
+
+Mate scores depend on the ply they are found at, so steps 11 and 12 leave them out of
+the table, and a draw by repetition is tested before the table so that a stored
+score never hides a repetition.
+
+### Why the order matters
+
+The enhancements lean on each other. Null-move pruning, principal variation search,
+and late move reductions all assume that the first move tried is the best one, or
+close to it, and that assumption only holds because the stored move and the killers
+have already been put at the front of the list. A reduced or null-window search that
+guesses wrong is caught by the full search that follows it, so a wrong guess costs
+time but never a move. The table lookup comes before the null move because a dict
+read is far cheaper than a shallower search. Draw sense comes before everything else
+because a repetition inside the search is the one case where a stored score would
+lie.
+
+The strengths do not simply add. The league table below rates each enhanced engine
+alone against Remus-WHITE, and Remus-GOLD against all of them, and
+[`engines_elo.md`](../designer/engines_elo.md) rates Remus-WHITE and Remus-GOLD
+against Stockfish. Two enhancements that each save work can save much of the same
+work, and a sharper evaluation changes which moves the search cuts off. The pages in
+[`engine_code/`](engine_code/) walk through each file:
+[`search.md`](engine_code/search.md) draws the call tree of `upgraded_search()`,
+[`evaluation.md`](engine_code/evaluation.md) the five terms, and
+[`transposition_table.md`](engine_code/transposition_table.md) the stored entries.
+
 ## The Day 9 battles: version_match.py
 
 `version_match.py`, in `misc/designer`, plays an enhanced engine's Remus against Remus-WHITE,

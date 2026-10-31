@@ -420,8 +420,10 @@ learners extend it, and save open questions. Never drop in a complete optimized 
     A lab, demo, or science file gets a new `##` section in its page, not a new file.
   - `misc/teachers/`: everything a teacher needs to run the two weeks as they stand.
     `README.md`, where to start; `remus_course_plan.md`; `unplugged_activities.md`,
-    the run sheets of the warm-ups; `slide_plan.md`; `student_edit_plan.md`, which
-    `make_student_folders.py` writes; and `briefs/`, the two briefing PDFs.
+    the run sheets of the warm-ups with their answers; `handouts.md`, the
+    worksheets and cheat sheets to print, with no answers; `slide_plan.md`;
+    `student_edit_plan.md`, which `make_student_folders.py` writes; and `briefs/`,
+    the two briefing PDFs.
   - `misc/designer/`: the course designer's scripts (see "Every course designer
     tool" above) and the pages only the designer reads: `README.md`, the tools and
     the rebuild order; `engines_elo.md`, the league and Stockfish ratings and the

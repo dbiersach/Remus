@@ -139,7 +139,7 @@ at the input and output boundary.
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
 | Matches | Day 9, period 4: engine battles, two enhanced engines at a time, twice at 10 minutes a side, once with each piece color, on five laptops at once. The teacher then shows the designer's league table of all twelve Remus versions |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
-| Documentation | `misc/students/remus_program_overview.md` for the whole program, one page per script in `misc/students/engine_code/`, the Python labs in `misc/students/python_labs.md`, chess itself in `misc/students/learn_chess.md`, and `misc/teachers/slide_plan.md` for the PowerPoint slides |
+| Documentation | `misc/students/remus_program_overview.md` for the whole program, one page per script in `misc/students/engine_code/`, the Python labs in `misc/students/python_labs.md`, chess itself in `misc/students/learn_chess.md`, the warm-ups in `misc/teachers/unplugged_activities.md` and `misc/teachers/handouts.md`, and `misc/teachers/slide_plan.md` for the PowerPoint slides |
 
 ## The thirteen lessons
 
@@ -423,6 +423,10 @@ The time comes out of the teacher's explanation at the board, which the warm-up
 replaces: students learn the idea by doing it instead of by listening to it. The
 "Students write" block of each period keeps its full time.
 
+[`unplugged_activities.md`](unplugged_activities.md) is the run sheet for every
+warm-up in this table: the steps, the minutes, and the answers. The worksheets the
+student pairs hold are in [`handouts.md`](handouts.md).
+
 | When | Warm-up (10 to 15 minutes) | Idea it prepares | Materials per student pair |
 | --- | --- | --- | --- |
 | D1 P3 | **Call the square.** The teacher calls `(6, 4)`; the navigator puts a token on the printed board and the driver names the square (`e2`). Then they swap and go the other way | Row 0 is rank 8 | Printed board labeled both ways, one token |
@@ -533,8 +537,9 @@ student pairs can explain Remus's own answer.
    icon: it runs engine-against-engine games only when it starts from its own folder. If the image is identical, the same
    engine path works on all 10; check that the repository sits at the same folder on
    every laptop.
-4. **Print handouts:** a board diagram labeled with both `e2` and `(6, 4)`, the rules
-   refresher table, a SAN and UCI cheat sheet, a perft reference table, and a blank game
+4. **Print handouts** from [`handouts.md`](handouts.md): a board diagram labeled
+   with both `e2` and `(6, 4)`, the rules refresher table, a SAN and UCI cheat sheet, a
+   perft reference table, and the worksheet of each warm-up, including the blank game
    tree for Day 8.
 5. **Collect test positions as FEN:** the ten verification exercises above, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
    mate puzzles in `mate_puzzles.epd`, and a horizon-effect position.
@@ -544,8 +549,9 @@ student pairs can explain Remus's own answer.
    check that every laptop runs a file with the Run button and opens Lucas Chess.
 7. **Prepare unplugged materials:** for each student pair, a printed board, sticky-note
    pieces, a deck of index cards, and the warm-up worksheets listed under "Unplugged
-   warm-ups"; for the room, a large demonstration board and score cards for the human
-   minimax tree.
+   warm-ups" and printed from [`handouts.md`](handouts.md); for the room, a large
+   demonstration board and score cards for the human minimax tree. The run sheets in
+   [`unplugged_activities.md`](unplugged_activities.md) hold the answers.
 8. **Set speed expectations.** Plain Python searches thousands to tens of thousands of
    positions per second. Depth 3 to 4 with alpha-beta and quiescence in a few seconds
    is a realistic target, so students compare Remus with other Python engines, not

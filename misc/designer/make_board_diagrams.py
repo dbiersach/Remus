@@ -220,6 +220,71 @@ DIAGRAMS = {
         "arrows": [("b7", "b8", GOOD)],
         "fill": [("b8", MARK)],
     },
+    # Day 4 pin hunt: a bishop on a4 pins the bishop on c2 to the king on d1
+    "pin_bishop": {
+        "fen": "4k3/8/8/8/b7/8/2B5/3K4 w - - 0 1",
+        "arrows": [("a4", "c2", THREAT)],
+        "fill": [("c2", HOLE)],
+    },
+    # Day 4 pin hunt: the rook on f2 guards d2, e2, and f1, so the king has two moves
+    "king_into_check": {
+        "fen": "4k3/8/8/8/8/8/5r2/4K3 w - - 0 1",
+        "arrows": [("e1", "d1", GOOD), ("e1", "f2", GOOD)],
+        "fill": [("d2", HOLE), ("e2", HOLE), ("f1", HOLE)],
+    },
+    # Day 4 pin hunt: capturing en passant would open the fifth rank to the king
+    "en_passant_pin": {
+        "fen": "4k3/8/8/K1pP3r/8/8/8/8 w - c6 0 2",
+        "arrows": [("d5", "c6", THREAT), ("h5", "a5", THREAT)],
+        "fill": [("c5", HOLE), ("d5", HOLE)],
+    },
+    # Day 6 count by hand: king and pawn against king, 6 moves and 30 positions two plies deep
+    "count_by_hand": {
+        "fen": "4k3/8/8/8/8/8/4P3/4K3 w - - 0 1",
+        "arrows": [],
+        "fill": [],
+    },
+    # handouts.md, shade the reach: the three pieces alone, with no squares marked
+    "reach_knight_d4": {
+        "fen": "8/8/8/8/3N4/8/8/8 w - - 0 1",
+        "arrows": [],
+        "fill": [],
+        "size": 240,
+    },
+    "reach_knight_a1": {
+        "fen": "8/8/8/8/8/8/8/N7 w - - 0 1",
+        "arrows": [],
+        "fill": [],
+        "size": 240,
+    },
+    "reach_bishop_c1": {
+        "fen": "8/8/8/8/8/8/8/2B5 w - - 0 1",
+        "arrows": [],
+        "fill": [],
+        "size": 240,
+    },
+    # handouts.md, pin hunt: the four positions with no arrows, so the worksheet
+    # holds no hints
+    "hunt_pin_knight": {
+        "fen": "k3r3/8/8/8/8/8/4N3/4K3 w - - 0 1",
+        "arrows": [],
+        "fill": [],
+    },
+    "hunt_pin_bishop": {
+        "fen": "4k3/8/8/8/b7/8/2B5/3K4 w - - 0 1",
+        "arrows": [],
+        "fill": [],
+    },
+    "hunt_king_into_check": {
+        "fen": "4k3/8/8/8/8/8/5r2/4K3 w - - 0 1",
+        "arrows": [],
+        "fill": [],
+    },
+    "hunt_en_passant_pin": {
+        "fen": "4k3/8/8/K1pP3r/8/8/8/8 w - c6 0 2",
+        "arrows": [],
+        "fill": [],
+    },
 }
 
 
@@ -280,7 +345,7 @@ def main():
         file_path = OUT / f"{name}.svg"
         file_path.write_text(draw(spec), encoding="utf-8")
         print(f"Saved {file_path}")
-    print(f"Diagrams drawn: {len(DIAGRAMS)}  (expected 22)")
+    print(f"Diagrams drawn: {len(DIAGRAMS)}  (expected 33)")
 
 
 if __name__ == "__main__":
