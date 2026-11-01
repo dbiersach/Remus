@@ -30,3 +30,7 @@ board.svg
 
 # Niram build output (cargo build writes it inside engines/Niram/)
 engines/Niram/target/
+
+# The game tree video that misc/designer/make_game_tree_video.py makes stays on the
+# computer that made it
+/misc/teachers/videos/
