@@ -426,7 +426,8 @@ replaces: students learn the idea by doing it instead of by listening to it. The
 
 [`unplugged_activities.md`](unplugged_activities.md) is the run sheet for every
 warm-up in this table: the steps, the minutes, and the answers. The worksheets the
-student pairs hold are in [`handouts.md`](handouts.md).
+student pairs hold are in [`handouts.md`](handouts.md), and the [`handouts/`](handouts/)
+folder holds each one as a PDF to print.
 
 | When | Warm-up (10 to 15 minutes) | Idea it prepares | Materials per student pair |
 | --- | --- | --- | --- |
@@ -538,7 +539,8 @@ student pairs can explain Remus's own answer.
    icon: it runs engine-against-engine games only when it starts from its own folder. If the image is identical, the same
    engine path works on all 10; check that the repository sits at the same folder on
    every laptop.
-4. **Print handouts** from [`handouts.md`](handouts.md): a board diagram labeled
+4. **Print handouts** from the [`handouts/`](handouts/) folder, one PDF per handout,
+   numbered as in [`handouts.md`](handouts.md): a board diagram labeled
    with both `e2` and `(6, 4)`, the rules refresher table, a SAN and UCI cheat sheet, a
    perft reference table, and the worksheet of each warm-up, including the blank game
    tree for Day 8. Print the concept check and the interest survey twice over, 40
@@ -552,7 +554,7 @@ student pairs can explain Remus's own answer.
    check that every laptop runs a file with the Run button and opens Lucas Chess.
 7. **Prepare unplugged materials:** for each student pair, a printed board, sticky-note
    pieces, a deck of index cards, and the warm-up worksheets listed under "Unplugged
-   warm-ups" and printed from [`handouts.md`](handouts.md); for the room, a large
+   warm-ups" and printed from the [`handouts/`](handouts/) folder; for the room, a large
    demonstration board and score cards for the human minimax tree. The run sheets in
    [`unplugged_activities.md`](unplugged_activities.md) hold the answers.
 8. **Set speed expectations.** Plain Python searches thousands to tens of thousands of
