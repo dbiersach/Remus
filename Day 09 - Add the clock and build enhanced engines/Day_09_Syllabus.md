@@ -1,6 +1,6 @@
 # Day 9: The clock and the enhanced engines
 
-Day 9 gives Remus a clock, then splits the class into ten enhancement enhanced engines. Each student pair adds one idea to the same engine, Remus-WHITE, and tests it. In period 4 the student pairs carry their enhanced engines to each other's laptops on USB sticks and battle. By 4:30 every enhanced engine passes its tests and has played two battles.
+Day 9 gives Remus a clock, then splits the class into ten enhanced engines. Each student pair adds one idea to the same engine, Remus-WHITE, and tests it. In period 4 the student pairs carry their enhanced engines to each other's laptops on USB sticks and battle. By 4:30 every enhanced engine passes its tests and has played two battles.
 
 ## Objectives for the day
 
