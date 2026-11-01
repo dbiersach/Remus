@@ -116,12 +116,13 @@ adds two settings on top of level 3:
 
 | Setting | What it does |
 | --- | --- |
-| `lto = "fat"` | Link-time optimization: the compiler optimizes the whole program at once instead of one file at a time, so a call from `search.rs` into `make_move.rs` can be inlined. The depth 6 benchmark (`cargo run --release -- bench 6`) runs about 15 percent faster with it. |
+| `lto = "fat"` | Link-time optimization: the compiler optimizes the whole program at once instead of one file at a time, so a call from `search.rs` into `make_move.rs` can be inlined. The depth 6 benchmark (`cargo run --release -- bench 6`) ran about 15 percent faster with it on one Linux machine and at the same speed on the course designer's Windows PC; the program shrinks by about a sixth either way. |
 | `panic = "abort"` | A bug that would panic stops the program at once instead of unwinding the stack, which removes the unwinding tables and landing pads from the code. Niram never catches a panic, so nothing changes. |
 
 `codegen-units = 1`, another common release setting, is left at its default
-on purpose: for this engine it made the benchmark about 15 percent slower, because
-the single compilation unit led the optimizer to different inlining choices.
+on purpose: for this engine it made the benchmark about 15 percent slower on that
+Linux machine, because the single compilation unit led the optimizer to different
+inlining choices.
 
 The build writes no debug information into the program (`debug = false` and
 `strip = true`). On Windows, Microsoft's linker still writes a `.pdb` file, the
