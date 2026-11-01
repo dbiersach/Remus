@@ -105,6 +105,33 @@ cargo run --release -- bench 6
 cargo run --release -- perft 5          # 4,865,609 from the start position
 ```
 
+## The release build
+
+`cargo build --release` writes `target/release/niram.exe`, and that is the program
+to use: Lucas Chess, `engine_parity.py`, and `version_elo.py` all run it. Rust has
+optimization levels 0 to 3, and Cargo's release profile uses level 3, the highest,
+while `cargo build` without `--release` writes a slow, unoptimized program with
+debug checks to `target/debug`. The `[profile.release]` table in `Cargo.toml`
+adds two settings on top of level 3:
+
+| Setting | What it does |
+| --- | --- |
+| `lto = "fat"` | Link-time optimization: the compiler optimizes the whole program at once instead of one file at a time, so a call from `search.rs` into `make_move.rs` can be inlined. The depth 6 benchmark (`cargo run --release -- bench 6`) runs about 15 percent faster with it. |
+| `panic = "abort"` | A bug that would panic stops the program at once instead of unwinding the stack, which removes the unwinding tables and landing pads from the code. Niram never catches a panic, so nothing changes. |
+
+`codegen-units = 1`, another common release setting, is left at its default
+on purpose: for this engine it made the benchmark about 15 percent slower, because
+the single compilation unit led the optimizer to different inlining choices.
+
+The build writes no debug information into the program (`debug = false` and
+`strip = true`). On Windows, Microsoft's linker still writes a `.pdb` file, the
+debug symbol database that a debugger such as Visual Studio reads, beside
+`niram.exe` and in `target/release/deps`. The engine never reads a `.pdb`, and
+Lucas Chess plays the same without one. `.cargo/config.toml` in this folder passes
+the linker `/DEBUG:NONE`, so a build on Windows skips the file. The whole
+`target/` folder is build output that git ignores, and deleting it costs only the
+next `cargo build --release`.
+
 The matching Python benchmark runs from the repository folder:
 
 ```bash
