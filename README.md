@@ -126,10 +126,12 @@ The engine uses only the Python standard library. The development group adds
 `python-chess`, which the tests use as an outside reference for move counts,
 along with `pytest` and `ruff`. Lucas Chess talks to Remus over UCI.
 
-Niram, in the top `engines/Niram` folder beside the Remus versions, is Remus-GOLD
-rewritten in Rust. It searches the same trees about 15 times faster. It is a
-course designer's experiment, outside the course; see
-[its README](<engines/Niram/README.md>).
+Niram-GOLD, in the top `engines/Niram-GOLD` folder beside the Remus versions, is
+Remus-GOLD rewritten in Rust. It searches the same trees about 15 times faster. It
+is a course designer's experiment, outside the course; see
+[its README](<engines/Niram-GOLD/README.md>). `engines/Niram-PLATINUM` holds
+Niram-PLATINUM, the Rust copy of Remus-PLATINUM, which adds ten more enhancements to
+Remus-GOLD; see [the Remus-PLATINUM README](<engines/instructor/12 Remus-PLATINUM - Ten more enhancements/README.md>).
 
 ## License
 

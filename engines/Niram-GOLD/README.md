@@ -1,21 +1,23 @@
-# Niram: Remus-GOLD in Rust
+# Niram-GOLD: Remus-GOLD in Rust
 
 Niram is Remus rewritten in Rust. Remus echoes Rimush, the son of Sargon of Akkad;
-Niram shortens Naram-Sin, Sargon's grandson, the next heir in the family line.
+Niram shortens Naram-Sin, Sargon's grandson, the next heir in the family line. Each
+Niram carries the engine color of the Remus version it copies: Niram-GOLD copies
+Remus-GOLD, and Niram-PLATINUM, in the folder beside this one, copies Remus-PLATINUM.
 
-Niram keeps the exact rules, evaluation, and search of Remus-GOLD, in the
-folder beside this one: the same board of 64 characters, the same move order, and
+Niram-GOLD keeps the exact rules, evaluation, and search of Remus-GOLD, in the
+`engines/instructor` folder: the same board of 64 characters, the same move order, and
 the same evaluation terms and search function. Given the same position and depth,
 both engines visit the same number of positions and choose the same move with the
-same score. Only the language changes, so Niram searches about 15 times faster.
+same score. Only the language changes, so Niram-GOLD searches about 15 times faster.
 
-Niram is the course designer's experiment, not part of the course. Students write Remus in
-Python, and the student folders leave Niram out.
+Niram-GOLD is the course designer's experiment, not part of the course. Students write
+Remus in Python, and the student folders leave Niram out.
 
 ## Files
 
 `src/` holds every Rust file. Each one matches the Remus-GOLD Python file of the
-same name, with the same function names. `main.rs` starts the program `niram`,
+same name, with the same function names. `main.rs` starts the program `niram-gold`,
 which asks the opening book first, then searches:
 
 | Rust file | Remus file | What it does |
@@ -42,7 +44,7 @@ which asks the opening book first, then searches:
 scanning attack test) stay in Python only.
 
 The designer's league ran on Rust copies of all 12 Remus versions, from Niram-WHITE
-to Niram. Only Niram is kept. The league's games stay in
+to Niram-GOLD. Only Niram-GOLD is kept. The league's games stay in
 `misc/games/remus_games.pgn`, and `uv run misc/designer/version_league.py --niram --rate-only
 --event "Niram league 1"` rates them, with Niram-WHITE pinned at 0.
 
@@ -77,10 +79,10 @@ it needs Rust 1.85 or newer; rustup installs the latest version.
 
    If Windows reports that `cargo` is not recognized, the terminal started before
    the install: open a new one, or sign out and back in.
-4. **Build Niram.** In PowerShell, from the repository folder:
+4. **Build Niram-GOLD.** In PowerShell, from the repository folder:
 
    ```powershell
-   cd engines\Niram
+   cd engines\Niram-GOLD
    cargo build --release
    cargo test --release
    ```
@@ -100,14 +102,14 @@ From inside this folder:
 ```bash
 cargo build --release                        # The program, in target/release
 cargo test --release                         # perft, the book, and the node count
-cargo run --release -- bench            # Time Niram on ten positions, depth 4
+cargo run --release -- bench            # Time Niram-GOLD on ten positions, depth 4
 cargo run --release -- bench 6
 cargo run --release -- perft 5          # 4,865,609 from the start position
 ```
 
 ## The release build
 
-`cargo build --release` writes `target/release/niram.exe`, and that is the program
+`cargo build --release` writes `target/release/niram-gold.exe`, and that is the program
 to use: Lucas Chess, `engine_parity.py`, and `version_elo.py` all run it. Rust has
 optimization levels 0 to 3, and Cargo's release profile uses level 3, the highest,
 while `cargo build` without `--release` writes a slow, unoptimized program with
@@ -127,7 +129,7 @@ inlining choices.
 The build writes no debug information into the program (`debug = false` and
 `strip = true`). On Windows, Microsoft's linker still writes a `.pdb` file, the
 debug symbol database that a debugger such as Visual Studio reads, beside
-`niram.exe` and in `target/release/deps`. The engine never reads a `.pdb`, and
+`niram-gold.exe` and in `target/release/deps`. The engine never reads a `.pdb`, and
 Lucas Chess plays the same without one. `.cargo/config.toml` in this folder passes
 the linker `/DEBUG:NONE`, so a build on Windows skips the file. The whole
 `target/` folder is build output that git ignores, and deleting it costs only the
@@ -139,14 +141,14 @@ The matching Python benchmark runs from the repository folder:
 uv run misc/designer/remus_benchmark.py GOLD      # Remus-GOLD, depth 4
 ```
 
-`misc/designer/engine_parity.py` checks that Niram thinks exactly like Remus-GOLD,
+`misc/designer/engine_parity.py` checks that Niram-GOLD thinks exactly like Remus-GOLD,
 on 49 positions that cover openings and book trap lines, tactics, checks,
 castling, en passant, promotion, endgames, repetition, the fifty-move rule, and
 mate puzzles. For each position it compares the evaluation, the legal moves in
 generation and search order, the book moves, and a search with no clock: every
 depth's score, node count, and principal variation, and the best move. The
 program's `parity` command picks the deepest search that stays within a node
-budget, and Remus repeats that search on every CPU core. `book` prints Niram's
+budget, and Remus repeats that search on every CPU core. `book` prints Niram-GOLD's
 whole opening book for the same comparison. The latest results are in
 [misc/designer/remus-niram_same_algorithms.md](../../misc/designer/remus-niram_same_algorithms.md).
 
@@ -155,7 +157,7 @@ uv run misc/designer/engine_parity.py                  # 25,000 nodes a search
 uv run misc/designer/engine_parity.py --nodes 100000   # Deeper searches (Remus takes longer)
 ```
 
-To play Niram in Lucas Chess, run `cargo build --release` and add
-`target/release/niram.exe` as a UCI engine, the same way the
+To play Niram-GOLD in Lucas Chess, run `cargo build --release` and add
+`target/release/niram-gold.exe` as a UCI engine, the same way the
 [Lucas Chess guide](../../misc/students/lucas_chess_guide.md) adds Remus. It needs no
 batch file.

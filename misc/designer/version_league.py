@@ -31,8 +31,8 @@ clock.
 
 The designer's league ran on Niram, Rust copies of the same 12 versions that chose
 the same moves as Remus about 15 times faster, so a 10 minute Niram game searched
-as deep as a Remus game of about 2.5 hours. Only Niram is kept, in the Niram
-folder, but the Niram games stay in the games file: --niram with --rate-only rates
+as deep as a Remus game of about 2.5 hours. Only Niram-GOLD is kept, in the
+engines/Niram-GOLD folder, but the Niram games stay in the games file: --niram with --rate-only rates
 them apart from Remus games, with Niram-WHITE pinned at 0.
 
 Every game starts from one of the OPENINGS of version_match.py, three moves for each
@@ -374,7 +374,7 @@ def main():
     clock = time_control(options.minutes, options.increment)
     start = time.perf_counter()
     if options.niram and not options.rate_only:
-        sys.exit("Only Niram is kept, so --niram works only with --rate-only")
+        sys.exit("Only Niram-GOLD is kept, so --niram works only with --rate-only")
     if not options.rate_only:
         play_league(
             options.games,

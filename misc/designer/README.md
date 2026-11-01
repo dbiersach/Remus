@@ -8,7 +8,8 @@ rules the tools follow are in `AGENTS.md` at the top of Remus.
 | Page | What it holds |
 | --- | --- |
 | [`engines_elo.md`](engines_elo.md) | The designer's league of the 12 Remus versions, the Stockfish bracket run, the code lines of each version, and the `version_league.py` and `version_elo.py` commands that rate them |
-| [`remus-niram_same_algorithms.md`](remus-niram_same_algorithms.md) | Written by `engine_parity.py`: whether Niram and Remus-GOLD still pick the same moves at the same depth, and how fast each runs |
+| [`remus-niram_same_algorithms.md`](remus-niram_same_algorithms.md) | Written by `engine_parity.py`: whether Niram-GOLD and Remus-GOLD still pick the same moves at the same depth, and how fast each runs |
+| [`remus-niram_platinum_same_algorithms.md`](remus-niram_platinum_same_algorithms.md) | Written by `engine_parity.py --version PLATINUM`: the same check for Niram-PLATINUM and Remus-PLATINUM |
 | [`science_tree_search_survey.md`](science_tree_search_survey.md) | The survey of published science problems that search a tree like a chess engine, which chose the Day 10 phase hunt |
 
 Four pages elsewhere, and the handout PDFs, are written by scripts in this folder, so
@@ -67,18 +68,18 @@ uv run misc/designer/make_student_folders.py
 ## Play and rate the Remus versions
 
 Every game these scripts play goes into `misc/games/remus_games.pgn`. The designer's league
-ran on Rust copies of the 12 versions; only Niram is kept, so `--niram` rates
+ran on Rust copies of the 12 versions; only Niram-GOLD is kept, so `--niram` rates
 those saved games and plays none.
 
 | Script | What it does |
 | --- | --- |
 | `version_match.py` | Plays one enhanced engine against Remus-WHITE or another engine, 2 games at 10 minutes a side, and prints the Elo gap. `play_battle.py` and `basic_test.py` in each engine folder run it with `--engines`; by hand it plays the engines in `engines/instructor`. |
 | `version_league.py` | Plays a round robin of all 12 versions on a 10-minute clock and fits one Elo rating each, with Remus-WHITE pinned at 0. `--rate-only` prints the ratings from saved games. |
-| `version_elo.py` | Rates all 12 versions, and Niram with `--niram`, against Stockfish at four strengths near an even score. `--bracket` instead sets each round's Stockfish strength to the engine's rating so far, the run that `misc/designer/engines_elo.md` reports. `--report-only` prints the tables from saved games. |
+| `version_elo.py` | Rates the Remus versions, Niram-GOLD with `--niram`, and Niram-PLATINUM with `--niram-platinum` against Stockfish at four strengths near an even score. `--bracket` instead sets each round's Stockfish strength to the engine's rating so far, the run that `misc/designer/engines_elo.md` reports. `--report-only` prints the tables from saved games. |
 
-## Compare Remus with Niram
+## Compare Remus with Niram-GOLD and Niram-PLATINUM
 
 | Script | What it does |
 | --- | --- |
-| `engine_parity.py` | Checks that Niram matches Remus-GOLD on 49 positions: evaluation, legal moves, book moves, and every search depth's score, node count, and best line. It writes `misc/designer/remus-niram_same_algorithms.md` and exits with code 1 if anything differs. |
-| `remus_benchmark.py` | Times one Remus version, such as `GOLD`, on the ten positions of the Day 8 `compare_search.py`, so the speed of Remus-GOLD can be compared with the Niram benchmark. |
+| `engine_parity.py` | Checks that Niram-GOLD matches Remus-GOLD on 49 positions: evaluation, legal moves, book moves, and every search depth's score, node count, and best line. It writes `misc/designer/remus-niram_same_algorithms.md` and exits with code 1 if anything differs. `--version PLATINUM` checks Niram-PLATINUM against Remus-PLATINUM and writes `remus-niram_platinum_same_algorithms.md`. |
+| `remus_benchmark.py` | Times one Remus version, such as `GOLD`, on the ten positions of the Day 8 `compare_search.py`, so the speed of Remus-GOLD can be compared with the Niram-GOLD benchmark. |

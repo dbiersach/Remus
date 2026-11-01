@@ -1,6 +1,6 @@
 # Remus-GOLD: All enhancements
 
-Remus-GOLD is the finished Remus of Day 10, with all ten enhancements at once. It lives only in the teacher's folders; estimate_elo.py measures its rating against Stockfish, and Niram, in engines/Niram, is the same engine in Rust.
+Remus-GOLD is the finished Remus of Day 10, with all ten enhancements at once. It lives only in the teacher's folders; estimate_elo.py measures its rating against Stockfish, and Niram-GOLD, in engines/Niram-GOLD, is the same engine in Rust.
 
 ## The idea, with an example
 

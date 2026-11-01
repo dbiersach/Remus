@@ -1,0 +1,24 @@
+# Niram-GOLD: Remus-GOLD rewritten in Rust.
+#
+# src/ holds every Rust file, each named after the Remus-GOLD Python file it matches:
+# the board, the rules of chess, FEN, SAN, the opening book, the evaluation, move
+# ordering, the transposition table, the search, the UCI loop, and the benchmark.
+[package]
+name = "niram-gold"
+description = "Niram-GOLD: Remus-GOLD in Rust, with all ten enhancements"
+version = "0.2.0"
+edition = "2024"
+license = "BSD-3-Clause"
+
+# Niram uses the Rust standard library only, the way Remus uses Python's.
+[dependencies]
+
+# The release profile. Cargo's release build already compiles at opt-level 3, the
+# highest optimization level; these settings add whole-program optimization.
+# codegen-units = 1 is left at its default of 16 on purpose: with it, the depth 6
+# benchmark measured about 15 percent slower on this engine.
+[profile.release]
+lto = "fat"          # Optimize across every module at link time: a smaller, sometimes faster program
+panic = "abort"      # Stop at once on a bug instead of unwinding the stack
+debug = false        # No debug information in the program
+strip = true         # No symbol table in the program

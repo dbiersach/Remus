@@ -2,7 +2,7 @@
 """version_elo.py
 
 Rate every Remus version against Stockfish: Remus-WHITE, the ten enhanced engines,
-and Remus-GOLD.
+Remus-GOLD, and Remus-PLATINUM.
 
 Each version plays Stockfish at four strengths (UCI_Elo) near the strength where
 Remus scores about half the points, because a game against a Stockfish that
@@ -12,9 +12,10 @@ Black, on a 10 minute clock. The script then finds each version's Elo rating the
 way estimate_elo.py does, adds every game to misc/games/remus_games.pgn, and
 prints the table that misc/designer/engines_elo.md reports.
 
-With --niram, Niram, the Rust copy of Remus-GOLD that chooses the same
-moves about 15 times faster, plays too, at 2000, 2200, 2400, and 2600. Build it
-first with "cargo build --release" inside its folder. Its games are rated apart
+With --niram, Niram-GOLD, the Rust copy of Remus-GOLD that chooses the same
+moves about 15 times faster, plays too, at 2000, 2200, 2400, and 2600, and with
+--niram-platinum, Niram-PLATINUM, the Rust copy of Remus-PLATINUM. Build each
+first with "cargo build --release" inside its folder. Their games are rated apart
 from the Remus games.
 
 Before the first game, the script copies every version folder into a temporary
@@ -27,12 +28,14 @@ keep --workers at or below the number of physical cores.
 
 Usage:
     uv run misc/designer/version_elo.py --workers 20         all 12 versions, 576 games
-    uv run misc/designer/version_elo.py --niram              Niram too, 48 more
+    uv run misc/designer/version_elo.py --niram              Niram-GOLD too, 48 more
     uv run misc/designer/version_elo.py --colors WHITE GOLD  only some versions
     uv run misc/designer/version_elo.py --levels 1800 2000   other Stockfish strengths
     uv run misc/designer/version_elo.py --games 2            fewer games per strength
     uv run misc/designer/version_elo.py --report-only        only the ratings, saved games
     uv run misc/designer/version_elo.py --bracket --colors WHITE GOLD --niram --workers 24
+    uv run misc/designer/version_elo.py --bracket --colors NONE --niram-platinum
+                                                          Niram-PLATINUM alone
 
 With --bracket the script closes in on each rating round by round instead: in each
 of 8 rounds every engine plays 8 games against one Stockfish strength, set by
@@ -71,11 +74,13 @@ for folder in Path(__file__).parents:
         break
 # Every game any script plays goes into one file
 GAMES_PATH = REPOSITORY / "misc" / "games" / "remus_games.pgn"
-# Niram's program, which cargo builds inside engines/Niram
-NIRAM_FOLDER = ENGINES / "Niram"
-NIRAM_PROGRAM = NIRAM_FOLDER / "target" / "release" / "niram"
+# The Niram programs, which cargo builds inside engines/Niram-GOLD and
+# engines/Niram-PLATINUM
+NIRAM_PROGRAM = ENGINES / "Niram-GOLD" / "target" / "release" / "niram-gold"
+PLATINUM_PROGRAM = ENGINES / "Niram-PLATINUM" / "target" / "release" / "niram-platinum"
 if sys.platform == "win32":
     NIRAM_PROGRAM = NIRAM_PROGRAM.with_suffix(".exe")
+    PLATINUM_PROGRAM = PLATINUM_PROGRAM.with_suffix(".exe")
 # Where the course designer keeps the newest Stockfish from stockfishchess.org
 STOCKFISH_HOME = Path.home() / "stockfish"
 LUCAS_CHESS_ENGINES = (
@@ -87,7 +92,12 @@ LEVELS = {"Remus": [1650, 1800, 1950, 2100], "Niram": [2000, 2200, 2400, 2600]}
 GAMES_PER_LEVEL = 12  # Half with the version as White, half as Black
 BRACKET_EVENT = "Engine Elo bracket"  # The Event header of the bracketing games
 # The first Stockfish strength of each engine in a bracketing run
-BRACKET_START = {"Remus-WHITE": 1850, "Remus-GOLD": 2000, "Niram": 2500}
+BRACKET_START = {
+    "Remus-WHITE": 1850,
+    "Remus-GOLD": 2000,
+    "Niram-GOLD": 2500,
+    "Niram-PLATINUM": 2700,
+}
 BRACKET_ROUNDS = 8  # Rounds in a bracketing run
 BRACKET_GAMES = 8  # Games per engine in each round, half as White, half as Black
 BRACKET_STEP = 25  # Each round's Stockfish strength is a multiple of this
@@ -278,9 +288,9 @@ def play_game(
 
 
 def player_name(name: str) -> str:
-    """Return a player's name, reading the older "Niram-GOLD" in the games file as "Niram"."""
-    if name == "Niram-GOLD":
-        return "Niram"
+    """Return a player's name, reading the older "Niram" in the games file as "Niram-GOLD"."""
+    if name == "Niram":
+        return "Niram-GOLD"
     return name
 
 
@@ -531,7 +541,10 @@ def main():
     )
     parser.add_argument("--stockfish", default=None, help="path to Stockfish")
     parser.add_argument("--report-only", action="store_true", help="skip the games")
-    parser.add_argument("--niram", action="store_true", help="play Niram too")
+    parser.add_argument("--niram", action="store_true", help="play Niram-GOLD too")
+    parser.add_argument(
+        "--niram-platinum", action="store_true", help="play Niram-PLATINUM too"
+    )
     parser.add_argument(
         "--levels", type=int, nargs="+", help="Stockfish strengths, like 1800 2000"
     )
@@ -558,7 +571,11 @@ def main():
     if options.niram:
         if not options.report_only and not NIRAM_PROGRAM.exists():
             sys.exit(f"No {NIRAM_PROGRAM}: run 'cargo build --release' first")
-        players.append(("Niram", NIRAM_PROGRAM))
+        players.append(("Niram-GOLD", NIRAM_PROGRAM))
+    if options.niram_platinum:
+        if not options.report_only and not PLATINUM_PROGRAM.exists():
+            sys.exit(f"No {PLATINUM_PROGRAM}: run 'cargo build --release' first")
+        players.append(("Niram-PLATINUM", PLATINUM_PROGRAM))
     if not options.report_only:
         stockfish_path = options.stockfish or find_stockfish()
         print(f"Stockfish: {stockfish_path}")
