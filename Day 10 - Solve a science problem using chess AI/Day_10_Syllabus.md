@@ -1,6 +1,6 @@
 # Day 10: Solve a science problem using chess AI
 
-Day 10 aims the engine's ideas at real science. The same generate, score, and choose loop picks where to measure a hidden peak, and the full tree search, with make and undo, names the crystal phases in an X-ray powder pattern. The day ends with each student pair reporting its science results, and every student pair takes its code home.
+Day 10 aims the engine's ideas at real science. The same generate, score, and choose loop picks where to measure a hidden peak, and the full tree search, with make and undo, names the crystal phases in an X-ray powder pattern. The day ends with each student pair reporting its science results, the Day 1 concept check and survey taken again, and every student pair taking its code home.
 
 ## Objectives for the day
 
@@ -61,11 +61,12 @@ By 4:30, each student pair can:
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:15 | Each student copies the student pair's Remus folder to a USB drive in File Explorer, leaving out the `.venv` folder, and checks that the copy opens in VS Code. |
-| 3:15 to 3:40 | Each student pair runs `hidden_peak.py` and `phase_hunt.py` once more and fills in its results table: measurements against random guessing, and right, wrong, and can't-tell counts for greedy and for search. The class collects every student pair's numbers on the board. |
-| 3:40 to 3:55 | Each student pair picks one powder its search named and one it answered with can't tell, and works out which measurement would settle the second. |
-| 3:55 to 4:20 | Each student pair presents its results and its two powders in three minutes. |
-| 4:20 to 4:30 | The class closes with what comes next: AI agents that steer real experiments at light sources such as NSLS-II. |
+| 3:00 to 3:10 | Each student copies the student pair's Remus folder to a USB drive in File Explorer, leaving out the `.venv` folder, and checks that the copy opens in VS Code. |
+| 3:10 to 3:30 | Each student pair runs `hidden_peak.py` and `phase_hunt.py` once more and fills in its results table: measurements against random guessing, and right, wrong, and can't-tell counts for greedy and for search. The class collects every student pair's numbers on the board. |
+| 3:30 to 3:40 | Each student pair picks one powder its search named and one it answered with can't tell, and works out which measurement would settle the second. |
+| 3:40 to 4:00 | Each student pair presents its results and its two powders in two minutes. The teacher scores each presentation with the rubric (handout 14). |
+| 4:00 to 4:25 | The Day 1 concept check (handout 13, 20 minutes) and interest survey (handout 15, 5 minutes) again, on paper, alone. The teacher keeps both sheets with the Day 1 ones. |
+| 4:25 to 4:30 | The class closes with what comes next: AI agents that steer real experiments at light sources such as NSLS-II. |
 
 [`Day_10_Period_04_Goals.md`](period4/Day_10_Period_04_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 

@@ -8,8 +8,8 @@ command.
 | Page | What it holds |
 | --- | --- |
 | [`remus_course_plan.md`](remus_course_plan.md) | The teaching principles, the thirteen lessons and their gates, the day-by-day plan with every period, the rules to refresh, the verification exercises, and the teacher preparation list |
-| [`unplugged_activities.md`](unplugged_activities.md) | The run sheet for each of the nine unplugged warm-ups: when it runs, what to hand out, the steps, and the answers |
-| [`handouts.md`](handouts.md) | The worksheets the student pairs hold during the warm-ups, with no answers on them, plus the cheat sheets to print for the whole course: the board labeled both ways, the SAN and UCI notation, the rules refresher, and the perft reference table |
+| [`unplugged_activities.md`](unplugged_activities.md) | The run sheet for each of the nine unplugged warm-ups: when it runs, what to hand out, the steps, and the answers, plus the answer key for the concept check |
+| [`handouts.md`](handouts.md) | The worksheets the student pairs hold during the warm-ups, with no answers on them, plus the cheat sheets to print for the whole course: the board labeled both ways, the SAN and UCI notation, the rules refresher, and the perft reference table, and the three evaluation sheets: the concept check, the rubric, and the interest survey |
 | [`slide_plan.md`](slide_plan.md) | The PowerPoint slides the workshop needs, numbered by day, with what each one shows |
 | [`student_edit_plan.md`](student_edit_plan.md) | Who writes what, period by period, with the lines to type. `make_student_folders.py` writes it from the code, so it always matches the folders |
 | [`briefs/`](briefs/) | The management brief and the student and parent brief, as PDFs |
@@ -45,7 +45,8 @@ image with VS Code and Lucas Chess, the Day 1 install of git and `uv` that each
 student does with the teacher, the handouts to print from
 [`handouts.md`](handouts.md), the unplugged materials per student pair (a printed
 board, sticky-note pieces, index cards, and the worksheets), 20 USB drives plus one
-class stick for the Day 9 battles, and a first full game of the finished Remus in
+class stick for the Day 9 battles, the concept check and the interest survey printed
+twice over for Day 1 and Day 10, and a first full game of the finished Remus in
 Lucas Chess on one laptop. Read [`unplugged_activities.md`](unplugged_activities.md)
 the evening before a day that holds a warm-up; its table at the top says which days do.
 

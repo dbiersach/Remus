@@ -1,9 +1,10 @@
 # The handouts
 
 This page holds every sheet a student pair holds in its hands during the workshop:
-one worksheet for each of the eight unplugged warm-ups that needs one, then four
-cheat sheets that stay on the desk for the whole two weeks. Nothing on this page
-gives an answer away. The answers are in the run sheets of
+one worksheet for each of the eight unplugged warm-ups that needs one, four
+cheat sheets that stay on the desk for the whole two weeks, and the three
+evaluation sheets: the concept check, the rubric, and the interest survey. Nothing on
+this page gives an answer away. The answers are in the run sheets of
 [`unplugged_activities.md`](unplugged_activities.md), and the "Teacher preparation"
 list in the [course plan](remus_course_plan.md) says how many copies to print.
 
@@ -25,6 +26,9 @@ handout. The boards print well in black and white.
 | [10. The rules refresher](#handout-10-the-rules-refresher) | The rules that trip people up | Day 4 on |
 | [11. The perft reference table](#handout-11-the-perft-reference-table) | Checking the move generator | Day 6 on |
 | [12. The piece values](#handout-12-the-piece-values) | Evaluation | Day 7 on |
+| [13. The concept check](#handout-13-the-concept-check) | The same ten questions before and after the course | Day 1, 8:30, and Day 10, 4:00 |
+| [14. The rubric](#handout-14-the-rubric) | Scoring a picked function and a Day 10 presentation | Days 1 to 10 |
+| [15. The interest survey](#handout-15-the-interest-survey) | Interest in computing and science, before and after | Day 1, 8:50, and Day 10, 4:20 |
 
 ---
 
@@ -493,3 +497,131 @@ The three tactics that win material, to look for in every game Remus plays:
 | Fork | One piece attacks two at once, and only one can be saved |
 | Pin | A piece cannot move without exposing a more valuable piece, or the king, behind it |
 | Skewer | A piece attacks a valuable piece, and when that piece moves away, the piece behind it falls |
+
+---
+
+## Handout 13: The concept check
+
+Name: ______________________    Day 1 or Day 10 (circle one)
+
+Ten questions about ideas, not about Python. Work alone, on paper, for 20 minutes.
+Nothing here is graded. On Day 1 nobody has seen Remus yet, so write what you
+think and leave a question blank if you have no idea; the same sheet comes back on
+Day 10, and the two together show how far you traveled.
+
+**1.** A chess program has five parts: the board, the moves, the rules, the search,
+and the evaluation. Write one job for each part you can.
+
+| Part | Its job |
+| --- | --- |
+| Board | |
+| Moves | |
+| Rules | |
+| Search | |
+| Evaluation | |
+
+**2.** Remus stores the board as 8 rows of 8 squares, both counted from 0. Row 0 is
+rank 8 (the top of the board, where Black starts) and column 0 is file a. Which
+square name is row 6, column 4? Which (row, col) is h1?
+
+**3.** A program first lists every square a piece could move to, then throws some of
+those moves away. Which moves does it throw away, and why?
+
+**4.** It is White's turn. White can play move A or move B. After A, Black's two
+replies leave the score at +3 or +8 for White. After B, Black's two replies leave
++5 or +1. Black always picks the reply that is worst for White. Which move should
+White choose, and what score should White expect?
+
+```text
+            White to move
+           /            \
+          A              B
+        /   \          /   \
+      +3    +8       +5    +1
+```
+
+**5.** From the start position White has 20 moves, and after one move by each side
+there are 400 positions. Why would a chess program count positions like this? What
+would a count of 401 tell you?
+
+**6.** In question 4, White has already looked at move A and knows it is worth +3.
+White now starts looking at move B and sees the reply that leaves +1. Does White
+need to look at B's other reply? Why or why not?
+
+**7.** A queen counts 9, a rook 5, a knight or a bishop 3, and a pawn 1. White has a
+queen and two pawns. Black has two rooks and a knight. Who is ahead, and by how
+much?
+
+**8.** A sample hides one hot spot. Three squares have been measured: the readings
+are below. Mark the square you would measure next, and say why in one sentence.
+
+```text
+     a   b   c   d   e
+   +---+---+---+---+---+
+ 1 | 2 |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |   |   | 40|   |   |
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | 0 |
+   +---+---+---+---+---+
+```
+
+**9.** Every crystal has its own fingerprint of X-ray peaks, and a powder that mixes
+crystals shows all their peaks at once. Crystal A has peaks at 20, 30, and 45.
+Crystal B has peaks at 20 and 38. Crystal C has peaks at 30, 45, and 60.
+
+- A powder shows peaks at 20, 30, 38, and 45. Which crystals are in it?
+- Another powder shows peaks at 30 and 45 only. Which crystals are in it? If you
+  cannot be sure, say what you would do next.
+
+**10.** In one sentence each: what does a computer do the same way when it picks a
+chess move and when it picks the next measurement in a laboratory? What is
+different?
+
+---
+
+## Handout 14: The rubric
+
+One sheet per student pair. The teacher uses it twice: when the class picks one
+student pair's version of a function as the clearest (any day), and for each
+student pair's Day 10 presentation. Circle one box per row; the rows are the four
+things the course asks for, and the levels say what each one looks like.
+
+| | Getting there | Solid | Strong |
+| --- | --- | --- | --- |
+| **Correctness** | The function runs, but some of its tests fail | Every test passes | Every test passes, and the student pair found and fixed a case the tests missed |
+| **Evidence** | The student pair says it works | The student pair points to the passing tests, the matching perft count, or the benchmark numbers | The student pair shows the numbers and says what a wrong number would have looked like |
+| **Explanation** | The student pair reads the code aloud | The student pair explains what each line does in its own words | The student pair explains why the code is written that way, and what would go wrong if a line were removed |
+| **Teamwork** | One partner did the work | The driver and the navigator swapped each period, and both can run the code | Both partners can explain every line, and each can say what the other caught |
+
+Function picked or presentation: ______________________    Date: ________
+
+Notes:
+
+---
+
+## Handout 15: The interest survey
+
+Name: ______________________    Day 1 or Day 10 (circle one)
+
+Five minutes. There are no right answers. For each line, circle the number that
+fits you best: 1 means "not at all" and 5 means "very much".
+
+| | 1 | 2 | 3 | 4 | 5 |
+| --- | --- | --- | --- | --- | --- |
+| I like solving puzzles | 1 | 2 | 3 | 4 | 5 |
+| I could write a computer program that does something useful | 1 | 2 | 3 | 4 | 5 |
+| I know what a chess program does to pick its move | 1 | 2 | 3 | 4 | 5 |
+| I know how AI helps scientists in a laboratory | 1 | 2 | 3 | 4 | 5 |
+| I can tell when a program's answer is right | 1 | 2 | 3 | 4 | 5 |
+| I would like a job that involves computing | 1 | 2 | 3 | 4 | 5 |
+| I would like a job that involves science | 1 | 2 | 3 | 4 | 5 |
+| I want to learn more about AI after this course | 1 | 2 | 3 | 4 | 5 |
+
+Day 1: one thing I hope to learn in these two weeks.
+
+Day 10: one thing I learned that I did not expect.
