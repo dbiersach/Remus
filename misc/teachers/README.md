@@ -9,8 +9,7 @@ command.
 | --- | --- |
 | [`remus_course_plan.md`](remus_course_plan.md) | The teaching principles, the thirteen lessons and their gates, the day-by-day plan with every period, the rules to refresh, the verification exercises, and the teacher preparation list |
 | [`unplugged_activities.md`](unplugged_activities.md) | The run sheet for each of the nine unplugged warm-ups: when it runs, what to hand out, the steps, and the answers, plus the answer key for the concept check |
-| [`handouts.md`](handouts.md) | The worksheets the student pairs hold during the warm-ups, with no answers on them, plus the cheat sheets for the whole course: the board labeled both ways, the SAN and UCI notation, the rules refresher, and the perft reference table, and the three evaluation sheets: the concept check, the rubric, and the interest survey |
-| [`handouts/`](handouts/) | The same fifteen handouts as print-ready PDFs, one letter-size file per handout, numbered like the page: print these |
+| [`handouts/`](handouts/) | The fifteen handouts as print-ready PDFs, one letter-size file per handout, beside [`handouts.md`](handouts/handouts.md), the page they are made from: the worksheets the student pairs hold during the warm-ups, with no answers on them, the cheat sheets for the whole course (the board labeled both ways, the SAN and UCI notation, the rules refresher, and the perft reference table), and the three evaluation sheets (the concept check, the rubric, and the interest survey) |
 | [`slide_plan.md`](slide_plan.md) | The PowerPoint slides the workshop needs, numbered by day, with what each one shows |
 | [`student_edit_plan.md`](student_edit_plan.md) | Who writes what, period by period, with the lines to type. `make_student_folders.py` writes it from the code, so it always matches the folders |
 | [`briefs/`](briefs/) | The management brief and the student and parent brief, as PDFs |

@@ -128,7 +128,7 @@ def test_every_quoted_line_of_code_matches_its_file() -> None:
 
 
 def test_every_handout_has_its_pdf() -> None:
-    """misc/teachers/handouts/ holds one PDF per handout of handouts.md, and nothing else."""
+    """misc/teachers/handouts/ holds one PDF per handout of its handouts.md, and nothing else."""
     import make_handouts
 
     expected = set()

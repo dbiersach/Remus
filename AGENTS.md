@@ -421,8 +421,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
     A lab, demo, or science file gets a new `##` section in its page, not a new file.
   - `misc/teachers/`: everything a teacher needs to run the two weeks as they stand.
     `README.md`, where to start; `remus_course_plan.md`; `unplugged_activities.md`,
-    the run sheets of the warm-ups with their answers; `handouts.md`, the
-    worksheets and cheat sheets, with no answers, and `handouts/`, one
+    the run sheets of the warm-ups with their answers; `handouts/`, which holds
+    `handouts.md`, the worksheets and cheat sheets with no answers, beside one
     letter-size PDF per handout to print, which
     `uv run misc/designer/make_handouts.py` writes from `handouts.md`; `slide_plan.md`;
     `student_edit_plan.md`, which `make_student_folders.py` writes; and `briefs/`,
