@@ -33,7 +33,7 @@ By 4:30, each student pair can:
 | 9:35 to 9:50 | The class lists, on the board, every move that removes a castling right. |
 | 9:50 to 10:00 | Wrap-up and a preview of castling. |
 
-[`Day 05 Period 01 Goals.md`](<period1/Day 05 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_05_Period_01_Goals.md`](period1/Day_05_Period_01_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Castling
 
@@ -45,7 +45,7 @@ By 4:30, each student pair can:
 | 11:20 to 11:50 | Student pairs run the castling tests and build one castling position of their own to test. |
 | 11:50 to 12:00 | Show and choose for `update_castling_rights()`. |
 
-[`Day 05 Period 02 Goals.md`](<period2/Day 05 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_05_Period_02_Goals.md`](period2/Day_05_Period_02_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: En passant and the double step
 
@@ -57,7 +57,7 @@ By 4:30, each student pair can:
 | 1:55 to 2:20 | Student pairs run the en passant tests, including the rare capture that exposes the king along the rank. |
 | 2:20 to 2:30 | Wrap-up: which square does the undo put the captured pawn back on? |
 
-[`Day 05 Period 03 Goals.md`](<period3/Day 05 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_05_Period_03_Goals.md`](period3/Day_05_Period_03_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Promotion, and Remus plays in Lucas Chess
 
@@ -69,7 +69,7 @@ By 4:30, each student pair can:
 | 4:00 to 4:25 | Student pairs play their own Remus, which answers with random legal moves. Every special move works on a real board. |
 | 4:25 to 4:30 | Checkpoint: every special-move test passes. |
 
-[`Day 05 Period 04 Goals.md`](<period4/Day 05 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_05_Period_04_Goals.md`](period4/Day_05_Period_04_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## By the end of the day
 

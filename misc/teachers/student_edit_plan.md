@@ -1,6 +1,6 @@
 # Student Edit Plan: Who Writes What, Period by Period
 
-`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which hold given code, and the functions the student pairs write, which are stubs in each `student` folder and finished in the `instructor` folder beside it. Each period's goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check each function.
+`make_student_folders.py` writes this page from the code, so it always matches the folders. For every period it names the files that arrive or grow, which hold given code, and the functions the student pairs write, which are stubs in each `student` folder and finished in the `instructor` folder beside it. Each period's goals file, such as `Day_03_Period_02_Goals.md`, has the same list with line numbers and the tests that check each function.
 
 ## Day 01 - Draw the board
 

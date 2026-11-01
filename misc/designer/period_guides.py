@@ -4,10 +4,10 @@
 The teaching text of every period goals file: the learning objectives, each with a way
 to measure it, and one paragraph for every change the student pairs make to the code. It
 also holds the overview of every day, which goes into the syllabus at the top of
-each Day folder ("Day NN Syllabus.md").
+each Day folder ("Day_NN_Syllabus.md").
 
 make_period_folders.py writes this text into each period goals file, such as
-"Day 03 Period 02 Goals.md", and make_student_folders.py adds the period's timed
+"Day_03_Period_02_Goals.md", and make_student_folders.py adds the period's timed
 steps and tasks to it and writes the version READMEs. Keep
 the language at a middle school reading level: short sentences, one idea each.
 """
@@ -2815,7 +2815,7 @@ LAB_NOTES = {
     ],
 }
 
-# The syllabus at the top of each Day folder ("Day NN Syllabus.md"): what the day is about, its
+# The syllabus at the top of each Day folder ("Day_NN_Syllabus.md"): what the day is about, its
 # objectives, the timed steps of each period, and the checkpoint at 4:30.
 # Each step is (minutes after the period starts, what happens), and a step lasts
 # until the next one starts.

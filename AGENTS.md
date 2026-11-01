@@ -228,7 +228,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   complete, runnable copy of Remus as it stands at the end of that period (Day 10
   holds only its science files, and Day 9 periods 2 to 4 hold no engine code: see
   below). Beside `instructor/` and `student/` sits one goals file for the period,
-  such as `Day 03 Period 02 Goals.md` (David, 2026-10-29), which replaces separate
+  such as `Day_03_Period_02_Goals.md` (David, 2026-10-29), which replaces separate
   instructor and student READMEs. It names the period, its new and growing files,
   and the functions student pairs write. Every period goals file and enhanced engine README
   also holds (David, 2026-10-27):
@@ -243,7 +243,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   stronger, what it costs, a table of positions per depth and positions per second
   measured against Remus-WHITE, what to expect in games, and where the student pair's code
   is called from.
-  Each Day folder also has one syllabus at its top, `Day NN Syllabus.md` (David,
+  Each Day folder also has one syllabus at its top, `Day_NN_Syllabus.md` (David,
   2026-10-28), that paints the whole day: what the day is about, its
   objectives, a table of the four periods with what the student pairs write in each, a timed
   sequence of activities for every period, and the checkpoint at 4:30.
@@ -363,7 +363,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   `uv run misc/designer/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).
   `uv run misc/designer/engine_parity.py` checks the two engines on 49 positions: evaluation,
   legal moves, book moves, and every depth's score, node count, and principal
-  variation must match, and the results go to `misc/designer/remus-niram same algorithms.md`. A
+  variation must match, and the results go to `misc/designer/remus-niram_same_algorithms.md`. A
   change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
   change in Niram and a clean `engine_parity.py` run. The Rust copies of WHITE
   and the ten enhanced engines were deleted (David, 2026-10-28) after Niram league 1, whose
@@ -427,7 +427,7 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - `misc/designer/`: the course designer's scripts (see "Every course designer
     tool" above) and the pages only the designer reads: `README.md`, the tools and
     the rebuild order; `engines_elo.md`, the league and Stockfish ratings and the
-    commands that make them; `remus-niram same algorithms.md`, which
+    commands that make them; `remus-niram_same_algorithms.md`, which
     `engine_parity.py` writes; and `science_tree_search_survey.md`.
   - `misc/games/`: `remus_games.pgn`, which git ignores.
 - Remus-WHITE, the ten enhanced engines (Remus-RED, Remus-BLUE, ...), and Remus-GOLD
@@ -643,6 +643,10 @@ NotImplementedError`. The `instructor/` folder beside it holds the teacher's sol
   `move_generation.py`, `perft.py`.
 - Instructor answer files add `_instructor` and live in the `instructor/` folder beside
   the period's `student/` folder.
+- No file name holds a space (David, 2026-11-01): `Day_03_Period_02_Goals.md`,
+  `Day_03_Syllabus.md`, `remus-niram_same_algorithms.md`. Join the words of a file
+  name with underscores. Folder names such as `Day 03 - Generate piece moves` and
+  `10 Remus-RED - Transposition table` keep their spaces.
 
 ## File input and output
 

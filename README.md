@@ -22,8 +22,8 @@ The code grows one class period at a time. The top folder holds one folder per d
 Inside every period folder, `instructor/` is a complete, runnable copy of Remus at the
 end of that period, and `student/` is the same code with the functions the student pairs write
 left as stubs for them to fill in. Beside them sits the period's goals file, such as
-`Day 04 Period 03 Goals.md`: the objectives, the timed steps, and the exact tasks.
-Each Day folder's syllabus, such as `Day 04 Syllabus.md`, gives the day's
+`Day_04_Period_03_Goals.md`: the objectives, the timed steps, and the exact tasks.
+Each Day folder's syllabus, such as `Day_04_Syllabus.md`, gives the day's
 objectives and the timed activities of its four periods.
 
 Everything else sits in `misc/`, in one folder for each kind of reader:

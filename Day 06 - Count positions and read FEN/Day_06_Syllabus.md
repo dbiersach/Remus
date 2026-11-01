@@ -33,7 +33,7 @@ By 4:30, each student pair can:
 | 9:35 to 9:50 | The teacher draws the call stack of a short count on the whiteboard while the class traces it. |
 | 9:50 to 10:00 | Wrap-up: what stops a recursion? |
 
-[`Day 06 Period 01 Goals.md`](<period1/Day 06 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_06_Period_01_Goals.md`](period1/Day_06_Period_01_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Perft
 
@@ -45,7 +45,7 @@ By 4:30, each student pair can:
 | 11:25 to 11:50 | Student pairs run `perft.py` from the start: 20, 400, and 8,902. The teacher shows `divide()`, which prints the count under each root move. |
 | 11:50 to 12:00 | Show and choose for `perft()`. |
 
-[`Day 06 Period 02 Goals.md`](<period2/Day 06 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_06_Period_02_Goals.md`](period2/Day_06_Period_02_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: Perft against python-chess, and bug hunt
 
@@ -56,7 +56,7 @@ By 4:30, each student pair can:
 | 2:10 to 2:25 | Student pairs explain each bug they found and the rule it broke. |
 | 2:25 to 2:30 | Wrap-up: the hunt is over when `hunt.py` prints 0 root moves that disagree. |
 
-[`Day 06 Period 03 Goals.md`](<period3/Day 06 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_06_Period_03_Goals.md`](period3/Day_06_Period_03_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Python lab 9 and FEN
 
@@ -67,7 +67,7 @@ By 4:30, each student pair can:
 | 3:30 to 4:20 | Student pairs write `fen_placement()` and `board_from_placement()` in `fen.py`. The given code holds the other five fields. |
 | 4:20 to 4:30 | Checkpoint: every test position loads from FEN and perft matches the reference. |
 
-[`Day 06 Period 04 Goals.md`](<period4/Day 06 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_06_Period_04_Goals.md`](period4/Day_06_Period_04_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## By the end of the day
 

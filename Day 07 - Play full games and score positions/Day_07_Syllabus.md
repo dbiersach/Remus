@@ -33,7 +33,7 @@ By 4:30, each student pair can:
 | 9:00 to 9:45 | Student pairs write `insufficient_material()` and `game_result()` in `game_end.py`. |
 | 9:45 to 10:00 | Student pairs check their answers on the quiz positions, then show and choose. |
 
-[`Day 07 Period 01 Goals.md`](<period1/Day 07 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_07_Period_01_Goals.md`](period1/Day_07_Period_01_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: SAN: moves people read and type
 
@@ -44,7 +44,7 @@ By 4:30, each student pair can:
 | 11:05 to 11:20 | Student pairs run `notation.py`, then change its position and check that `parse_san()` reads each SAN move it prints. |
 | 11:20 to 12:00 | Student pairs work through `python_input_output.py`: `random.choice()`, a loop that keeps the best so far, stderr, and a tiny program that answers `isready` with `readyok`. |
 
-[`Day 07 Period 02 Goals.md`](<period2/Day 07 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_07_Period_02_Goals.md`](period2/Day_07_Period_02_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: First brains and the GUI
 
@@ -56,7 +56,7 @@ By 4:30, each student pair can:
 | 2:00 to 2:15 | Student pairs register `remus.bat` from the `student` folder in Lucas Chess again and play greedy Remus. |
 | 2:15 to 2:30 | Student pairs run `play_match.py`: random Remus against greedy Remus for 20 games, with the score at the end. |
 
-[`Day 07 Period 03 Goals.md`](<period3/Day 07 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_07_Period_03_Goals.md`](period3/Day_07_Period_03_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: What makes a position good? Material and piece-square tables
 
@@ -69,7 +69,7 @@ By 4:30, each student pair can:
 | 4:05 to 4:25 | Each student pair proposes one change to one table, and the class votes. |
 | 4:25 to 4:30 | Checkpoint: `explain_evaluation()` gives 0 for the start. |
 
-[`Day 07 Period 04 Goals.md`](<period4/Day 07 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_07_Period_04_Goals.md`](period4/Day_07_Period_04_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## By the end of the day
 

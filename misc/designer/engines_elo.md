@@ -11,7 +11,7 @@ plus Niram, the Rust copy of Remus-GOLD. Two yardsticks measure them:
    Niram on an Elo scale that people outside the class know. It measures the size of
    a rating well, but it cannot sort versions that sit only 30 or 40 Elo apart.
 
-[`remus-niram same algorithms.md`](remus-niram%20same%20algorithms.md) shows that Niram
+[`remus-niram_same_algorithms.md`](remus-niram_same_algorithms.md) shows that Niram
 runs the same algorithms as Remus-GOLD and picks the same moves at the same depth. The
 two engines differ in speed, and the speed gap makes Niram far stronger with a clock.
 
@@ -114,7 +114,7 @@ Each engine's score at each Stockfish level it met:
 ### What the bracket shows
 
 **Niram rates about 620 Elo above Remus-GOLD.** The two engines pick the same move in
-every position ([`remus-niram same algorithms.md`](remus-niram%20same%20algorithms.md)), and both scored
+every position ([`remus-niram_same_algorithms.md`](remus-niram_same_algorithms.md)), and both scored
 31 of 64. Niram scored its 31 points against Stockfish set about 600 Elo higher. The
 whole gap comes from speed: Niram searches about 15 times as many positions in the
 same 10 minutes, deep enough for null-move pruning, late move reductions, and the
@@ -195,7 +195,7 @@ keep the openings. Rate such a league with `--book-start` as well.
 The designer's league ran on Niram, Rust copies of all 12 versions that picked the
 same moves as Remus about 15 times faster, so a 10-minute Niram game searched about
 as many positions as a 2.5-hour Remus game. Only Niram is kept, in
-`engines/Niram` ([`remus-niram same algorithms.md`](../designer/remus-niram%20same%20algorithms.md) shows that the two match), but
+`engines/Niram` ([`remus-niram_same_algorithms.md`](../designer/remus-niram_same_algorithms.md) shows that the two match), but
 the league's games stay in the games file. `--niram --rate-only` rates them apart
 from Remus games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays
 Niram against Stockfish ([`engines_elo.md`](../designer/engines_elo.md) gives its rating).

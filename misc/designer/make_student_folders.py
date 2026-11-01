@@ -11,8 +11,8 @@ fail until the student pair writes each function. Functions from earlier periods
 complete, so every student folder starts from working code.
 
 It adds the timed flow of the period and the student pairs' exact tasks to each period's
-goals file, such as "Day 03 Period 02 Goals.md", and writes
-misc/teachers/student_edit_plan.md and the syllabus, "Day NN Syllabus.md", at the
+goals file, such as "Day_03_Period_02_Goals.md", and writes
+misc/teachers/student_edit_plan.md and the syllabus, "Day_NN_Syllabus.md", at the
 top of every Day folder, from DAY_GUIDES in period_guides.py.
 
 Run this script again whenever the instructor code changes, after
@@ -536,8 +536,8 @@ def day_readme(day: int, rows: dict) -> str:
         out += [
             "",
             (
-                f"[`Day {day:02} Period {period:02} Goals.md`]"
-                f"(<period{period}/Day {day:02} Period {period:02} Goals.md>) "
+                f"[`Day_{day:02}_Period_{period:02}_Goals.md`]"
+                f"(period{period}/Day_{day:02}_Period_{period:02}_Goals.md) "
                 "lists the period's learning objectives, how each one is measured, "
                 "every change the student pairs make, and their exact tasks."
             ),
@@ -588,12 +588,12 @@ def write_goals(day: int, period: int, sections: list[str]) -> None:
 
 
 def write_day_readmes(rows: dict) -> None:
-    """Write the syllabus, "Day NN Syllabus.md", at the top of every Day folder."""
+    """Write the syllabus, "Day_NN_Syllabus.md", at the top of every Day folder."""
     count = 0
     for folder in sorted(ROOT.glob("Day *")):
         day = int(folder.name[4:6])
         (folder / "README.md").unlink(missing_ok=True)
-        (folder / f"Day {day:02} Syllabus.md").write_text(day_readme(day, rows))
+        (folder / f"Day_{day:02}_Syllabus.md").write_text(day_readme(day, rows))
         count += 1
     print(f"Wrote the syllabus of {count} Day folders  (expected 10)")
 
@@ -611,7 +611,7 @@ def write_edit_plan(rows: dict[tuple[int, int], list[EditRow]]) -> None:
             "hold given code, and the functions the student pairs write, which are stubs in "
             "each `student` folder and finished in the `instructor` folder beside it. Each "
             "period's "
-            "goals file, such as `Day 03 Period 02 Goals.md`, has the same list with line numbers and the tests that check "
+            "goals file, such as `Day_03_Period_02_Goals.md`, has the same list with line numbers and the tests that check "
             "each function."
         ),
         "",
