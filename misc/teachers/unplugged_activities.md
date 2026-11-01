@@ -9,8 +9,9 @@ from the block in which the student pairs type code.
 This page is the teacher's run sheet: for each warm-up, when it runs, what to hand
 out, the steps, and the answers. The answer key for the concept check, which the
 students take on Day 1 and again on Day 10, is the last section. The worksheets the student pairs hold are in
-[`handouts.md`](handouts.md), one section per warm-up, with no answers on them. Print
-the handouts before the day; the "Teacher preparation" list in the
+[`handouts.md`](handouts.md), one section per warm-up, with no answers on them, and
+the [`handouts/`](handouts/) folder holds each one as a PDF. Print the handouts
+before the day; the "Teacher preparation" list in the
 [course plan](remus_course_plan.md) says how many copies.
 
 | Warm-up | When | Idea it prepares | Materials per student pair |

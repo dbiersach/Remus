@@ -125,3 +125,15 @@ def test_every_quoted_line_of_code_matches_its_file() -> None:
                     wrong.append(f"{page.name} {heading} line {number}: {quoted!r}")
     assert checked > 1000, checked
     assert wrong == []
+
+
+def test_every_handout_has_its_pdf() -> None:
+    """misc/teachers/handouts/ holds one PDF per handout of handouts.md, and nothing else."""
+    import make_handouts
+
+    expected = set()
+    for number, title, _ in make_handouts.read_handouts():
+        expected.add(make_handouts.pdf_name(number, title))
+    assert len(expected) >= 15
+    found = {path.name for path in make_handouts.OUT.glob("*.pdf")}
+    assert found == expected

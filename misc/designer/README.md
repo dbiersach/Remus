@@ -11,13 +11,15 @@ rules the tools follow are in `AGENTS.md` at the top of Remus.
 | [`remus-niram_same_algorithms.md`](remus-niram_same_algorithms.md) | Written by `engine_parity.py`: whether Niram and Remus-GOLD still pick the same moves at the same depth, and how fast each runs |
 | [`science_tree_search_survey.md`](science_tree_search_survey.md) | The survey of published science problems that search a tree like a chess engine, which chose the Day 10 phase hunt |
 
-Four pages elsewhere are written by scripts in this folder, so edit the script, not
-the page: `make_student_folders.py` writes `misc/teachers/student_edit_plan.md` and
+Four pages elsewhere, and the handout PDFs, are written by scripts in this folder, so
+edit the script or its source, not the page: `make_student_folders.py` writes `misc/teachers/student_edit_plan.md` and
 every `Day_NN_Syllabus.md`; `make_period_folders.py` and `make_student_folders.py`
 write every period goals file from `period_guides.py`; `make_version_folders.py`
 writes every engine README from `period_guides.py`; `make_white_map.py` writes the
 "Remus-WHITE across the course" section of `misc/students/remus_program_overview.md`;
-and `engine_parity.py` writes the parity page above. `version_elo.py` prints the
+`engine_parity.py` writes the parity page above; and `make_handouts.py` prints
+every handout of `misc/teachers/handouts.md` to its own PDF in
+`misc/teachers/handouts/`. `version_elo.py` prints the
 Stockfish tables that `engines_elo.md` reports.
 
 ## The scripts
@@ -52,6 +54,7 @@ uv run misc/designer/make_student_folders.py
 | `make_board_diagrams.py` | Draws the chess board diagrams in `misc/students/images/boards/` that the enhanced engine READMEs, the goals files, and the `misc/students/engine_code/` pages show beside their examples, with python-chess's `chess.svg`. A diagram marked `row_col` also prints Remus's row and column numbers on the edges. Each entry of its `DIAGRAMS` table names a FEN, the arrows, and the colored squares; `board_image()` and `goals_board_image()` in `period_guides.py` link a diagram into the README and goals text. Run it after changing a diagram, then the three builders. |
 | `make_white_map.py` | Writes the "Remus-WHITE across the course" section of `misc/students/remus_program_overview.md`: an import diagram of the engine files, the ones `uci_engine.py` loads, which it lays out itself with right-angle arrows into `misc/students/images/code/remus_white_imports.svg` (no Graphviz needed), and a table that marks, for every engine file, the period where it appears and the periods where student pairs edit it. The table comes from the Day folders and their goals files. Run it after the three builders. |
 | `make_phase_hunt_figures.py` | Draws the pictures in `misc/students/images/phase_hunt/` for the Day 10 phase hunt README. It installs matplotlib for itself alone. |
+| `make_handouts.py` | Prints each handout of `misc/teachers/handouts.md` as its own letter-size PDF in `misc/teachers/handouts/`, with the board diagrams embedded, using Microsoft Edge (or Chrome or Chromium) in headless mode, so nothing needs installing. Run it after any change to `handouts.md`. |
 
 ## Test
 

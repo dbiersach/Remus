@@ -289,7 +289,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Every course designer tool that is not part of an engine lives in `misc/designer/`
   (David, 2026-10-28): the builders `make_period_folders.py`,
   `make_version_folders.py`, `make_student_folders.py`,
-  `make_phase_hunt_figures.py`, `make_board_diagrams.py`, and `make_white_map.py`, the README text in `period_guides.py`,
+  `make_phase_hunt_figures.py`, `make_board_diagrams.py`, `make_white_map.py`, and
+  `make_handouts.py`, the README text in `period_guides.py`,
   `run_all_tests.py`, `test_reference_tools.py`, `version_match.py`, `version_league.py`,
   `version_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
   top Remus folder from its own path, so it
@@ -421,7 +422,9 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   - `misc/teachers/`: everything a teacher needs to run the two weeks as they stand.
     `README.md`, where to start; `remus_course_plan.md`; `unplugged_activities.md`,
     the run sheets of the warm-ups with their answers; `handouts.md`, the
-    worksheets and cheat sheets to print, with no answers; `slide_plan.md`;
+    worksheets and cheat sheets, with no answers, and `handouts/`, one
+    letter-size PDF per handout to print, which
+    `uv run misc/designer/make_handouts.py` writes from `handouts.md`; `slide_plan.md`;
     `student_edit_plan.md`, which `make_student_folders.py` writes; and `briefs/`,
     the two briefing PDFs.
   - `misc/designer/`: the course designer's scripts (see "Every course designer

@@ -8,9 +8,12 @@ this page gives an answer away. The answers are in the run sheets of
 [`unplugged_activities.md`](unplugged_activities.md), and the "Teacher preparation"
 list in the [course plan](remus_course_plan.md) says how many copies to print.
 
-Print each handout as its own page. A section break (the `---` line) marks where
-one handout ends and the next begins, so the printout can be cut or stapled per
-handout. The boards print well in black and white.
+Each handout is also a print-ready PDF in the [`handouts/`](handouts/) folder, one
+letter-size file per handout, such as `handout_01_the_board_labeled_both_ways.pdf`.
+Print the PDFs; this page is the source they are made from. A section break (the
+`---` line) marks where one handout ends and the next begins, and
+`uv run misc/designer/make_handouts.py` writes the PDFs again from this page after
+any change to it. The boards print well in black and white.
 
 | Handout | Warm-up or use | When |
 | --- | --- | --- |
