@@ -16,9 +16,9 @@ license = "BSD-3-Clause"
 # The release profile. Cargo's release build already compiles at opt-level 3, the
 # highest optimization level; these settings add whole-program optimization.
 # codegen-units = 1 is left at its default of 16 on purpose: with it, the depth 6
-# benchmark runs about 15 percent slower on this engine.
+# benchmark measured about 15 percent slower on this engine.
 [profile.release]
-lto = "fat"          # Optimize across every module at link time: about 15 percent faster
+lto = "fat"          # Optimize across every module at link time: a smaller, sometimes faster program
 panic = "abort"      # Stop at once on a bug instead of unwinding the stack
 debug = false        # No debug information in the program
 strip = true         # No symbol table in the program
