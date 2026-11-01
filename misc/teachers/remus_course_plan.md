@@ -432,7 +432,7 @@ folder holds each one as a PDF to print.
 | When | Warm-up (10 to 15 minutes) | Idea it prepares | Materials per student pair |
 | --- | --- | --- | --- |
 | D1 P3 | **Call the square.** The teacher calls `(6, 4)`; the navigator puts a token on the printed board and the driver names the square (`e2`). Then they swap and go the other way | Row 0 is rank 8 | Printed board labeled both ways, one token |
-| D2 P4 | **Undo from the card.** One partner makes three moves with sticky-note pieces and writes an undo card for each. The other partner restores the start position from the cards alone | Undo records and exact undo | Printed board, sticky notes, three index cards |
+| D2 P4 | **Undo from the card.** One partner makes three moves with sticky-note pieces and writes an undo card for each. The other partner restores the start position from the cards alone | Undo records and exact undo | Printed board, sticky notes, the undo card worksheet |
 | D3 P2 | **Shade the reach.** Shade every square a knight on `d4`, a knight on `a1`, and a bishop on `c1` can reach; compare counts with the next student pair (8, 2, 7) | Offset lists and sliding | Grid worksheet |
 | D4 P3 | **Pin hunt.** Four printed positions; cross out every move that leaves the mover's king attacked | The legal-move filter | Worksheet |
 | D6 P2 | **Count by hand.** A king and pawn against a king; list every move two plies deep on index cards and count the leaves before running `perft` on the same position | Perft and recursion | Index cards, worksheet |

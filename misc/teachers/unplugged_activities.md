@@ -17,14 +17,14 @@ before the day; the "Teacher preparation" list in the
 | Warm-up | When | Idea it prepares | Materials per student pair |
 | --- | --- | --- | --- |
 | [Call the square](#call-the-square) | Day 1, period 3, 1:00 to 1:15 | Row 0 is rank 8 | The board labeled both ways, one token (a coin or a sticky note) |
-| [Undo from the card](#undo-from-the-card) | Day 2, period 4, 3:00 to 3:15 | Undo records and exact undo | A printed board, sticky-note pieces, three index cards, the undo card worksheet |
+| [Undo from the card](#undo-from-the-card) | Day 2, period 4, 3:00 to 3:15 | Undo records and exact undo | A printed board, sticky-note pieces, the undo card worksheet with its three cards |
 | [Shade the reach](#shade-the-reach) | Day 3, period 2, 10:30 to 10:45 | Jump lists and sliding | The three-board worksheet, a pencil |
 | [Pin hunt](#pin-hunt) | Day 4, period 3, 1:00 to 1:15 | The legal-move filter | The four-position worksheet |
 | [Count by hand](#count-by-hand) | Day 6, period 2, 10:30 to 10:45 | Perft and recursion | The position worksheet, six index cards |
 | [Paper minimax](#paper-minimax) | Day 8, period 1, 8:30 to 8:45 | Minimax | The tree worksheet |
-| [Fewest flips](#fewest-flips) | Day 8, period 2, 10:30 to 10:45 | Alpha-beta cutoffs | Nine index cards with the tree's leaf scores, face down |
+| [Fewest flips](#fewest-flips) | Day 8, period 2, 10:30 to 10:45 | Alpha-beta cutoffs | Nine index cards, on which the student pair writes the tree's leaf scores, face down |
 | [Find the hidden peak](#find-the-hidden-peak) | Day 10, period 1, 8:30 to 8:45 | How a beamline AI chooses the next measurement | The 10x10 grid worksheet; the teacher holds the answer grid |
-| [Name the powder](#name-the-powder) | Day 10, period 2, 10:45 to 11:00 | Scoring a guess, and why a fingerprint that fits half the peaks is a trap | Five fingerprint strips and the mystery pattern sheet |
+| [Name the powder](#name-the-powder) | Day 10, period 2, 10:45 to 11:00 | Scoring a guess, and why a fingerprint that fits half the peaks is a trap | The mystery pattern sheet with the five fingerprint strips under it |
 
 Every warm-up runs the same way. The teacher states the task in one sentence, the
 student pairs work for most of the time, and the last three minutes compare answers
@@ -71,14 +71,15 @@ The rule to leave on the board: `row = 8 - rank` and `col = "abcdefgh".index(fil
 returns and `undo_move()` reads, right before the student pairs write both.
 
 Hand out a printed board, sticky-note pieces for the start position (or the pieces
-of a pocket set), and the undo card worksheet (handout 2), three blank cards per
-student pair. Each card has the fields of the Day 2 undo record: the move, the piece
+of a pocket set), and the undo card worksheet (handout 2), which prints the three
+blank cards side by side on one sheet, so nothing is cut out. Each card has the
+fields of the Day 2 undo record: the move, the piece
 that moved, the piece it captured (a dot for none), the old en passant square, the
 old halfmove clock, and the old fullmove number.
 
 1. The navigator plays three moves on the board and fills in one card for each move
    as it is made: 1. e4, then d5, then exd5. The driver looks away.
-2. The driver takes the three cards, and only the cards, and restores the start
+2. The driver takes the sheet with the three cards, and only the sheet, and restores the start
    position in reverse order: card 3 first. For each card the driver moves the piece
    back from the destination to the start square and puts the captured piece back on
    the destination square.
@@ -207,9 +208,10 @@ room predicts each call on paper before it is made.
 **Day 8, period 2, 10:30 to 10:45.** Prepares alpha-beta: a branch can be abandoned
 as soon as one reply shows it is worse than a move already found.
 
-Hand out nine index cards with the leaf scores of the paper minimax tree written on
-their faces, laid face down on the desk in three groups of three, in the order of the
-worksheet: A (4, 6, 5), B (2, 9, 7), C (3, 8, 8).
+Each student pair copies the nine leaf scores of the paper minimax tree from the
+worksheet (handout 6) onto nine index cards, one score per card, and lays them face
+down on the desk in three groups of three, in the order of the worksheet: A (4, 6,
+5), B (2, 9, 7), C (3, 8, 8).
 
 1. The student pairs turn cards over one at a time, left to right, and may stop a group
    as soon as the group can no longer change White's choice. They count their flips.
@@ -271,13 +273,15 @@ should go far from it. To run the warm-up again with a fresh grid, print
 each measured peak it explains and loses a point for each peak it leaves over, each
 peak it predicts that is missing, and each phase it uses.
 
-Hand out the mystery pattern sheet and the five fingerprint strips (handout 8). The
+Hand out the mystery pattern sheet with the five fingerprint strips printed under it
+on the same scale (handout 8); nothing is cut out. The
 pattern is `make_pattern(7)` from the Day 10 folder, eight peaks between 20 and 57
 degrees. The five strips are quartz, zincite, rutile, halite, and silicon, each
 with its four strongest peaks from the `LIBRARY` in `phase_hunt.py`.
 
-1. The student pairs lay each strip under the pattern and count how many of the
-   pattern's peaks line up with a mark on the strip, within about a third of a degree.
+1. The student pairs read straight down from the pattern to each strip and count how
+   many of the pattern's peaks line up with a mark on the strip, within about a third
+   of a degree.
 2. They choose the two phases that together explain the most peaks, and count the
    peaks their choice leaves over and the marks on their strips that the pattern does
    not show.
