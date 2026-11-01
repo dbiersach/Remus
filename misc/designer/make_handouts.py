@@ -1,14 +1,14 @@
 #!/usr/bin/env -S uv run
 """make_handouts.py
 
-Print each handout of misc/teachers/handouts.md as its own letter-size PDF.
+Print each handout of misc/teachers/handouts/handouts.md as its own letter-size PDF.
 
 A course designer tool, like the other make_*.py scripts. handouts.md stays the
 source of every worksheet and cheat sheet; this script reads it, cuts it at each
 `---` line into one handout per section, turns the Markdown of each handout into a
 small HTML page with the board diagrams embedded, and asks a Chromium-based browser
 (Microsoft Edge on Windows, Chrome or Chromium elsewhere) to print the page to
-misc/teachers/handouts/handout_NN_<title>.pdf. Edge comes with Windows 11, so the
+handout_NN_<title>.pdf beside it. Edge comes with Windows 11, so the
 designer's PC needs nothing installed. Run it after any change to handouts.md:
 
     uv run misc/designer/make_handouts.py
@@ -30,8 +30,8 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/designer/
-SOURCE = ROOT / "misc" / "teachers" / "handouts.md"  # The page every handout comes from
 OUT = ROOT / "misc" / "teachers" / "handouts"  # One PDF per handout goes here
+SOURCE = OUT / "handouts.md"  # The page every handout comes from
 BROWSER_VARIABLE = (
     "REMUS_BROWSER"  # Names the browser program when the search below fails
 )

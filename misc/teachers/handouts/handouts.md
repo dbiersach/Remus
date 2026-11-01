@@ -5,15 +5,15 @@ one worksheet for each of the eight unplugged warm-ups that needs one, four
 cheat sheets that stay on the desk for the whole two weeks, and the three
 evaluation sheets: the concept check, the rubric, and the interest survey. Nothing on
 this page gives an answer away. The answers are in the run sheets of
-[`unplugged_activities.md`](unplugged_activities.md), and the "Teacher preparation"
-list in the [course plan](remus_course_plan.md) says how many copies to print.
+[`unplugged_activities.md`](../unplugged_activities.md), and the "Teacher preparation"
+list in the [course plan](../remus_course_plan.md) says how many copies to print.
 
-Each handout is also a print-ready PDF in the [`handouts/`](handouts/) folder, one
-letter-size file per handout, such as `handout_01_the_board_labeled_both_ways.pdf`.
-Print the PDFs; this page is the source they are made from. A section break (the
-`---` line) marks where one handout ends and the next begins, and
-`uv run misc/designer/make_handouts.py` writes the PDFs again from this page after
-any change to it. The boards print well in black and white.
+Each handout is also a print-ready PDF beside this page, one letter-size file per
+handout, such as `handout_01_the_board_labeled_both_ways.pdf`. Print the PDFs; this
+page is the source they are made from. A section break (the `---` line) marks where
+one handout ends and the next begins, and `uv run misc/designer/make_handouts.py`
+writes the PDFs again from this page after any change to it. The boards print well
+in black and white.
 
 | Handout | Warm-up or use | When |
 | --- | --- | --- |
@@ -43,7 +43,7 @@ The usual chess labels run along the bottom (files `a` to `h`) and the left side
 (ranks `1` to `8`). Remus's own numbers run along the top (columns 0 to 7) and the
 right side (rows 0 to 7). The square `e2` is marked.
 
-![The start position with files and ranks on the left and bottom and Remus's columns and rows on the top and right](../students/images/boards/board_row_col.svg)
+![The start position with files and ranks on the left and bottom and Remus's columns and rows on the top and right](../../students/images/boards/board_row_col.svg)
 
 When the teacher calls a `(row, col)` pair, the navigator puts the token on that
 square and the driver names it. When the teacher calls a square name, the navigator
@@ -126,7 +126,7 @@ ______________________________________________________________________
 The board is empty except for the one piece shown. Shade every square the piece can
 move to, then write the count under the board.
 
-![A knight alone on d4](../students/images/boards/reach_knight_d4.svg) ![A knight alone on a1](../students/images/boards/reach_knight_a1.svg) ![A bishop alone on c1](../students/images/boards/reach_bishop_c1.svg)
+![A knight alone on d4](../../students/images/boards/reach_knight_d4.svg) ![A knight alone on a1](../../students/images/boards/reach_knight_a1.svg) ![A bishop alone on c1](../../students/images/boards/reach_bishop_c1.svg)
 
 | Piece | Squares it reaches |
 | --- | --- |
@@ -156,26 +156,26 @@ and leave the legal ones.
 
 **Position 1.** The knight on e2.
 
-![White king e1 and knight e2, Black king a8 and rook e8](../students/images/boards/hunt_pin_knight.svg)
+![White king e1 and knight e2, Black king a8 and rook e8](../../students/images/boards/hunt_pin_knight.svg)
 
 Moves offered: Nc1, Nc3, Nd4, Nf4, Ng1, Ng3
 
 **Position 2.** The bishop on c2.
 
-![White king d1 and bishop c2, Black king e8 and bishop a4](../students/images/boards/hunt_pin_bishop.svg)
+![White king d1 and bishop c2, Black king e8 and bishop a4](../../students/images/boards/hunt_pin_bishop.svg)
 
 Moves offered: Bb1, Bb3, Bd3, Be4, Bf5, Bg6, Bh7, Bxa4
 
 **Position 3.** The king on e1.
 
-![White king e1, Black king e8 and rook f2](../students/images/boards/hunt_king_into_check.svg)
+![White king e1, Black king e8 and rook f2](../../students/images/boards/hunt_king_into_check.svg)
 
 Moves offered: Kd1, Kd2, Ke2, Kf1, Kxf2
 
 **Position 4.** The king on a5 and the pawn on d5. Black has just played the pawn
 from c7 to c5, so the pawn on d5 may capture it en passant, landing on c6.
 
-![White king a5 and pawn d5, Black king e8, pawn c5, and rook h5](../students/images/boards/hunt_en_passant_pin.svg)
+![White king a5 and pawn d5, Black king e8, pawn c5, and rook h5](../../students/images/boards/hunt_en_passant_pin.svg)
 
 Moves offered: Ka4, Ka6, Kb4, Kb5, Kb6, d6, dxc6 (en passant)
 
@@ -191,7 +191,7 @@ ______________________________________________________________________
 
 White to move: a king on e1 and a pawn on e2 against a lone Black king on e8.
 
-![White king e1 and pawn e2, Black king e8](../students/images/boards/count_by_hand.svg)
+![White king e1 and pawn e2, Black king e8](../../students/images/boards/count_by_hand.svg)
 
 1. Write every move White can make, one per index card, and copy the list here.
 2. On each card, list every reply Black would have after that move and write the
@@ -382,7 +382,7 @@ ______________________________________________________________________
 
 People write moves in **standard algebraic notation**, SAN. Chess programs talk to
 each other in **UCI** notation. Remus reads and writes both at its edges and uses
-`(row, col)` pairs inside. [`learn_chess.md`](../students/learn_chess.md) explains
+`(row, col)` pairs inside. [`learn_chess.md`](../../students/learn_chess.md) explains
 every line of this table with examples.
 
 | Piece | Letter in SAN | Letter on the Remus board |

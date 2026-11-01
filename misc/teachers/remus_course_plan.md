@@ -140,7 +140,7 @@ at the input and output boundary.
 | Evaluation | The same 20-minute concept check and 5-minute interest survey on paper at the start of Day 1 and near the end of Day 10 (handouts 13 and 15, answer key in `unplugged_activities.md`), and a rubric (handout 14) for the functions the class picks and the Day 10 presentations. The teacher or Brookhaven education staff score the sheets; none of this takes coding time |
 | Matches | Day 9, period 4: engine battles, two enhanced engines at a time, twice at 10 minutes a side, once with each piece color, on five laptops at once. The teacher then shows the designer's league table of all twelve Remus versions |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
-| Documentation | `misc/students/remus_program_overview.md` for the whole program, one page per script in `misc/students/engine_code/`, the Python labs in `misc/students/python_labs.md`, chess itself in `misc/students/learn_chess.md`, the warm-ups in `misc/teachers/unplugged_activities.md` and `misc/teachers/handouts.md`, and `misc/teachers/slide_plan.md` for the PowerPoint slides |
+| Documentation | `misc/students/remus_program_overview.md` for the whole program, one page per script in `misc/students/engine_code/`, the Python labs in `misc/students/python_labs.md`, chess itself in `misc/students/learn_chess.md`, the warm-ups in `misc/teachers/unplugged_activities.md` and `misc/teachers/handouts/handouts.md`, and `misc/teachers/slide_plan.md` for the PowerPoint slides |
 
 ## The thirteen lessons
 
@@ -426,7 +426,7 @@ replaces: students learn the idea by doing it instead of by listening to it. The
 
 [`unplugged_activities.md`](unplugged_activities.md) is the run sheet for every
 warm-up in this table: the steps, the minutes, and the answers. The worksheets the
-student pairs hold are in [`handouts.md`](handouts.md), and the [`handouts/`](handouts/)
+student pairs hold are in [`handouts/handouts.md`](handouts/handouts.md), and the same
 folder holds each one as a PDF to print.
 
 | When | Warm-up (10 to 15 minutes) | Idea it prepares | Materials per student pair |
@@ -540,7 +540,7 @@ student pairs can explain Remus's own answer.
    engine path works on all 10; check that the repository sits at the same folder on
    every laptop.
 4. **Print handouts** from the [`handouts/`](handouts/) folder, one PDF per handout,
-   numbered as in [`handouts.md`](handouts.md): a board diagram labeled
+   numbered as in [`handouts/handouts.md`](handouts/handouts.md): a board diagram labeled
    with both `e2` and `(6, 4)`, the rules refresher table, a SAN and UCI cheat sheet, a
    perft reference table, and the worksheet of each warm-up, including the blank game
    tree for Day 8. Print the concept check and the interest survey twice over, 40
