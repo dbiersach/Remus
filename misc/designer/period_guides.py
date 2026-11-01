@@ -56,7 +56,11 @@ OBJECTIVES = {
                 "Name the parts of a chess engine that Remus will grow: board, moves, "
                 "rules, search, and evaluation."
             ),
-            "Exit ticket: each student lists three of the five parts and one job of each.",
+            (
+                "Question 1 of the concept check (handout 13): each student writes one "
+                "job for each part on Day 10. On Day 1 the same question is the baseline, "
+                "taken before the teacher names the parts."
+            ),
         ),
     ],
     (1, 2): [
@@ -682,6 +686,14 @@ OBJECTIVES = {
             (
                 "Each student's USB drive holds the student pair's Remus folder, every Day "
                 "folder included, and the copy opens in VS Code."
+            ),
+        ),
+        (
+            "Show what two weeks taught.",
+            (
+                "Each student's Day 10 concept check (handout 13) scores higher than "
+                "the same check on Day 1, and the two interest surveys (handout 15) "
+                "sit side by side for the course evaluation."
             ),
         ),
     ],
@@ -2823,10 +2835,12 @@ DAY_GUIDES = {
     1: {
         "theme": "Setup and the board",
         "summary": (
-            "Day 1 forms the student pairs, sets up the laptops, and teaches the first Python: "
-            "strings and lists. In the last period each student pair writes its first Remus "
-            "code. By 4:30 Remus prints its own board, converts a square name such as "
-            "e2 into a (row, col) pair and back, and draws the board as a picture."
+            "Day 1 opens with the concept check and the interest survey that come back on "
+            "Day 10, then forms the student pairs, sets up the laptops, and teaches the "
+            "first Python: strings and lists. In the last period each student pair writes "
+            "its first Remus code. By 4:30 Remus prints its own board, converts a square "
+            "name such as e2 into a (row, col) pair and back, and draws the board as a "
+            "picture."
         ),
         "objectives": [
             (
@@ -2849,20 +2863,25 @@ DAY_GUIDES = {
                 (
                     0,
                     (
-                        "Welcome. The finished Remus plays a game in Lucas Chess on "
-                        "the projector."
+                        "The concept check (handout 13, 20 minutes) and the interest "
+                        "survey (handout 15, 5 minutes), on paper, alone, before anyone "
+                        "has seen Remus. Nobody is expected to answer much yet: the "
+                        "same two sheets come back on Day 10 to show how far each "
+                        "student traveled."
                     ),
                 ),
                 (
-                    10,
+                    25,
                     (
-                        "The story of the name: Sargon, the 1978 chess program, and "
-                        "Rimush, the first son of Sargon of Akkad. Remus is a son of "
-                        "Sargon."
+                        "Welcome. The finished Remus plays a game in Lucas Chess on "
+                        "the projector while the teacher names its five parts: board, "
+                        "moves, rules, search, and evaluation. The story of the name: "
+                        "Sargon, the 1978 chess program, and Rimush, the first son of "
+                        "Sargon of Akkad. Remus is a son of Sargon."
                     ),
                 ),
                 (
-                    20,
+                    35,
                     (
                         "Form the ten student pairs. The driver types and the navigator reads "
                         "and checks; the two swap roles every period. Each student pair picks "
@@ -2870,7 +2889,7 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    30,
+                    40,
                     (
                         "Setup, the only git and uv commands of the workshop. The "
                         "teacher walks each student through installing git and uv, "
@@ -2880,7 +2899,7 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    50,
+                    60,
                     (
                         "Notation on the demonstration board: square names, SAN for "
                         "people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs "
@@ -2888,20 +2907,12 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    60,
+                    70,
                     (
                         "Student pairs type the 6 lines of `python_setup.py` and run it. It "
                         "checks the laptop, greets the team, and prints a first chess "
                         "line. The teacher and the assistant check that every laptop "
                         "runs a file with the Run button and opens Lucas Chess."
-                    ),
-                ),
-                (
-                    80,
-                    (
-                        "Exit ticket: each student lists three of the five parts of a "
-                        "chess engine (board, moves, rules, search, evaluation) and "
-                        "one job of each."
                     ),
                 ),
             ],
@@ -4337,8 +4348,9 @@ DAY_GUIDES = {
             "Day 10 aims the engine's ideas at real science. The same generate, score,"
             " and choose loop picks where to measure a hidden peak, and the full tree "
             "search, with make and undo, names the crystal phases in an X-ray powder "
-            "pattern. The day ends with each student pair reporting its science results, and "
-            "every student pair takes its code home."
+            "pattern. The day ends with each student pair reporting its science results, "
+            "the Day 1 concept check and survey taken again, and every student pair "
+            "taking its code home."
         ),
         "objectives": [
             (
@@ -4473,7 +4485,7 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    15,
+                    10,
                     (
                         "Each student pair runs `hidden_peak.py` and `phase_hunt.py` once more "
                         "and fills in its results table: measurements against random "
@@ -4483,7 +4495,7 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    40,
+                    30,
                     (
                         "Each student pair picks one powder its search named and one it "
                         "answered with can't tell, and works out which measurement "
@@ -4491,14 +4503,23 @@ DAY_GUIDES = {
                     ),
                 ),
                 (
-                    55,
+                    40,
                     (
-                        "Each student pair presents its results and its two powders in three "
-                        "minutes."
+                        "Each student pair presents its results and its two powders in two "
+                        "minutes. The teacher scores each presentation with the rubric "
+                        "(handout 14)."
                     ),
                 ),
                 (
-                    80,
+                    60,
+                    (
+                        "The Day 1 concept check (handout 13, 20 minutes) and interest "
+                        "survey (handout 15, 5 minutes) again, on paper, alone. The "
+                        "teacher keeps both sheets with the Day 1 ones."
+                    ),
+                ),
+                (
+                    85,
                     (
                         "The class closes with what comes next: AI agents that steer "
                         "real experiments at light sources such as NSLS-II."

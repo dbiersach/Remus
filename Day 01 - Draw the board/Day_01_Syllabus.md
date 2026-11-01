@@ -1,6 +1,6 @@
 # Day 1: Setup and the board
 
-Day 1 forms the student pairs, sets up the laptops, and teaches the first Python: strings and lists. In the last period each student pair writes its first Remus code. By 4:30 Remus prints its own board, converts a square name such as e2 into a (row, col) pair and back, and draws the board as a picture.
+Day 1 opens with the concept check and the interest survey that come back on Day 10, then forms the student pairs, sets up the laptops, and teaches the first Python: strings and lists. In the last period each student pair writes its first Remus code. By 4:30 Remus prints its own board, converts a square name such as e2 into a (row, col) pair and back, and draws the board as a picture.
 
 ## Objectives for the day
 
@@ -28,13 +28,12 @@ By 4:30, each student pair can:
 
 | Time | Activity |
 | --- | --- |
-| 8:30 to 8:40 | Welcome. The finished Remus plays a game in Lucas Chess on the projector. |
-| 8:40 to 8:50 | The story of the name: Sargon, the 1978 chess program, and Rimush, the first son of Sargon of Akkad. Remus is a son of Sargon. |
-| 8:50 to 9:00 | Form the ten student pairs. The driver types and the navigator reads and checks; the two swap roles every period. Each student pair picks a team name for `CONTRIBUTORS.md`. |
-| 9:00 to 9:20 | Setup, the only git and uv commands of the workshop. The teacher walks each student through installing git and uv, cloning the Remus repository, and running `uv sync` once to build the `.venv` folder. From here on every step runs from VS Code's Run button. |
-| 9:20 to 9:30 | Notation on the demonstration board: square names, SAN for people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs (`g1f3`). |
-| 9:30 to 9:50 | Student pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop runs a file with the Run button and opens Lucas Chess. |
-| 9:50 to 10:00 | Exit ticket: each student lists three of the five parts of a chess engine (board, moves, rules, search, evaluation) and one job of each. |
+| 8:30 to 8:55 | The concept check (handout 13, 20 minutes) and the interest survey (handout 15, 5 minutes), on paper, alone, before anyone has seen Remus. Nobody is expected to answer much yet: the same two sheets come back on Day 10 to show how far each student traveled. |
+| 8:55 to 9:05 | Welcome. The finished Remus plays a game in Lucas Chess on the projector while the teacher names its five parts: board, moves, rules, search, and evaluation. The story of the name: Sargon, the 1978 chess program, and Rimush, the first son of Sargon of Akkad. Remus is a son of Sargon. |
+| 9:05 to 9:10 | Form the ten student pairs. The driver types and the navigator reads and checks; the two swap roles every period. Each student pair picks a team name for `CONTRIBUTORS.md`. |
+| 9:10 to 9:30 | Setup, the only git and uv commands of the workshop. The teacher walks each student through installing git and uv, cloning the Remus repository, and running `uv sync` once to build the `.venv` folder. From here on every step runs from VS Code's Run button. |
+| 9:30 to 9:40 | Notation on the demonstration board: square names, SAN for people (`Nf3`, `Bxh8`, `e8=Q`), and UCI for programs (`g1f3`). |
+| 9:40 to 10:00 | Student pairs type the 6 lines of `python_setup.py` and run it. It checks the laptop, greets the team, and prints a first chess line. The teacher and the assistant check that every laptop runs a file with the Run button and opens Lucas Chess. |
 
 [`Day_01_Period_01_Goals.md`](period1/Day_01_Period_01_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 

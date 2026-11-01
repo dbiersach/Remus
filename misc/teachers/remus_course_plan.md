@@ -137,6 +137,7 @@ at the input and output boundary.
 | First pictures | Day 1: `show_board.py` draws the students' board in the browser with python-chess. Day 3: it draws an arrow for every move their generator finds |
 | First GUI game | Day 5 Period 4: a ready-made `uci_engine.py` plays random legal moves in Lucas Chess once every special move works. Day 7 explains UCI and adds the brains, after the rules pass perft and Remus reads FEN |
 | Unplugged warm-ups | 10 to 15 minutes at the desk with paper and cards before each hard idea, taken from the teacher's explanation time, never from coding time |
+| Evaluation | The same 20-minute concept check and 5-minute interest survey on paper at the start of Day 1 and near the end of Day 10 (handouts 13 and 15, answer key in `unplugged_activities.md`), and a rubric (handout 14) for the functions the class picks and the Day 10 presentations. The teacher or Brookhaven education staff score the sheets; none of this takes coding time |
 | Matches | Day 9, period 4: engine battles, two enhanced engines at a time, twice at 10 minutes a side, once with each piece color, on five laptops at once. The teacher then shows the designer's league table of all twelve Remus versions |
 | Mate puzzles | The ten `MATE.00x` positions live in `mate_puzzles.epd`, beside the search tests from Day 8 on: nine mates in 2 and one mate in 3 (`MATE.008`), each with its single key move, checked with python-chess |
 | Documentation | `misc/students/remus_program_overview.md` for the whole program, one page per script in `misc/students/engine_code/`, the Python labs in `misc/students/python_labs.md`, chess itself in `misc/students/learn_chess.md`, the warm-ups in `misc/teachers/unplugged_activities.md` and `misc/teachers/handouts.md`, and `misc/teachers/slide_plan.md` for the PowerPoint slides |
@@ -540,7 +541,9 @@ student pairs can explain Remus's own answer.
 4. **Print handouts** from [`handouts.md`](handouts.md): a board diagram labeled
    with both `e2` and `(6, 4)`, the rules refresher table, a SAN and UCI cheat sheet, a
    perft reference table, and the worksheet of each warm-up, including the blank game
-   tree for Day 8.
+   tree for Day 8. Print the concept check and the interest survey twice over, 40
+   copies of each, one set for Day 1 and one for Day 10, and one rubric per
+   student pair.
 5. **Collect test positions as FEN:** the ten verification exercises above, the standard perft positions, mate-in-1 and mate-in-2 puzzles, the ten
    mate puzzles in `mate_puzzles.epd`, and a horizon-effect position.
 6. **Plan for 20 students.** Print 20 copies of each handout. Buy 20 USB drives, so
@@ -561,7 +564,10 @@ student pairs can explain Remus's own answer.
 
 ### Day 1: Setup and the board
 
-- **P1. Welcome and setup.** Watch the finished reference Remus play in the GUI. Tell
+- **P1. Welcome and setup.** Before anything else, each student takes the concept
+  check (handout 13, 20 minutes) and the interest survey (handout 15, 5 minutes) on
+  paper; the same two sheets come back on Day 10. Then watch the finished reference
+  Remus play in the GUI while the teacher names its five parts, and tell
   the Sargon and Rimush story from `AGENTS.md`. Form student pairs. The teacher walks
   each student through installing git and `uv`, cloning Remus, and running `uv sync`, the only git
   and `uv` commands of the workshop. Check every laptop runs a
@@ -860,9 +866,11 @@ test, and has played two battles against other enhanced engines.
   can't-tell counts of greedy and search on the 200 powders. The class collects every
   student pair's numbers on the board and asks why the student pairs' counts agree or differ. Each
   student pair then picks one powder its search named and one it answered with "can't tell",
-  works out which second measurement would settle it, and presents both in three
-  minutes. Close with what comes next: AI agents that steer real experiments at light
-  sources such as NSLS-II.
+  works out which second measurement would settle it, and presents both in two
+  minutes, which the teacher scores with the rubric (handout 14). Then each student
+  takes the Day 1 concept check and interest survey again (25 minutes), and the
+  teacher keeps both days' sheets together for the evaluation. Close with what comes
+  next: AI agents that steer real experiments at light sources such as NSLS-II.
 
 **Checkpoint (4:30):** every student pair's `choose_next_measurement()` beats random
 guessing on the 100-grid benchmark, every student pair's `search()` makes fewer wrong calls

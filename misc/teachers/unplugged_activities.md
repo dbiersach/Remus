@@ -7,7 +7,8 @@ warm-up replaces part of the teacher's explanation at the board; it never takes 
 from the block in which the student pairs type code.
 
 This page is the teacher's run sheet: for each warm-up, when it runs, what to hand
-out, the steps, and the answers. The worksheets the student pairs hold are in
+out, the steps, and the answers. The answer key for the concept check, which the
+students take on Day 1 and again on Day 10, is the last section. The worksheets the student pairs hold are in
 [`handouts.md`](handouts.md), one section per warm-up, with no answers on them. Print
 the handouts before the day; the "Teacher preparation" list in the
 [course plan](remus_course_plan.md) says how many copies.
@@ -298,3 +299,31 @@ The measured pattern and the answer:
 The powder is quartz and zincite. Every measured peak is explained and no predicted
 peak is missing, so the pair scores 8 points for the explained peaks less 2 for the
 two phases: 6, the best score any set can reach on this pattern.
+
+## The concept check: answer key and scoring
+
+**Day 1, period 1, 8:30 to 8:50, and Day 10, period 4, 4:00 to 4:20.** Handout 13
+asks the same ten questions both days, before the first word about Remus and after
+the science work. Each student works alone on paper. Score one point per question,
+so a sheet scores 0 to 10, and keep each student's two sheets together: the gain
+from Day 1 to Day 10 is the result, and the Day 1 sheet also shows the teacher what
+the class already knows. Give the point for the idea, not the wording.
+
+| Question | Answer | The point goes for |
+| --- | --- | --- |
+| 1 | Board: holds where every piece stands. Moves: lists where each piece could go. Rules: keeps only the legal moves and says when the game ends. Search: looks ahead through replies to replies. Evaluation: scores a position with a number | Three or more parts with a sensible job each |
+| 2 | Row 6, column 4 is e2; h1 is (7, 7) | Both answers |
+| 3 | The moves that leave the mover's own king attacked: moving a pinned piece off its line, walking the king into check, or ignoring a check | Naming the king's safety |
+| 4 | Move A, expecting +3. After A Black picks +3; after B Black picks +1; White takes the larger of the two worst cases | A with +3, or B ruled out because Black would pick +1 |
+| 5 | The counts check that the move generator obeys every rule, because the right numbers are known; 401 means one move too many, so some rule is wrong | Counting as a check against known numbers |
+| 6 | No. B already leads to +1 at best, which is worse than A's +3, so B's other reply cannot make B the better choice | No, with the comparison against +3 |
+| 7 | White has 11, Black has 13: Black is ahead by 2 | Black by 2 |
+| 8 | A square next to the 40, such as c2, b3, d3, or c4, because the hot spot is near the highest reading; a far corner such as a5 is also a point if the reason is that nothing there has been measured yet | Any square with a reason that names the readings |
+| 9 | A and B together explain all four peaks with none left over. The second powder is "can't tell": A with its 20 missing, or C with its 60 missing, so measure again or look for the 20 or 60 peak | A and B; then "can't tell" or a second measurement |
+| 10 | The same: list the choices, look ahead, score each one, pick the best. Different: in chess an opponent answers, and in the lab nature answers with a reading, so the program averages instead of expecting the worst | One sentence on each |
+
+On Day 1 most sheets score 1 to 3 points, from questions 2, 7, and 8, which need
+only arithmetic and common sense. Questions 4, 6, 9, and 10 are the ones the course
+teaches, and a Day 10 sheet should score 7 or more. Hand the sheets, with the two
+interest surveys (handout 15) and the rubrics (handout 14), to the Brookhaven
+education staff who support the evaluation.
