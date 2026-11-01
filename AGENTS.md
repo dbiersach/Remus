@@ -289,8 +289,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
 - Every course designer tool that is not part of an engine lives in `misc/designer/`
   (David, 2026-10-28): the builders `make_period_folders.py`,
   `make_version_folders.py`, `make_student_folders.py`,
-  `make_phase_hunt_figures.py`, `make_board_diagrams.py`, `make_white_map.py`, and
-  `make_handouts.py`, the README text in `period_guides.py`,
+  `make_phase_hunt_figures.py`, `make_board_diagrams.py`, `make_white_map.py`,
+  `make_game_tree_video.py`, and `make_handouts.py`, the README text in `period_guides.py`,
   `run_all_tests.py`, `test_reference_tools.py`, `version_match.py`, `version_league.py`,
   `version_elo.py`, `remus_benchmark.py`, and `engine_parity.py`. Each one finds the
   top Remus folder from its own path, so it
