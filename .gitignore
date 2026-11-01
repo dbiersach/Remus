@@ -28,8 +28,9 @@ board.svg
 # games he plays and analyzes in the chess apps
 /Remus.pgn
 
-# Niram build output (cargo build writes it inside engines/Niram/)
-engines/Niram/target/
+# Niram build output (cargo build writes it inside engines/Niram-GOLD/ and
+# engines/Niram-PLATINUM/)
+engines/Niram-*/target/
 
 # The game tree video that misc/designer/make_game_tree_video.py makes stays on the
 # computer that made it

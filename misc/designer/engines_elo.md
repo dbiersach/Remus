@@ -2,18 +2,19 @@
 
 This page rates the twelve Remus versions: Remus-WHITE (the finished Day 9 Remus with
 no enhancements), the ten enhanced engines, and Remus-GOLD (all ten enhancements),
-plus Niram, the Rust copy of Remus-GOLD. Two yardsticks measure them:
+plus Niram-GOLD, the Rust copy of Remus-GOLD, and Niram-PLATINUM, the Rust copy of
+Remus-PLATINUM. Two yardsticks measure them:
 
 1. **The league** plays all twelve versions against each other. It measures the gaps
    between versions well, because every game pits two Remus versions of nearly equal
    strength.
 2. **Stockfish** at a limited strength (`UCI_Elo`) puts Remus-WHITE, Remus-GOLD, and
-   Niram on an Elo scale that people outside the class know. It measures the size of
+   the Niram engines on an Elo scale that people outside the class know. It measures the size of
    a rating well, but it cannot sort versions that sit only 30 or 40 Elo apart.
 
-[`remus-niram_same_algorithms.md`](remus-niram_same_algorithms.md) shows that Niram
+[`remus-niram_same_algorithms.md`](remus-niram_same_algorithms.md) shows that Niram-GOLD
 runs the same algorithms as Remus-GOLD and picks the same moves at the same depth. The
-two engines differ in speed, and the speed gap makes Niram far stronger with a clock.
+two engines differ in speed, and the speed gap makes Niram-GOLD far stronger with a clock.
 
 ## The league: every version against the others, in Rust
 
@@ -22,8 +23,8 @@ The designer's league did not play the Python engines. It played Rust copies of 
 versions and pick the same moves, only much faster. That is why its games carry the
 Event "Niram league 1" and why `version_league.py` needs `--niram` to rate them. The
 Rust copies let 660 games at 10 minutes a side finish in one night, and they search
-deep enough for every enhancement to show what it adds. Only Niram, the copy of
-Remus-GOLD, is kept in `engines/Niram`; the games of the other copies stay in the
+deep enough for every enhancement to show what it adds. Only Niram-GOLD, the copy of
+Remus-GOLD, is kept, in `engines/Niram-GOLD`; the games of the other copies stay in the
 games file.
 
 Every version played every other version 10 times, 5 with each piece color. The 450
@@ -53,7 +54,7 @@ about +147, less than half of the +339 its Rust copy gained here.
 
 ## The Stockfish bracket run
 
-Remus-WHITE, Remus-GOLD, and Niram each played 64 games against Stockfish 19 at 10
+Remus-WHITE, Remus-GOLD, and Niram-GOLD each played 64 games against Stockfish 19 at 10
 minutes a side, under the Event "Engine Elo bracket" in `misc/games/remus_games.pgn`.
 The run took 2 hours 31 minutes for 192 games, 24 at once on the course designer's PC.
 No engine crashed or lost on time.
@@ -70,7 +71,7 @@ No engine crashed or lost on time.
 **How the bracket works.** A game teaches the most about a rating when its result is
 hardest to predict, at a 50 percent expected score, so the run aims Stockfish at each
 engine's strength. Round 1 starts from a guess: Stockfish 1850 for Remus-WHITE, 2000
-for Remus-GOLD, and 2500 for Niram. After each round, the script rates the engine
+for Remus-GOLD, and 2500 for Niram-GOLD. After each round, the script rates the engine
 from all of its games so far and sets the next round's Stockfish level to that rating,
 rounded to a multiple of 25. The levels close in on the rating, so most games land near
 an even score.
@@ -84,7 +85,7 @@ its expected score.
 
 | Rank | Engine | Elo | 95% margin | Score |
 | ---: | --- | ---: | ---: | ---: |
-| 1 | Niram | 2354 | +/- 80 | 31/64 |
+| 1 | Niram-GOLD | 2354 | +/- 80 | 31/64 |
 | 2 | Remus-GOLD | 1731 | +/- 77 | 31/64 |
 | 3 | Remus-WHITE | 1681 | +/- 79 | 24.5/64 |
 
@@ -92,7 +93,7 @@ All 128 Python Remus games pooled into one player give **1706 +/- 55**.
 
 The ratings after each round show the bracket settling:
 
-| After round | Remus-WHITE | Remus-GOLD | Niram |
+| After round | Remus-WHITE | Remus-GOLD | Niram-GOLD |
 | ---: | ---: | ---: | ---: |
 | 1 | 1894 | 1745 | 2363 |
 | 2 | 1831 | 1721 | 2322 |
@@ -109,14 +110,14 @@ Each engine's score at each Stockfish level it met:
 | --- | --- | --- |
 | Remus-WHITE | 1850, 1900, 1825, 1775, 1725, 1725, 1675, 1675 | 1675: 8/16, 1725: 5/16, 1775: 2.5/8, 1825: 2/8, 1850: 4.5/8, 1900: 2.5/8 |
 | Remus-GOLD | 2000, 1750, 1725, 1675, 1675, 1700, 1725, 1725 | 1675: 9/16, 1700: 6/8, 1725: 11/24, 1750: 3.5/8, 2000: 1.5/8 |
-| Niram | 2500, 2375, 2325, 2375, 2350, 2350, 2325, 2325 | 2325: 16/24, 2350: 6/16, 2375: 6.5/16, 2500: 2.5/8 |
+| Niram-GOLD | 2500, 2375, 2325, 2375, 2350, 2350, 2325, 2325 | 2325: 16/24, 2350: 6/16, 2375: 6.5/16, 2500: 2.5/8 |
 
 ### What the bracket shows
 
-**Niram rates about 620 Elo above Remus-GOLD.** The two engines pick the same move in
+**Niram-GOLD rates about 620 Elo above Remus-GOLD.** The two engines pick the same move in
 every position ([`remus-niram_same_algorithms.md`](remus-niram_same_algorithms.md)), and both scored
-31 of 64. Niram scored its 31 points against Stockfish set about 600 Elo higher. The
-whole gap comes from speed: Niram searches about 15 times as many positions in the
+31 of 64. Niram-GOLD scored its 31 points against Stockfish set about 600 Elo higher. The
+whole gap comes from speed: Niram-GOLD searches about 15 times as many positions in the
 same 10 minutes, deep enough for null-move pruning, late move reductions, and the
 transposition table to pay off.
 
@@ -127,8 +128,8 @@ to 8. At Python speed Remus-GOLD reaches only a few plies in 10 minutes, so most
 enhancements get little chance to work, and its evaluation costs about three times as
 much per position as Remus-WHITE's.
 
-**Remus-GOLD and Niram score less with Black.** Over all 64 games, Remus-GOLD and
-Niram each scored 19.5 of 32 with White and 11.5 of 32 with Black, while Remus-WHITE
+**Remus-GOLD and Niram-GOLD score less with Black.** Over all 64 games, Remus-GOLD and
+Niram-GOLD each scored 19.5 of 32 with White and 11.5 of 32 with Black, while Remus-WHITE
 scored 13 of 32 with White and 11.5 of 32 with Black. Moving first helps Stockfish
 when Remus plays Black, but Remus-WHITE shows only a small gap, so the larger gap may
 come from how Remus-GOLD plays Black, perhaps its opening book. Thirty-two games with
@@ -194,11 +195,11 @@ keep the openings. Rate such a league with `--book-start` as well.
 
 The designer's league ran on Niram, Rust copies of all 12 versions that picked the
 same moves as Remus about 15 times faster, so a 10-minute Niram game searched about
-as many positions as a 2.5-hour Remus game. Only Niram is kept, in
-`engines/Niram` ([`remus-niram_same_algorithms.md`](../designer/remus-niram_same_algorithms.md) shows that the two match), but
+as many positions as a 2.5-hour Remus game. Only Niram-GOLD is kept, in
+`engines/Niram-GOLD` ([`remus-niram_same_algorithms.md`](../designer/remus-niram_same_algorithms.md) shows that the two match), but
 the league's games stay in the games file. `--niram --rate-only` rates them apart
 from Remus games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays
-Niram against Stockfish ([`engines_elo.md`](../designer/engines_elo.md) gives its rating).
+Niram-GOLD against Stockfish ([`engines_elo.md`](../designer/engines_elo.md) gives its rating).
 
 Without `--at-once`, the league plays one game per processor thread. Give it the
 number of cores or fewer, because each game needs a whole core to itself to use its
@@ -257,7 +258,7 @@ Remus-GOLD's 1,491 code lines among its 15 engine scripts.
 
 The course designer runs these commands; no student or teacher needs them in
 class. From the top Remus folder on a computer with at least 24 physical cores, after
-`cargo build --release` inside `engines/Niram`, this command plays the bracket run:
+`cargo build --release` inside `engines/Niram-GOLD`, this command plays the bracket run:
 
 ```
 uv run misc/designer/version_elo.py --bracket --colors WHITE GOLD --niram --workers 24

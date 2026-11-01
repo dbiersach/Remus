@@ -1,11 +1,11 @@
-# Niram: Remus-GOLD rewritten in Rust.
+# Niram-PLATINUM: Remus-PLATINUM rewritten in Rust.
 #
-# src/ holds every Rust file, each named after the Remus-GOLD Python file it matches:
+# src/ holds every Rust file, each named after the Remus-PLATINUM Python file it matches:
 # the board, the rules of chess, FEN, SAN, the opening book, the evaluation, move
 # ordering, the transposition table, the search, the UCI loop, and the benchmark.
 [package]
-name = "niram"
-description = "Niram: Remus-GOLD in Rust, with all ten enhancements"
+name = "niram-platinum"
+description = "Niram-PLATINUM: Remus-PLATINUM in Rust, Niram-GOLD plus ten more enhancements"
 version = "0.2.0"
 edition = "2024"
 license = "BSD-3-Clause"

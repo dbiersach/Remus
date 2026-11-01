@@ -1,8 +1,8 @@
-# Cargo settings for Niram. Cargo reads this file for every cargo command run inside
-# engines/Niram, which is where the README, engine_parity.py, and version_elo.py build it.
+# Cargo settings for Niram-PLATINUM. Cargo reads this file for every cargo command run
+# inside engines/Niram-PLATINUM, which is where the README and engine_parity.py build it.
 
 # On Windows, rustc tells Microsoft's linker to write a .pdb debug symbol file beside
-# niram.exe whatever the profile says. The engine never reads that file, so this flag
+# niram-platinum.exe whatever the profile says. The engine never reads that file, so this flag
 # tells the linker to skip it. Cargo passes the flag after rustc's own /DEBUG, and
 # the linker keeps the last one.
 [target.x86_64-pc-windows-msvc]

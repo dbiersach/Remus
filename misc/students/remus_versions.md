@@ -16,12 +16,13 @@ better than another before the games are played.
 ## Where the enhanced engines live
 
 The Remus versions live in the `engines` folder at the top of the Remus folder, which
-holds three folders:
+holds four folders:
 
 | Folder | Holds |
 | --- | --- |
-| `engines/instructor` | `00 Remus-WHITE - No enhancements` to `11 Remus-GOLD - All enhancements`, the finished engines |
-| `engines/Niram` | Niram, Remus-GOLD rewritten in Rust, a course designer's tool |
+| `engines/instructor` | `00 Remus-WHITE - No enhancements` to `11 Remus-GOLD - All enhancements`, the finished engines, and `12 Remus-PLATINUM - Ten more enhancements`, the course designer's engine with ten more |
+| `engines/Niram-GOLD` | Niram-GOLD, Remus-GOLD rewritten in Rust, a course designer's tool |
+| `engines/Niram-PLATINUM` | Niram-PLATINUM, Remus-PLATINUM rewritten in Rust, a course designer's tool |
 | `engines/student` | `00 Remus-WHITE - No enhancements` to `10 Remus-RED - Transposition table`, with the functions each student pair writes stubbed |
 
 `00 Remus-WHITE - No enhancements` is Remus-WHITE, a copy of the Day 9 `period1`

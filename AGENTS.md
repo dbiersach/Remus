@@ -315,7 +315,8 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   every `student/` folder from its `instructor/` sibling and lists every student function by day and period;
   run it after `make_period_folders.py`, and never edit a student stub by hand.
 - The Remus versions live in the top `engines/` folder (David, 2026-10-29), which
-  holds `engines/instructor`, `engines/student`, and `engines/Niram`. Each of
+  holds `engines/instructor`, `engines/student`, `engines/Niram-GOLD`, and
+  `engines/Niram-PLATINUM`. Each of
   `instructor` and `student` holds one engine folder per Remus version, named by its
   engine color. `00 Remus-WHITE - No enhancements` is Remus-WHITE,
   the finished Day 9 Remus with none of the ten enhancements (named by David on
@@ -330,8 +331,15 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   Remus has no console game: every game runs in Lucas Chess or a match script. `01 Remus-GRAY - King safety` to `10 Remus-RED -
   Transposition table` are the ten enhanced engines, each Remus-WHITE plus one
   enhancement. `11 Remus-GOLD - All enhancements` is Remus-GOLD, the finished Remus with
-  all ten (David, 2026-10-27), and only `engines/instructor` holds it. `engines/Niram`
-  holds Niram, the same engine in Rust. Remus-GOLD is the engine of Day 10 (David,
+  all ten (David, 2026-10-27), and only `engines/instructor` holds it.
+  `engines/Niram-GOLD` holds Niram-GOLD, the same engine in Rust.
+  `12 Remus-PLATINUM - Ten more enhancements` is Remus-PLATINUM (David,
+  2026-11-01): Remus-GOLD plus aspiration windows, futility pruning, delta pruning,
+  static exchange evaluation (`exchange.py`), time management, tapered evaluation,
+  the pawn race, mobility, the bishop pair, and rooks on open files. It is a course
+  designer's engine outside the course, written by hand with its own README, and only
+  `engines/instructor` holds it; `engines/Niram-PLATINUM` holds Niram-PLATINUM, the
+  same engine in Rust. Remus-GOLD is the engine of Day 10 (David,
   2026-10-28): the Day 10 period folders hold only the science files
   (`hidden_peak.py`, `phase_hunt.py`, their tests, and the results demo), and their
   READMEs point to Remus-GOLD for the engine, Lucas Chess, and `estimate_elo.py`.
@@ -349,28 +357,33 @@ learners extend it, and save open questions. Never drop in a complete optimized 
   against Remus-WHITE or another enhanced engine, and `play_battle.py` in each engine folder
   runs it for the Day 9 battles. `version_league.py` plays a round robin of all 12
   versions, Remus-WHITE and Remus-GOLD included, and fits one Elo rating per version
-  with Remus-WHITE pinned at 0. `version_elo.py` rates all 12 versions, and
-  Niram with `--niram`, against Stockfish at four UCI_Elo levels near an
+  with Remus-WHITE pinned at 0. `version_elo.py` rates the Remus versions, and
+  Niram-GOLD with `--niram` and Niram-PLATINUM with `--niram-platinum`, against Stockfish at four UCI_Elo levels near an
   even score, from frozen copies of the versions. With `--bracket` it sets each
   round's Stockfish level to the engine's rating so far; the bracket ratings of
-  Remus-WHITE, Remus-GOLD, and Niram are the ones
+  Remus-WHITE, Remus-GOLD, Niram-GOLD, and Niram-PLATINUM are the ones
   `misc/designer/engines_elo.md` reports beside the league table.
-- `engines/Niram` holds Niram, Remus-GOLD rewritten in Rust, named for
-  Naram-Sin, Sargon's grandson: one Cargo package whose `src/` folder
+- `engines/Niram-GOLD` holds Niram-GOLD, Remus-GOLD rewritten in Rust, named for
+  Naram-Sin, Sargon's grandson (David, 2026-11-01: each Niram carries the engine
+  color of the Remus version it copies): one Cargo package whose `src/` folder
   holds every Rust file. It is a course designer's tool that runs the same engine about
   15 times faster; students never edit it. Each `.rs` file matches the Python file of
-  the same name, and Niram must visit exactly the same number of positions as
-  Remus-GOLD at each depth (`cargo test --release` inside `engines/Niram`;
+  the same name, and Niram-GOLD must visit exactly the same number of positions as
+  Remus-GOLD at each depth (`cargo test --release` inside `engines/Niram-GOLD`;
   `uv run misc/designer/remus_benchmark.py GOLD` times Remus-GOLD on the same positions).
   `uv run misc/designer/engine_parity.py` checks the two engines on 49 positions: evaluation,
   legal moves, book moves, and every depth's score, node count, and principal
   variation must match, and the results go to `misc/designer/remus-niram_same_algorithms.md`. A
   change to Remus-GOLD's rules, evaluation, search, or opening book needs the same
-  change in Niram and a clean `engine_parity.py` run. The Rust copies of WHITE
+  change in Niram-GOLD and a clean `engine_parity.py` run. `engines/Niram-PLATINUM`
+  holds Niram-PLATINUM, Remus-PLATINUM in Rust, built the same way;
+  `engine_parity.py --version PLATINUM` checks the pair and writes
+  `misc/designer/remus-niram_platinum_same_algorithms.md`, and a change to
+  Remus-PLATINUM needs the same change in Niram-PLATINUM. The Rust copies of WHITE
   and the ten enhanced engines were deleted (David, 2026-10-28) after Niram league 1, whose
   games stay in the games file: `version_league.py --niram --rate-only` rates those
-  saved games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays Niram
-  against Stockfish beside the Remus versions. The
+  saved games, with Niram-WHITE pinned at 0, and `version_elo.py --niram` plays
+  Niram-GOLD against Stockfish beside the Remus versions. The
   Python style rules above do not apply to the Rust code, which follows `cargo fmt`
   and `cargo clippy`.
 - Every game any script plays (`play_match.py`, `estimate_elo.py`,

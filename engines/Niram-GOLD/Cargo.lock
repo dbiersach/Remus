@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "niram"
+name = "niram-gold"
 version = "0.2.0"

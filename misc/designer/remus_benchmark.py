@@ -1,8 +1,9 @@
 #!/usr/bin/env -S uv run
 """remus_benchmark.py
 
-Time one Remus version on the ten positions of the Day 8 compare_search.py. For Remus-GOLD,
-the speed can be compared with Niram, the Rust copy of that version.
+Time one Remus version on the ten positions of the Day 8 compare_search.py. For Remus-GOLD
+and Remus-PLATINUM, the speed can be compared with Niram-GOLD and Niram-PLATINUM, the
+Rust copies of those versions.
 Each position gets that version's own think(), one depth at a time up to the depth
 asked for, with no clock, so both engines visit exactly the same positions.
 
@@ -11,9 +12,9 @@ Run it from the repository folder:
     uv run misc/designer/remus_benchmark.py GOLD        Remus-GOLD, depth 4
     uv run misc/designer/remus_benchmark.py WHITE 5     Remus-WHITE, depth 5
 
-and the matching Rust benchmark from inside engines/Niram/:
+and the matching Rust benchmark from inside engines/Niram-GOLD/:
 
-    cargo run --release -p niram -- bench
+    cargo run --release -- bench
 """
 
 import sys

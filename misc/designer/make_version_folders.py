@@ -12,8 +12,9 @@ named by a color so that no engine sounds better than another. A student pair bu
 enhanced engine, then its Remus plays Remus-WHITE to measure how much Elo the one
 enhancement adds. Remus-GOLD, the finished Remus of Day 10, holds every
 enhancement at once. Its folder, engines/instructor/11 Remus-GOLD - All enhancements, is
-written by hand, and this script only rewrites its README.md. engines/Niram holds
-the same engine in Rust.
+written by hand, and this script only rewrites its README.md. engines/Niram-GOLD
+holds the same engine in Rust. engines/instructor/12 Remus-PLATINUM - Ten more
+enhancements is also written by hand, README included, and this script leaves it alone.
 
 The script copies the Day 9 files, adds the enhanced engine's files from the GOLD folder,
 and applies the enhanced engine's edits. Each search enhancement gets a new search function
@@ -544,8 +545,8 @@ VERSIONS_TABLE = [
         "folder": "11 Remus-GOLD - All enhancements",
         "idea": "Remus-GOLD is the finished Remus of Day 10, with all ten "
         "enhancements at once. It lives only in the teacher's folders; "
-        "estimate_elo.py measures its rating against Stockfish, and Niram, in "
-        "engines/Niram, is the same engine in Rust.",
+        "estimate_elo.py measures its rating against Stockfish, and Niram-GOLD, in "
+        "engines/Niram-GOLD, is the same engine in Rust.",
         "source": FINAL,
         "copies": [],
         "edits": [],

@@ -1,8 +1,9 @@
 #!/usr/bin/env -S uv run
 """engine_parity.py
 
-Check that Niram, the Rust copy of Remus-GOLD, runs the same algorithms as
-Remus-GOLD and picks the same moves. For each test position, the script compares
+Check that Niram-GOLD, the Rust copy of Remus-GOLD, runs the same algorithms as
+Remus-GOLD and picks the same moves. With --version PLATINUM it checks
+Niram-PLATINUM against Remus-PLATINUM the same way. For each test position, the script compares
 what the two engines report:
 
 - the position key, which the opening book and the repetition count use
@@ -30,9 +31,12 @@ Run it from the repository folder:
 
     uv run misc/designer/engine_parity.py                 25,000 nodes a search
     uv run misc/designer/engine_parity.py --nodes 100000  Deeper searches, slower Remus
+    uv run misc/designer/engine_parity.py --version PLATINUM
+                                                          Remus-PLATINUM and Niram-PLATINUM
 
-The results go to "misc/designer/remus-niram_same_algorithms.md". The exit code
-is 1 if anything differs.
+The results go to "misc/designer/remus-niram_same_algorithms.md", or to
+"misc/designer/remus-niram_platinum_same_algorithms.md" for PLATINUM. The exit
+code is 1 if anything differs.
 """
 
 import argparse
@@ -46,12 +50,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent.parent  # The top Remus folder, above misc/designer/
 ENGINES_FOLDER = ROOT / "engines" / "instructor"  # The Remus versions
-# The finished Remus, with all ten enhancements
-GOLD_FOLDER = ENGINES_FOLDER / "11 Remus-GOLD - All enhancements"
-NIRAM = ROOT / "engines" / "Niram"  # Remus-GOLD rewritten in Rust
-REPORT_PATH = (
-    ROOT / "misc" / "designer" / "remus-niram_same_algorithms.md"
-)
+# Each Remus version that has a Rust twin: its folder, the twin's folder, and the
+# report page. GOLD is the finished Remus, with all ten enhancements; PLATINUM is
+# GOLD plus ten more. --version picks one.
+TWINS = {
+    "GOLD": (
+        ENGINES_FOLDER / "11 Remus-GOLD - All enhancements",
+        ROOT / "engines" / "Niram-GOLD",
+        ROOT / "misc" / "designer" / "remus-niram_same_algorithms.md",
+    ),
+    "PLATINUM": (
+        ENGINES_FOLDER / "12 Remus-PLATINUM - Ten more enhancements",
+        ROOT / "engines" / "Niram-PLATINUM",
+        ROOT / "misc" / "designer" / "remus-niram_platinum_same_algorithms.md",
+    ),
+}
+VERSION = "GOLD"  # The version this run checks; main() sets it from --version
+GOLD_FOLDER, NIRAM, REPORT_PATH = TWINS[VERSION]
 DEFAULT_NODES = 25_000  # Remus searches this many positions in about 3 to 8 seconds
 PARITY_MAX_DEPTH = 12  # The deepest search Niram's parity command asks for
 FIELDS = ["key", "eval", "legal", "ordered", "book", "info", "nodes", "best"]
@@ -252,7 +267,7 @@ CASES = [
 
 
 def version_folders() -> list[Path]:
-    """Return the Remus version folders that have a Niram twin: Remus-GOLD alone."""
+    """Return the Remus version folder this run checks, Remus-GOLD or Remus-PLATINUM."""
     return [GOLD_FOLDER]
 
 
@@ -262,8 +277,8 @@ def color_of(folder: Path) -> str:
 
 
 def niram_program(color: str) -> Path:
-    """Return the Niram program, Niram/target/release/niram; Remus-GOLD is its only color."""
-    name = "niram"
+    """Return the Niram program, such as Niram-GOLD/target/release/niram-gold."""
+    name = "niram-" + color.lower()
     if sys.platform == "win32":
         name += ".exe"
     return NIRAM / "target" / "release" / name
@@ -417,11 +432,15 @@ def main():
     parser.add_argument("--nodes", type=int, default=DEFAULT_NODES)
     parser.add_argument("--workers", type=int, default=os.cpu_count() or 1)
     parser.add_argument("--no-build", action="store_true", help="skip cargo build")
+    parser.add_argument("--version", choices=list(TWINS), default="GOLD")
     arguments = parser.parse_args()
+    global VERSION, GOLD_FOLDER, NIRAM, REPORT_PATH
+    VERSION = arguments.version
+    GOLD_FOLDER, NIRAM, REPORT_PATH = TWINS[VERSION]
 
     folders = version_folders()
     if not arguments.no_build:
-        print("Building Niram (cargo build --release)")
+        print(f"Building Niram-{VERSION} (cargo build --release)")
         subprocess.run(
             ["cargo", "build", "--release", "--quiet"], cwd=NIRAM, check=True
         )
@@ -441,7 +460,7 @@ def main():
             )
     niram_seconds = time.perf_counter() - start
     print(
-        f"Niram finished {len(folders) * len(CASES)} searches in {niram_seconds:.1f} s"
+        f"Niram-{VERSION} finished {len(folders) * len(CASES)} searches in {niram_seconds:.1f} s"
     )
 
     # The longest Remus searches start first, so no core sits idle at the end
@@ -471,7 +490,10 @@ def main():
 
     book_rows = []
     niram_book = subprocess.run(
-        [str(niram_program("GOLD")), "book"], capture_output=True, text=True, check=True
+        [str(niram_program(VERSION)), "book"],
+        capture_output=True,
+        text=True,
+        check=True,
     ).stdout.splitlines()
     for folder in version_folders():
         if (folder / "opening_book.py").exists():
@@ -527,24 +549,30 @@ def write_report(
             deepest = max(deepest, int(result["depth"][0]))
     remus_total = sum(remus_seconds.values())
 
-    text = "# Remus-GOLD and Niram: the same algorithms at two speeds\n\n"
+    remus = f"Remus-{VERSION}"
+    niram = f"Niram-{VERSION}"
+    text = f"# {remus} and {niram}: the same algorithms at two speeds\n\n"
     text += (
-        "Niram is Remus-GOLD rewritten in Rust. The two engines run the same "
+        f"{niram} is {remus} rewritten in Rust. The two engines run the same "
         "algorithms: the same move generator, evaluation, search, and opening book. "
         "Given the same position and the same depth, they pick the same move. They "
         "differ greatly in speed, and so in playing strength: with a clock running, "
-        "Niram searches far more positions and reaches deeper. Against Stockfish, "
-        "[`engines_elo.md`](engines_elo.md) rates Niram about 2354 and Remus-GOLD "
-        "about 1731.\n\n"
+        f"{niram} searches far more positions and reaches deeper."
     )
+    if VERSION == "GOLD":
+        text += (
+            " Against Stockfish, [`engines_elo.md`](engines_elo.md) rates Niram-GOLD "
+            "about 2354 and Remus-GOLD about 1731."
+        )
+    text += "\n\n"
     text += (
         "`misc/designer/engine_parity.py` checks that the algorithms match. It gives "
         "both engines the same positions with no clock, so time never decides how "
         "deep a search goes. For each position, both engines report the position key, "
         "the evaluation, the legal moves in generation order and in search order, the "
         "book moves, every depth's score, node count, and principal variation, and "
-        "the best move. Niram picks the depth, the deepest search that visits at most "
-        f"{arguments.nodes:,} positions, and Remus-GOLD repeats that search. Any "
+        f"the best move. {niram} picks the depth, the deepest search that visits at "
+        f"most {arguments.nodes:,} positions, and {remus} repeats that search. Any "
         "difference in any field counts as a mismatch.\n\n"
     )
     matched = searches - len(mismatches)
@@ -557,24 +585,24 @@ def write_report(
     )
     text += "## Speed\n\n"
     text += (
-        "Both engines ran the same searches. Niram ran them one after another on one "
-        "core. Remus-GOLD ran one search per core, and its time below adds up the "
+        f"Both engines ran the same searches. {niram} ran them one after another on "
+        f"one core. {remus} ran one search per core, and its time below adds up the "
         "time of every search.\n\n"
     )
     text += "| Engine | Time for all searches (s) | Positions a second |\n"
     text += "| --- | ---: | ---: |\n"
-    text += f"| Niram | {niram_seconds:,.1f} | {nodes / niram_seconds:,.0f} |\n"
-    text += f"| Remus-GOLD | {remus_total:,.0f} | {nodes / remus_total:,.0f} |\n\n"
+    text += f"| {niram} | {niram_seconds:,.1f} | {nodes / niram_seconds:,.0f} |\n"
+    text += f"| {remus} | {remus_total:,.0f} | {nodes / remus_total:,.0f} |\n\n"
     text += (
-        f"Niram ran the same searches {remus_total / niram_seconds:,.0f} times as "
+        f"{niram} ran the same searches {remus_total / niram_seconds:,.0f} times as "
         "fast.\n\n"
     )
     text += "## Opening book\n\n"
     text += (
-        "Niram reads `engines/Niram/opening_book.txt`. The check compares every "
-        "position and move of that book, in order, with the book Remus-GOLD loads.\n\n"
+        f"{niram} reads `engines/{niram}/opening_book.txt`. The check compares every "
+        f"position and move of that book, in order, with the book {remus} loads.\n\n"
     )
-    text += "| Engine | Positions | Moves | Same as Niram's book | Same file |\n"
+    text += f"| Engine | Positions | Moves | Same as {niram}'s book | Same file |\n"
     text += "| --- | ---: | ---: | --- | --- |\n"
     for color, positions, moves, same_book, same_file in book_rows:
         text += (
@@ -600,12 +628,14 @@ def write_report(
         for color, name, difference in mismatches:
             text += f"| Remus-{color} | {name} | `{difference}` |\n"
     command = "uv run misc/designer/engine_parity.py"
+    if VERSION != "GOLD":
+        command += f" --version {VERSION}"
     if arguments.nodes != DEFAULT_NODES:
         command += f" --nodes {arguments.nodes}"
     text += "\n## Run it again\n\n"
     text += (
         f"The course designer runs `{command}` from the top Remus folder. The script "
-        "builds Niram with `cargo build --release` first and rewrites this page.\n"
+        f"builds {niram} with `cargo build --release` first and rewrites this page.\n"
     )
     REPORT_PATH.write_text(text, encoding="utf-8", newline="\n")
 
