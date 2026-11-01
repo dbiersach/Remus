@@ -11,7 +11,7 @@ into misc/students/remus_program_overview.md:
    where student pairs edit it.
 
 The table comes from the Day folders: each period's instructor folder and its
-"Day NN Period NN Goals.md" file. The script lays out the diagram itself: each
+"Day_NN_Period_NN_Goals.md" file. The script lays out the diagram itself: each
 file sits in a row one below the lowest file that imports it, the rows are ordered to
 keep crossings few, and every arrow runs straight down or bends at right angles,
 leaving and reaching a box at its own spot on the edge. Run it from the top Remus

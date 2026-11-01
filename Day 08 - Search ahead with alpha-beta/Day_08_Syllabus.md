@@ -34,7 +34,7 @@ By 4:30, each student pair can:
 | 9:10 to 9:50 | Student pairs write `negamax()` until the tests show it agrees with minimax and leaves the root state unchanged. |
 | 9:50 to 10:00 | Show and choose for `negamax()`. |
 
-[`Day 08 Period 01 Goals.md`](<period1/Day 08 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_08_Period_01_Goals.md`](period1/Day_08_Period_01_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Python lab 11 and alpha-beta
 
@@ -45,7 +45,7 @@ By 4:30, each student pair can:
 | 10:55 to 11:25 | Student pairs write `alpha_beta()` beside `negamax()` and run `compare_search.py`: the same score, fewer nodes. |
 | 11:25 to 12:00 | Student pairs work through `python_sorting.py`: `insert()` puts the biggest victim first, `float("inf")`, and timing a perft run. |
 
-[`Day 08 Period 02 Goals.md`](<period2/Day 08 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_08_Period_02_Goals.md`](period2/Day_08_Period_02_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: The horizon effect and quiescence
 
@@ -57,7 +57,7 @@ By 4:30, each student pair can:
 | 2:10 to 2:20 | Student pairs run the puzzle again: Remus keeps its queen. |
 | 2:20 to 2:30 | Show and choose for `quiescence()`. |
 
-[`Day 08 Period 03 Goals.md`](<period3/Day 08 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_08_Period_03_Goals.md`](period3/Day_08_Period_03_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Move ordering
 
@@ -69,7 +69,7 @@ By 4:30, each student pair can:
 | 4:05 to 4:20 | Student pairs run the mate puzzles. |
 | 4:20 to 4:30 | Checkpoint: every mate in 1 and every puzzle mate in 2. |
 
-[`Day 08 Period 04 Goals.md`](<period4/Day 08 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_08_Period_04_Goals.md`](period4/Day_08_Period_04_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## By the end of the day
 

@@ -34,7 +34,7 @@ By 4:30, each student pair can:
 | 9:35 to 9:50 | Two student pairs show their maps on the projector. The teacher shows that every arrow stays inside the folder: each period folder holds a complete Remus, so its files import only each other. |
 | 9:50 to 10:00 | Every student pair shows its map to the teacher or the assistant. |
 
-[`Day 04 Period 01 Goals.md`](<period1/Day 04 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_04_Period_01_Goals.md`](period1/Day_04_Period_01_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Attacks
 
@@ -46,7 +46,7 @@ By 4:30, each student pair can:
 | 11:40 to 11:50 | Student pairs run the attack tests and the file's self-check. |
 | 11:50 to 12:00 | Show and choose for `piece_at_offsets()`. |
 
-[`Day 04 Period 02 Goals.md`](<period2/Day 04 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_04_Period_02_Goals.md`](period2/Day_04_Period_02_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: Check and the legal filter
 
@@ -58,7 +58,7 @@ By 4:30, each student pair can:
 | 2:05 to 2:15 | Student pairs compare Remus's answers with their pin hunt worksheets. |
 | 2:15 to 2:30 | Show and choose for `legal_moves()`. |
 
-[`Day 04 Period 03 Goals.md`](<period3/Day 04 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_04_Period_03_Goals.md`](period3/Day_04_Period_03_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Practice positions
 
@@ -69,7 +69,7 @@ By 4:30, each student pair can:
 | 3:50 to 4:15 | Part #4: each student pair builds a position of its own and trades it with the next student pair, who predict before they run it. |
 | 4:15 to 4:30 | Checkpoint: a pinned knight has zero legal moves, and a king in check has only escapes. |
 
-[`Day 04 Period 04 Goals.md`](<period4/Day 04 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_04_Period_04_Goals.md`](period4/Day_04_Period_04_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## By the end of the day
 

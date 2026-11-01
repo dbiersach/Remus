@@ -29,13 +29,13 @@ holds four period folders, `period1` to `period4`, one for each class period:
 Every period folder holds two folders. `instructor/` holds only finished reference
 code that runs as it is, with no blanks to fill in, and `student/` holds the code
 students write and change. Every `instructor/` folder is a complete, runnable copy of Remus as it stands at the end of that period. Beside the two folders sits the
-period's goals file, such as `Day 06 Period 02 Goals.md`, which names the period, its learning objectives with how each is measured, the
+period's goals file, such as `Day_06_Period_02_Goals.md`, which names the period, its learning objectives with how each is measured, the
 files that are new or growing, the functions the student pairs write, and a paragraph on each
 change and why (the text comes from `period_guides.py`), then the timed steps of the
 period and the student pairs' exact tasks. `period4/instructor` holds the finished code of the day. `make_period_folders.py`
 builds the instructor folders of `period1` to `period3` from it, so a file that grows during the day, such as
 `make_move.py` on Day 5, gains castling in `period2`, en passant in `period3`, and
-promotion in `period4`. Above the period folders, each Day folder's syllabus, such as `Day 05 Syllabus.md`, gives
+promotion in `period4`. Above the period folders, each Day folder's syllabus, such as `Day_05_Syllabus.md`, gives
 the whole day at a glance: its objectives, what the student pairs write in each period, a
 timed sequence of activities for all four periods, and the checkpoint at 4:30.
 `make_student_folders.py` writes it from `DAY_GUIDES` in `period_guides.py` into the

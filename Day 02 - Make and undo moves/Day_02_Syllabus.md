@@ -34,7 +34,7 @@ By 4:30, each student pair can:
 | 9:35 to 9:50 | Student pairs finish Part #4, which checks their functions with `assert`. |
 | 9:50 to 10:00 | Wrap-up: each student pair says what a failing test tells them and where to look first. |
 
-[`Day 02 Period 01 Goals.md`](<period1/Day 02 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_02_Period_01_Goals.md`](period1/Day_02_Period_01_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Python lab 4: dicts, dataclasses, aliasing, copying
 
@@ -45,7 +45,7 @@ By 4:30, each student pair can:
 | 11:15 to 11:50 | The teacher explains aliasing on the whiteboard: two names, one list. Then student pairs write Parts #3 and #4: a real copy, and a dataclass that describes a move. |
 | 11:50 to 12:00 | Wrap-up: why would a chess engine break if it changed a board it meant to copy? |
 
-[`Day 02 Period 02 Goals.md`](<period2/Day 02 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_02_Period_02_Goals.md`](period2/Day_02_Period_02_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: game_state.py and moves.py: a game state and a move record
 
@@ -56,7 +56,7 @@ By 4:30, each student pair can:
 | 2:05 to 2:15 | Student pairs run `game_state.py` and `moves.py` and compare the printouts with the expected answers. |
 | 2:15 to 2:30 | Show and choose: the class picks one `move_from_uci()`, and the teacher adds its student pair's team name to `CONTRIBUTORS.md`. |
 
-[`Day 02 Period 03 Goals.md`](<period3/Day 02 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_02_Period_03_Goals.md`](period3/Day_02_Period_03_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: make_move.py: make and undo ordinary moves
 
@@ -67,7 +67,7 @@ By 4:30, each student pair can:
 | 3:25 to 4:15 | Student pairs write `make_move()` and `undo_move()` in `make_move.py` until the tests pass. |
 | 4:15 to 4:30 | Show and choose for `make_move()`, then the checkpoint: ten moves made and undone give back the exact start state. |
 
-[`Day 02 Period 04 Goals.md`](<period4/Day 02 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_02_Period_04_Goals.md`](period4/Day_02_Period_04_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## By the end of the day
 

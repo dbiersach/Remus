@@ -19,11 +19,11 @@ command.
 The course itself is in the Day folders at the top of Remus, `Day 01 - Draw the
 board` to `Day 10 - Solve a science problem using chess AI`:
 
-- Each Day folder opens with its syllabus, such as `Day 04 Syllabus.md`: the day's
+- Each Day folder opens with its syllabus, such as `Day_04_Syllabus.md`: the day's
   objectives, a table of the four periods, a timed sequence of activities for each
   period, and the checkpoint at 4:30. Read it the evening before.
 - Each period folder, `period1` to `period4`, holds one goals file, such as
-  `Day 04 Period 03 Goals.md`: the learning objectives and how each one is measured,
+  `Day_04_Period_03_Goals.md`: the learning objectives and how each one is measured,
   the files that are new or growing, a paragraph on every change, the timed steps,
   and "The code you type", the exact lines the student pairs write with their line
   numbers. Beside it sit `instructor/`, the finished code of that period, and

@@ -33,7 +33,7 @@ By 4:30, each student pair can:
 | 9:25 to 9:35 | Show and choose for `think()`. The chosen code makes Remus-WHITE, the Remus with none of the enhancements and the starting point of every enhanced engine. |
 | 9:35 to 10:00 | The class watches Remus-WHITE play a 5-minute game against Stockfish at 1500 Elo in Lucas Chess and reads the `info` lines as it thinks. |
 
-[`Day 09 Period 01 Goals.md`](<period1/Day 09 Period 01 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_09_Period_01_Goals.md`](period1/Day_09_Period_01_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 2, 10:30 to 12:00: Python lab 12 and the engine enhancements
 
@@ -43,7 +43,7 @@ By 4:30, each student pair can:
 | 10:50 to 11:00 | Slides: the ten enhanced engines. Each one is the period 1 Remus with one enhancement added, such as RED (transposition table) or BLUE (killer moves). The folder names use colors so that no engine sounds better than another. |
 | 11:00 to 12:00 | Each student pair opens its enhanced engine in `engines/student`, reads the version README, and writes the enhanced engine's stubbed code. |
 
-[`Day 09 Period 02 Goals.md`](<period2/Day 09 Period 02 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_09_Period_02_Goals.md`](period2/Day_09_Period_02_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 3, 1:00 to 2:30: Engine enhancements: test and measure
 
@@ -53,7 +53,7 @@ By 4:30, each student pair can:
 | 1:40 to 2:10 | Each student pair opens `basic_test.py` in its engine folder and presses Run in VS Code: one 2-minute game against Remus-WHITE, which checks only that the engine plays legal moves to the end. |
 | 2:10 to 2:30 | Each student pair writes one sentence on the board: what its enhancement should change, and how the class will see it. |
 
-[`Day 09 Period 03 Goals.md`](<period3/Day 09 Period 03 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_09_Period_03_Goals.md`](period3/Day_09_Period_03_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## Period 4, 3:00 to 4:30: Engine battles
 
@@ -66,7 +66,7 @@ By 4:30, each student pair can:
 | 4:10 to 4:25 | The class reads the board: which engines won, and why two games prove little. The teacher shows the league table, 110 games for each engine, and compares. |
 | 4:25 to 4:30 | Each visiting student pair takes its USB stick back. The visitor's folder stays on the host laptop in place of an engine the host student pair never writes, so the host's own engine folder is untouched. |
 
-[`Day 09 Period 04 Goals.md`](<period4/Day 09 Period 04 Goals.md>) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
+[`Day_09_Period_04_Goals.md`](period4/Day_09_Period_04_Goals.md) lists the period's learning objectives, how each one is measured, every change the student pairs make, and their exact tasks.
 
 ## By the end of the day
 

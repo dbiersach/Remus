@@ -17,7 +17,7 @@ rebuilds the three earlier periods from it:
    or test that uses it is left out too, until each file uses only what exists.
 
 Each period folder also gets one goals file at its top, beside instructor and
-student, such as "Day 03 Period 02 Goals.md". This script writes what the period is
+student, such as "Day_03_Period_02_Goals.md". This script writes what the period is
 about, its learning objectives and how each one is measured, which files changed, and
 one paragraph on every change the students make, all from period_guides.py;
 make_student_folders.py then adds the timed flow of the period and the exact tasks. A Python
@@ -716,11 +716,11 @@ def engine_folder_table(day: int, period: int) -> str:
 
 
 def goals_path(day: int, period: int) -> Path:
-    """Return the goals file of one period, such as Day 03/period2/Day 03 Period 02 Goals.md."""
+    """Return the goals file of one period, such as Day 03/period2/Day_03_Period_02_Goals.md."""
     return (
         day_folder(day)
         / f"period{period}"
-        / f"Day {day:02} Period {period:02} Goals.md"
+        / f"Day_{day:02}_Period_{period:02}_Goals.md"
     )
 
 

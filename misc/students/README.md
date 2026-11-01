@@ -20,11 +20,11 @@ You write Remus in the `student` folders. The top of the Remus folder has one
 folder for each day of the workshop, and each Day folder has four period folders,
 `period1` to `period4`. Each period folder holds a `student` folder, where you work,
 and an `instructor` folder with the finished code. The syllabus at the top of each
-Day folder, such as `Day 01 Syllabus.md`, shows the whole day: what you will learn, and what happens in each
+Day folder, such as `Day_01_Syllabus.md`, shows the whole day: what you will learn, and what happens in each
 period, from 8:30 to 4:30.
 
 Each `student` folder starts with working code from the periods before. The goals
-file beside it, such as `Day 03 Period 02 Goals.md`, lists what you will learn and how you will show it, the files that are
+file beside it, such as `Day_03_Period_02_Goals.md`, lists what you will learn and how you will show it, the files that are
 new or growing, a paragraph on every change you make and why, the steps of the
 period with their times, and a table of the
 functions left for you to write, with the line where each one starts. Each of those

@@ -31,7 +31,7 @@ Run it from the repository folder:
     uv run misc/designer/engine_parity.py                 25,000 nodes a search
     uv run misc/designer/engine_parity.py --nodes 100000  Deeper searches, slower Remus
 
-The results go to "misc/designer/remus-niram same algorithms.md". The exit code
+The results go to "misc/designer/remus-niram_same_algorithms.md". The exit code
 is 1 if anything differs.
 """
 
@@ -50,7 +50,7 @@ ENGINES_FOLDER = ROOT / "engines" / "instructor"  # The Remus versions
 GOLD_FOLDER = ENGINES_FOLDER / "11 Remus-GOLD - All enhancements"
 NIRAM = ROOT / "engines" / "Niram"  # Remus-GOLD rewritten in Rust
 REPORT_PATH = (
-    ROOT / "misc" / "designer" / "remus-niram same algorithms.md"
+    ROOT / "misc" / "designer" / "remus-niram_same_algorithms.md"
 )
 DEFAULT_NODES = 25_000  # Remus searches this many positions in about 3 to 8 seconds
 PARITY_MAX_DEPTH = 12  # The deepest search Niram's parity command asks for
