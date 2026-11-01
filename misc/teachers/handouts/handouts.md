@@ -74,40 +74,29 @@ Write the two rules that turn a square name into a `(row, col)` pair:
 
 **Undo from the card. Day 2, period 4.** Team name: ______________________
 
-The navigator plays three moves on the board and fills in one card for each move,
-as it is made. The driver looks away. Then the driver takes the cards, and only the
-cards, and puts the board back to the start position, newest card first.
+The three undo cards are printed below, side by side; nothing is cut out. The
+navigator plays three moves on the board and fills in one card for each move, as
+it is made. The driver looks away. Then the driver takes this sheet, and only this
+sheet, and puts the board back to the start position, newest card first.
 
 A card holds exactly what `make_move()` will return on this period: the move, the
 piece that moved, the piece it captured (write `.` for none), and the three parts of
 the state that the move overwrites.
 
-| Card 1 | |
-| --- | --- |
-| Move (from square to to square) | |
-| Piece that moved | |
-| Piece captured (`.` for none) | |
-| Old en passant square (or none) | |
-| Old halfmove clock | |
-| Old fullmove number | |
-
-| Card 2 | |
-| --- | --- |
-| Move (from square to to square) | |
-| Piece that moved | |
-| Piece captured (`.` for none) | |
-| Old en passant square (or none) | |
-| Old halfmove clock | |
-| Old fullmove number | |
-
-| Card 3 | |
-| --- | --- |
-| Move (from square to to square) | |
-| Piece that moved | |
-| Piece captured (`.` for none) | |
-| Old en passant square (or none) | |
-| Old halfmove clock | |
-| Old fullmove number | |
+| Undo card 1 | Undo card 2 | Undo card 3 |
+| --- | --- | --- |
+| Move (from square to to square) | Move (from square to to square) | Move (from square to to square) |
+| | | |
+| Piece that moved | Piece that moved | Piece that moved |
+| | | |
+| Piece captured (`.` for none) | Piece captured (`.` for none) | Piece captured (`.` for none) |
+| | | |
+| Old en passant square (or none) | Old en passant square (or none) | Old en passant square (or none) |
+| | | |
+| Old halfmove clock | Old halfmove clock | Old halfmove clock |
+| | | |
+| Old fullmove number | Old fullmove number | Old fullmove number |
+| | | |
 
 Did the board come back exactly? Yes / No. If not, which card was missing something?
 
@@ -246,11 +235,11 @@ Why can White not count on the 9?
 
 ______________________________________________________________________
 
-**Fewest flips. Day 8, period 2.** Cut the nine cards below apart and lay them face
-down in the same order as the tree: group A on the left, then B, then C, with the
-left card of each group nearest the group letter. Turn cards over one at a time,
-left to right, and stop a group as soon as nothing left in it could change White's
-choice. Count your flips.
+**Fewest flips. Day 8, period 2.** Copy each of the nine scores below onto its own
+index card and lay the cards face down in the same order as the tree: group A on
+the left, then B, then C, with the left card of each group nearest the group
+letter. Turn cards over one at a time, left to right, and stop a group as soon as
+nothing left in it could change White's choice. Count your flips.
 
 | A, card 1 | A, card 2 | A, card 3 |
 | :---: | :---: | :---: |
@@ -330,9 +319,10 @@ The same pattern drawn on a scale, each `^` one peak:
   ^          ^         ^     ^  ^^                          ^            ^
 ```
 
-The five fingerprints, each with its four strongest peaks. Cut the strips apart
-along the lines and slide each one under the pattern. A mark lines up with a peak
-when they are within about a third of a degree.
+The five fingerprints, each with its four strongest peaks, drawn on the same scale
+as the pattern, so read straight down: a mark lines up with a peak when the two sit
+within about a third of a degree of each other. The straight edge of a pencil or a
+card held upright helps.
 
 ```text
 quartz    20.9  26.6  36.5  50.1
