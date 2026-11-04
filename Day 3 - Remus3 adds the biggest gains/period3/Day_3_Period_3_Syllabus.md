@@ -14,6 +14,15 @@ An opening book is a list of good opening lines, written as UCI moves such as `e
 
 The clock gets smarter in two ways. `uci.py` now gives `think()` two times: the time it aims to use, and the longest it may take, a hard limit that is never more than a fifth of the time left on the clock. `think()` spends more of that time when the best move changes from one depth to the next, a sign that the position is hard. The search also uses an aspiration window: from depth 4 on, it first searches only a 50-centipawn window around the last depth's score, which skips more moves, and searches again with the full window when the score falls outside.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 1:00 to 1:10 | An opening book is a list of good first moves in UCI text. Copy `opening_book.txt` from `engines_instructor/Remus3` into `engines/Remus3` in File Explorer: it is data, not code, so nobody types it. |
+| 1:10 to 1:35 | Type `opening_book.py` (21 code lines): `load_book()` and `book_moves()`. |
+| 1:35 to 2:25 | In `think()`, add the aspiration window and the time that grows when the best move changes; in `uci.py`, add `legal_book_move()`, the game's moves, and the hard time limit (about 30 code lines). |
+| 2:25 to 2:30 | Change the name line in `uci.py` to `id name Remus3`. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -34,6 +43,8 @@ In File Explorer, copy [`engines_instructor/Remus3/opening_book.txt`](../../engi
 
 ### `opening_book.py`
 
+![opening_book.py, lines 1 to 26](images/opening_book_lines_1_to_26.png)
+
 Create `opening_book.py` in `engines/Remus3`. It has 26 lines when it is done.
 
 `book = []` (line 4) holds the book's lines once they are read. `def load_book():` (line 7) finds `opening_book.txt` in the engine's own folder with `Path(__file__).parent` (line 8), so the file is found wherever Lucas Chess starts the engine. Line 9 returns quietly when the file is missing: an engine with no book still plays. The loop on lines 11 to 16 splits each line into its side, if any, and its list of moves.
@@ -41,6 +52,10 @@ Create `opening_book.py` in `engines/Remus3`. It has 26 lines when it is done.
 `def book_moves(played, white):` (line 19) returns the next move of every book line that starts with the moves played so far, in random order (line 25), so Remus3 does not play the same opening every game.
 
 ### `search.py`
+
+![search.py, line 20](images/search_line_20.png)
+
+![search.py, lines 150 to 178](images/search_lines_150_to_178.png)
 
 `search.py` grows from 167 lines to 180, all in `think()` except one constant.
 
@@ -57,6 +72,20 @@ In `think()`, from the top down:
 
 ### `uci.py`
 
+![uci.py, lines 3 to 7](images/uci_lines_3_to_7.png)
+
+![uci.py, lines 17 to 23](images/uci_lines_17_to_23.png)
+
+![uci.py, line 27](images/uci_line_27.png)
+
+![uci.py, line 29](images/uci_line_29.png)
+
+![uci.py, line 35](images/uci_line_35.png)
+
+![uci.py, lines 41 to 42](images/uci_lines_41_to_42.png)
+
+![uci.py, lines 47 to 61](images/uci_lines_47_to_61.png)
+
 `uci.py` grows from 51 lines to 68. The edits, from the top down:
 
 1. Replace the import `from board import START_POSITION, parse_square, square_name` with two lines, `from attacks import in_check` and `from board import START_POSITION, move_text, parse_square` (lines 3 and 4).
@@ -69,15 +98,6 @@ In `think()`, from the top down:
 8. Under `seconds = (clock_left / 30 + increment / 2) / 1000`, type `longest = min(3 * seconds, clock_left / 5000)` (line 53): at most three times the planned time, and never more than a fifth of the clock.
 9. Change the `movetime` line to `seconds = longest = read_time(words, "movetime") / 1000` (line 55), and replace `move = think(position, seconds)` with the three lines from `move = legal_book_move(position, played)` to `move = think(position, seconds, longest)` (lines 56 to 58).
 10. Replace the three lines that build the move's text, from `text = square_name(move[0]) + square_name(move[1])` to `text += ".pnbrqk"[move[2]]`, with the one line `text = move_text(move)` (line 61).
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 1:00 to 1:10 | An opening book is a list of good first moves in UCI text. Copy `opening_book.txt` from `engines_instructor/Remus3` into `engines/Remus3` in File Explorer: it is data, not code, so nobody types it. |
-| 1:10 to 1:35 | Type `opening_book.py` (21 code lines): `load_book()` and `book_moves()`. |
-| 1:35 to 2:25 | In `think()`, add the aspiration window and the time that grows when the best move changes; in `uci.py`, add `legal_book_move()`, the game's moves, and the hard time limit (about 30 code lines). |
-| 2:25 to 2:30 | Change the name line in `uci.py` to `id name Remus3`. |
 
 ## Done when
 

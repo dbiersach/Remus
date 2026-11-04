@@ -14,6 +14,14 @@ The student pair keeps building Remus1 from nothing in `engines/Remus1`, so both
 
 `attacks.py` answers "is this square attacked?" by looking out from the square itself: if a knight's jump away stands an enemy knight, a knight attacks the square, and the same idea works for every piece. One question built on it, "is my king in check?", is what makes a move legal or not.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 10:30 to 10:45 | The position tuple and copy-make: `make_move()` copies the board and returns a new position, so no move is ever taken back. Reminder of castling rights, en passant, and promotion. |
+| 10:45 to 11:15 | Type `make_move.py` (23 code lines). Run it. |
+| 11:15 to 12:00 | Type `attacks.py` (34 code lines): the knight jumps, the eight directions, `is_attacked()`, and `in_check()`. Run it. |
+
 ## What the student pair types this period
 
 | File | New or edited | What it holds | Lines in your file |
@@ -27,6 +35,8 @@ The instructor's versions are [`engines_instructor/Remus1/make_move.py`](../../e
 
 ### `make_move.py`
 
+![make_move.py, lines 1 to 26](images/make_move_lines_1_to_26.png)
+
 Create `make_move.py` in `engines/Remus1`. It has 26 lines when it is done.
 
 `from board import EMPTY, KING, PAWN, WHITE` (line 1) borrows four names from `board.py`, much as an `import` in Java borrows a class. `RIGHTS_OF_SQUARE = {60: 3, 63: 1, 56: 2, 4: 12, 7: 4, 0: 8}` (line 3) is a dictionary, Python's version of a `HashMap`: it names, for each king and rook square, the castling rights lost when a piece moves from or to that square. A move from e1 (square 60) loses both of White's rights, 1 and 2, so it loses 3.
@@ -35,6 +45,8 @@ Create `make_move.py` in `engines/Remus1`. It has 26 lines when it is done.
 
 ### `attacks.py`
 
+![attacks.py, lines 1 to 40](images/attacks_lines_1_to_40.png)
+
 Create `attacks.py` in `engines/Remus1`. It has 40 lines when it is done.
 
 Lines 3 to 6 list the eight knight jumps as (row change, column change) pairs, and lines 8 to 11 list the eight directions a queen or king can go. Type the `# fmt: skip` at the end of lines 6 and 11: it is the only comment a student pair types, and it stops VS Code from spreading the table over eight lines when it saves the file. `STRAIGHT = DIRECTIONS[0:4]` (line 12) takes the rook's four directions out of the list, and `DIAGONAL = DIRECTIONS[4:8]` (line 13) the bishop's.
@@ -42,14 +54,6 @@ Lines 3 to 6 list the eight knight jumps as (row change, column change) pairs, a
 `def is_attacked(board, square, by_white):` (line 16) checks each kind of attacker in turn. The loop header on lines 21 to 27 walks through five rows of a small table: the steps an attacker takes, whether it slides past empty squares, and which pieces attack that way. The `while` loop on lines 31 to 33 slides a rook, bishop, or queen along its line until it reaches a piece or the edge of the board.
 
 `def in_check(board, white):` (line 39) finds the king of the side named by `white` with `board.index()`, and asks whether the other side attacks its square.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 10:30 to 10:45 | The position tuple and copy-make: `make_move()` copies the board and returns a new position, so no move is ever taken back. Reminder of castling rights, en passant, and promotion. |
-| 10:45 to 11:15 | Type `make_move.py` (23 code lines). Run it. |
-| 11:15 to 12:00 | Type `attacks.py` (34 code lines): the knight jumps, the eight directions, `is_attacked()`, and `in_check()`. Run it. |
 
 ## Done when
 

@@ -12,6 +12,14 @@ The student pair keeps building Remus1 from nothing in `engines/Remus1`, and thi
 
 The file lists the moves a piece could make before it checks whether the move leaves its own king in check. That check comes in Period 4, where `search.py` plays each move with `make_move()` and throws away the moves after which `in_check()` says the king is attacked. Listing first and checking after catches pins, discovered checks, and en passant captures that expose the king, with no extra code.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 1:00 to 1:15 | One function moves every piece but the pawn: a knight or king takes one step, a bishop, rook, or queen slides. Reminder of the castling conditions. |
+| 1:15 to 2:20 | Type `move_generation.py` (65 code lines): `add_pawn_move()`, `pawn_moves()`, `piece_moves()`, `castling_moves()`, and `generate_moves()`. Run it. |
+| 2:20 to 2:30 | Catch-up. |
+
 ## What the student pair types this period
 
 | File | New or edited | What it holds | Lines in your file |
@@ -24,6 +32,8 @@ The instructor's version is [`engines_instructor/Remus1/move_generation.py`](../
 
 ### `move_generation.py`
 
+![move_generation.py, lines 1 to 75](images/move_generation_lines_1_to_75.png)
+
 Create `move_generation.py` in `engines/Remus1`. It has 75 lines when it is done. Lines 1 and 2 import the knight jumps and the directions from `attacks.py` and the piece numbers from `board.py`.
 
 `def add_pawn_move(moves, start, target):` (line 5) adds a pawn move to the list. A pawn that reaches the last rank, a square below 8 or from 56 up, adds four moves, one for each piece it can become; any other pawn move adds one move with promotion 0.
@@ -35,14 +45,6 @@ Create `move_generation.py` in `engines/Remus1`. It has 75 lines when it is done
 `def castling_moves(board, white, castling, moves):` (line 39) adds castling when the right is still there, the squares between king and rook are empty, and the king does not start on, cross, or land on an attacked square. Line 45 stops early when neither side is open or the king is in check, and lines 47 and 49 test the square the king crosses. The landing square is tested later with every other move, when `search.py` checks the king after the move.
 
 `def generate_moves(position):` (line 53) walks over the 64 squares, and for each piece of the side to move calls the function that moves that kind of piece (lines 61 to 72). Lines 73 and 74 add castling, and line 75 returns the list.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 1:00 to 1:15 | One function moves every piece but the pawn: a knight or king takes one step, a bishop, rook, or queen slides. Reminder of the castling conditions. |
-| 1:15 to 2:20 | Type `move_generation.py` (65 code lines): `add_pawn_move()`, `pawn_moves()`, `piece_moves()`, `castling_moves()`, and `generate_moves()`. Run it. |
-| 2:20 to 2:30 | Catch-up. |
 
 ## Done when
 

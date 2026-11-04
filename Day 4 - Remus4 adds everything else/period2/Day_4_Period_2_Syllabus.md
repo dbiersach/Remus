@@ -12,6 +12,14 @@ The student pair keeps working in `engines/Remus4`, on the files copied and edit
 
 Quiescence search plays every capture, even queen takes a pawn that a pawn defends, and a capture like that costs a whole search to refute. Static exchange evaluation, the new file `exchange.py`, settles most captures without a search. It plays out every capture on one square on a copy of the board, each side taking with its cheapest attacker, and lets each side stop when going on would lose more. Queen takes a defended pawn scores 100 - 900 = -800, so `quiescence()` skips it. Delta pruning skips a capture for a second reason: when even winning the captured piece and 200 centipawns more cannot lift the score to alpha, the capture cannot matter.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 10:30 to 10:45 | A capture is good only if the whole exchange on its square wins material: play it out on paper, cheapest attacker first. |
+| 10:45 to 11:50 | Type `exchange.py` (36 code lines): `cheapest_attacker()` and `exchange_score()`. In `quiescence()`, add delta pruning and skip the captures that lose material (about 8 code lines). |
+| 11:50 to 12:00 | Run `uci.py`. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -26,6 +34,8 @@ The instructor's versions are [`engines_instructor/Remus4/exchange.py`](../../en
 
 ### `exchange.py`
 
+![exchange.py, lines 1 to 41](images/exchange_lines_1_to_41.png)
+
 Create `exchange.py` in `engines/Remus4`. It has 41 lines when it is done.
 
 `KING_VALUE = 2000` (line 5) gives the king a value for this file only, larger than any other piece, so the king is always the last piece to capture.
@@ -36,6 +46,14 @@ Create `exchange.py` in `engines/Remus4`. It has 41 lines when it is done.
 
 ### `search.py`
 
+![search.py, line 17](images/search_line_17.png)
+
+![search.py, line 22](images/search_line_22.png)
+
+![search.py, line 70](images/search_line_70.png)
+
+![search.py, lines 78 to 85](images/search_lines_78_to_85.png)
+
 `search.py` grows from 224 lines to 233, all of it at the top of the file and in `quiescence()`.
 
 1. Type `from exchange import exchange_score` (line 17) under the `evaluation` import.
@@ -43,14 +61,6 @@ Create `exchange.py` in `engines/Remus4`. It has 41 lines when it is done.
 3. In `quiescence()`, type `board, white = position[0], position[1]` (line 70) under `count_node()`.
 4. Under the two lines `if priority < CAPTURE:` and `break`, type the six lines from `if not move[2]:` to the second `continue` (lines 78 to 83). A promotion skips both tests, because a pawn that promotes gains far more than the piece it captures.
 5. Change the legality test under `child = make_move(position, move)` to `if in_check(child[0], white):` (line 85), using the name from step 3.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 10:30 to 10:45 | A capture is good only if the whole exchange on its square wins material: play it out on paper, cheapest attacker first. |
-| 10:45 to 11:50 | Type `exchange.py` (36 code lines): `cheapest_attacker()` and `exchange_score()`. In `quiescence()`, add delta pruning and skip the captures that lose material (about 8 code lines). |
-| 11:50 to 12:00 | Run `uci.py`. |
 
 ## Done when
 

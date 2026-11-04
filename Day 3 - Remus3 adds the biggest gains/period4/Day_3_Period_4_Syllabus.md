@@ -12,6 +12,15 @@ The student pair finishes Remus3 in `engines/Remus3` with a few lines in `search
 
 The principal variation is the line of moves the engine expects both sides to play, such as `g8f6 g1f3 b8c6 b1c3` after 1. a3. The transposition table of Period 2 already holds it: the best move stored for the position on the board, then the best move stored for the position after that move, and so on. `principal_variation()` follows those stored moves, and `think()` prints them at the end of each `info` line after the word `pv`, which Lucas Chess shows beside the engine's score.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 3:00 to 3:20 | Add `principal_variation()` and the `pv` of the `info` line (about 13 code lines). Run `uci.py` and send `position startpos moves a2a3` and `go movetime 5000` to `engines/Remus3` and to `engines/Remus2` (1. a3 is in no line of the book, so Remus3 searches): the `info` lines show how much deeper Remus3 searches in the same time, and the line it expects. |
+| 3:20 to 3:50 | Run `verify_remus.py` in `engines/Remus3` until Remus3 passes every test. Then add `engines\Remus3\remus.bat` to Lucas Chess and play one round of their Remus3 against their Remus2, two 5-minute games. |
+| 3:50 to 4:10 | One round of their Remus3 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
+| 4:10 to 4:30 | Each student plays their version of Remus3 (Part 4 of the guide), human against computer, until the end of the day. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -25,6 +34,10 @@ The instructor's version is [`engines_instructor/Remus3/search.py`](../../engine
 
 ### `search.py`
 
+![search.py, lines 150 to 158](images/search_lines_150_to_158.png)
+
+![search.py, lines 186 to 187](images/search_lines_186_to_187.png)
+
 `search.py` grows from 180 lines to 192, the finished Remus3 file.
 
 Type `def principal_variation(position, depth):` (lines 150 to 158) between `alpha_beta()` and `think()`, with two blank lines after it. It starts with an empty string and, at most `depth` times, probes the table for the current position, adds the stored move's UCI text, and plays the move with `make_move()`. It stops early at a position the table does not hold, or one with no stored move.
@@ -32,15 +45,6 @@ Type `def principal_variation(position, depth):` (lines 150 to 158) between `alp
 In `think()`, replace the `print` line, `print(f"info depth {depth} score cp {score} nodes {nodes}", flush=True)`, with two lines: `line = principal_variation(position, depth)` (line 186) and `print(f"info depth {depth} score cp {score} nodes {nodes} pv{line}", flush=True)` (line 187). The `f` before the string makes it an f-string, so each name in braces is replaced by its value; `line` starts with a space, so the text reads `pv g8f6 g1f3`.
 
 Remus3 is complete. Every file in `engines/Remus3` now matches the instructor's Remus3, comments, docstrings, and type hints aside.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 3:00 to 3:20 | Add `principal_variation()` and the `pv` of the `info` line (about 13 code lines). Run `uci.py` and send `position startpos moves a2a3` and `go movetime 5000` to `engines/Remus3` and to `engines/Remus2` (1. a3 is in no line of the book, so Remus3 searches): the `info` lines show how much deeper Remus3 searches in the same time, and the line it expects. |
-| 3:20 to 3:50 | Run `verify_remus.py` in `engines/Remus3` until Remus3 passes every test. Then add `engines\Remus3\remus.bat` to Lucas Chess and play one round of their Remus3 against their Remus2, two 5-minute games. |
-| 3:50 to 4:10 | One round of their Remus3 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
-| 4:10 to 4:30 | Each student plays their version of Remus3 (Part 4 of the guide), human against computer, until the end of the day. |
 
 ## Done when
 

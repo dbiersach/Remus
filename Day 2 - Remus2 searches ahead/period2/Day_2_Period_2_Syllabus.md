@@ -14,6 +14,14 @@ The first half of the new `search.py` holds three helpers that the search of Per
 
 Until Period 3 finishes `search.py`, the file has no `think()`, so `uci.py` cannot run this period: run `search.py` instead.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 10:30 to 10:50 | Alpha-beta on paper: look ahead, assume both sides play their best, and skip the moves that cannot change the result. MVV-LVA: try pawn takes queen before queen takes pawn. |
+| 10:50 to 11:55 | In `engines/Remus2`, keep the three import lines of Remus1's `search.py`, change `import random` to `import time`, delete Remus1's random-move `think()`, and type the rest of the top of Remus2's `search.py` (about 50 code lines): the imports and constants, `ordered_moves()`, `count_node()`, and `quiescence()`. |
+| 11:55 to 12:00 | Swap driver and navigator. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -25,6 +33,8 @@ The instructor's version is [`engines_instructor/Remus2/search.py`](../../engine
 ## The edits, file by file
 
 ### `search.py`
+
+![search.py, lines 1 to 63](images/search_lines_1_to_63.png)
 
 Open `search.py` in `engines/Remus2`. It is Remus1's 14-line file, and it becomes 63 lines this period.
 
@@ -39,14 +49,6 @@ Below the imports, type the constants and the search's memory. `MATE_SCORE = 100
 `def count_node():` (line 40) adds one to the count and, every 1024 positions, looks at the clock. `global nodes` (line 41) lets the function change the shared count instead of making a new local one.
 
 `def quiescence(position, alpha, beta):` (line 47) scores the position as it stands (`stand_pat`, line 49), then tries only the captures: line 54 stops at the first move with priority 0, which is the first move that captures nothing. `score = -quiescence(child, -beta, -alpha)` (line 59) is a recursive call: the score of a move for one side is the opposite of the score for the other side.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 10:30 to 10:50 | Alpha-beta on paper: look ahead, assume both sides play their best, and skip the moves that cannot change the result. MVV-LVA: try pawn takes queen before queen takes pawn. |
-| 10:50 to 11:55 | In `engines/Remus2`, keep the three import lines of Remus1's `search.py`, change `import random` to `import time`, delete Remus1's random-move `think()`, and type the rest of the top of Remus2's `search.py` (about 50 code lines): the imports and constants, `ordered_moves()`, `count_node()`, and `quiescence()`. |
-| 11:55 to 12:00 | Swap driver and navigator. |
 
 ## Done when
 

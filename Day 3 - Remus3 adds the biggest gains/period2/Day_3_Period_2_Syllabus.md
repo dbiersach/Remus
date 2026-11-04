@@ -14,6 +14,15 @@ Alpha-beta skips the most moves when it tries the best move first, so a faster s
 
 The null move is a test. If the side to move could pass, letting the opponent move twice, and still stand above beta, a real move will do even better, so the search cuts off without trying any. The test is skipped in check, and when the side to move has only a king and pawns, where passing can be the best move and the test would be wrong.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 10:30 to 10:45 | Why move order matters to alpha-beta, and why the same position appears by many move orders: e4 e5 Nf3 and Nf3 e5 e4 reach one position. The null move: let the opponent move twice; if the side to move still stands above beta, cut off. |
+| 10:45 to 11:00 | Type `transposition_table.py` (22 code lines): `store()` and `probe()`. |
+| 11:00 to 11:55 | In `search.py`, add the killer moves and the table probe and store, then `has_pieces()` and null-move pruning in `alpha_beta()` (about 52 code lines). Run `uci.py`. |
+| 11:55 to 12:00 | Swap driver and navigator. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -28,6 +37,8 @@ The instructor's versions are [`engines_instructor/Remus3/transposition_table.py
 
 ### `transposition_table.py`
 
+![transposition_table.py, lines 1 to 28](images/transposition_table_lines_1_to_28.png)
+
 Create `transposition_table.py` in `engines/Remus3`. It has 28 lines when it is done.
 
 `EXACT, LOWER, UPPER = 0, 1, 2` (line 3) names the three kinds of score the table holds: an exact score, a score that is at least this much (the search cut off above beta), and a score that is at most this much (no move reached alpha). `table = {}` (line 6) is the dictionary of positions, from key to entry.
@@ -35,6 +46,18 @@ Create `transposition_table.py` in `engines/Remus3`. It has 28 lines when it is 
 `def store(key, depth, score, bound, move, ply):` (line 9) saves an entry, and clears the whole table when it holds more than `MAX_ENTRIES`, two million positions, so the table never fills the laptop's memory. `def probe(key, ply):` (line 19) reads an entry back, or returns `None` for a position never seen. Both functions adjust a mate score by `ply` (lines 10 to 13 and 24 to 27). A mate is stored as "mate so many moves from this position" rather than "from the root", so a position reached at another depth reads the right distance to mate.
 
 ### `search.py`
+
+![search.py, line 3](images/search_line_3.png)
+
+![search.py, line 20](images/search_line_20.png)
+
+![search.py, lines 30 to 32](images/search_lines_30_to_32.png)
+
+![search.py, lines 35 to 50](images/search_lines_35_to_50.png)
+
+![search.py, lines 69 to 70](images/search_lines_69_to_70.png)
+
+![search.py, lines 82 to 146](images/search_lines_82_to_146.png)
 
 `search.py` grows from 118 lines to 167. The edits, from the top down:
 
@@ -62,15 +85,6 @@ Type `def has_pieces(board, white):` (lines 82 to 87) above `alpha_beta()`. It c
 8. Replace the last line, `return alpha`, with lines 140 to 146, from `bound = tt.EXACT` to `return best_score`: the search stores its result in the table before it returns.
 
 `think()` does not change this period.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 10:30 to 10:45 | Why move order matters to alpha-beta, and why the same position appears by many move orders: e4 e5 Nf3 and Nf3 e5 e4 reach one position. The null move: let the opponent move twice; if the side to move still stands above beta, cut off. |
-| 10:45 to 11:00 | Type `transposition_table.py` (22 code lines): `store()` and `probe()`. |
-| 11:00 to 11:55 | In `search.py`, add the killer moves and the table probe and store, then `has_pieces()` and null-move pruning in `alpha_beta()` (about 52 code lines). Run `uci.py`. |
-| 11:55 to 12:00 | Swap driver and navigator. |
 
 ## Done when
 

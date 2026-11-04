@@ -14,6 +14,15 @@ Remus2 needs a way to tell a good position from a bad one before it can look ahe
 
 No copied file changes this period. The copied files of Remus1 keep working, and `evaluation.py` waits until Period 2 for `search.py` to use it.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 8:30 to 8:35 | In File Explorer, copy every file of `engines/Remus1` into `engines/Remus2`. The rest of Day 2 edits those copies. |
+| 8:35 to 8:45 | A score in centipawns: material, plus a bonus or penalty for where each piece stands. A Black piece reads each table upside down. |
+| 8:45 to 9:55 | Type `evaluation.py` (68 code lines): `mirrored_table()`, the four piece-square tables (files a to d only), the piece values, and `evaluate()`. Run it. |
+| 9:55 to 10:00 | Swap driver and navigator. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -27,6 +36,8 @@ The instructor's version is [`engines_instructor/Remus2/evaluation.py`](../../en
 
 ### `evaluation.py`
 
+![evaluation.py, lines 1 to 80](images/evaluation_lines_1_to_80.png)
+
 Create `evaluation.py` in `engines/Remus2`. It has 80 lines when it is done.
 
 `def mirrored_table(left_half):` (line 4) saves typing. A piece-square table needs 64 numbers, but the tables are the same on the left and right halves of the board, so each one is typed as 32 numbers, files a to d of each rank. The loop on lines 6 to 8 builds all 64 by reading each row's four numbers forward and then backward: file e copies file d, f copies c, g copies b, and h copies a.
@@ -36,15 +47,6 @@ The four tables follow: `PAWN_TABLE = mirrored_table((` (line 12), `KNIGHT_TABLE
 `PIECE_VALUES = (0, 100, 300, 300, 500, 900, 0)` (line 56) gives each piece number its value, from 0 for an empty square to 0 for the king, which is never captured. Rooks and queens get no table in Remus2, so `ZERO_TABLE` (line 58), 64 zeros, stands in for them, and `TABLES` (lines 60 to 63) puts the tables in piece-number order, so `TABLES[KNIGHT]` is the knight table.
 
 `def evaluate(position):` (line 66) adds up every piece on the board. A White piece reads its table at its own square (line 75). A Black piece reads the table upside down, because rank 8 is Black's home rank: line 78 turns the row number `square // 8` into `7 - square // 8`. `return score if white else -score` (line 80) turns the score to the side to move's point of view.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 8:30 to 8:35 | In File Explorer, copy every file of `engines/Remus1` into `engines/Remus2`. The rest of Day 2 edits those copies. |
-| 8:35 to 8:45 | A score in centipawns: material, plus a bonus or penalty for where each piece stands. A Black piece reads each table upside down. |
-| 8:45 to 9:55 | Type `evaluation.py` (68 code lines): `mirrored_table()`, the four piece-square tables (files a to d only), the piece values, and `evaluate()`. Run it. |
-| 9:55 to 10:00 | Swap driver and navigator. |
 
 ## Done when
 

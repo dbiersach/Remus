@@ -14,6 +14,16 @@ This period teaches the evaluation three ideas a chess player learns early. Two 
 
 The period also moves `MATE_SCORE` from `search.py` to `board.py` and adds two small helpers to `board.py`, `position_key()` and `move_text()`. The transposition table of Period 2 needs `MATE_SCORE` and `position_key()`, and it cannot import them from `search.py`, because `search.py` imports the table. No new file is added this period.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 8:30 to 8:35 | In File Explorer, copy every file of `engines/Remus2` into `engines/Remus3`. |
+| 8:35 to 8:45 | Doubled, isolated, and passed pawns, on a position the teacher shows in Lucas Chess. Why two bishops together are worth more than a bishop and a knight. |
+| 8:45 to 9:00 | Move `MATE_SCORE` from `search.py` to `board.py`, and add `position_key()` and `move_text()` (8 code lines in `board.py`). |
+| 9:00 to 9:55 | In `evaluation.py`, add the rook table, `pawn_terms()`, the bishop pair, and the lines of `evaluate()` that collect the pawns (47 code lines). Run `uci.py`. |
+| 9:55 to 10:00 | Swap driver and navigator. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -29,6 +39,12 @@ The instructor's versions are in [`engines_instructor/Remus3`](../../engines_ins
 
 ### `board.py`
 
+![board.py, line 3](images/board_line_3.png)
+
+![board.py, lines 17 to 18](images/board_lines_17_to_18.png)
+
+![board.py, lines 29 to 33](images/board_lines_29_to_33.png)
+
 `board.py` grows from 21 lines to 33. Type `MATE_SCORE = 100_000` (line 3) under `WHITE = 8`; it is the same constant `search.py` holds today.
 
 Between `is_own()` and `parse_square()`, type `def position_key(position):` (line 17) and its one line of code, `return hash((tuple(position[0]), position[1], position[2], position[3]))` (line 18). The key is one number that stands for the whole position: the board, the side to move, the castling rights, and the en passant square. A list cannot be hashed in Python, so `tuple()` turns the board into a tuple first. Two move orders that reach the same position, such as e4 e5 Nf3 and Nf3 e5 e4, get the same key.
@@ -36,6 +52,20 @@ Between `is_own()` and `parse_square()`, type `def position_key(position):` (lin
 At the end of the file, type `def move_text(move):` (line 29) and its four lines (30 to 33). It turns a move tuple into UCI text such as `e7e8q`, the same steps that `uci.py` takes today for `bestmove`. Remus3 needs the text in three places: the `bestmove` answer, the opening book, and the line of moves the engine expects.
 
 ### `evaluation.py`
+
+![evaluation.py, line 1](images/evaluation_line_1.png)
+
+![evaluation.py, lines 56 to 65](images/evaluation_lines_56_to_65.png)
+
+![evaluation.py, line 73](images/evaluation_line_73.png)
+
+![evaluation.py, lines 76 to 106](images/evaluation_lines_76_to_106.png)
+
+![evaluation.py, line 112](images/evaluation_line_112.png)
+
+![evaluation.py, lines 118 to 119](images/evaluation_lines_118_to_119.png)
+
+![evaluation.py, lines 126 to 130](images/evaluation_lines_126_to_130.png)
 
 `evaluation.py` grows from 80 lines to 131.
 
@@ -51,19 +81,11 @@ In `evaluate()`, three edits collect the pawns and add the new terms. Type `pawn
 
 ### `search.py`
 
+![search.py, lines 4 to 14](images/search_lines_4_to_14.png)
+
 `search.py` grows from 110 lines to 118. Replace the import `from board import EMPTY, QUEEN` with the eleven lines from `from board import (` to `)` (lines 4 to 14), one name per line. The block brings in `MATE_SCORE` today and the names that Periods 2 to 4 need: the piece kinds for `has_pieces()`, `position_key()` for the table, and `move_text()` for the line of moves. VS Code shows the names not used yet in a dimmer color until those periods use them, which is not an error.
 
 Then delete `MATE_SCORE = 100_000` and the blank line above it, which stood at line 9 of the copied file: `search.py` now gets `MATE_SCORE` from `board.py`.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 8:30 to 8:35 | In File Explorer, copy every file of `engines/Remus2` into `engines/Remus3`. |
-| 8:35 to 8:45 | Doubled, isolated, and passed pawns, on a position the teacher shows in Lucas Chess. Why two bishops together are worth more than a bishop and a knight. |
-| 8:45 to 9:00 | Move `MATE_SCORE` from `search.py` to `board.py`, and add `position_key()` and `move_text()` (8 code lines in `board.py`). |
-| 9:00 to 9:55 | In `evaluation.py`, add the rook table, `pawn_terms()`, the bishop pair, and the lines of `evaluate()` that collect the pawns (47 code lines). Run `uci.py`. |
-| 9:55 to 10:00 | Swap driver and navigator. |
 
 ## Done when
 

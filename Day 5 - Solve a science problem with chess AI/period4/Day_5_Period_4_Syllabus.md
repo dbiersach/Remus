@@ -10,10 +10,6 @@ Every student takes the code home, and every student pair presents its science r
 
 No file changes this period: the student pair types no code and edits no file. Each student copies the whole Remus folder to a USB drive, leaving out `.venv`, so the four engines in `engines/Remus1` to `engines/Remus4`, every line of them typed by the student pair, go home.
 
-## The files
-
-The student pair types no code this period.
-
 ## The period step by step
 
 | Time | Activity |
@@ -23,6 +19,10 @@ The student pair types no code this period.
 | 3:30 to 3:45 | Each student pair picks one powder its search named and one it answered with "can't tell", and works out which measurement would settle the second. |
 | 3:45 to 4:20 | Each student pair presents its results and its two powders in three minutes. |
 | 4:20 to 4:30 | What comes next: AI agents that steer real experiments at light sources such as NSLS-II. |
+
+## The files
+
+The student pair types no code this period.
 
 ## Done when
 

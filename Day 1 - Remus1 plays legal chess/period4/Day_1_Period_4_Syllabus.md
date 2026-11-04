@@ -14,6 +14,15 @@ The last two files of Remus1 are new files in `engines/Remus1`, like every file 
 
 `uci.py` is the engine's voice. Lucas Chess and Remus talk in UCI, the Universal Chess Interface: Lucas Chess sends lines of text such as `position startpos moves e2e4` and `go`, and Remus answers with lines such as `bestmove e7e5`. `uci.py` reads each line, plays the moves of the game on the starting position, asks `search.py` for a move, and prints it.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 3:00 to 3:10 | How Lucas Chess and Remus talk: read [`uci.md`](../../docs/chess_tutor/uci.md) together. A move is legal only if the mover's own king is not attacked after it. |
+| 3:10 to 3:50 | Type `search.py` of `engines_instructor/Remus1` (12 code lines), whose `think()` plays a random legal move, then `uci.py` (44 code lines). Run `uci.py` and talk to it by hand, as in the "Try it" part of `uci.md`. |
+| 3:50 to 4:05 | Run `verify_remus.py` in `engines/Remus1` and fix any file it names until it reports that Remus1 passes every test. Then add `engines\Remus1\remus.bat` to Lucas Chess (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
+| 4:05 to 4:30 | Each student plays their version of Remus1 (Part 4 of the guide). Every move it makes is legal, and nearly every move is bad. |
+
 ## What the student pair types this period
 
 | File | New or edited | What it holds | Lines in your file |
@@ -27,11 +36,15 @@ The instructor's versions are [`engines_instructor/Remus1/search.py`](../../engi
 
 ### `search.py`
 
+![search.py, lines 1 to 14](images/search_lines_1_to_14.png)
+
 Create `search.py` in `engines/Remus1`. It has 14 lines when it is done. Line 1 imports Python's `random` module, and lines 3 to 5 import `in_check()`, `make_move()`, and `generate_moves()` from the files typed earlier today.
 
 `def think(position, seconds):` (line 8) builds the list `legal` (lines 9 to 13): for every move, it makes the move on a copy and keeps it only if `in_check()` says the mover's king is safe. `position[1]` is the second part of the position, `True` when White is to move. `return random.choice(legal) if legal else None` (line 14) picks one legal move, or returns `None` when there is none, which means checkmate or stalemate. Remus1 ignores `seconds`; Remus2 uses it to decide how long to think.
 
 ### `uci.py`
+
+![uci.py, lines 1 to 51](images/uci_lines_1_to_51.png)
 
 Create `uci.py` in `engines/Remus1`. It has 51 lines when it is done, and it is the file Lucas Chess runs.
 
@@ -40,15 +53,6 @@ Create `uci.py` in `engines/Remus1`. It has 51 lines when it is done, and it is 
 `def main():` (line 14) reads Lucas Chess's lines one at a time with `for line in sys.stdin:` (line 16), splits each line into words, and answers by the first word. `print("id name Remus1")` (line 21) gives the engine its name. The `position` branch (lines 25 to 30) starts from `START_POSITION` and plays each UCI move of the game, such as `e2e4` or `e7e8q`, turning its text into a move tuple with `parse_square()`. The `go` branch (lines 31 to 45) works out how many seconds to think from the clock, calls `think()`, and prints `bestmove` with the move in UCI text, or `bestmove 0000` when there is no legal move. `flush=True` sends each answer to Lucas Chess at once instead of holding it back.
 
 Lines 50 and 51, `if __name__ == "__main__":` and `main()`, run `main()` only when `uci.py` itself is started, as Java runs `main` in the class it starts.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 3:00 to 3:10 | How Lucas Chess and Remus talk: read [`uci.md`](../../docs/chess_tutor/uci.md) together. A move is legal only if the mover's own king is not attacked after it. |
-| 3:10 to 3:50 | Type `search.py` of `engines_instructor/Remus1` (12 code lines), whose `think()` plays a random legal move, then `uci.py` (44 code lines). Run `uci.py` and talk to it by hand, as in the "Try it" part of `uci.md`. |
-| 3:50 to 4:05 | Run `verify_remus.py` in `engines/Remus1` and fix any file it names until it reports that Remus1 passes every test. Then add `engines\Remus1\remus.bat` to Lucas Chess (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
-| 4:05 to 4:30 | Each student plays their version of Remus1 (Part 4 of the guide). Every move it makes is legal, and nearly every move is bad. |
 
 ## Done when
 

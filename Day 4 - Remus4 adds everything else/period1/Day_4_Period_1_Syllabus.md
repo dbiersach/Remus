@@ -16,6 +16,15 @@ The same period makes the search spend less time on moves that are probably bad,
 
 The name line in `uci.py` stays `id name Remus3` until Period 4. No new file is added this period.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 8:30 to 8:35 | In File Explorer, copy every file of `engines/Remus3` into `engines/Remus4`. |
+| 8:35 to 8:45 | Reminder of threefold repetition and the fifty-move rule. Late move reductions, principal variation search, and futility pruning: three ways to spend less time on moves that are probably bad. |
+| 8:45 to 9:55 | The halfmove clock in `board.py` and `make_move.py`, the game history in `uci.py`, then `is_draw()`, the history list, futility pruning, late move reductions, and PVS in `search.py` (about 36 code lines). Run `uci.py`. |
+| 9:55 to 10:00 | Swap driver and navigator. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -33,9 +42,17 @@ The instructor's versions are in [`engines_instructor/Remus4`](../../engines_ins
 
 ### `board.py`
 
+![board.py, line 10](images/board_line_10.png)
+
 Change the starting position to `START_POSITION = (START_BOARD, True, 15, -1, 0)` (line 10). The fifth part, 0, is the halfmove clock: no move has been played yet.
 
 ### `make_move.py`
+
+![make_move.py, line 7](images/make_move_line_7.png)
+
+![make_move.py, line 13](images/make_move_line_13.png)
+
+![make_move.py, line 27](images/make_move_line_27.png)
 
 Three lines change, and the file grows from 26 lines to 27.
 
@@ -45,9 +62,25 @@ Three lines change, and the file grows from 26 lines to 27.
 
 ### `move_generation.py`
 
+![move_generation.py, line 54](images/move_generation_line_54.png)
+
 Change the first line of `generate_moves()`'s body to `board, white, castling, en_passant = position[0:4]` (line 54). The position has five parts now, and Python refuses to unpack five values into four names, so `position[0:4]` takes the first four. Move generation needs no clock.
 
 ### `search.py`
+
+![search.py, line 20](images/search_line_20.png)
+
+![search.py, line 32](images/search_line_32.png)
+
+![search.py, lines 85 to 87](images/search_lines_85_to_87.png)
+
+![search.py, lines 102 to 104](images/search_lines_102_to_104.png)
+
+![search.py, lines 123 to 170](images/search_lines_123_to_170.png)
+
+![search.py, lines 192 to 193](images/search_lines_192_to_193.png)
+
+![search.py, line 206](images/search_line_206.png)
 
 `search.py` grows from 192 lines to 224. The edits, from the top down:
 
@@ -65,21 +98,22 @@ Change the first line of `generate_moves()`'s body to `board, white, castling, e
 
 ### `uci.py`
 
+![uci.py, line 4](images/uci_line_4.png)
+
+![uci.py, line 30](images/uci_line_30.png)
+
+![uci.py, line 43](images/uci_line_43.png)
+
+![uci.py, line 45](images/uci_line_45.png)
+
+![uci.py, line 61](images/uci_line_61.png)
+
 `uci.py` grows from 68 lines to 71.
 
 1. Add `position_key` to the board import: `from board import START_POSITION, move_text, parse_square, position_key` (line 4).
 2. Type `game_history = []` (line 30) under `played = []`.
 3. In the `position` branch, type `game_history = []` (line 43) under `played = words[3:]`, and type `game_history.append(position_key(position))` (line 45) as the first line inside the loop `for text in played:`. Each position of the game goes into the history before its move is played.
 4. Pass the history to the search: `move = think(position, game_history, seconds, longest)` (line 61).
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 8:30 to 8:35 | In File Explorer, copy every file of `engines/Remus3` into `engines/Remus4`. |
-| 8:35 to 8:45 | Reminder of threefold repetition and the fifty-move rule. Late move reductions, principal variation search, and futility pruning: three ways to spend less time on moves that are probably bad. |
-| 8:45 to 9:55 | The halfmove clock in `board.py` and `make_move.py`, the game history in `uci.py`, then `is_draw()`, the history list, futility pruning, late move reductions, and PVS in `search.py` (about 36 code lines). Run `uci.py`. |
-| 9:55 to 10:00 | Swap driver and navigator. |
 
 ## Done when
 

@@ -14,6 +14,14 @@ In the middlegame a king hides behind its pawns, but in the endgame, with few pi
 
 Two endgame rules follow. A side that is ahead by 400 centipawns or more in a late endgame earns a bonus for driving the losing king toward the edge and bringing its own king close, the way every mate against a lone king is won. And a position with no pawns and at most one minor piece, such as king and bishop against king, scores 0, because neither side can mate: this is insufficient material.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 1:00 to 1:15 | Reminder of insufficient material. In the endgame the king comes to the center, and the side that is ahead drives the lone king to the edge. |
+| 1:15 to 2:25 | In `evaluation.py`, add the endgame king table and the taper that blends the two king tables, mobility, `mating_bonus()`, and insufficient material (about 45 code lines). Run `uci.py`. |
+| 2:25 to 2:30 | Swap driver and navigator. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -26,6 +34,24 @@ The instructor's version is [`engines_instructor/Remus4/evaluation.py`](../../en
 ## The edits, file by file
 
 ### `evaluation.py`
+
+![evaluation.py, lines 1 to 3](images/evaluation_lines_1_to_3.png)
+
+![evaluation.py, line 47](images/evaluation_line_47.png)
+
+![evaluation.py, lines 69 to 78](images/evaluation_lines_69_to_78.png)
+
+![evaluation.py, line 86](images/evaluation_line_86.png)
+
+![evaluation.py, lines 89 to 97](images/evaluation_lines_89_to_97.png)
+
+![evaluation.py, lines 129 to 138](images/evaluation_lines_129_to_138.png)
+
+![evaluation.py, lines 144 to 146](images/evaluation_lines_144_to_146.png)
+
+![evaluation.py, lines 153 to 176](images/evaluation_lines_153_to_176.png)
+
+![evaluation.py, lines 181 to 182](images/evaluation_lines_181_to_182.png)
 
 `evaluation.py` grows from 131 lines to 183. The edits, from the top down:
 
@@ -43,14 +69,6 @@ The instructor's version is [`engines_instructor/Remus4/evaluation.py`](../../en
 12. Near the end, change `score += pawn_terms(pawns)` to `score += material + pawn_terms(pawns)` (line 181), and type `score += mating_bonus(material, kings, phase)` (line 182) under it.
 
 `pawn_terms()` does not change this period; Period 4 gives it the king and the rooks.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 1:00 to 1:15 | Reminder of insufficient material. In the endgame the king comes to the center, and the side that is ahead drives the lone king to the edge. |
-| 1:15 to 2:25 | In `evaluation.py`, add the endgame king table and the taper that blends the two king tables, mobility, `mating_bonus()`, and insufficient material (about 45 code lines). Run `uci.py`. |
-| 2:25 to 2:30 | Swap driver and navigator. |
 
 ## Done when
 

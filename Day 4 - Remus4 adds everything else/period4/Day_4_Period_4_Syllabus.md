@@ -12,6 +12,15 @@ The student pair finishes Remus4 in `engines/Remus4` with the last terms of the 
 
 Three terms join `pawn_terms()`, because each one depends on where the pawns stand. The pawn race uses the rule of the square: in a pawn endgame, a passed pawn whose enemy king is too far away to catch it will promote, so it earns a bonus of 500, more than a rook. A rook on a file with no pawns of its own side is on a half-open file, worth 10, and on a file with no pawns at all it is on an open file, worth 20. King safety rewards a king on its home rank for each pawn in front of it and punishes each file next to it with no pawn of its own, scaled by the phase from Period 3 so it fades as the pieces come off.
 
+## The period step by step
+
+| Time | Activity |
+| --- | --- |
+| 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
+| 3:30 to 3:55 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then add `engines\Remus4\remus.bat` to Lucas Chess and play one round of their Remus4 against their Remus3, two 5-minute games. |
+| 3:55 to 4:15 | One round of their Remus4 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 3's. |
+| 4:15 to 4:30 | Each student plays their version of Remus4 (Part 4 of the guide), human against computer, until the end of the day. |
+
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
@@ -26,6 +35,20 @@ The instructor's versions are [`engines_instructor/Remus4/evaluation.py`](../../
 
 ### `evaluation.py`
 
+![evaluation.py, lines 98 to 99](images/evaluation_lines_98_to_99.png)
+
+![evaluation.py, lines 102 to 104](images/evaluation_lines_102_to_104.png)
+
+![evaluation.py, lines 107 to 121](images/evaluation_lines_107_to_121.png)
+
+![evaluation.py, lines 142 to 156](images/evaluation_lines_142_to_156.png)
+
+![evaluation.py, line 179](images/evaluation_line_179.png)
+
+![evaluation.py, lines 200 to 201](images/evaluation_lines_200_to_201.png)
+
+![evaluation.py, line 215](images/evaluation_line_215.png)
+
 `evaluation.py` grows from 183 lines to 217, the finished Remus4 file. The edits, from the top down:
 
 1. Under `BISHOP_PAIR = 30`, type `ROOK_OPEN_FILE = 20` and `ROOK_HALF_OPEN_FILE = 10` (lines 98 and 99).
@@ -39,16 +62,9 @@ The instructor's versions are [`engines_instructor/Remus4/evaluation.py`](../../
 
 ### `uci.py`
 
+![uci.py, line 36](images/uci_line_36.png)
+
 Change the name line to `print("id name Remus4")` (line 36). Remus4 is complete, and every file in `engines/Remus4` now matches the instructor's Remus4, comments, docstrings, and type hints aside.
-
-## The period step by step
-
-| Time | Activity |
-| --- | --- |
-| 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 3:55 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then add `engines\Remus4\remus.bat` to Lucas Chess and play one round of their Remus4 against their Remus3, two 5-minute games. |
-| 3:55 to 4:15 | One round of their Remus4 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 3's. |
-| 4:15 to 4:30 | Each student plays their version of Remus4 (Part 4 of the guide), human against computer, until the end of the day. |
 
 ## Done when
 
