@@ -51,13 +51,14 @@ day and edits them there.
 [`docs/engines/remus_versions.md`](docs/engines/remus_versions.md) lists every
 enhancement and the version that holds it.
 
-Everything else sits in the plan of the week, the day folders, `science/`, and `docs/`:
+Everything else sits in the plan of the week, the day folders, `science/`, `science_instructor/`, and `docs/`:
 
 | Place | What it holds |
 | --- | --- |
 | [`workshop_syllabus.md`](workshop_syllabus.md) | The plan of the five days on one page |
 | `Day 1 - ...` to `Day 5 - ...` | One folder per day, such as [`Day 1 - Remus1 plays legal chess`](Day%201%20-%20Remus1%20plays%20legal%20chess/Day_1_Syllabus.md), with a page for the day and a folder for each period |
-| [`science/`](science/) | The two Day 5 science programs: `student/` with the functions the student pairs write left empty, and `instructor/` with the finished versions |
+| [`science/`](science/) | The two Day 5 science programs, with the functions the student pairs write left empty |
+| [`science_instructor/`](science_instructor/) | The same two programs, finished |
 | [`docs/engines/`](docs/engines/) | One folder per engine with its README and call tree, and [`remus_versions.md`](docs/engines/remus_versions.md), the plan of the versions |
 | [`docs/lucas_chess/`](docs/lucas_chess/) | The [Lucas Chess guide](docs/lucas_chess/lucas_chess_guide.md) and its pictures |
 | [`docs/chess_tutor/`](docs/chess_tutor/) | [`learn_chess.md`](docs/chess_tutor/learn_chess.md), the rarer rules and how moves are written, [`uci.md`](docs/chess_tutor/uci.md), the conversation between Lucas Chess and Remus, and videos on minimax, negamax, and alpha-beta |

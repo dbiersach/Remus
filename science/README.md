@@ -14,13 +14,13 @@ not its code.
 
 | Folder | What it holds |
 | --- | --- |
-| [`student/`](student/) | The programs the student pairs work in. Every line is there except the bodies of the functions the student pair writes: `candidate_squares()`, `score_candidate()`, and `choose_next_measurement()` in `hidden_peak.py`, then `score()`, `greedy_phases()`, and `search()` in `phase_hunt.py`. Each empty function keeps its docstring, which says what the function must do, and a comment names its period. |
-| [`instructor/`](instructor/) | The same programs, complete and correct. A student pair that is stuck compares its function with the one here. |
+| `science/`, this folder | The programs the student pairs work in. Every line is there except the bodies of the functions the student pair writes: `candidate_squares()`, `score_candidate()`, and `choose_next_measurement()` in `hidden_peak.py`, then `score()`, `greedy_phases()`, and `search()` in `phase_hunt.py`. Each empty function keeps its docstring, which says what the function must do, and a comment names its period. |
+| [`science_instructor/`](../science_instructor/) | The same programs, complete and correct. A student pair that is stuck compares its function with the one there. |
 
 ## Running a program
 
 Open the file in VS Code and click Run Python File. `main()` prints each result next
-to the result it expects. In `science/student`, a function not written yet stops the
+to the result it expects. In this folder, a function not written yet stops the
 run with `NotImplementedError` and its name, such as "Write score()".
 
 Expected results of the finished programs:

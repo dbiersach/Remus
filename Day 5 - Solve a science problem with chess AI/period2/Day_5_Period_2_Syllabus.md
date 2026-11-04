@@ -8,7 +8,7 @@ The student pair scores a set of crystal phases and builds the greedy answer.
 
 ## The big picture
 
-No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they were at the end of Day 4. The student pair writes `score()` and `greedy_phases()` in `phase_hunt.py`, a science program that reuses the engine's ideas, not its code: `score()` is the evaluation of a set of phases, and `greedy_phases()` is a one-move-deep search that keeps adding the best phase. `phase_hunt.py` holds every other line already, so the student pair types only the bodies of these functions, from their docstrings. The student pair edits `science/student/phase_hunt.py`, and `science/instructor/phase_hunt.py` holds the finished version.
+No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they were at the end of Day 4. The student pair writes `score()` and `greedy_phases()` in `phase_hunt.py`, a science program that reuses the engine's ideas, not its code: `score()` is the evaluation of a set of phases, and `greedy_phases()` is a one-move-deep search that keeps adding the best phase. `phase_hunt.py` holds every other line already, so the student pair types only the bodies of these functions, from their docstrings. The student pair edits `science/phase_hunt.py`, and `science_instructor/phase_hunt.py` holds the finished version.
 
 ## The period step by step
 
@@ -22,7 +22,29 @@ No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they 
 
 | File | The instructor's version |
 | --- | --- |
-| phase_hunt.py | Not in the repository yet |
+| `phase_hunt.py` | [`science_instructor/phase_hunt.py`](../../science_instructor/phase_hunt.py) |
+
+### `phase_hunt.py`
+
+These images show the function bodies from [`science_instructor/phase_hunt.py`](../../science_instructor/phase_hunt.py). In `science/phase_hunt.py`, replace the comment and the `raise` line under each docstring with the body. Work from the top of the file down, and the line numbers match when you reach each function.
+
+![score(), lines 138 to 148](images/phase_hunt_lines_138_to_148.png)
+
+![greedy_phases(), lines 168 to 183](images/phase_hunt_lines_168_to_183.png)
+
+### The graphs
+
+matplotlib drew these graphs from the results of `science_instructor/phase_hunt.py`.
+
+![The experiment at the beamline](images/experiment.png)
+
+![The fingerprint of each phase](images/fingerprints.png)
+
+![The mystery powder](images/mystery_powder.png)
+
+![Three guesses scored peak by peak](images/scoring.png)
+
+![Greedy, step by step](images/greedy_steps.png)
 
 ## Done when
 

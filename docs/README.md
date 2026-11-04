@@ -13,4 +13,5 @@ holds code to type or run.
 | [`briefs/`](briefs/) | Two one-page PDFs: the [management brief](briefs/Turning_a_Chess_Engine_into_Science_AI_Management_Brief.pdf) and the [student and parent brief](briefs/Turning_a_Chess_Engine_into_Science_AI_Student_and_Parent_Brief.pdf). | School leaders, students, and parents, before the workshop |
 
 The engine code itself lives in the top `engines_instructor/` folder, the student
-pairs' own engines in `engines/`, and the Day 5 programs in `science/`.
+pairs' own engines in `engines/`, the Day 5 programs in `science/`, and their finished
+versions in `science_instructor/`.

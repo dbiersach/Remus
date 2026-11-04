@@ -241,9 +241,9 @@ Stockfish 1500.
 **Goal for the day:** the student pairs aim the engine's ideas at two problems from a
 synchrotron beamline, report what their science AI found, and take their code home.
 
-The project uses two programs in the top `science/` folder, `hidden_peak.py` and
-`phase_hunt.py`. The student pair works in `science/student`, where each program holds
-every line but the functions the student pair writes; `science/instructor` holds the
+The project uses two programs, `hidden_peak.py` and `phase_hunt.py`. The student pair
+works in the top `science/` folder, where each program holds every line but the
+functions the student pair writes; the top `science_instructor/` folder holds the
 finished programs. Both use the standard library only. Neither imports the engine:
 they reuse the engine's ideas, not its code.
 

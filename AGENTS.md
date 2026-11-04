@@ -218,11 +218,16 @@ The engine must run without Lucas Chess or `python-chess` installed.
     and one top folder per day, such as `Day 1 - Remus1 plays legal chess`, with
     `Day_1_Syllabus.md` and a folder per period (`period1` to `period4`) that
     holds `Day_1_Period_1_Syllabus.md`. The day and period pages follow
-    `workshop_syllabus.md`; a change to one goes into the others.
-  - `science/`, the two Day 5 programs, `hidden_peak.py` and `phase_hunt.py`
-    (David, 2026-11-04): `science/student` holds each one with the functions the
-    student pairs write left empty, and `science/instructor` the finished version.
-    They follow the engine style (no shebang, copy-make) and import no engine.
+    `workshop_syllabus.md`; a change to one goes into the others. Each period
+    folder with typed code also holds `images/` (David, 2026-11-04): pictures of
+    that code from VS Code, so a student pair cannot paste it, written by
+    `admin/make_code_images.py`, and the Day 5 graphs from
+    `admin/make_science_figures.py`. Run both after a change to the code they show.
+  - `science/`, the two Day 5 programs, `hidden_peak.py` and `phase_hunt.py`, with
+    the functions the student pairs write left empty, and `science_instructor/`,
+    the finished versions (David, 2026-11-04). This mirrors `engines/` and
+    `engines_instructor/`. They follow the engine style (no shebang, copy-make) and
+    import no engine.
   - `docs/`, the pages people read:
     - `docs/engines/`: `Remus1` to `Remus4`, each with its `README.md` and
       `call_tree.svg`, and `remus_versions.md`.

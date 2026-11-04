@@ -1,6 +1,7 @@
 {
     "folders": [{ "path": "." }],
     "settings": {
+        "workbench.colorTheme": "Dark 2026",
         "chat.editor.fontSize": 16,
         "chat.fontSize": 16,
         "editor.fontSize": 18,
