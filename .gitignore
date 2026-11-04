@@ -10,16 +10,11 @@ dist/
 *.egg-info/
 .env
 
-# Claude Code local settings and background tasks
+# Local tool settings
 .claude/settings.local.json
-tasks/
 
 # Scratch space for reviews and experiments. Nothing in it is ever committed.
 /tmp/
-
-# David's own game file, Remus.pgn at the top of the Remus folder, which holds the
-# games he plays and analyzes in the chess apps
-/Remus.pgn
 
 # David's snapshot of the course before the Remus engines, kept on his
 # computer only
@@ -31,8 +26,7 @@ tasks/
 # git bundles that carry changes between computers
 *.bundle
 
-# The stripped student code that admin/make_student_engines.py writes, kept on
-# David's computer only so the student pairs cannot copy it from the repository
+# The stripped student code, kept on David's computer only
 /engines_student/
 
 # The course designer's tools, kept on David's computer only
