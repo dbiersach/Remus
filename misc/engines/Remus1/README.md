@@ -37,7 +37,7 @@ a function it calls. Lucas Chess starts `main()` in `uci.py`.
 `think()` makes each move that `generate_moves()` lists, keeps it only if the
 mover's own king is not in check afterward, and returns one of the kept moves with
 `random.choice()`. With no legal move, checkmate or stalemate, it returns `None`, and
-`uci.py` sends `bestmove 0000`. The course designer's
+`uci.py` sends `bestmove 0000`. The workshop designer's
 `verify_engines.py` checks Remus1's perft
 counts against the published counts from six positions, and its UCI answers.
 

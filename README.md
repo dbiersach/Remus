@@ -17,7 +17,7 @@ empire together through widespread revolts. Remus echoes Rimush: a "son of Sargo
 heir to the small, readable chess programs whose insides lie open for learners,
 rebuilt in modern Python.
 
-## The course
+## The workshop
 
 The workshop runs for one week, five days of four 90-minute periods, for high school
 students who know the basics of coding and chess notation. Twenty students work in
@@ -149,7 +149,7 @@ the student pair's own `engines/Remus2`, and click the Run Python File button (t
 of the editor).
 
 The engines use only the Python standard library. The development group adds
-`python-chess`, which the course designer's engine checks use as an outside
+`python-chess`, which the workshop designer's engine checks use as an outside
 reference, and `ruff`. Lucas Chess talks to Remus over UCI.
 
 ## License

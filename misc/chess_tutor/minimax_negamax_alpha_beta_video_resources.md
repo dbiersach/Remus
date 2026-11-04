@@ -1,6 +1,6 @@
 # Minimax, Negamax, and Alpha-Beta: Video Resources
 
-Recommendations for a high-school chess-engine programming course, with an emphasis on clear narration, visual game trees, step-by-step evaluation, and visible alpha-beta cutoffs. The strongest first lessons let students *see* search working before they implement it.
+Recommendations for a high-school chess-engine programming workshop, with an emphasis on clear narration, visual game trees, step-by-step evaluation, and visible alpha-beta cutoffs. The strongest first lessons let students *see* search working before they implement it.
 
 ## Top recommendations
 

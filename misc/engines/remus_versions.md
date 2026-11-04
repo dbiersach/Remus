@@ -1,6 +1,6 @@
 # The versions of Remus
 
-The course builds four Remus engines, one for each of Days 1 to 4, and the student
+The workshop builds four Remus engines, one for each of Days 1 to 4, and the student
 pairs type every line of each one, copying the instructor's version:
 
 | Version | What it adds | Code lines | New lines |
@@ -147,7 +147,7 @@ The expected gains add up to about +195 Elo over Remus3, less once they overlap.
 
 ## Checking each version
 
-The course designer's `verify_engines.py` checks all four engines without playing a
+The workshop designer's `verify_engines.py` checks all four engines without playing a
 game: perft counts from six published positions, ten mate puzzles, five positions
 searched to a fixed depth, and a short UCI conversation. The fixed-depth searches show
 what each step buys. To depth 4 from the starting position Remus2 visits 17,360

@@ -1,7 +1,7 @@
 # Remus Project Rules and Python Style Guide
 
 Remus is a chess engine written in pure, native Python as a teaching project for the
-**"Turning a Chess Engine into Science AI"** workshop. The course has four engines in
+**"Turning a Chess Engine into Science AI"** workshop. The workshop has four engines in
 the top `engines_instructor/` folder: Remus1, a random legal mover that ends Day 1, and Remus2,
 Remus3, and Remus4;
 [`misc/engines/remus_versions.md`](misc/engines/remus_versions.md) lists what each
@@ -42,9 +42,9 @@ that are specific to Claude Code. The Python style follows David's course reposi
 - Success means a learner can explain a move, say why a search result is legal and
   preferred, and say what each enhancement of Remus3 and Remus4 buys.
 
-## Audience and course format
+## Audience and workshop format
 
-- Remus is an instructional engine for a **one-week, five-day course** taught to
+- Remus is an instructional engine for a **one-week, five-day workshop** taught to
   **high school students, ages 14 to 18** (David, 2026-11-04): four 90-minute
   periods a day (8:30 to 10:00, 10:30 to 12:00, 1:00 to 2:30, 3:00 to 4:30). The students already
   know the basics of coding (most have learned Java, close enough to type Python and
@@ -58,11 +58,11 @@ that are specific to Claude Code. The Python style follows David's course reposi
 - **Students type the engines in** (David, 2026-11-03). On Days 1 and 2 each
   student pair types in Remus1 and then Remus2, copying the instructor's version
   systematically, file by file. Later the student pairs type the new lines of Remus3
-  and then of Remus4 the same way. The course has no Python skills labs and no
+  and then of Remus4 the same way. The workshop has no Python skills labs and no
   unplugged (non-coding) activities.
 - **Always minimize the code students type** (David, 2026-11-03). The engines hold
   no test, check, perft, or print code beyond what UCI needs: they "assume it works",
-  and the course designer's `admin/verify_engines.py` checks them from
+  and the workshop designer's `admin/verify_engines.py` checks them from
   outside. Prefer the shorter of two equally clear forms.
 - Students know how the pieces move. Lessons remind them of the rarer rules right
   before the code that needs each one: castling conditions, en passant, promotion,
@@ -94,10 +94,10 @@ that are specific to Claude Code. The Python style follows David's course reposi
   - **Teachers**, who run the class. A teacher does everything in VS Code: open a
     file and press the Run Python File button, or open a Markdown page. No step of the
     five-day workshop asks a student or a teacher to type a command.
-  - **The course designer** (David), who builds the course. The tools in
+  - **The workshop designer** (David), who builds the workshop. The tools in
     `admin/` are designer tools, and only they may need `uv run` in a
     terminal.
-- Documents describe the course as it stands, with no dates of past events ("the
+- Documents describe the workshop as it stands, with no dates of past events ("the
   league finished on 2026-10-28", "a survey from October 2026"), the same rule as
   for code comments. The David dates in this file record when a rule was set and
   stay here only.
@@ -180,7 +180,7 @@ The engine must run without Lucas Chess or `python-chess` installed.
   student pairs copy from. Each holds only the files the engine runs
   (David, 2026-11-03): its Python files and `remus.bat` (the one line `uv run uci.py`;
   Lucas Chess starts it in its own folder). Remus3 and Remus4 also hold
-  `opening_book.txt`. Each also holds a copy of `verify_remus.py`, so the course
+  `opening_book.txt`. Each also holds a copy of `verify_remus.py`, so the workshop
   designer can run the student pairs' test on the instructor's engine;
   `make_call_trees.py` skips it and `make_student_engines.py` copies it unchanged. Each engine's `README.md` and `call_tree.svg` live in
   `misc/engines/Remus1` to `misc/engines/Remus4`.
@@ -214,7 +214,7 @@ The engine must run without Lucas Chess or `python-chess` installed.
   smarter, the new code goes into the same file. Never add version numbers to file
   names.
 - Four top folders hold everything that is not an engine folder (David, 2026-11-03):
-  - `docs/`, the plan of the course: `five_day_syllabus.md`, the whole week on
+  - `docs/`, the plan of the workshop: `five_day_syllabus.md`, the whole week on
     one page, and one folder per day, such as `Day 1 - Remus1 plays legal chess`,
     with `Day_1_Syllabus.md` and a folder per period (`period1` to `period4`) that
     holds `Day_1_Period_1_Syllabus.md`. The day and period pages follow
@@ -232,13 +232,13 @@ The engine must run without Lucas Chess or `python-chess` installed.
       negamax, and alpha-beta videos page.
     - `misc/briefs/`: the one-page management brief and the one-page student
       and parent brief, as PDFs.
-  - `admin/`: the course designer's scripts, with a `README.md`. Every course
+  - `admin/`: the workshop designer's scripts, with a `README.md`. Every workshop
     designer tool lives here, finds the top Remus folder from its own path, and
     runs from the top folder with `uv run admin/<name>.py`. List every script in
     `admin/README.md` with what it does (David, 2026-10-28). Git ignores
     `admin/` (David, 2026-11-04): it stays on David's computer only, and no
     public page links to it.
-- David keeps a snapshot of the course before the Remus engines in
+- David keeps a snapshot of the workshop before the Remus engines in
   `.archive/` at the top of his Remus folder (David, 2026-11-03). Git ignores it.
   Never edit or delete it.
 - **Say "student pairs"** (David, 2026-10-29). The students work in pairs, and every
@@ -268,7 +268,7 @@ Pick a move by looking ahead with alpha-beta search.
 """
 ```
 
-A course designer script in `admin/` starts with the shebang line
+A workshop designer script in `admin/` starts with the shebang line
 `#!/usr/bin/env -S uv run` above its docstring, so on Linux and macOS a script marked
 executable runs with the project's environment and no manual activation.
 
@@ -360,7 +360,7 @@ Short helper functions may use a one-line docstring:
     comprehension. Check every item with a loop and a yes-or-no variable, never
     with `any()` or `all()` over a generator expression.
   - `min()` and `max()` of two numbers, and `sum()` of a list, are fine.
-  - The course designer scripts in `admin/` are tools no student reads, so
+  - The workshop designer scripts in `admin/` are tools no student reads, so
     they may keep the compact forms.
 
 ## Comments
@@ -464,7 +464,7 @@ and negative numbers and scores with the ordinary hyphen.
 
 ## Editorial and style guidelines
 
-These apply to the workshop text, course plan, README, docstrings, comments, and chat replies.
+These apply to the workshop text and plan, README, docstrings, comments, and chat replies.
 
 1. **Avoid robotic abstractions and nested clauses.** Prefer direct, active verbs over
    phrasal verbs like "comes with" or "results in." Say who applies a rule or what the

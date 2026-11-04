@@ -1,6 +1,6 @@
 # misc
 
-The pages people read during the workshop, beside the plan of the course in `docs/`.
+The pages people read during the workshop, beside the plan of the workshop in `docs/`.
 Students, teachers, and parents open these pages in VS Code or on GitHub. None of them
 holds code to type or run.
 

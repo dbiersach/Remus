@@ -67,7 +67,7 @@ Lucas Chess starts `main()` in `uci.py`.
 
 Tests, perft, FEN, notation, undo, the repetition and fifty-move rules, and the
 principal variation. Lucas Chess sends `position startpos moves ...` for every game
-from the starting position, which is all Remus2 plays. The course designer's
+from the starting position, which is all Remus2 plays. The workshop designer's
 `verify_engines.py` checks Remus2 from
 outside: its perft counts match the published counts from six positions, and it
 finds a forced mate in all ten mate puzzles (the key move in nine).
