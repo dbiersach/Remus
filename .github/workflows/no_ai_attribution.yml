@@ -1,0 +1,59 @@
+name: No AI attribution
+
+# Fail when a commit on a pull request or on main credits an AI tool, in its
+# author, its committer, or its message. A GitHub squash merge adds a
+# "Co-authored-by" line for every branch author other than the person who
+# merges, so a branch commit made as Claude would put that line on main. Fail
+# also when a pull request's title or description credits an AI tool, including
+# in an HTML comment that GitHub hides from readers. Editing a pull request
+# reruns the check, so a corrected description clears it.
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check every new commit
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          pattern='co-authored-by:.*(claude|anthropic|openai|chatgpt|copilot)|generated (with|by) .*(claude|chatgpt|copilot)|claude-session:|claude-projects-attribution|claude\.ai/code|noreply@anthropic\.com|🤖'
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BASE" 2>/dev/null; then
+            range="$HEAD"
+          else
+            range="$BASE..$HEAD"
+          fi
+          found=0
+          for commit in $(git rev-list "$range"); do
+            who=$(git log -1 --format='%an <%ae> / %cn <%ce>' "$commit")
+            if echo "$who" | grep -Eiq 'anthropic|claude'; then
+              echo "::error::$commit is made as $who"
+              found=1
+            fi
+            if git log -1 --format=%B "$commit" | grep -Eiq "$pattern"; then
+              echo "::error::$commit credits an AI tool in its message"
+              found=1
+            fi
+          done
+          exit $found
+      - name: Check the pull request title and description
+        if: github.event_name == 'pull_request'
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+          BODY: ${{ github.event.pull_request.body }}
+        run: |
+          pattern='co-authored-by:.*(claude|anthropic|openai|chatgpt|copilot)|generated (with|by) .*(claude|chatgpt|copilot)|claude-session:|claude-projects-attribution|claude\.ai/code|noreply@anthropic\.com|🤖'
+          if printf '%s\n%s\n' "$TITLE" "$BODY" | grep -Eiq "$pattern"; then
+            echo "::error::the pull request title or description credits an AI tool"
+            printf '%s\n%s\n' "$TITLE" "$BODY" | grep -Ein "$pattern"
+            exit 1
+          fi
