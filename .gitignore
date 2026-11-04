@@ -31,3 +31,7 @@ dist/
 
 # The course designer's tools, kept on David's computer only
 /admin/
+
+# David's commit hook and GitHub workflow, kept on his computer only
+/.githooks/
+/.github/

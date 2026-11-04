@@ -65,12 +65,7 @@ first commit of every session:
 ```bash
 git config user.name "David Biersach"
 git config user.email "dbiersach@gmail.com"
-git config core.hooksPath .githooks
 ```
 
-- `.githooks/commit-msg` refuses a commit made as Claude or a message that credits an
-  AI tool.
-- `.github/workflows/no_ai_attribution.yml` fails a pull request whose commits do
-  either or whose title or description credits an AI tool, and fails a push to main
-  whose commits do either. Before a push, run `git log -1 --format='%an <%ae>%n%B'`
-  and confirm the author is David and the message holds no `Co-authored-by` line.
+Before a push, run `git log -1 --format='%an <%ae>%n%B'` and confirm the author is
+David and the message holds no `Co-authored-by` line and no credit to an AI tool.
