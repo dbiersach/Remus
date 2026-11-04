@@ -1,10 +1,4 @@
-# Five-day syllabus (draft)
-
-This is a draft for the course designer's review. It plans the one-week workshop
-period by period, and each engine carries the number of its day: the student pairs type
-in Remus1 on Day 1, turn it into Remus2 on Day 2, add the new lines of Remus3 on Day 3
-and of Remus4 on Day 4, and aim the engine's ideas at a science problem on Day 5. The open questions at the end list the choices the draft makes that
-the course designer has not settled yet.
+# Five-day syllabus
 
 Each day also has its own folder in `docs/`, such as `Day 1 - Remus1 plays legal
 chess`, with a page for the day and a page for each period.

@@ -6,7 +6,7 @@ the top `engines_instructor/` folder: Remus1, a random legal mover that ends Day
 Remus3, and Remus4;
 [`misc/engines/remus_versions.md`](misc/engines/remus_versions.md) lists what each
 one adds, and [`docs/five_day_syllabus.md`](docs/five_day_syllabus.md)
-holds the draft plan of the five days.
+holds the plan of the five days.
 
 This file holds every project and style rule, so that every AI tool used with this
 repository builds Remus the same way. `CLAUDE.md` imports it and adds only the rules
