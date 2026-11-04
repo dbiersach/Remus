@@ -47,9 +47,9 @@ Lines 50 and 51, `if __name__ == "__main__":` and `main()`, run `main()` only wh
 | --- | --- |
 | 3:00 to 3:10 | How Lucas Chess and Remus talk: read [`uci.md`](../../../misc/chess_tutor/uci.md) together. A move is legal only if the mover's own king is not attacked after it. |
 | 3:10 to 3:50 | Type `search.py` of `engines_instructor/Remus1` (12 code lines), whose `think()` plays a random legal move, then `uci.py` (44 code lines). Run `uci.py` and talk to it by hand, as in the "Try it" part of `uci.md`. |
-| 3:50 to 4:05 | Run `check_my_remus.py` in `engines/Remus1` and fix any file it names until it reports that Remus1 passes every check. Then add `engines\Remus1\remus.bat` to Lucas Chess as "My Remus1" (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
-| 4:05 to 4:30 | Each student plays My Remus1 (Part 4 of the guide). Every move it makes is legal, and nearly every move is bad. |
+| 3:50 to 4:05 | Run `verify_remus.py` in `engines/Remus1` and fix any file it names until it reports that Remus1 passes every test. Then add `engines\Remus1\remus.bat` to Lucas Chess (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
+| 4:05 to 4:30 | Each student plays their version of Remus1 (Part 4 of the guide). Every move it makes is legal, and nearly every move is bad. |
 
 ## Done when
 
-My Remus1 plays a whole legal game in Lucas Chess.
+The student pair's Remus1 plays a whole legal game in Lucas Chess.

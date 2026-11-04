@@ -8,7 +8,7 @@ Remus2 can score a position in centipawns.
 
 ## The big picture
 
-Today the student pair turns Remus1 into Remus2, and all of Day 2's typing goes into the folder `engines/Remus2`. The period opens in File Explorer: copy every file of `engines/Remus1` into `engines/Remus2`, and say yes when Windows asks to replace `remus.bat`. From then on, edit only the files in `engines/Remus2`. `engines/Remus1` stays as it is, so My Remus1 still plays in Lucas Chess.
+Today the student pair turns Remus1 into Remus2, and all of Day 2's typing goes into the folder `engines/Remus2`. The period opens in File Explorer: copy every file of `engines/Remus1` into `engines/Remus2`, and say yes when Windows asks to replace `remus.bat` and `verify_remus.py`. From then on, edit only the files in `engines/Remus2`. `engines/Remus1` stays as it is, so their Remus1 still plays in Lucas Chess.
 
 Remus2 needs a way to tell a good position from a bad one before it can look ahead, so this period adds one new file, `evaluation.py`. It scores a position in centipawns, hundredths of a pawn: a pawn is worth 100, a knight or bishop 300, a rook 500, and a queen 900. On top of the material, each piece gets a bonus or a penalty for the square it stands on, read from a piece-square table: a White knight on e4 gets 20, the same knight on its home square g1 gets -40, and on the corner square a1 it gets -50. The score is from the side to move's point of view, so a position good for White scores above 0 when White is to move and below 0 when Black is to move.
 

@@ -82,7 +82,7 @@ evaluation terms.
 
 ## Play it
 
-The student pair adds its own `engines/Remus3/remus.bat` to Lucas Chess as "My Remus3", as the
+The student pair adds its own `engines/Remus3/remus.bat` to Lucas Chess, as the
 [Lucas Chess guide](../../lucas_chess/lucas_chess_guide.md) shows. It names itself
 `Remus3`. While a game follows a book line, it plays the book move at once; after that
 it searches.

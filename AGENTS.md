@@ -180,8 +180,8 @@ The engine must run without Lucas Chess or `python-chess` installed.
   student pairs copy from. Each holds only the files the engine runs
   (David, 2026-11-03): its Python files and `remus.bat` (the one line `uv run uci.py`;
   Lucas Chess starts it in its own folder). Remus3 and Remus4 also hold
-  `opening_book.txt`. Each also holds a copy of `check_my_remus.py`, so the course
-  designer can run the student pairs' check on the instructor's engine;
+  `opening_book.txt`. Each also holds a copy of `verify_remus.py`, so the course
+  designer can run the student pairs' test on the instructor's engine;
   `make_call_trees.py` skips it and `make_student_engines.py` copies it unchanged. Each engine's `README.md` and `call_tree.svg` live in
   `misc/engines/Remus1` to `misc/engines/Remus4`.
   Each engine names itself in `uci.py` (`id name Remus2`). Modules import each other
@@ -190,8 +190,8 @@ The engine must run without Lucas Chess or `python-chess` installed.
   folder.
 - The top `engines/` folder holds the student pair's own engines (David,
   2026-11-03): four folders, `engines/Remus1` to `engines/Remus4`, each holding only
-  `remus.bat` and `check_my_remus.py` in the repository. `check_my_remus.py` is the
-  same file in all four: run with the Run button, it checks the student pair's
+  `remus.bat` and `verify_remus.py` in the repository. `verify_remus.py` is the
+  same file in all four: run with the Run button, it tests the student pair's
   finished version (files, perft, evaluation, a depth-4 search, UCI) against the
   instructor's numbers, which it holds. Update those numbers after any engine change
   that moves them. On Day 1 the student pair creates every

@@ -53,9 +53,9 @@
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:20 | Add `principal_variation()` and the `pv` of the `info` line (about 13 code lines). Run `uci.py` and send `position startpos moves a2a3` and `go movetime 5000` to `engines/Remus3` and to `engines/Remus2` (1. a3 is in no line of the book, so Remus3 searches): the `info` lines show how much deeper Remus3 searches in the same time, and the line it expects. |
-| 3:20 to 3:50 | Run `check_my_remus.py` in `engines/Remus3` until Remus3 passes every check. Then add `engines\Remus3\remus.bat` to Lucas Chess as "My Remus3" and play one round of My Remus3 against My Remus2, two 5-minute games. |
-| 3:50 to 4:10 | One round of My Remus3 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
-| 4:10 to 4:30 | Each student plays My Remus3 (Part 4 of the guide), human against computer, until the end of the day. |
+| 3:20 to 3:50 | Run `verify_remus.py` in `engines/Remus3` until Remus3 passes every test. Then add `engines\Remus3\remus.bat` to Lucas Chess and play one round of their Remus3 against their Remus2, two 5-minute games. |
+| 3:50 to 4:10 | One round of their Remus3 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
+| 4:10 to 4:30 | Each student plays their version of Remus3 (Part 4 of the guide), human against computer, until the end of the day. |
 
 [`Day_3_Period_4_Syllabus.md`](period4/Day_3_Period_4_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.
 

@@ -8,7 +8,7 @@ Remus3's evaluation knows pawn structure, the bishop pair, and where rooks belon
 
 ## The big picture
 
-Today the student pair turns Remus2 into Remus3, and all of Day 3's typing goes into the folder `engines/Remus3`. The period opens in File Explorer: copy every file of `engines/Remus2` into `engines/Remus3`, and say yes when Windows asks to replace `remus.bat`. From then on, edit only the files in `engines/Remus3`. `engines/Remus2` stays as it is, so My Remus2 still plays, and in Period 4 My Remus3 plays it.
+Today the student pair turns Remus2 into Remus3, and all of Day 3's typing goes into the folder `engines/Remus3`. The period opens in File Explorer: copy every file of `engines/Remus2` into `engines/Remus3`, and say yes when Windows asks to replace `remus.bat` and `verify_remus.py`. From then on, edit only the files in `engines/Remus3`. `engines/Remus2` stays as it is, so their Remus2 still plays, and in Period 4 their Remus3 plays it.
 
 This period teaches the evaluation three ideas a chess player learns early. Two pawns on one file (doubled pawns) and a pawn with no friendly pawn on either neighboring file (an isolated pawn) are weak, and a pawn that no enemy pawn can stop (a passed pawn) grows stronger the closer it gets to promotion. Two bishops together are worth more than a bishop and a knight, because together they cover both colors of square. And a rook belongs on the seventh rank, where it attacks the pawns that have not moved. `evaluation.py` gets all three.
 

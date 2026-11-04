@@ -46,10 +46,10 @@ Change the name line to `print("id name Remus4")` (line 36). Remus4 is complete,
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 3:55 | Run `check_my_remus.py` in `engines/Remus4` until Remus4 passes every check. Then add `engines\Remus4\remus.bat` to Lucas Chess as "My Remus4" and play one round of My Remus4 against My Remus3, two 5-minute games. |
-| 3:55 to 4:15 | One round of My Remus4 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 3's. |
-| 4:15 to 4:30 | Each student plays My Remus4 (Part 4 of the guide), human against computer, until the end of the day. |
+| 3:30 to 3:55 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then add `engines\Remus4\remus.bat` to Lucas Chess and play one round of their Remus4 against their Remus3, two 5-minute games. |
+| 3:55 to 4:15 | One round of their Remus4 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 3's. |
+| 4:15 to 4:30 | Each student plays their version of Remus4 (Part 4 of the guide), human against computer, until the end of the day. |
 
 ## Done when
 
-My Remus4 has played one round against My Remus3 and one against Stockfish 1500, and each student has played it.
+The student pair's Remus4 has played one round against its Remus3 and one against Stockfish 1500, and each student has played it.

@@ -54,8 +54,7 @@ with **Ctrl+V**, and click **Open**.
 ![Paste the path of remus.bat into the File name box](../lucas_chess/04_type_the_path.jpg)
 
 **Step 5.** Lucas starts Remus and asks for its name. Remus2 says `id name Remus2`,
-so both boxes start as "Remus2". Name it "My Remus2" instead, so every engine you
-add reads "My" and its version: type it in **Identifier** and in **Name**.
+so both boxes start as "Remus2". Keep that name.
 Leave every other box at 0, and check that the last line shows your `remus.bat`.
 Click **Accept**.
 

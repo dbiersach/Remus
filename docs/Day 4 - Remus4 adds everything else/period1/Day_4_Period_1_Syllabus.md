@@ -8,7 +8,7 @@ Remus4 sees draws by repetition and the fifty-move rule, and spends less time on
 
 ## The big picture
 
-Today the student pair turns Remus3 into Remus4, and all of Day 4's typing goes into the folder `engines/Remus4`. The period opens in File Explorer: copy every file of `engines/Remus3` into `engines/Remus4`, `opening_book.txt` included, and say yes when Windows asks to replace `remus.bat`. From then on, edit only the files in `engines/Remus4`. `engines/Remus3` stays as it is, so My Remus3 still plays, and in Period 4 My Remus4 plays it.
+Today the student pair turns Remus3 into Remus4, and all of Day 4's typing goes into the folder `engines/Remus4`. The period opens in File Explorer: copy every file of `engines/Remus3` into `engines/Remus4`, `opening_book.txt` included, and say yes when Windows asks to replace `remus.bat` and `verify_remus.py`. From then on, edit only the files in `engines/Remus4`. `engines/Remus3` stays as it is, so their Remus3 still plays, and in Period 4 their Remus4 plays it.
 
 Remus3 cannot see a draw by repetition or by the fifty-move rule, so it can throw away a won game by repeating moves, or miss a draw that would save a lost one. This period gives the position a fifth part, the halfmove clock: the number of moves since the last pawn move or capture. At 100 halfmoves, fifty moves by each side, the game is drawn. The search also keeps a history, the keys of every position on the way from the start of the game to the position it is searching, and scores a position that is already in the history as a draw.
 

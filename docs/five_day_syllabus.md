@@ -27,7 +27,7 @@ Day 5.
 
 - **One folder for each version.** The top `engines/` folder holds four
   folders, `Remus1` to `Remus4`, for the student pair's own code. Each starts with
-  only `remus.bat` and `check_my_remus.py`. On Day 1 the student
+  only `remus.bat` and `verify_remus.py`. On Day 1 the student
   pair creates every file of Remus1 in `engines/Remus1`. At the start of Day 2 the
   student pair copies every file of `engines/Remus1` into `engines/Remus2` in File
   Explorer, then edits those copies into Remus2. Day 3 starts the same way, from
@@ -46,10 +46,10 @@ Day 5.
   the instructor's. The student pair still types every line itself: from Day 2 on,
   the only copying in File Explorer is the student pair's own files from the day
   before, plus `opening_book.txt`, which is data, on Day 3.
-- **Check each finished version.** Every `engines/RemusN` folder starts with
-  `check_my_remus.py`, which the student pair runs but never types. Run with the
+- **Verify each finished version.** Every `engines/RemusN` folder starts with
+  `verify_remus.py`, which the student pair runs but never types. Run with the
   Run Python File button once the version is typed, it counts the legal moves from
-  six published positions and compares them with the published counts, checks the
+  six published positions and compares them with the published counts, tests the
   evaluation and a four-move search against the instructor's engine (Remus2 to
   Remus4), and talks to `uci.py` the way Lucas Chess does. At the first difference
   it stops and names the files to look at.
@@ -60,9 +60,9 @@ Day 5.
   red error that names the file and the line. Because each module imports the ones
   before it, running the newest file also checks every file it imports.
 - **Run only your own engines.** Lucas Chess holds the student pair's own engines,
-  `engines\Remus1\remus.bat` added as "My Remus1", and so on for each version.
+  `engines\Remus1\remus.bat` for Remus1, and so on for each version.
   Students never run code from `engines_instructor/`: they read it, and
-  `check_my_remus.py` compares their engine with the instructor's numbers. Only the
+  `verify_remus.py` compares their engine with the instructor's numbers. Only the
   teacher runs an instructor engine, as the demonstration on Day 1.
 
 ## Day 1: Remus1, legal chess at random
@@ -76,7 +76,7 @@ plays a random legal move, and the student pair plays it in Lucas Chess.
 | --- | --- |
 | 8:30 to 9:15 | Setup, steps 1 to 6 of the top `README.md`: install Git, VS Code, and `uv`, clone the repository, run `uv sync`, install the extensions, and open `Remus.code-workspace`. This is the only time anyone types a git or `uv` command. |
 | 9:15 to 9:30 | The teacher adds the instructor's `engines_instructor/Remus2/remus.bat` to Lucas Chess (Part 2 of the [Lucas Chess guide](../misc/lucas_chess/lucas_chess_guide.md)) and starts it against Stockfish 1500 (Part 3), so the class sees the engine it will build by tomorrow afternoon. |
-| 9:30 to 9:40 | Each student pair opens its `engines/Remus1` folder in VS Code. The folder holds `remus.bat`, the one line that starts the engine, and `check_my_remus.py`, which checks the finished engine; the student pair types every other file. |
+| 9:30 to 9:40 | Each student pair opens its `engines/Remus1` folder in VS Code. The folder holds `remus.bat`, the one line that starts the engine, and `verify_remus.py`, which tests the finished engine; the student pair types every other file. |
 | 9:40 to 10:00 | Type `board.py` (15 code lines): the piece numbers, the starting position, and square names. The reminder before typing: row 0 is rank 8, column 0 is file a, so a8 is square 0 and h1 is square 63. |
 
 ### P2, 10:30 to 12:00: Moves and attacks
@@ -101,8 +101,8 @@ plays a random legal move, and the student pair plays it in Lucas Chess.
 | --- | --- |
 | 3:00 to 3:10 | How Lucas Chess and Remus talk: read [`uci.md`](../misc/chess_tutor/uci.md) together. A move is legal only if the mover's own king is not attacked after it. |
 | 3:10 to 3:50 | Type `search.py` of `engines_instructor/Remus1` (12 code lines), whose `think()` plays a random legal move, then `uci.py` (44 code lines). Run `uci.py` and talk to it by hand, as in the "Try it" part of `uci.md`. |
-| 3:50 to 4:05 | Run `check_my_remus.py` in `engines/Remus1` and fix any file it names until it reports that Remus1 passes every check. Then add `engines\Remus1\remus.bat` to Lucas Chess as "My Remus1" (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
-| 4:05 to 4:30 | Each student plays My Remus1 (Part 4 of the guide). Every move it makes is legal, and nearly every move is bad. |
+| 3:50 to 4:05 | Run `verify_remus.py` in `engines/Remus1` and fix any file it names until it reports that Remus1 passes every test. Then add `engines\Remus1\remus.bat` to Lucas Chess (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
+| 4:05 to 4:30 | Each student plays their version of Remus1 (Part 4 of the guide). Every move it makes is legal, and nearly every move is bad. |
 
 **Checkpoint:** Remus1 is complete, 193 code lines, and it plays a legal game in Lucas
 Chess.
@@ -135,15 +135,15 @@ Stockfish 1500 in Lucas Chess.
 | --- | --- |
 | 1:00 to 1:10 | Reminder of checkmate and stalemate: a side with no legal move has lost if in check, and draws if not. |
 | 1:10 to 2:10 | Type `alpha_beta()` and `think()` (about 43 code lines), which finish `search.py`. Change the name line in `uci.py` to `id name Remus2`. |
-| 2:10 to 2:30 | Run `uci.py` and send `position startpos` and `go movetime 2000`: the `info` lines show Remus2 searching one move deeper at a time. Then run `check_my_remus.py` in `engines/Remus2` and fix any file it names until Remus2 passes every check. |
+| 2:10 to 2:30 | Run `uci.py` and send `position startpos` and `go movetime 2000`: the `info` lines show Remus2 searching one move deeper at a time. Then run `verify_remus.py` in `engines/Remus2` and fix any file it names until Remus2 passes every test. |
 
 ### P4, 3:00 to 4:30: Remus2 against Stockfish 1500
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:25 | Add `engines\Remus2\remus.bat` to Lucas Chess as "My Remus2" and start one round of My Remus2 against My Remus1, two 5-minute games (Part 3 of the guide), to see what the search buys over a random choice. |
-| 3:25 to 3:50 | One round of My Remus2 against Stockfish 1500, two 5-minute games. Each student pair reads its results tab. |
-| 3:50 to 4:30 | Each student plays My Remus2 (Part 4 of the guide), human against computer, until the end of the day. |
+| 3:00 to 3:25 | Add `engines\Remus2\remus.bat` to Lucas Chess and start one round of their Remus2 against their Remus1, two 5-minute games (Part 3 of the guide), to see what the search buys over a random choice. |
+| 3:25 to 3:50 | One round of their Remus2 against Stockfish 1500, two 5-minute games. Each student pair reads its results tab. |
+| 3:50 to 4:30 | Each student plays their version of Remus2 (Part 4 of the guide), human against computer, until the end of the day. |
 
 **Checkpoint:** Remus2 is complete, 342 code lines, and it plays two full games
 against Stockfish 1500.
@@ -187,9 +187,9 @@ the lines of one period never call a function of a later period.
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:20 | Add `principal_variation()` and the `pv` of the `info` line (about 13 code lines). Run `uci.py` and send `position startpos moves a2a3` and `go movetime 5000` to `engines/Remus3` and to `engines/Remus2` (1. a3 is in no line of the book, so Remus3 searches): the `info` lines show how much deeper Remus3 searches in the same time, and the line it expects. |
-| 3:20 to 3:50 | Run `check_my_remus.py` in `engines/Remus3` until Remus3 passes every check. Then add `engines\Remus3\remus.bat` to Lucas Chess as "My Remus3" and play one round of My Remus3 against My Remus2, two 5-minute games. |
-| 3:50 to 4:10 | One round of My Remus3 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
-| 4:10 to 4:30 | Each student plays My Remus3 (Part 4 of the guide), human against computer, until the end of the day. |
+| 3:20 to 3:50 | Run `verify_remus.py` in `engines/Remus3` until Remus3 passes every test. Then add `engines\Remus3\remus.bat` to Lucas Chess and play one round of their Remus3 against their Remus2, two 5-minute games. |
+| 3:50 to 4:10 | One round of their Remus3 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
+| 4:10 to 4:30 | Each student plays their version of Remus3 (Part 4 of the guide), human against computer, until the end of the day. |
 
 **Checkpoint:** Remus3 is complete, 535 code lines, and it has played Remus2 and
 Stockfish 1500.
@@ -229,9 +229,9 @@ it in P4.
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 3:55 | Run `check_my_remus.py` in `engines/Remus4` until Remus4 passes every check. Then add `engines\Remus4\remus.bat` to Lucas Chess as "My Remus4" and play one round of My Remus4 against My Remus3, two 5-minute games. |
-| 3:55 to 4:15 | One round of My Remus4 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 3's. |
-| 4:15 to 4:30 | Each student plays My Remus4 (Part 4 of the guide), human against computer, until the end of the day. |
+| 3:30 to 3:55 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then add `engines\Remus4\remus.bat` to Lucas Chess and play one round of their Remus4 against their Remus3, two 5-minute games. |
+| 3:55 to 4:15 | One round of their Remus4 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 3's. |
+| 4:15 to 4:30 | Each student plays their version of Remus4 (Part 4 of the guide), human against computer, until the end of the day. |
 
 **Checkpoint:** Remus4 is complete, 694 code lines, and it has played Remus3 and
 Stockfish 1500.

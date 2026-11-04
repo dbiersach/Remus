@@ -1,9 +1,9 @@
-"""check_my_remus.py
+"""verify_remus.py
 
-Check the Remus in this folder without playing a game. Run this file with the Run
+Verify the Remus in this folder without playing a game. Run this file with the Run
 Python File button once the student pair has typed every file of this version.
 
-The check runs in steps and stops at the first step that fails, naming the file
+The test runs in steps and stops at the first step that fails, naming the file
 to look at:
 
 1. Every file of this version is in the folder.
@@ -16,7 +16,7 @@ to look at:
 5. UCI: uci.py answers the commands Lucas Chess sends.
 
 The same file sits in engines/Remus1 to engines/Remus4. It reads the name of its
-own folder to know which version it checks.
+own folder to know which version it tests.
 """
 
 import importlib
@@ -83,8 +83,8 @@ PERFT_POSITIONS = (
     ),
 )
 
-# Positions for the evaluation and search checks
-CHECK_POSITIONS = (
+# Positions for the evaluation and search tests
+TEST_POSITIONS = (
     ("start", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -"),
     ("italian", "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq -"),
     (
@@ -95,14 +95,14 @@ CHECK_POSITIONS = (
     ("position 5", "rnbq1k1r/pp1Pbppp/2p5/8/2B5/8/PPP1NnPP/RNBQK2R w KQ -"),
 )
 
-# The instructor's scores of CHECK_POSITIONS, in the same order
+# The instructor's scores of TEST_POSITIONS, in the same order
 EXPECTED_SCORES = {
     "Remus2": [0, 0, 100, 580, 65],
     "Remus3": [0, 0, 100, 575, 185],
     "Remus4": [0, -6, 100, 652, 160],
 }
 
-# The instructor's search of each of CHECK_POSITIONS, four moves deep:
+# The instructor's search of each of TEST_POSITIONS, four moves deep:
 # (best move, score, positions searched)
 SEARCH_DEPTH = 4
 EXPECTED_SEARCHES = {
@@ -131,7 +131,7 @@ EXPECTED_SEARCHES = {
 
 
 def fail(message: str):
-    """Print what went wrong and stop the check."""
+    """Print what went wrong and stop the test."""
     print()
     print("PROBLEM: " + message)
     sys.exit(1)
@@ -188,8 +188,8 @@ def perft(position, depth: int, engine) -> int:
 
 class StoppedClock:
     """
-    A clock for the search check. It reads 0 until stop is True, then reads a
-    time far in the future, so think() ends after the depth the check asks for.
+    A clock for the search test. It reads 0 until stop is True, then reads a
+    time far in the future, so think() ends after the depth the test asks for.
     """
 
     stop = False
@@ -206,7 +206,7 @@ def search_to_depth(position, engine) -> tuple[str, int, int]:
     score, and the number of positions searched.
 
     think() prints one "info depth" line per depth and stops when its clock runs
-    out. This check hands think() a clock that runs out right after the "info
+    out. This test hands think() a clock that runs out right after the "info
     depth 4" line, and reads that line instead of printing it.
     """
     search = engine["search"]
@@ -232,7 +232,7 @@ def search_to_depth(position, engine) -> tuple[str, int, int]:
     return move_name(move, engine["board"]), score, nodes
 
 
-def check_files():
+def verify_files():
     """Step 1: every file of this version is in the folder."""
     if VERSION not in FILES:
         fail(f"this file must sit in engines/Remus1 to Remus4, not in {VERSION}")
@@ -258,7 +258,7 @@ def load_engine() -> dict:
     return engine
 
 
-def check_perft(engine):
+def verify_perft(engine):
     """Step 2: count the legal move sequences and compare with the published."""
     print("2. Move generation (perft):")
     for name, fen, depth, expected in PERFT_POSITIONS:
@@ -272,28 +272,28 @@ def check_perft(engine):
         )
         if count != expected:
             fail(
-                "the move counts differ. Check move_generation.py, make_move.py, "
+                "the move counts differ. Look at move_generation.py, make_move.py, "
                 "attacks.py, and board.py"
             )
 
 
-def check_evaluation(engine):
+def verify_evaluation(engine):
     """Step 3: score five positions and compare with the instructor's engine."""
     print("3. Evaluation:")
-    for index in range(len(CHECK_POSITIONS)):
-        name, fen = CHECK_POSITIONS[index]
+    for index in range(len(TEST_POSITIONS)):
+        name, fen = TEST_POSITIONS[index]
         score = engine["evaluation"].evaluate(from_fen(fen, engine["board"]))
         expected = EXPECTED_SCORES[VERSION][index]
         print(f"   {name:<11} score {score:>5} (expected {expected})")
         if score != expected:
-            fail("the scores differ. Check evaluation.py and its tables")
+            fail("the scores differ. Look at evaluation.py and its tables")
 
 
-def check_search(engine):
+def verify_search(engine):
     """Step 4: search five positions and compare with the instructor's engine."""
     print(f"4. Search, {SEARCH_DEPTH} moves deep:")
-    for index in range(len(CHECK_POSITIONS)):
-        name, fen = CHECK_POSITIONS[index]
+    for index in range(len(TEST_POSITIONS)):
+        name, fen = TEST_POSITIONS[index]
         found = search_to_depth(from_fen(fen, engine["board"]), engine)
         expected = EXPECTED_SEARCHES[VERSION][index]
         print(
@@ -301,10 +301,10 @@ def check_search(engine):
             f"(expected {expected[0]} score {expected[1]} nodes {expected[2]:,})"
         )
         if found != expected:
-            fail("the search differs. Check search.py and the files it imports")
+            fail("the search differs. Look at search.py and the files it imports")
 
 
-def check_uci():
+def verify_uci():
     """Step 5: send uci.py the commands Lucas Chess sends."""
     commands = "uci\nisready\nposition startpos moves e2e4\ngo movetime 500\nquit\n"
     answer = subprocess.run(
@@ -329,16 +329,16 @@ def check_uci():
 
 def main():
     started = time.perf_counter()
-    print(f"Checking {VERSION} in {FOLDER}")
-    check_files()
+    print(f"Verifying {VERSION} in {FOLDER}")
+    verify_files()
     engine = load_engine()
-    check_perft(engine)
+    verify_perft(engine)
     if VERSION != "Remus1":
-        check_evaluation(engine)
-        check_search(engine)
-    check_uci()
+        verify_evaluation(engine)
+        verify_search(engine)
+    verify_uci()
     print()
-    print(f"{VERSION} passes every check")
+    print(f"{VERSION} passes every test")
     print(f"Total run time (sec): {time.perf_counter() - started:.3f}")
 
 
