@@ -25,12 +25,14 @@ because a scientist needs to know when the pattern alone cannot decide.
 | Several moves with the best score | Several sets with the best score: the pattern cannot decide |
 | Perft counts from published positions | Known mixtures: does the search name the true phases? |
 
-This file uses the standard library only and does not import the engine: it reuses
+This file uses common Python modules and does not import the engine: it reuses
 the engine's ideas, not its code.
 """
 
 import random
 from dataclasses import dataclass, field
+
+import matplotlib.pyplot as plt
 
 TOLERANCE = 0.3  # Two peaks closer than this many degrees count as the same peak
 MAX_PHASES = 3  # The most phases one powder may hold, which is the search depth
@@ -308,6 +310,57 @@ def show_benchmark(name: str, counts: dict[str, int]) -> None:
     )
 
 
+def show_answer_graph(phases: Phases, measured: list[float], truth: Phases) -> None:
+    """Draw the measured peaks above the peaks that a set of phases predicts."""
+    predicted = predicted_peaks(phases)
+    _, ax = plt.subplots(figsize=(12, 4.5))
+    ax.plot([], [], color="tab:green", linewidth=3, label="Measured, explained")
+    ax.plot([], [], color="tab:orange", linewidth=3, label="Measured, left over")
+    ax.plot([], [], color="tab:blue", linewidth=3, label="Predicted, in the pattern")
+    ax.plot([], [], color="tab:red", linewidth=3, label="Predicted, missing")
+    for peak in measured:
+        color = "tab:green" if matches(peak, predicted) else "tab:orange"
+        ax.plot([peak, peak], [0, 1], color=color, linewidth=3)
+    for peak in predicted:
+        color = "tab:blue" if matches(peak, measured) else "tab:red"
+        ax.plot([peak, peak], [-1, 0], color=color, linewidth=3)
+    ax.axhline(0, color="black", linewidth=1)
+    ax.set_yticks((-0.5, 0.5), ("Predicted", "Measured"))
+    ax.set_xlabel("Angle 2-theta (degrees)")
+    ax.set_title(
+        f"Greedy answer: {phases}, score {score(phases, measured)}. "
+        f"True phases: {truth}"
+    )
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncols=4)
+    plt.tight_layout()
+    print("Close the graph window to continue.")
+    plt.show()
+
+
+def show_verdict_graph(greedy: dict[str, int], searched: dict[str, int]) -> None:
+    """Draw how many powders greedy and the search get right, unsure, and wrong."""
+    colors = {"right": "tab:green", "can't tell": "tab:orange", "wrong": "tab:red"}
+    _, ax = plt.subplots(figsize=(12, 4.5))
+    for verdict, color in colors.items():
+        ax.barh(0, 0, color=color, label=verdict)  # An empty bar names the legend
+    for row, counts in enumerate((greedy, searched)):
+        left = 0
+        for verdict, color in colors.items():
+            count = counts[verdict]
+            ax.barh(row, count, left=left, color=color, edgecolor="white")
+            if count > 0:
+                ax.text(left + count / 2, row, str(count), ha="center", va="center")
+            left += count
+    ax.set_yticks((0, 1), ("Greedy", "Search"))
+    ax.invert_yaxis()  # Greedy goes at the top
+    ax.set_xlabel(f"{TRIALS} powders whose phases are known")
+    ax.set_title('The search says "can\'t tell" where greedy guesses wrong')
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncols=3)
+    plt.tight_layout()
+    print("Close the graph window to continue.")
+    plt.show()
+
+
 def main():
     measured, truth = make_pattern(SILVER_POWDER)
     print(f"Powder {SILVER_POWDER} shows {len(measured)} peaks: {measured}")
@@ -316,17 +369,21 @@ def main():
         f"  Greedy says:  {greedy_phases(measured)}  (expected: gold, which is wrong)"
     )
     print(f"Benchmark: {TRIALS} powders of 1 to {MAX_PHASES} phases")
-    show_benchmark("Greedy", benchmark(greedy_answer))
+    greedy_counts = benchmark(greedy_answer)
+    show_benchmark("Greedy", greedy_counts)
+    show_answer_graph(greedy_phases(measured), measured, truth)
     hunt = run_search(measured)
     print(f"Powder {SILVER_POWDER} again")
     print(f"  Search says:  {hunt.sets}, each with score {hunt.score}")
     print("  (expected: gold or silver, a tie the pattern cannot decide)")
-    show_benchmark("Search", benchmark(search_answer))
+    search_counts = benchmark(search_answer)
+    show_benchmark("Search", search_counts)
     print("  (expected: the search makes far fewer wrong calls than greedy)")
     print(
         f"Sets scored per powder: {hunt.nodes} in library order, "
         f"{sets_every_order(MAX_PHASES)} in every order  (expected: 176 and 821)"
     )
+    show_verdict_graph(greedy_counts, search_counts)
 
 
 if __name__ == "__main__":

@@ -4,8 +4,11 @@ version = "0.1.0"
 description = 'Remus - a pure Python teaching chess engine for the "Turning a Chess Engine into Science AI" workshop'
 readme = "README.md"
 requires-python = ">=3.14,<3.15"
-# The engine uses the standard library only, so it has no runtime dependencies.
-dependencies = []
+# The engines use the standard library only. matplotlib draws the graphs of the two
+# Day 5 science programs, and no engine imports it.
+dependencies = [
+    "matplotlib>=3.10,<4",
+]
 
 [dependency-groups]
 # python-chess is a reference tool: the workshop designer's verify_engines.py

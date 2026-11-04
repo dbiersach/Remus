@@ -2,7 +2,7 @@
 
 The two programs of Day 5, the science project. Each one aims an idea from the Remus
 engines at a problem from a synchrotron beamline, such as NSLS-II at Brookhaven. Both
-use the standard library only and import no engine: they reuse the engine's ideas,
+use common Python modules and import no engine: they reuse the engine's ideas,
 not its code.
 
 | Program | The question | The chess idea | Day 5 periods |
@@ -20,7 +20,8 @@ not its code.
 ## Running a program
 
 Open the file in VS Code and click Run Python File. `main()` prints each result next
-to the result it expects. In this folder, a function not written yet stops the
+to the result it expects, and matplotlib opens each graph in its own window. Close the
+window and the program continues. In this folder, a function not written yet stops the
 run with `NotImplementedError` and its name, such as "Write score()".
 
 Expected results of the finished programs:

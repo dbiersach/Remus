@@ -16,12 +16,14 @@ Brookhaven's NSLS-II: where to measure next.
 | Minimax: the opponent picks the minimum | Expectimax: average over a high or low reading |
 | Games against Stockfish 1500 | A benchmark: average measurements over 100 hidden samples |
 
-This file uses the standard library only and does not import the engine: it reuses
+This file uses common Python modules and does not import the engine: it reuses
 the engine's ideas, not its code.
 """
 
 import math
 import random
+
+import matplotlib.pyplot as plt
 
 SIZE = 10  # The sample is SIZE x SIZE squares
 PEAK = 100  # The reading at the hot spot
@@ -262,10 +264,70 @@ def benchmark(
     return total / trials
 
 
+def measurement_order(grid: list[list[int]], strategy) -> list[tuple[int, int]]:
+    """Return the squares one strategy measures, in order, until it reads PEAK."""
+    center = (SIZE // 2, SIZE // 2)
+    readings = {center: measure(grid, center)}
+    order: list[tuple[int, int]] = [center]
+    while PEAK not in readings.values():
+        square = strategy(readings)
+        readings[square] = measure(grid, square)
+        order.append(square)
+    return order
+
+
+def show_sample_graph(seed: int) -> None:
+    """Draw one hidden sample with the squares each strategy measures numbered."""
+    grid = make_grid(seed)
+    random.seed(0)  # The random strategy makes the same choices every run
+    strategies = (
+        ("Random guessing", random_strategy),
+        ("The AI", choose_next_measurement),
+    )
+    figure, axes = plt.subplots(1, 2, figsize=(12, 6.5))
+    for ax, (name, strategy) in zip(axes, strategies, strict=True):
+        order = measurement_order(grid, strategy)
+        ax.imshow(grid, cmap="YlOrRd", vmin=0, vmax=PEAK)
+        for number, (row, col) in enumerate(order, start=1):
+            ax.text(col, row, str(number), ha="center", va="center")
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_title(f"{name}: {len(order)} measurements")
+    figure.suptitle(
+        "One hidden sample: each number is one measurement. Darker is hotter."
+    )
+    figure.tight_layout()
+    print("Close the graph window to continue.")
+    plt.show()
+
+
+def show_benchmark_graph(results: list[tuple[str, float]]) -> None:
+    """Draw the average measurements of each strategy, with the fewest in green."""
+    fewest = results[0][1]
+    for _, average in results:
+        fewest = min(fewest, average)
+    _, ax = plt.subplots(figsize=(12, 4.5))
+    for row, (name, average) in enumerate(results):
+        color = "tab:green" if average == fewest else "tab:gray"
+        ax.barh(name, average, color=color)
+        ax.text(average + 0.5, row, f"{average:.1f}", va="center")
+    ax.invert_yaxis()  # The first strategy goes at the top
+    ax.margins(x=0.1)  # Room for the number at the end of the longest bar
+    ax.set_xlabel("Measurements needed to find the peak, on average")
+    ax.set_title("Fewer measurements means a better strategy")
+    plt.tight_layout()
+    print("Close the graph window to continue.")
+    plt.show()
+
+
 def main():
-    print(f"Random guessing: {benchmark(random_strategy):5.1f} measurements on average")
+    results = []
+    average = benchmark(random_strategy)
+    results.append(("Random guessing", average))
+    print(f"Random guessing: {average:5.1f} measurements on average")
     for weight in (0, EXPLORE_WEIGHT, 40):
         average = benchmark(choose_next_measurement, explore_weight=weight)
+        results.append((f"Greedy AI, weight {weight}", average))
         print(
             f"Greedy AI, explore weight {weight:2}: {average:5.1f} measurements on average"
         )
@@ -273,10 +335,13 @@ def main():
         "  (expected: every greedy AI well below random guessing, best near weight 8)"
     )
     average = benchmark(expectimax_choice, trials=10)
+    results.append(("Expectimax (10 samples)", average))
     print(f"Expectimax AI (10 samples): {average:5.1f} measurements on average")
     print(
         "  (expected: better than random, worse than greedy: a crude model limits lookahead)"
     )
+    show_sample_graph(3)  # Sample 3 hides its peak far from the center
+    show_benchmark_graph(results)
 
 
 if __name__ == "__main__":

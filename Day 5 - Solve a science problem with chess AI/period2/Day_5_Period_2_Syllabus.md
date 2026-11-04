@@ -16,7 +16,7 @@ No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they 
 | --- | --- |
 | 10:30 to 10:45 | The PDF beamline at Brookhaven's NSLS-II and its daily question: which crystal phases are in this powder? Each phase makes its own fingerprint of X-ray peaks. |
 | 10:45 to 11:15 | Write `score()` in `phase_hunt.py` (11 code lines): a point for each explained peak, and a point lost for each left-over peak, missing peak, and phase used. |
-| 11:15 to 12:00 | Write `greedy_phases()` (17 code lines), which adds the best phase again and again. On 200 known powders greedy names 166 right and 34 wrong, and on powder 12 it mistakes silver for gold. |
+| 11:15 to 12:00 | Write `greedy_phases()` (16 lines), which adds the best phase again and again. On 200 known powders greedy names 166 right and 34 wrong, and on powder 12 it mistakes silver for gold. |
 
 ## The files
 
@@ -28,13 +28,17 @@ No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they 
 
 These images show the function bodies from [`science_instructor/phase_hunt.py`](../../science_instructor/phase_hunt.py). In `science/phase_hunt.py`, replace the comment and the `raise` line under each docstring with the body. Work from the top of the file down, and the line numbers match when you reach each function.
 
-![score(), lines 138 to 148](images/phase_hunt_lines_138_to_148.png)
+![score(), lines 140 to 150](images/phase_hunt_lines_140_to_150.png)
 
-![greedy_phases(), lines 168 to 183](images/phase_hunt_lines_168_to_183.png)
+![greedy_phases(), lines 170 to 185](images/phase_hunt_lines_170_to_185.png)
 
 ### The graphs
 
-matplotlib drew these graphs from the results of `science_instructor/phase_hunt.py`.
+When `phase_hunt.py` finishes the greedy benchmark, matplotlib opens this graph of powder 12. Close the window and the program continues, until it stops at "Write search()", the function of Period 3. The student pair types none of the graph code.
+
+![Powder 12 and the greedy answer](images/powder_answer.png)
+
+These pictures explain the experiment and the two functions of this period.
 
 ![The experiment at the beamline](images/experiment.png)
 

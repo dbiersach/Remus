@@ -170,7 +170,8 @@ The engine must run without Lucas Chess or `python-chess` installed.
 
 - Remus is a `uv` project on Python 3.14 (`.python-version`, `pyproject.toml`).
   Run `uv sync` once, then `uv run ruff check .`.
-- The project has no runtime dependencies. The `dev` dependency group holds
+- The one runtime dependency is `matplotlib`, for the graphs of the Day 5 science
+  programs (David, 2026-11-04); no engine imports it. The `dev` dependency group holds
   `python-chess` (imported as `chess`) and `ruff`. Engine modules never import
   `chess`.
 - Lucas Chess is a desktop application, not a Python dependency. It hosts Remus as an
@@ -226,8 +227,9 @@ The engine must run without Lucas Chess or `python-chess` installed.
   - `science/`, the two Day 5 programs, `hidden_peak.py` and `phase_hunt.py`, with
     the functions the student pairs write left empty, and `science_instructor/`,
     the finished versions (David, 2026-11-04). This mirrors `engines/` and
-    `engines_instructor/`. They follow the engine style (no shebang, copy-make) and
-    import no engine.
+    `engines_instructor/`. They follow the engine style (no shebang, copy-make), import
+    no engine, and show their graphs with matplotlib: the student pair closes each
+    window and the program continues. The student pair types none of the graph code.
   - `docs/`, the pages people read:
     - `docs/engines/`: `Remus1` to `Remus4`, each with its `README.md` and
       `call_tree.svg`, and `remus_versions.md`.

@@ -28,15 +28,15 @@ No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they 
 
 These images show the function bodies from [`science_instructor/hidden_peak.py`](../../science_instructor/hidden_peak.py). In `science/hidden_peak.py`, replace the comment and the `raise` line under each docstring with the body. Work from the top of the file down, and the line numbers match when you reach each function.
 
-![candidate_squares(), lines 98 to 103](images/hidden_peak_lines_98_to_103.png)
+![candidate_squares(), lines 100 to 105](images/hidden_peak_lines_100_to_105.png)
 
-![score_candidate(), lines 129 to 132](images/hidden_peak_lines_129_to_132.png)
+![score_candidate(), lines 131 to 134](images/hidden_peak_lines_131_to_134.png)
 
-![choose_next_measurement(), lines 157 to 165](images/hidden_peak_lines_157_to_165.png)
+![choose_next_measurement(), lines 159 to 167](images/hidden_peak_lines_159_to_167.png)
 
 ### The graphs
 
-matplotlib drew these graphs from the results of `science_instructor/hidden_peak.py`.
+When `hidden_peak.py` finishes printing its results, matplotlib opens these two graphs, one window at a time. Close each window and the program continues. The student pair types none of the graph code.
 
 ![One hidden sample, measured by random guessing and by the AI](images/hidden_peak_search.png)
 
