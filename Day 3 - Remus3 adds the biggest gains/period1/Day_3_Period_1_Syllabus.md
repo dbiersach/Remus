@@ -83,7 +83,9 @@ In `evaluate()`, three edits collect the pawns and add the new terms. Type `pawn
 
 ![search.py, lines 4 to 14](images/search_lines_4_to_14.png)
 
-`search.py` grows from 110 lines to 118. Replace the import `from board import EMPTY, QUEEN` with the eleven lines from `from board import (` to `)` (lines 4 to 14), one name per line. The block brings in `MATE_SCORE` today and the names that Periods 2 to 4 need: the piece kinds for `has_pieces()`, `position_key()` for the table, and `move_text()` for the line of moves. VS Code shows the names not used yet in a dimmer color until those periods use them, which is not an error.
+`search.py` grows from 110 lines to 118. Replace the import `from board import EMPTY, QUEEN` with the eleven lines from `from board import (` to `)` (lines 4 to 14), one name per line. The block brings in `MATE_SCORE` today and the names that Periods 2 to 4 need: the piece kinds for `has_pieces()`, `position_key()` for the table, and `move_text()` for the line of moves.
+
+VS Code grays out six of these names: `BISHOP`, `KNIGHT`, `ROOK`, `WHITE`, `move_text`, and `position_key`. The gray is temporary and is not an error. `search.py` does not use these names in this period, but it uses them in later periods: all but `move_text` in Period 2, and `move_text` in Period 4. Type all eleven lines now, and each name brightens when the code that uses it arrives.
 
 Then delete `MATE_SCORE = 100_000` and the blank line above it, which stood at line 9 of the copied file: `search.py` now gets `MATE_SCORE` from `board.py`.
 
