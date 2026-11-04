@@ -11,7 +11,8 @@ holds the plan of the five days.
 This file holds every project and style rule, so that every AI tool used with this
 repository builds Remus the same way. `CLAUDE.md` imports it and adds only the rules
 that are specific to Claude Code. The Python style follows David's course repositories
-(qis101, scicomp101, cse101), adapted for a chess engine and a younger audience.
+(qis101, scicomp101, cse101), adapted for a chess engine and for students meeting its
+ideas for the first time.
 
 # Part 1: The project
 
@@ -36,8 +37,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
 
 ## Project goals
 
-- Build a legal chess engine that plays well, in code a high school student can read line
-  by line.
+- Build a legal chess engine that plays well, in code a student can read line by line.
 - A working game comes first; stronger play comes later.
 - Success means a learner can explain a move, say why a search result is legal and
   preferred, and say what each enhancement of Remus3 and Remus4 buys.
@@ -45,12 +45,15 @@ that are specific to Claude Code. The Python style follows David's course reposi
 ## Audience and workshop format
 
 - Remus is an instructional engine for a **one-week, five-day workshop** taught to
-  **high school students, ages 14 to 18** (David, 2026-11-04): four 90-minute
-  periods a day (8:30 to 10:00, 10:30 to 12:00, 1:00 to 2:30, 3:00 to 4:30). The students already
-  know the basics of coding (most have learned Java, close enough to type Python and
-  follow the ideas) and chess notation. Each engine carries the number of the day that
+  **students who know some coding and know how to play chess, including notation**
+  (David, 2026-11-04): four 90-minute periods a day (8:30 to 10:00, 10:30 to 12:00,
+  1:00 to 2:30, 3:00 to 4:30). Many students have learned Java, close enough to type
+  Python and follow the ideas. Each engine carries the number of the day that
   builds it (David, 2026-11-03): Day 1 types in Remus1, Day 2 Remus2, Day 3 Remus3,
   Day 4 Remus4, and Day 5 is the science project.
+- **The workshop is open to students of all ages** (David, 2026-11-04). Every
+  document, comment, and brief names the audience with the plain word "students":
+  no age, grade, school level, or age group.
 - 20 students work in **10 student pairs** (driver and navigator, swapping every
   period). Each student pair gets an identical, preconfigured **Windows 11** class
   laptop with VS Code and Lucas Chess. Remus targets Windows only (David, 2026-10-28):
@@ -69,16 +72,15 @@ that are specific to Claude Code. The Python style follows David's course reposi
   stalemate, threefold repetition, the fifty-move rule, and insufficient material.
 - The teacher writes no code during the workshop (David, 2026-10-31): every line a
   student pair does not type is already in the repository.
-- Write code, comments, and lesson text for a high school student reading the idea
-  for the first time: short functions, concrete names, and one small example position per
-  idea.
+- Write code, comments, and lesson text for a student reading the idea for the first
+  time: short functions, concrete names, and one small example position per idea.
 - The class never builds a GUI. Every laptop uses **Lucas Chess** (David,
   2026-10-27), which runs Remus as a UCI engine through `remus.bat`.
   [`docs/lucas_chess/lucas_chess_guide.md`](docs/lucas_chess/lucas_chess_guide.md) shows
   students, step by step with screenshots, how to add Remus and watch it play
   Stockfish at 1500 Elo.
-- **No GitHub for students.** They are minors, so they create no online accounts.
-  Cloning the public repository needs none.
+- **No GitHub for students.** Students create no online accounts: cloning the public
+  repository needs none.
 - **git and `uv` only at setup** (David, 2026-10-29). On Day 1, period 1, the teacher
   walks each student through installing git and `uv`, cloning the repository, and
   running `uv sync` once to build `.venv`. After that setup no student or teacher uses
@@ -358,7 +360,7 @@ Short helper functions may use a one-line docstring:
 - Seed the random generator (`random.seed(2016)`) wherever a check must give the
   same result on every run.
 - Plain loops over clever one-liners, everywhere in the repository (David,
-  2026-10-27). Simple code for high school readers matters more than the most
+  2026-10-27). Simple code for student readers matters more than the most
   Pythonic or the fastest form, and every file follows the same rule:
   - Build text with `+` or `+=` in a loop, never with `str.join()`.
   - Find the best item with a loop that remembers the best so far, never with

@@ -19,11 +19,11 @@ rebuilt in modern Python.
 
 ## The workshop
 
-The workshop runs for one week, five days of four 90-minute periods, for high school
-students who know the basics of coding and chess notation. Twenty students work in
-ten student pairs, one Windows 11 laptop per student pair. Each day builds the engine
-of its number: Day 1 types in Remus1, Day 2 Remus2, Day 3 Remus3, and Day 4 Remus4,
-and the last period of each of those days tests the newest engine in Lucas Chess.
+The workshop runs for one week, five days of four 90-minute periods, for students
+who know some coding and know how to play chess, including notation. Twenty students
+work in ten student pairs, one Windows 11 laptop per student pair. Each day builds the
+engine of its number: Day 1 types in Remus1, Day 2 Remus2, Day 3 Remus3, and Day 4
+Remus4, and the last period of each of those days tests the newest engine in Lucas Chess.
 Day 5 turns the search ideas of the week into a science project.
 [`workshop_syllabus.md`](workshop_syllabus.md) holds the plan of the week, and each day has its own folder at the top of the repository.
 
@@ -96,8 +96,8 @@ such as the teacher's laptop or a computer at home.
    cd Remus
    ```
 
-   Cloning a public repository needs no GitHub account, so the students, who are
-   minors, never create one.
+   Cloning a public repository needs no GitHub account, so the students never create
+   one.
 
 4. Install Python 3.14 and the development tools (`python-chess` and `ruff`) into
    the project:

@@ -5,9 +5,9 @@ chess`, with a page for the day and a page for each period.
 
 ## The week at a glance
 
-The students already know the basics of coding and chess notation, so every period goes to the
-engine. Each day has four 90-minute periods: P1 8:30 to 10:00, P2 10:30 to 12:00,
-P3 1:00 to 2:30, and P4 3:00 to 4:30.
+The students already know some coding and know how to play chess, including notation,
+so every period goes to the engine. Each day has four 90-minute periods: P1 8:30 to
+10:00, P2 10:30 to 12:00, P3 1:00 to 2:30, and P4 3:00 to 4:30.
 
 | Day | What the student pairs build | Code lines typed | Ends with |
 | --- | --- | ---: | --- |
