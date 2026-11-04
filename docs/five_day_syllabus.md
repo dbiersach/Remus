@@ -231,10 +231,11 @@ Stockfish 1500.
 **Goal for the day:** the student pairs aim the engine's ideas at two problems from a
 synchrotron beamline, report what their science AI found, and take their code home.
 
-The project uses two programs from the archived course design, `hidden_peak.py` and
-`phase_hunt.py`. Each holds every line but the functions the student pairs write,
-and each uses the standard library only. Neither imports the engine: they reuse the
-engine's ideas, not its code.
+The project uses two programs in the top `science/` folder, `hidden_peak.py` and
+`phase_hunt.py`. The student pair works in `science/student`, where each program holds
+every line but the functions the student pair writes; `science/instructor` holds the
+finished programs. Both use the standard library only. Neither imports the engine:
+they reuse the engine's ideas, not its code.
 
 | Chess engine | Hidden peak | Phase hunt |
 | --- | --- | --- |
@@ -292,15 +293,7 @@ leaves with the code on a USB drive.
    on a student pair's `engines/RemusN` (20, 400, 8,902, 197,281 from the start) and name the first wrong
    depth. The student pairs would not type it. The draft recommends adding it, so
    rule 7, "rules before search", holds for the students' own code too.
-2. **Where the Day 5 files live.** `hidden_peak.py` and `phase_hunt.py` sit in the
-   archive. The draft proposes a top `science/` folder holding each file twice: a
-   starter with the student functions left empty, and the finished version to copy
-   from.
-3. **Write or copy on Day 5.** The engines are copied line by line. The science
+2. **Write or copy on Day 5.** The engines are copied line by line. The science
    functions are short and their docstrings say exactly what to do, so the draft has
    the student pairs write them from the docstrings, with the finished file as the
    fallback.
-4. **Edits to the archived science files.** Their tables of the chess-to-science map
-   name `greedy_move()` and `undo_move()`, which none of the engines has. They
-   need the copy-make wording of Remus before they return, and their pytest files
-   stay in the archive.

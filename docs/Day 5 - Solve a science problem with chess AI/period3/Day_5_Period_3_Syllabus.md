@@ -8,7 +8,7 @@ The student pair searches every set of up to three phases and verifies the searc
 
 ## The big picture
 
-No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they were at the end of Day 4. The student pair writes `search()` in `phase_hunt.py`, a science program that reuses the engine's ideas, not its code: `search()` scores every set of up to three phases, the way `alpha_beta()` scores every line of moves. `phase_hunt.py` holds every other line already, so the student pair types only the bodies of these functions, from their docstrings. The file is not in the repository yet, so this page gives no line numbers; the open questions at the end of [the five-day syllabus](../../five_day_syllabus.md) list where it goes.
+No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they were at the end of Day 4. The student pair writes `search()` in `phase_hunt.py`, a science program that reuses the engine's ideas, not its code: `search()` scores every set of up to three phases, the way `alpha_beta()` scores every line of moves. `phase_hunt.py` holds every other line already, so the student pair types only the bodies of these functions, from their docstrings. The student pair edits `science/student/phase_hunt.py`, and `science/instructor/phase_hunt.py` holds the finished version.
 
 ## The files
 

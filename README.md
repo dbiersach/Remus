@@ -51,11 +51,12 @@ day and edits them there.
 [`misc/engines/remus_versions.md`](misc/engines/remus_versions.md) lists every
 enhancement and the version that holds it.
 
-Everything else sits in two top folders, `docs/` and `misc/`:
+Everything else sits in three top folders, `docs/`, `science/`, and `misc/`:
 
 | Place | What it holds |
 | --- | --- |
 | [`docs/`](docs/) | [`five_day_syllabus.md`](docs/five_day_syllabus.md), the plan of the five days, and one folder per day with a page for the day and for each period |
+| [`science/`](science/) | The two Day 5 science programs: `student/` with the functions the student pairs write left empty, and `instructor/` with the finished versions |
 | [`misc/engines/`](misc/engines/) | One folder per engine with its README and call tree, and [`remus_versions.md`](misc/engines/remus_versions.md), the plan of the versions |
 | [`misc/lucas_chess/`](misc/lucas_chess/) | The [Lucas Chess guide](misc/lucas_chess/lucas_chess_guide.md) and its pictures |
 | [`misc/chess_tutor/`](misc/chess_tutor/) | [`learn_chess.md`](misc/chess_tutor/learn_chess.md), the rarer rules and how moves are written, [`uci.md`](misc/chess_tutor/uci.md), the conversation between Lucas Chess and Remus, and videos on minimax, negamax, and alpha-beta |

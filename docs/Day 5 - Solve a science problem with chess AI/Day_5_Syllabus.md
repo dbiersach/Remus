@@ -2,10 +2,11 @@
 
 **Goal for the day:** the student pairs aim the engine's ideas at two problems from a synchrotron beamline, report what their science AI found, and take their code home.
 
-The project uses two programs from the archived course design, `hidden_peak.py` and
-`phase_hunt.py`. Each holds every line but the functions the student pairs write,
-and each uses the standard library only. Neither imports the engine: they reuse the
-engine's ideas, not its code.
+The project uses two programs in the top `science/` folder, `hidden_peak.py` and
+`phase_hunt.py`. The student pair works in `science/student`, where each program holds
+every line but the functions the student pair writes; `science/instructor` holds the
+finished programs. Both use the standard library only. Neither imports the engine:
+they reuse the engine's ideas, not its code.
 
 | Chess engine | Hidden peak | Phase hunt |
 | --- | --- | --- |
@@ -15,8 +16,6 @@ engine's ideas, not its code.
 | Search | Choose the best-scoring square | Score every set of up to three phases |
 | Several moves with the best score | | Several sets tie: the pattern cannot decide |
 | verify_engines.py | The average measurements over 100 hidden samples | The verdicts on 200 known powders |
-
-The science files `hidden_peak.py` and `phase_hunt.py` are not in the repository yet; the open questions at the end of [the five-day syllabus](../five_day_syllabus.md) list where they go.
 
 ## The day at a glance
 

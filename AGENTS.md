@@ -207,12 +207,16 @@ The engine must run without Lucas Chess or `python-chess` installed.
 - A module keeps one file name in every version. When a later version makes a file
   smarter, the new code goes into the same file. Never add version numbers to file
   names.
-- Three top folders hold everything that is not an engine folder (David, 2026-11-03):
+- Four top folders hold everything that is not an engine folder (David, 2026-11-03):
   - `docs/`, the plan of the course: `five_day_syllabus.md`, the whole week on
     one page, and one folder per day, such as `Day 1 - Remus1 plays legal chess`,
     with `Day_1_Syllabus.md` and a folder per period (`period1` to `period4`) that
     holds `Day_1_Period_1_Syllabus.md`. The day and period pages follow
     `five_day_syllabus.md`; a change to one goes into the others.
+  - `science/`, the two Day 5 programs, `hidden_peak.py` and `phase_hunt.py`
+    (David, 2026-11-04): `science/student` holds each one with the functions the
+    student pairs write left empty, and `science/instructor` the finished version.
+    They follow the engine style (no shebang, copy-make) and import no engine.
   - `misc/`, the pages people read:
     - `misc/engines/`: `Remus1` to `Remus4`, each with its `README.md` and
       `call_tree.svg`, and `remus_versions.md`.
