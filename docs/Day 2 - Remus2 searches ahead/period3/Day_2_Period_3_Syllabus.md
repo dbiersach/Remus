@@ -43,7 +43,7 @@ The copied `uci.py` works for Remus2 unchanged except for one line, the name Luc
 | --- | --- |
 | 1:00 to 1:10 | Reminder of checkmate and stalemate: a side with no legal move has lost if in check, and draws if not. |
 | 1:10 to 2:10 | Type `alpha_beta()` and `think()` (about 43 code lines), which finish `search.py`. Change the name line in `uci.py` to `id name Remus2`. |
-| 2:10 to 2:30 | Run `uci.py` and send `position startpos` and `go movetime 2000`: the `info` lines show Remus2 searching one move deeper at a time. |
+| 2:10 to 2:30 | Run `uci.py` and send `position startpos` and `go movetime 2000`: the `info` lines show Remus2 searching one move deeper at a time. Then run `check_my_remus.py` in `engines/Remus2` and fix any file it names until Remus2 passes every check. |
 
 ## Done when
 

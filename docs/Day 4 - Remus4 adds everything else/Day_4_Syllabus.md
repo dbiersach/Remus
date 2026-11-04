@@ -50,7 +50,7 @@
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 4:20 | Add `engines\Remus4\remus.bat` to Lucas Chess as "My Remus4". Test it: one round of My Remus4 against My Remus3, then one round against Stockfish 1500, two 5-minute games each. |
+| 3:30 to 4:20 | Run `check_my_remus.py` in `engines/Remus4` until Remus4 passes every check. Then add `engines\Remus4\remus.bat` to Lucas Chess as "My Remus4". Test it: one round of My Remus4 against My Remus3, then one round against Stockfish 1500, two 5-minute games each. |
 | 4:20 to 4:30 | Each student pair compares the results with Day 3's. |
 
 [`Day_4_Period_4_Syllabus.md`](period4/Day_4_Period_4_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.

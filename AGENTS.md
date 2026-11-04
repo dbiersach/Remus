@@ -188,7 +188,11 @@ The engine must run without Lucas Chess or `python-chess` installed.
   folder.
 - The top `engines/` folder holds the student pair's own engines (David,
   2026-11-03): four folders, `engines/Remus1` to `engines/Remus4`, each holding only
-  `remus.bat` in the repository. On Day 1 the student pair creates every
+  `remus.bat` and `check_my_remus.py` in the repository. `check_my_remus.py` is the
+  same file in all four: run with the Run button, it checks the student pair's
+  finished version (files, perft, evaluation, a depth-4 search, UCI) against the
+  instructor's numbers, which it holds. Update those numbers after any engine change
+  that moves them. On Day 1 the student pair creates every
   file of Remus1 in `engines/Remus1`. At the start of Days 2, 3, and 4 it copies every
   file of the previous version's folder into the next one in File Explorer and edits
   those copies. Never put instructor code in `engines/`.

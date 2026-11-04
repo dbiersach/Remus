@@ -25,8 +25,9 @@ Day 5.
 
 ## How a student pair works
 
-- **One folder for each version.** The top `engines/` folder holds four empty
-  folders, `Remus1` to `Remus4`, for the student pair's own code. On Day 1 the student
+- **One folder for each version.** The top `engines/` folder holds four
+  folders, `Remus1` to `Remus4`, for the student pair's own code. Each starts with
+  only `remus.bat` and `check_my_remus.py`. On Day 1 the student
   pair creates every file of Remus1 in `engines/Remus1`. At the start of Day 2 the
   student pair copies every file of `engines/Remus1` into `engines/Remus2` in File
   Explorer, then edits those copies into Remus2. Day 3 starts the same way, from
@@ -45,6 +46,13 @@ Day 5.
   the instructor's. The student pair still types every line itself: from Day 2 on,
   the only copying in File Explorer is the student pair's own files from the day
   before, plus `opening_book.txt`, which is data, on Day 3.
+- **Check each finished version.** Every `engines/RemusN` folder starts with
+  `check_my_remus.py`, which the student pair runs but never types. Run with the
+  Run Python File button once the version is typed, it counts the legal moves from
+  six published positions and compares them with the published counts, checks the
+  evaluation and a four-move search against the instructor's engine (Remus2 to
+  Remus4), and talks to `uci.py` the way Lucas Chess does. At the first difference
+  it stops and names the files to look at.
 - **Driver and navigator.** The driver types and the navigator reads the instructor's
   file aloud and checks each line. They swap at the start of every period.
 - **Run after every file.** Open the file just typed and press Run Python File. An
@@ -68,7 +76,7 @@ plays a random legal move, and the student pair plays it in Lucas Chess.
 | --- | --- |
 | 8:30 to 9:15 | Setup, steps 1 to 6 of the top `README.md`: install Git, VS Code, and `uv`, clone the repository, run `uv sync`, install the extensions, and open `Remus.code-workspace`. This is the only time anyone types a git or `uv` command. |
 | 9:15 to 9:30 | The teacher adds the instructor's `engines_instructor/Remus2/remus.bat` to Lucas Chess (Part 2 of the [Lucas Chess guide](../misc/lucas_chess/lucas_chess_guide.md)) and starts it against Stockfish 1500 (Part 3), so the class sees the engine it will build by tomorrow afternoon. |
-| 9:30 to 9:40 | Each student pair opens its `engines/Remus1` folder in VS Code. The folder holds only `remus.bat`, the one line that starts the engine; the student pair types every other file. |
+| 9:30 to 9:40 | Each student pair opens its `engines/Remus1` folder in VS Code. The folder holds `remus.bat`, the one line that starts the engine, and `check_my_remus.py`, which checks the finished engine; the student pair types every other file. |
 | 9:40 to 10:00 | Type `board.py` (15 code lines): the piece numbers, the starting position, and square names. The reminder before typing: row 0 is rank 8, column 0 is file a, so a8 is square 0 and h1 is square 63. |
 
 ### P2, 10:30 to 12:00: Moves and attacks
@@ -93,7 +101,7 @@ plays a random legal move, and the student pair plays it in Lucas Chess.
 | --- | --- |
 | 3:00 to 3:10 | How Lucas Chess and Remus talk: read [`uci.md`](../misc/chess_tutor/uci.md) together. A move is legal only if the mover's own king is not attacked after it. |
 | 3:10 to 3:50 | Type `search.py` of `engines_instructor/Remus1` (12 code lines), whose `think()` plays a random legal move, then `uci.py` (44 code lines). Run `uci.py` and talk to it by hand, as in the "Try it" part of `uci.md`. |
-| 3:50 to 4:05 | Add `engines\Remus1\remus.bat` to Lucas Chess as "My Remus1" (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
+| 3:50 to 4:05 | Run `check_my_remus.py` in `engines/Remus1` and fix any file it names until it reports that Remus1 passes every check. Then add `engines\Remus1\remus.bat` to Lucas Chess as "My Remus1" (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
 | 4:05 to 4:30 | Each student plays My Remus1 (Part 4 of the guide). Every move it makes is legal, and nearly every move is bad. |
 
 **Checkpoint:** Remus1 is complete, 193 code lines, and it plays a legal game in Lucas
@@ -127,7 +135,7 @@ Stockfish 1500 in Lucas Chess.
 | --- | --- |
 | 1:00 to 1:10 | Reminder of checkmate and stalemate: a side with no legal move has lost if in check, and draws if not. |
 | 1:10 to 2:10 | Type `alpha_beta()` and `think()` (about 43 code lines), which finish `search.py`. Change the name line in `uci.py` to `id name Remus2`. |
-| 2:10 to 2:30 | Run `uci.py` and send `position startpos` and `go movetime 2000`: the `info` lines show Remus2 searching one move deeper at a time. |
+| 2:10 to 2:30 | Run `uci.py` and send `position startpos` and `go movetime 2000`: the `info` lines show Remus2 searching one move deeper at a time. Then run `check_my_remus.py` in `engines/Remus2` and fix any file it names until Remus2 passes every check. |
 
 ### P4, 3:00 to 4:30: Remus2 against Stockfish 1500
 
@@ -179,7 +187,7 @@ the lines of one period never call a function of a later period.
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:20 | Add `principal_variation()` and the `pv` of the `info` line (about 13 code lines). Run `uci.py` and send `position startpos moves a2a3` and `go movetime 5000` to `engines/Remus3` and to `engines/Remus2` (1. a3 is in no line of the book, so Remus3 searches): the `info` lines show how much deeper Remus3 searches in the same time, and the line it expects. |
-| 3:20 to 4:20 | Add `engines\Remus3\remus.bat` to Lucas Chess as "My Remus3". Test it: one round of My Remus3 against My Remus2, then one round against Stockfish 1500, two 5-minute games each. |
+| 3:20 to 4:20 | Run `check_my_remus.py` in `engines/Remus3` until Remus3 passes every check. Then add `engines\Remus3\remus.bat` to Lucas Chess as "My Remus3". Test it: one round of My Remus3 against My Remus2, then one round against Stockfish 1500, two 5-minute games each. |
 | 4:20 to 4:30 | Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
 
 **Checkpoint:** Remus3 is complete, 535 code lines, and it has played Remus2 and
@@ -220,7 +228,7 @@ it in P4.
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 4:20 | Add `engines\Remus4\remus.bat` to Lucas Chess as "My Remus4". Test it: one round of My Remus4 against My Remus3, then one round against Stockfish 1500, two 5-minute games each. |
+| 3:30 to 4:20 | Run `check_my_remus.py` in `engines/Remus4` until Remus4 passes every check. Then add `engines\Remus4\remus.bat` to Lucas Chess as "My Remus4". Test it: one round of My Remus4 against My Remus3, then one round against Stockfish 1500, two 5-minute games each. |
 | 4:20 to 4:30 | Each student pair compares the results with Day 3's. |
 
 **Checkpoint:** Remus4 is complete, 694 code lines, and it has played Remus3 and
@@ -284,16 +292,3 @@ they reuse the engine's ideas, not its code.
 **Checkpoint:** every student pair's `choose_next_measurement()` beats random guessing,
 every student pair's `search()` makes fewer wrong calls than greedy, and every student
 leaves with the code on a USB drive.
-
-## Open questions for the course designer
-
-1. **A check a student pair can run.** The engines hold no perft code, so a student
-   pair learns that its move generator works by playing Remus1. A short
-   `check_my_remus.py` in `docs/`, run with the Run button, could count perft
-   on a student pair's `engines/RemusN` (20, 400, 8,902, 197,281 from the start) and name the first wrong
-   depth. The student pairs would not type it. The draft recommends adding it, so
-   rule 7, "rules before search", holds for the students' own code too.
-2. **Write or copy on Day 5.** The engines are copied line by line. The science
-   functions are short and their docstrings say exactly what to do, so the draft has
-   the student pairs write them from the docstrings, with the finished file as the
-   fallback.

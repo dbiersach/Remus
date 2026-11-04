@@ -20,7 +20,7 @@
 | --- | --- |
 | 8:30 to 9:15 | Setup, steps 1 to 6 of the top `README.md`: install Git, VS Code, and `uv`, clone the repository, run `uv sync`, install the extensions, and open `Remus.code-workspace`. This is the only time anyone types a git or `uv` command. |
 | 9:15 to 9:30 | The teacher adds the instructor's `engines_instructor/Remus2/remus.bat` to Lucas Chess (Part 2 of the [Lucas Chess guide](../../misc/lucas_chess/lucas_chess_guide.md)) and starts it against Stockfish 1500 (Part 3), so the class sees the engine it will build by tomorrow afternoon. |
-| 9:30 to 9:40 | Each student pair opens its `engines/Remus1` folder in VS Code. The folder holds only `remus.bat`, the one line that starts the engine; the student pair types every other file. |
+| 9:30 to 9:40 | Each student pair opens its `engines/Remus1` folder in VS Code. The folder holds `remus.bat`, the one line that starts the engine, and `check_my_remus.py`, which checks the finished engine; the student pair types every other file. |
 | 9:40 to 10:00 | Type `board.py` (15 code lines): the piece numbers, the starting position, and square names. The reminder before typing: row 0 is rank 8, column 0 is file a, so a8 is square 0 and h1 is square 63. |
 
 [`Day_1_Period_1_Syllabus.md`](period1/Day_1_Period_1_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.
@@ -51,7 +51,7 @@
 | --- | --- |
 | 3:00 to 3:10 | How Lucas Chess and Remus talk: read [`uci.md`](../../misc/chess_tutor/uci.md) together. A move is legal only if the mover's own king is not attacked after it. |
 | 3:10 to 3:50 | Type `search.py` of `engines_instructor/Remus1` (12 code lines), whose `think()` plays a random legal move, then `uci.py` (44 code lines). Run `uci.py` and talk to it by hand, as in the "Try it" part of `uci.md`. |
-| 3:50 to 4:05 | Add `engines\Remus1\remus.bat` to Lucas Chess as "My Remus1" (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
+| 3:50 to 4:05 | Run `check_my_remus.py` in `engines/Remus1` and fix any file it names until it reports that Remus1 passes every check. Then add `engines\Remus1\remus.bat` to Lucas Chess as "My Remus1" (Part 2 of the guide). A student pair whose engine fails to start uses the "When something goes wrong" table at the end of the guide. |
 | 4:05 to 4:30 | Each student plays My Remus1 (Part 4 of the guide). Every move it makes is legal, and nearly every move is bad. |
 
 [`Day_1_Period_4_Syllabus.md`](period4/Day_1_Period_4_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.

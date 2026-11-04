@@ -45,7 +45,7 @@ Each instructor engine folder holds only what the engine runs: its Python files,
 which Lucas Chess starts, and for Remus3 and Remus4 `opening_book.txt`. Each engine's
 README and `call_tree.svg`, a picture of which function calls which, live in
 `misc/engines/Remus1` to `misc/engines/Remus4`.
-The four folders in `engines/` start with only `remus.bat` in them: each student pair
+The four folders in `engines/` start with only `remus.bat` and `check_my_remus.py`, which checks a finished version: each student pair
 fills `engines/Remus1` on Day 1, then copies its files forward into the next folder at the start of each
 day and edits them there.
 [`misc/engines/remus_versions.md`](misc/engines/remus_versions.md) lists every
