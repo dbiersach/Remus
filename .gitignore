@@ -21,7 +21,7 @@ dist/
 /.archive/
 
 # Games David plays and analyzes, kept on his computer only
-/misc/engines/played_games/
+/docs/engines/played_games/
 
 # git bundles that carry changes between computers
 *.bundle

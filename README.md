@@ -25,7 +25,7 @@ ten student pairs, one Windows 11 laptop per student pair. Each day builds the e
 of its number: Day 1 types in Remus1, Day 2 Remus2, Day 3 Remus3, and Day 4 Remus4,
 and the last period of each of those days tests the newest engine in Lucas Chess.
 Day 5 turns the search ideas of the week into a science project.
-[`docs/five_day_syllabus.md`](docs/five_day_syllabus.md) holds the plan of the week.
+[`workshop_syllabus.md`](workshop_syllabus.md) holds the plan of the week, and each day has its own folder at the top of the repository.
 
 ## The engines
 
@@ -36,31 +36,32 @@ out blank lines, comments, and docstrings:
 
 | Version | What it plays with | Code lines |
 | --- | --- | ---: |
-| [Remus1](misc/engines/Remus1/README.md) | Legal chess, one random legal move at a time, with no search | 193 |
-| [Remus2](misc/engines/Remus2/README.md) | Legal chess, the evaluation, alpha-beta, quiescence, MVV-LVA ordering, a check extension, and iterative deepening | 342 |
-| [Remus3](misc/engines/Remus3/README.md) | Remus2 plus killer moves, pawn structure, a transposition table, an opening book, aspiration windows, time management, null-move pruning, the principal variation, the bishop pair, and the rook table | 535 |
-| [Remus4](misc/engines/Remus4/README.md) | Remus3 plus every other enhancement: draw sense, the endgame terms, late move reductions, principal variation search, pruning margins, static exchange evaluation, and the last evaluation terms | 694 |
+| [Remus1](docs/engines/Remus1/README.md) | Legal chess, one random legal move at a time, with no search | 193 |
+| [Remus2](docs/engines/Remus2/README.md) | Legal chess, the evaluation, alpha-beta, quiescence, MVV-LVA ordering, a check extension, and iterative deepening | 342 |
+| [Remus3](docs/engines/Remus3/README.md) | Remus2 plus killer moves, pawn structure, a transposition table, an opening book, aspiration windows, time management, null-move pruning, the principal variation, the bishop pair, and the rook table | 535 |
+| [Remus4](docs/engines/Remus4/README.md) | Remus3 plus every other enhancement: draw sense, the endgame terms, late move reductions, principal variation search, pruning margins, static exchange evaluation, and the last evaluation terms | 694 |
 
 Each instructor engine folder holds only what the engine runs: its Python files, `remus.bat`,
 which Lucas Chess starts, and for Remus3 and Remus4 `opening_book.txt`. Each engine's
 README and `call_tree.svg`, a picture of which function calls which, live in
-`misc/engines/Remus1` to `misc/engines/Remus4`.
+`docs/engines/Remus1` to `docs/engines/Remus4`.
 The four folders in `engines/` start with only `remus.bat` and `verify_remus.py`, which tests a finished version: each student pair
 fills `engines/Remus1` on Day 1, then copies its files forward into the next folder at the start of each
 day and edits them there.
-[`misc/engines/remus_versions.md`](misc/engines/remus_versions.md) lists every
+[`docs/engines/remus_versions.md`](docs/engines/remus_versions.md) lists every
 enhancement and the version that holds it.
 
-Everything else sits in three top folders, `docs/`, `science/`, and `misc/`:
+Everything else sits in the plan of the week, the day folders, `science/`, and `docs/`:
 
 | Place | What it holds |
 | --- | --- |
-| [`docs/`](docs/) | [`five_day_syllabus.md`](docs/five_day_syllabus.md), the plan of the five days, and one folder per day with a page for the day and for each period |
+| [`workshop_syllabus.md`](workshop_syllabus.md) | The plan of the five days on one page |
+| `Day 1 - ...` to `Day 5 - ...` | One folder per day, such as [`Day 1 - Remus1 plays legal chess`](Day%201%20-%20Remus1%20plays%20legal%20chess/Day_1_Syllabus.md), with a page for the day and a folder for each period |
 | [`science/`](science/) | The two Day 5 science programs: `student/` with the functions the student pairs write left empty, and `instructor/` with the finished versions |
-| [`misc/engines/`](misc/engines/) | One folder per engine with its README and call tree, and [`remus_versions.md`](misc/engines/remus_versions.md), the plan of the versions |
-| [`misc/lucas_chess/`](misc/lucas_chess/) | The [Lucas Chess guide](misc/lucas_chess/lucas_chess_guide.md) and its pictures |
-| [`misc/chess_tutor/`](misc/chess_tutor/) | [`learn_chess.md`](misc/chess_tutor/learn_chess.md), the rarer rules and how moves are written, [`uci.md`](misc/chess_tutor/uci.md), the conversation between Lucas Chess and Remus, and videos on minimax, negamax, and alpha-beta |
-| [`misc/briefs/`](misc/briefs/) | The [management brief](misc/briefs/Turning_a_Chess_Engine_into_Science_AI_Management_Brief.pdf) and the [student and parent brief](misc/briefs/Turning_a_Chess_Engine_into_Science_AI_Student_and_Parent_Brief.pdf), one page each, as PDFs |
+| [`docs/engines/`](docs/engines/) | One folder per engine with its README and call tree, and [`remus_versions.md`](docs/engines/remus_versions.md), the plan of the versions |
+| [`docs/lucas_chess/`](docs/lucas_chess/) | The [Lucas Chess guide](docs/lucas_chess/lucas_chess_guide.md) and its pictures |
+| [`docs/chess_tutor/`](docs/chess_tutor/) | [`learn_chess.md`](docs/chess_tutor/learn_chess.md), the rarer rules and how moves are written, [`uci.md`](docs/chess_tutor/uci.md), the conversation between Lucas Chess and Remus, and videos on minimax, negamax, and alpha-beta |
+| [`docs/briefs/`](docs/briefs/) | The [management brief](docs/briefs/Turning_a_Chess_Engine_into_Science_AI_Management_Brief.pdf) and the [student and parent brief](docs/briefs/Turning_a_Chess_Engine_into_Science_AI_Student_and_Parent_Brief.pdf), one page each, as PDFs |
 
 ## Setup
 
@@ -124,7 +125,7 @@ such as the teacher's laptop or a computer at home.
    Windows installer from
    [lucaschess.pythonanywhere.com/downloads](https://lucaschess.pythonanywhere.com/downloads)
    and run it. Lucas Chess comes with Stockfish, so no other engine is needed. The
-   [Lucas Chess guide](misc/lucas_chess/lucas_chess_guide.md) shows, with screenshots, how
+   [Lucas Chess guide](docs/lucas_chess/lucas_chess_guide.md) shows, with screenshots, how
    to add Remus through its `remus.bat` and watch it play.
 
 ### Stockfish

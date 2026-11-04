@@ -4,8 +4,8 @@ Remus is a chess engine written in pure, native Python as a teaching project for
 **"Turning a Chess Engine into Science AI"** workshop. The workshop has four engines in
 the top `engines_instructor/` folder: Remus1, a random legal mover that ends Day 1, and Remus2,
 Remus3, and Remus4;
-[`misc/engines/remus_versions.md`](misc/engines/remus_versions.md) lists what each
-one adds, and [`docs/five_day_syllabus.md`](docs/five_day_syllabus.md)
+[`docs/engines/remus_versions.md`](docs/engines/remus_versions.md) lists what each
+one adds, and [`workshop_syllabus.md`](workshop_syllabus.md)
 holds the plan of the five days.
 
 This file holds every project and style rule, so that every AI tool used with this
@@ -74,7 +74,7 @@ that are specific to Claude Code. The Python style follows David's course reposi
   idea.
 - The class never builds a GUI. Every laptop uses **Lucas Chess** (David,
   2026-10-27), which runs Remus as a UCI engine through `remus.bat`.
-  [`misc/lucas_chess/lucas_chess_guide.md`](misc/lucas_chess/lucas_chess_guide.md) shows
+  [`docs/lucas_chess/lucas_chess_guide.md`](docs/lucas_chess/lucas_chess_guide.md) shows
   students, step by step with screenshots, how to add Remus and watch it play
   Stockfish at 1500 Elo.
 - **No GitHub for students.** They are minors, so they create no online accounts.
@@ -183,7 +183,7 @@ The engine must run without Lucas Chess or `python-chess` installed.
   `opening_book.txt`. Each also holds a copy of `verify_remus.py`, so the workshop
   designer can run the student pairs' test on the instructor's engine;
   `make_call_trees.py` skips it and `make_student_engines.py` copies it unchanged. Each engine's `README.md` and `call_tree.svg` live in
-  `misc/engines/Remus1` to `misc/engines/Remus4`.
+  `docs/engines/Remus1` to `docs/engines/Remus4`.
   Each engine names itself in `uci.py` (`id name Remus2`). Modules import each other
   by name (`from board import START_POSITION`), so any module runs from inside its
   folder with the Run button, and nothing in an engine folder imports from another
@@ -213,24 +213,24 @@ The engine must run without Lucas Chess or `python-chess` installed.
 - A module keeps one file name in every version. When a later version makes a file
   smarter, the new code goes into the same file. Never add version numbers to file
   names.
-- Four top folders hold everything that is not an engine folder (David, 2026-11-03):
-  - `docs/`, the plan of the workshop: `five_day_syllabus.md`, the whole week on
-    one page, and one folder per day, such as `Day 1 - Remus1 plays legal chess`,
-    with `Day_1_Syllabus.md` and a folder per period (`period1` to `period4`) that
+- The top folder holds everything that is not an engine folder (David, 2026-11-04):
+  - The plan of the workshop: `workshop_syllabus.md`, the whole week on one page,
+    and one top folder per day, such as `Day 1 - Remus1 plays legal chess`, with
+    `Day_1_Syllabus.md` and a folder per period (`period1` to `period4`) that
     holds `Day_1_Period_1_Syllabus.md`. The day and period pages follow
-    `five_day_syllabus.md`; a change to one goes into the others.
+    `workshop_syllabus.md`; a change to one goes into the others.
   - `science/`, the two Day 5 programs, `hidden_peak.py` and `phase_hunt.py`
     (David, 2026-11-04): `science/student` holds each one with the functions the
     student pairs write left empty, and `science/instructor` the finished version.
     They follow the engine style (no shebang, copy-make) and import no engine.
-  - `misc/`, the pages people read:
-    - `misc/engines/`: `Remus1` to `Remus4`, each with its `README.md` and
+  - `docs/`, the pages people read:
+    - `docs/engines/`: `Remus1` to `Remus4`, each with its `README.md` and
       `call_tree.svg`, and `remus_versions.md`.
-    - `misc/lucas_chess/`: `lucas_chess_guide.md` and its pictures.
-    - `misc/chess_tutor/`: `learn_chess.md` (the rarer rules and chess
+    - `docs/lucas_chess/`: `lucas_chess_guide.md` and its pictures.
+    - `docs/chess_tutor/`: `learn_chess.md` (the rarer rules and chess
       notation, with its board pictures in `images/`), `uci.md`, and the minimax,
       negamax, and alpha-beta videos page.
-    - `misc/briefs/`: the one-page management brief and the one-page student
+    - `docs/briefs/`: the one-page management brief and the one-page student
       and parent brief, as PDFs.
   - `admin/`: the workshop designer's scripts, with a `README.md`. Every workshop
     designer tool lives here, finds the top Remus folder from its own path, and
