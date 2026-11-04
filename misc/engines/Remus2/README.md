@@ -74,6 +74,6 @@ finds a forced mate in all ten mate puzzles (the key move in nine).
 
 ## Play it
 
-Add `engines_instructor/Remus2/remus.bat` to Lucas Chess as a UCI engine, as the
+The student pair adds its own `engines/Remus2/remus.bat` to Lucas Chess as "My Remus2", as the
 [Lucas Chess guide](../../lucas_chess/lucas_chess_guide.md) shows. It names itself
 `Remus2`.

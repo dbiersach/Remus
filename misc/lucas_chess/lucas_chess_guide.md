@@ -36,7 +36,7 @@ You do this once for each `remus.bat` you want to use.
 
 **Step 1.** Copy the full path of `remus.bat`. In VS Code, right-click `remus.bat` in
 the file list on the left and choose **Copy Path**. The path looks like
-`C:\...\Remus\engines_instructor\Remus2\remus.bat`.
+`C:\...\Remus\engines\Remus2\remus.bat`.
 
 **Step 2.** In Lucas Chess, click **Engines**, then **External engines**.
 
@@ -54,8 +54,8 @@ with **Ctrl+V**, and click **Open**.
 ![Paste the path of remus.bat into the File name box](../lucas_chess/04_type_the_path.jpg)
 
 **Step 5.** Lucas starts Remus and asks for its name. Remus2 says `id name Remus2`,
-so both boxes start as "Remus2". Keep that name, or add your team name to tell your
-own Remus apart from the instructor's: type it in **Identifier** and in **Name**.
+so both boxes start as "Remus2". Name it "My Remus2" instead, so every engine you
+add reads "My" and its version: type it in **Identifier** and in **Name**.
 Leave every other box at 0, and check that the last line shows your `remus.bat`.
 Click **Accept**.
 

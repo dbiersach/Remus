@@ -145,7 +145,7 @@ engine, the same way the Lucas Chess guide adds Remus.
 ### Running the files
 
 From here on, every file runs inside VS Code. Open a file, such as `uci.py` in
-`engines_instructor/Remus2`, and click the Run Python File button (the triangle at the top right
+the student pair's own `engines/Remus2`, and click the Run Python File button (the triangle at the top right
 of the editor).
 
 The engines use only the Python standard library. The development group adds

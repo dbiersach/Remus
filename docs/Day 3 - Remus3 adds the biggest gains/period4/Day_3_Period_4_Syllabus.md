@@ -38,9 +38,10 @@ Remus3 is complete. Every file in `engines/Remus3` now matches the instructor's 
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:20 | Add `principal_variation()` and the `pv` of the `info` line (about 13 code lines). Run `uci.py` and send `position startpos moves a2a3` and `go movetime 5000` to `engines/Remus3` and to `engines/Remus2` (1. a3 is in no line of the book, so Remus3 searches): the `info` lines show how much deeper Remus3 searches in the same time, and the line it expects. |
-| 3:20 to 4:20 | Run `check_my_remus.py` in `engines/Remus3` until Remus3 passes every check. Then add `engines\Remus3\remus.bat` to Lucas Chess as "My Remus3". Test it: one round of My Remus3 against My Remus2, then one round against Stockfish 1500, two 5-minute games each. |
-| 4:20 to 4:30 | Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
+| 3:20 to 3:50 | Run `check_my_remus.py` in `engines/Remus3` until Remus3 passes every check. Then add `engines\Remus3\remus.bat` to Lucas Chess as "My Remus3" and play one round of My Remus3 against My Remus2, two 5-minute games. |
+| 3:50 to 4:10 | One round of My Remus3 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 2's, and finds one game where Remus3 played a book move. |
+| 4:10 to 4:30 | Each student plays My Remus3 (Part 4 of the guide), human against computer, until the end of the day. |
 
 ## Done when
 
-My Remus3 has played one round against My Remus2 and one against Stockfish 1500.
+My Remus3 has played one round against My Remus2 and one against Stockfish 1500, and each student has played it.

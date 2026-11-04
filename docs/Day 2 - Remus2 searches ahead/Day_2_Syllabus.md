@@ -49,9 +49,9 @@
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:25 | Add `engines\Remus2\remus.bat` to Lucas Chess as "My Remus2" and start it against Stockfish 1500, one round of two 5-minute games (Part 3 of the guide), and watch the first game. |
-| 3:25 to 4:05 | While the second game runs, each student plays one game against the instructor's Remus2 on the main board (Part 4). |
-| 4:05 to 4:30 | Each student pair reads its results tab, then plays My Remus2 against My Remus1 for a few minutes to see what the search buys. |
+| 3:00 to 3:25 | Add `engines\Remus2\remus.bat` to Lucas Chess as "My Remus2" and start one round of My Remus2 against My Remus1, two 5-minute games (Part 3 of the guide), to see what the search buys over a random choice. |
+| 3:25 to 3:50 | One round of My Remus2 against Stockfish 1500, two 5-minute games. Each student pair reads its results tab. |
+| 3:50 to 4:30 | Each student plays My Remus2 (Part 4 of the guide), human against computer, until the end of the day. |
 
 [`Day_2_Period_4_Syllabus.md`](period4/Day_2_Period_4_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.
 
