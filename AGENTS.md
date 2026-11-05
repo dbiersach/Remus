@@ -77,10 +77,14 @@ ideas for the first time.
 - The class never builds a GUI. Every laptop uses **Lucas Chess** (David,
   2026-10-27), which runs Remus as a UCI engine through `remus.bat`.
   [`docs/lucas_chess/lucas_chess_guide.md`](docs/lucas_chess/lucas_chess_guide.md) shows
-  students, step by step with screenshots, how to add Remus1, play a game against it,
-  and run one-round tournaments between the versions.
-  `docs/lucas_chess/install_lucas_engines.py` adds Remus1 to Remus4 to the list of
-  external engines without touching any other entry or adding a duplicate.
+  students, step by step with screenshots, how to find the engines, play a game against
+  Remus1, and run one-round tournaments between the versions.
+  `docs/lucas_chess/install_lucas_engines.py` adds the instructor's Remus1 to Remus4
+  and Remus4-Rust to the list of external engines, from `engines_instructor/`
+  (David, 2026-11-04), without touching any other entry or adding a duplicate, so no
+  student or teacher adds an engine by hand. Lucas Chess plays only the instructor's
+  engines, and `verify_remus.py` tests what a student pair types. The guide's pictures
+  live in `docs/lucas_chess/jpg/`.
 - **No GitHub for students.** Students create no online accounts: cloning the public
   repository needs none.
 - **git and `uv` only at setup** (David, 2026-10-29). On Day 1, period 1, the teacher
@@ -193,6 +197,19 @@ The engine must run without Lucas Chess or `python-chess` installed.
   by name (`from board import START_POSITION`), so any module runs from inside its
   folder with the Run button, and nothing in an engine folder imports from another
   folder.
+- `engines_instructor/Remus4-Rust` holds Remus4 rewritten in Rust (David, 2026-11-04),
+  so the class sees that speed matters, not just the algorithms. Students neither type
+  nor read it, and it lives only in this folder, with no copy in `engines/`. It is the
+  one engine with a real `remus4_rust.exe`, which git keeps, so a laptop needs no Rust
+  installed. Each `.rs` file matches the Remus4 Python file of the same name, and
+  `main.rs` matches `uci.py`. Its one difference in play is a larger table (David,
+  2026-11-04): 512 MB of four-entry buckets that replace their least useful entry
+  instead of starting over. Until a bucket fills, it searches the same tree as Remus4.
+  A change to Remus4's rules, evaluation, search, or book needs the same change here,
+  then `uv run admin/build_rust.py` and a clean `uv run admin/verify_rust.py`. The rules of Part 2 and
+  the bans on bitboards, FEN, and print code apply to the Python engines only: this
+  engine uses bitboards, follows `cargo fmt` and `cargo clippy`, and takes the extra
+  commands `position fen`, `go depth`, `go perft`, and `eval` for that check.
 - The top `engines/` folder holds the student pair's own engines (David,
   2026-11-03): four folders, `engines/Remus1` to `engines/Remus4`, each holding only
   `remus.bat` and `verify_remus.py` in the repository. `verify_remus.py` is the

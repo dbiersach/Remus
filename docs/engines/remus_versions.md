@@ -18,6 +18,10 @@ and the 93 lines of its own `search.py`. Each version is the
 one before plus its enhancements, so a student pair that finishes Remus2 types only
 the new lines of Remus3, and then only the new lines of Remus4.
 
+A fifth engine, [Remus4-Rust](Remus4-Rust/README.md), is Remus4 written in Rust, with a
+larger table. It adds no other enhancement and nobody types it: it searches about 100
+times as many positions per second, to show what speed buys.
+
 This page lists every enhancement, the file each one changes, the code it adds, and
 the Elo it should gain, then shows which version holds it.
 

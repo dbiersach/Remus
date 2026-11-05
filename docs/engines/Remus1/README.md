@@ -43,6 +43,6 @@ counts against the published counts from six positions, and its UCI answers.
 
 ## Play it
 
-The student pair adds its own `engines/Remus1/remus.bat` to Lucas Chess, as the
+Lucas Chess holds the instructor's engine, as the
 [Lucas Chess guide](../../lucas_chess/lucas_chess_guide.md) shows. It names itself
 `Remus1`. It answers at once, whatever the clock.

@@ -50,12 +50,12 @@
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then add `engines\Remus4\remus.bat` to Lucas Chess and play one round of their Remus4 against their Remus3, two 10-minute games. |
-| 4:00 to 4:30 | One round of the student pair against their Remus4, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
-| If time remains | One round of their Remus4 against Stockfish 1500, two 10-minute games. A student pair that also played Stockfish 1500 on Day 3 compares the results. |
+| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then play one round of their Remus4 against their Remus3, two 10-minute games. |
+| 4:00 to 4:30 | One round of their Remus4 against Remus4-Rust, two 10-minute games. Remus4-Rust is the instructor's Remus4 written in Rust, with the same evaluation and search and a larger table, so speed and memory alone separate the two engines. |
+| If time remains | One round of the student pair against their Remus4, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
 
 [`Day_4_Period_4_Syllabus.md`](period4/Day_4_Period_4_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.
 
 ## By the end of the day
 
-**Checkpoint:** Remus4 is complete, 694 code lines, and it has played Remus3 and the student pair.
+**Checkpoint:** Remus4 is complete, 694 code lines, and it passes every test in `verify_remus.py`.

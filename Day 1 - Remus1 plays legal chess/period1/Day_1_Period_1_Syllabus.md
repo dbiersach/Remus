@@ -8,7 +8,7 @@ Every laptop is set up, the class has seen the finished Remus2 play, and the stu
 
 ## The big picture
 
-Today the student pair builds Remus1 from nothing, so every file of Day 1 is a new file, and all of Day 1's typing goes into the folder `engines/Remus1`. That folder starts with one file, `remus.bat`, the line that Lucas Chess runs to start the engine. The student pair creates every other file of Remus1 there and copies nothing from another folder.
+Today the student pair builds Remus1 from nothing, so every file of Day 1 is a new file, and all of Day 1's typing goes into the folder `engines/Remus1`. That folder starts with one file, `remus.bat`, the line that starts the engine. The student pair creates every other file of Remus1 there and copies nothing from another folder.
 
 The first file is `board.py`, because every other file of the engine imports it. It answers three questions the rest of the engine keeps asking: which number stands for which piece, what the board looks like before the first move, and how a square number turns into a name such as `e2` and back. A chess engine sees the board as 64 numbers in a list, one per square. Row 0 is rank 8 and column 0 is file a, so square `row * 8 + col` names a square: a8 is square 0, h8 is square 7, a1 is square 56, and h1 is square 63.
 
@@ -16,8 +16,8 @@ The first file is `board.py`, because every other file of the engine imports it.
 
 | Time | Activity |
 | --- | --- |
-| 8:30 to 9:15 | Setup, steps 1 to 6 of the top `README.md`: install Git, VS Code, and `uv`, clone the repository, run `uv sync`, install the extensions, and open `Remus.code-workspace`. This is the only time anyone types a git or `uv` command. |
-| 9:15 to 9:30 | The teacher adds the instructor's `engines_instructor/Remus2/remus.bat` to Lucas Chess (Part 2 of the [Lucas Chess guide](../../docs/lucas_chess/lucas_chess_guide.md)) and starts it against Stockfish 1500 (Part 4), so the class sees the engine it will build by tomorrow afternoon. |
+| 8:30 to 9:15 | Setup, steps 1 to 6 of the top `README.md`: install Git, VS Code, and `uv`, clone the repository, run `uv sync`, install the extensions, open `Remus.code-workspace`, and run `install_lucas_engines.py` to add the engines to Lucas Chess. This is the only time anyone types a git or `uv` command. |
+| 9:15 to 9:30 | The teacher starts the instructor's Remus2 against Stockfish 1500 in Lucas Chess (Part 4 of the [Lucas Chess guide](../../docs/lucas_chess/lucas_chess_guide.md)), so the class sees the engine it will build by tomorrow afternoon. |
 | 9:30 to 9:40 | Each student pair opens its `engines/Remus1` folder in VS Code. The folder holds `remus.bat`, the one line that starts the engine, and `verify_remus.py`, which tests the finished engine; the student pair types every other file. |
 | 9:40 to 10:00 | Type `board.py` (15 code lines): the piece numbers, the starting position, and square names. The reminder before typing: row 0 is rank 8, column 0 is file a, so a8 is square 0 and h1 is square 63. |
 

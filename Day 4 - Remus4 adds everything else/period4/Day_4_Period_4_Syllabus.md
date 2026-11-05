@@ -4,7 +4,7 @@
 
 ## Goal
 
-Remus4's evaluation is complete, and the student pair tests it against Remus3 and then plays it.
+Remus4's evaluation is complete, and the student pair tests it with `verify_remus.py`, then it plays Remus3 and Remus4-Rust.
 
 ## The big picture
 
@@ -17,9 +17,9 @@ Three terms join `pawn_terms()`, because each one depends on where the pawns sta
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then add `engines\Remus4\remus.bat` to Lucas Chess and play one round of their Remus4 against their Remus3, two 10-minute games. |
-| 4:00 to 4:30 | One round of the student pair against their Remus4, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
-| If time remains | One round of their Remus4 against Stockfish 1500, two 10-minute games. A student pair that also played Stockfish 1500 on Day 3 compares the results. |
+| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then play one round of their Remus4 against their Remus3, two 10-minute games. |
+| 4:00 to 4:30 | One round of their Remus4 against Remus4-Rust, two 10-minute games. Remus4-Rust is the instructor's Remus4 written in Rust, with the same evaluation and search and a larger table, so speed and memory alone separate the two engines. |
+| If time remains | One round of the student pair against their Remus4, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
 
 ## What changes this period
 
@@ -68,4 +68,4 @@ Change the name line to `print("id name Remus4")` (line 36). Remus4 is complete,
 
 ## Done when
 
-The student pair's Remus4 has played one round against its Remus3, and each student has played it. A round against Stockfish 1500 follows if time remains.
+The student pair's Remus4 passes every test in `verify_remus.py`, and it has played one round against its Remus3 and one against Remus4-Rust. A round against the student pair follows if time remains.

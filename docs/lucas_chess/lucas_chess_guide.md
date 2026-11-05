@@ -10,7 +10,7 @@ conversation line by line.
 This guide shows four things:
 
 1. Start Lucas Chess.
-2. Add Remus1 to Lucas Chess as an engine.
+2. Find the engines in Lucas Chess.
 3. Play a game against Remus1, as each student does at the end of Day 1.
 4. Run tournaments between the versions: Remus2 against Remus1, Remus3 against Remus2,
    and Remus4 against Remus3.
@@ -23,70 +23,48 @@ the letter L. You can also double-click the Lucas Chess icon on the desktop.
 Always start Lucas Chess one of these two ways. Both start it from its own folder,
 and Lucas needs that folder to run engine-against-engine games.
 
-![The Lucas Chess main window](01_main_window.jpg)
+![The Lucas Chess main window](jpg/01_main_window.jpg)
 
 The buttons along the top open menus. This guide uses **Play** and **Engines**.
 
-## Part 2: Add Remus as an engine
+## Part 2: Find the engines
 
-You do this once for each `remus.bat` you want to use. The steps add Remus1, and the
-other versions go in the same way: only the folder of `remus.bat` changes.
+Every class laptop holds the instructor's engines, because step 6 of the Day 1
+setup runs [`install_lucas_engines.py`](install_lucas_engines.py). Nobody adds an
+engine by hand. `verify_remus.py` tests the code a student pair types, and
+Lucas Chess plays with the instructor's versions of the same engines.
 
-**Step 1.** Copy the full path of `remus.bat`. In VS Code, right-click `remus.bat` in
-the file list on the left and choose **Copy Path**. The path looks like
-`C:\...\Remus\engines\Remus1\remus.bat`.
+**Step 1.** Click **Engines**, then **External engines**.
 
-**Step 2.** In Lucas Chess, click **Engines**, then **External engines**.
+![The Engines menu](jpg/02_engines_menu.jpg)
 
-![The Engines menu](02_engines_menu.jpg)
+**Step 2.** The window lists Remus1, Remus2, Remus3, Remus4, and Remus4-Rust. Each one
+runs from the `engines_instructor` folder. Click **Close**.
 
-**Step 3.** The External engines window lists every engine you have added. Click
-**New**.
-
-![The External engines window](03_external_engines.jpg)
-
-**Step 4.** A window opens to choose the engine file. It shows only `.exe` files, so
-`remus.bat` does not appear in the list. Click the **File name** box, paste the path
-with **Ctrl+V**, and click **Open**.
-
-![Paste the path of remus.bat into the File name box](04_type_the_path.jpg)
-
-**Step 5.** Lucas starts Remus and asks for its name. Remus1 says `id name Remus1`,
-so both boxes start as "Remus1". Keep that name.
-Leave every other box at 0, and check that the last line shows your `remus.bat`.
-Click **Accept**.
-
-![Name the new engine](05_name_the_engine.jpg)
-
-**Step 6.** Remus1 is now in the list. Click **Close**.
-
-![Remus in the list of external engines](06_engine_added.jpg)
-
-If Lucas shows an error in Step 5, Remus did not start. See "When something goes
-wrong" at the end of this guide.
+![The instructor's engines in the list](jpg/03_external_engines.jpg)
 
 ## Part 3: Play against Remus yourself
 
 **Step 1.** Click **Play**, then **Play against an engine**.
 
-![The Play menu](07_play_menu.jpg)
+![The Play menu](jpg/04_play_menu.jpg)
 
 **Step 2.** Under **Opponent**, click the wide button with the engine's name, then
 choose **External engines** and **Remus1**. Under **Side you play with**, pick White,
 Black, or Random.
 
-![Choose Remus as your opponent](08_choose_remus.jpg)
+![Choose Remus as your opponent](jpg/05_choose_remus.jpg)
 
 **Step 3.** Open the **Time** tab and tick **Activate the time control**. Set **Total
 minutes** to 10 and **Seconds added per move** to 0, so each side has 10 minutes for
 the whole game.
 
-![Turn on the clock](09_time_control.jpg)
+![Turn on the clock](jpg/06_time_control.jpg)
 
 **Step 4.** Click **Accept**, then **Continue**, and drag a piece to make your move.
 Remus answers on the board.
 
-![A game against Remus1](10_playing_remus.jpg)
+![A game against Remus1](jpg/07_playing_remus.jpg)
 
 In this game White has played e4, Nc3, and Nf3, and Remus1 has answered Nf6, g6, and
 c5. Remus1 picks a legal move at random and answers at once, so its clock stays near
@@ -120,7 +98,7 @@ and the other two go in the same way.
 the menu in the picture from Part 2). Click **New**, type the name `Remus2 vs Remus1`,
 and click **Accept**.
 
-![Name the new tournament](11_new_tournament.jpg)
+![Name the new tournament](jpg/08_new_tournament.jpg)
 
 **Step 2.** The **Configuration** tab opens. Lucas can stop a game early and give the
 win to whichever side is far ahead. To watch every game to the end, set **Minimum
@@ -128,33 +106,33 @@ centipawns to assign winner** to `0` and **Minimum movements to assign draw** to
 A centipawn is one hundredth of a pawn, so 350 centipawns means "ahead by three and a
 half pawns".
 
-![Set both adjudication boxes to 0](12_play_to_the_end.jpg)
+![Set both adjudication boxes to 0](jpg/09_play_to_the_end.jpg)
 
 **Step 3.** Open the **Engines** tab and click **Import**. Choose **External
 engines**, then **Remus2**. Click **Import** again, and choose **External engines**,
 then **Remus1**.
 
-![Import the engines](13_import_remus.jpg)
+![Import the engines](jpg/10_import_remus.jpg)
 
 **Step 4.** The tab shows two engines. Click a name to see its settings on the right.
 
-![Both engines in the tournament](14_two_engines.jpg)
+![Both engines in the tournament](jpg/11_two_engines.jpg)
 
 **Step 5.** Open the **Games queued** tab and click **New**. Set **Rounds** to 1,
 **Total minutes** to 10, and **Seconds added per move** to 0, and click **Accept**. Each
 engine gets 10 minutes on its clock for the whole game.
 
-![Choose the rounds and the clock](15_new_games.jpg)
+![Choose the rounds and the clock](jpg/12_new_games.jpg)
 
 **Step 6.** One round makes two games, so each engine plays once with White and once
 with Black. The **Time** column shows 600 seconds.
 
-![Two games wait to be played](16_games_queued.jpg)
+![Two games wait to be played](jpg/13_games_queued.jpg)
 
 **Step 7.** Click **Launch workers** at the top of the window and choose **1**. A
 worker is a second Lucas window that plays the games one after the other.
 
-![Remus2 plays Remus1](17_game_running.jpg)
+![Remus2 plays Remus1](jpg/14_game_running.jpg)
 
 The worker window shows the board, both clocks, and the moves. The number after each
 move is the engine's score in pawns: +1.80 means "White is ahead by almost two pawns".
@@ -170,18 +148,19 @@ queued**.
 finished. Remus3 and Remus4 start from an opening book, and the box at the bottom right
 of the worker window shows the line the engine expects to follow.
 
-![Remus3 plays Remus2](18_remus3_vs_remus2.jpg)
+![Remus3 plays Remus2](jpg/15_remus3_vs_remus2.jpg)
 
-![Remus4 plays Remus3](19_remus4_vs_remus3.jpg)
+![Remus4 plays Remus3](jpg/16_remus4_vs_remus3.jpg)
 
 The list of tournaments keeps each one, so you can open it later to read its results.
 
-![The three tournaments in the list](20_three_tournaments.jpg)
+![The three tournaments in the list](jpg/17_three_tournaments.jpg)
 
 ### A tournament against Stockfish 1500
 
-This tournament comes last in Period 4, after the round against the previous version
-and the round against the student pair, and a class short of time skips it.
+This tournament comes last in Period 4 of Days 2 and 3, after the round against the
+previous version and the round against the student pair, and a class short of time
+skips it.
 
 Stockfish is one of the strongest chess engines in the world. Lucas Chess comes with
 a Stockfish that is held back to play like a 1500 Elo club player. To use it as an
@@ -189,6 +168,20 @@ opponent, click **Import** in Step 3 and choose **Engines with limited elo**, th
 **1500**, then **Stockfish 19 (1500)**. Click its name in the **Engines** tab, and its
 ELO line reads 1500. The rest of the tournament goes the same way: one round, with 10
 minutes for each side.
+
+### A tournament against Remus4-Rust
+
+On Day 4 the second tournament of Period 4 plays Remus4 against Remus4-Rust, right after
+Remus4 against Remus3. Remus4-Rust is the instructor's Remus4 written in Rust, with the
+same evaluation and search and a larger table, so speed and memory alone separate the
+two engines. Click **Import** in Step 3, choose **External engines**, then
+**Remus4-Rust**. The rest of the tournament goes the same way: one round, with 10
+minutes for each side.
+
+![Remus4 plays Remus4-Rust](jpg/18_remus4_vs_rust.jpg)
+
+The box at the bottom right shows the line Remus4-Rust expects, from move 8 to move 14
+in this picture.
 
 ## Lucas Chess at home
 
@@ -200,8 +193,10 @@ launcher run on Windows only.
 
 To play your own Remus at home, copy the Remus folder from your USB drive to a Windows
 computer, install `uv`, and run `uv sync` once in the Remus folder, the same setup as
-on Day 1 (see the setup steps in the top `README.md`). Then add your `remus.bat` as in
-Part 2.
+on Day 1 (see the setup steps in the top `README.md`). In Lucas Chess, click **Engines**,
+**External engines**, and **New**. The window that opens shows only `.exe` files, so
+paste the full path of your `remus.bat` into the **File name** box and click **Open**.
+Keep the name Lucas offers, and click **Accept**.
 
 ## When something goes wrong
 
@@ -210,4 +205,3 @@ Part 2.
 | Lucas shows an error when you add Remus | Open `uci.py` in the folder of `remus.bat` and press Run. A module that fails to import stops Remus before it can say `uciok`, and the error names the file and line. |
 | Remus never moves | Open `uci.py` in the folder of `remus.bat` in VS Code and press Run. In the panel that opens, type `uci` and press Enter. Remus must print `uciok`. Then type `position startpos` and `go`, and Remus must print a `bestmove` line. |
 | **Launch workers** does nothing | Quit Lucas Chess and start it again from the Start menu or the desktop icon. |
-| Remus plays an old version of your code | Each `remus.bat` runs the code in its own folder. Add the `remus.bat` from the folder you are working in, or select the engine in **External engines** and click **Modify**. |

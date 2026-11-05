@@ -31,3 +31,9 @@
 *.pgn text eol=lf
 *.fen text eol=lf
 *.epd text eol=lf
+
+# The one compiled engine, Remus4-Rust, is stored as it is.
+*.exe binary
+
+# Rust source.
+*.rs text eol=lf

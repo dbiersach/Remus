@@ -6,7 +6,7 @@ the "Turning a Chess Engine into Science AI" workshop.
 <table>
   <tr>
     <td width="39%" valign="top">
-      <a href="docs/lucas_chess/lucas_chess_guide.md"><img src="docs/lucas_chess/17_game_running.jpg" alt="Remus2 plays Remus1 in Lucas Chess, with the board, both clocks, and the score of each move" width="100%"></a>
+      <a href="docs/lucas_chess/lucas_chess_guide.md"><img src="docs/lucas_chess/jpg/14_game_running.jpg" alt="Remus2 plays Remus1 in Lucas Chess, with the board, both clocks, and the score of each move" width="100%"></a>
     </td>
     <td width="61%" valign="top">
       <a href="docs/engines/Remus2/call_tree.svg"><img src="docs/engines/Remus2/call_tree.svg" alt="The call tree of Remus2, a picture of which function calls which" width="100%"></a>
@@ -65,6 +65,11 @@ fills `engines/Remus1` on Day 1, then copies its files forward into the next fol
 day and edits them there.
 [`docs/engines/remus_versions.md`](docs/engines/remus_versions.md) lists every
 enhancement and the version that holds it.
+
+A fifth engine, [Remus4-Rust](docs/engines/Remus4-Rust/README.md), is the instructor's
+Remus4 written in Rust, with a larger table. Nobody types it. In the same time it
+searches about 100 times as many positions, so on Day 4 the class sees what speed buys
+when the algorithms stay the same.
 
 Everything else sits in the plan of the week, the day folders, `science/`, `science_instructor/`, and `docs/`:
 
@@ -140,14 +145,15 @@ such as the teacher's laptop or a computer at home.
 6. Install Lucas Chess, the chess board that plays against Remus. Download the
    Windows installer from
    [lucaschess.pythonanywhere.com/downloads](https://lucaschess.pythonanywhere.com/downloads)
-   and run it. Lucas Chess comes with Stockfish, so no other engine is needed. The
-   [Lucas Chess guide](docs/lucas_chess/lucas_chess_guide.md) shows, with screenshots, how
-   to add Remus through its `remus.bat` and watch it play.
+   and run it. Lucas Chess comes with Stockfish, so no other engine is needed.
 
-   To add all four engines at once instead, close Lucas Chess, open
+   Every laptop then adds the engines: close Lucas Chess, open
    [`docs/lucas_chess/install_lucas_engines.py`](docs/lucas_chess/install_lucas_engines.py)
-   in VS Code, and press the Run button. The program adds Remus1 to Remus4 to the
-   External engines list, keeps every engine already there, and adds no duplicates.
+   in VS Code, and press the Run button. The program adds the instructor's Remus1 to
+   Remus4 and Remus4-Rust to the External engines list, keeps every engine already
+   there, and adds no duplicates, so nobody adds an engine by hand. The
+   [Lucas Chess guide](docs/lucas_chess/lucas_chess_guide.md) shows, with screenshots, how
+   to play those engines and watch them play.
 
 ### Stockfish
 
@@ -162,7 +168,7 @@ To get the newest Stockfish at home, download it free from
 processor the computer has when it starts and uses that processor's fastest
 instructions, such as AVX2, so there is no need to choose among the other builds.
 Stockfish has no board of its own: add the `.exe` to Lucas Chess as an external
-engine, the same way the Lucas Chess guide adds Remus.
+engine, the way the "Lucas Chess at home" part of the guide adds a `remus.bat`.
 
 ### Running the files
 
