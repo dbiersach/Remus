@@ -23,8 +23,9 @@ A fifth engine, [Remus4-Rust](Remus4-Rust/README.md), is Remus4 written in Rust,
 larger table. It adds no other enhancement and nobody types it: it searches more than
 100 times as many positions per second, to show what speed buys.
 
-This page lists every enhancement, the file each one changes, the code it adds, and
-the Elo it should gain, then shows which version holds it.
+This page lists every enhancement of Remus3 and Remus4, the file each one changes, the
+code it adds, and the Elo it should gain, then shows what each of Remus2, Remus3, and
+Remus4 adds.
 
 ## How to read the tables
 
@@ -92,6 +93,30 @@ repetition that would save a lost game.
 | N2 | Transposition table | Remember each searched position's score, depth, bound, and best move; reuse the score when it suffices, and try the stored move first | **New file** `transposition_table.py`, plus `search.py` | 35 | +101 | Remus3 |
 | N3 | Opening book | Play a stored opening line while the game follows one. The book holds UCI moves (`e2e4 e7e5 g1f3`), not SAN, so it needs no notation code | **New file** `opening_book.py`, plus `uci.py`, plus `opening_book.txt` (56 lines of data) | 28 | +58 | Remus3 |
 | N4 | Static exchange evaluation | Play out every capture on one square, cheapest attacker first, to see if a capture wins material; quiescence then skips the losing captures | **New file** `exchange.py`, plus `search.py` | 45 | +15 | Remus4 |
+
+## Remus2: looking ahead
+
+Remus2 is the engine every later step builds on. It keeps Remus1's rules and replaces
+the random choice with a score and a search, in the order Day 2 types them:
+
+| Part | Enhancement | Why it comes here |
+| --- | --- | --- |
+| Material and piece-square tables | `evaluate()`: 100 for a pawn, 300 for a knight or bishop, 500 for a rook, 900 for a queen, plus a bonus or penalty for each piece's square | A search needs a score to compare positions, so the evaluation comes first |
+| MVV-LVA ordering | `ordered_moves()` tries the best capture first: pawn takes queen before queen takes pawn | Alpha-beta cuts off sooner when the best move comes first |
+| Quiescence | `quiescence()` plays out the captures at the end of the search before it trusts the score | A search that stops in the middle of an exchange counts a queen as won when it is about to be taken back |
+| Alpha-beta | `alpha_beta()` looks ahead, assumes both sides play their best, and skips the moves that cannot change the result | The heart of the engine: the same best move as minimax, from far fewer positions |
+| Check extension | A side in check searches one ply deeper | A search never stops on a position where the king is in check |
+| Iterative deepening | `think()` searches to depth 1, then 2, then 3, until its time runs out | The engine always has a move ready, and each search starts with the best move of the one before |
+
+The parts change the files of Remus1 like this:
+
+| File | Remus1 | Remus2 | What changes |
+| --- | ---: | ---: | --- |
+| `evaluation.py` | | 68 | New: `mirrored_table()`, the four piece-square tables, the piece values, and `evaluate()` |
+| `search.py` | 12 | 93 | Replaced: the random `think()` gives way to `ordered_moves()`, `count_node()`, `quiescence()`, `alpha_beta()`, and a `think()` that deepens one ply at a time |
+| `uci.py` | 44 | 44 | The name line reads `id name Remus2` |
+| `board.py`, `make_move.py`, `attacks.py`, `move_generation.py` | 137 | 137 | Unchanged |
+| **Total** | **193** | **342** | |
 
 ## Remus3: the biggest gains for the fewest lines
 
