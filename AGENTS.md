@@ -187,7 +187,7 @@ The engine must run without Lucas Chess or `python-chess` installed.
   Lucas Chess starts it in its own folder). Remus3 and Remus4 also hold
   `opening_book.txt`. Each also holds a copy of `verify_remus.py`, so the workshop
   designer can run the student pairs' test on the instructor's engine;
-  `make_call_trees.py` skips it and `make_student_engines.py` copies it unchanged. Each engine's `README.md` and `call_tree.svg` live in
+  `make_call_trees.py` skips it and the tool that strips the engines copies it unchanged. Each engine's `README.md` and `call_tree.svg` live in
   `docs/engines/Remus1` to `docs/engines/Remus4`.
   Each engine names itself in `uci.py` (`id name Remus2`). Modules import each other
   by name (`from board import START_POSITION`), so any module runs from inside its
@@ -203,12 +203,11 @@ The engine must run without Lucas Chess or `python-chess` installed.
   file of Remus1 in `engines/Remus1`. At the start of Days 2, 3, and 4 it copies every
   file of the previous version's folder into the next one in File Explorer and edits
   those copies. Never put instructor code in `engines/`.
-- `engines_student/` holds the code a student pair types, written by
-  `uv run admin/make_student_engines.py` from `engines_instructor/`: no shebang,
-  docstrings, comments, or type hints, only the `# fmt: skip` comments that keep the
-  board tables in shape when VS Code formats on save. Never edit it by hand. It stays
-  on David's computer only: git ignores it, so the student pairs cannot copy the
-  stripped code from the public repository.
+- The code a student pair types is `engines_instructor/` stripped by a tool that
+  `admin/README.md` lists: no shebang, docstrings, comments, or type hints, only the
+  `# fmt: skip` comments that keep the board tables in shape when VS Code formats on
+  save. Never edit the stripped code by hand. It stays on David's computer only, so
+  the student pairs cannot copy it from the public repository.
 - Each engine README holds a table of its files with their code lines (blank lines,
   comments, and docstrings left out), the call tree picture, and what the version
   adds. `uv run admin/make_call_trees.py` draws the `call_tree.svg`

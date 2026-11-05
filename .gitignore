@@ -26,9 +26,6 @@ dist/
 # git bundles that carry changes between computers
 *.bundle
 
-# The stripped student code, kept on David's computer only
-/engines_student/
-
 # The workshop designer's tools, kept on David's computer only
 /admin/
 
