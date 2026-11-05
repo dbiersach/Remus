@@ -50,12 +50,14 @@ student pairs type every line of each one into their own folders, `engines/Remus
 the lines a student pair types for that version, leaving out blank lines, comments, and
 docstrings:
 
-| Version | What it plays with | New code lines |
-| --- | --- | ---: |
-| [Remus1](docs/engines/Remus1/README.md) | Legal chess, one random legal move at a time, with no search | 193 |
-| [Remus2](docs/engines/Remus2/README.md) | Legal chess, the evaluation, alpha-beta, quiescence, MVV-LVA ordering, a check extension, and iterative deepening | 161 |
-| [Remus3](docs/engines/Remus3/README.md) | Remus2 plus killer moves, pawn structure, a transposition table, an opening book, aspiration windows, time management, null-move pruning, the principal variation, the bishop pair, and the rook table | 193 |
-| [Remus4](docs/engines/Remus4/README.md) | Remus3 plus every other enhancement: draw sense, the endgame terms, late move reductions, principal variation search, pruning margins, static exchange evaluation, and the last evaluation terms | 159 |
+<table>
+  <tr><th align="left">Version</th><th align="left">What it plays with</th><th align="right">New code lines</th></tr>
+  <tr><td><a href="docs/engines/Remus1/README.md">Remus1</a></td><td>Legal chess, one random legal move at a time, with no search</td><td align="right">193</td></tr>
+  <tr><td><a href="docs/engines/Remus2/README.md">Remus2</a></td><td>Legal chess, the evaluation, alpha-beta, quiescence, MVV-LVA ordering, a check extension, and iterative deepening</td><td align="right">161</td></tr>
+  <tr><td><a href="docs/engines/Remus3/README.md">Remus3</a></td><td>Remus2 plus killer moves, pawn structure, a transposition table, an opening book, aspiration windows, time management, null-move pruning, the principal variation, the bishop pair, and the rook table</td><td align="right">193</td></tr>
+  <tr><td><a href="docs/engines/Remus4/README.md">Remus4</a></td><td>Remus3 plus every other enhancement: draw sense, the endgame terms, late move reductions, principal variation search, pruning margins, static exchange evaluation, and the last evaluation terms</td><td align="right">159</td></tr>
+  <tr><td></td><td align="right"><strong>Total lines of code</strong></td><td align="right"><strong>706</strong></td></tr>
+</table>
 
 Each instructor engine folder holds only what the engine runs: its Python files, `remus.bat`,
 which Lucas Chess starts, and for Remus3 and Remus4 `opening_book.txt`, plus a copy of
