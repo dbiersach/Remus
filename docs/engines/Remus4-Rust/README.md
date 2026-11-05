@@ -6,6 +6,8 @@ class that speed matters in a chess engine, not just the algorithms. No student 
 types it or edits it, and it lives only in
 [`engines_instructor/Remus4-Rust`](../../../engines_instructor/Remus4-Rust). It is the
 one engine with a real program, `remus4_rust.exe`, so a laptop needs no Rust installed.
+Only a rebuild of the program needs Rust: `rust-toolchain.toml` names the stable compiler
+and its parts, and rustup installs them the first time `cargo` runs in the folder.
 
 ## The same engine, faster
 

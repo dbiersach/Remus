@@ -11,6 +11,9 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports.ruff": "explicit"
         },
+        "[rust]": {
+            "editor.defaultFormatter": "rust-lang.rust-analyzer"
+        },
         "editor.unusualLineTerminators": "prompt",
         "files.autoSave": "afterDelay",
         "files.exclude": { "**/__pycache__": true },
