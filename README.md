@@ -57,7 +57,8 @@ out blank lines, comments, and docstrings:
 | [Remus4](docs/engines/Remus4/README.md) | Remus3 plus every other enhancement: draw sense, the endgame terms, late move reductions, principal variation search, pruning margins, static exchange evaluation, and the last evaluation terms | 694 |
 
 Each instructor engine folder holds only what the engine runs: its Python files, `remus.bat`,
-which Lucas Chess starts, and for Remus3 and Remus4 `opening_book.txt`. Each engine's
+which Lucas Chess starts, and for Remus3 and Remus4 `opening_book.txt`, plus a copy of
+`verify_remus.py`. Each engine's
 README and `call_tree.svg`, a picture of which function calls which, live in
 `docs/engines/Remus1` to `docs/engines/Remus4`.
 The four folders in `engines/` start with only `remus.bat` and `verify_remus.py`, which tests a finished version: each student pair
@@ -68,7 +69,7 @@ enhancement and the version that holds it.
 
 A fifth engine, [Remus4-Rust](docs/engines/Remus4-Rust/README.md), is the instructor's
 Remus4 written in Rust, with a larger table. Nobody types it. In the same time it
-searches about 100 times as many positions, so on Day 4 the class sees what speed buys
+searches more than 100 times as many positions, so on Day 4 the class sees what speed buys
 when the algorithms stay the same.
 
 Everything else sits in the plan of the week, the day folders, `science/`, `science_instructor/`, and `docs/`:
@@ -119,8 +120,8 @@ such as the teacher's laptop or a computer at home.
    Cloning a public repository needs no GitHub account, so the students never create
    one.
 
-4. Install Python 3.14 and the development tools (`python-chess` and `ruff`) into
-   the project:
+4. Install Python 3.14, `matplotlib` for the Day 5 graphs, and the development tools
+   (`python-chess` and `ruff`) into the project:
 
    ```powershell
    uv sync

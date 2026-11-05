@@ -16,7 +16,7 @@ No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they 
 | --- | --- |
 | 10:30 to 10:45 | The PDF beamline at Brookhaven's NSLS-II and its daily question: which crystal phases are in this powder? Each phase makes its own fingerprint of X-ray peaks. |
 | 10:45 to 11:15 | Write `score()` in `phase_hunt.py` (11 code lines): a point for each explained peak, and a point lost for each left-over peak, missing peak, and phase used. |
-| 11:15 to 12:00 | Write `greedy_phases()` (16 lines), which adds the best phase again and again. On 200 known powders greedy names 166 right and 34 wrong, and on powder 12 it mistakes silver for gold. |
+| 11:15 to 12:00 | Write `greedy_phases()` (15 code lines), which adds the best phase again and again. On 200 known powders greedy names 166 right and 34 wrong, and on powder 12 it mistakes silver for gold. |
 
 ## The files
 

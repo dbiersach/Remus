@@ -15,7 +15,7 @@ No engine file changes today: `engines/Remus1` to `engines/Remus4` stay as they 
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | The tree of phase sets beside Remus's game tree: a set is a position and adding a phase is a move. Quartz then rutile is the same set as rutile then quartz, the same idea as the transposition table. |
-| 1:15 to 1:50 | Write `search()` (12 lines), which scores every set of up to three phases and keeps every set that ties for the best score. |
+| 1:15 to 1:50 | Write `search()` (12 code lines), which scores every set of up to three phases and keeps every set that ties for the best score. |
 | 1:50 to 2:15 | Verify on the 200 known powders: 139 right, 52 "can't tell", and 9 wrong, against greedy's 34 wrong. The search scores 176 sets per powder in library order, against 821 in every order. Change `PHASE_COST` and `MISSING` and watch the verdicts move. |
 | 2:15 to 2:30 | The programs that search the same tree on real synchrotron data, and the agent that steers measurements at a beamline. |
 

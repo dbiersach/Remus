@@ -15,7 +15,7 @@ they reuse the engine's ideas, not its code.
 | Evaluation | Predicted value plus distance to the nearest reading | Peaks explained, minus peaks left over, missing, and phases used |
 | Search | Choose the best-scoring square | Score every set of up to three phases |
 | Several moves with the best score | | Several sets tie: the pattern cannot decide |
-| verify_engines.py | The average measurements over 100 hidden samples | The verdicts on 200 known powders |
+| `verify_remus.py` | The average measurements over 100 hidden samples | The verdicts on 200 known powders |
 
 ## The two programs
 
@@ -65,7 +65,7 @@ Expected results of the finished programs:
 | --- | --- |
 | 10:30 to 10:45 | The PDF beamline at Brookhaven's NSLS-II and its daily question: which crystal phases are in this powder? Each phase makes its own fingerprint of X-ray peaks. |
 | 10:45 to 11:15 | Write `score()` in `phase_hunt.py` (11 code lines): a point for each explained peak, and a point lost for each left-over peak, missing peak, and phase used. |
-| 11:15 to 12:00 | Write `greedy_phases()` (16 lines), which adds the best phase again and again. On 200 known powders greedy names 166 right and 34 wrong, and on powder 12 it mistakes silver for gold. |
+| 11:15 to 12:00 | Write `greedy_phases()` (15 code lines), which adds the best phase again and again. On 200 known powders greedy names 166 right and 34 wrong, and on powder 12 it mistakes silver for gold. |
 
 [`Day_5_Period_2_Syllabus.md`](period2/Day_5_Period_2_Syllabus.md) has the period's goal, the big picture, what the student pair writes, and how the student pair knows it is done.
 
@@ -74,7 +74,7 @@ Expected results of the finished programs:
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | The tree of phase sets beside Remus's game tree: a set is a position and adding a phase is a move. Quartz then rutile is the same set as rutile then quartz, the same idea as the transposition table. |
-| 1:15 to 1:50 | Write `search()` (12 lines), which scores every set of up to three phases and keeps every set that ties for the best score. |
+| 1:15 to 1:50 | Write `search()` (12 code lines), which scores every set of up to three phases and keeps every set that ties for the best score. |
 | 1:50 to 2:15 | Verify on the 200 known powders: 139 right, 52 "can't tell", and 9 wrong, against greedy's 34 wrong. The search scores 176 sets per powder in library order, against 821 in every order. Change `PHASE_COST` and `MISSING` and watch the verdicts move. |
 | 2:15 to 2:30 | The programs that search the same tree on real synchrotron data, and the agent that steers measurements at a beamline. |
 

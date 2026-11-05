@@ -8,7 +8,7 @@ Every laptop is set up, the class has seen the finished Remus2 play, and the stu
 
 ## The big picture
 
-Today the student pair builds Remus1 from nothing, so every file of Day 1 is a new file, and all of Day 1's typing goes into the folder `engines/Remus1`. That folder starts with one file, `remus.bat`, the line that starts the engine. The student pair creates every other file of Remus1 there and copies nothing from another folder.
+Today the student pair builds Remus1 from nothing, so every file of Day 1 is a new file, and all of Day 1's typing goes into the folder `engines/Remus1`. That folder starts with two files: `remus.bat`, the line that starts the engine, and `verify_remus.py`, which tests the finished engine. The student pair creates every other file of Remus1 there and copies nothing from another folder.
 
 The first file is `board.py`, because every other file of the engine imports it. It answers three questions the rest of the engine keeps asking: which number stands for which piece, what the board looks like before the first move, and how a square number turns into a name such as `e2` and back. A chess engine sees the board as 64 numbers in a list, one per square. Row 0 is rank 8 and column 0 is file a, so square `row * 8 + col` names a square: a8 is square 0, h8 is square 7, a1 is square 56, and h1 is square 63.
 

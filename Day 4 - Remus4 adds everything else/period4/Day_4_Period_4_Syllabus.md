@@ -17,16 +17,16 @@ Three terms join `pawn_terms()`, because each one depends on where the pawns sta
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then play one round of their Remus4 against their Remus3, two 10-minute games. |
-| 4:00 to 4:30 | One round of their Remus4 against Remus4-Rust, two 10-minute games. Remus4-Rust is the instructor's Remus4 written in Rust, with the same evaluation and search and a larger table, so speed and memory alone separate the two engines. |
+| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then play one round of Remus4 against Remus3, the instructor's engines, two 10-minute games played at once in two Lucas workers. |
+| 4:00 to 4:30 | One round of Remus4 against Remus4-Rust, two 10-minute games played at once in two Lucas workers. Remus4-Rust is the instructor's Remus4 written in Rust, with the same evaluation and search and a larger table, so speed and memory alone separate the two engines. |
 | If time remains | One round of the student pair against their Remus4, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
 
 ## What changes this period
 
 | File | New or edited | What the student pair does | Lines in your file |
 | --- | --- | --- | --- |
-| `evaluation.py` | Copied from `engines/Remus3`, edited | Add the pawn race, rooks on open files, and `king_safety()` | 98 to 99, 102 to 104, 107 to 121, 142 to 156, 179, 200 to 201, 215 |
-| `uci.py` | Copied from `engines/Remus3`, edited | Change the engine's name to Remus4 | 36 |
+| `evaluation.py` | Edited (begun in Period 3) | Add the pawn race, rooks on open files, and `king_safety()` | 98 to 99, 102 to 104, 107 to 121, 142 to 156, 179, 200 to 201, 215 |
+| `uci.py` | Edited (begun in Period 1) | Change the engine's name to Remus4 | 36 |
 | All other files | Unchanged since Period 3 | No edits this period | Unchanged |
 
 The instructor's versions are [`engines_instructor/Remus4/evaluation.py`](../../engines_instructor/Remus4/evaluation.py) and [`engines_instructor/Remus4/uci.py`](../../engines_instructor/Remus4/uci.py). Copy only the code: no comments, no docstrings, and no type hints. The line numbers on this page count the lines of the student pair's own files in `engines/Remus4`, as they stand at the end of this period. Work from the top of each file down, and each number is right when you reach it.
@@ -68,4 +68,4 @@ Change the name line to `print("id name Remus4")` (line 36). Remus4 is complete,
 
 ## Done when
 
-The student pair's Remus4 passes every test in `verify_remus.py`, and it has played one round against its Remus3 and one against Remus4-Rust. A round against the student pair follows if time remains.
+The student pair's Remus4 passes every test in `verify_remus.py`, and Remus4 has played one round against Remus3 and one against Remus4-Rust in Lucas Chess. A round against the student pair follows if time remains.

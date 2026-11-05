@@ -15,7 +15,7 @@ so every period goes to the engine. Each day has four 90-minute periods: P1 8:30
 | 2 | Remus2: the evaluation and the search | 161 | Remus2 plays Remus1 and the student pair in Lucas Chess |
 | 3 | Remus3: pawn structure, the table, killers, the null move, the book, the clock | 193 | Remus3 plays Remus2 and the student pair |
 | 4 | Remus4: draw sense, pruning, exchanges, the full evaluation | 159 | Remus4 plays Remus3 and Remus4-Rust |
-| 5 | The science project: where to measure, and which crystals | 60 | Science results and the take-home copy |
+| 5 | The science project: where to measure, and which crystals | 57 | Science results and the take-home copy |
 
 Student pairs type only the code: no comments and no docstrings. The code lines
 count what they type, the same count as the engine READMEs, and no day asks for more
@@ -139,9 +139,9 @@ Remus1 and the student pair in Lucas Chess.
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:25 | Start one round of their Remus2 against their Remus1, two 10-minute games (Part 4 of the guide), to see what the search buys over a random choice. Each student pair reads its results tab. |
+| 3:00 to 3:25 | Start one round of Remus2 against Remus1, the instructor's engines, two 10-minute games played at once in two Lucas workers (Part 4 of the guide), to see what the search buys over a random choice. Each student pair reads its results tab. |
 | 3:25 to 4:05 | One round of the student pair against their Remus2, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
-| 4:05 to 4:30, if time remains | One round of their Remus2 against Stockfish 1500, two 10-minute games. |
+| 4:05 to 4:30, if time remains | One round of Remus2 against Stockfish 1500, two 10-minute games played at once in two Lucas workers. |
 
 **Checkpoint:** Remus2 is complete, 342 code lines, and it passes every test in `verify_remus.py`.
 
@@ -184,9 +184,9 @@ the lines of one period never call a function of a later period.
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:20 | Add `principal_variation()` and the `pv` of the `info` line (about 13 code lines). Run `uci.py` and send `position startpos moves a2a3` and `go movetime 5000` to `engines/Remus3` and to `engines/Remus2` (1. a3 is in no line of the book, so Remus3 searches): the `info` lines show how much deeper Remus3 searches in the same time, and the line it expects. |
-| 3:20 to 3:55 | Run `verify_remus.py` in `engines/Remus3` until Remus3 passes every test. Then play one round of their Remus3 against their Remus2, two 10-minute games. Each student pair finds one game where Remus3 played a book move. |
+| 3:20 to 3:55 | Run `verify_remus.py` in `engines/Remus3` until Remus3 passes every test. Then play one round of Remus3 against Remus2, the instructor's engines, two 10-minute games played at once in two Lucas workers. Each student pair finds one game where Remus3 played a book move. |
 | 3:55 to 4:30 | One round of the student pair against their Remus3, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
-| If time remains | One round of their Remus3 against Stockfish 1500, two 10-minute games. A student pair that also played Stockfish 1500 on Day 2 compares the results. |
+| If time remains | One round of Remus3 against Stockfish 1500, two 10-minute games played at once in two Lucas workers. A student pair that also played Stockfish 1500 on Day 2 compares the results. |
 
 **Checkpoint:** Remus3 is complete, 535 code lines, and it passes every test in `verify_remus.py`.
 
@@ -225,8 +225,8 @@ it in P4.
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then play one round of their Remus4 against their Remus3, two 10-minute games. |
-| 4:00 to 4:30 | One round of their Remus4 against Remus4-Rust, two 10-minute games. Remus4-Rust is the instructor's Remus4 written in Rust, with the same evaluation and search and a larger table, so speed and memory alone separate the two engines. |
+| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then play one round of Remus4 against Remus3, the instructor's engines, two 10-minute games played at once in two Lucas workers. |
+| 4:00 to 4:30 | One round of Remus4 against Remus4-Rust, two 10-minute games played at once in two Lucas workers. Remus4-Rust is the instructor's Remus4 written in Rust, with the same evaluation and search and a larger table, so speed and memory alone separate the two engines. |
 | If time remains | One round of the student pair against their Remus4, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
 
 **Checkpoint:** Remus4 is complete, 694 code lines, and it passes every test in `verify_remus.py`.
@@ -249,7 +249,7 @@ they reuse the engine's ideas, not its code.
 | Evaluation | Predicted value plus distance to the nearest reading | Peaks explained, minus peaks left over, missing, and phases used |
 | Search | Choose the best-scoring square | Score every set of up to three phases |
 | Several moves with the best score | | Several sets tie: the pattern cannot decide |
-| verify_engines.py | The average measurements over 100 hidden samples | The verdicts on 200 known powders |
+| `verify_remus.py` | The average measurements over 100 hidden samples | The verdicts on 200 known powders |
 
 ### P1, 8:30 to 10:00: Where to measure next
 
@@ -265,14 +265,14 @@ they reuse the engine's ideas, not its code.
 | --- | --- |
 | 10:30 to 10:45 | The PDF beamline at Brookhaven's NSLS-II and its daily question: which crystal phases are in this powder? Each phase makes its own fingerprint of X-ray peaks. |
 | 10:45 to 11:15 | Write `score()` in `phase_hunt.py` (11 code lines): a point for each explained peak, and a point lost for each left-over peak, missing peak, and phase used. |
-| 11:15 to 12:00 | Write `greedy_phases()` (16 lines), which adds the best phase again and again. On 200 known powders greedy names 166 right and 34 wrong, and on powder 12 it mistakes silver for gold. |
+| 11:15 to 12:00 | Write `greedy_phases()` (15 code lines), which adds the best phase again and again. On 200 known powders greedy names 166 right and 34 wrong, and on powder 12 it mistakes silver for gold. |
 
 ### P3, 1:00 to 2:30: Search every set, and verify
 
 | Time | Activity |
 | --- | --- |
 | 1:00 to 1:15 | The tree of phase sets beside Remus's game tree: a set is a position and adding a phase is a move. Quartz then rutile is the same set as rutile then quartz, the same idea as the transposition table. |
-| 1:15 to 1:50 | Write `search()` (12 lines), which scores every set of up to three phases and keeps every set that ties for the best score. |
+| 1:15 to 1:50 | Write `search()` (12 code lines), which scores every set of up to three phases and keeps every set that ties for the best score. |
 | 1:50 to 2:15 | Verify on the 200 known powders: 139 right, 52 "can't tell", and 9 wrong, against greedy's 34 wrong. The search scores 176 sets per powder in library order, against 821 in every order. Change `PHASE_COST` and `MISSING` and watch the verdicts move. |
 | 2:15 to 2:30 | The programs that search the same tree on real synchrotron data, and the agent that steers measurements at a beamline. |
 

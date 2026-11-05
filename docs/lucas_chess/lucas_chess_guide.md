@@ -129,23 +129,24 @@ with Black. The **Time** column shows 600 seconds.
 
 ![Two games wait to be played](jpg/13_games_queued.jpg)
 
-**Step 7.** Click **Launch workers** at the top of the window and choose **1**. A
-worker is a second Lucas window that plays the games one after the other.
+**Step 7.** Click **Launch workers** at the top of the window and choose **2**. A
+worker is another Lucas window that plays one game at a time, so two workers play both
+games of the round at once.
 
 ![Remus2 plays Remus1](jpg/14_game_running.jpg)
 
-The worker window shows the board, both clocks, and the moves. The number after each
+Each worker window shows the board, both clocks, and the moves. The number after each
 move is the engine's score in pawns: +1.80 means "White is ahead by almost two pawns".
 Remus2 wins material quickly here, because Remus1 reports +0.00 for every move and has
 looked at none of the replies.
 
-A game lasts up to 20 minutes, so the two games last up to 40 minutes. When they are
-over, the **Games finished** and **Results** tabs of the tournament show who won. To
-stop early, click **Cancel** in the worker window; the unfinished games stay in **Games
-queued**.
+A game lasts up to 20 minutes, and the two games run side by side, so the round lasts
+up to 20 minutes. When both games are over, the **Games finished** and **Results** tabs
+of the tournament show who won. To stop early, click **Cancel** in each worker window;
+the unfinished games stay in **Games queued**.
 
 **Step 8.** Build the other two tournaments the same way when their versions are
-finished. Remus3 and Remus4 start from an opening book, and the box at the bottom right
+finished, and launch two workers for each. Remus3 and Remus4 start from an opening book, and the box at the bottom right
 of the worker window shows the line the engine expects to follow.
 
 ![Remus3 plays Remus2](jpg/15_remus3_vs_remus2.jpg)
@@ -167,7 +168,7 @@ a Stockfish that is held back to play like a 1500 Elo club player. To use it as 
 opponent, click **Import** in Step 3 and choose **Engines with limited elo**, then
 **1500**, then **Stockfish 19 (1500)**. Click its name in the **Engines** tab, and its
 ELO line reads 1500. The rest of the tournament goes the same way: one round, with 10
-minutes for each side.
+minutes for each side, and two workers.
 
 ### A tournament against Remus4-Rust
 
@@ -176,7 +177,7 @@ Remus4 against Remus3. Remus4-Rust is the instructor's Remus4 written in Rust, w
 same evaluation and search and a larger table, so speed and memory alone separate the
 two engines. Click **Import** in Step 3, choose **External engines**, then
 **Remus4-Rust**. The rest of the tournament goes the same way: one round, with 10
-minutes for each side.
+minutes for each side, and two workers.
 
 ![Remus4 plays Remus4-Rust](jpg/18_remus4_vs_rust.jpg)
 
