@@ -49,9 +49,9 @@
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:25 | Start one round of Remus2 against Remus1, the instructor's engines, two 10-minute games played at once in two Lucas workers (Part 4 of the guide), to see what the search buys over a random choice. Each student pair reads its results tab. |
+| 3:00 to 3:25 | Start one round of their Remus2 against their Remus1, two 10-minute games played at once in two Lucas workers (Part 4 of the guide), to see what the search buys over a random choice. Each student pair reads its results tab. |
 | 3:25 to 4:05 | One round of the student pair against their Remus2, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
-| 4:05 to 4:30, if time remains | One round of Remus2 against Stockfish 1500, two 10-minute games played at once in two Lucas workers. |
+| 4:05 to 4:30, if time remains | One round of their Remus2 against Stockfish 1500, two 10-minute games played at once in two Lucas workers. |
 
 [`Day_2_Period_4_Syllabus.md`](period4/Day_2_Period_4_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.
 

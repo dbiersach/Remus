@@ -29,19 +29,18 @@ The buttons along the top open menus. This guide uses **Play** and **Engines**.
 
 ## Part 2: Find the engines
 
-Every class laptop holds the instructor's engines, because step 6 of the Day 1
+Every class laptop already lists the Remus engines, because step 6 of the Day 1
 setup runs [`install_lucas_engines.py`](install_lucas_engines.py). Nobody adds an
-engine by hand. `verify_remus.py` tests the code a student pair types, and
-Lucas Chess plays with the instructor's versions of the same engines.
+engine by hand.
 
 **Step 1.** Click **Engines**, then **External engines**.
 
 ![The Engines menu](jpg/02_engines_menu.jpg)
 
-**Step 2.** The window lists Remus1, Remus2, Remus3, Remus4, and Remus4-Rust. Each one
-runs from the `engines_instructor` folder. Click **Close**.
+**Step 2.** The window lists Remus1, Remus2, Remus3, Remus4, and Remus4-Rust. Click
+**Close**.
 
-![The instructor's engines in the list](jpg/03_external_engines.jpg)
+![The Remus engines in the list](jpg/03_external_engines.jpg)
 
 ## Part 3: Play against Remus yourself
 

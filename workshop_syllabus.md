@@ -139,9 +139,9 @@ Remus1 and the student pair in Lucas Chess.
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:25 | Start one round of Remus2 against Remus1, the instructor's engines, two 10-minute games played at once in two Lucas workers (Part 4 of the guide), to see what the search buys over a random choice. Each student pair reads its results tab. |
+| 3:00 to 3:25 | Start one round of their Remus2 against their Remus1, two 10-minute games played at once in two Lucas workers (Part 4 of the guide), to see what the search buys over a random choice. Each student pair reads its results tab. |
 | 3:25 to 4:05 | One round of the student pair against their Remus2, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
-| 4:05 to 4:30, if time remains | One round of Remus2 against Stockfish 1500, two 10-minute games played at once in two Lucas workers. |
+| 4:05 to 4:30, if time remains | One round of their Remus2 against Stockfish 1500, two 10-minute games played at once in two Lucas workers. |
 
 **Checkpoint:** Remus2 is complete, 342 code lines, and it passes every test in `verify_remus.py`.
 
@@ -184,9 +184,9 @@ the lines of one period never call a function of a later period.
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:20 | Add `principal_variation()` and the `pv` of the `info` line (about 13 code lines). Run `uci.py` and send `position startpos moves a2a3` and `go movetime 5000` to `engines/Remus3` and to `engines/Remus2` (1. a3 is in no line of the book, so Remus3 searches): the `info` lines show how much deeper Remus3 searches in the same time, and the line it expects. |
-| 3:20 to 3:55 | Run `verify_remus.py` in `engines/Remus3` until Remus3 passes every test. Then play one round of Remus3 against Remus2, the instructor's engines, two 10-minute games played at once in two Lucas workers. Each student pair finds one game where Remus3 played a book move. |
+| 3:20 to 3:55 | Run `verify_remus.py` in `engines/Remus3` until Remus3 passes every test. Then play one round of their Remus3 against their Remus2, two 10-minute games played at once in two Lucas workers. Each student pair finds one game where Remus3 played a book move. |
 | 3:55 to 4:30 | One round of the student pair against their Remus3, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
-| If time remains | One round of Remus3 against Stockfish 1500, two 10-minute games played at once in two Lucas workers. A student pair that also played Stockfish 1500 on Day 2 compares the results. |
+| If time remains | One round of their Remus3 against Stockfish 1500, two 10-minute games played at once in two Lucas workers. A student pair that also played Stockfish 1500 on Day 2 compares the results. |
 
 **Checkpoint:** Remus3 is complete, 535 code lines, and it passes every test in `verify_remus.py`.
 
@@ -225,8 +225,8 @@ it in P4.
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then play one round of Remus4 against Remus3, the instructor's engines, two 10-minute games played at once in two Lucas workers. |
-| 4:00 to 4:30 | One round of Remus4 against Remus4-Rust, two 10-minute games played at once in two Lucas workers. Remus4-Rust is the instructor's Remus4 written in Rust, with the same evaluation and search and a larger table, so speed and memory alone separate the two engines. |
+| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then play one round of their Remus4 against their Remus3, two 10-minute games played at once in two Lucas workers. |
+| 4:00 to 4:30 | One round of their Remus4 against Remus4-Rust, two 10-minute games played at once in two Lucas workers. Remus4-Rust is the instructor's Remus4 written in Rust, with the same evaluation and search and a larger table, so speed and memory alone separate the two engines. |
 | If time remains | One round of the student pair against their Remus4, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
 
 **Checkpoint:** Remus4 is complete, 694 code lines, and it passes every test in `verify_remus.py`.
