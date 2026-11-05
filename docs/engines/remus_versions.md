@@ -3,15 +3,16 @@
 The workshop builds four Remus engines, one for each of Days 1 to 4, and the student
 pairs type every line of each one, copying the instructor's version:
 
-| Version | What it adds | Code lines | New lines |
+| Version | What it adds | New lines | Total lines |
 | --- | --- | ---: | ---: |
 | [Remus1](Remus1/README.md) | Legal chess, a random legal move with no search | 193 | 193 |
-| [Remus2](Remus2/README.md) | The evaluation, alpha-beta, quiescence, MVV-LVA ordering, a check extension, and iterative deepening | 342 | 161 |
-| [Remus3](Remus3/README.md) | Killer moves, pawn structure, a transposition table, an opening book, aspiration windows, time management, null-move pruning, the principal variation, the bishop pair, and the rook table | 535 | 193 |
-| [Remus4](Remus4/README.md) | Every other enhancement: draw sense, the endgame terms, late move reductions, principal variation search, pruning margins, static exchange evaluation, and the last evaluation terms | 694 | 159 |
+| [Remus2](Remus2/README.md) | The evaluation, alpha-beta, quiescence, MVV-LVA ordering, a check extension, and iterative deepening | 161 | 342 |
+| [Remus3](Remus3/README.md) | Killer moves, pawn structure, a transposition table, an opening book, aspiration windows, time management, null-move pruning, the principal variation, the bishop pair, and the rook table | 193 | 535 |
+| [Remus4](Remus4/README.md) | Every other enhancement: draw sense, the endgame terms, late move reductions, principal variation search, pruning margins, static exchange evaluation, and the last evaluation terms | 159 | 694 |
 
-The code lines leave out blank lines, comments, and docstrings. Before Remus2 the
-student pairs finish [Remus1](Remus1/README.md) at the end of Day 1: the
+New lines are the lines a student pair types for that version, and total lines
+count the whole engine. Both leave out blank lines, comments, and docstrings. Before
+Remus2 the student pairs finish [Remus1](Remus1/README.md) at the end of Day 1: the
 board, the moves, and `uci.py` of Remus2, with a 12-line `search.py` that plays a
 random legal move. Remus2 replaces that file, so its new lines are `evaluation.py`
 and the 93 lines of its own `search.py`. Each version is the
