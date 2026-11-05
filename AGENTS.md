@@ -255,8 +255,8 @@ The engine must run without Lucas Chess or `python-chess` installed.
       `call_tree.svg`, and `remus_versions.md`.
     - `docs/lucas_chess/`: `lucas_chess_guide.md` and its pictures.
     - `docs/chess_tutor/`: `learn_chess.md` (the rarer rules and chess
-      notation, with its board pictures in `images/`), `uci.md`, and the minimax,
-      negamax, and alpha-beta videos page.
+      notation, with its board pictures in `images/`), `uci.md`, the minimax,
+      negamax, and alpha-beta videos page, and `fide_titles_and_elo_ratings.md`.
     - `docs/briefs/`: the one-page management brief and the one-page student
       and parent brief, as PDFs.
   - `admin/`: the workshop designer's scripts, with a `README.md`. Every workshop
