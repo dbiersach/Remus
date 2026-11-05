@@ -1,8 +1,19 @@
 # FIDE titles and typical Elo ratings
 
+The Elo rating carries the name of Arpad Elo (1903 to 1992), a Hungarian-American
+physics professor and chess master who designed it. Elo is his surname, not an
+acronym, so it is written "Elo", not "ELO". US Chess adopted his system in 1960 and
+FIDE in 1970. An Elo rating predicts results: two players with the same rating each
+expect to score half the points between them, a player 200 points higher expects to
+score about 76%, and a player 400 points higher about 91%. After each game, a rating
+rises when the player scores more than that prediction and falls when the player
+scores less, so beating a stronger opponent gains more points than beating a weaker
+one. The scale has no maximum. The highest rating any person has held is 2882, set by
+Magnus Carlsen in 2014, and the strongest chess engines rate above 3500 on engine
+rating lists.
+
 FIDE, the international chess federation, awards titles to players who reach a
-minimum Elo rating. An Elo rating is a number that rises when a player beats
-stronger opponents and falls after losses to weaker ones. The class names below
+minimum Elo rating. The class names below
 the titles (Expert and Class A to Class D) come from national federations such as
 US Chess, not from FIDE.
 
