@@ -46,12 +46,12 @@ Day 5 turns the search ideas of the week into a science project.
 
 Remus comes in four versions, each in its own folder under `engines_instructor/`. The
 student pairs type every line of each one into their own folders, `engines/Remus1` to
-`engines/Remus4`, copying the instructor's version file by file. The new code lines are
+`engines/Remus4`, copying the instructor's version file by file. The additional code lines are
 the lines a student pair types for that version, leaving out blank lines, comments, and
 docstrings:
 
 <table>
-  <tr><th align="left">Version</th><th align="left">What it plays with</th><th align="right">New code lines</th></tr>
+  <tr><th align="left">Version</th><th align="left">What it plays with</th><th align="right">Additional code lines</th></tr>
   <tr><td><a href="docs/engines/Remus1/README.md">Remus1</a></td><td>Legal chess, one random legal move at a time, with no search</td><td align="right">193</td></tr>
   <tr><td><a href="docs/engines/Remus2/README.md">Remus2</a></td><td>Legal chess, the evaluation, alpha-beta, quiescence, MVV-LVA ordering, a check extension, and iterative deepening</td><td align="right">161</td></tr>
   <tr><td><a href="docs/engines/Remus3/README.md">Remus3</a></td><td>Remus2 plus killer moves, pawn structure, a transposition table, an opening book, aspiration windows, time management, null-move pruning, the principal variation, the bishop pair, and the rook table</td><td align="right">193</td></tr>
