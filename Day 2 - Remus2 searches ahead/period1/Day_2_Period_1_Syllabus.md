@@ -1,6 +1,6 @@
 # Day 2, Period 1: The evaluation
 
-8:30 to 10:00. Part of [Day 2: Remus2 searches and plays Stockfish](../Day_2_Syllabus.md).
+8:30 to 10:00. Part of [Day 2: Remus2 searches ahead](../Day_2_Syllabus.md).
 
 ## Goal
 

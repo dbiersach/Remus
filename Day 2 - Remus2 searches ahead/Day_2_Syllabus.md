@@ -1,6 +1,6 @@
-# Day 2: Remus2 searches and plays Stockfish
+# Day 2: Remus2 searches ahead
 
-**Goal for the day:** the student pair turns Remus1 into Remus2, and Remus2 plays Stockfish 1500 in Lucas Chess.
+**Goal for the day:** the student pair turns Remus1 into Remus2, and Remus2 plays Remus1 and the student pair in Lucas Chess.
 
 ## The day at a glance
 
@@ -12,7 +12,7 @@
 | | 12:00 to 1:00 | Lunch |
 | P3 | 1:00 to 2:30 | [Alpha-beta and iterative deepening](period3/Day_2_Period_3_Syllabus.md) |
 | | 2:30 to 3:00 | Break |
-| P4 | 3:00 to 4:30 | [Remus2 against Stockfish 1500](period4/Day_2_Period_4_Syllabus.md) |
+| P4 | 3:00 to 4:30 | [Remus2 against Remus1 and the student pair](period4/Day_2_Period_4_Syllabus.md) |
 
 ## Period 1, 8:30 to 10:00: The evaluation
 
@@ -45,16 +45,16 @@
 
 [`Day_2_Period_3_Syllabus.md`](period3/Day_2_Period_3_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.
 
-## Period 4, 3:00 to 4:30: Remus2 against Stockfish 1500
+## Period 4, 3:00 to 4:30: Remus2 against Remus1 and the student pair
 
 | Time | Activity |
 | --- | --- |
-| 3:00 to 3:25 | Add `engines\Remus2\remus.bat` to Lucas Chess and start one round of their Remus2 against their Remus1, two 5-minute games (Part 3 of the guide), to see what the search buys over a random choice. |
-| 3:25 to 3:50 | One round of their Remus2 against Stockfish 1500, two 5-minute games. Each student pair reads its results tab. |
-| 3:50 to 4:30 | Each student plays their version of Remus2 (Part 4 of the guide), human against computer, until the end of the day. |
+| 3:00 to 3:25 | Add `engines\Remus2\remus.bat` to Lucas Chess and start one round of their Remus2 against their Remus1, two 10-minute games (Part 4 of the guide), to see what the search buys over a random choice. Each student pair reads its results tab. |
+| 3:25 to 4:05 | One round of the student pair against their Remus2, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
+| 4:05 to 4:30, if time remains | One round of their Remus2 against Stockfish 1500, two 10-minute games. |
 
 [`Day_2_Period_4_Syllabus.md`](period4/Day_2_Period_4_Syllabus.md) has the period's goal, the big picture of what the student pair types or edits and why, every file that changes with its line numbers, and how the student pair knows it is done.
 
 ## By the end of the day
 
-**Checkpoint:** Remus2 is complete, 342 code lines, and it plays two full games against Stockfish 1500.
+**Checkpoint:** Remus2 is complete, 342 code lines, and it has played Remus1 and the student pair.

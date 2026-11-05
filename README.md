@@ -129,6 +129,11 @@ such as the teacher's laptop or a computer at home.
    [Lucas Chess guide](docs/lucas_chess/lucas_chess_guide.md) shows, with screenshots, how
    to add Remus through its `remus.bat` and watch it play.
 
+   To add all four engines at once instead, close Lucas Chess, open
+   [`docs/lucas_chess/install_lucas_engines.py`](docs/lucas_chess/install_lucas_engines.py)
+   in VS Code, and press the Run button. The program adds Remus1 to Remus4 to the
+   External engines list, keeps every engine already there, and adds no duplicates.
+
 ### Stockfish
 
 Stockfish is the strongest free chess engine in the world, and like Remus it speaks

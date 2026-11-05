@@ -1,6 +1,6 @@
 # Day 2, Period 3: Alpha-beta and iterative deepening
 
-1:00 to 2:30. Part of [Day 2: Remus2 searches and plays Stockfish](../Day_2_Syllabus.md).
+1:00 to 2:30. Part of [Day 2: Remus2 searches ahead](../Day_2_Syllabus.md).
 
 ## Goal
 

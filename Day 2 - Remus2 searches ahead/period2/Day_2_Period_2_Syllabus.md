@@ -1,6 +1,6 @@
 # Day 2, Period 2: Move ordering and quiescence
 
-10:30 to 12:00. Part of [Day 2: Remus2 searches and plays Stockfish](../Day_2_Syllabus.md).
+10:30 to 12:00. Part of [Day 2: Remus2 searches ahead](../Day_2_Syllabus.md).
 
 ## Goal
 

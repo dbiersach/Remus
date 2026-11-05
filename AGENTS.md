@@ -77,8 +77,10 @@ ideas for the first time.
 - The class never builds a GUI. Every laptop uses **Lucas Chess** (David,
   2026-10-27), which runs Remus as a UCI engine through `remus.bat`.
   [`docs/lucas_chess/lucas_chess_guide.md`](docs/lucas_chess/lucas_chess_guide.md) shows
-  students, step by step with screenshots, how to add Remus and watch it play
-  Stockfish at 1500 Elo.
+  students, step by step with screenshots, how to add Remus1, play a game against it,
+  and run one-round tournaments between the versions.
+  `docs/lucas_chess/install_lucas_engines.py` adds Remus1 to Remus4 to the list of
+  external engines without touching any other entry or adding a duplicate.
 - **No GitHub for students.** Students create no online accounts: cloning the public
   repository needs none.
 - **git and `uv` only at setup** (David, 2026-10-29). On Day 1, period 1, the teacher

@@ -4,7 +4,7 @@
 
 ## Goal
 
-Remus4's evaluation is complete, and the student pair tests it against Remus3 and Stockfish 1500.
+Remus4's evaluation is complete, and the student pair tests it against Remus3 and then plays it.
 
 ## The big picture
 
@@ -17,9 +17,9 @@ Three terms join `pawn_terms()`, because each one depends on where the pawns sta
 | Time | Activity |
 | --- | --- |
 | 3:00 to 3:30 | Reminder of the rule of the square. In `pawn_terms()`, add the pawn race, rooks on open files, and `king_safety()` (about 35 code lines). Change the name line to `id name Remus4`. |
-| 3:30 to 3:55 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then add `engines\Remus4\remus.bat` to Lucas Chess and play one round of their Remus4 against their Remus3, two 5-minute games. |
-| 3:55 to 4:15 | One round of their Remus4 against Stockfish 1500, two 5-minute games. Each student pair compares the results with Day 3's. |
-| 4:15 to 4:30 | Each student plays their version of Remus4 (Part 4 of the guide), human against computer, until the end of the day. |
+| 3:30 to 4:00 | Run `verify_remus.py` in `engines/Remus4` until Remus4 passes every test. Then add `engines\Remus4\remus.bat` to Lucas Chess and play one round of their Remus4 against their Remus3, two 10-minute games. |
+| 4:00 to 4:30 | One round of the student pair against their Remus4, two 10-minute games: each student plays one game, one with White and one with Black (Part 3 of the guide). |
+| If time remains | One round of their Remus4 against Stockfish 1500, two 10-minute games. A student pair that also played Stockfish 1500 on Day 3 compares the results. |
 
 ## What changes this period
 
@@ -68,4 +68,4 @@ Change the name line to `print("id name Remus4")` (line 36). Remus4 is complete,
 
 ## Done when
 
-The student pair's Remus4 has played one round against its Remus3 and one against Stockfish 1500, and each student has played it.
+The student pair's Remus4 has played one round against its Remus3, and each student has played it. A round against Stockfish 1500 follows if time remains.
