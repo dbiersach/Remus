@@ -3,6 +3,21 @@
 Remus is a chess engine written in plain Python, built one lesson at a time for
 the "Turning a Chess Engine into Science AI" workshop.
 
+<table>
+  <tr>
+    <td width="39%" valign="top">
+      <a href="docs/lucas_chess/lucas_chess_guide.md"><img src="docs/lucas_chess/17_game_running.jpg" alt="Remus2 plays Remus1 in Lucas Chess, with the board, both clocks, and the score of each move" width="100%"></a>
+    </td>
+    <td width="61%" valign="top">
+      <a href="docs/engines/Remus2/call_tree.svg"><img src="docs/engines/Remus2/call_tree.svg" alt="The call tree of Remus2, a picture of which function calls which" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">Remus2 plays Remus1 in <a href="docs/lucas_chess/lucas_chess_guide.md">Lucas Chess</a>.</td>
+    <td valign="top">Inside Remus2: which function <a href="docs/engines/Remus2/README.md">calls which</a>.</td>
+  </tr>
+</table>
+
 Its name reaches back more than four thousand years. Sargon of Akkad (about 2335 to
 2279 BC) founded the Akkadian Empire in Mesopotamia, the first known great empire. In
 1978 his name went to Sargon, a chess program by Dan and Kathe Spracklen. Written in
