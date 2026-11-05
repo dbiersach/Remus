@@ -1,5 +1,9 @@
 # Remus
 
+How many lines of code does it take to make a very strong chess player? You will
+see it only takes 694 lines of code, and the chess engine you write will likely beat
+you every time.
+
 Remus is a chess engine written in plain Python, built one lesson at a time for
 the "Turning a Chess Engine into Science AI" workshop.
 

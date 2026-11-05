@@ -19,6 +19,25 @@ US Chess, not from FIDE.
 | Class C player | None | 1400 to 1599 |
 | Class D player | None | 1200 to 1399 |
 
+## Ratings of everyday players
+
+Most chess players never earn a title. The table below places everyday players on the
+same Elo scale, from someone who has just learned the moves to a FIDE Master. The
+ranges are estimates: club ratings differ from one federation to another, and many
+casual players have no rating at all.
+
+| Player category | Typical Elo range | Representative rating |
+| --- | ---: | ---: |
+| Casual player who knows the rules | 400 to 900 | 650 |
+| Beginning chess club member | 600 to 1200 | 900 |
+| Strong chess club player | 1200 to 1700 | 1450 |
+| First-board player on a club team | 1500 to 2000 | 1750 |
+| Average city chess club member | 1200 to 1600 | 1400 |
+| Strong city chess club competitor | 1600 to 2000 | 1800 |
+| City club champion | 1800 to 2200+ | 2000 |
+| FIDE Candidate Master | 2200+ | 2250 |
+| FIDE Master | 2300+ | 2350 |
+
 ## Where the Remus engines would land
 
 FIDE gives titles only to people, so no engine can earn one. The table below shows
