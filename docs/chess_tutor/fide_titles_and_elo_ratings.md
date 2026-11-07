@@ -52,22 +52,32 @@ casual players have no rating at all.
 ## Where the Remus engines would land
 
 FIDE gives titles only to people, so no engine can earn one. The table below shows
-the title or class a player with each engine's rating would hold. No rated games
-have measured the Remus engines, so every number is an estimate: the Remus2 figure
-comes from engines of the same design, and the later rows add the gains that
-[`remus_versions.md`](../engines/remus_versions.md) expects for each version (about
-+350 Elo for Remus3 and +195 for Remus4, less once the gains overlap). Expect each
-estimate to be off by 150 Elo or more, and to change with the clock and the
-computer.
+the title or class a player with each engine's rating would hold. Remus2, Remus3,
+Remus4, and Remus4-Rust each played 200 games against Stockfish held to a set
+strength (its UCI_Elo setting), at 15 minutes per side with no increment, half with
+White and half with Black, on one fast processor core per game. Each engine met
+Stockfish at six levels between 1320 and 2950, and its rating is the one that best
+explains its score against those levels. The 27 games that Stockfish lost on time
+are left out, because Stockfish ran out of time in long endgames whatever the
+position on the board.
 
-| Engine | Estimated Elo | Likely title or class |
-| --- | ---: | --- |
-| Remus1 | 300 | None: a random mover sits far below Class D |
-| Remus2 | 1300 | Class D player |
-| Remus3 | 1600 | Class B player |
-| Remus4 | 1750 | Class B player |
-| Remus4-Rust | 2250 | Candidate Master (CM) |
+| Engine | Elo | 95% range | Likely title or class |
+| --- | ---: | ---: | --- |
+| Remus1 | 300 (estimate) | | None: a random mover sits far below Class D |
+| Remus2 | 1840 | 1785 to 1895 | Class A player |
+| Remus3 | 2086 | 2029 to 2143 | Expert |
+| Remus4 | 2195 | 2133 to 2257 | Expert, at the edge of Candidate Master (CM) |
+| Remus4-Rust | 2897 | 2831 to 2963 | Super Grandmaster |
+
+Remus1 plays a random legal move, so it loses every game even to Stockfish's
+weakest setting, 1320, and its rating stays an estimate.
+
+The 95% range means that 95 times out of 100, a measurement like this one lands
+within that range of the engine's true rating on this scale. Stockfish's UCI_Elo
+scale is calibrated against other engines, not against people, so a human FIDE
+rating for the same strength could sit 100 to 200 points away.
 
 Remus4-Rust plays the same moves as Remus4 but searches more than 100 times as many
 positions per second, so it looks several moves deeper in the same time. That extra
-depth alone lifts it about 500 Elo, from Class B to the edge of Candidate Master.
+depth alone lifts it about 700 Elo, from Expert to the level of the strongest human
+players.
